@@ -30,7 +30,7 @@ public class AddListener extends AbstractAction {
     private AddListener() {
 	super(LanguageManager.getInstance().get("btnAddLabel"), ImageFactory.getInstance().getImageIcon("add"));  
         putValue(SHORT_DESCRIPTION, LanguageManager.getInstance().get("btnAddShortDescription"));
-	MainWindowEventDispatcher.getInstance().addActionListener(getAcceleratorKey(), this);
+	MainWindowEventDispatcher.getInstance().addControlMaskedActionListener(getAcceleratorKey(), this);
     }
 
     public static AddListener getInstance() {

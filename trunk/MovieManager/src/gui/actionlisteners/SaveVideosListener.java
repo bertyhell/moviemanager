@@ -23,7 +23,7 @@ public class SaveVideosListener extends AbstractAction {
     private SaveVideosListener() {
 	super(LanguageManager.getInstance().get("btnSaveLabel"), ImageFactory.getInstance().getImageIcon("save"));  
         putValue(SHORT_DESCRIPTION, LanguageManager.getInstance().get("btnSaveShortDescription"));
-	MainWindowEventDispatcher.getInstance().addActionListener(getAcceleratorKey(), this);
+	MainWindowEventDispatcher.getInstance().addControlMaskedActionListener(getAcceleratorKey(), this);
     }
 
     public static SaveVideosListener getInstance() {
@@ -36,6 +36,7 @@ public class SaveVideosListener extends AbstractAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+	System.out.println("begin saving");
 	VideoDatabase.getInstance().saveToHDD();
     }
 }

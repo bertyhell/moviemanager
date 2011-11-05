@@ -174,7 +174,6 @@ public class DatabaseConnector {
 		st.setString(2, video.getName());
 		st.setDate(3, (java.sql.Date) video.getRelease());//setting path
 		st.setDouble(4, video.getRating());
-		System.out.println(video.getRatingImdb());
 		st.setDouble(5, video.getRatingImdb());
 		st.setInt(6, 1); //TODO 010 convert genre string to int
 		st.setString(7, video.getPath());

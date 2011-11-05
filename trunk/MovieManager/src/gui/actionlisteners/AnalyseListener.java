@@ -24,7 +24,7 @@ public class AnalyseListener extends AbstractAction {
     private AnalyseListener() {
 	super(LanguageManager.getInstance().get("btnAnalyseLabel"), ImageFactory.getInstance().getImageIcon("analyse"));  
         putValue(SHORT_DESCRIPTION, LanguageManager.getInstance().get("btnAnalyseShortDescription"));
-	MainWindowEventDispatcher.getInstance().addActionListener(getAcceleratorKey(), this);
+	MainWindowEventDispatcher.getInstance().addControlMaskedActionListener(getAcceleratorKey(), this);
     }
 
     public static AnalyseListener getInstance() {
@@ -37,6 +37,7 @@ public class AnalyseListener extends AbstractAction {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+	System.out.println("analyse started");
 	//TODO 100 program analyser
 	for(Video video : VideoDatabase.getInstance().getVideos()){
 	    VideoInformationCollector.getVideoInfoFromImdb(video.getName(),video);

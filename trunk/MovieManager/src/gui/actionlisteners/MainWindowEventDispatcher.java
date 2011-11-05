@@ -19,7 +19,7 @@ import javax.swing.KeyStroke;
 public class MainWindowEventDispatcher implements KeyEventDispatcher {
 
     private static MainWindowEventDispatcher instance = new MainWindowEventDispatcher();
-    private Map<Integer, AbstractAction> actions = new HashMap<Integer, AbstractAction>();
+    private Map<Integer, AbstractAction> controlMaskedActions = new HashMap<Integer, AbstractAction>();
 
     private MainWindowEventDispatcher() {
     }
@@ -31,23 +31,25 @@ public class MainWindowEventDispatcher implements KeyEventDispatcher {
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
 	if (e.getID() == KeyEvent.KEY_RELEASED) {
-	    if (actions.containsKey(e.getKeyCode())) {
-		actions.get(e.getKeyCode()).actionPerformed(null);
+	    if(e.isControlDown()){
+		if (controlMaskedActions.containsKey(e.getKeyCode())) {
+		    controlMaskedActions.get(e.getKeyCode()).actionPerformed(null);
+		}
 	    }
 	}
 	return false;
     }
 
-    public void addActionListener(KeyStroke keys, AbstractAction action) {
-	actions.put(keys.getKeyCode(), action);
+    public void addControlMaskedActionListener(KeyStroke keys, AbstractAction action) {
+	controlMaskedActions.put(keys.getKeyCode(), action);
     }
 
     public void printShortcutKeys() {
-	Iterator iterator = actions.keySet().iterator();
+	Iterator iterator = controlMaskedActions.keySet().iterator();
 
 	while (iterator.hasNext()) {
 	    Integer key = (Integer)iterator.next();
-	    String value = actions.get(key).getClass().getSimpleName();
+	    String value = controlMaskedActions.get(key).getClass().getSimpleName();
 
 	    System.out.println(key.toString() + " " + value);
 	}

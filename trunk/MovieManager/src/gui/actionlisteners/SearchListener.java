@@ -5,7 +5,7 @@
 package gui.actionlisteners;
 
 import gui.MainWindow;
-import gui.searchInfoFrame;
+import gui.search.searchInfoFrame;
 import gui.tables.VideoTableModel;
 import img.ImageFactory;
 import java.awt.event.ActionEvent;
