@@ -4,21 +4,10 @@
  */
 package gui.actionlisteners;
 
-import gui.MainWindow;
 import gui.search.searchInfoFrame;
-import gui.tables.VideoTableModel;
 import img.ImageFactory;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.util.ArrayList;
 import javax.swing.AbstractAction;
-import javax.swing.JFileChooser;
-import javax.swing.KeyStroke;
-import logic.MovieFileReader;
-import logic.database.Video;
-import logic.database.VideoDatabase;
-import logic.database.jdbc.DatabaseConnector;
 import logic.settings.languages.LanguageManager;
 
 /**

@@ -29,6 +29,7 @@ public class TableMouseListener extends MouseAdapter {
 //		Logger.getLogger(TableMouseListener.class.getName()).log(Level.SEVERE, null, ex);
 //	    }
 	    JFrame frame = new JFrame();
+            System.setProperty("jna.library.path", "C:\\Program Files\\VideoLAN\\VLC");
 	    VlcPlayer player = new VlcPlayer();
 	    frame.setContentPane(player);
 
@@ -36,7 +37,8 @@ public class TableMouseListener extends MouseAdapter {
 	    frame.setSize(1050, 600);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setVisible(true);
-
+            
+            String[] mediaOptions = {};
 	    player.start(model.getVideo(table.getSelectedRow()).getPath());
 	}
     }
