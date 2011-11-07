@@ -24,23 +24,24 @@ import logic.settings.languages.LanguageManager;
  *
  * @author alexander
  */
-public class AddListener extends AbstractAction {
+public class AddListener extends AbstractAction implements IVideoReciever {
+
     private static AddListener instance = new AddListener();
-    
+
     private AddListener() {
-	super(LanguageManager.getInstance().get("btnAddLabel"), ImageFactory.getInstance().getImageIcon("add"));  
-        putValue(SHORT_DESCRIPTION, LanguageManager.getInstance().get("btnAddShortDescription"));
+	super(LanguageManager.getInstance().get("btnAddLabel"), ImageFactory.getInstance().getImageIcon("add"));
+	putValue(SHORT_DESCRIPTION, LanguageManager.getInstance().get("btnAddShortDescription"));
 	MainWindowEventDispatcher.getInstance().addControlMaskedActionListener(getAcceleratorKey(), this);
     }
 
     public static AddListener getInstance() {
 	return instance;
-    }  
-    
-    public final KeyStroke getAcceleratorKey(){
+    }
+
+    public final KeyStroke getAcceleratorKey() {
 	return KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
 	JFileChooser fc = new JFileChooser();
@@ -49,18 +50,23 @@ public class AddListener extends AbstractAction {
 //	fc.setSelectedFile(fc.getCurrentDirectory());
 	fc.setSelectedFile(new File("M:/Downloads/Movies"));
 	int result = fc.showOpenDialog(MainWindow.getInstance());
-	if( result == JFileChooser.APPROVE_OPTION){
-	    ArrayList<Video> videos = new ArrayList<Video>();
-	    for(File file : fc.getSelectedFiles()){
-		 MovieFileReader.getVideos(file, videos);
-	    }
+	if (result == JFileChooser.APPROVE_OPTION) {
 	    
+//	    for (File file : fc.getSelectedFiles()) {
+//		MovieFileReader.getVideos(file, videos);
+//	    }
+	    new MovieFileReader(fc.getSelectedFiles(),this).execute();
+
 	    System.out.println("finished getting videos");
-	    
-	    DatabaseConnector.getInstance().insertVideosHDD(videos);
-	    VideoDatabase.getInstance().addVideos(videos);
-	    VideoTableModel.getInstance().updateData(videos);
+
+
 	}
     }
-    
+
+    @Override
+    public void returnVideos(ArrayList<Video> videos) {
+	DatabaseConnector.getInstance().insertVideosHDD(videos);
+	VideoDatabase.getInstance().addVideos(videos);
+	VideoTableModel.getInstance().updateData(videos);
+    }
 }

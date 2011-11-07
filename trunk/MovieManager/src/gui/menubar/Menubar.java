@@ -6,6 +6,7 @@ package gui.Menubar;
 
 import gui.actionlisteners.AddListener;
 import gui.actionlisteners.AnalyseListener;
+import gui.actionlisteners.CleanDatabaseListener;
 import gui.actionlisteners.SaveVideosListener;
 import gui.actionlisteners.SearchListener;
 import java.awt.BorderLayout;
@@ -50,6 +51,11 @@ public class Menubar extends JPanel {
 	btnSearch.setHorizontalTextPosition(SwingConstants.CENTER);
 	btnSearch.setVerticalTextPosition(SwingConstants.BOTTOM);
 	PnlStart.add(btnSearch);
+	//cleanDatabase button	
+	JButton btnClearDatabase = new JButton(CleanDatabaseListener.getInstance());
+	btnClearDatabase.setHorizontalTextPosition(SwingConstants.CENTER);
+	btnClearDatabase.setVerticalTextPosition(SwingConstants.BOTTOM);
+	PnlStart.add(btnClearDatabase);
 	
 	
 	

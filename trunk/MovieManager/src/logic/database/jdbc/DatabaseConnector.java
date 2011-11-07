@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic.database.jdbc;
 
 import gui.MainWindow;
@@ -32,6 +28,7 @@ public class DatabaseConnector {
 
     private final String DatabasePropertiesFile = "settings/database.properties";
     private static DatabaseConnector sqLiteJDBC = new DatabaseConnector();
+    private Properties prop = new Properties();
 
     private DatabaseConnector() {
 	try {
@@ -52,7 +49,6 @@ public class DatabaseConnector {
     public static DatabaseConnector getInstance() {
 	return sqLiteJDBC;
     }
-    private Properties prop = new Properties();
 
     private Connection openConnection() throws SQLException {
 	return DriverManager.getConnection(prop.getProperty("url"));
@@ -192,13 +188,11 @@ public class DatabaseConnector {
 	for (Video video : videos) {
 	    if (video.getVideoType().equals(Video.VideoType.Video)) {
 		updateVideo(video);
-	    }
-	    else  if(video.getVideoType().equals(Video.VideoType.Movie)){
+	    } else if (video.getVideoType().equals(Video.VideoType.Movie)) {
 		Movie movie = (Movie) video;
-		if(isMoviePresent(movie)){
+		if (isMoviePresent(movie)) {
 		    updateMovie(movie);
-		}
-		else{
+		} else {
 		    insertMovie(movie);
 		}
 	    }
@@ -257,5 +251,18 @@ public class DatabaseConnector {
 	    ex.printStackTrace();
 	}
 	return videos;
+    }
+
+    public void emptyTables() {
+	try {
+	    Statement stmt;
+	    Connection conn = openConnection();
+	    stmt = conn.createStatement();
+	    stmt.execute(prop.getProperty("empty_all_tables"));
+	    stmt.close();
+	    conn.close();
+	} catch (SQLException ex) {
+	    ex.printStackTrace();
+	}
     }
 }
