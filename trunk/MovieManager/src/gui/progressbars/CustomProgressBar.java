@@ -4,12 +4,14 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
+import logic.common.TimeFormatter;
 
 public class CustomProgressBar extends JDialog implements PropertyChangeListener {
 
     private JProgressBar current;
     private String label;
     private long starttime;
+    private int totalFiles;
 
     //TODO 010 add button to progressbar "details", output what is getting done (only if button has been pressed (efficiency)
     /**
@@ -27,16 +29,9 @@ public class CustomProgressBar extends JDialog implements PropertyChangeListener
 	
 	current = new JProgressBar(0, 100);
 	current.setValue(0);
-//	current.setStringPainted(true);
-//	current.setString(label);
-	
-	
-	
-	
-	current.setMaximum(2226);
-	
-	
-	
+	current.setStringPainted(true);
+	current.setString(label);
+	current.setIndeterminate(true);
 	
 	this.add(current, BorderLayout.CENTER);
 	
@@ -53,23 +48,20 @@ public class CustomProgressBar extends JDialog implements PropertyChangeListener
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 	if ("progress".equals(evt.getPropertyName())) {
-	    System.out.println("property has changed");
 	    int progress = (Integer) evt.getNewValue();
 	    
-//	    long elapsedTime = System.nanoTime() - starttime;
-//	    long estimatedTime = ((100-progress)*elapsedTime)/progress;
+	    long elapsedTime = System.nanoTime() - starttime;
+	    long estimatedTime = ((100-progress)*elapsedTime)/progress;
 
 	    current.setValue(progress);
-//	    System.out.println(label + "(" + progress + " * " + max + " - " + passedProgress + ")  / 100 +  / + " + maxLabel);
-//	    current.setString(label +" "+ (progress * current.getMaximum() /100) + " / " + current.getMaximum() + "    " + "eta: " + estimatedTime);
-//	    System.out.println(label + (progress * current.getMaximum() /100) + " / " + current.getMaximum() + "\t" + "eta: " + estimatedTime);
+	    current.setString(label +" "+ (progress * totalFiles /100) + " / " + totalFiles + "    remaining: "+ TimeFormatter.longToTime(estimatedTime/1000000));
 	}
     }
 
     public void start(String label, int totalFiles) {
-	current.setMaximum(totalFiles);
-//	starttime = System.nanoTime();
-//	this.label = label;
-//	current.setString(label + "0 / " + current.getMaximum() + "\t" + "eta: ?");
+	this.totalFiles = totalFiles;
+	starttime = System.nanoTime();
+	this.label = label;
+	current.setString(label + "0 / " + current.getMaximum() + "\t" + "remaining: ?");
     }
 }

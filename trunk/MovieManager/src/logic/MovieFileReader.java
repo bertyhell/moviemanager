@@ -27,15 +27,15 @@ public class MovieFileReader extends SwingWorker<Void, Void> {
     private CustomProgressBar progressBar;
     private int totalFiles;
     private int processedFiles;
-    
+
     public MovieFileReader(File[] folders, IVideoReciever reciever) {
 	this.folders = folders;
 	this.reciever = reciever;
-	
+
 	System.out.println("starting search for files in folder");
 	progressBar = new CustomProgressBar(MainWindow.getInstance(), "calculating required time... ");
 	progressBar.setVisible(true);
-	
+
 	this.addPropertyChangeListener(progressBar);
 
 	//calculate number of files to be processed
@@ -44,12 +44,12 @@ public class MovieFileReader extends SwingWorker<Void, Void> {
 	for (File folder : folders) {
 	    countFiles(folder);
 	}
-	
-	this.setProgress(0);
-	
-	
+//	
+//	this.setProgress(0);
+//	
+
 	System.out.println("total number of files is: " + totalFiles);
-	progressBar.start("Files processed: ",totalFiles);
+	progressBar.start("Files processed: ", totalFiles);
     }
 
     private void countFiles(File dir) { // TODO 050 Add search options -> minimal size, limit extensions, ...
@@ -85,7 +85,13 @@ public class MovieFileReader extends SwingWorker<Void, Void> {
 		videos.add(new Video(path, cleanTitle(path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".")))));
 	    }
 	    processedFiles++;
-	    this.setProgress(processedFiles);
+//	    try {
+//		Thread.sleep(10);
+//	    } catch (InterruptedException ex) {
+//		Logger.getLogger(MovieFileReader.class.getName()).log(Level.SEVERE, null, ex);
+//	    }
+//	    this.setProgress(processedFiles);
+	    this.setProgress(processedFiles * 100 / totalFiles);
 	}
     }
 
@@ -116,29 +122,25 @@ public class MovieFileReader extends SwingWorker<Void, Void> {
 
     @Override
     protected Void doInBackground() throws Exception {
-//	System.out.println("searching files");
-//	
-//	videos = new ArrayList<Video>();
-//	for (File folder : folders) {
-//	    getVideos(folder, videos);
-//	    this.setProgress(processedFiles);
-//	}
-	
-	for(int i=0;i<10;i++){
-	    Thread.sleep(1000);
-	    processedFiles++;
-	    this.setProgress(processedFiles);
-	    
+	videos = new ArrayList<Video>();
+	for (File folder : folders) {
+	    getVideos(folder, videos);
 	}
-	
+	setProgress(100);
 	return null;
     }
 
     @Override
     protected void done() {
 	
-	System.out.println("finished searching files");
 	reciever.returnVideos(videos);
+	
+	progressBar.setVisible(false);
 	progressBar.dispose();
+	System.out.println("done");
     }
+    
+    
+    
+    
 }

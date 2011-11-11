@@ -14,13 +14,13 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.text.DecimalFormat;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import logic.common.TimeFormatter;
 import logic.settings.ProgramSettings;
 import uk.co.caprica.vlcj.player.MediaPlayer;
 import uk.co.caprica.vlcj.player.MediaPlayerEventListener;
@@ -183,7 +183,7 @@ public class VlcPlayer extends JLayeredPane {
 
 	    @Override
 	    public void timeChanged(MediaPlayer mediaPlayer, long newTime) {
-		currentTimeLabel.setText(longToTime(newTime) + "/" + longToTime(mediaPlayer.getLength()));
+		currentTimeLabel.setText(TimeFormatter.longToTime(newTime) + "/" + TimeFormatter.longToTime(mediaPlayer.getLength()));
 		int sliderNewPosition = (int) (mediaPlayer.getPosition() * 1000);
 		if (Math.abs(timeChooser.getValue() - sliderNewPosition) > 1) {
 		    sliderChangedByCode = true;
@@ -233,7 +233,7 @@ public class VlcPlayer extends JLayeredPane {
 	//time label
 	currentTimeLabel = new JLabel();
 
-	currentTimeLabel.setText("0:00:00/" + longToTime(mediaPlayer.getLength()));
+	currentTimeLabel.setText("0:00:00/" + TimeFormatter.longToTime(mediaPlayer.getLength()));
 	controlPanel.add(currentTimeLabel, BorderLayout.SOUTH);
 
 
@@ -291,15 +291,5 @@ public class VlcPlayer extends JLayeredPane {
 
 	// Cleanly dispose of the media player factory and any associated native resources
 	mediaPlayerFactory.release();
-    }
-
-    private String longToTime(long time) {
-	long seconds = time / 1000;
-	long minutes = seconds / 60;
-	long hours = (int) Math.floor((double) (minutes / 60));
-	minutes = minutes - hours * 60;
-	seconds = seconds - minutes * 60 - hours * 60 * 60;
-	DecimalFormat myFormat = new DecimalFormat("00");
-	return hours + ":" + myFormat.format(minutes) + ":" + myFormat.format(seconds);
     }
 }

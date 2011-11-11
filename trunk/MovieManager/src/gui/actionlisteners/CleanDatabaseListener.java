@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.actionlisteners;
 
 import gui.MainWindow;
@@ -18,7 +14,7 @@ import logic.settings.languages.LanguageManager;
 
 /**
  *
- * @author alexander
+ * @author Bert
  */
 public class CleanDatabaseListener extends AbstractAction {
 

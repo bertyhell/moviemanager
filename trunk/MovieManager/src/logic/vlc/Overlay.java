@@ -6,15 +6,10 @@ package logic.vlc;
 
 import com.sun.awt.AWTUtilities;
 import com.sun.jna.platform.WindowUtils;
-import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
 
 /**
  *
