@@ -12,6 +12,7 @@ import java.io.File;
 import javax.swing.JFrame;
 import logic.vlc.VlcPlayer;
 import logic.vlc.VlcPlayerFrame;
+import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 /**
  *
@@ -33,8 +34,8 @@ public class TableMouseListener extends MouseAdapter {
 //		Logger.getLogger(TableMouseListener.class.getName()).log(Level.SEVERE, null, ex);
 //	    }
 	    
-	    VlcPlayerFrame frame = new VlcPlayerFrame();
-	    VlcPlayer player = frame.getPlayer();
+	    VlcPlayerFrame frame = new VlcPlayerFrame(true);
+	    VlcPlayer player = frame.getVlcPlayer();
 	    
 	    
             String[] mediaOptions = {};

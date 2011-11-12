@@ -6,59 +6,110 @@ package logic.vlc;
 
 import com.sun.awt.AWTUtilities;
 import com.sun.jna.platform.WindowUtils;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Window;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.KeyStroke;
+import javax.swing.plaf.basic.BasicSliderUI.ComponentHandler;
+import logic.vlc.actionListeners.PauseListener;
 
 /**
  *
  * @author alexander
  */
-public class Overlay extends Window {
+public class Overlay extends Window implements ComponentListener {
 
-    private static final long serialVersionUID = 1L;
     private VlcPlayerFrame parent;
+    private VlcPlayer vlcPlayer;
+    private Overlay panel = this;
+    TranslucentComponent controlBarEnabler;
+    TranslucentComponent FullScreenEnabler;
 
     public Overlay(VlcPlayerFrame owner) {
 	super(owner, WindowUtils.getAlphaCompatibleGraphicsConfiguration());
-
 	this.parent = owner;
+	this.vlcPlayer = owner.getVlcPlayer();
+
 	AWTUtilities.setWindowOpaque(this, false);
 	setLayout(null);
 
-	TranslucentComponent c = new TranslucentComponent();
-	c.addMouseListener(new MouseAdapter() {
+
+	//control bar enabler
+	controlBarEnabler = new TranslucentComponent();
+	controlBarEnabler.addMouseListener(new MouseAdapter() {
 
 	    @Override
 	    public void mouseEntered(MouseEvent e) {
-		parent.getPlayer().setControlPanelVisible(true);
+		vlcPlayer.setControlPanelVisible(true);
 	    }
 	});
-	c.setBounds(0, owner.getSize().height - 15, owner.getSize().width, 12);
-	add(c);
 	
-	TranslucentComponent c2 = new TranslucentComponent();
-	c2.addMouseListener(new MouseAdapter() {
+	add(controlBarEnabler);
+
+	//double click full screen +control bar disable
+	FullScreenEnabler = new TranslucentComponent();
+	FullScreenEnabler.addMouseListener(new MouseAdapter() {
 
 	    @Override
 	    public void mouseEntered(MouseEvent e) {
-		parent.getPlayer().setControlPanelVisible(false);
+		vlcPlayer.setControlPanelVisible(false);
 	    }
-	    
+
 	    @Override
 	    public void mousePressed(MouseEvent e) {
-		if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2){
+		if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
 		    parent.switchFullScreen();
+		}
+		else if(e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 1){
+		    VlcPopupMenu menu = new VlcPopupMenu(parent.getVlcPlayer());
+		    menu.show(parent, e.getPoint().x, e.getPoint().y);
 		}
 	    }
 	});
-	c2.setBounds(0,0 , owner.getSize().width, owner.getSize().height - 60);
-	add(c2);
-    }
+	add(FullScreenEnabler);
 
+
+	parent.addComponentListener(this);
+	
+
+    }
+    //<editor-fold defaultstate="collapsed" desc="component listener --> resizing handler">
+
+   
     @Override
     public void paint(Graphics g) {
 	super.paint(g);
     }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+	System.out.println("resized " + parent.getContentPane().getSize());
+	this.setSize(parent.getSize());
+	FullScreenEnabler.setBounds(0, 0, parent.getSize().width, parent.getContentPane().getSize().height - 60);
+	System.out.println(this.getSize());
+	controlBarEnabler.setBounds(0, parent.getContentPane().getSize().height - 12, parent.getContentPane().getSize().width, 12);
+
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+    }
+    //</editor-fold>
 }

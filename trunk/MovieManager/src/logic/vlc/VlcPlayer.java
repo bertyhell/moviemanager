@@ -9,10 +9,12 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -50,43 +52,27 @@ public class VlcPlayer extends JLayeredPane {
     //sizes
     private Dimension controlPanelSize;
     private Dimension videoSize;
+    private String lastVideo;
 
-    public VlcPlayer() {
-	this.setBackground(Color.red);
+    //<editor-fold defaultstate="collapsed" desc="initialize">
+    public VlcPlayer(VlcPlayerFrame parent) {
+	this.parent = parent;
+	//set sizes
 	videoSize = new Dimension(800, 600);
 	controlPanelSize = new Dimension(500, 50);
 	this.setPreferredSize(videoSize);
 
+	//initialize panels
 	initPlayer();
 	initControlPanel();
 
 	vlcPlayerPanel.setBounds(0, 0, videoSize.width, videoSize.height);
 	controlPanel.setBounds(videoSize.width / 2 - controlPanelSize.width / 2, videoSize.height - controlPanelSize.height, controlPanelSize.width, controlPanelSize.height);
 
-	this.add(vlcPlayerPanel, 1, 0);
-	this.add(controlPanel, 2, 0);
-	controlPanel.setVisible(false);
-	controlPanel.addMouseListener(new MouseAdapter() {
+	this.add(vlcPlayerPanel, 1, 1);
+	this.add(controlPanel, 2, 1);
 
-	    @Override
-	    public void mouseClicked(MouseEvent e) {
-		if(e.getButton() == MouseEvent.BUTTON3){
-		    controlPanel.setVisible(false);
-		}
-	    }
-	    
-	});
-
-
-
-	//automatically rescale video on resize
-	vlcPlayerPanel.addComponentListener(new ComponentAdapter() {
-
-	    @Override
-	    public void componentResized(ComponentEvent e) {
-		videoSurface.setSize(vlcPlayerPanel.getSize());
-	    }
-	});
+	// handle resize of panel
 	this.addComponentListener(new ComponentAdapter() {
 
 	    @Override
@@ -96,16 +82,6 @@ public class VlcPlayer extends JLayeredPane {
 		controlPanel.setBounds(videoSize.width / 2 - controlPanelSize.width / 2, videoSize.height - controlPanelSize.height, controlPanelSize.width, controlPanelSize.height);
 	    }
 	});
-
-    }
-
-    public VlcPlayer(VlcPlayerFrame parent) {
-	this();
-	this.parent = parent;
-    }
-
-    public EmbeddedMediaPlayer getMediaPlayer() {
-	return mediaPlayer;
     }
 
     private void initPlayer() {
@@ -113,7 +89,7 @@ public class VlcPlayer extends JLayeredPane {
 	System.setProperty("jna.library.path", ProgramSettings.getInstance().get("Vlclib_location"));
 	mediaPlayerFactory = new MediaPlayerFactory();
 	// Create a full screen strategy
-	FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(MainWindow.getInstance());
+	FullScreenStrategy fullScreenStrategy = new DefaultFullScreenStrategy(parent);
 	// Create a new media player instance for the run-time platform
 	mediaPlayer = mediaPlayerFactory.newMediaPlayer(fullScreenStrategy);
 
@@ -138,7 +114,72 @@ public class VlcPlayer extends JLayeredPane {
 	mediaPlayer.setVideoSurface(videoSurface);
 	vlcPlayerPanel.add(videoSurface);
 
+	//automatically rescale video on resize
+	vlcPlayerPanel.addComponentListener(new ComponentAdapter() {
+
+	    @Override
+	    public void componentResized(ComponentEvent e) {
+		videoSurface.setSize(vlcPlayerPanel.getSize());
+	    }
+	});
+
 	addMediaPlayerEventListener();
+    }
+
+    private void initControlPanel() {
+	controlPanel = new JPanel();
+	controlPanel.setLayout(new BorderLayout());
+	controlPanel.setPreferredSize(controlPanelSize);
+
+	//time label
+	currentTimeLabel = new JLabel();
+
+	currentTimeLabel.setText("0:00:00/" + TimeFormatter.longToTime(mediaPlayer.getLength()));
+	controlPanel.add(currentTimeLabel, BorderLayout.SOUTH);
+
+
+	//slider bar to choose time
+	timeChooser = new JSlider(0, 1000, 0);
+
+	timeChooser.addChangeListener(new ChangeListener() {
+
+	    @Override
+	    public void stateChanged(ChangeEvent e) {
+		if (!sliderChangedByCode) {
+		    JSlider source = (JSlider) e.getSource();
+		    mediaPlayer.setPosition((float) (source.getValue() * 1.0 / source.getMaximum()));
+		} else {
+		    sliderChangedByCode = false;
+		}
+	    }
+	});
+
+//	controlPanel.setVisible(false);
+	controlPanel.addMouseListener(new MouseAdapter() {
+
+	    @Override
+	    public void mouseClicked(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON3) {
+		    controlPanel.setVisible(false);
+		}
+	    }
+	});
+
+	controlPanel.add(timeChooser);
+    }
+
+    public final void enableVideoOverlay() {
+	if (parent != null) {
+	    //overlay for video to handle mouse and click events
+	    Overlay nieuw = new Overlay(parent);
+	    mediaPlayer.setOverlay(new Overlay(parent));
+	    mediaPlayer.enableOverlay(true);
+	}
+    }
+    //</editor-fold>
+
+    public EmbeddedMediaPlayer getMediaPlayer() {
+	return mediaPlayer;
     }
 
     private void addMediaPlayerEventListener() {
@@ -225,44 +266,20 @@ public class VlcPlayer extends JLayeredPane {
 	});
     }
 
-    private void initControlPanel() {
-	controlPanel = new JPanel();
-	controlPanel.setLayout(new BorderLayout());
-	controlPanel.setPreferredSize(controlPanelSize);
-
-	//time label
-	currentTimeLabel = new JLabel();
-
-	currentTimeLabel.setText("0:00:00/" + TimeFormatter.longToTime(mediaPlayer.getLength()));
-	controlPanel.add(currentTimeLabel, BorderLayout.SOUTH);
-
-
-	//slider bar to choose time
-	timeChooser = new JSlider(0, 1000, 0);
-
-	timeChooser.addChangeListener(new ChangeListener() {
-
-	    @Override
-	    public void stateChanged(ChangeEvent e) {
-		if (!sliderChangedByCode) {
-		    JSlider source = (JSlider) e.getSource();
-		    mediaPlayer.setPosition((float) (source.getValue() * 1.0 / source.getMaximum()));
-		} else {
-		    sliderChangedByCode = false;
-		}
-	    }
-	});
-
-
-
-	controlPanel.add(timeChooser);
-    }
-
-    public void start(String Path) {
-	File file = new File(Path);
+    public void start(String path) {
+	lastVideo = path;
+	File file = new File(path);
 	// vlcj: play the media
 	mediaPlayer.playMedia(file.getAbsolutePath());
 
+    }
+
+    public void start() {
+	if (lastVideo != null) {
+	    File file = new File(lastVideo);
+	    // vlcj: play the media
+	    mediaPlayer.playMedia(file.getAbsolutePath());
+	}
     }
 
     public void stop() {
@@ -281,10 +298,10 @@ public class VlcPlayer extends JLayeredPane {
 	}
     }
 
-    public void setControlPanelVisible(boolean visible){
+    public void setControlPanelVisible(boolean visible) {
 	controlPanel.setVisible(visible);
     }
-    
+
     public void dispose() {
 	// Cleanly dispose of the media player instance and any associated native resources
 	mediaPlayer.release();

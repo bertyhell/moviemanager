@@ -8,13 +8,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import javax.swing.KeyStroke;
+import logic.vlc.actionListeners.MuteListener;
+import logic.vlc.actionListeners.PauseListener;
+import logic.vlc.actionListeners.StopStartListener;
 
 /**
  *
@@ -22,57 +25,66 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  */
 public class VlcPlayerFrame extends JFrame {
 
-    private VlcPlayer vlcPlayer;
-    private EmbeddedMediaPlayer player;
+    private VlcPlayer vlcPlayerPanel;
     private Dimension previousSize;
     private Point previousLocation;
     private boolean isFullscreen = false;
 
-    public VlcPlayerFrame() {
-	vlcPlayer = new VlcPlayer(this);
-	player = vlcPlayer.getMediaPlayer();
-	this.setUndecorated(true);
-	this.setBackground(Color.BLACK);
-	this.add(vlcPlayer);
+    public VlcPlayerFrame(boolean enableVlcControls) {
+	vlcPlayerPanel = new VlcPlayer(this);
+//	this.setUndecorated(true);	
+	this.add(vlcPlayerPanel);
+	this.setBackground(Color.red);
 	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
 	this.addWindowListener(new WindowAdapter() {
+
 	    @Override
 	    public void windowClosing(WindowEvent e) {
-		vlcPlayer.stop();
-		vlcPlayer.dispose();
+		vlcPlayerPanel.dispose();
 	    }
 	});
-	
-	this.addMouseListener(new MouseAdapter() {
-	    @Override
-	    public void mouseClicked(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-		    if (!isFullscreen) {
-			enterFullScreen();
-		    } else {
-			exitFullScreen();
-		    }
-		}
-	    }
-	});
+
 
 	this.pack();
 	this.setLocationRelativeTo(null);
-
-	
-	this.setVisible(true);
-	
-	player.setOverlay(new Overlay(this));
-	player.enableOverlay(true);
+	if (enableVlcControls) {
+//	    this.setVisible(true);
+	    enableVlcControls();
+	}
     }
 
+    public VlcPlayer getVlcPlayer() {
+	return vlcPlayerPanel;
+    }
+
+    public final void enableVlcControls() {
+	if (!isVisible()) {
+	    initializeShortcutKeys();
+
+
+
+	    this.setVisible(true);
+	    this.requestFocus();
+	    vlcPlayerPanel.enableVideoOverlay();
+	} else {
+	    System.out.println("VlcPlayerFrame: The frame must be visible before enabling the controls");
+	}
+    }
+
+    private void initializeShortcutKeys() {
+	initializeShortcutKey("Pause",KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, true) , new PauseListener(vlcPlayerPanel));
+	initializeShortcutKey("Stop", KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK, true), new StopStartListener(vlcPlayerPanel));
+	initializeShortcutKey("Mute", KeyStroke.getKeyStroke(KeyEvent.VK_M, KeyEvent.CTRL_DOWN_MASK, true), new MuteListener(vlcPlayerPanel));
+    }
+    
+    private void initializeShortcutKey(String ActionName, KeyStroke stroke, AbstractAction action){
+	getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, ActionName);
+	getRootPane().getActionMap().put(ActionName, action);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Fullscreen mode switch">
     public boolean isFullscreen() {
 	return isFullscreen;
-    }
-
-    public VlcPlayer getPlayer() {
-	return vlcPlayer;
     }
 
     public void enterFullScreen() {
@@ -82,7 +94,7 @@ public class VlcPlayerFrame extends JFrame {
 	    this.setLocation(0, 0);
 	    this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 	    isFullscreen = true;
-	    //GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
+//	    GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
 	}
     }
 
@@ -93,13 +105,13 @@ public class VlcPlayerFrame extends JFrame {
 	    isFullscreen = false;
 	}
     }
-    
-    public void switchFullScreen(){
-	if(isFullscreen){
+
+    public void switchFullScreen() {
+	if (isFullscreen) {
 	    exitFullScreen();
-	}
-	else{
+	} else {
 	    enterFullScreen();
 	}
     }
+    //</editor-fold>
 }
