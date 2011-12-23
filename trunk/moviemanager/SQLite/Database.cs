@@ -1,13 +1,5 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Configuration;
-using System.IO;
-using System.Globalization;
-using System.Data.Common;
 using System.Data.SQLite;
 
 namespace SQLite
@@ -15,27 +7,25 @@ namespace SQLite
 
     public class Database
     {
-        private static String _connString = "data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\Settings\\moviemanager.sqlite\"";
-        private static SQLiteConnection _conn = null;
-
-        private static Dictionary<string, SQLiteConnection> _connections = new Dictionary<string, SQLiteConnection>();
+        private const String CONN_STRING = "data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\Settings\\moviemanager.sqlite\"";
+        private static SQLiteConnection _conn;
 
         public static void ExecuteSQL(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand cmd = GetCommand(conn, transaction, sql, @params);
+            SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
+            Cmd.ExecuteNonQuery();
         }
 
         public static void ExecuteSQL(string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand cmd = GetCommand(sql, @params);
-            cmd.ExecuteNonQuery();
+            ExecuteSQL(GetConnection(), null, sql, @params);
         }
 
         public static SQLiteConnection GetConnection()
         {
             if (_conn == null)
             {
-                _conn = new SQLiteConnection(_connString);
+                _conn = new SQLiteConnection(CONN_STRING);
                 _conn.Open();
             }
             return _conn;
@@ -43,21 +33,17 @@ namespace SQLite
 
         public static SQLiteCommand GetCommand(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand cmd = new SQLiteCommand(sql);
-            cmd.Transaction = transaction;
-            cmd.Connection = conn;
-            foreach (SQLiteParameter param in @params)
+            SQLiteCommand Cmd = new SQLiteCommand(sql) {Transaction = transaction, Connection = conn};
+            foreach (SQLiteParameter Param in @params)
             {
-                cmd.Parameters.Add(param);
+                Cmd.Parameters.Add(Param);
             }
-            return cmd;
+            return Cmd;
         }
 
         public static SQLiteCommand GetCommand(string sql, params SQLiteParameter[] @params)
         {
-            SQLiteConnection conn = GetConnection();
-            SQLiteCommand cmd = GetCommand(GetConnection(), null, sql, @params);
-            return cmd;
+            return GetCommand(GetConnection(), null, sql, @params);
         }
 
         public static SQLiteDataReader GetReader(string sql, params SQLiteParameter[] @params)
@@ -67,9 +53,8 @@ namespace SQLite
 
         public static SQLiteDataReader GetReader(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand cmd = GetCommand(conn, transaction, sql, @params);
-            string commandtext = cmd.CommandText;
-            return cmd.ExecuteReader();
+            SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
+            return Cmd.ExecuteReader();
         }
 
         public static SQLiteDataAdapter GetAdapter(string sql, params SQLiteParameter[] @params)
@@ -79,23 +64,23 @@ namespace SQLite
 
         public static SQLiteDataAdapter GetAdapter(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteDataAdapter adapter=null;
+            SQLiteDataAdapter Adapter=null;
             try
             {
-                SQLiteCommand cmd = GetCommand(conn, transaction, sql, @params);
-                string commandtext = cmd.CommandText;
-                adapter = new SQLiteDataAdapter(cmd);
+                SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
+                Adapter = new SQLiteDataAdapter(Cmd);
             }
-            catch { }
-            return adapter;
+            catch
+            { }
+            return Adapter;
         }
 
         public static bool FillDataset( DsVideos dataSet, Dictionary<String,String> tableNames)
         {
             bool RetVal = true;
-            foreach (KeyValuePair<String,String> pair in tableNames)
+            foreach (KeyValuePair<String,String> Pair in tableNames)
             {
-                RetVal &= FillDataset(dataSet, pair.Key, pair.Value);
+                RetVal &= FillDataset(dataSet, Pair.Key, Pair.Value);
             }
             return RetVal;
         }
@@ -105,8 +90,8 @@ namespace SQLite
             bool Retval = true;
             try
             {
-                SQLiteDataAdapter adap = Database.GetAdapter(query);
-                adap.Fill(dataSet, tableName);
+                SQLiteDataAdapter Adap = GetAdapter(query);
+                Adap.Fill(dataSet, tableName);
             }
             catch
             {
