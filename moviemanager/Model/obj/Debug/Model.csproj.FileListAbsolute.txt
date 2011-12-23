@@ -1,0 +1,5 @@
+M:\projects\Open Source\MovieManagerCSharp\Model\bin\Debug\Model.dll
+M:\projects\Open Source\MovieManagerCSharp\Model\bin\Debug\Model.pdb
+M:\projects\Open Source\MovieManagerCSharp\Model\obj\Debug\ResolveAssemblyReference.cache
+M:\projects\Open Source\MovieManagerCSharp\Model\obj\Debug\Model.dll
+M:\projects\Open Source\MovieManagerCSharp\Model\obj\Debug\Model.pdb
