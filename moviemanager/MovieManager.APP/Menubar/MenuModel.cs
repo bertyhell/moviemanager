@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
 using System.Windows.Input;
-using Microsoft.Windows.Controls.Ribbon;
 using SQLite.Commands;
 
 namespace MovieManager.APP.Menubar
@@ -15,9 +11,8 @@ namespace MovieManager.APP.Menubar
 
         #region Data
 
-        private const string HelpFooterTitle = "Press F1 for more help.";
-        private static object _lockObject = new object();
-        private static Dictionary<string, ControlData> _dataCollection = new Dictionary<string, ControlData>();
+        private static readonly object LOCK_OBJECT = new object();
+        private static readonly Dictionary<string, ControlData> DATA_COLLECTION = new Dictionary<string, ControlData>();
 
         #endregion Data
 
@@ -26,27 +21,27 @@ namespace MovieManager.APP.Menubar
         {
             get
             {
-                lock (_lockObject)
+                lock (LOCK_OBJECT)
                 {
-                    string Str = "Add Files";
+                    const string Str = "Add Files";
 
-                    if (!_dataCollection.ContainsKey(Str))
+                    if (!DATA_COLLECTION.ContainsKey(Str))
                     {
-                        string AddVideosToolTipTitle = "Add Video Files";
-                        string AddVideosToolTipDescription = "Add Videos To Database";
-                        ControlData buttonData = new ControlData()
-                        {
-                            Label = Str,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
-                            ToolTipTitle = AddVideosToolTipTitle,
-                            ToolTipDescription = AddVideosToolTipDescription,
-                            Command = new AddVideosCommand(),
-                            KeyTip = "",
-                        };
-                        _dataCollection[Str] = buttonData;
+                        const string AddVideosToolTipTitle = "Add Video Files";
+                        const string AddVideosToolTipDescription = "Add Videos To Database";
+                        ControlData ButtonData = new ControlData
+                                                     {
+                                                         Label = Str,
+                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
+                                                         ToolTipTitle = AddVideosToolTipTitle,
+                                                         ToolTipDescription = AddVideosToolTipDescription,
+                                                         Command = new AddVideosCommand(),
+                                                         KeyTip = "",
+                                                     };
+                        DATA_COLLECTION[Str] = ButtonData;
                     }
 
-                    return _dataCollection[Str];
+                    return DATA_COLLECTION[Str];
                 }
             }
         }
@@ -58,27 +53,27 @@ namespace MovieManager.APP.Menubar
         {
             get
             {
-                lock (_lockObject)
+                lock (LOCK_OBJECT)
                 {
-                    string Str = "Add Directory";
+                    const string Str = "Add Directory";
 
-                    if (!_dataCollection.ContainsKey(Str))
+                    if (!DATA_COLLECTION.ContainsKey(Str))
                     {
-                        string AddVideosToolTipTitle = "Add Video Directory";
-                        string AddVideosToolTipDescription = "Add Videos To Database";
-                        ControlData buttonData = new ControlData()
-                        {
-                            Label = Str,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
-                            ToolTipTitle = AddVideosToolTipTitle,
-                            ToolTipDescription = AddVideosToolTipDescription,
-                            Command = new AddVideosDirectoryCommand(),
-                            KeyTip = "",
-                        };
-                        _dataCollection[Str] = buttonData;
+                        const string AddVideosToolTipTitle = "Add Video Directory";
+                        const string AddVideosToolTipDescription = "Add Videos To Database";
+                        ControlData ButtonData = new ControlData
+                                                     {
+                                                         Label = Str,
+                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
+                                                         ToolTipTitle = AddVideosToolTipTitle,
+                                                         ToolTipDescription = AddVideosToolTipDescription,
+                                                         Command = new AddVideosDirectoryCommand(),
+                                                         KeyTip = "",
+                                                     };
+                        DATA_COLLECTION[Str] = ButtonData;
                     }
 
-                    return _dataCollection[Str];
+                    return DATA_COLLECTION[Str];
                 }
             }
         }
@@ -87,27 +82,27 @@ namespace MovieManager.APP.Menubar
         {
             get
             {
-                lock (_lockObject)
+                lock (LOCK_OBJECT)
                 {
-                    string Str = "Clear videos";
+                    const string Str = "Clear videos";
 
-                    if (!_dataCollection.ContainsKey(Str))
+                    if (!DATA_COLLECTION.ContainsKey(Str))
                     {
-                        string AddVideosToolTipTitle = "Clear videotables";
-                        string AddVideosToolTipDescription = "Clear all videotables";
-                        ControlData buttonData = new ControlData()
-                        {
-                            Label = Str,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/clear.png", UriKind.Relative),
-                            ToolTipTitle = AddVideosToolTipTitle,
-                            ToolTipDescription = AddVideosToolTipDescription,
-                            Command = new EmptyVideosCommand(),
-                            KeyTip = "",
-                        };
-                        _dataCollection[Str] = buttonData;
+                        const string AddVideosToolTipTitle = "Clear videotables";
+                        const string AddVideosToolTipDescription = "Clear all videotables";
+                        ControlData ButtonData = new ControlData
+                                                     {
+                                                         Label = Str,
+                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/clear.png", UriKind.Relative),
+                                                         ToolTipTitle = AddVideosToolTipTitle,
+                                                         ToolTipDescription = AddVideosToolTipDescription,
+                                                         Command = new EmptyVideosCommand(),
+                                                         KeyTip = "",
+                                                     };
+                        DATA_COLLECTION[Str] = ButtonData;
                     }
 
-                    return _dataCollection[Str];
+                    return DATA_COLLECTION[Str];
                 }
             }
         }
@@ -116,25 +111,25 @@ namespace MovieManager.APP.Menubar
         {
             get
             {
-                lock (_lockObject)
+                lock (LOCK_OBJECT)
                 {
-                    string Str = "Search Web";
+                    const string Str = "Search Web";
 
-                    if (!_dataCollection.ContainsKey(Str))
+                    if (!DATA_COLLECTION.ContainsKey(Str))
                     {
-                        ControlData buttonData = new ControlData()
-                        {
-                            Label = Str,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/search.png", UriKind.Relative),
-                            ToolTipTitle = "Search TMDB",
-                            ToolTipDescription = "Search TMDB for info",
-                            Command =  new MovieManager.APP.Search.SearchCommand(),
-                            KeyTip = "",
-                        };
-                        _dataCollection[Str] = buttonData;
+                        ControlData ButtonData = new ControlData
+                                                     {
+                                                         Label = Str,
+                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/search.png", UriKind.Relative),
+                                                         ToolTipTitle = "Search TMDB",
+                                                         ToolTipDescription = "Search TMDB for info",
+                                                         Command = new Search.SearchCommand(),
+                                                         KeyTip = "",
+                                                     };
+                        DATA_COLLECTION[Str] = ButtonData;
                     }
 
-                    return _dataCollection[Str];
+                    return DATA_COLLECTION[Str];
                 }
             }
         }
@@ -144,23 +139,23 @@ namespace MovieManager.APP.Menubar
         {
             get
             {
-                lock (_lockObject)
+                lock (LOCK_OBJECT)
                 {
-                    string Str = "Exit Word";
+                    const string Str = "Exit Word";
 
-                    if (!_dataCollection.ContainsKey(Str))
+                    if (!DATA_COLLECTION.ContainsKey(Str))
                     {
-                        ControlData buttonData = new ControlData()
-                        {
-                            Label = Str,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
-                            Command = ApplicationCommands.Close,
-                            KeyTip = "X",
-                        };
-                        _dataCollection[Str] = buttonData;
+                        ControlData ButtonData = new ControlData
+                                                     {
+                                                         Label = Str,
+                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
+                                                         Command = ApplicationCommands.Close,
+                                                         KeyTip = "X",
+                                                     };
+                        DATA_COLLECTION[Str] = ButtonData;
                     }
 
-                    return _dataCollection[Str];
+                    return DATA_COLLECTION[Str];
                 }
             }
         }
