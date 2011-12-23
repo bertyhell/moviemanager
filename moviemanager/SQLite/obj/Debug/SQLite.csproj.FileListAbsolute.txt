@@ -1,0 +1,8 @@
+M:\projects\Open Source\MovieManagerCSharp\SQLite\bin\Debug\SQLite.dll.config
+M:\projects\Open Source\MovieManagerCSharp\SQLite\bin\Debug\SQLite.dll
+M:\projects\Open Source\MovieManagerCSharp\SQLite\bin\Debug\SQLite.pdb
+M:\projects\Open Source\MovieManagerCSharp\SQLite\bin\Debug\Model.dll
+M:\projects\Open Source\MovieManagerCSharp\SQLite\bin\Debug\Model.pdb
+M:\projects\Open Source\MovieManagerCSharp\SQLite\obj\Debug\ResolveAssemblyReference.cache
+M:\projects\Open Source\MovieManagerCSharp\SQLite\obj\Debug\SQLite.dll
+M:\projects\Open Source\MovieManagerCSharp\SQLite\obj\Debug\SQLite.pdb

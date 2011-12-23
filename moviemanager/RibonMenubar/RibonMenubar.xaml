@@ -1,0 +1,80 @@
+﻿<UserControl  x:Class="RibonMenubar.RibonMenubar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" 
+             xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
+             xmlns:data ="clr-namespace:RibonMenubar">
+    <Grid>
+        <Grid.Resources>
+            <Style x:Key="RibbonControlStyle">
+                <Setter Property="ribbon:RibbonControlService.Label" Value="{Binding Label}" />
+                <Setter Property="ribbon:RibbonControlService.LargeImageSource" Value="{Binding LargeImage}" />
+                <Setter Property="ribbon:RibbonControlService.SmallImageSource" Value="{Binding SmallImage}" />
+                <Setter Property="ribbon:RibbonControlService.ToolTipTitle" Value="{Binding ToolTipTitle}" />
+                <Setter Property="ribbon:RibbonControlService.ToolTipDescription" Value="{Binding ToolTipDescription}" />
+                <Setter Property="ribbon:RibbonControlService.ToolTipImageSource" Value="{Binding ToolTipImage}" />
+                <Setter Property="ribbon:RibbonControlService.ToolTipFooterTitle" Value="{Binding ToolTipFooterTitle}" />
+                <Setter Property="ribbon:RibbonControlService.ToolTipFooterDescription" Value="{Binding ToolTipFooterDescription}" />
+                <Setter Property="ribbon:RibbonControlService.ToolTipFooterImageSource" Value="{Binding ToolTipFooterImage}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding LargeImage}" Value="{x:Null}">
+                        <Setter Property="ribbon:RibbonControlService.LargeImageSource" Value="{x:Null}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding SmallImage}" Value="{x:Null}">
+                        <Setter Property="ribbon:RibbonControlService.SmallImageSource" Value="{x:Null}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ToolTipImage}" Value="{x:Null}">
+                        <Setter Property="ribbon:RibbonControlService.ToolTipImageSource" Value="{x:Null}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ToolTipFooterImage}" Value="{x:Null}">
+                        <Setter Property="ribbon:RibbonControlService.ToolTipFooterImageSource" Value="{x:Null}" />
+                    </DataTrigger>
+                    <Trigger Property="ribbon:RibbonControlService.IsInQuickAccessToolBar" Value="False">
+                        <Setter Property="KeyTipService.KeyTip" Value="{Binding KeyTip}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="{x:Type ribbon:RibbonButton}" BasedOn="{StaticResource RibbonControlStyle}">
+                <Setter Property="Command" Value="{Binding Command}" />
+            </Style>
+        </Grid.Resources>
+
+
+        <ribbon:Ribbon Grid.Row="0" Grid.ColumnSpan="3" x:Name="_ribbonMenubar">
+            <!-- Applicatiemenu-->
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu  SmallImageSource="Images\picto.png">
+                    <ribbon:RibbonApplicationMenuItem Header="_Close" ImageSource="Images\close.png" />
+
+                <ribbon:RibbonApplicationMenu.FooterPaneContent>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ribbon:RibbonButton Grid.Column="2" DataContext="{x:Static data:MenuModel.ExitMM}" />
+                    </Grid>
+                </ribbon:RibbonApplicationMenu.FooterPaneContent>
+
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
+            
+            
+            <ribbon:RibbonTab x:Name="_ribbonHometab" Header="Home">
+                <ribbon:RibbonGroup>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddVideo}">
+                    </ribbon:RibbonButton>
+                </ribbon:RibbonGroup>
+
+                <ribbon:RibbonGroup>
+
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
+    </Grid>
+</UserControl>

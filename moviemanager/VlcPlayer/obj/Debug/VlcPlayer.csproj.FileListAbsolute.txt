@@ -1,0 +1,15 @@
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\bin\Debug\VlcPlayer.dll
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\bin\Debug\VlcPlayer.pdb
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\ResolveAssemblyReference.cache
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayerControl.baml
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayerControl.g.cs
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\GeneratedInternalTypeHelper.g.cs
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer_MarkupCompile.cache
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer_MarkupCompile.lref
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\Themes\Generic.baml
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer.g.resources
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer.Properties.Resources.resources
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\GenerateResource.read.1.tlog
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\GenerateResource.write.1.tlog
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer.dll
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer.pdb
