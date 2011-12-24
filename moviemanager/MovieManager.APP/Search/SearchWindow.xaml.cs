@@ -28,7 +28,11 @@ namespace MovieManager.APP.Search
         private void _searchControl_ClickOnSearch(ClickOnSearchEventArgs e)
         {
             List<Actor> SearchedActors = SearchTMDB.SearchActor(e.SearchTerm);
-            SearchTMDB.getActorInfo(SearchedActors[0]);
+            if (SearchedActors.Count > 0)
+            {
+                SearchTMDB.GetActorInfo(SearchedActors[0]);
+                _actorOverview.Actor = SearchedActors[0];
+            }
         }
     }
 }

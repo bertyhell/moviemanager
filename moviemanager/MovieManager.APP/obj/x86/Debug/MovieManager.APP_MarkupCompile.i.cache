@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\App.xaml
-5-847776361
+71629095928
 
-17-1078797888
+21-876811934
 24-1726389549
-MainWindow.xaml;Menubar\RibonMenubar.xaml;Search\SearchControl.xaml;Search\SearchWindow.xaml;VlcWindow.xaml;
+CommonControls\MovieScrollPanel.xaml;MainWindow.xaml;Menubar\RibonMenubar.xaml;Search\ActorOverview.xaml;Search\SearchControl.xaml;Search\SearchWindow.xaml;VlcWindow.xaml;
 
 True
 

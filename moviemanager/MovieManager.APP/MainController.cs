@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Model;
 using SQLite;
-using System.Data.SQLite;
 using System.ComponentModel;
 
 namespace MovieManager.APP
@@ -14,8 +11,8 @@ namespace MovieManager.APP
 
         public MainController()
         {
-            Videos = MMDatabase.selectAllVideos();
-            MMDatabase.onVideosChanged += new VideosChanged(MMDatabase_onVideoChanged);
+            Videos = MMDatabase.SelectAllVideos();
+            MMDatabase.OnVideosChanged += MMDatabase_onVideoChanged;
         }
 
 
@@ -29,23 +26,23 @@ namespace MovieManager.APP
             set
             {
                 _videos = value;
-                propChanged("Videos");
+                PropChanged("Videos");
             }
         }
 
         void MMDatabase_onVideoChanged()
         {
-            Videos = MMDatabase.selectAllVideos();
+            Videos = MMDatabase.SelectAllVideos();
         }
 
 
 
         public void Dispose()
         {
-            MMDatabase.onVideosChanged -= new VideosChanged(MMDatabase_onVideoChanged);
+            MMDatabase.OnVideosChanged -= MMDatabase_onVideoChanged;
         }
 
-        public void propChanged(String title)
+        public void PropChanged(String title)
         {
             if (PropertyChanged != null)
             {

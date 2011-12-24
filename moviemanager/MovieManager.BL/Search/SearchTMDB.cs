@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Model;
 using System.Globalization;
 using System.Net;
@@ -13,53 +12,54 @@ namespace MovieManager.BL.Search
 {
     public class SearchTMDB
     {
-        public static void getVideoInfoFromImdb(String query, Video video) {
+        public static void GetVideoInfoFromImdb(String query, Video video)
+        {
 
             try
             {
                 //do request
-                Uri request = new Uri("http://www.imdbapi.com/?r=XML&t=" + HttpUtility.UrlEncode(query));
-                String response = doRequest(request);
+                Uri Request = new Uri("http://www.imdbapi.com/?r=XML&t=" + HttpUtility.UrlEncode(query));
+                String Response = DoRequest(Request);
 
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(Response))
                 {
-                    Console.WriteLine(response);
+                    Console.WriteLine(Response);
 
 
                 }
             }
             catch { }
 
-        //    //parse request
-        //    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        //    DocumentBuilder db = dbf.newDocumentBuilder();
-        //    if (!response.contains("Parse Error")) {
-        //    Document doc = db.parse(new InputSource(new java.io.StringReader(response)));
-        //    doc.getDocumentElement();
+            //    //parse request
+            //    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            //    DocumentBuilder db = dbf.newDocumentBuilder();
+            //    if (!response.contains("Parse Error")) {
+            //    Document doc = db.parse(new InputSource(new java.io.StringReader(response)));
+            //    doc.getDocumentElement();
 
-        //    //get all movietags
-        //    NodeList movieList = doc.getElementsByTagName("movie");
+            //    //get all movietags
+            //    NodeList movieList = doc.getElementsByTagName("movie");
 
-        //    //get informatie from movie nodes
-        //    for (int i = 0; i < movieList.getLength(); i++) {
-        //        Node movie = movieList.item(i);
-        //        if (movie.getNodeType() == Node.ELEMENT_NODE) {
-        //        Element movieElement = (Element) movie;
-        //        video.setRelease(parseDate(movieElement.getAttribute("release")));
-        //        try {
-        //            double rating = Double.parseDouble(movieElement.getAttribute("rating"));
-        //            video.setRatingImdb(rating);
-        //        } catch (NumberFormatException e) {
-        //            System.out.println(e.getMessage());
-        //        }
-        //        //TODO 100 get all the information in the node
-        //        //TODO 100 Date doesn't get saved in database
-        //        }
-        //    }
-        //    }
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //}
+            //    //get informatie from movie nodes
+            //    for (int i = 0; i < movieList.getLength(); i++) {
+            //        Node movie = movieList.item(i);
+            //        if (movie.getNodeType() == Node.ELEMENT_NODE) {
+            //        Element movieElement = (Element) movie;
+            //        video.setRelease(parseDate(movieElement.getAttribute("release")));
+            //        try {
+            //            double rating = Double.parseDouble(movieElement.getAttribute("rating"));
+            //            video.setRatingImdb(rating);
+            //        } catch (NumberFormatException e) {
+            //            System.out.println(e.getMessage());
+            //        }
+            //        //TODO 100 get all the information in the node
+            //        //TODO 100 Date doesn't get saved in database
+            //        }
+            //    }
+            //    }
+            //} catch (Exception e) {
+            //    e.printStackTrace();
+            //}
         }
 
         public static List<Actor> SearchActor(String query)
@@ -69,39 +69,39 @@ namespace MovieManager.BL.Search
             {
 
                 //do request
-                Uri request = new Uri("http://api.themoviedb.org/2.1/Person.search/en/xml/02004323eee9878ce511ca57faf0b29c/" + HttpUtility.UrlEncode(query));
-                String response = doRequest(request);
+                Uri Request = new Uri("http://api.themoviedb.org/2.1/Person.search/en/xml/02004323eee9878ce511ca57faf0b29c/" + HttpUtility.UrlEncode(query));
+                String Response = DoRequest(Request);
 
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(Response))
                 {
                     //Console.WriteLine(response);
 
-                    XDocument XMLDoc = XDocument.Parse(response);
+                    XDocument XMLDoc = XDocument.Parse(Response);
 
                     //get elements from xml
-                    var actors = from Person in XMLDoc.Descendants("person")
-                                 select new
-                                 {
-                                     TmdbID = Convert.ToInt32(Person.Element("id").Value),
-                                     Name = Person.Element("name").Value,
-                                     Images = Person.Element("images").Nodes().ToList()
-                                 };
+                    var LocalActors = from Person in XMLDoc.Descendants("person")
+                                      select new
+                                      {
+                                          TmdbID = Convert.ToInt32(Person.Element("id").Value),
+                                          Name = Person.Element("name").Value,
+                                          Images = Person.Element("images").Nodes().ToList()
+                                      };
 
                     //convert elements to actor
-                    foreach (var actor in actors)
+                    foreach (var Actor in LocalActors)
                     {
-                        Actor newActor = new Actor()
-                        {
-                            Name = actor.Name,
-                            TmdbID = actor.TmdbID
-                        };
+                        Actor NewActor = new Actor
+                                             {
+                                                 Name = Actor.Name,
+                                                 TmdbID = Actor.TmdbID
+                                             };
 
-                        foreach (XElement image in actor.Images)
+                        foreach (XElement Image in Actor.Images)
                         {
-                            newActor.ImageUrls.Add(image.Attribute("url").Value);
+                            NewActor.ImageUrls.Add(Image.Attribute("url").Value);
                         }
 
-                        Actors.Add(newActor);
+                        Actors.Add(NewActor);
 
                     }
                 }
@@ -112,60 +112,65 @@ namespace MovieManager.BL.Search
         }
 
 
-        public static void getActorInfo(Actor actor)
+        public static void GetActorInfo(Actor actor)
         {
             try
             {
 
                 //do request
-                Uri request = new Uri("http://api.themoviedb.org/2.1/Person.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + actor.TmdbID);
-                String response = doRequest(request);
+                Uri Request = new Uri("http://api.themoviedb.org/2.1/Person.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + actor.TmdbID);
+                String Response = DoRequest(Request);
 
-                Console.WriteLine(response);
+                Console.WriteLine(Response);
 
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(Response))
                 {
-                    XDocument XDoc = XDocument.Parse(response);
+                    XDocument XDoc = XDocument.Parse(Response);
 
-                    var actors = from actorEl in XDoc.Descendants("person")
+                    var Actors = from ActorEl in XDoc.Descendants("person")
                                  select new
                                  {
-                                     ImagesMovies = actorEl.Element("filmography").Nodes().ToList()
+                                     ImagesMovies = ActorEl.Element("filmography").Nodes().ToList(),
+                                     BirthPlace = ActorEl.Element("birthplace").Value,
+                                     Biography = ActorEl.Element("biography").Value
                                  };
 
-                    foreach (XElement image in actors.ToList()[0].ImagesMovies)
+                    //convert to a Actor object
+                    var Actor = Actors.ToList()[0];
+                    actor.Birthplace = Actor.BirthPlace;
+                    actor.Biography = Actor.Biography;
+                    foreach (XElement Image in Actor.ImagesMovies)
                     {
-                        actor.MovieImageUrls.Add(image.Attribute("poster").Value);
+                        actor.MovieImageUrls.Add(new Uri(Image.Attribute("poster").Value));
                     }
                 }
             }
             catch { }
         }
 
-        private static DateTime parseDate(String date)
+        private static DateTime ParseDate(String date)
         {
-            DateTimeFormatInfo format = new DateTimeFormatInfo();
-            DateTime datetime;
+            DateTimeFormatInfo Format = new DateTimeFormatInfo();
+            DateTime Datetime;
             try
             {
-                format.FullDateTimePattern = "d MMM yyyy";
+                Format.FullDateTimePattern = "d MMM yyyy";
 
-                datetime = DateTime.Parse(date, format);
+                Datetime = DateTime.Parse(date, Format);
             }
             catch
             {
                 try
                 {
-                    format.FullDateTimePattern = "yyyy";
-                    datetime = DateTime.Parse(date, format);
+                    Format.FullDateTimePattern = "yyyy";
+                    Datetime = DateTime.Parse(date, Format);
                 }
                 catch
                 {
                     return DateTime.MinValue;
                 }
             }
-            return datetime;
-
+            return Datetime;
         }
 
         /**
@@ -173,16 +178,20 @@ namespace MovieManager.BL.Search
          * @param url
          * @return
          */
-        private static String doRequest(Uri url)
+        private static String DoRequest(Uri url)
         {
 
-            WebClient client = new WebClient();
-            Stream data = client.OpenRead(url);
-            StreamReader reader = new StreamReader(data);
-            string ResponseXML = reader.ReadToEnd();
-            Console.WriteLine(ResponseXML);
-            data.Close();
-            reader.Close();
+            WebClient Client = new WebClient();
+            Stream Data = Client.OpenRead(url);
+            string ResponseXML = null;
+            if (Data != null)
+            {
+                StreamReader Reader = new StreamReader(Data);
+                ResponseXML = Reader.ReadToEnd();
+                Console.WriteLine(ResponseXML);
+                Data.Close();
+                Reader.Close();
+            }
 
             return ResponseXML;
 

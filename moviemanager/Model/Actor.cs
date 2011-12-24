@@ -1,81 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Model
 {
     public class Actor
     {
-
-        private int _tmdbID;
-        private String _name;
-        private List<String> _imageURLs;
-        private List<String> _movieURLs;
-
         public Actor()
         {
-            _imageURLs = new List<String>();
-            _movieURLs = new List<String>();
+            ImageUrls = new List<String>();
+            MovieImageUrls= new List<Uri>();
         }
 
-        public String Name
+        public string Name { get; set; }
+
+        public int TmdbID { get; set; }
+
+        public void AddImage(String url)
         {
-            get { return _name; }
-            set { _name = value; }
+            ImageUrls.Add(url);
         }
 
-        public int TmdbID
-        {
-            get { return _tmdbID; }
-            set { _tmdbID = value; }
-        }
-
-        public void addImage(String URL)
-        {
-            _imageURLs.Add(URL);
-        }
-
-        public List<String> ImageUrls
-        {
-            get { return _imageURLs; }
-            set { _imageURLs = value; }
-        }
-
+        public List<string> ImageUrls { get; set; }
+        
         public List<Image> Images
         {
             get
             {
-                List<Image> images = new List<Image>();
-                for (int i = 0; i < _imageURLs.Count; i++)
+                List<Image> LocalImages = new List<Image>();
+                foreach (string ImageUrl in ImageUrls)
                 {
                     try
                     {
-                        Image image = new Image();
+                        Image Image = new Image();
 
-                        BitmapImage bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.UriSource = new Uri(_imageURLs[i], UriKind.Absolute);
-                        bitmap.EndInit();
+                        BitmapImage Bitmap = new BitmapImage();
+                        Bitmap.BeginInit();
+                        Bitmap.UriSource = new Uri(ImageUrl, UriKind.Absolute);
+                        Bitmap.EndInit();
 
-                        image.Source = bitmap;
-                        images.Add(image);
+                        Image.Source = Bitmap;
+                        LocalImages.Add(Image);
                     }
                     catch
                     {
                     }
                 }
-                return images;
+                return LocalImages;
             }
         }
 
-        public List<String> MovieImageUrls
-        {
-            get { return _movieURLs; }
-            set { _movieURLs = value; }
-        }
+        public List<Uri> MovieImageUrls { get; set; }
+
+        public String Birthplace { get; set; }
+
+        public String Biography { get; set; }
     }
 }
