@@ -36,3 +36,8 @@ M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Genera
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\GenerateResource.write.1.tlog
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.exe
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.pdb
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Search\ActorOverview.g.cs
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Search\ActorOverview.baml
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.Localization.Resource.resources
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\MovieScrollPanel.baml
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\MovieScrollPanel.g.cs

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Model;
 using System.Data.SQLite;
 using System.Globalization;
@@ -14,85 +11,84 @@ namespace SQLite
 
     public class MMDatabase
     {
-        public static event VideosChanged onVideosChanged;
+        public static event VideosChanged OnVideosChanged;
 
-        public static List<Video> selectAllVideos()
+        public static List<Video> SelectAllVideos()
         {
-            List<Video> videos = new List<Video>();
+            List<Video> Videos = new List<Video>();
 
             try
             {
                 //get all videos from  database
-                DsVideos datasetVideos = new DsVideos();
-                FillDatasetWithAllVideos(datasetVideos);
+                DsVideos DatasetVideos = new DsVideos();
+                FillDatasetWithAllVideos(DatasetVideos);
 
                 //to parse dates
-                DateTimeFormatInfo format = new DateTimeFormatInfo();
-                format.FullDateTimePattern = "G";
+                DateTimeFormatInfo Format = new DateTimeFormatInfo { FullDateTimePattern = "G" };
 
                 //Convert to List<Video>
-                foreach (DsVideos.videosRow Row in datasetVideos.Tables["Videos"].Rows)
+                foreach (DsVideos.videosRow Row in DatasetVideos.Tables["Videos"].Rows)
                 {
-                    string sRelease = (Row["release"] == DBNull.Value ? null : Convert.ToString(Row["release"]));
-                    DateTime Release = (!string.IsNullOrEmpty(sRelease) ? DateTime.Parse(sRelease, format) : new DateTime());
-                    Video video = new Video()
+                    string SRelease = (Row["release"] == DBNull.Value ? null : Convert.ToString(Row["release"]));
+                    DateTime Release = (!string.IsNullOrEmpty(SRelease) ? DateTime.Parse(SRelease, Format) : new DateTime());
+                    Video Video = new Video
+                                      {
+                                          Id = Convert.ToInt32(Row["id"]),
+                                          IdImdb = (Row["id_imdb"] == DBNull.Value ? null : Convert.ToString(Row["id_imdb"])),
+                                          Name = Convert.ToString(Row["name"]),
+                                          Release = Release,
+                                          Rating = (Row["rating"] == DBNull.Value ? -1 : Convert.ToDouble(Row["rating"])),
+                                          RatingImdb = (Row["rating_imdb"] == DBNull.Value ? -1 : Convert.ToDouble(Row["rating_imdb"])),
+                                          //TODO 015: Maak koppeltabel voor genres 
+                                          Genres = new List<String> { (Row["genre"] == DBNull.Value ? "" : Convert.ToString(Row["genre"])) },
+                                          Path = (Row["path"] == DBNull.Value ? null : Convert.ToString(Row["path"])),
+                                          LastPlayLocation = Convert.ToInt32(Row["last_play_location"])
+                                      };
+                    DsVideos.moviesRow MoviesRow = DatasetVideos.Tables["Movies"].Rows.Find(Video.Id) as DsVideos.moviesRow;
+                    if (MoviesRow != null)
                     {
-                        Id = Convert.ToInt32(Row["id"]),
-                        IdImdb = (Row["id_imdb"] == DBNull.Value ? null : Convert.ToString(Row["id_imdb"])),
-                        Name = Convert.ToString(Row["name"]),
-                        Release = Release,
-                        Rating = (Row["rating"] == DBNull.Value ? -1 : Convert.ToDouble(Row["rating"])),
-                        RatingImdb = (Row["rating_imdb"] == DBNull.Value ? -1 : Convert.ToDouble(Row["rating_imdb"])),
-                        //TODO 015: Maak koppeltabel voor genres 
-                        Genres = new List<String>() { (Row["genre"] == DBNull.Value ? "" : Convert.ToString(Row["genre"])) },
-                        Path = (Row["path"] == DBNull.Value ? null : Convert.ToString(Row["path"])),
-                        LastPlayLocation = Convert.ToInt32(Row["last_play_location"])
-                    };
-                    DsVideos.moviesRow moviesRow = datasetVideos.Tables["Movies"].Rows.Find(video.Id) as DsVideos.moviesRow;
-                    if (moviesRow != null)
-                    {
-                        video = video as Movie;
+                        Video = Video as Movie;
                     }
                     else
                     {
-                        DsVideos.episodesRow episodeRow = datasetVideos.Tables["Episodes"].Rows.Find(video.Id) as DsVideos.episodesRow;
-                        if (episodeRow != null)
+                        DsVideos.episodesRow EpisodeRow = DatasetVideos.Tables["Episodes"].Rows.Find(Video.Id) as DsVideos.episodesRow;
+                        if (EpisodeRow != null)
                         {
-                            video = video as Episode;
+                            Video = Video as Episode;
                         }
                     }
-                    videos.Add(video);
+                    Videos.Add(Video);
                 }
             }
             catch { }
 
-            return videos;
+            return Videos;
         }
 
-        public static void insertVideosHDD(List<Video> videos)
+        public static void InsertVideosHDD(List<Video> videos)
         {
 
-            SQLiteDataAdapter adap = Database.GetAdapter("select * from videos");
-            SQLiteCommandBuilder builder = new SQLiteCommandBuilder(adap);
-            DsVideos datasetVideos = new DsVideos();
+            SQLiteDataAdapter Adap = Database.GetAdapter("select * from videos");
+            SQLiteCommandBuilder Builder = new SQLiteCommandBuilder(Adap);
+            DsVideos DatasetVideos = new DsVideos();
             foreach (Video Video in videos)
             {
-                DsVideos.videosRow row = datasetVideos.videos.NewvideosRow();
-                row.path = Video.Path;
-                row.name = Video.Name;
-                datasetVideos.videos.AddvideosRow(row);
+                DsVideos.videosRow Row = DatasetVideos.videos.NewvideosRow();
+                Row.path = Video.Path;
+                Row.name = Video.Name;
+                DatasetVideos.videos.AddvideosRow(Row);
             }
 
-            adap.Update(datasetVideos, "videos");
+            Adap.Update(DatasetVideos, "videos");
 
-            if (onVideosChanged != null)
-                onVideosChanged();
+            if (OnVideosChanged != null)
+                OnVideosChanged();
         }
-        public static void emptyTable(String tableName)
+        public static void EmptyTable(String tableName)
         {
             Database.ExecuteSQL("DELETE FROM " + tableName);
-            if (onVideosChanged != null)
-                onVideosChanged();
+            if (OnVideosChanged != null)
+                OnVideosChanged();
         }
 
 

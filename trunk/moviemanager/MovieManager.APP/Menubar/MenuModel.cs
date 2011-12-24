@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using SQLite.Commands;
+using MovieManager.APP.Commands;
 
 namespace MovieManager.APP.Menubar
 {

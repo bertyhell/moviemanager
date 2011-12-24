@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
 using Model;
 using System.Configuration;
+using SQLite;
 
-
-namespace SQLite.Commands
+namespace MovieManager.APP.Commands
 {
     class AddVideosDirectoryCommand : ICommand
     {
@@ -22,15 +20,14 @@ namespace SQLite.Commands
 
         public void Execute(object parameter)
         {
-            FolderBrowserDialog odd = new FolderBrowserDialog();
-            odd.SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"];
-            if (odd.ShowDialog() == DialogResult.OK)
+            FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
+            if (Odd.ShowDialog() == DialogResult.OK)
             {
                 List<Video> Videos = new List<Video>();
-                MovieFileReader.GetVideos(new DirectoryInfo(odd.SelectedPath), Videos);
+                MovieFileReader.GetVideos(new DirectoryInfo(Odd.SelectedPath), Videos);
 
-                MMDatabase.insertVideosHDD(Videos);
+                MMDatabase.InsertVideosHDD(Videos);
             }
         }
     }
-} 
+}

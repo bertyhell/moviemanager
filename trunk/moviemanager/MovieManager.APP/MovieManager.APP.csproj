@@ -68,6 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CommonControls\MovieScrollPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +79,10 @@
     <Page Include="Menubar\RibonMenubar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Search\ActorOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Search\SearchControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +103,15 @@
     <Compile Include="Commands\AddVideosCommand.cs" />
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
     <Compile Include="Commands\EmptyVideosCommand.cs" />
+    <Compile Include="CommonControls\MovieScrollPanel.xaml.cs">
+      <DependentUpon>MovieScrollPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ImageFactory.cs" />
+    <Compile Include="Localization\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="MainController.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -105,6 +122,9 @@
       <DependentUpon>RibonMenubar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\SearchCommand.cs" />
+    <Compile Include="Search\ActorOverview.xaml.cs">
+      <DependentUpon>ActorOverview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Search\SearchControl.xaml.cs">
       <DependentUpon>SearchControl.xaml</DependentUpon>
     </Compile>
@@ -130,6 +150,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Localization\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -180,6 +204,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ico4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\next.png" />
+    <Resource Include="Images\previous.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
