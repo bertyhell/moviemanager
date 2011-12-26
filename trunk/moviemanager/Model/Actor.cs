@@ -11,7 +11,7 @@ namespace Model
         public Actor()
         {
             ImageUrls = new List<String>();
-            MovieImageUrls= new List<Uri>();
+            MovieImageUrls= new List<ImageInfo>();
         }
 
         public string Name { get; set; }
@@ -52,7 +52,7 @@ namespace Model
             }
         }
 
-        public List<Uri> MovieImageUrls { get; set; }
+        public List<ImageInfo> MovieImageUrls { get; set; }
 
         public String Birthplace { get; set; }
 

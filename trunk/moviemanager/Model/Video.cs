@@ -23,8 +23,15 @@ namespace Model
         private int _lastPlayLocation = 0;
         private bool _watchedToEnd = false;
         private List<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
+        //properties for searchresults
+        private Uri _poster;
+        private List<ImageInfo> _images;
+        private String _plot;
 
-        public Video() { }
+        public Video()
+        {
+            _images =new List<ImageInfo>();
+        }
 
         public virtual VideoTypeEnum VideoType
         {
@@ -85,16 +92,16 @@ namespace Model
             set { _genres = value; }
         }
 
-        public String getGenresString()
+        public String GetGenresString()
         {
             if (_genres.Count > 0)
             {
-                String genresString = _genres[0];
+                String GenresString = _genres[0];
                 for (int i = 1; i < _genres.Count; i++)
                 {
-                    genresString += ", " + _genres[i];
+                    GenresString += ", " + _genres[i];
                 }
-                return genresString;
+                return GenresString;
             }
             else
             {
@@ -167,7 +174,7 @@ namespace Model
             set { _watchedToEnd = value; }
         }
 
-        public void markAsSeen(int movieLength, int iCurrentTimestamp, bool bWatchedToEnd)
+        public void MarkAsSeen(int movieLength, int iCurrentTimestamp, bool bWatchedToEnd)
         {
             if (bWatchedToEnd)
             {
@@ -195,25 +202,26 @@ namespace Model
             }
         }
 
-        //public String getField(String field)
-        //{
-        //    Getfi;
-        //    if (field.equals("Name"))
-        //    {
-        //        return name;
-        //    }
-        //    else if (field.equals("VideoType"))
-        //    {
-        //        return getVideoType().toString();
-        //    }
-        //    else if (field.equals("Rating"))
-        //    {
-        //        return "" + rating;
-        //    }
-        //    else
-        //    {
-        //        return path;
-        //    }//TODO 090 create better mechanism for getting fields out of video into table
-        //}
+        #region properties for search results
+
+        public Uri Poster
+        {
+            get { return _poster; }
+            set { _poster = value; }
+        }
+
+        public List<ImageInfo> Images
+        {
+            get { return _images; }
+            set { _images = value; }
+        }
+
+        public String Plot
+        {
+            get { return _plot; }
+            set { _plot = value; }
+        }
+
+        #endregion
     }
 }

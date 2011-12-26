@@ -61,6 +61,15 @@ namespace MovieManager.APP.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actor.
+        /// </summary>
+        public static string Actor {
+            get {
+                return ResourceManager.GetString("Actor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Biography:.
         /// </summary>
         public static string Biography {
@@ -88,6 +97,15 @@ namespace MovieManager.APP.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Movie.
+        /// </summary>
+        public static string Movie {
+            get {
+                return ResourceManager.GetString("Movie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name:.
         /// </summary>
         public static string Name {
@@ -97,11 +115,56 @@ namespace MovieManager.APP.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Actors were found.
+        /// </summary>
+        public static string NoActorsWereFound {
+            get {
+                return ResourceManager.GetString("NoActorsWereFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No results found.
+        /// </summary>
+        public static string NoResultsFound {
+            get {
+                return ResourceManager.GetString("NoResultsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot:.
+        /// </summary>
+        public static string Plot {
+            get {
+                return ResourceManager.GetString("Plot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Popularity:.
         /// </summary>
         public static string Popularity {
             get {
                 return ResourceManager.GetString("Popularity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for:.
+        /// </summary>
+        public static string SearchFor {
+            get {
+                return ResourceManager.GetString("SearchFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to source.
+        /// </summary>
+        public static string Source {
+            get {
+                return ResourceManager.GetString("Source", resourceCulture);
             }
         }
     }

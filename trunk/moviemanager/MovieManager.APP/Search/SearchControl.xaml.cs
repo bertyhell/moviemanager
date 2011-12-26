@@ -15,19 +15,12 @@ using System.Windows.Shapes;
 namespace MovieManager.APP.Search
 {
 
-    public delegate void ClickedOnSearch(ClickOnSearchEventArgs e);
-
-    public class ClickOnSearchEventArgs : EventArgs
+    public class SearchEventArgs : EventArgs
     {
-
-        private bool _searchForActors;
-        private bool _searchForMovies;
-        private string _searchTerm;
-
-        public bool SearchForActors { get { return _searchForActors; } set { _searchForActors = value; } }
-        public bool SearchForMovies { get { return _searchForMovies; } set { _searchForMovies = value; } }
-        public string SearchTerm { get { return _searchTerm; } set { _searchTerm = value; } }
+        public SearchOptions SearchOptions { get; set; }
     }
+
+    public delegate void ClickedOnSearch(SearchEventArgs e);
 
     /// <summary>
     /// Interaction logic for SearchControl.xaml
@@ -45,11 +38,16 @@ namespace MovieManager.APP.Search
         {
             if (ClickOnSearch != null)
             {
-                ClickOnSearch(new ClickOnSearchEventArgs()
+                ClickOnSearch(new SearchEventArgs
                 {
-                    SearchForActors = (bool)_ChkActor.IsChecked,
-                    SearchForMovies = (bool)_ChkMovie.IsChecked,
-                    SearchTerm = _txtSearchTerm.Text.Trim()
+                    SearchOptions = new SearchOptions
+                    {
+                        SearchForActors = (_ChkActor.IsChecked == true),
+                        SearchForMovies = (_ChkMovie.IsChecked == true),
+                        SearchOnImdb = (_radImdb.IsChecked == true),
+                        SearchOnTmdb = (_radTmdb.IsChecked == true),
+                        SearchTerm = _txtSearchTerm.Text.Trim()
+                    }
                 });
             }
         }

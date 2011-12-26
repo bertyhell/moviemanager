@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" MinWidth="300"
+             xmlns:loc="clr-namespace:MovieManager.APP.Localization" 
              >
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -18,7 +20,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             
-            <Label Content="Search for: " FontWeight="Bold"/>
+            <Label Content="{x:Static loc:Resource.SearchFor}" FontWeight="Bold"/>
             
             <Grid Grid.Row="1" Grid.Column="0" Margin="20,0,0,0">
                 
@@ -32,16 +34,47 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Grid.Row="0" Grid.Column="0" x:Name="_ChkActor" VerticalAlignment="Center"/>
-                <Label Grid.Row="0" Grid.Column="1" Content="Actor" VerticalAlignment="Center"/>
-                <CheckBox Grid.Row="1" Grid.Column="0" x:Name="_ChkMovie" VerticalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="Movie"/>
+                <RadioButton GroupName="SearchFilter"  Grid.Row="0" Grid.Column="0" x:Name="_ChkActor" VerticalAlignment="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{x:Static loc:Resource.Actor}" VerticalAlignment="Center"/>
+                <RadioButton IsChecked="True" GroupName="SearchFilter" Grid.Row="1" Grid.Column="0" x:Name="_ChkMovie" VerticalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{x:Static loc:Resource.Movie}"/>
             </Grid>
         </Grid>
         
+        <!-- search on imdb -->
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="{x:Static loc:Resource.Source}" FontWeight="Bold"/>
+
+            <Grid Grid.Row="1" Grid.Column="0" Margin="20,0,0,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <RadioButton  IsChecked="True" GroupName="SearchSource"  Grid.Row="0" Grid.Column="0" x:Name="_radTmdb" VerticalAlignment="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="TMDB" VerticalAlignment="Center"/>
+                <RadioButton GroupName="SearchSource" Grid.Row="1" Grid.Column="0" x:Name="_radImdb" VerticalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="IMDB"/>
+            </Grid>
+        </Grid>
+
+
+
         <!-- search fields -->
         
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>

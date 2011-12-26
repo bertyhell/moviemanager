@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
+using MovieManager.APP.Search;
 
-namespace MovieManager.APP.Search
+namespace MovieManager.APP.Commands
 {
     class SearchCommand : ICommand
     {
@@ -18,8 +16,8 @@ namespace MovieManager.APP.Search
 
         public void Execute(object parameter)
         {
-            SearchWindow window = new SearchWindow();
-            window.Show();
+            SearchWindow Window = new SearchWindow();
+            Window.Show();
         }
     }
 }

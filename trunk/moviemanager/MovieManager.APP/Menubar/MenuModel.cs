@@ -123,7 +123,7 @@ namespace MovieManager.APP.Menubar
                                                          SmallImage = new Uri("/MovieManager.APP;component/Images/search.png", UriKind.Relative),
                                                          ToolTipTitle = "Search TMDB",
                                                          ToolTipDescription = "Search TMDB for info",
-                                                         Command = new Search.SearchCommand(),
+                                                         Command = new SearchCommand(),
                                                          KeyTip = "",
                                                      };
                         DATA_COLLECTION[Str] = ButtonData;

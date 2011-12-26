@@ -2,15 +2,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="SearchWindow" Background="#FFF1EDED" Height="778" Width="804">
-    <Grid>
+    <Grid x:Name="_layoutRoot">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Search panel -->
         <my:SearchControl x:Name="_searchControl" ClickOnSearch="_searchControl_ClickOnSearch"/>
-        <my:ActorOverview Grid.Row="1" x:Name="_actorOverview" VerticalAlignment="Top" />
+        <my:ActorOverview Grid.Row="1" x:Name="_actorOverview"/>
         <!-- Result view -->
         
     </Grid>

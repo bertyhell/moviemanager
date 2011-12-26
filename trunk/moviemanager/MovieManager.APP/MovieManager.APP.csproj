@@ -72,6 +72,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CommonControls\RatingEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommonControls\VideoEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +91,10 @@
     <Page Include="Search\ActorOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Search\MovieOverview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Search\SearchControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -106,7 +118,12 @@
     <Compile Include="CommonControls\MovieScrollPanel.xaml.cs">
       <DependentUpon>MovieScrollPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\ImageFactory.cs" />
+    <Compile Include="CommonControls\RatingEditor.xaml.cs">
+      <DependentUpon>RatingEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommonControls\VideoEditor.xaml.cs">
+      <DependentUpon>VideoEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +141,10 @@
     <Compile Include="Commands\SearchCommand.cs" />
     <Compile Include="Search\ActorOverview.xaml.cs">
       <DependentUpon>ActorOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Search\SearchOptions.cs" />
+    <Compile Include="Search\MovieOverview.xaml.cs">
+      <DependentUpon>MovieOverview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Search\SearchControl.xaml.cs">
       <DependentUpon>SearchControl.xaml</DependentUpon>
@@ -171,6 +192,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>
@@ -208,6 +233,13 @@
   <ItemGroup>
     <Resource Include="Images\next.png" />
     <Resource Include="Images\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\EmptyStar.png" />
+    <Resource Include="Images\HalfSelectedStar.png" />
+    <Resource Include="Images\MouseOverHalfStar.png" />
+    <Resource Include="Images\MouseOverStar.png" />
+    <Resource Include="Images\SelectedStar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
