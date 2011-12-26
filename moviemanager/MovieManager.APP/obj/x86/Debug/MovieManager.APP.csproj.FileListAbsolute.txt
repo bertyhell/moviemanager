@@ -41,3 +41,11 @@ M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Search
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.Localization.Resource.resources
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\MovieScrollPanel.baml
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\MovieScrollPanel.g.cs
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\bin\Debug\Common.dll
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\bin\Debug\Common.pdb
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Search\MovieOverview.g.cs
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Search\MovieOverview.baml
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\RatingEditor.baml
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\RatingEditor.g.cs
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\VideoEditor.g.cs
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\CommonControls\VideoEditor.baml

@@ -17,3 +17,5 @@ M:\projects\Open Source\MovieManagerCSharp\MovieManager.BL\obj\x86\Debug\Generat
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.BL\obj\x86\Debug\GenerateResource.write.1.tlog
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.BL\obj\x86\Debug\MovieManager.BL.exe
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.BL\obj\x86\Debug\MovieManager.BL.pdb
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.BL\bin\Debug\Common.dll
+M:\projects\Open Source\MovieManagerCSharp\MovieManager.BL\bin\Debug\Common.pdb

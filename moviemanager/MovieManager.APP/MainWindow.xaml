@@ -28,13 +28,18 @@
         </ListBox>
         
         <!-- center panel-->
-        <DataGrid Grid.Row="1" Grid.Column="1" Margin="5" ItemsSource="{Binding Videos}" AlternatingRowBackground="#EEE"
+        <DataGrid x:Name="_videoGrid" Grid.Row="1" Grid.Column="1" Margin="5" ItemsSource="{Binding Videos}" AlternatingRowBackground="#EEE"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
                 </Style>
             </DataGrid.CellStyle>
+            <DataGrid.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="Properties" Click="MenuItemProperties_Click"  />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         
         <StatusBar Grid.Row="2" Grid.ColumnSpan="3" Height="20">

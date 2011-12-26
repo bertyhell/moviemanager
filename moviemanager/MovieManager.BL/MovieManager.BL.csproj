@@ -62,6 +62,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Search\SearchIMDB.cs" />
     <Compile Include="Search\SearchTMDB.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>

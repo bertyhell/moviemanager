@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Actor.cs" />
     <Compile Include="Franchise.cs" />
+    <Compile Include="ImageInfo.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Serie.cs" />
     <Compile Include="Subtitle.cs" />
