@@ -37,6 +37,7 @@
             </DataGrid.CellStyle>
             <DataGrid.ContextMenu>
                 <ContextMenu >
+                    <MenuItem Header="Play" Click="MenuItemPlay_Click"/>
                     <MenuItem Header="Properties" Click="MenuItemProperties_Click"  />
                 </ContextMenu>
             </DataGrid.ContextMenu>

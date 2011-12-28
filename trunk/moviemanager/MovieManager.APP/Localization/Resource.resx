@@ -147,6 +147,9 @@
   <data name="Popularity" xml:space="preserve">
     <value>Popularity:</value>
   </data>
+  <data name="Rating" xml:space="preserve">
+    <value>Rating</value>
+  </data>
   <data name="SearchFor" xml:space="preserve">
     <value>Search for:</value>
   </data>

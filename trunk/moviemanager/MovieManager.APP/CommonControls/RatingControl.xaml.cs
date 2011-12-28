@@ -19,23 +19,24 @@ namespace MovieManager.APP.CommonControls
     /// <summary>
     /// Interaction logic for RatingEditor.xaml
     /// </summary>
-    public partial class RatingEditor : UserControl
+    public partial class RatingControl : UserControl
     {
-        public static readonly DependencyProperty VideoProperty =
-            DependencyProperty.Register("Video", typeof(Video), typeof(RatingEditor), new PropertyMetadata(null, VideoChanged));
+        public static readonly DependencyProperty RatingProperty =
+            DependencyProperty.Register("Rating", typeof(Double), typeof(RatingControl), new PropertyMetadata(-2.0, RatingChanged));
 
         public static Uri EmptyStar = new Uri("/MovieManager.APP;component/Images/EmptyStar.png", UriKind.Relative);
         public static Uri SelectedStar = new Uri("/MovieManager.APP;component/Images/SelectedStar.png", UriKind.Relative);
         public static Uri HalfSelectedStar = new Uri("/MovieManager.APP;component/Images/HalfSelectedStar.png", UriKind.Relative);
         private List<Image> _stars = new List<Image>();
         private int _starCount = 5;
+        private Boolean _isInitialized;
 
-        public RatingEditor()
+        public RatingControl()
         {
             InitializeComponent();
         }
 
-        public int StarCount
+        protected int StarCount
         {
             get { return _starCount; }
             set { _starCount = value; }
@@ -47,35 +48,37 @@ namespace MovieManager.APP.CommonControls
             set { _stars = value; }
         }
 
-        public Video Video
+        public Double Rating
         {
-            get { return (Video)GetValue(VideoProperty); }
-            set { SetValue(VideoProperty, value); }
+            get { return (Double)GetValue(RatingProperty); }
+            set { SetValue(RatingProperty, value); }
         }
 
-        private void Init()
+        protected virtual void Init()
         {
-            this.Width = _starCount*16;
-            this.Height = 16;
-            if (_layoutroot != null)
+            if (!_isInitialized)
             {
-                _layoutroot.ColumnDefinitions.Clear();
-                _layoutroot.Children.Clear();
-            }
-            else
-                _layoutroot = new Grid();
-            if (Video != null)
-            {
+                this.Width = _starCount*16;
+                this.Height = 16;
+                if (_layoutroot != null)
+                {
+                    _layoutroot.ColumnDefinitions.Clear();
+                    _layoutroot.Children.Clear();
+                }
+                else
+                    _layoutroot = new Grid();
                 for (int i = 0; i < _starCount; i++)
                 {
                     _layoutroot.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(16)});
                     Image LocalImage = ImageFactory.GetImage(EmptyStar);
-                    Grid.SetColumn(LocalImage,i);
+                    Grid.SetColumn(LocalImage, i);
                     _stars.Add(LocalImage);
                     _layoutroot.Children.Add(LocalImage);
                 }
-                RefreshStars(Video.Rating, SelectedStar, HalfSelectedStar, EmptyStar);
+                _isInitialized = true;
             }
+
+            RefreshStars(Rating, SelectedStar, HalfSelectedStar, EmptyStar);
         }
 
         protected void RefreshStars(double rating, Uri selectedStar, Uri halfSelectedStar, Uri emptyStar)
@@ -104,9 +107,16 @@ namespace MovieManager.APP.CommonControls
 
         }
 
-        private static void VideoChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void RatingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            (d as RatingEditor).Init();
+            if (d is RatingEditorControl)
+            {
+                (d as RatingEditorControl).Init();
+            }
+            else
+            {
+                (d as RatingControl).Init();
+            }
         }
 
     }
