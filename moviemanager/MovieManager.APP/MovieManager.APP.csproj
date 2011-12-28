@@ -72,7 +72,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CommonControls\RatingEditor.xaml">
+    <Page Include="CommonControls\RatingControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,9 +118,10 @@
     <Compile Include="CommonControls\MovieScrollPanel.xaml.cs">
       <DependentUpon>MovieScrollPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommonControls\RatingEditor.xaml.cs">
-      <DependentUpon>RatingEditor.xaml</DependentUpon>
+    <Compile Include="CommonControls\RatingControl.xaml.cs">
+      <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CommonControls\RatingEditorControl.cs" />
     <Compile Include="CommonControls\VideoEditor.xaml.cs">
       <DependentUpon>VideoEditor.xaml</DependentUpon>
     </Compile>

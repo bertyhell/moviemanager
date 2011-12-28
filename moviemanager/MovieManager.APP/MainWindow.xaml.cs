@@ -20,11 +20,20 @@ namespace MovieManager.APP
             this.DataContext = _context;
         }
 
+        #region ContextMenu event handlers
         private void MenuItemProperties_Click(object sender, RoutedEventArgs e)
         {
             VideoEditor Editor = new VideoEditor();
             Editor.Video = (_videoGrid.SelectedItem as Video);
             Editor.Show();
         }
+
+        private void MenuItemPlay_Click(object sender, RoutedEventArgs e)
+        {
+            VlcWindow Vlc = new VlcWindow();
+            Vlc.Show();
+        }
+        #endregion
+        
     }
 }
