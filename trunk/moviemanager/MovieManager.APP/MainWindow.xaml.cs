@@ -16,7 +16,7 @@ namespace MovieManager.APP
             InitializeComponent();
 
 
-            _context = new MainController();
+            _context = MainController.Instance;
             this.DataContext = _context;
         }
 

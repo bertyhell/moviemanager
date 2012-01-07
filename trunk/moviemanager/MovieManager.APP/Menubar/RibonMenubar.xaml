@@ -75,7 +75,8 @@
                 </ribbon:RibbonGroup>
 
                 <ribbon:RibbonGroup>
-                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.SearchWeb}">
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.SearchWeb}"/>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.Analyse}">
                     </ribbon:RibbonButton>
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>

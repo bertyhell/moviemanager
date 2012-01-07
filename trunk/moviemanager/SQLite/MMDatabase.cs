@@ -65,24 +65,45 @@ namespace SQLite
             return Videos;
         }
 
-        public static void InsertVideosHDD(List<Video> videos)
+        public static List<Video> InsertVideosHDD(List<Video> videos)
         {
+            return InsertVideosHDD(videos,false);
+        }
+        public static void InsertVideosHDDWithDuplicates(List<Video> videos)
+        {
+            InsertVideosHDD(videos, true);
+        }
 
-            SQLiteDataAdapter Adap = Database.GetAdapter("select * from videos");
+        private static List<Video> InsertVideosHDD(List<Video> videos, bool insertDuplicates)
+        {
+            List<Video> Duplicates = new List<Video>();
+            SQLiteDataAdapter Adap = Database.GetAdapter("select * from videos"); 
             SQLiteCommandBuilder Builder = new SQLiteCommandBuilder(Adap);
             DsVideos DatasetVideos = new DsVideos();
+            FillDatasetWithAllVideos(DatasetVideos);
             foreach (Video Video in videos)
             {
-                DsVideos.videosRow Row = DatasetVideos.videos.NewvideosRow();
-                Row.path = Video.Path;
-                Row.name = Video.Name;
-                DatasetVideos.videos.AddvideosRow(Row);
+                if (insertDuplicates || DatasetVideos.videos.Select(DatasetVideos.videos.pathColumn.ColumnName + " = '" + Video.Path + "'").Length == 0)
+                {
+
+                    DsVideos.videosRow Row = DatasetVideos.videos.NewvideosRow();
+                    Row.path = Video.Path;
+                    Row.name = Video.Name;
+                    DatasetVideos.videos.AddvideosRow(Row);
+                }
+                else
+                {
+                    Duplicates.Add(Video);
+                }
             }
 
             Adap.Update(DatasetVideos, "videos");
 
             if (OnVideosChanged != null)
                 OnVideosChanged();
+
+            //return the duplicates that are not inserted in the table
+            return Duplicates;
         }
         public static void EmptyTable(String tableName)
         {

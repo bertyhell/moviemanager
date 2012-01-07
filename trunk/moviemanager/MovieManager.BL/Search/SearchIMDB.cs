@@ -9,13 +9,22 @@ namespace MovieManager.BL.Search
 {
     public class SearchIMDB
     {
-        public static Video GetVideoInfo(String query)
+
+        public static void GetVideoInfo(Video video)
         {
-            Video Video = null;
+            if (!string.IsNullOrEmpty(video.IdImdb))
+            {
+                GetVideoInfoFromId(video);
+            }
+        }
+
+
+        private static void GetVideoInfoFromId(Video video)
+        {
             try
             {
                 //do request
-                Uri Request = new Uri("http://www.imdbapi.com/?r=XML&t=" + HttpUtility.UrlEncode(query));
+                Uri Request = new Uri("http://www.imdbapi.com/?r=XML&i=" + HttpUtility.UrlEncode(video.IdImdb));
                 String Response = SimpleWebRequest.DoRequest(Request);
 
                 if (!string.IsNullOrEmpty(Response))
@@ -25,35 +34,21 @@ namespace MovieManager.BL.Search
                     XDocument XMLDoc = XDocument.Parse(Response);
 
                     //get elements from xml
-                    var LocalMovies = from Movie in XMLDoc.Descendants("movie")
+                    var LocalMovies = from Mov in XMLDoc.Descendants("movie")
                                       select new
                                       {
-                                          TmdbID = Convert.ToInt32(Movie.Element("rating").Value),
-                                          Name = Movie.Element("release").Value
+                                          RatingImdb = Mov.Attribute("rating").Value,
+                                          Release = Mov.Attribute("released").Value
                                       };
 
-                    Video = new Video();
-                    //convert elements to actor
-                    //foreach (var Movie in LocalMovies)
-                    //{
-                    //    Actor NewActor = new Actor
-                    //    {
-                    //        Name = Movie.Name,
-                    //        TmdbID = Movie.TmdbID
-                    //    };
-
-                    //Actors.Add(NewActor);
-
+                    var Vid = LocalMovies.ToList()[0];
+                    video.RatingImdb = double.Parse(Vid.RatingImdb);
+                    video.Release = DateTimeUtilities.ParseDate(Vid.Release);
                 }
-
-
             }
-
             catch
             {
             }
-
-            return Video;
         }
 
     }

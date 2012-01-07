@@ -31,6 +31,7 @@ namespace Model
         public Video()
         {
             _images =new List<ImageInfo>();
+            _subs = new List<Subtitle>();
         }
 
         public virtual VideoTypeEnum VideoType

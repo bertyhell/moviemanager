@@ -107,6 +107,8 @@ namespace MovieManager.APP.Menubar
             }
         }
 
+#region web
+
         public static ControlData SearchWeb
         {
             get
@@ -134,6 +136,33 @@ namespace MovieManager.APP.Menubar
             }
         }
 
+        public static ControlData Analyse
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string Str = "Analyse";
+
+                    if (!DATA_COLLECTION.ContainsKey(Str))
+                    {
+                        ControlData ButtonData = new ControlData
+                        {
+                            Label = Str,
+                            SmallImage = new Uri("/MovieManager.APP;component/Images/analyse.png", UriKind.Relative),
+                            ToolTipTitle = "Analyse videos",
+                            ToolTipDescription = "Analyse videos and search info on the web",
+                            Command = new AnalyseCommand(),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[Str] = ButtonData;
+                    }
+
+                    return DATA_COLLECTION[Str];
+                }
+            }
+        }
+#endregion
 
         public static ControlData ExitMM
         {
@@ -141,7 +170,7 @@ namespace MovieManager.APP.Menubar
             {
                 lock (LOCK_OBJECT)
                 {
-                    const string Str = "Exit Word";
+                    const string Str = "Exit MovieManager";
 
                     if (!DATA_COLLECTION.ContainsKey(Str))
                     {

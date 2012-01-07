@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Common
 {
-    class DateTimeUtilities
+    public class DateTimeUtilities
     {
         public static DateTime ParseDate(String date)
         {
