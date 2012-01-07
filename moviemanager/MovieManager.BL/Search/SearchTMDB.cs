@@ -80,7 +80,7 @@ namespace MovieManager.BL.Search
 
         private static void GetImages(IEnumerable<XNode> images, Movie movie)
         {
-            bool firstImage = true;
+            bool FirstImage = true;
             foreach (XNode ImageNode in images)
             {
                 XElement ImageEl = ImageNode as XElement;
@@ -89,10 +89,10 @@ namespace MovieManager.BL.Search
                     string Url = ImageEl.Attribute("url").Value;
                     if (!string.IsNullOrEmpty(Url))
                     {
-                        if (firstImage)
+                        if (FirstImage)
                         {
                             movie.Poster = new Uri(Url);
-                            firstImage = false;
+                            FirstImage = false;
                         }
                         else
                         {

@@ -6,10 +6,16 @@ using System.ComponentModel;
 
 namespace MovieManager.APP
 {
-    public class MainController: IDisposable, INotifyPropertyChanged
+    public class MainController : IDisposable, INotifyPropertyChanged
     {
+        private static readonly MainController INSTANCE = new MainController();
 
-        public MainController()
+        public static MainController Instance
+        {
+            get { return INSTANCE; }
+        }
+
+        private MainController()
         {
             Videos = MMDatabase.SelectAllVideos();
             MMDatabase.OnVideosChanged += MMDatabase_onVideoChanged;

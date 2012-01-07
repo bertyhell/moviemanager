@@ -120,6 +120,9 @@
   <data name="Actor" xml:space="preserve">
     <value>Actor</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="Biography" xml:space="preserve">
     <value>Biography:</value>
   </data>
@@ -128,6 +131,18 @@
   </data>
   <data name="Birthplace" xml:space="preserve">
     <value>Birthplace:</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ImdbId" xml:space="preserve">
+    <value>Imdb id:</value>
+  </data>
+  <data name="ImdbRating" xml:space="preserve">
+    <value>Imdb rating:</value>
   </data>
   <data name="Movie" xml:space="preserve">
     <value>Movie</value>
@@ -155,5 +170,11 @@
   </data>
   <data name="Source" xml:space="preserve">
     <value>source</value>
+  </data>
+  <data name="SubtitleAlreadyInMovie" xml:space="preserve">
+    <value>Subtitle already in movie</value>
+  </data>
+  <data name="Subtitles" xml:space="preserve">
+    <value>Subtitles:</value>
   </data>
 </root>

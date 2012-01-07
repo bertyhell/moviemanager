@@ -70,6 +70,15 @@ namespace MovieManager.APP.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Biography:.
         /// </summary>
         public static string Biography {
@@ -93,6 +102,42 @@ namespace MovieManager.APP.Localization {
         public static string Birthplace {
             get {
                 return ResourceManager.GetString("Birthplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imdb id:.
+        /// </summary>
+        public static string ImdbId {
+            get {
+                return ResourceManager.GetString("ImdbId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imdb rating:.
+        /// </summary>
+        public static string ImdbRating {
+            get {
+                return ResourceManager.GetString("ImdbRating", resourceCulture);
             }
         }
         
@@ -174,6 +219,24 @@ namespace MovieManager.APP.Localization {
         public static string Source {
             get {
                 return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subtitle already in movie.
+        /// </summary>
+        public static string SubtitleAlreadyInMovie {
+            get {
+                return ResourceManager.GetString("SubtitleAlreadyInMovie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subtitles:.
+        /// </summary>
+        public static string Subtitles {
+            get {
+                return ResourceManager.GetString("Subtitles", resourceCulture);
             }
         }
     }

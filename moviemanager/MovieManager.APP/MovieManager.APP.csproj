@@ -76,6 +76,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CommonControls\SubtitleEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommonControls\VideoEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="VlcWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,6 +122,7 @@
     </Compile>
     <Compile Include="Commands\AddVideosCommand.cs" />
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
+    <Compile Include="Commands\AnalyseCommand.cs" />
     <Compile Include="Commands\EmptyVideosCommand.cs" />
     <Compile Include="CommonControls\MovieScrollPanel.xaml.cs">
       <DependentUpon>MovieScrollPanel.xaml</DependentUpon>
@@ -122,6 +131,9 @@
       <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommonControls\RatingEditorControl.cs" />
+    <Compile Include="CommonControls\SubtitleEditor.xaml.cs">
+      <DependentUpon>SubtitleEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CommonControls\VideoEditor.xaml.cs">
       <DependentUpon>VideoEditor.xaml</DependentUpon>
     </Compile>
@@ -220,9 +232,6 @@
     <Resource Include="Images\picto.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\add.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\search.png" />
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +250,9 @@
     <Resource Include="Images\MouseOverHalfStar.png" />
     <Resource Include="Images\MouseOverStar.png" />
     <Resource Include="Images\SelectedStar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\analyse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
