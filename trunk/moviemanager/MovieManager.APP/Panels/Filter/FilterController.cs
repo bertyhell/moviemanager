@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace MovieManager.APP.Panels.Filter
 {
@@ -7,6 +6,7 @@ namespace MovieManager.APP.Panels.Filter
     {
         Name, Path, Genre, ReleaseDate, Rating
     }
+
     public class FilterController
     {
         public Filters SelectedFilter

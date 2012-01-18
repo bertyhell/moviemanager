@@ -7,14 +7,14 @@ namespace SQLite
 
     public class Database
     {
-        private const String CONN_STRING = "data source=\".\\Settings\\moviemanager.sqlite\"";
+        private const String ConnString = "data source=\".\\Settings\\moviemanager.sqlite\"";
         //private const String CONN_STRING = "data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\Settings\\moviemanager.sqlite\"";
         private static SQLiteConnection _conn;
 
         public static void ExecuteSQL(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
-            Cmd.ExecuteNonQuery();
+            SQLiteCommand cmd = GetCommand(conn, transaction, sql, @params);
+            cmd.ExecuteNonQuery();
         }
 
         public static void ExecuteSQL(string sql, params SQLiteParameter[] @params)
@@ -26,7 +26,7 @@ namespace SQLite
         {
             if (_conn == null)
             {
-                _conn = new SQLiteConnection(CONN_STRING);
+                _conn = new SQLiteConnection(ConnString);
                 _conn.Open();
             }
             return _conn;
@@ -34,12 +34,12 @@ namespace SQLite
 
         public static SQLiteCommand GetCommand(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand Cmd = new SQLiteCommand(sql) {Transaction = transaction, Connection = conn};
-            foreach (SQLiteParameter Param in @params)
+            SQLiteCommand cmd = new SQLiteCommand(sql) {Transaction = transaction, Connection = conn};
+            foreach (SQLiteParameter param in @params)
             {
-                Cmd.Parameters.Add(Param);
+                cmd.Parameters.Add(param);
             }
-            return Cmd;
+            return cmd;
         }
 
         public static SQLiteCommand GetCommand(string sql, params SQLiteParameter[] @params)
@@ -54,8 +54,8 @@ namespace SQLite
 
         public static SQLiteDataReader GetReader(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
-            return Cmd.ExecuteReader();
+            SQLiteCommand cmd = GetCommand(conn, transaction, sql, @params);
+            return cmd.ExecuteReader();
         }
 
         public static SQLiteDataAdapter GetAdapter(string sql, params SQLiteParameter[] @params)
