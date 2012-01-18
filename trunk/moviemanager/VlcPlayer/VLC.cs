@@ -62,17 +62,17 @@ namespace VlcPlayer
 
     class VlcException : Exception
     {
-        protected string _err;
+        protected string Err;
 
         public VlcException()
             : base()
         {
-            IntPtr errorPointer = LibVlc.libvlc_errmsg();
-            _err = errorPointer == IntPtr.Zero ? "VLC Exception"
-                : Marshal.PtrToStringAuto(errorPointer);
+            IntPtr ErrorPointer = LibVlc.libvlc_errmsg();
+            Err = ErrorPointer == IntPtr.Zero ? "VLC Exception"
+                : Marshal.PtrToStringAuto(ErrorPointer);
         }
 
-        public override string Message { get { return _err; } }
+        public override string Message { get { return Err; } }
     }
 
     class VlcInstance : IDisposable
@@ -115,8 +115,8 @@ namespace VlcPlayer
     class VlcMediaPlayer : IDisposable
     {
         internal IntPtr Handle;
-        private IntPtr drawable;
-        private bool playing, paused;
+        private IntPtr _drawable;
+        private bool _playing, _paused;
 
         public VlcMediaPlayer(VlcMedia media)
         {
@@ -133,12 +133,12 @@ namespace VlcPlayer
         {
             get
             {
-                return drawable;
+                return _drawable;
             }
             set
             {
                 LibVlc.libvlc_media_player_set_hwnd(Handle, value);
-                drawable = value;
+                _drawable = value;
             }
         }
 
@@ -156,11 +156,11 @@ namespace VlcPlayer
             }
         }
 
-        public bool IsPlaying { get { return playing && !paused; } }
+        public bool IsPlaying { get { return _playing && !_paused; } }
 
-        public bool IsPaused { get { return playing && paused; } }
+        public bool IsPaused { get { return _playing && _paused; } }
 
-        public bool IsStopped { get { return !playing; } }
+        public bool IsStopped { get { return !_playing; } }
 
         public void Play()
         {
@@ -168,24 +168,24 @@ namespace VlcPlayer
             if (ret == -1)
                 throw new VlcException();
 
-            playing = true;
-            paused = false;
+            _playing = true;
+            _paused = false;
         }
 
         public void Pause()
         {
             LibVlc.libvlc_media_player_pause(Handle);
 
-            if (playing)
-                paused ^= true;
+            if (_playing)
+                _paused ^= true;
         }
 
         public void Stop()
         {
             LibVlc.libvlc_media_player_stop(Handle);
 
-            playing = false;
-            paused = false;
+            _playing = false;
+            _paused = false;
         }
     }
 }

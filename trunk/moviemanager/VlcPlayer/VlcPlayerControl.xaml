@@ -8,19 +8,35 @@
              d:DesignHeight="650" d:DesignWidth="850">
         
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         
-              
-        <Rectangle x:Name="_video" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Menu IsMainMenu="True">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+        </Menu>
+
+        <!--<WindowsFormsHost Grid.Row="0" Grid.Column="0" x:Name="_video" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            
+        </WindowsFormsHost>-->
+        <Rectangle Grid.Row="1" Grid.Column="0" x:Name="_video" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         
-        <Grid Grid.ZIndex="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ZIndex="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" x:Name="_btnStop" Content="Stop"/>
-            <Button Grid.Column="2" x:Name="_btnPlay" Content="Play" Click="_btnPlay_Click"/>
+            <Button Grid.Column="2" x:Name="_btnPause" Content="Pause" Click="_btnPause_Click"/>
+            <Button Grid.Column="4" x:Name="_btnPlay" Content="Play" Click="_btnPlay_Click"/>
         </Grid>
         
     </Grid>

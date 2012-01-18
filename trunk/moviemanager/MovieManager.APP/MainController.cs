@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Data;
 using Model;
 using SQLite;
 using System.ComponentModel;
+using MovieManager.APP.Panels.Filter;
 
 namespace MovieManager.APP
 {
@@ -19,6 +21,18 @@ namespace MovieManager.APP
         {
             Videos = MMDatabase.SelectAllVideos();
             MMDatabase.OnVideosChanged += MMDatabase_onVideoChanged;
+             _videosView = CollectionViewSource.GetDefaultView(Videos);
+        }
+
+
+
+        private ICollectionView _videosView;
+        public ICollectionView VideosView
+        {
+            get { return _videosView; }
+            set { _videosView = value;
+                PropChanged("Videos");
+            }
         }
 
 
@@ -33,6 +47,17 @@ namespace MovieManager.APP
             {
                 _videos = value;
                 PropChanged("Videos");
+            }
+        }
+
+        private FilterEditor _filterEditor;
+        public FilterEditor FilterEditor
+        {
+            get { return _filterEditor; }
+            set
+            {
+                _filterEditor = value;
+                _videosView.Filter += FilterEditor.FilterVideo;
             }
         }
 

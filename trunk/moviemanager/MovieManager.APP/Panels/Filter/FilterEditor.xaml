@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MovieManager.APP.Panels.Filter.FilterEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:MovieManager.APP.Panels.Filter" mc:Ignorable="d" 
+             d:DesignHeight="453" d:DesignWidth="328">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:Filters"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <Grid>
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="0.086*"/>
+    		<RowDefinition Height="0.914*"/>
+    	</Grid.RowDefinitions>
+        <ComboBox VerticalAlignment="Center" Margin="73,0,12,0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding SelectedFilter}"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding AppliedFilters}" HorizontalContentAlignment="Stretch"></ListBox>
+        <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="Add filter:" d:LayoutOverrides="Height" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

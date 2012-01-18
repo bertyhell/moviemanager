@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -22,7 +23,7 @@ namespace Model
         private String _path; //path to movie
         private int _lastPlayLocation = 0;
         private bool _watchedToEnd = false;
-        private List<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
+        private ObservableCollection<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
         private Uri _poster;
         private List<ImageInfo> _images;
@@ -31,7 +32,7 @@ namespace Model
         public Video()
         {
             _images =new List<ImageInfo>();
-            _subs = new List<Subtitle>();
+            _subs = new ObservableCollection<Subtitle>();
         }
 
         public virtual VideoTypeEnum VideoType
@@ -157,7 +158,7 @@ namespace Model
             set { _release = value; }
         }
 
-        public List<Subtitle> Subs
+        public ObservableCollection<Subtitle> Subs
         {
             get { return _subs; }
             set { _subs = value; }
@@ -182,12 +183,12 @@ namespace Model
                 //mark as seen
                 _watchedToEnd = true;
             }
-            else if (!bWatchedToEnd && (movieLength - (iCurrentTimestamp) < movieLength * 10 / 100))
+            else if (movieLength - (iCurrentTimestamp) < movieLength * 10 / 100)
             {
-                MessageBoxResult result = MessageBox.Show("Do you want to mark this video as seen?\n"
+                MessageBoxResult Result = MessageBox.Show("Do you want to mark this video as seen?\n"
                     + "Press \"yes\" to mark this video as seen.\n"
                     + "Press \"no\" to save the current timestamp of the video.", "Choose Option", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                if (result == MessageBoxResult.Yes)
+                if (Result == MessageBoxResult.Yes)
                 {
                     _watchedToEnd = true;
                 }

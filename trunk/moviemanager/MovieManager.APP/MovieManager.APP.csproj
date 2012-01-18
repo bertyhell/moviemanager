@@ -68,19 +68,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CommonControls\MovieScrollPanel.xaml">
+    <Page Include="Panels\Filter\FilterEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CommonControls\RatingControl.xaml">
+    <Page Include="Panels\Filter\FilterText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CommonControls\SubtitleEditor.xaml">
+    <Page Include="Panels\MovieScrollPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CommonControls\VideoEditor.xaml">
+    <Page Include="Panels\RatingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\SubtitleEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\VideoEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,27 +100,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Search\ActorOverview.xaml">
+    <Page Include="Panels\Search\ActorOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Search\MovieOverview.xaml">
+    <Page Include="Panels\Search\MovieOverview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Search\SearchControl.xaml">
+    <Page Include="Panels\Search\SearchControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Search\SearchWindow.xaml">
+    <Page Include="Panels\Search\SearchWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="VlcWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -123,18 +127,27 @@
     <Compile Include="Commands\AddVideosCommand.cs" />
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
     <Compile Include="Commands\AnalyseCommand.cs" />
+    <Compile Include="Commands\FilterVideosCommand.cs" />
     <Compile Include="Commands\EmptyVideosCommand.cs" />
-    <Compile Include="CommonControls\MovieScrollPanel.xaml.cs">
+    <Compile Include="Panels\Filter\FilterControl.cs" />
+    <Compile Include="Panels\Filter\FilterController.cs" />
+    <Compile Include="Panels\Filter\FilterEditor.xaml.cs">
+      <DependentUpon>FilterEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Filter\FilterText.xaml.cs">
+      <DependentUpon>FilterText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\MovieScrollPanel.xaml.cs">
       <DependentUpon>MovieScrollPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommonControls\RatingControl.xaml.cs">
+    <Compile Include="Panels\RatingControl.xaml.cs">
       <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommonControls\RatingEditorControl.cs" />
-    <Compile Include="CommonControls\SubtitleEditor.xaml.cs">
+    <Compile Include="Panels\RatingEditorControl.cs" />
+    <Compile Include="Panels\SubtitleEditor.xaml.cs">
       <DependentUpon>SubtitleEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommonControls\VideoEditor.xaml.cs">
+    <Compile Include="Panels\VideoEditor.xaml.cs">
       <DependentUpon>VideoEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Localization\Resource.Designer.cs">
@@ -152,22 +165,18 @@
       <DependentUpon>RibonMenubar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\SearchCommand.cs" />
-    <Compile Include="Search\ActorOverview.xaml.cs">
+    <Compile Include="Panels\Search\ActorOverview.xaml.cs">
       <DependentUpon>ActorOverview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\SearchOptions.cs" />
-    <Compile Include="Search\MovieOverview.xaml.cs">
+    <Compile Include="Panels\Search\SearchOptions.cs" />
+    <Compile Include="Panels\Search\MovieOverview.xaml.cs">
       <DependentUpon>MovieOverview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\SearchControl.xaml.cs">
+    <Compile Include="Panels\Search\SearchControl.xaml.cs">
       <DependentUpon>SearchControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\SearchWindow.xaml.cs">
+    <Compile Include="Panels\Search\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VlcWindow.xaml.cs">
-      <DependentUpon>VlcWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +262,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\analyse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\view-filter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

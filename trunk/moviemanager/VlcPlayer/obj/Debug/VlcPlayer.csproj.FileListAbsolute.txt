@@ -13,3 +13,6 @@ M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\GenerateResource.
 M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\GenerateResource.write.1.tlog
 M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer.dll
 M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer.pdb
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcWindow.g.cs
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcWindow.baml
+M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\VlcPlayer.VlcWinForm.resources

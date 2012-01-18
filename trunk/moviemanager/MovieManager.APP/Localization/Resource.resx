@@ -177,4 +177,7 @@
   <data name="Subtitles" xml:space="preserve">
     <value>Subtitles:</value>
   </data>
+  <data name="Videotype" xml:space="preserve">
+    <value>VideoType</value>
+  </data>
 </root>

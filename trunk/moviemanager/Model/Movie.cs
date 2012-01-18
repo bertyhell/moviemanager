@@ -8,7 +8,7 @@ namespace Model
     public class Movie : Video
     {
         private long _runtime;
-        private int _franchise_id;
+        private int _franchiseID;
 
         public Movie() { }
 
@@ -19,8 +19,8 @@ namespace Model
 
         public int Franchise_id
         {
-            get { return _franchise_id; }
-            set { _franchise_id = value; }
+            get { return _franchiseID; }
+            set { _franchiseID = value; }
         }
 
         public long Runtime

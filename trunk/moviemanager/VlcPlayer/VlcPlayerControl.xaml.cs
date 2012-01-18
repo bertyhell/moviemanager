@@ -22,58 +22,88 @@ namespace VlcPlayer
     /// </summary>
     public partial class VlcPlayerControl : UserControl
     {
-        private VlcInstance vlcInstance;
-        private VlcMediaPlayer player;
+        private readonly VlcInstance _vlcInstance;
+        private VlcMediaPlayer _player;
 
         public VlcPlayerControl()
         {
             InitializeComponent();
 
-            string[] args = new string[] {
+            string[] Args = new string[] {
                 "--ignore-config",
                 @"--plugin-path=C:\Program Files (x86)\VideoLAN\VLC\plugins"
                 //,"--vout-filter=deinterlace", "--deinterlace-mode=blend"
             };
 
-            vlcInstance = new VlcInstance(args);
-            player = null;
+            _vlcInstance = new VlcInstance(Args);
+            _player = null;
         }
+
+#region Event Handlers
 
         private void _btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
 
-            if (openFileDialog1.ShowDialog() != true)
+            if (OpenFileDialog1.ShowDialog() != true)
                 return;
 
-            using (VlcMedia media = new VlcMedia(vlcInstance, openFileDialog1.FileName))
-            {
-                if (player == null)
-                    player = new VlcMediaPlayer(media);
-                else
-                    player.Media = media;
-            }
+            PlayVideo(OpenFileDialog1.FileName);
 
-            player.Drawable = ((HwndSource)HwndSource.FromVisual(_video)).Handle;
-            player.Play();
-
-            Button inAdorner = new Button()
-            {
-                HorizontalAlignment = HorizontalAlignment.Right,
-                Content = "X",
-            };
-            OverlayAdorner adorner = new OverlayAdorner(_video)
-            {
-                Child = inAdorner,
-            };
-            AdornerLayer.GetAdornerLayer(this).Add(adorner);
         }
+
+        private void _btnPause_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
+        }
+
+#endregion
 
         private void _VideoBackground_Click(object sender, EventArgs e)
         {
             Console.WriteLine("");
 
         }
+
+        #region Media Player Controls
+
+        public void PlayVideo(String fileName)
+        {
+            using (VlcMedia Media = new VlcMedia(_vlcInstance, fileName))
+            {
+                if (_player == null)
+                    _player = new VlcMediaPlayer(Media);
+                else
+                    _player.Media = Media;
+            }
+
+            //_player.Drawable = _video.Handle;
+            _player.Drawable = ((HwndSource)HwndSource.FromVisual(_video)).Handle;
+            _player.Play();
+
+            Button InAdorner = new Button()
+            {
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Content = "X",
+            };
+            OverlayAdorner Adorner = new OverlayAdorner(_video)
+            {
+                Child = InAdorner,
+            };
+            AdornerLayer.GetAdornerLayer(this).Add(Adorner);
+
+        }
+
+        public void Pause()
+        {
+            if(_player.IsPaused)
+                _player.Pause();
+            else
+                _player.Play();
+        }
+
+        #endregion
+
 
 
     }
