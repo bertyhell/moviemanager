@@ -4,7 +4,7 @@
 library
 C#
 .cs
-M:\projects\Open Source\MovieManagerCSharp\VlcPlayer\obj\Debug\
+E:\berty\Documents\MovieManagerCSharp\VlcPlayer\obj\Debug\
 VlcPlayer
 none
 false
@@ -13,7 +13,7 @@ DEBUG;TRACE
 31369144063
 
 9-1324214649
-162130521089
+162034443426
 Themes\Generic.xaml;VlcPlayerControl.xaml;VlcWindow.xaml;
 
 False

@@ -3,3 +3,8 @@ M:\projects\Open Source\MovieManagerCSharp\Model\bin\Debug\Model.pdb
 M:\projects\Open Source\MovieManagerCSharp\Model\obj\Debug\ResolveAssemblyReference.cache
 M:\projects\Open Source\MovieManagerCSharp\Model\obj\Debug\Model.dll
 M:\projects\Open Source\MovieManagerCSharp\Model\obj\Debug\Model.pdb
+E:\berty\Documents\MovieManagerCSharp\Model\bin\Debug\Model.dll
+E:\berty\Documents\MovieManagerCSharp\Model\bin\Debug\Model.pdb
+E:\berty\Documents\MovieManagerCSharp\Model\obj\Debug\ResolveAssemblyReference.cache
+E:\berty\Documents\MovieManagerCSharp\Model\obj\Debug\Model.dll
+E:\berty\Documents\MovieManagerCSharp\Model\obj\Debug\Model.pdb

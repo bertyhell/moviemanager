@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\
 MovieManager.APP
 none
 false
 DEBUG;TRACE
-M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\App.xaml
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\App.xaml
 13987335461
 
-31-2005470269
-2588866227
+311621250009
+25-1524785968
 Panels\Filter\FilterEditor.xaml;Panels\Filter\FilterText.xaml;Panels\MovieScrollPanel.xaml;Panels\RatingControl.xaml;Panels\SubtitleEditor.xaml;Panels\VideoEditor.xaml;MainWindow.xaml;Menubar\RibonMenubar.xaml;Panels\Search\ActorOverview.xaml;Panels\Search\MovieOverview.xaml;Panels\Search\SearchControl.xaml;Panels\Search\SearchWindow.xaml;Themes\Generic.xaml;
 
 True
