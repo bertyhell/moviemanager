@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\App.xaml
-1035641429
+13987335461
 
-23-1187010058
+301061113250
 2588866227
-CommonControls\MovieScrollPanel.xaml;CommonControls\RatingEditor.xaml;CommonControls\VideoEditor.xaml;MainWindow.xaml;Menubar\RibonMenubar.xaml;Search\ActorOverview.xaml;Search\MovieOverview.xaml;Search\SearchControl.xaml;Search\SearchWindow.xaml;VlcWindow.xaml;
+Panels\Filter\FilterEditor.xaml;Panels\Filter\FilterText.xaml;Panels\MovieScrollPanel.xaml;Panels\RatingControl.xaml;Panels\SubtitleEditor.xaml;Panels\VideoEditor.xaml;MainWindow.xaml;Menubar\RibonMenubar.xaml;Panels\Search\ActorOverview.xaml;Panels\Search\MovieOverview.xaml;Panels\Search\SearchControl.xaml;Panels\Search\SearchWindow.xaml;Themes\Generic.xaml;
 
 False
 

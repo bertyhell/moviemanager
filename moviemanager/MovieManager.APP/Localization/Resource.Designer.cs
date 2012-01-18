@@ -239,5 +239,14 @@ namespace MovieManager.APP.Localization {
                 return ResourceManager.GetString("Subtitles", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VideoType.
+        /// </summary>
+        public static string Videotype {
+            get {
+                return ResourceManager.GetString("Videotype", resourceCulture);
+            }
+        }
     }
 }

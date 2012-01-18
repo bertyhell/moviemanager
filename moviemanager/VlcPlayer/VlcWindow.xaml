@@ -1,0 +1,8 @@
+﻿<Window xmlns:my="clr-namespace:VlcPlayer" x:Class="VlcPlayer.VlcWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="600" Width="800">
+    <Grid>
+        <my:VlcPlayerControl x:Name="_vlcPlayer" ></my:VlcPlayerControl>
+    </Grid>
+</Window>
