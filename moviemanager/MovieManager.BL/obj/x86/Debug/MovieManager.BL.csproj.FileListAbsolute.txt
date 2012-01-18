@@ -26,10 +26,6 @@ E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\Common.dll
 E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\Model.dll
 E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\Common.pdb
 E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\Model.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\Microsoft.Windows.Shell.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\Microsoft.Windows.Shell.xml
-E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\RibbonControlsLibrary.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\bin\Debug\RibbonControlsLibrary.xml
 E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\obj\x86\Debug\ResolveAssemblyReference.cache
 E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\obj\x86\Debug\App.g.cs
 E:\berty\Documents\MovieManagerCSharp\MovieManager.BL\obj\x86\Debug\MovieManager.BL_MarkupCompile.cache

@@ -69,10 +69,6 @@ E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Model.pdb
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\SQLite.pdb
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\VlcPlayer.pdb
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.BL.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Microsoft.Windows.Shell.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Microsoft.Windows.Shell.xml
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\RibbonControlsLibrary.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\RibbonControlsLibrary.xml
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\ResolveAssemblyReference.cache
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\MovieScrollPanel.baml
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\RatingControl.baml

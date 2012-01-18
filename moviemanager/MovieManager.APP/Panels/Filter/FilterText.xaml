@@ -1,9 +1,9 @@
-﻿<Filter:FilterControl x:Class="MovieManager.APP.Panels.Filter.FilterText"
+﻿<local:FilterControl x:Class="MovieManager.APP.Panels.Filter.FilterText"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                   xmlns:Filter="clr-namespace:MovieManager.APP.Panels.Filter" mc:Ignorable="d" 
+             xmlns:local="clr-namespace:MovieManager.APP.Panels.Filter" mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="300" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -12,9 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Text="{Binding FilterType, StringFormat={}{0}: }" VerticalAlignment="Center" />
-        <ComboBox HorizontalAlignment="Left" Margin="2,6,0,6" Name="comboBox1" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0">
-            <ComboBoxItem Content="Contains"/>            
-        </ComboBox>
-        <TextBox HorizontalAlignment="Stretch" Margin="0,6,10,6" Text="{Binding Path=FilterInput, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="2" />
+        <ComboBox HorizontalAlignment="Left" Margin="2,6,0,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0" ItemsSource="{Binding TextOperationsLabels}" />
+      <TextBox HorizontalAlignment="Stretch" Margin="0,6,10,6" Text="{Binding Path=FilterInput, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="2" MinWidth="30" />
     </Grid>
-</Filter:FilterControl>
+</local:FilterControl>
