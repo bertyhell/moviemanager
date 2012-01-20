@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Data;
 using Model;
 using SQLite;
@@ -36,8 +37,8 @@ namespace MovieManager.APP
         }
 
 
-        private List<Video> _videos;
-        public List<Video> Videos
+        private ObservableCollection<Video> _videos;
+        public ObservableCollection<Video> Videos
         {
             get
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Model;
 using System.Data.SQLite;
 using System.Globalization;
@@ -13,9 +14,9 @@ namespace SQLite
     {
         public static event VideosChanged OnVideosChanged;
 
-        public static List<Video> SelectAllVideos()
+        public static ObservableCollection<Video> SelectAllVideos()
         {
-            List<Video> videos = new List<Video>();
+            ObservableCollection<Video> videos = new ObservableCollection<Video>();
 
             try
             {
@@ -26,7 +27,7 @@ namespace SQLite
                 //to parse dates
                 DateTimeFormatInfo format = new DateTimeFormatInfo { FullDateTimePattern = "G" };
 
-                //Convert to List<Video>
+                //Convert to ObservableCollection<Video>
                 foreach (DsVideos.videosRow row in datasetVideos.Tables["Videos"].Rows)
                 {
                     string sRelease = (row["release"] == DBNull.Value ? null : Convert.ToString(row["release"]));
@@ -66,18 +67,18 @@ namespace SQLite
             return videos;
         }
 
-        public static List<Video> InsertVideosHDD(List<Video> videos)
+        public static ObservableCollection<Video> InsertVideosHDD(ObservableCollection<Video> videos)
         {
             return InsertVideosHDD(videos,false);
         }
-        public static void InsertVideosHDDWithDuplicates(List<Video> videos)
+        public static void InsertVideosHDDWithDuplicates(ObservableCollection<Video> videos)
         {
             InsertVideosHDD(videos, true);
         }
 
-        private static List<Video> InsertVideosHDD(IEnumerable<Video> videos, bool insertDuplicates)
+        private static ObservableCollection<Video> InsertVideosHDD(IEnumerable<Video> videos, bool insertDuplicates)
         {
-            List<Video> duplicates = new List<Video>();
+            ObservableCollection<Video> duplicates = new ObservableCollection<Video>();
             SQLiteDataAdapter adap = Database.GetAdapter("select * from videos"); 
             SQLiteCommandBuilder builder = new SQLiteCommandBuilder(adap);
             DsVideos datasetVideos = new DsVideos();

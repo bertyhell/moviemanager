@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
@@ -27,7 +28,7 @@ namespace MovieManager.APP.Commands
                                      };
             if (Ofd.ShowDialog() == DialogResult.OK)
             {
-                List<Video> Videos = new List<Video>();
+                ObservableCollection<Video> Videos = new ObservableCollection<Video>();
                 foreach (String File in Ofd.FileNames)
                 {
                     MovieFileReader.GetVideos(new FileInfo(File), Videos);

@@ -266,6 +266,12 @@
   <ItemGroup>
     <Resource Include="Images\view-filter.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cancel_32.png" />
+    <Resource Include="Images\excel_export_32.png" />
+    <Resource Include="Images\excel_import_32.png" />
+    <Resource Include="Images\save_32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

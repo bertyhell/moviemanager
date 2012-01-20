@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using Model;
 using System;
 
@@ -43,7 +44,13 @@ namespace MovieManager.APP.Panels
         {
             VideoTypeEnum VideoType = (VideoTypeEnum)e.AddedItems[0];
             if (Video.VideoType != VideoType)
+            {
+                ObservableCollection<Video> LocalVideos = MainController.Instance.Videos;
+                int Index = LocalVideos.IndexOf(Video);
                 Video = Video.ConvertVideo(VideoType, Video);
+                LocalVideos.RemoveAt(Index);
+                LocalVideos.Insert(Index,Video);
+            }
         }
     }
 }
