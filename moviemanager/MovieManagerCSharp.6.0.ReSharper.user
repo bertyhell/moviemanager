@@ -14,23 +14,23 @@
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Commands/f:FilterVideosCommand.cs" caret="42" fromTop="1" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Menubar/f:ControlData.cs" caret="0" fromTop="0" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Commands/f:SearchCommand.cs" caret="421" fromTop="15" />
+      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/f:MainWindow.xaml" caret="1744" fromTop="6" />
+      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/f:VideoEditor.xaml.cs" caret="1284" fromTop="12" />
+      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/f:VideoEditor.xaml" caret="2206" fromTop="0" />
+      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterText.xaml" caret="1332" fromTop="5" />
+      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterEditor.xaml" caret="1217" fromTop="1" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Search/f:SearchWindow.xaml.cs" caret="2283" fromTop="25" />
-      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterText.xaml.cs" caret="403" fromTop="17" />
+      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/f:MainController.cs" caret="937" fromTop="15" />
       <File id="EF7C715E-4C61-43D6-B83D-90F0FF38424F/f:MovieFileReader.cs" caret="1302" fromTop="8" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Commands/f:AddVideosDirectoryCommand.cs" caret="724" fromTop="18" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Commands/f:AddVideosCommand.cs" caret="889" fromTop="16" />
       <File id="EF7C715E-4C61-43D6-B83D-90F0FF38424F/f:MMDatabase.cs" caret="322" fromTop="15" />
+      <File id="3B9B5FE6-81CC-4714-86E1-16A10C44DEA2/f:Movie.cs" caret="204" fromTop="10" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/f:MainWindow.xaml.cs" caret="1216" fromTop="18" />
       <File id="3B9B5FE6-81CC-4714-86E1-16A10C44DEA2/f:Video.cs" caret="1313" fromTop="15" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterControl.cs" caret="239" fromTop="9" />
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterEditor.xaml.cs" caret="771" fromTop="30" />
-      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/f:MainWindow.xaml" caret="1744" fromTop="6" />
-      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/f:MainController.cs" caret="937" fromTop="15" />
-      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/f:VideoEditor.xaml" caret="2206" fromTop="0" />
-      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterText.xaml" caret="1332" fromTop="5" />
-      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterEditor.xaml" caret="1217" fromTop="1" />
-      <File id="3B9B5FE6-81CC-4714-86E1-16A10C44DEA2/f:Movie.cs" caret="204" fromTop="10" />
-      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/f:VideoEditor.xaml.cs" caret="1284" fromTop="12" />
+      <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/d:Filter/f:FilterText.xaml.cs" caret="403" fromTop="17" />
     </RecentFiles>
     <RecentEdits>
       <File id="F6064BDE-DADA-4205-8E12-3A48D243DA66/d:Panels/f:VideoEditor.xaml" caret="372" fromTop="1" />

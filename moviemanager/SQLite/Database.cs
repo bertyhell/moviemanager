@@ -7,7 +7,7 @@ namespace SQLite
 
     public class Database
     {
-        private const String ConnString = "data source=\".\\Settings\\moviemanager.sqlite\"";
+        private const String ConnString = "data source=\"Settings\\moviemanager.sqlite\"";
         //private const String CONN_STRING = "data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\Settings\\moviemanager.sqlite\"";
         private static SQLiteConnection _conn;
 

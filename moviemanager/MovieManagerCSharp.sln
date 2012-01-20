@@ -17,6 +17,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MovieManager.SETUP", "Movie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D6017DF9-AE81-49B8-857A-495CE8275DB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelInterop", "ExcelInterop\ExcelInterop.csproj", "{948401DF-F23E-47C2-B524-8B7AA5B95A56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,17 @@ Global
 		{D6017DF9-AE81-49B8-857A-495CE8275DB0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D6017DF9-AE81-49B8-857A-495CE8275DB0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D6017DF9-AE81-49B8-857A-495CE8275DB0}.Release|x86.ActiveCfg = Release|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Debug|x86.Build.0 = Debug|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +120,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2} = {A8201B25-CCC9-4EB6-8E32-6DE714BAB888}
 		{EF7C715E-4C61-43D6-B83D-90F0FF38424F} = {A8201B25-CCC9-4EB6-8E32-6DE714BAB888}
+		{948401DF-F23E-47C2-B524-8B7AA5B95A56} = {A8201B25-CCC9-4EB6-8E32-6DE714BAB888}
 	EndGlobalSection
 EndGlobal
