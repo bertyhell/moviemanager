@@ -1,129 +1,133 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using ExcelInterop;
+using SQLite;
 
-public class ExcelExportController : INotifyPropertyChanged
+namespace ExcelInterop
 {
+    public class ExcelExportController : INotifyPropertyChanged
+    {
+        private bool _selectAllNone;
 
-	private readonly bool _isFuifProductExport;
-	private readonly int _fuifId;
+        public ExcelExportController()
+        {
+            _exportProperties = new ObservableCollection<DatabaseMappingItem>();
+            List<String> headers = new List<String>();//TODO 070 get from database or enum
+            headers.Add("id");
+            headers.Add("id_imdb");
+            headers.Add("name");
+            headers.Add("release");
+            headers.Add("rating");
+            headers.Add("rating_imdb");
+            headers.Add("genre");
+            headers.Add("path");
+            headers.Add("last_play_location");
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "Id",
+                                          DatabaseColumn = "Id",
+                                          Selected = true
+                                      });
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "IMDB id",
+                                          DatabaseColumn = "id_imdb",
+                                          Selected = true
+                                      });
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "Name",
+                                          DatabaseColumn = "name",
+                                          Selected = true
+                                      });
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "Release date",
+                                          DatabaseColumn = "release",
+                                          Selected = true
+                                      });
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "IMDB rating",
+                                          DatabaseColumn = "rating_imdb",
+                                          Selected = true
+                                      });
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "Genre",
+                                          DatabaseColumn = "genre",
+                                          Selected = true
+                                      });
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "Video file path",
+                                          DatabaseColumn = "path",
+                                          Selected = true
+                                      });
+            _exportProperties.Add(new DatabaseMappingItem
+                                      {
+                                          MMColumn = "Last play location",
+                                          DatabaseColumn = "last_play_location",
+                                          Selected = true
+                                      });
+            _selectAllNone = false;
+            ExportFilePath = "";
+        }
 
-	private bool _selectAllNone;
+        private ObservableCollection<DatabaseMappingItem> _exportProperties;
+        public ObservableCollection<DatabaseMappingItem> ExportProperties
+        {
+            get { return _exportProperties; }
+            set { _exportProperties = value; }
+        }
 
-	public ExcelExportController(bool isFuifProductExport, int fuifId)
-	{
-		_isFuifProductExport = isFuifProductExport;
-		_fuifId = fuifId;
+        private string _exportFilePath;
+        public string ExportFilePath
+        {
+            get { return _exportFilePath; }
+            set
+            {
+                _exportFilePath = value;
+                PropChanged("ExportFilePath");
+                PropChanged("IsExportEnabled");
+            }
+        }
 
-		_exportProperties = new ObservableCollection<DatabaseMappingItem>();
-		_exportProperties.Add(new DatabaseMappingItem {
-			ParoganColumn = "Id",
-			DatabaseColumn = "ProdId",
-			Selected = true
-		});
-		_exportProperties.Add(new DatabaseMappingItem {
-			ParoganColumn = "Naam",
-			DatabaseColumn = "ProdNaam",
-			Selected = true
-		});
-		_exportProperties.Add(new DatabaseMappingItem {
-			ParoganColumn = "Huidige aankoopprijs",
-			DatabaseColumn = "ProdAankoopprijs",
-			Selected = true
-		});
-		if ((_isFuifProductExport)) {
-			_exportProperties.Add(new DatabaseMappingItem {
-				ParoganColumn = "Afgesproken aankoopprijs",
-				DatabaseColumn = "FPAankoopprijs",
-				Selected = true
-			});
-			_exportProperties.Add(new DatabaseMappingItem {
-				ParoganColumn = "Verkoopprijs",
-				DatabaseColumn = "FPVerkoopprijs",
-				Selected = true
-			});
-			_exportProperties.Add(new DatabaseMappingItem {
-				ParoganColumn = "Categorie",
-				DatabaseColumn = "FPCategorie",
-				Selected = true
-			});
-			_exportProperties.Add(new DatabaseMappingItem {
-				ParoganColumn = "Ratio",
-				DatabaseColumn = "FPRatio",
-				Selected = true
-			});
-			_exportProperties.Add(new DatabaseMappingItem {
-				ParoganColumn = "Stock totaal aantal",
-				DatabaseColumn = "FPAantal",
-				Selected = true
-			});
-			_exportProperties.Add(new DatabaseMappingItem {
-				ParoganColumn = "Stock rest aantal",
-				DatabaseColumn = "FPRestAantal",
-				Selected = true
-			});
-		} else {
-			_exportProperties.Add(new DatabaseMappingItem {
-				ParoganColumn = "Beschikbaar",
-				DatabaseColumn = "ProdOnbeschikbaar",
-				Selected = true
-			});
-			//only useful for brewer, for organisation its always true (not true: can change after add to fuif)
-		}
-		_selectAllNone = false;
-		ExportFilePath = "";
-	}
+        public void PropChanged(string arg)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(arg));
+            }
+        }
 
-	private ObservableCollection<DatabaseMappingItem> _exportProperties;
-	public ObservableCollection<DatabaseMappingItem> ExportProperties {
-		get { return _exportProperties; }
-		set { _exportProperties = value; }
-	}
+        public void SelectAllNone()
+        {
+            foreach (DatabaseMappingItem mappingItem in _exportProperties)
+            {
+                mappingItem.Selected = _selectAllNone;
+            }
+            _selectAllNone = !_selectAllNone;
+        }
 
-	private string _exportFilePath;
-	public string ExportFilePath {
-		get { return _exportFilePath; }
-		set {
-			_exportFilePath = value;
-			PropChanged("ExportFilePath");
-			PropChanged("IsExportEnabled");
-		}
-	}
-
-	public void PropChanged(string arg)
-	{
-		if (PropertyChanged != null) {
-			PropertyChanged(this, new PropertyChangedEventArgs(arg));
-		}
-	}
-
-	public void SelectAllNone()
-	{
-		foreach (DatabaseMappingItem MappingItem in _exportProperties) {
-			MappingItem.Selected = _selectAllNone;
-		}
-		_selectAllNone = !_selectAllNone;
-	}
-
-	public void Export()
-	{
-	    bool MinOneSelected = false;
-	    foreach (var MappingItem in ExportProperties)
-	    {
-	        if( MappingItem.Selected)
-	        {
-	            MinOneSelected = true;
-	            break;
-	        }
-	    }
-		if (MinOneSelected) {
-			//export
-				Excel.Data2Excel(ParoganConnector.SelectAllFuifProducts(_fuifId, from item in _exportProperties where item.Selecteditem.DatabaseColumn), from item in _exportPropertieswhere item.Selecteditem.ParoganColumn);
-		} else {
-			MessageBox.Show("U hebt geen kolommen geselecteerd om te exporteren.");
-		}
-	}
-    public event PropertyChangedEventHandler PropertyChanged;
+        public void Export()
+        {
+            if (ExportProperties.Any(mappingItem => mappingItem.Selected))
+            {
+                //export
+                Excel.Data2Excel(
+                    MMDatabase.GetVideosDataReader(),
+                    from mappingItem in ExportProperties where mappingItem.Selected select mappingItem.DatabaseColumn,
+                    "videos");
+            }
+            else
+            {
+                MessageBox.Show("U hebt geen kolommen geselecteerd om te exporteren.");
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 }
