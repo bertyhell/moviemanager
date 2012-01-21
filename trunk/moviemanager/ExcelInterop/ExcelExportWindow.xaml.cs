@@ -6,27 +6,24 @@ namespace ExcelInterop
     {
 
         private readonly ExcelExportController _controller;
-        public ExcelExportWindow(bool isFuifProductExport, int fuifId = -1)
-            : base()
+        public ExcelExportWindow()
         {
 
             InitializeComponent();
 
             // Insert code required on object creation below this point.
-            _controller = new ExcelExportController(isFuifProductExport, fuifId);
+            _controller = new ExcelExportController();
             DataContext = _controller;
         }
-
-
+        
+        private void BtnSelectAllNoneClick(object sender, RoutedEventArgs e)
+        {
+            _controller.SelectAllNone();
+        }
 
         private void BtnAbortClick(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void BtnSelectAllNoneClick(object sender, RoutedEventArgs e)
-        {
-            _controller.SelectAllNone();
         }
 
         private void BtnExportClick(object sender, RoutedEventArgs e)
@@ -34,6 +31,7 @@ namespace ExcelInterop
             //export to excel file
             _controller.Export();
             Close();
+
         }
     }
 }

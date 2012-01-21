@@ -54,21 +54,6 @@ M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\Filter\FilterEditor.g.cs
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\Filter\FilterText.g.cs
 M:\projects\Open Source\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\Filter\FilterEditor.baml
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.APP.exe.config
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.exe
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.APP.exe
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.APP.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Common.dll
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Model.dll
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.BL.exe
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\SQLite.dll
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\VlcPlayer.dll
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Common.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Model.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\SQLite.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\VlcPlayer.pdb
-E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.BL.pdb
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\ResolveAssemblyReference.cache
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\MovieScrollPanel.baml
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\RatingControl.baml
@@ -89,6 +74,21 @@ E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\App.g.cs
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP_MarkupCompile.cache
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP_MarkupCompile.lref
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.APP.exe.config
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.APP.exe
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.APP.pdb
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Common.dll
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\ExcelInterop.dll
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Model.dll
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.BL.exe
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\SQLite.dll
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\VlcPlayer.dll
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Common.pdb
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\ExcelInterop.pdb
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\Model.pdb
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\SQLite.pdb
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\VlcPlayer.pdb
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\bin\Debug\MovieManager.BL.pdb
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\Filter\FilterEditor.baml
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\Filter\FilterText.baml
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\Panels\SubtitleEditor.baml
@@ -104,3 +104,5 @@ E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManage
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.Properties.Resources.resources
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\GenerateResource.read.1.tlog
 E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.exe
+E:\berty\Documents\MovieManagerCSharp\MovieManager.APP\obj\x86\Debug\MovieManager.APP.pdb

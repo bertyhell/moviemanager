@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Model;
 using System.Data.SQLite;
 using System.Globalization;
+using System.Data.Common;
 
 
 namespace SQLite
@@ -67,6 +68,11 @@ namespace SQLite
             return videos;
         }
 
+        public static DbDataReader GetVideosDataReader()
+        {
+            return Database.GetReader("select * from videos");
+        }
+
         public static ObservableCollection<Video> InsertVideosHDD(ObservableCollection<Video> videos)
         {
             return InsertVideosHDD(videos,false);
@@ -128,5 +134,10 @@ namespace SQLite
         }
 
         #endregion
+
+        public static void InsertVideoHDD(Video video)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

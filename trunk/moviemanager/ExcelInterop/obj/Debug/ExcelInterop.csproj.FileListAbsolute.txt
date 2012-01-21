@@ -1,0 +1,16 @@
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\bin\Debug\ExcelInterop.dll
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\bin\Debug\ExcelInterop.pdb
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\bin\Debug\SQLite.dll
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\bin\Debug\Model.dll
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\bin\Debug\SQLite.pdb
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\bin\Debug\Model.pdb
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ResolveAssemblyReference.cache
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelInterop.csproj.ResolveComReference.cache
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelExportWindow.baml
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelExportWindow.g.cs
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelInterop_MarkupCompile.cache
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelInterop.g.resources
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelInterop.dll
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelInterop.pdb
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelmportWindow.baml
+E:\berty\Documents\MovieManagerCSharp\ExcelInterop\obj\Debug\ExcelmportWindow.g.cs

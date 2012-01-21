@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 using Model;
@@ -21,7 +20,7 @@ namespace MovieManager.APP
         private MainController()
         {
             Videos = MMDatabase.SelectAllVideos();
-            MMDatabase.OnVideosChanged += MMDatabase_onVideoChanged;
+            MMDatabase.OnVideosChanged += MMDatabaseOnVideoChanged;
              _videosView = CollectionViewSource.GetDefaultView(Videos);
         }
 
@@ -62,7 +61,7 @@ namespace MovieManager.APP
             }
         }
 
-        void MMDatabase_onVideoChanged()
+        void MMDatabaseOnVideoChanged()
         {
             Videos = MMDatabase.SelectAllVideos();
         }
@@ -71,7 +70,7 @@ namespace MovieManager.APP
 
         public void Dispose()
         {
-            MMDatabase.OnVideosChanged -= MMDatabase_onVideoChanged;
+            MMDatabase.OnVideosChanged -= MMDatabaseOnVideoChanged;
         }
 
         public void PropChanged(String title)

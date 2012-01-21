@@ -127,6 +127,7 @@
     <Compile Include="Commands\AddVideosCommand.cs" />
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
     <Compile Include="Commands\AnalyseCommand.cs" />
+    <Compile Include="Commands\ExportVideosCommand.cs" />
     <Compile Include="Commands\FilterVideosCommand.cs" />
     <Compile Include="Commands\EmptyVideosCommand.cs" />
     <Compile Include="Panels\Filter\FilterControl.cs" />
@@ -218,6 +219,10 @@
       <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExcelInterop\ExcelInterop.csproj">
+      <Project>{948401DF-F23E-47C2-B524-8B7AA5B95A56}</Project>
+      <Name>ExcelInterop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>
@@ -267,10 +272,8 @@
     <Resource Include="Images\view-filter.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\cancel_32.png" />
     <Resource Include="Images\excel_export_32.png" />
     <Resource Include="Images\excel_import_32.png" />
-    <Resource Include="Images\save_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

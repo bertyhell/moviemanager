@@ -11,10 +11,10 @@ namespace ExcelInterop
 			set { _databaseColumn = value; }
 		}
 
-		private string _paroganColumn;
-		public string ParoganColumn {
-			get { return _paroganColumn; }
-			set { _paroganColumn = value; }
+		private string _mmColumn;
+		public string MMColumn {
+			get { return _mmColumn; }
+			set { _mmColumn = value; }
 		}
 
 		private bool _selected;

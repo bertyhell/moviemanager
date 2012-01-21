@@ -15,20 +15,20 @@
         <ListBox Padding="5" ItemsSource="{Binding ExportProperties}" Name="ListExportProperties">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Content="{Binding ParoganColumn}" IsChecked="{Binding Selected}"/>
+                    <CheckBox Content="{Binding MMColumn}" IsChecked="{Binding Selected}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Margin="0,8,0,0" Grid.Row="1" HorizontalAlignment="Left" Width="100" Name="BtnSelectAllNone">
+        <Button Margin="0,8,0,0" Grid.Row="1" HorizontalAlignment="Left" Width="100" Name="BtnSelectAllNone" Click="BtnSelectAllNoneClick">
             <TextBlock TextWrapping="NoWrap" TextAlignment="Center"><Run Language="nl-be" Text="Alle / Geen"/></TextBlock>
         </Button>
-        <Button HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="1" Width="100" Name="BtnExport">
+        <Button HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="1" Width="100" Name="BtnExport" Click="BtnExportClick">
             <StackPanel Orientation="Horizontal" Width="91.333">
                 <Image Height="32" Width="32" Source="/ExcelInterop;component/images/excel_export_32.png"/>
                 <TextBlock TextWrapping="NoWrap" Width="53.913" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Exporteer"/></TextBlock>
             </StackPanel>
         </Button>
-        <Button Margin="0,8,104,0" Grid.Row="1" HorizontalAlignment="Right" Width="100" Name="BtnAbort">
+        <Button Margin="0,8,104,0" Grid.Row="1" HorizontalAlignment="Right" Width="100" Name="BtnAbort" Click="BtnAbortClick">
             <StackPanel Orientation="Horizontal" Width="85.333">
                 <Image Height="32" Width="32" Source="/ExcelInterop;component/images/cancel_32.png" />
                 <TextBlock TextWrapping="NoWrap" Width="51.246" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Annuleer"/></TextBlock>

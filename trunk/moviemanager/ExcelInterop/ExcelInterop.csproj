@@ -35,6 +35,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,11 @@
     <Compile Include="ExcelExportController.cs" />
     <Compile Include="ExcelExportWindow.xaml.cs">
       <DependentUpon>ExcelExportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelImportController.cs" />
+    <Compile Include="ExcelMappingItem.cs" />
+    <Compile Include="ExcelmportWindow.xaml.cs">
+      <DependentUpon>ExcelmportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,12 +92,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ExcelmportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\cancel_32.png" />
     <Resource Include="images\excel_export_32.png" />
     <Resource Include="images\excel_import_32.png" />
     <Resource Include="images\save_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLite\SQLite.csproj">
+      <Project>{EF7C715E-4C61-43D6-B83D-90F0FF38424F}</Project>
+      <Name>SQLite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\browse_32.png" />
+    <Resource Include="images\ok_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
