@@ -10,14 +10,16 @@ namespace MovieManager.APP.Panels.Filter
     /// </summary>
     public partial class FilterText : FilterControl
     {
+        private readonly string _property;
 
         public enum TextOperations
         {
             Contains, DoesntContain, StartsWith, EndsWith, Regex
         }
 
-        public FilterText()
+        public FilterText(string property)
         {
+            _property = property;
             InitializeComponent();
         }
 
@@ -40,15 +42,15 @@ namespace MovieManager.APP.Panels.Filter
             switch ((TextOperations)cbbOperation.SelectedIndex)
             {
                 case TextOperations.Contains:
-                    return video.Name.Contains(FilterInput);
+                    return ((String)typeof(Video).GetProperty(_property).GetValue(video, null)).Contains(FilterInput);
                 case TextOperations.DoesntContain:
-                    return !video.Name.Contains(FilterInput);
+                    return !((String)typeof(Video).GetProperty(_property).GetValue(video, null)).Contains(FilterInput);
                 case TextOperations.StartsWith:
-                    return !video.Name.StartsWith(FilterInput);
+                    return !((String)typeof(Video).GetProperty(_property).GetValue(video, null)).StartsWith(FilterInput);
                 case TextOperations.EndsWith:
-                    return !video.Name.EndsWith(FilterInput);
+                    return !((String)typeof(Video).GetProperty(_property).GetValue(video, null)).EndsWith(FilterInput);
                 case TextOperations.Regex:
-                    return Regex.IsMatch(video.Name, FilterInput);
+                    return Regex.IsMatch(((String)typeof(Video).GetProperty(_property).GetValue(video, null)), FilterInput);
             }
             return false;
 

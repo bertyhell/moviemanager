@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Model;
 
 namespace MovieManager.APP.Panels.Filter
 {
@@ -16,7 +17,10 @@ namespace MovieManager.APP.Panels.Filter
                 switch (value)
                 {
                     case Filters.Name:
-                        AppliedFilters.Add(new FilterText());
+                        AppliedFilters.Add(new FilterText("Name"));
+                        break;
+                    case Filters.Path:
+                        AppliedFilters.Add(new FilterText("Path"));
                         break;
                     case Filters.Genre:
                         break;

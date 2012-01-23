@@ -24,7 +24,7 @@
         </menu:RibonMenubar>
 
         <!--left  panel-->
-        <TabControl x:Name="_tabLeft" Grid.Row="1" Margin="5,0,0,0">
+        <TabControl x:Name="_tabLeft" Grid.Row="1" Margin="5,0,0,0" Padding="0">
             <TabItem  ToolTip="Filters">
                 <TabItem.Header>
                     <Image Source="/MovieManager.APP;component/Images/view-filter.png" Width="24"/>
