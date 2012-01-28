@@ -48,6 +48,9 @@ namespace VlcPlayer
         public static extern void libvlc_media_player_pause(IntPtr player);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void libvlc_audio_toggle_mute(IntPtr player);
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void libvlc_media_player_stop(IntPtr player);
         #endregion
 
@@ -162,10 +165,12 @@ namespace VlcPlayer
 
         public bool IsStopped { get { return !_playing; } }
 
+        #region methods
+
         public void Play()
         {
-            int ret = LibVlc.libvlc_media_player_play(Handle);
-            if (ret == -1)
+            int Ret = LibVlc.libvlc_media_player_play(Handle);
+            if (Ret == -1)
                 throw new VlcException();
 
             _playing = true;
@@ -187,5 +192,12 @@ namespace VlcPlayer
             _playing = false;
             _paused = false;
         }
+
+        public void Mute()
+        {
+            LibVlc.libvlc_audio_toggle_mute(Handle);
+        }
+
+        #endregion
     }
 }
