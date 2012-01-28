@@ -33,5 +33,16 @@ namespace SQLite.Properties {
                 return ((string)(this["moviemanagerConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\MovieManager.APP\\bin\\Debu" +
+            "g\\Settings\\moviemanager.sqlite\"")]
+        public string moviemanagerConnectionString1 {
+            get {
+                return ((string)(this["moviemanagerConnectionString1"]));
+            }
+        }
     }
 }

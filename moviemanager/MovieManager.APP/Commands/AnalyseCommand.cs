@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 using System.Windows.Input;
 using Model;
 using MovieManager.APP.Search;
@@ -20,12 +22,21 @@ namespace MovieManager.APP.Commands
         {
             foreach (Video Video in MainController.Instance.Videos)
             {
-                if(!string.IsNullOrEmpty(Video.IdImdb))
-                SearchIMDB.GetVideoInfo(Video);
-                else
+                if (Video is Movie)
                 {
+                    List<Movie> Movies = SearchTMDB.GetVideoInfo(Video.Name);
+                    if (Movies.Count > 0)
+                    {
+                        (Video as Movie).IdImdb = Movies[0].IdImdb;
+                        SearchTMDB.GetExtraMovieInfo(Movies[0].IdTmdb, (Movie)Video);
+                    }
+                    //if(!string.IsNullOrEmpty(Video.IdImdb))
+                    //SearchIMDB.GetVideoInfo(Video);
+                    //else
+                    //{
                     //TODO 060: search for imdb id
-                    
+
+                    //}
                 }
             }
         }

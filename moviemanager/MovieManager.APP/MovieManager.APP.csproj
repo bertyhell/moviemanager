@@ -133,6 +133,7 @@
     <Compile Include="Commands\ExportVideosCommand.cs" />
     <Compile Include="Commands\FilterVideosCommand.cs" />
     <Compile Include="Commands\EmptyVideosCommand.cs" />
+    <Compile Include="Converters\StringListConverter.cs" />
     <Compile Include="Panels\Filter\FilterControl.cs" />
     <Compile Include="Panels\Filter\FilterController.cs" />
     <Compile Include="Panels\Filter\FilterEditor.xaml.cs">

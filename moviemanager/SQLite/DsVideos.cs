@@ -1,3 +1,6 @@
 ﻿namespace SQLite
 {
 }
+namespace SQLite
+{
+}
