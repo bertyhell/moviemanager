@@ -1,5 +1,0 @@
-M:\projects\Open Source\MovieManagerCSharp\Model\bin\Release\Model.dll
-M:\projects\Open Source\MovieManagerCSharp\Model\bin\Release\Model.pdb
-M:\projects\Open Source\MovieManagerCSharp\Model\obj\Release\ResolveAssemblyReference.cache
-M:\projects\Open Source\MovieManagerCSharp\Model\obj\Release\Model.dll
-M:\projects\Open Source\MovieManagerCSharp\Model\obj\Release\Model.pdb
