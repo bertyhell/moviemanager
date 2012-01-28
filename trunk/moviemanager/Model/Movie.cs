@@ -28,5 +28,7 @@ namespace Model
             get { return _runtime; }
             set { this._runtime = value; }
         }
+
+        public int IdTmdb { get; set; }
     }
 }

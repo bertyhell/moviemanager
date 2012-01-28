@@ -24,10 +24,9 @@ namespace MovieManager.APP.Commands
             FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
             if (Odd.ShowDialog() == DialogResult.OK)
             {
-                ObservableCollection<Video> Videos = new ObservableCollection<Video>();
-                MovieFileReader.GetVideos(new DirectoryInfo(Odd.SelectedPath), Videos);
+                MovieFileReader.GetVideos(new DirectoryInfo(Odd.SelectedPath), MainController.Instance.Videos);
 
-                MMDatabase.InsertVideosHDD(Videos);
+                MMDatabase.InsertVideosHDD(MainController.Instance.Videos);
             }
         }
     }

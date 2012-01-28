@@ -23,15 +23,11 @@ namespace MovieManager.APP.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
+        public global::Model.Actor abc {
             get {
-                return ((string)(this["Setting"]));
-            }
-            set {
-                this["Setting"] = value;
+                return ((global::Model.Actor)(this["abc"]));
             }
         }
     }

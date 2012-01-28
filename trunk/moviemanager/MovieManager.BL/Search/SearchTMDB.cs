@@ -30,7 +30,7 @@ namespace MovieManager.BL.Search
                     var LocalMovies = from Movie in XMLDoc.Descendants("movie")
                                       select new
                                                  {
-                                                     Id = Movie.Element("id").Value,
+                                                     TmdbId = Movie.Element("id").Value,
                                                      ImdbId = Movie.Element("imdb_id").Value,
                                                      Images = Movie.Element("images").Nodes().ToList()
                                                  };
@@ -41,11 +41,10 @@ namespace MovieManager.BL.Search
                     {
                         Movie NewMovie = new Movie
                                              {
-                                                 IdImdb = Movie.ImdbId
+                                                 IdImdb = Movie.ImdbId,
+                                                 IdTmdb = int.Parse(Movie.TmdbId)
                                              };
-
                         GetPosterFromMovie(Movie.Images, NewMovie);
-                        GetExtraMovieInfo(Convert.ToInt32(Movie.Id), NewMovie);
                         Videos.Add(NewMovie);
 
                     }
@@ -120,6 +119,7 @@ namespace MovieManager.BL.Search
                                   {
                                       Plot = MovieEl.Element("overview").Value,
                                       Name = MovieEl.Element("name").Value,
+                                      Genres = MovieEl.Element("categories").Nodes().ToList(),
                                       Images = MovieEl.Element("images").Nodes().ToList(),
                                       Cast = MovieEl.Element("cast").Nodes().ToList()
                                   };
@@ -129,6 +129,12 @@ namespace MovieManager.BL.Search
                 movie.Name = MovieVar.Name;
                 movie.Plot = MovieVar.Plot;
 
+                movie.Genres.Clear();
+                foreach (XNode Genre in MovieVar.Genres)
+                {
+                    XElement CategoryElement = Genre as XElement;
+                    movie.Genres.Add(CategoryElement.Attribute("name").Value);
+                }
             }
         }
 

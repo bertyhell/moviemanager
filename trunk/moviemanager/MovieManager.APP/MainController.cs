@@ -31,7 +31,7 @@ namespace MovieManager.APP
         {
             get { return _videosView; }
             set { _videosView = value;
-                PropChanged("Videos");
+            PropChanged("VideosView");
             }
         }
 

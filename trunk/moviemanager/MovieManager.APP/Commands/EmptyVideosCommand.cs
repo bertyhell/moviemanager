@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Model;
 using SQLite;
 
 namespace MovieManager.APP.Commands
@@ -16,6 +18,12 @@ namespace MovieManager.APP.Commands
         public void Execute(object parameter)
         {
             MMDatabase.EmptyTable("videos");
+
+
+            for (int i = 0; i < MainController.Instance.Videos.Count; i++)
+            {
+                MainController.Instance.Videos.RemoveAt(0);
+            }
         }
     }
 }

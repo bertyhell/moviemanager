@@ -832,6 +832,8 @@ namespace SQLite {
             
             private global::System.Data.DataColumn columnfranchise_id;
             
+            private global::System.Data.DataColumn columnid_tmdb;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public moviesDataTable() {
@@ -891,6 +893,14 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn id_tmdbColumn {
+                get {
+                    return this.columnid_tmdb;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -926,12 +936,13 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public moviesRow AddmoviesRow(videosRow parentvideosRowByFK_movies_0, System.DateTime runtime, franchisesRow parentfranchisesRowByFK_movies_1) {
+            public moviesRow AddmoviesRow(videosRow parentvideosRowByFK_movies_0, System.DateTime runtime, franchisesRow parentfranchisesRowByFK_movies_1, long id_tmdb) {
                 moviesRow rowmoviesRow = ((moviesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         runtime,
-                        null};
+                        null,
+                        id_tmdb};
                 if ((parentvideosRowByFK_movies_0 != null)) {
                     columnValuesArray[0] = parentvideosRowByFK_movies_0[0];
                 }
@@ -970,6 +981,7 @@ namespace SQLite {
                 this.columnid = base.Columns["id"];
                 this.columnruntime = base.Columns["runtime"];
                 this.columnfranchise_id = base.Columns["franchise_id"];
+                this.columnid_tmdb = base.Columns["id_tmdb"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -981,6 +993,8 @@ namespace SQLite {
                 base.Columns.Add(this.columnruntime);
                 this.columnfranchise_id = new global::System.Data.DataColumn("franchise_id", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfranchise_id);
+                this.columnid_tmdb = new global::System.Data.DataColumn("id_tmdb", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnid_tmdb);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -2261,6 +2275,22 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public long id_tmdb {
+                get {
+                    try {
+                        return ((long)(this[this.tablemovies.id_tmdbColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'id_tmdb\' in table \'movies\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablemovies.id_tmdbColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public videosRow videosRow {
                 get {
                     return ((videosRow)(this.GetParentRow(this.Table.ParentRelations["FK_movies_0"])));
@@ -2303,6 +2333,18 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setfranchise_idNull() {
                 this[this.tablemovies.franchise_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isid_tmdbNull() {
+                return this.IsNull(this.tablemovies.id_tmdbColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setid_tmdbNull() {
+                this[this.tablemovies.id_tmdbColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3641,12 +3683,11 @@ namespace SQLite.DsVideosTableAdapters {
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("runtime", "runtime");
             tableMapping.ColumnMappings.Add("franchise_id", "franchise_id");
+            tableMapping.ColumnMappings.Add("id_tmdb", "id_tmdb");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [movies] WHERE (([id] = @Original_id) AND ((@IsNull_runtime = 1 AND [" +
-                "runtime] IS NULL) OR ([runtime] = @Original_runtime)) AND ((@IsNull_franchise_id" +
-                " = 1 AND [franchise_id] IS NULL) OR ([franchise_id] = @Original_franchise_id)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [movies] WHERE (([id] = @Original_id) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)) AND ((@IsNull_franchise_id = 1 AND [franchise_id] IS NULL) OR ([franchise_id] = @Original_franchise_id)) AND ((@IsNull_id_tmdb = 1 AND [id_tmdb] IS NULL) OR ([id_tmdb] = @Original_id_tmdb)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -3685,10 +3726,25 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceColumn = "franchise_id";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_id_tmdb";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "id_tmdb";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_id_tmdb";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "id_tmdb";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [movies] ([id], [runtime], [franchise_id]) VALUES (@id, @runtime, @fr" +
-                "anchise_id)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [movies] ([id], [runtime], [franchise_id], [id_tmdb]) VALUES (@id, @r" +
+                "untime, @franchise_id, @id_tmdb)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id";
@@ -3708,9 +3764,15 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.Int64;
             param.SourceColumn = "franchise_id";
             this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@id_tmdb";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "id_tmdb";
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [movies] SET [id] = @id, [runtime] = @runtime, [franchise_id] = @franchise_id WHERE (([id] = @Original_id) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)) AND ((@IsNull_franchise_id = 1 AND [franchise_id] IS NULL) OR ([franchise_id] = @Original_franchise_id)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [movies] SET [id] = @id, [runtime] = @runtime, [franchise_id] = @franchise_id, [id_tmdb] = @id_tmdb WHERE (([id] = @Original_id) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)) AND ((@IsNull_franchise_id = 1 AND [franchise_id] IS NULL) OR ([franchise_id] = @Original_franchise_id)) AND ((@IsNull_id_tmdb = 1 AND [id_tmdb] IS NULL) OR ([id_tmdb] = @Original_id_tmdb)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id";
@@ -3729,6 +3791,12 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
             param.SourceColumn = "franchise_id";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@id_tmdb";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "id_tmdb";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -3767,13 +3835,28 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceColumn = "franchise_id";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_id_tmdb";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "id_tmdb";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_id_tmdb";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "id_tmdb";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3782,7 +3865,7 @@ namespace SQLite.DsVideosTableAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [runtime], [franchise_id] FROM [movies]";
+            this._commandCollection[0].CommandText = "SELECT        id, runtime, franchise_id, id_tmdb\r\nFROM            movies";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3843,7 +3926,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, global::System.Nullable<global::System.DateTime> Original_runtime, global::System.Nullable<long> Original_franchise_id) {
+        public virtual int Delete(long Original_id, global::System.Nullable<global::System.DateTime> Original_runtime, global::System.Nullable<long> Original_franchise_id, global::System.Nullable<long> Original_id_tmdb) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
             if ((Original_runtime.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -3860,6 +3943,14 @@ namespace SQLite.DsVideosTableAdapters {
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_id_tmdb.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((long)(Original_id_tmdb.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3881,7 +3972,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(long id, global::System.Nullable<global::System.DateTime> runtime, global::System.Nullable<long> franchise_id) {
+        public virtual int Insert(long id, global::System.Nullable<global::System.DateTime> runtime, global::System.Nullable<long> franchise_id, global::System.Nullable<long> id_tmdb) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((long)(id));
             if ((runtime.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(runtime.Value));
@@ -3894,6 +3985,12 @@ namespace SQLite.DsVideosTableAdapters {
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((id_tmdb.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((long)(id_tmdb.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3915,7 +4012,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(long id, global::System.Nullable<global::System.DateTime> runtime, global::System.Nullable<long> franchise_id, long Original_id, global::System.Nullable<global::System.DateTime> Original_runtime, global::System.Nullable<long> Original_franchise_id) {
+        public virtual int Update(long id, global::System.Nullable<global::System.DateTime> runtime, global::System.Nullable<long> franchise_id, global::System.Nullable<long> id_tmdb, long Original_id, global::System.Nullable<global::System.DateTime> Original_runtime, global::System.Nullable<long> Original_franchise_id, global::System.Nullable<long> Original_id_tmdb) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(id));
             if ((runtime.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(runtime.Value));
@@ -3929,22 +4026,36 @@ namespace SQLite.DsVideosTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(Original_id));
-            if ((Original_runtime.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Original_runtime.Value));
+            if ((id_tmdb.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(id_tmdb.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(Original_id));
+            if ((Original_runtime.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(Original_runtime.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((Original_franchise_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_franchise_id.Value));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(Original_franchise_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_id_tmdb.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((long)(Original_id_tmdb.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3966,8 +4077,8 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<global::System.DateTime> runtime, global::System.Nullable<long> franchise_id, long Original_id, global::System.Nullable<global::System.DateTime> Original_runtime, global::System.Nullable<long> Original_franchise_id) {
-            return this.Update(Original_id, runtime, franchise_id, Original_id, Original_runtime, Original_franchise_id);
+        public virtual int Update(global::System.Nullable<global::System.DateTime> runtime, global::System.Nullable<long> franchise_id, global::System.Nullable<long> id_tmdb, long Original_id, global::System.Nullable<global::System.DateTime> Original_runtime, global::System.Nullable<long> Original_franchise_id, global::System.Nullable<long> Original_id_tmdb) {
+            return this.Update(Original_id, runtime, franchise_id, id_tmdb, Original_id, Original_runtime, Original_franchise_id, Original_id_tmdb);
         }
     }
     

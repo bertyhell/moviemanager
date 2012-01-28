@@ -26,13 +26,13 @@ namespace SQLite
                 FillDatasetWithAllVideos(datasetVideos);
 
                 //to parse dates
-                DateTimeFormatInfo format = new DateTimeFormatInfo { FullDateTimePattern = "G" };
+                DateTimeFormatInfo Format = new DateTimeFormatInfo { FullDateTimePattern = "G" };
 
                 //Convert to ObservableCollection<Video>
                 foreach (DsVideos.videosRow row in datasetVideos.Tables["Videos"].Rows)
                 {
                     string sRelease = (row["release"] == DBNull.Value ? null : Convert.ToString(row["release"]));
-                    DateTime release = (!string.IsNullOrEmpty(sRelease) ? DateTime.Parse(sRelease, format) : new DateTime());
+                    DateTime release = (!string.IsNullOrEmpty(sRelease) ? DateTime.Parse(sRelease, Format) : new DateTime());
                     Video video = new Video
                                       {
                                           Id = Convert.ToInt32(row["id"]),
@@ -42,19 +42,19 @@ namespace SQLite
                                           Rating = (row["rating"] == DBNull.Value ? -1 : Convert.ToDouble(row["rating"])),
                                           RatingImdb = (row["rating_imdb"] == DBNull.Value ? -1 : Convert.ToDouble(row["rating_imdb"])),
                                           //TODO 015: Maak koppeltabel voor genres 
-                                          Genres = new List<String> { (row["genre"] == DBNull.Value ? "" : Convert.ToString(row["genre"])) },
+                                          Genres = new ObservableCollection<string> { (row["genre"] == DBNull.Value ? "" : Convert.ToString(row["genre"])) },
                                           Path = (row["path"] == DBNull.Value ? null : Convert.ToString(row["path"])),
                                           LastPlayLocation = Convert.ToInt32(row["last_play_location"])
                                       };
-                    DsVideos.moviesRow moviesRow = datasetVideos.Tables["Movies"].Rows.Find(video.Id) as DsVideos.moviesRow;
-                    if (moviesRow != null)
+                    DsVideos.moviesRow MoviesRow = datasetVideos.Tables["Movies"].Rows.Find(video.Id) as DsVideos.moviesRow;
+                    if (MoviesRow != null)
                     {
                         video = video as Movie;
                     }
                     else
                     {
-                        DsVideos.episodesRow episodeRow = datasetVideos.Tables["Episodes"].Rows.Find(video.Id) as DsVideos.episodesRow;
-                        if (episodeRow != null)
+                        DsVideos.episodesRow EpisodeRow = datasetVideos.Tables["Episodes"].Rows.Find(video.Id) as DsVideos.episodesRow;
+                        if (EpisodeRow != null)
                         {
                             video = video as Episode;
                         }
@@ -84,34 +84,34 @@ namespace SQLite
 
         private static ObservableCollection<Video> InsertVideosHDD(IEnumerable<Video> videos, bool insertDuplicates)
         {
-            ObservableCollection<Video> duplicates = new ObservableCollection<Video>();
-            SQLiteDataAdapter adap = Database.GetAdapter("select * from videos"); 
-            SQLiteCommandBuilder builder = new SQLiteCommandBuilder(adap);
-            DsVideos datasetVideos = new DsVideos();
-            FillDatasetWithAllVideos(datasetVideos);
-            foreach (Video video in videos)
+            ObservableCollection<Video> Duplicates = new ObservableCollection<Video>();
+            SQLiteDataAdapter Adap = Database.GetAdapter("select * from videos"); 
+            SQLiteCommandBuilder Builder = new SQLiteCommandBuilder(Adap);
+            DsVideos DatasetVideos = new DsVideos();
+            FillDatasetWithAllVideos(DatasetVideos);
+            foreach (Video Video in videos)
             {
-                if (insertDuplicates || datasetVideos.videos.Select(datasetVideos.videos.pathColumn.ColumnName + " = '" + video.Path + "'").Length == 0)
+                if (insertDuplicates || DatasetVideos.videos.Select(DatasetVideos.videos.pathColumn.ColumnName + " = '" + Video.Path + "'").Length == 0)
                 {
 
-                    DsVideos.videosRow row = datasetVideos.videos.NewvideosRow();
-                    row.path = video.Path;
-                    row.name = video.Name;
-                    datasetVideos.videos.AddvideosRow(row);
+                    DsVideos.videosRow row = DatasetVideos.videos.NewvideosRow();
+                    row.path = Video.Path;
+                    row.name = Video.Name;
+                    DatasetVideos.videos.AddvideosRow(row);
                 }
                 else
                 {
-                    duplicates.Add(video);
+                    Duplicates.Add(Video);
                 }
             }
 
-            adap.Update(datasetVideos, "videos");
+            Adap.Update(DatasetVideos, "videos");
 
             if (OnVideosChanged != null)
                 OnVideosChanged();
 
             //return the duplicates that are not inserted in the table
-            return duplicates;
+            return Duplicates;
         }
         public static void EmptyTable(String tableName)
         {
