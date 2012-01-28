@@ -98,6 +98,7 @@
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(460, 45);
             this.trackBar1.TabIndex = 3;
+            this.trackBar1.TabStop = false;
             // 
             // _btnStop
             // 
@@ -105,6 +106,7 @@
             this._btnStop.Name = "_btnStop";
             this._btnStop.Size = new System.Drawing.Size(75, 23);
             this._btnStop.TabIndex = 2;
+            this._btnStop.TabStop = false;
             this._btnStop.Text = "Stop";
             this._btnStop.UseVisualStyleBackColor = true;
             this._btnStop.Click += new System.EventHandler(this._btnStop_Click);
@@ -115,6 +117,7 @@
             this._btnPause.Name = "_btnPause";
             this._btnPause.Size = new System.Drawing.Size(75, 23);
             this._btnPause.TabIndex = 2;
+            this._btnPause.TabStop = false;
             this._btnPause.Text = "Pause";
             this._btnPause.UseVisualStyleBackColor = true;
             this._btnPause.Click += new System.EventHandler(this._btnPause_Click);
@@ -125,6 +128,7 @@
             this._btnPlay.Name = "_btnPlay";
             this._btnPlay.Size = new System.Drawing.Size(75, 23);
             this._btnPlay.TabIndex = 2;
+            this._btnPlay.TabStop = false;
             this._btnPlay.Text = "Play";
             this._btnPlay.UseVisualStyleBackColor = true;
             this._btnPlay.Click += new System.EventHandler(this._btnPlay_Click);
@@ -150,6 +154,7 @@
             this._btnFullScreen.Name = "_btnFullScreen";
             this._btnFullScreen.Size = new System.Drawing.Size(75, 23);
             this._btnFullScreen.TabIndex = 5;
+            this._btnFullScreen.TabStop = false;
             this._btnFullScreen.Text = "Full Screen";
             this._btnFullScreen.UseVisualStyleBackColor = true;
             this._btnFullScreen.Click += new System.EventHandler(this._btnFullScreen_Click);
@@ -160,6 +165,7 @@
             this._btnMute.Name = "_btnMute";
             this._btnMute.Size = new System.Drawing.Size(75, 23);
             this._btnMute.TabIndex = 4;
+            this._btnMute.TabStop = false;
             this._btnMute.Text = "Mute";
             this._btnMute.UseVisualStyleBackColor = true;
             this._btnMute.Click += new System.EventHandler(this._btnMute_Click);
