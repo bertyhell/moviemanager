@@ -65,41 +65,41 @@ namespace SQLite
 
         public static SQLiteDataAdapter GetAdapter(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteDataAdapter Adapter=null;
+            SQLiteDataAdapter adapter=null;
             try
             {
-                SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
-                Adapter = new SQLiteDataAdapter(Cmd);
+                SQLiteCommand cmd = GetCommand(conn, transaction, sql, @params);
+                adapter = new SQLiteDataAdapter(cmd);
             }
             catch
             { }
-            return Adapter;
+            return adapter;
         }
 
         public static bool FillDataset( DsVideos dataSet, Dictionary<String,String> tableNames)
         {
-            bool RetVal = true;
-            foreach (KeyValuePair<String,String> Pair in tableNames)
+            bool retVal = true;
+            foreach (KeyValuePair<String,String> pair in tableNames)
             {
-                RetVal &= FillDataset(dataSet, Pair.Key, Pair.Value);
+                retVal &= FillDataset(dataSet, pair.Key, pair.Value);
             }
-            return RetVal;
+            return retVal;
         }
 
         public static bool FillDataset(DsVideos dataSet, string tableName, string query)
         {
-            bool Retval = true;
+            bool retval = true;
             try
             {
-                SQLiteDataAdapter Adap = GetAdapter(query);
-                Adap.Fill(dataSet, tableName);
+                SQLiteDataAdapter adap = GetAdapter(query);
+                adap.Fill(dataSet, tableName);
             }
             catch
             {
-                Retval = false;
+                retval = false;
             }
 
-            return Retval;
+            return retval;
         }
 
         public static void UpdateDatabase(DsVideos dataset)

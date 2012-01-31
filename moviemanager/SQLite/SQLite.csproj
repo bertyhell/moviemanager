@@ -45,7 +45,6 @@
     <Compile Include="Database.cs" />
     <Compile Include="DsVideos.cs">
       <DependentUpon>DsVideos.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DsVideos.Designer.cs">
       <AutoGen>True</AutoGen>

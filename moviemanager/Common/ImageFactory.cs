@@ -9,27 +9,27 @@ namespace Common
     {
         public static Image GetImage(Uri uri)
         {
-            Image FinalImage = new Image();
+            Image finalImage = new Image();
 
-            BitmapImage Source = new BitmapImage();
-            Source.BeginInit();
-            Source.UriSource = uri;
-            Source.EndInit();
-            FinalImage.Source = Source;
+            BitmapImage source = new BitmapImage();
+            source.BeginInit();
+            source.UriSource = uri;
+            source.EndInit();
+            finalImage.Source = source;
 
-            return FinalImage;
+            return finalImage;
         }
 
         public static ImageSource GetImageSource(Uri uri)
         {
 
-            BitmapImage ImageSource = new BitmapImage();
+            BitmapImage imageSource = new BitmapImage();
 
-            ImageSource.BeginInit();
-            ImageSource.UriSource = uri;
-            ImageSource.EndInit();
+            imageSource.BeginInit();
+            imageSource.UriSource = uri;
+            imageSource.EndInit();
 
-            return ImageSource;
+            return imageSource;
         }
     }
 }

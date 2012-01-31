@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Model;
 using SQLite;
 
 namespace MovieManager.APP.Commands

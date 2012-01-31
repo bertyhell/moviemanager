@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Common;
-using Model;
 
-namespace MovieManager.APP.CommonControls
+namespace MovieManager.APP.Panels
 {
     /// <summary>
     /// Interaction logic for RatingEditorControl.xaml
@@ -29,7 +16,6 @@ namespace MovieManager.APP.CommonControls
         private readonly int _width;
 
         public RatingEditorControl()
-            : base()
         {
             InitializeComponent();
             _width = StarCount * 16;
@@ -37,19 +23,19 @@ namespace MovieManager.APP.CommonControls
         protected override void Init()
         {
             base.Init();
-            MouseMove += new MouseEventHandler(RatingEditorControl_MouseMove);
-            MouseUp += new MouseButtonEventHandler(RatingEditorControl_MouseUp);
-            MouseLeave += new MouseEventHandler(RatingEditorControl_MouseLeave);
+            MouseMove += RatingEditorControlMouseMove;
+            MouseUp += RatingEditorControlMouseUp;
+            MouseLeave += RatingEditorControlMouseLeave;
         }
 
-        private void RatingEditorControl_MouseLeave(object sender, MouseEventArgs e)
+        private void RatingEditorControlMouseLeave(object sender, MouseEventArgs e)
         {
             _oldMouseOverRating = -1;
             _mouseOverRating = -1;
             RefreshStars(Rating, SelectedStar, HalfSelectedStar, EmptyStar);
         }
 
-        private void RatingEditorControl_MouseUp(object sender, MouseButtonEventArgs e)
+        private void RatingEditorControlMouseUp(object sender, MouseButtonEventArgs e)
         {
             if (e.GetPosition(this).X <= _width + 5)
             {
@@ -60,21 +46,21 @@ namespace MovieManager.APP.CommonControls
 
 
 
-        public void RatingEditorControl_MouseMove(object sender, MouseEventArgs e)
+        public void RatingEditorControlMouseMove(object sender, MouseEventArgs e)
         {
-            double MousePositionX = e.GetPosition(this).X;
-            if (MousePositionX > _width)
+            double mousePositionX = e.GetPosition(this).X;
+            if (mousePositionX > _width)
             {
-                MousePositionX = _width;
+                mousePositionX = _width;
             }
             _oldMouseOverRating = _mouseOverRating;
 
             //Determine voted score
-            _mouseOverRating = MousePositionX * 2.0 / 16;
-            double Hulp = Math.Floor(_mouseOverRating);
-            _mouseOverRating = Hulp + ((_mouseOverRating - Hulp < 0.5) ? 0 : 1);
+            _mouseOverRating = mousePositionX * 2.0 / 16;
+            double hulp = Math.Floor(_mouseOverRating);
+            _mouseOverRating = hulp + ((_mouseOverRating - hulp < 0.5) ? 0 : 1);
 
-            if (_oldMouseOverRating != _mouseOverRating)
+            if (Math.Abs(_oldMouseOverRating - _mouseOverRating) > 0.005)
             {
                 RefreshStars(_mouseOverRating, MouseOverSelectedStar, MouseOverHalfSelectedStar, EmptyStar);
             }
@@ -84,9 +70,9 @@ namespace MovieManager.APP.CommonControls
 
         public void Dispose()
         {
-            MouseMove -= new MouseEventHandler(RatingEditorControl_MouseMove);
-            MouseUp -= new MouseButtonEventHandler(RatingEditorControl_MouseUp);
-            MouseLeave -= new MouseEventHandler(RatingEditorControl_MouseLeave);
+            MouseMove -= RatingEditorControlMouseMove;
+            MouseUp -= RatingEditorControlMouseUp;
+            MouseLeave -= RatingEditorControlMouseLeave;
 
         }
 

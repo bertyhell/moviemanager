@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using ExcelInterop;
-using SQLite;
 
 namespace MovieManager.APP.Commands
 {

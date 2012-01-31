@@ -1,14 +1,13 @@
-﻿using System.ComponentModel;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using Model;
 
-namespace MovieManager.APP.Search
+namespace MovieManager.APP.Panels.Search
 {
 
     /// <summary>
     /// Interaction logic for ActorOverview.xaml
     /// </summary>
-    public partial class ActorOverview : UserControl
+    public partial class ActorOverview
     {
 
         public event ClickedOnSearch SearchEvent;
@@ -17,10 +16,10 @@ namespace MovieManager.APP.Search
         {
             InitializeComponent();
             DataContext = Actor;
-            _movieScrollPanel.SearchEvent += _movieScrollPanel_SearchEvent;
+            _movieScrollPanel.SearchEvent += MovieScrollPanelSearchEvent;
         }
 
-        void _movieScrollPanel_SearchEvent(SearchEventArgs e)
+        void MovieScrollPanelSearchEvent(SearchEventArgs e)
         {
             if (SearchEvent != null)
                 SearchEvent(e);

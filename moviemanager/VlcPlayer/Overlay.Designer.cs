@@ -42,8 +42,8 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FullScreenForm";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Overlay_KeyUp);
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseDoubleClick);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OverlayKeyUp);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OverlayMouseDoubleClick);
             this.ResumeLayout(false);
 
         }

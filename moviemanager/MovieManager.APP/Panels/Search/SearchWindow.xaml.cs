@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MovieManager.BL.Search;
 using Model;
 
-namespace MovieManager.APP.Search
+namespace MovieManager.APP.Panels.Search
 {
     /// <summary>
     /// Interaction logic for SearchWindow.xaml
     /// </summary>
-    public partial class SearchWindow : Window
+    public partial class SearchWindow
     {
         private ActorOverview _overview;
 
@@ -27,7 +19,7 @@ namespace MovieManager.APP.Search
             InitializeComponent();
         }
 
-        private void _searchControl_ClickOnSearch(SearchEventArgs e)
+        private void SearchControlClickOnSearch(SearchEventArgs e)
         {
             Search(e.SearchOptions);
         }
@@ -36,15 +28,15 @@ namespace MovieManager.APP.Search
         {
             if (options.SearchForActors)
             {
-                List<Actor> SearchedActors = SearchTMDB.SearchActor(options.SearchTerm);
-                if (SearchedActors.Count > 1)
+                List<Actor> searchedActors = SearchTMDB.SearchActor(options.SearchTerm);
+                if (searchedActors.Count > 1)
                 {
                     //TODO 090: Make selection window
-                    SearchForActor(SearchedActors[0]);
+                    SearchForActor(searchedActors[0]);
                 }
-                else if (SearchedActors.Count == 1)
+                else if (searchedActors.Count == 1)
                 {
-                    SearchForActor(SearchedActors[0]);
+                    SearchForActor(searchedActors[0]);
                 }
                 else
                 {
@@ -55,27 +47,20 @@ namespace MovieManager.APP.Search
 
             if (options.SearchForMovies)
             {
-                Movie Movie;
+                Movie movie;
                 try
                 {
-                    int QueryIsId = Convert.ToInt32(options.SearchTerm);
-                    Movie = new Movie();
-                    SearchTMDB.GetExtraMovieInfo(QueryIsId, Movie);
+                    int queryIsId = Convert.ToInt32(options.SearchTerm);
+                    movie = new Movie();
+                    SearchTMDB.GetExtraMovieInfo(queryIsId, movie);
                 }
                 catch
                 {
-                    List<Movie> Movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
+                    List<Movie> movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
                     //TODO 090: Make selection window
-                    if (Movies.Count > 0)
-                    {
-                        Movie = Movies[0];
-                    }
-                    else
-                    {
-                        Movie = null;
-                    }
+                    movie = movies.Count > 0 ? movies[0] : null;
                 }
-                SearchForMovie(Movie);
+                SearchForMovie(movie);
             }
         }
 
@@ -87,7 +72,7 @@ namespace MovieManager.APP.Search
             if (_overview == null)
             {
                 _overview = new ActorOverview();
-                _overview.SearchEvent += _searchControl_ClickOnSearch;
+                _overview.SearchEvent += SearchControlClickOnSearch;
                 Grid.SetRow(_overview, 1);
             }
             _overview.Actor = actor;
@@ -97,10 +82,10 @@ namespace MovieManager.APP.Search
         private void SearchForMovie(Movie movie)
         {
             ResetGrid();
-            MovieOverview Overview = new MovieOverview();
-            Overview.Movie = movie;
-            Grid.SetRow(Overview, 1);
-            _layoutRoot.Children.Add(Overview);
+            MovieOverview overview = new MovieOverview();
+            overview.Movie = movie;
+            Grid.SetRow(overview, 1);
+            _layoutRoot.Children.Add(overview);
         }
 
         private void ResetGrid()

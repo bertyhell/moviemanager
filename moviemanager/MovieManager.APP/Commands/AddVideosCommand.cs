@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Forms;
@@ -21,19 +20,19 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            OpenFileDialog Ofd = new OpenFileDialog
+            OpenFileDialog ofd = new OpenFileDialog
                                      {
                                          InitialDirectory = ConfigurationManager.AppSettings["defaultVideoLocation"],
                                          Multiselect = true
                                      };
-            if (Ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ObservableCollection<Video> Videos = new ObservableCollection<Video>();
-                foreach (String File in Ofd.FileNames)
+                ObservableCollection<Video> videos = new ObservableCollection<Video>();
+                foreach (String file in ofd.FileNames)
                 {
-                    MovieFileReader.GetVideos(new FileInfo(File), Videos);
+                    MovieFileReader.GetVideos(new FileInfo(file), videos);
                 }
-                MMDatabase.InsertVideosHDD(Videos);
+                MMDatabase.InsertVideosHDD(videos);
             }
         }
     }

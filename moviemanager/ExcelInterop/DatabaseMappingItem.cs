@@ -4,20 +4,11 @@ namespace ExcelInterop
 {
 	public class DatabaseMappingItem : INotifyPropertyChanged
 	{
+	    public string DatabaseColumn { get; set; }
 
-		private string _databaseColumn;
-		public string DatabaseColumn {
-			get { return _databaseColumn; }
-			set { _databaseColumn = value; }
-		}
+	    public string MMColumn { get; set; }
 
-		private string _mmColumn;
-		public string MMColumn {
-			get { return _mmColumn; }
-			set { _mmColumn = value; }
-		}
-
-		private bool _selected;
+	    private bool _selected;
 		public bool Selected {
 			get { return _selected; }
 			set {

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace VlcPlayer
@@ -19,19 +15,19 @@ namespace VlcPlayer
         private Point _previousVideoPanelLocation;
         private Size _previousVideoPanelSize;
         private bool _isFullScreen;
-        Overlay overlayForm;
+        Overlay _overlayForm;
 
         public VlcWinForm()
         {
             InitializeComponent();
-            this.KeyPreview = true;
-            string[] Args = new string[] {
+            KeyPreview = true;
+            string[] args = new[] {
                 "--ignore-config",
                 @"--plugin-path=C:\Program Files (x86)\VideoLAN\VLC\plugins"
                 //,"--vout-filter=deinterlace", "--deinterlace-mode=blend"
             };
 
-            _vlcInstance = new VlcInstance(Args);
+            _vlcInstance = new VlcInstance(args);
             _player = null;
 
 
@@ -41,23 +37,23 @@ namespace VlcPlayer
 
         public void PlayVideo()
         {
-            OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
 
-            if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 return;
 
-            PlayVideo(OpenFileDialog1.FileName);
+            PlayVideo(openFileDialog1.FileName);
         }
 
         public void PlayVideo(String fileName)
         {
-            using (VlcMedia Media = new VlcMedia(_vlcInstance, fileName))
+            using (VlcMedia media = new VlcMedia(_vlcInstance, fileName))
             {
                 if (_player == null)
-                    _player = new VlcMediaPlayer(Media);
+                    _player = new VlcMediaPlayer(media);
                 else
-                    _player.Media = Media;
+                    _player.Media = media;
             }
 
             //_player.Drawable = _video.Handle;
@@ -105,15 +101,15 @@ namespace VlcPlayer
             }
             else
             {
-                this.FormBorderStyle = FormBorderStyle.Sizable;
-                this.Size = _previousFormSize;
-                this.Location = _previousFormLocation;
+                FormBorderStyle = FormBorderStyle.Sizable;
+                Size = _previousFormSize;
+                Location = _previousFormLocation;
                 _pnlVideo.Size = _previousVideoPanelSize;
                 _pnlVideo.Location = _previousVideoPanelLocation;
                 _menubar.Visible = true;
                 _pnlControls.Visible = true;
-                overlayForm.Location = CalculateOverlayLocation();
-                overlayForm.Size = _pnlVideo.Size;
+                _overlayForm.Location = CalculateOverlayLocation();
+                _overlayForm.Size = _pnlVideo.Size;
                 _isFullScreen = false;
                 //overlayForm.Close();
             }
@@ -123,42 +119,42 @@ namespace VlcPlayer
         private void ActivateOverlay()
         {
             //activate overlay
-            if (overlayForm == null)
-                overlayForm = new Overlay(this);
-            overlayForm.Show(this);
-            overlayForm.Focus();
-            overlayForm.Size = _pnlVideo.Size;
-            overlayForm.Location = CalculateOverlayLocation();
+            if (_overlayForm == null)
+                _overlayForm = new Overlay(this);
+            _overlayForm.Show(this);
+            _overlayForm.Focus();
+            _overlayForm.Size = _pnlVideo.Size;
+            _overlayForm.Location = CalculateOverlayLocation();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             Stop();
-            overlayForm.Close();
+            _overlayForm.Close();
             base.OnClosing(e);
         }
 
-        private void _btnPause_Click(object sender, EventArgs e)
+        private void BtnPauseClick(object sender, EventArgs e)
         {
             Pause();
         }
 
-        private void _btnPlay_Click(object sender, EventArgs e)
+        private void BtnPlayClick(object sender, EventArgs e)
         {
             PlayVideo();
         }
 
-        private void _btnStop_Click(object sender, EventArgs e)
+        private void BtnStopClick(object sender, EventArgs e)
         {
             Stop();
         }
 
-        private void _btnMute_Click(object sender, EventArgs e)
+        private void BtnMuteClick(object sender, EventArgs e)
         {
             _player.Mute();
         }
 
-        private void _btnFullScreen_Click(object sender, EventArgs e)
+        private void BtnFullScreenClick(object sender, EventArgs e)
         {
             ToggleFullScreen();
         }
@@ -167,30 +163,30 @@ namespace VlcPlayer
 
         #endregion
 
-        private void VlcWinForm_Move(object sender, EventArgs e)
+        private void VlcWinFormMove(object sender, EventArgs e)
         {
-            if (overlayForm != null)
+            if (_overlayForm != null)
             {
-                overlayForm.Location = CalculateOverlayLocation();
+                _overlayForm.Location = CalculateOverlayLocation();
             }
         }
 
         private Point CalculateOverlayLocation()
         {
-            int BorderWidth = (this.Width - this.ClientSize.Width) / 2;
-            int BorderHeight = (this.Height - this.ClientSize.Height) - BorderWidth;
+            int borderWidth = (Width - ClientSize.Width) / 2;
+            int borderHeight = (Height - ClientSize.Height) - borderWidth;
             return new Point(
-                this.Location.X + BorderWidth + _pnlVideo.Location.X,
-                this.Location.Y + BorderHeight + _pnlVideo.Location.Y
+                Location.X + borderWidth + _pnlVideo.Location.X,
+                Location.Y + borderHeight + _pnlVideo.Location.Y
                 );
         }
 
-        private void _pnlVideo_Resize(object sender, EventArgs e)
+        private void PnlVideoResize(object sender, EventArgs e)
         {
-            overlayForm.Size = _pnlVideo.Size;
+            _overlayForm.Size = _pnlVideo.Size;
         }
 
-        private void VlcWinForm_KeyUp(object sender, KeyEventArgs e)
+        private void VlcWinFormKeyUp(object sender, KeyEventArgs e)
         {
             HandleKeys(e.KeyCode);
         }

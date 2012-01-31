@@ -1,9 +1,9 @@
-﻿<UserControl xmlns:my="clr-namespace:MovieManager.APP.CommonControls"  x:Class="MovieManager.APP.Search.MovieOverview"
+﻿<UserControl x:Class="MovieManager.APP.Panels.Search.MovieOverview"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:loc="clr-namespace:MovieManager.APP.Localization" 
+             xmlns:loc="clr-namespace:MovieManager.APP.Localization" xmlns:Panels="clr-namespace:MovieManager.APP.Panels"
              mc:Ignorable="d" d:DesignWidth="500">
     <Grid x:Name="_layoutRoot">
         <Grid.RowDefinitions>
@@ -49,6 +49,6 @@
             <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="_moviePlot" HorizontalAlignment="Stretch" Text="{Binding Path=Plot}"></TextBox>
         </Grid>
 
-        <my:MovieScrollPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Grid.ColumnSpan="3" Images="{Binding Path=Images}"/>
+        <Panels:MovieScrollPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Grid.ColumnSpan="3" Images="{Binding Path=Images}"/>
     </Grid>
 </UserControl>

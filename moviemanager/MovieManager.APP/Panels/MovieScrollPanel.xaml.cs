@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Common;
 using Model;
-using MovieManager.APP.Search;
+using MovieManager.APP.Panels.Search;
 
-namespace MovieManager.APP.CommonControls
+namespace MovieManager.APP.Panels
 {
 
 
@@ -15,7 +14,7 @@ namespace MovieManager.APP.CommonControls
     /// <summary>
     /// Interaction logic for MovieScrollPanel.xaml
     /// </summary>
-    public partial class MovieScrollPanel : UserControl
+    public partial class MovieScrollPanel
     {
         public event ClickedOnSearch SearchEvent;
 
@@ -25,15 +24,15 @@ namespace MovieManager.APP.CommonControls
                                                                           typeof(MovieScrollPanel), new PropertyMetadata(new List<ImageInfo>(), OnImagesChanged));
 
 
-        private const double REPOSITION_SPEED = 100;
+        private const double RepositionSpeed = 100;
 
-        private double _currentScrollViewPosition = 0;
+        private double _currentScrollViewPosition;
 
         public MovieScrollPanel()
         {
             InitializeComponent();
             _imagesElements = new List<Image>();
-            _ImgScrollViewer.ScrollChanged += new ScrollChangedEventHandler(_ImgScrollViewer_ScrollChanged);
+            _ImgScrollViewer.ScrollChanged += ImgScrollViewerScrollChanged;//new ScrollChangedEventHandler(ImgScrollViewerScrollChanged);
         }
 
         public List<ImageInfo> Images
@@ -57,34 +56,34 @@ namespace MovieManager.APP.CommonControls
                 for (int i = 0; i < panel.Images.Count; i++)
                 {
                     //add new elements
-                    Image NewImage = new Image();
+                    Image newImage = new Image();
                     //set sources
-                    NewImage.Source = ImageFactory.GetImage(panel.Images[i].Uri).Source;
-                    NewImage.Tag = panel.Images[i];
-                    NewImage.Margin = new Thickness(5);
-                    NewImage.MouseUp += panel.NewImage_MouseUp;
+                    newImage.Source = ImageFactory.GetImage(panel.Images[i].Uri).Source;
+                    newImage.Tag = panel.Images[i];
+                    newImage.Margin = new Thickness(5);
+                    newImage.MouseUp += panel.NewImageMouseUp;
 
-                    panel._layoutRoot.Children.Add(NewImage);
+                    panel._layoutRoot.Children.Add(newImage);
                     panel._layoutRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength() });
-                    Grid.SetColumn(NewImage, i);
-                    panel._imagesElements.Add(NewImage);
+                    Grid.SetColumn(newImage, i);
+                    panel._imagesElements.Add(newImage);
                 }
             }
         }
 
-        private void NewImage_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void NewImageMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ImageInfo Info = (sender as Image).Tag as ImageInfo;
-            if (Info != null && SearchEvent != null)
+            ImageInfo info = (sender as Image).Tag as ImageInfo;
+            if (info != null && SearchEvent != null)
             {
                 SearchEvent(new SearchEventArgs
                 {
                     SearchOptions = new SearchOptions
                     {
-                        SearchForMovies = (Info.Type == typeof(Movie)),
-                        SearchForActors = (Info.Type == typeof(Actor)),
+                        SearchForMovies = (info.Type == typeof(Movie)),
+                        SearchForActors = (info.Type == typeof(Actor)),
                         SearchOnTmdb = true,
-                        SearchTerm = Info.Tag,
+                        SearchTerm = info.Tag,
                     }
                 });
             }
@@ -95,22 +94,22 @@ namespace MovieManager.APP.CommonControls
             UpdateImages(o as MovieScrollPanel);
         }
 
-        private void _btnLeft_Click(object sender, RoutedEventArgs e)
+        private void BtnLeftClick(object sender, RoutedEventArgs e)
         {
-            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition - REPOSITION_SPEED);
+            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition - RepositionSpeed);
         }
 
-        private void _btnRight_Click(object sender, RoutedEventArgs e)
+        private void BtnRightClick(object sender, RoutedEventArgs e)
         {
-            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition + REPOSITION_SPEED);
+            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition + RepositionSpeed);
         }
 
-        public void _ImgScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        public void ImgScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             _currentScrollViewPosition = e.HorizontalOffset;
         }
 
-        private void _layoutRoot_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void LayoutRootMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
 
             _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition - e.Delta);

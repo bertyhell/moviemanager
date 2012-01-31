@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
 using System.Windows.Input;
 using Model;
-using MovieManager.APP.Search;
 using MovieManager.BL.Search;
 
 namespace MovieManager.APP.Commands
@@ -20,15 +18,15 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            foreach (Video Video in MainController.Instance.Videos)
+            foreach (Video video in MainController.Instance.Videos)
             {
-                if (Video is Movie)
+                if (video is Movie)
                 {
-                    List<Movie> Movies = SearchTMDB.GetVideoInfo(Video.Name);
-                    if (Movies.Count > 0)
+                    List<Movie> movies = SearchTMDB.GetVideoInfo(video.Name);
+                    if (movies.Count > 0)
                     {
-                        (Video as Movie).IdImdb = Movies[0].IdImdb;
-                        SearchTMDB.GetExtraMovieInfo(Movies[0].IdTmdb, (Movie)Video);
+                        (video as Movie).IdImdb = movies[0].IdImdb;
+                        SearchTMDB.GetExtraMovieInfo(movies[0].IdTmdb, (Movie)video);
                     }
                     //if(!string.IsNullOrEmpty(Video.IdImdb))
                     //SearchIMDB.GetVideoInfo(Video);

@@ -1,13 +1,12 @@
-﻿using System.ComponentModel;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using Model;
 
-namespace MovieManager.APP.Search
+namespace MovieManager.APP.Panels.Search
 {
     /// <summary>
     /// Interaction logic for ActorOverview.xaml
     /// </summary>
-    public partial class MovieOverview : UserControl
+    public partial class MovieOverview
     {
         public MovieOverview()
         {

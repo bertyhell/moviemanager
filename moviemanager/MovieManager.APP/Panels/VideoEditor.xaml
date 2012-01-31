@@ -1,9 +1,10 @@
-﻿<Window xmlns:my="clr-namespace:MovieManager.APP.CommonControls"  x:Class="MovieManager.APP.Panels.VideoEditor"
+﻿<Window x:Class="MovieManager.APP.Panels.VideoEditor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:MovieManager.APP.Localization"
         xmlns:model="clr-namespace:Model;assembly=Model" 
-        xmlns:System="clr-namespace:System;assembly=mscorlib" Title="VideoEditor"  Background="#FFF1EDED">
+        xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Panels="clr-namespace:MovieManager.APP.Panels"
+        Title="VideoEditor"  Background="#FFF1EDED">
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -39,18 +40,18 @@
         <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=Name,Mode=TwoWay}"/>
         
         <Label Grid.Row="2" Grid.Column="1" Content="{x:Static loc:Resource.Rating}"/>
-        <my:RatingEditorControl Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"  Rating="{Binding Path=Rating,Mode=TwoWay}"/>
+        <Panels:RatingEditorControl Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"  Rating="{Binding Path=Rating,Mode=TwoWay}"/>
 
         <Label Grid.Row="4" Grid.Column="1" Content="{x:Static loc:Resource.ImdbRating}"/>
-        <my:RatingEditorControl Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"  Rating="{Binding Path=RatingImdb,Mode=TwoWay}"/>
+        <Panels:RatingEditorControl Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"  Rating="{Binding Path=RatingImdb,Mode=TwoWay}"/>
         
         <Label Grid.Row="6" Grid.Column="1" Content="{x:Static loc:Resource.ImdbId}"/>
         <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding Path=IdImdb,Mode=TwoWay}"/>
         
         <Label Grid.Row="8" Grid.Column="1" Content="{x:Static loc:Resource.Videotype}"/>
-        <ComboBox Grid.Row="8" Grid.Column="3" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding VideoType,Mode=OneTime}" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox Grid.Row="8" Grid.Column="3" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding VideoType,Mode=OneTime}" SelectionChanged="ComboBoxSelectionChanged"/>
 
-        <my:SubtitleEditor Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="4" HorizontalAlignment="Left"
+        <Panels:SubtitleEditor Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="4" HorizontalAlignment="Left"
                            x:Name="subtitleEditor" VerticalAlignment="Top" Video="{Binding Path=DataContext, RelativeSource={RelativeSource Self},Mode=TwoWay}" />
     </Grid>
 </Window>

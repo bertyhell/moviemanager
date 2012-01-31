@@ -6,10 +6,10 @@ namespace MovieManager.APP.Panels.Filter
     /// <summary>
     /// Interaction logic for FilterEditor.xaml
     /// </summary>
-    public partial class FilterEditor : UserControl
+    public partial class FilterEditor
     {
 
-        private FilterController _controller;
+        private readonly FilterController _controller;
         public FilterEditor()
         {
             InitializeComponent();
@@ -20,9 +20,9 @@ namespace MovieManager.APP.Panels.Filter
         public bool FilterVideo(object video)
         {
 
-            foreach (FilterControl FilterControl in _controller.AppliedFilters)
+            foreach (FilterControl filterControl in _controller.AppliedFilters)
             {
-                if (!FilterControl.FilterSucceeded((Video)video)) return false;
+                if (!filterControl.FilterSucceeded((Video)video)) return false;
             }
             return true;
         }
