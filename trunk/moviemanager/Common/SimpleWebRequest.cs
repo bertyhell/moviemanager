@@ -13,18 +13,18 @@ namespace Common
         public static String DoRequest(Uri url)
         {
 
-            WebClient Client = new WebClient();
-            Stream Data = Client.OpenRead(url);
-            string ResponseXML = null;
-            if (Data != null)
+            WebClient client = new WebClient();
+            Stream data = client.OpenRead(url);
+            string responseXML = null;
+            if (data != null)
             {
-                StreamReader Reader = new StreamReader(Data);
-                ResponseXML = Reader.ReadToEnd();
-                Data.Close();
-                Reader.Close();
+                StreamReader reader = new StreamReader(data);
+                responseXML = reader.ReadToEnd();
+                data.Close();
+                reader.Close();
             }
 
-            return ResponseXML;
+            return responseXML;
 
         }
     }

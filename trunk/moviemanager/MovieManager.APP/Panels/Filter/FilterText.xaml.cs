@@ -8,7 +8,7 @@ namespace MovieManager.APP.Panels.Filter
     /// <summary>
     /// Interaction logic for FilterText.xaml
     /// </summary>
-    public partial class FilterText : FilterControl
+    public partial class FilterText
     {
         private readonly string _property;
 

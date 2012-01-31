@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -29,26 +28,26 @@ namespace Model
         {
             get
             {
-                List<Image> LocalImages = new List<Image>();
-                foreach (string ImageUrl in ImageUrls)
+                List<Image> localImages = new List<Image>();
+                foreach (string imageUrl in ImageUrls)
                 {
                     try
                     {
-                        Image Image = new Image();
+                        Image image = new Image();
 
-                        BitmapImage Bitmap = new BitmapImage();
-                        Bitmap.BeginInit();
-                        Bitmap.UriSource = new Uri(ImageUrl, UriKind.Absolute);
-                        Bitmap.EndInit();
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(imageUrl, UriKind.Absolute);
+                        bitmap.EndInit();
 
-                        Image.Source = Bitmap;
-                        LocalImages.Add(Image);
+                        image.Source = bitmap;
+                        localImages.Add(image);
                     }
                     catch
                     {
                     }
                 }
-                return LocalImages;
+                return localImages;
             }
         }
 

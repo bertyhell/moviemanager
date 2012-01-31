@@ -18,7 +18,7 @@
     		<RowDefinition Height="0.086*"/>
     		<RowDefinition Height="0.914*"/>
     	</Grid.RowDefinitions>
-        <ComboBox VerticalAlignment="Center" Margin="73,0,12,0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding SelectedFilter}"/>
+        <ComboBox VerticalAlignment="Center" Margin="73,0,12,0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Path=SelectedFilter, Mode=OneWayToSource}" Validation.ErrorTemplate="{x:Null}" SelectedIndex="-1" />
         <ListBox Grid.Row="1" ItemsSource="{Binding AppliedFilters}" HorizontalContentAlignment="Stretch" BorderThickness="0" Background="#FFEEEEEE"></ListBox>
         <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="Add filter:" d:LayoutOverrides="Height" VerticalAlignment="Center"/>
     </Grid>

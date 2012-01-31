@@ -1,25 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Common;
-using Model;
 
-namespace MovieManager.APP.CommonControls
+namespace MovieManager.APP.Panels
 {
     /// <summary>
     /// Interaction logic for RatingEditor.xaml
     /// </summary>
-    public partial class RatingControl : UserControl
+    public partial class RatingControl
     {
         public static readonly DependencyProperty RatingProperty =
             DependencyProperty.Register("Rating", typeof(Double), typeof(RatingControl), new PropertyMetadata(-2.0, RatingChanged));
@@ -58,8 +48,8 @@ namespace MovieManager.APP.CommonControls
         {
             if (!_isInitialized)
             {
-                this.Width = _starCount*16;
-                this.Height = 16;
+                Width = _starCount*16;
+                Height = 16;
                 if (_layoutroot != null)
                 {
                     _layoutroot.ColumnDefinitions.Clear();
@@ -70,10 +60,10 @@ namespace MovieManager.APP.CommonControls
                 for (int i = 0; i < _starCount; i++)
                 {
                     _layoutroot.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(16)});
-                    Image LocalImage = ImageFactory.GetImage(EmptyStar);
-                    Grid.SetColumn(LocalImage, i);
-                    _stars.Add(LocalImage);
-                    _layoutroot.Children.Add(LocalImage);
+                    Image localImage = ImageFactory.GetImage(EmptyStar);
+                    Grid.SetColumn(localImage, i);
+                    _stars.Add(localImage);
+                    _layoutroot.Children.Add(localImage);
                 }
                 _isInitialized = true;
             }
@@ -85,21 +75,21 @@ namespace MovieManager.APP.CommonControls
         {
             if (rating < 0) rating = 0;
             // adapt the rating to the star count
-            double NormalizedRating = rating / 10 * StarCount;
+            double normalizedRating = rating / 10 * StarCount;
 
             //determine the amount of full colered stars
-            int SelectedStarCount = (int)Math.Floor(NormalizedRating);
+            int selectedStarCount = (int)Math.Floor(normalizedRating);
 
             //determine the remaining rating -> used to determine if a half colered star is needed
-            double RatingRest = NormalizedRating - SelectedStarCount;
-            SelectedStarCount += (RatingRest > 0.75 ? 1 : 0);
-            int HalfSelectedStarCount = (RatingRest <= 0.75 && RatingRest >= 0.25 ? 1 : 0);
+            double ratingRest = normalizedRating - selectedStarCount;
+            selectedStarCount += (ratingRest > 0.75 ? 1 : 0);
+            int halfSelectedStarCount = (ratingRest <= 0.75 && ratingRest >= 0.25 ? 1 : 0);
 
             for (int i = 0; i < _starCount; i++)
             {
-                if (i < SelectedStarCount)
+                if (i < selectedStarCount)
                     Stars[i].Source = ImageFactory.GetImageSource(selectedStar);
-                else if (i < SelectedStarCount + HalfSelectedStarCount)
+                else if (i < selectedStarCount + halfSelectedStarCount)
                     Stars[i].Source = ImageFactory.GetImageSource(halfSelectedStar);
                 else
                     Stars[i].Source = ImageFactory.GetImageSource(emptyStar);

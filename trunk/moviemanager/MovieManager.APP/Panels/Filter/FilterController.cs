@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using Model;
 
 namespace MovieManager.APP.Panels.Filter
 {

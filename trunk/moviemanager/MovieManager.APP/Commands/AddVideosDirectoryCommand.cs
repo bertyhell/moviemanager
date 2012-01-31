@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
-using Model;
 using System.Configuration;
 using SQLite;
 
@@ -21,10 +18,10 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
-            if (Odd.ShowDialog() == DialogResult.OK)
+            FolderBrowserDialog odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
+            if (odd.ShowDialog() == DialogResult.OK)
             {
-                MovieFileReader.GetVideos(new DirectoryInfo(Odd.SelectedPath), MainController.Instance.Videos);
+                MovieFileReader.GetVideos(new DirectoryInfo(odd.SelectedPath), MainController.Instance.Videos);
 
                 MMDatabase.InsertVideosHDD(MainController.Instance.Videos);
             }

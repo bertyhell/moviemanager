@@ -16,7 +16,7 @@ namespace ExcelInterop
     {
         public ExcelImportController()
         {
-            _excelColumns = new List<string>();
+            ExcelColumns = new List<string>();
             _mappingItems = new ObservableCollection<ExcelMappingItem>();
         }
 
@@ -94,12 +94,7 @@ namespace ExcelInterop
             set { _mappingItems = value; }
         }
 
-        private List<string> _excelColumns;
-        public List<string> ExcelColumns
-        {
-            get { return _excelColumns; }
-            set { _excelColumns = value; }
-        }
+        public List<string> ExcelColumns { get; set; }
 
         public void GetImportFile()
         {
@@ -137,8 +132,8 @@ namespace ExcelInterop
                     string errorMessage = "";
 
                     //create video objects
-                    int idIndex = -1;
-                    int categoryIndex = -1;
+                    const int idIndex = -1;
+                    const int categoryIndex = -1;
                     int ratioIndex = -1;
                     int stockAantalIndex = -1;
                     int stockRestAantalIndex = -1;
@@ -197,19 +192,13 @@ namespace ExcelInterop
                         //Microsoft.Windows.Controls.MessageBox.Show("Importeren voltooid\n Aantal geimporteerde producten: " + aantalImportedProducts, "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
                         return true;
                     }
-                    else
-                    {
-                        //TODO 060 add error messages
-                        //Microsoft.Windows.Controls.MessageBox.Show("Importeren voltooid met enkele fouten: " + errorMessage + "\n" + "Aantal geimporteerde producten: " + aantalImportedProducts, "Succes met enkele fouten", MessageBoxButton.OK, MessageBoxImage.Information);
-                        return false;
-                    }
-                }
-                else
-                {
                     //TODO 060 add error messages
-                    //Microsoft.Windows.Controls.MessageBox.Show("Bij verplichte items(*) mag de 'Auto'-waarde niet geselecteerd zijn?", "Verplichte velden", MessageBoxButton.OK, MessageBoxImage.Error);
+                    //Microsoft.Windows.Controls.MessageBox.Show("Importeren voltooid met enkele fouten: " + errorMessage + "\n" + "Aantal geimporteerde producten: " + aantalImportedProducts, "Succes met enkele fouten", MessageBoxButton.OK, MessageBoxImage.Information);
                     return false;
                 }
+                //TODO 060 add error messages
+                //Microsoft.Windows.Controls.MessageBox.Show("Bij verplichte items(*) mag de 'Auto'-waarde niet geselecteerd zijn?", "Verplichte velden", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
             catch (IOException e)
             {

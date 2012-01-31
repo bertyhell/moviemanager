@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using Model;
-using SQLite;
 using MessageBox = System.Windows.MessageBox;
-using UserControl = System.Windows.Controls.UserControl;
 
-namespace MovieManager.APP.CommonControls
+namespace MovieManager.APP.Panels
 {
     /// <summary>
     /// Interaction logic for SubtitleEditor.xaml
     /// </summary>
-    public partial class SubtitleEditor : UserControl
+    public partial class SubtitleEditor
     {
         public static readonly DependencyProperty VideoProperty =
             DependencyProperty.Register("Video", typeof(Video), typeof(SubtitleEditor), new PropertyMetadata(null));
@@ -34,19 +30,19 @@ namespace MovieManager.APP.CommonControls
             InitializeComponent();
         }
 
-        private void _btnAddSubtitle_Click(object sender, RoutedEventArgs e)
+        private void BtnAddSubtitleClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog Ofd = new OpenFileDialog
+            OpenFileDialog ofd = new OpenFileDialog
             {
                 InitialDirectory = ConfigurationManager.AppSettings["defaultVideoLocation"],
                 Multiselect = true
             };
-            if (Ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                foreach (String File in Ofd.FileNames)
+                foreach (String file in ofd.FileNames)
                 {
-                    if (!AlreadyInSubs(File))
-                        Video.Subs.Add(new Subtitle { Path = File });
+                    if (!AlreadyInSubs(file))
+                        Video.Subs.Add(new Subtitle { Path = file });
                     else
                     {
                         MessageBox.Show(Localization.Resource.SubtitleAlreadyInMovie, Localization.Resource.Error,
@@ -59,23 +55,23 @@ namespace MovieManager.APP.CommonControls
         //check for duplicate
         private bool AlreadyInSubs(String path)
         {
-            bool IsDuplicate = false;
-            foreach (Subtitle Sub in Video.Subs)
+            bool isDuplicate = false;
+            foreach (Subtitle sub in Video.Subs)
             {
-                if (Sub.Path == path)
+                if (sub.Path == path)
                 {
-                    IsDuplicate = true;
+                    isDuplicate = true;
                     break;
                 }
             }
-            return IsDuplicate;
+            return isDuplicate;
         }
 
-        private void _btnDelSubtitle_Click(object sender, RoutedEventArgs e)
+        private void BtnDelSubtitleClick(object sender, RoutedEventArgs e)
         {
-            foreach(Subtitle Sub in _grdSubs.SelectedItems)
+            foreach(Subtitle sub in _grdSubs.SelectedItems)
             {
-                Video.Subs.Remove(Sub);
+                Video.Subs.Remove(sub);
             }
         }
     }

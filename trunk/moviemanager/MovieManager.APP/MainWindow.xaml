@@ -50,8 +50,8 @@
             </DataGrid.CellStyle>
             <DataGrid.ContextMenu>
                 <ContextMenu >
-                    <MenuItem Header="Play" Click="MenuItemPlay_Click"/>
-                    <MenuItem Header="Properties" Click="MenuItemProperties_Click"  />
+                    <MenuItem Header="Play" Click="MenuItemPlayClick"/>
+                    <MenuItem Header="Properties" Click="MenuItemPropertiesClick"  />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>

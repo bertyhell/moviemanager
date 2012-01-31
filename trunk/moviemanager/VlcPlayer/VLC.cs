@@ -18,11 +18,11 @@ namespace VlcPlayer
 
         #region media
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr libvlc_media_new_location(IntPtr p_instance,
-          [MarshalAs(UnmanagedType.LPStr)] string psz_mrl);
+        public static extern IntPtr libvlc_media_new_location(IntPtr pINSTANCE,
+          [MarshalAs(UnmanagedType.LPStr)] string pszMrl);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void libvlc_media_release(IntPtr p_meta_desc);
+        public static extern void libvlc_media_release(IntPtr pMetaDesc);
         #endregion
 
         #region media player
@@ -68,11 +68,10 @@ namespace VlcPlayer
         protected string Err;
 
         public VlcException()
-            : base()
         {
-            IntPtr ErrorPointer = LibVlc.libvlc_errmsg();
-            Err = ErrorPointer == IntPtr.Zero ? "VLC Exception"
-                : Marshal.PtrToStringAuto(ErrorPointer);
+            IntPtr errorPointer = LibVlc.libvlc_errmsg();
+            Err = errorPointer == IntPtr.Zero ? "VLC Exception"
+                : Marshal.PtrToStringAuto(errorPointer);
         }
 
         public override string Message { get { return Err; } }
@@ -106,7 +105,7 @@ namespace VlcPlayer
 
         internal VlcMedia(IntPtr handle)
         {
-            this.Handle = handle;
+            Handle = handle;
         }
 
         public void Dispose()
@@ -169,8 +168,8 @@ namespace VlcPlayer
 
         public void Play()
         {
-            int Ret = LibVlc.libvlc_media_player_play(Handle);
-            if (Ret == -1)
+            int ret = LibVlc.libvlc_media_player_play(Handle);
+            if (ret == -1)
                 throw new VlcException();
 
             _playing = true;

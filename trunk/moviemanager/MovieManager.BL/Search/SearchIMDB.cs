@@ -24,26 +24,26 @@ namespace MovieManager.BL.Search
             try
             {
                 //do request
-                Uri Request = new Uri("http://www.imdbapi.com/?r=XML&i=" + HttpUtility.UrlEncode(video.IdImdb));
-                String Response = SimpleWebRequest.DoRequest(Request);
+                Uri request = new Uri("http://www.imdbapi.com/?r=XML&i=" + HttpUtility.UrlEncode(video.IdImdb));
+                String response = SimpleWebRequest.DoRequest(request);
 
-                if (!string.IsNullOrEmpty(Response))
+                if (!string.IsNullOrEmpty(response))
                 {
-                    Console.WriteLine(Response);
+                    Console.WriteLine(response);
 
-                    XDocument XMLDoc = XDocument.Parse(Response);
+                    XDocument xmlDoc = XDocument.Parse(response);
 
                     //get elements from xml
-                    var LocalMovies = from Mov in XMLDoc.Descendants("movie")
+                    var localMovies = from mov in xmlDoc.Descendants("movie")
                                       select new
                                       {
-                                          RatingImdb = Mov.Attribute("rating").Value,
-                                          Release = Mov.Attribute("released").Value
+                                          RatingImdb = mov.Attribute("rating").Value,
+                                          Release = mov.Attribute("released").Value
                                       };
 
-                    var Vid = LocalMovies.ToList()[0];
-                    video.RatingImdb = double.Parse(Vid.RatingImdb);
-                    video.Release = DateTimeUtilities.ParseDate(Vid.Release);
+                    var vid = localMovies.ToList()[0];
+                    video.RatingImdb = double.Parse(vid.RatingImdb);
+                    video.Release = DateTimeUtilities.ParseDate(vid.Release);
                 }
             }
             catch

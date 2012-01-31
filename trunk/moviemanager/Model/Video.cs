@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.ComponentModel;
 
@@ -22,8 +20,8 @@ namespace Model
         private double _ratingImdb;
         private ObservableCollection<String> _genres;
         private String _path; //path to movie
-        private int _lastPlayLocation = 0;
-        private bool _watchedToEnd = false;
+        private int _lastPlayLocation;
+        private bool _watchedToEnd;
         private ObservableCollection<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
         private Uri _poster;
@@ -46,8 +44,8 @@ namespace Model
         {
             if (resultingVideoType == VideoTypeEnum.Movie)
             {
-                return new Movie()
-                {
+                return new Movie
+                           {
                     Id = video.Id,
                     IdImdb = video.IdImdb,
                     Name = video.Name,
@@ -59,34 +57,31 @@ namespace Model
                 };
 
             }
-            else if (resultingVideoType == VideoTypeEnum.Episode)
+            if (resultingVideoType == VideoTypeEnum.Episode)
             {
-                return new Episode()
-                {
-                    Id = video.Id,
-                    IdImdb = video.IdImdb,
-                    Name = video.Name,
-                    Release = video.Release,
-                    Rating = video.Rating,
-                    RatingImdb = video.RatingImdb,
-                    Path = video.Path,
-                    LastPlayLocation = video.LastPlayLocation
-                };
+                return new Episode
+                           {
+                               Id = video.Id,
+                               IdImdb = video.IdImdb,
+                               Name = video.Name,
+                               Release = video.Release,
+                               Rating = video.Rating,
+                               RatingImdb = video.RatingImdb,
+                               Path = video.Path,
+                               LastPlayLocation = video.LastPlayLocation
+                           };
             }
-            else
-            {
-                return new Video()
-                {
-                    Id = video.Id,
-                    IdImdb = video.IdImdb,
-                    Name = video.Name,
-                    Release = video.Release,
-                    Rating = video.Rating,
-                    RatingImdb = video.RatingImdb,
-                    Path = video.Path,
-                    LastPlayLocation = video.LastPlayLocation
-                };
-            }
+            return new Video
+                       {
+                           Id = video.Id,
+                           IdImdb = video.IdImdb,
+                           Name = video.Name,
+                           Release = video.Release,
+                           Rating = video.Rating,
+                           RatingImdb = video.RatingImdb,
+                           Path = video.Path,
+                           LastPlayLocation = video.LastPlayLocation
+                       };
         }
 
         //return 
@@ -105,12 +100,12 @@ namespace Model
         {
             if (_genres.Count > 0)
             {
-                String GenresString = _genres[0];
+                String genresString = _genres[0];
                 for (int i = 1; i < _genres.Count; i++)
                 {
-                    GenresString += ", " + _genres[i];
+                    genresString += ", " + _genres[i];
                 }
-                return GenresString;
+                return genresString;
             }
             return "";
         }
@@ -228,10 +223,10 @@ namespace Model
             }
             else if (movieLength - (iCurrentTimestamp) < movieLength * 10 / 100)
             {
-                MessageBoxResult Result = MessageBox.Show("Do you want to mark this video as seen?\n"
+                MessageBoxResult result = MessageBox.Show("Do you want to mark this video as seen?\n"
                     + "Press \"yes\" to mark this video as seen.\n"
                     + "Press \"no\" to save the current timestamp of the video.", "Choose Option", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                if (Result == MessageBoxResult.Yes)
+                if (result == MessageBoxResult.Yes)
                 {
                     _watchedToEnd = true;
                 }

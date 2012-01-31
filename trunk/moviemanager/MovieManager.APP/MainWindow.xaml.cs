@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using Model;
-using MovieManager.APP.CommonControls;
 using MovieManager.APP.Panels;
 using VlcPlayer;
 using System.Windows.Data;
@@ -10,7 +9,7 @@ namespace MovieManager.APP
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         readonly MainController _controller;
 
@@ -23,40 +22,40 @@ namespace MovieManager.APP
 
 
             DataContext = _controller;
-            Loaded += MainWindow_Loaded;
+            Loaded += MainWindowLoaded;
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        void MainWindowLoaded(object sender, RoutedEventArgs e)
         {
             _controller.FilterEditor = _FilterEditor;
         }
 
         #region ContextMenu event handlers
-        private void MenuItemProperties_Click(object sender, RoutedEventArgs e)
+        private void MenuItemPropertiesClick(object sender, RoutedEventArgs e)
         {
-            Video SelectedVideo = (_videoGrid.SelectedItem as Video);
+            Video selectedVideo = (_videoGrid.SelectedItem as Video);
 
-            VideoEditor Editor = new VideoEditor();
-            Editor.DataContext = SelectedVideo;
+            VideoEditor editor = new VideoEditor();
+            editor.DataContext = selectedVideo;
 
-            Binding VideoBinding = new Binding();
-            VideoBinding.Source = SelectedVideo;
-            VideoBinding.Path = new PropertyPath(".");
-            VideoBinding.Mode = BindingMode.TwoWay;
+            Binding videoBinding = new Binding();
+            videoBinding.Source = selectedVideo;
+            videoBinding.Path = new PropertyPath(".");
+            videoBinding.Mode = BindingMode.TwoWay;
 
-            Editor.SetBinding(VideoEditor.VideoProperty, VideoBinding);
-            Editor.Show();
+            editor.SetBinding(VideoEditor.VideoProperty, videoBinding);
+            editor.Show();
         }
 
-        private void MenuItemPlay_Click(object sender, RoutedEventArgs e)
+        private void MenuItemPlayClick(object sender, RoutedEventArgs e)
         {
-            string Path = (_videoGrid.SelectedItem as Video).Path;
+            string path = (_videoGrid.SelectedItem as Video).Path;
 
-            if (Path != null)
+            if (path != null)
             {
-                VlcWinForm Vlc = new VlcWinForm();
-                Vlc.Show();
-                Vlc.PlayVideo(Path);
+                VlcWinForm vlc = new VlcWinForm();
+                vlc.Show();
+                vlc.PlayVideo(path);
             }
         }
         #endregion

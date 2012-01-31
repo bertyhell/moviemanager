@@ -87,7 +87,7 @@
             this._pnlVideo.Name = "_pnlVideo";
             this._pnlVideo.Size = new System.Drawing.Size(492, 411);
             this._pnlVideo.TabIndex = 1;
-            this._pnlVideo.Resize += new System.EventHandler(this._pnlVideo_Resize);
+            this._pnlVideo.Resize += new System.EventHandler(this.PnlVideoResize);
             // 
             // trackBar1
             // 
@@ -109,7 +109,7 @@
             this._btnStop.TabStop = false;
             this._btnStop.Text = "Stop";
             this._btnStop.UseVisualStyleBackColor = true;
-            this._btnStop.Click += new System.EventHandler(this._btnStop_Click);
+            this._btnStop.Click += new System.EventHandler(this.BtnStopClick);
             // 
             // _btnPause
             // 
@@ -120,7 +120,7 @@
             this._btnPause.TabStop = false;
             this._btnPause.Text = "Pause";
             this._btnPause.UseVisualStyleBackColor = true;
-            this._btnPause.Click += new System.EventHandler(this._btnPause_Click);
+            this._btnPause.Click += new System.EventHandler(this.BtnPauseClick);
             // 
             // _btnPlay
             // 
@@ -131,7 +131,7 @@
             this._btnPlay.TabStop = false;
             this._btnPlay.Text = "Play";
             this._btnPlay.UseVisualStyleBackColor = true;
-            this._btnPlay.Click += new System.EventHandler(this._btnPlay_Click);
+            this._btnPlay.Click += new System.EventHandler(this.BtnPlayClick);
             // 
             // _pnlControls
             // 
@@ -157,7 +157,7 @@
             this._btnFullScreen.TabStop = false;
             this._btnFullScreen.Text = "Full Screen";
             this._btnFullScreen.UseVisualStyleBackColor = true;
-            this._btnFullScreen.Click += new System.EventHandler(this._btnFullScreen_Click);
+            this._btnFullScreen.Click += new System.EventHandler(this.BtnFullScreenClick);
             // 
             // _btnMute
             // 
@@ -168,7 +168,7 @@
             this._btnMute.TabStop = false;
             this._btnMute.Text = "Mute";
             this._btnMute.UseVisualStyleBackColor = true;
-            this._btnMute.Click += new System.EventHandler(this._btnMute_Click);
+            this._btnMute.Click += new System.EventHandler(this.BtnMuteClick);
             // 
             // VlcWinForm
             // 
@@ -181,8 +181,8 @@
             this.MainMenuStrip = this._menubar;
             this.Name = "VlcWinForm";
             this.Text = "VlcWinForm";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VlcWinForm_KeyUp);
-            this.Move += new System.EventHandler(this.VlcWinForm_Move);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VlcWinFormKeyUp);
+            this.Move += new System.EventHandler(this.VlcWinFormMove);
             this._menubar.ResumeLayout(false);
             this._menubar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();

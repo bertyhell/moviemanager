@@ -12,40 +12,40 @@ namespace MovieManager.BL.Search
     {
         public static List<Movie> GetVideoInfo(String query)
         {
-            List<Movie> Videos = new List<Movie>();
+            List<Movie> videos = new List<Movie>();
             try
             {
                 //do request
-                Uri Request =
+                Uri request =
                     new Uri("http://api.themoviedb.org/2.1/Movie.search/en/xml/02004323eee9878ce511ca57faf0b29c/" +
                             HttpUtility.UrlEncode(query));
-                String Response = SimpleWebRequest.DoRequest(Request);
+                String response = SimpleWebRequest.DoRequest(request);
 
-                if (!string.IsNullOrEmpty(Response))
+                if (!string.IsNullOrEmpty(response))
                 {
 
-                    XDocument XMLDoc = XDocument.Parse(Response);
+                    XDocument xmlDoc = XDocument.Parse(response);
 
                     //get elements from xml
-                    var LocalMovies = from Movie in XMLDoc.Descendants("movie")
+                    var localMovies = from movie in xmlDoc.Descendants("movie")
                                       select new
                                                  {
-                                                     TmdbId = Movie.Element("id").Value,
-                                                     ImdbId = Movie.Element("imdb_id").Value,
-                                                     Images = Movie.Element("images").Nodes().ToList()
+                                                     TmdbId = movie.Element("id").Value,
+                                                     ImdbId = movie.Element("imdb_id").Value,
+                                                     Images = movie.Element("images").Nodes().ToList()
                                                  };
 
 
                     //convert elements to Movie
-                    foreach (var Movie in LocalMovies)
+                    foreach (var movie in localMovies)
                     {
-                        Movie NewMovie = new Movie
+                        Movie newMovie = new Movie
                                              {
-                                                 IdImdb = Movie.ImdbId,
-                                                 IdTmdb = int.Parse(Movie.TmdbId)
+                                                 IdImdb = movie.ImdbId,
+                                                 IdTmdb = int.Parse(movie.TmdbId)
                                              };
-                        GetPosterFromMovie(Movie.Images, NewMovie);
-                        Videos.Add(NewMovie);
+                        GetPosterFromMovie(movie.Images, newMovie);
+                        videos.Add(newMovie);
 
                     }
                 }
@@ -55,23 +55,23 @@ namespace MovieManager.BL.Search
             {
             }
 
-            return Videos;
+            return videos;
         }
 
         private static void GetPosterFromMovie(IEnumerable<XNode> images, Movie movie)
         {
-            int MaxWidth = 0;
-            foreach (XNode ImageNode in images)
+            int maxWidth = 0;
+            foreach (XNode imageNode in images)
             {
-                XElement ImageEl = ImageNode as XElement;
-                if (ImageEl != null && ImageEl.Attribute("type").Value == "poster"
-                    && Convert.ToInt32(ImageEl.Attribute("width").Value) > MaxWidth)
+                XElement imageEl = imageNode as XElement;
+                if (imageEl != null && imageEl.Attribute("type").Value == "poster"
+                    && Convert.ToInt32(imageEl.Attribute("width").Value) > maxWidth)
                 {
-                    string Url = ImageEl.Attribute("url").Value;
-                    if (!string.IsNullOrEmpty(Url))
+                    string url = imageEl.Attribute("url").Value;
+                    if (!string.IsNullOrEmpty(url))
                     {
-                        movie.Poster = new Uri(Url);
-                        MaxWidth = Convert.ToInt32(ImageEl.Attribute("width").Value);
+                        movie.Poster = new Uri(url);
+                        maxWidth = Convert.ToInt32(imageEl.Attribute("width").Value);
                     }
                 }
             }
@@ -79,23 +79,23 @@ namespace MovieManager.BL.Search
 
         private static void GetImages(IEnumerable<XNode> images, Movie movie)
         {
-            bool FirstImage = true;
-            foreach (XNode ImageNode in images)
+            bool firstImage = true;
+            foreach (XNode imageNode in images)
             {
-                XElement ImageEl = ImageNode as XElement;
-                if (ImageEl != null && ImageEl.Attribute("size").Value == "original")
+                XElement imageEl = imageNode as XElement;
+                if (imageEl != null && imageEl.Attribute("size").Value == "original")
                 {
-                    string Url = ImageEl.Attribute("url").Value;
-                    if (!string.IsNullOrEmpty(Url))
+                    string url = imageEl.Attribute("url").Value;
+                    if (!string.IsNullOrEmpty(url))
                     {
-                        if (FirstImage)
+                        if (firstImage)
                         {
-                            movie.Poster = new Uri(Url);
-                            FirstImage = false;
+                            movie.Poster = new Uri(url);
+                            firstImage = false;
                         }
                         else
                         {
-                            movie.Images.Add(new ImageInfo {Uri = new Uri(Url), Type = typeof (Movie)});
+                            movie.Images.Add(new ImageInfo {Uri = new Uri(url), Type = typeof (Movie)});
                         }
                     }
                 }
@@ -104,127 +104,127 @@ namespace MovieManager.BL.Search
 
         public static void GetExtraMovieInfo(int tmdbId, Movie movie)
         {
-            Uri Request = new Uri("http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + tmdbId);
-            String Response = SimpleWebRequest.DoRequest(Request);
+            Uri request = new Uri("http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + tmdbId);
+            String response = SimpleWebRequest.DoRequest(request);
 
-            if (!string.IsNullOrEmpty(Response))
+            if (!string.IsNullOrEmpty(response))
             {
                 //Console.WriteLine(Response);
 
-                XDocument XMLDoc = XDocument.Parse(Response);
+                XDocument xmlDoc = XDocument.Parse(response);
 
                 //get elements from xml
-                var LocalMovies = from MovieEl in XMLDoc.Descendants("movie")
+                var localMovies = from movieEl in xmlDoc.Descendants("movie")
                                   select new
                                   {
-                                      Plot = MovieEl.Element("overview").Value,
-                                      Name = MovieEl.Element("name").Value,
-                                      Genres = MovieEl.Element("categories").Nodes().ToList(),
-                                      Images = MovieEl.Element("images").Nodes().ToList(),
-                                      Cast = MovieEl.Element("cast").Nodes().ToList()
+                                      Plot = movieEl.Element("overview").Value,
+                                      Name = movieEl.Element("name").Value,
+                                      Genres = movieEl.Element("categories").Nodes().ToList(),
+                                      Images = movieEl.Element("images").Nodes().ToList(),
+                                      Cast = movieEl.Element("cast").Nodes().ToList()
                                   };
 
-                var MovieVar = LocalMovies.ToList()[0];
-                GetImages(MovieVar.Images,movie);
-                movie.Name = MovieVar.Name;
-                movie.Plot = MovieVar.Plot;
+                var movieVar = localMovies.ToList()[0];
+                GetImages(movieVar.Images,movie);
+                movie.Name = movieVar.Name;
+                movie.Plot = movieVar.Plot;
 
                 movie.Genres.Clear();
-                foreach (XNode Genre in MovieVar.Genres)
+                foreach (XNode genre in movieVar.Genres)
                 {
-                    XElement CategoryElement = Genre as XElement;
-                    movie.Genres.Add(CategoryElement.Attribute("name").Value);
+                    XElement categoryElement = genre as XElement;
+                    movie.Genres.Add(categoryElement.Attribute("name").Value);
                 }
             }
         }
 
         public static List<Actor> SearchActor(String query)
         {
-            List<Actor> Actors = new List<Actor>();
+            List<Actor> actors = new List<Actor>();
             try
             {
 
                 //do request
-                Uri Request = new Uri("http://api.themoviedb.org/2.1/Person.search/en/xml/02004323eee9878ce511ca57faf0b29c/" + HttpUtility.UrlEncode(query));
-                String Response = SimpleWebRequest.DoRequest(Request);
+                Uri request = new Uri("http://api.themoviedb.org/2.1/Person.search/en/xml/02004323eee9878ce511ca57faf0b29c/" + HttpUtility.UrlEncode(query));
+                String response = SimpleWebRequest.DoRequest(request);
 
-                if (!string.IsNullOrEmpty(Response))
+                if (!string.IsNullOrEmpty(response))
                 {
                     //Console.WriteLine(response);
 
-                    XDocument XMLDoc = XDocument.Parse(Response);
+                    XDocument xmlDoc = XDocument.Parse(response);
 
                     //get elements from xml
-                    var LocalActors = from Person in XMLDoc.Descendants("person")
+                    var localActors = from person in xmlDoc.Descendants("person")
                                       select new
                                       {
-                                          TmdbID = Convert.ToInt32(Person.Element("id").Value),
-                                          Name = Person.Element("name").Value,
-                                          Images = Person.Element("images").Nodes().ToList()
+                                          TmdbID = Convert.ToInt32(person.Element("id").Value),
+                                          Name = person.Element("name").Value,
+                                          Images = person.Element("images").Nodes().ToList()
                                       };
 
                     //convert elements to actor
-                    foreach (var Actor in LocalActors)
+                    foreach (var actor in localActors)
                     {
-                        Actor NewActor = new Actor
+                        Actor newActor = new Actor
                                              {
-                                                 Name = Actor.Name,
-                                                 TmdbID = Actor.TmdbID
+                                                 Name = actor.Name,
+                                                 TmdbID = actor.TmdbID
                                              };
 
-                        foreach (XElement Image in Actor.Images)
+                        foreach (XElement image in actor.Images)
                         {
-                            NewActor.ImageUrls.Add(Image.Attribute("url").Value);
+                            newActor.ImageUrls.Add(image.Attribute("url").Value);
                         }
 
-                        Actors.Add(NewActor);
+                        actors.Add(newActor);
 
                     }
                 }
             }
             catch { }
 
-            return Actors;
+            return actors;
         }
 
 
-        public static void GetActorInfo(Actor actor)
+        public static void GetActorInfo(Actor Actor)
         {
             try
             {
 
                 //do request
-                Uri Request = new Uri("http://api.themoviedb.org/2.1/Person.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + actor.TmdbID);
-                String Response = SimpleWebRequest.DoRequest(Request);
+                Uri request = new Uri("http://api.themoviedb.org/2.1/Person.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + Actor.TmdbID);
+                String response = SimpleWebRequest.DoRequest(request);
 
                 //Console.WriteLine(Response);
 
-                if (!string.IsNullOrEmpty(Response))
+                if (!string.IsNullOrEmpty(response))
                 {
-                    XDocument XDoc = XDocument.Parse(Response);
+                    XDocument xDoc = XDocument.Parse(response);
 
-                    var Actors = from ActorEl in XDoc.Descendants("person")
+                    var actors = from actorEl in xDoc.Descendants("person")
                                  select new
                                  {
-                                     ImagesMovies = ActorEl.Element("filmography").Nodes().ToList(),
-                                     BirthPlace = ActorEl.Element("birthplace").Value,
-                                     Biography = ActorEl.Element("biography").Value
+                                     ImagesMovies = actorEl.Element("filmography").Nodes().ToList(),
+                                     BirthPlace = actorEl.Element("birthplace").Value,
+                                     Biography = actorEl.Element("biography").Value
                                  };
 
                     //convert to a Actor object
-                    var Actor = Actors.ToList()[0];
-                    actor.Birthplace = Actor.BirthPlace;
-                    actor.Biography = Actor.Biography;
-                    foreach (XNode MovieNode in Actor.ImagesMovies)
+                    var actor = actors.ToList()[0];
+                    Actor.Birthplace = actor.BirthPlace;
+                    Actor.Biography = actor.Biography;
+                    foreach (XNode movieNode in actor.ImagesMovies)
                     {
-                        XElement MovieEl = MovieNode as XElement;
-                        if (MovieEl != null)
+                        XElement movieEl = movieNode as XElement;
+                        if (movieEl != null)
                         {
-                            string Url = MovieEl.Attribute("poster").Value;
-                            string Name = MovieEl.Attribute("name").Value;
-                            string Id = MovieEl.Attribute("id").Value;
-                            if (!string.IsNullOrEmpty(Url))
-                                actor.MovieImageUrls.Add(new ImageInfo { Uri = new Uri(Url), Tag = Id, Name = Name, Type = typeof(Movie) });
+                            string url = movieEl.Attribute("poster").Value;
+                            string name = movieEl.Attribute("name").Value;
+                            string id = movieEl.Attribute("id").Value;
+                            if (!string.IsNullOrEmpty(url))
+                                Actor.MovieImageUrls.Add(new ImageInfo { Uri = new Uri(url), Tag = id, Name = name, Type = typeof(Movie) });
                         }
                     }
                 }

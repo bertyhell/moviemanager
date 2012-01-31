@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using MovieManager.APP.Search;
+using MovieManager.APP.Panels.Search;
 
 namespace MovieManager.APP.Commands
 {
@@ -16,8 +16,8 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            SearchWindow Window = new SearchWindow();
-            Window.Show();
+            SearchWindow window = new SearchWindow();
+            window.Show();
         }
     }
 }
