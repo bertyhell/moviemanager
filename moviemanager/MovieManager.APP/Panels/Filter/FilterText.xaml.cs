@@ -53,7 +53,6 @@ namespace MovieManager.APP.Panels.Filter
                     return Regex.IsMatch(((String)typeof(Video).GetProperty(_property).GetValue(video, null)), FilterInput);
             }
             return false;
-
         }
     }
 }
