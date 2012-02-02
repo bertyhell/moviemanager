@@ -138,5 +138,16 @@ namespace SQLite
         {
             throw new NotImplementedException();
         }
+
+        public static List<String> GetMovieGenres()
+        {
+            List<String> genres = new List<string>();
+            DbDataReader reader = Database.GetReader("SELECT gen_label FROM genres");
+            while(reader.Read())
+            {
+                genres.Add((string) reader[0]);
+            }
+            return genres;
+        } 
     }
 }
