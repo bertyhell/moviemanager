@@ -15,10 +15,8 @@ namespace SQLite
     {
         public static event VideosChanged OnVideosChanged;
 
-        public static ObservableCollection<Video> SelectAllVideos()
+        public static void SelectAllVideos(ObservableCollection<Video> videos)
         {
-            ObservableCollection<Video> videos = new ObservableCollection<Video>();
-
             try
             {
                 //get all videos from  database
@@ -41,11 +39,10 @@ namespace SQLite
                                           Release = release,
                                           Rating = (row["rating"] == DBNull.Value ? -1 : Convert.ToDouble(row["rating"])),
                                           RatingImdb = (row["rating_imdb"] == DBNull.Value ? -1 : Convert.ToDouble(row["rating_imdb"])),
-                                          //TODO 015: Maak koppeltabel voor genres 
-                                          Genres = new ObservableCollection<string> { (row["genre"] == DBNull.Value ? "" : Convert.ToString(row["genre"])) },
                                           Path = (row["path"] == DBNull.Value ? null : Convert.ToString(row["path"])),
                                           LastPlayLocation = Convert.ToInt32(row["last_play_location"])
                                       };
+                    //TODO 090 fill in video genres
                     DsVideos.moviesRow moviesRow = datasetVideos.Tables["Movies"].Rows.Find(video.Id) as DsVideos.moviesRow;
                     if (moviesRow != null)
                     {
@@ -64,8 +61,6 @@ namespace SQLite
             }
             catch
             { }
-
-            return videos;
         }
 
         public static DbDataReader GetVideosDataReader()

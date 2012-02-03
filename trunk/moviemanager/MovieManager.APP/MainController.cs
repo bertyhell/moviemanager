@@ -19,7 +19,8 @@ namespace MovieManager.APP
 
         private MainController()
         {
-            Videos = MMDatabase.SelectAllVideos();
+            Videos.Clear();
+            MMDatabase.SelectAllVideos(Videos);
             MMDatabase.OnVideosChanged += MMDatabaseOnVideoChanged;
              _videosView = CollectionViewSource.GetDefaultView(Videos);
         }
@@ -36,7 +37,7 @@ namespace MovieManager.APP
         }
 
 
-        private ObservableCollection<Video> _videos;
+        private ObservableCollection<Video> _videos = new ObservableCollection<Video>();
         public ObservableCollection<Video> Videos
         {
             get
@@ -63,7 +64,8 @@ namespace MovieManager.APP
 
         void MMDatabaseOnVideoChanged()
         {
-            Videos = MMDatabase.SelectAllVideos();
+            _videos.Clear();
+            MMDatabase.SelectAllVideos(_videos);
         }
 
 
