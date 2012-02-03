@@ -48,6 +48,7 @@ namespace MovieManager.APP.Panels.Filter
             switch ((TextOperations)cbbOperation.SelectedIndex)
             {
                 case TextOperations.Is:
+                    //return ((String)typeof(Video).GetProperty(_property).GetValue(video, null)).Contains(FilterInput);
                     List<String> videoOptions = ((List<String>) typeof (Video).GetProperty(_property).GetValue(video, null));
                     foreach (string selectedOption in cbbOptions.SelectedItems)
                     {
