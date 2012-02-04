@@ -544,8 +544,6 @@ namespace SQLite {
             
             private global::System.Data.DataColumn columnrating_imdb;
             
-            private global::System.Data.DataColumn columngenre;
-            
             private global::System.Data.DataColumn columnpath;
             
             private global::System.Data.DataColumn columnlast_play_location;
@@ -633,14 +631,6 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn genreColumn {
-                get {
-                    return this.columngenre;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn pathColumn {
                 get {
                     return this.columnpath;
@@ -692,7 +682,7 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public videosRow AddvideosRow(string id_imdb, string name, System.DateTime release, double rating, double rating_imdb, long genre, string path, long last_play_location) {
+            public videosRow AddvideosRow(string id_imdb, string name, System.DateTime release, double rating, double rating_imdb, string path, long last_play_location) {
                 videosRow rowvideosRow = ((videosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -701,7 +691,6 @@ namespace SQLite {
                         release,
                         rating,
                         rating_imdb,
-                        genre,
                         path,
                         last_play_location};
                 rowvideosRow.ItemArray = columnValuesArray;
@@ -739,7 +728,6 @@ namespace SQLite {
                 this.columnrelease = base.Columns["release"];
                 this.columnrating = base.Columns["rating"];
                 this.columnrating_imdb = base.Columns["rating_imdb"];
-                this.columngenre = base.Columns["genre"];
                 this.columnpath = base.Columns["path"];
                 this.columnlast_play_location = base.Columns["last_play_location"];
             }
@@ -759,8 +747,6 @@ namespace SQLite {
                 base.Columns.Add(this.columnrating);
                 this.columnrating_imdb = new global::System.Data.DataColumn("rating_imdb", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrating_imdb);
-                this.columngenre = new global::System.Data.DataColumn("genre", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columngenre);
                 this.columnpath = new global::System.Data.DataColumn("path", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpath);
                 this.columnlast_play_location = new global::System.Data.DataColumn("last_play_location", typeof(long), null, global::System.Data.MappingType.Element);
@@ -2624,6 +2610,8 @@ namespace SQLite {
             
             private videosDataTable tablevideos;
             
+            private static System.DateTime release_nullValue = global::System.DateTime.Parse("2009-01-01T00:00:00");
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal videosRow(global::System.Data.DataRowBuilder rb) : 
@@ -2646,11 +2634,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string id_imdb {
                 get {
-                    try {
-                        return ((string)(this[this.tablevideos.id_imdbColumn]));
+                    if (this.Isid_imdbNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'id_imdb\' in table \'videos\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tablevideos.id_imdbColumn]));
                     }
                 }
                 set {
@@ -2673,11 +2661,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime release {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablevideos.releaseColumn]));
+                    if (this.IsreleaseNull()) {
+                        return videosRow.release_nullValue;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'release\' in table \'videos\' is DBNull.", e);
+                    else {
+                        return ((global::System.DateTime)(this[this.tablevideos.releaseColumn]));
                     }
                 }
                 set {
@@ -2689,11 +2677,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double rating {
                 get {
-                    try {
-                        return ((double)(this[this.tablevideos.ratingColumn]));
+                    if (this.IsratingNull()) {
+                        return -1D;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'rating\' in table \'videos\' is DBNull.", e);
+                    else {
+                        return ((double)(this[this.tablevideos.ratingColumn]));
                     }
                 }
                 set {
@@ -2705,31 +2693,15 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double rating_imdb {
                 get {
-                    try {
-                        return ((double)(this[this.tablevideos.rating_imdbColumn]));
+                    if (this.Israting_imdbNull()) {
+                        return -1D;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'rating_imdb\' in table \'videos\' is DBNull.", e);
+                    else {
+                        return ((double)(this[this.tablevideos.rating_imdbColumn]));
                     }
                 }
                 set {
                     this[this.tablevideos.rating_imdbColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public long genre {
-                get {
-                    try {
-                        return ((long)(this[this.tablevideos.genreColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'genre\' in table \'videos\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevideos.genreColumn] = value;
                 }
             }
             
@@ -2806,18 +2778,6 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setrating_imdbNull() {
                 this[this.tablevideos.rating_imdbColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsgenreNull() {
-                return this.IsNull(this.tablevideos.genreColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetgenreNull() {
-                this[this.tablevideos.genreColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3646,13 +3606,12 @@ namespace SQLite.DsVideosTableAdapters {
             tableMapping.ColumnMappings.Add("release", "release");
             tableMapping.ColumnMappings.Add("rating", "rating");
             tableMapping.ColumnMappings.Add("rating_imdb", "rating_imdb");
-            tableMapping.ColumnMappings.Add("genre", "genre");
             tableMapping.ColumnMappings.Add("path", "path");
             tableMapping.ColumnMappings.Add("last_play_location", "last_play_location");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [videos] WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_genre = 1 AND [genre] IS NULL) OR ([genre] = @Original_genre)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [videos] WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -3727,21 +3686,6 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_genre";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "genre";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_genre";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "genre";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@IsNull_path";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
@@ -3764,16 +3708,10 @@ namespace SQLite.DsVideosTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [videos] ([id], [id_imdb], [name], [release], [rating], [rating_imdb]" +
-                ", [genre], [path], [last_play_location]) VALUES (@id, @id_imdb, @name, @release," +
-                " @rating, @rating_imdb, @genre, @path, @last_play_location)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [videos] ([id_imdb], [name], [release], [rating], [rating_imdb], [pat" +
+                "h], [last_play_location]) VALUES (@id_imdb, @name, @release, @rating, @rating_im" +
+                "db, @path, @last_play_location)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@id";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "id";
-            this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id_imdb";
             param.DbType = global::System.Data.DbType.String;
@@ -3801,12 +3739,6 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.Double;
             param.DbType = global::System.Data.DbType.Double;
             param.SourceColumn = "rating_imdb";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@genre";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "genre";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@path";
@@ -3821,14 +3753,8 @@ namespace SQLite.DsVideosTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [videos] SET [id] = @id, [id_imdb] = @id_imdb, [name] = @name, [release] = @release, [rating] = @rating, [rating_imdb] = @rating_imdb, [genre] = @genre, [path] = @path, [last_play_location] = @last_play_location WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_genre = 1 AND [genre] IS NULL) OR ([genre] = @Original_genre)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [videos] SET [id_imdb] = @id_imdb, [name] = @name, [release] = @release, [rating] = @rating, [rating_imdb] = @rating_imdb, [path] = @path, [last_play_location] = @last_play_location WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@id";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "id";
-            this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id_imdb";
             param.DbType = global::System.Data.DbType.String;
@@ -3856,12 +3782,6 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.Double;
             param.DbType = global::System.Data.DbType.Double;
             param.SourceColumn = "rating_imdb";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@genre";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "genre";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@path";
@@ -3947,21 +3867,6 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_genre";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "genre";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_genre";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "genre";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@IsNull_path";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
@@ -3988,7 +3893,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3997,8 +3902,8 @@ namespace SQLite.DsVideosTableAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [id_imdb], [name], [release], [rating], [rating_imdb], [genre], [pat" +
-                "h], [last_play_location] FROM [videos]";
+            this._commandCollection[0].CommandText = "SELECT [id], [id_imdb], [name], [release], [rating], [rating_imdb], [path], [last" +
+                "_play_location] FROM [videos]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -4059,7 +3964,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, string Original_id_imdb, string Original_name, global::System.Nullable<global::System.DateTime> Original_release, global::System.Nullable<double> Original_rating, global::System.Nullable<double> Original_rating_imdb, global::System.Nullable<long> Original_genre, string Original_path, long Original_last_play_location) {
+        public virtual int Delete(long Original_id, string Original_id_imdb, string Original_name, global::System.Nullable<global::System.DateTime> Original_release, global::System.Nullable<double> Original_rating, global::System.Nullable<double> Original_rating_imdb, string Original_path, long Original_last_play_location) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
             if ((Original_id_imdb == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -4099,23 +4004,15 @@ namespace SQLite.DsVideosTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((Original_genre.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((long)(Original_genre.Value));
-            }
-            else {
+            if ((Original_path == null)) {
                 this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((Original_path == null)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
             else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((string)(Original_path));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_path));
             }
-            this.Adapter.DeleteCommand.Parameters[14].Value = ((long)(Original_last_play_location));
+            this.Adapter.DeleteCommand.Parameters[12].Value = ((long)(Original_last_play_location));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4136,51 +4033,44 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(long id, string id_imdb, string name, global::System.Nullable<global::System.DateTime> release, global::System.Nullable<double> rating, global::System.Nullable<double> rating_imdb, global::System.Nullable<long> genre, string path, long last_play_location) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((long)(id));
+        public virtual int Insert(string id_imdb, string name, global::System.Nullable<global::System.DateTime> release, global::System.Nullable<double> rating, global::System.Nullable<double> rating_imdb, string path, long last_play_location) {
             if ((id_imdb == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(id_imdb));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(id_imdb));
             }
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(name));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(name));
             }
             if ((release.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(release.Value));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(release.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((rating.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(rating.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((rating.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(rating.Value));
+            if ((rating_imdb.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(rating_imdb.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((rating_imdb.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((double)(rating_imdb.Value));
-            }
-            else {
+            if ((path == null)) {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((genre.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((long)(genre.Value));
-            }
             else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(path));
             }
-            if ((path == null)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(path));
-            }
-            this.Adapter.InsertCommand.Parameters[8].Value = ((long)(last_play_location));
+            this.Adapter.InsertCommand.Parameters[6].Value = ((long)(last_play_location));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4201,125 +4091,92 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    long id, 
-                    string id_imdb, 
-                    string name, 
-                    global::System.Nullable<global::System.DateTime> release, 
-                    global::System.Nullable<double> rating, 
-                    global::System.Nullable<double> rating_imdb, 
-                    global::System.Nullable<long> genre, 
-                    string path, 
-                    long last_play_location, 
-                    long Original_id, 
-                    string Original_id_imdb, 
-                    string Original_name, 
-                    global::System.Nullable<global::System.DateTime> Original_release, 
-                    global::System.Nullable<double> Original_rating, 
-                    global::System.Nullable<double> Original_rating_imdb, 
-                    global::System.Nullable<long> Original_genre, 
-                    string Original_path, 
-                    long Original_last_play_location) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(id));
+        public virtual int Update(string id_imdb, string name, global::System.Nullable<global::System.DateTime> release, global::System.Nullable<double> rating, global::System.Nullable<double> rating_imdb, string path, long last_play_location, long Original_id, string Original_id_imdb, string Original_name, global::System.Nullable<global::System.DateTime> Original_release, global::System.Nullable<double> Original_rating, global::System.Nullable<double> Original_rating_imdb, string Original_path, long Original_last_play_location) {
             if ((id_imdb == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(id_imdb));
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(id_imdb));
             }
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(name));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(name));
             }
             if ((release.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(release.Value));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(release.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((rating.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((double)(rating.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((rating.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(rating.Value));
+            if ((rating_imdb.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(rating_imdb.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((rating_imdb.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(rating_imdb.Value));
-            }
-            else {
+            if ((path == null)) {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((genre.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(genre.Value));
-            }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(path));
             }
-            if ((path == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(path));
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(last_play_location));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((long)(Original_id));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(last_play_location));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_id));
             if ((Original_id_imdb == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_id_imdb));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_id_imdb));
             }
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_name));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_name));
             }
             if ((Original_release.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_release.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_rating.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_release.Value));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((double)(Original_rating.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((Original_rating.HasValue == true)) {
+            if ((Original_rating_imdb.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(Original_rating.Value));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(Original_rating_imdb.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((Original_rating_imdb.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((double)(Original_rating_imdb.Value));
-            }
-            else {
+            if ((Original_path == null)) {
                 this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((Original_genre.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((long)(Original_genre.Value));
-            }
             else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_path));
             }
-            if ((Original_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_path));
-            }
-            this.Adapter.UpdateCommand.Parameters[23].Value = ((long)(Original_last_play_location));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((long)(Original_last_play_location));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4334,31 +4191,6 @@ namespace SQLite.DsVideosTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string id_imdb, 
-                    string name, 
-                    global::System.Nullable<global::System.DateTime> release, 
-                    global::System.Nullable<double> rating, 
-                    global::System.Nullable<double> rating_imdb, 
-                    global::System.Nullable<long> genre, 
-                    string path, 
-                    long last_play_location, 
-                    long Original_id, 
-                    string Original_id_imdb, 
-                    string Original_name, 
-                    global::System.Nullable<global::System.DateTime> Original_release, 
-                    global::System.Nullable<double> Original_rating, 
-                    global::System.Nullable<double> Original_rating_imdb, 
-                    global::System.Nullable<long> Original_genre, 
-                    string Original_path, 
-                    long Original_last_play_location) {
-            return this.Update(Original_id, id_imdb, name, release, rating, rating_imdb, genre, path, last_play_location, Original_id, Original_id_imdb, Original_name, Original_release, Original_rating, Original_rating_imdb, Original_genre, Original_path, Original_last_play_location);
         }
     }
     
