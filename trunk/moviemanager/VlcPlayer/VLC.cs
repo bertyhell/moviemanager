@@ -1,11 +1,12 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace VlcPlayer
 {
     // http://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc.html
 
-    static class LibVlc
+    internal static class LibVlc
     {
         #region core
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
@@ -52,6 +53,17 @@ namespace VlcPlayer
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void libvlc_media_player_stop(IntPtr player);
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [SuppressUnmanagedCodeSecurity]
+        public static extern Int64 libvlc_media_player_get_length(IntPtr libvlc_mediaplayer, ref libvlc_exception_t exception);
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern Int64 libvlc_media_player_get_time(IntPtr libvlc_mediaplayer, ref libvlc_exception_t exception);
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void libvlc_media_player_set_time(IntPtr libvlc_mediaplayer, Int64 time, ref libvlc_exception_t exception);
+
         #endregion
 
         #region exception
@@ -63,140 +75,134 @@ namespace VlcPlayer
         #endregion
     }
 
-    class VlcException : Exception
-    {
-        protected string Err;
+    //public class VlcInstance : IDisposable
+    //{
+    //    internal IntPtr Handle;
 
-        public VlcException()
-        {
-            IntPtr errorPointer = LibVlc.libvlc_errmsg();
-            Err = errorPointer == IntPtr.Zero ? "VLC Exception"
-                : Marshal.PtrToStringAuto(errorPointer);
-        }
+    //    public VlcInstance(string[] args)
+    //    {
+    //        Handle = LibVlc.libvlc_new(args.Length, args);
+    //        if (Handle == IntPtr.Zero) throw new VlcException();
+    //    }
 
-        public override string Message { get { return Err; } }
-    }
+    //    public void Dispose()
+    //    {
+    //        LibVlc.libvlc_release(Handle);
+    //    }
+    //}
 
-    class VlcInstance : IDisposable
-    {
-        internal IntPtr Handle;
+    //public class VlcMedia : IDisposable
+    //{
+    //    internal IntPtr Handle;
 
-        public VlcInstance(string[] args)
-        {
-            Handle = LibVlc.libvlc_new(args.Length, args);
-            if (Handle == IntPtr.Zero) throw new VlcException();
-        }
+    //    public VlcMedia(VlcInstance instance, string url)
+    //    {
+    //        Handle = LibVlc.libvlc_media_new_location(instance.Handle, url);
+    //        if (Handle == IntPtr.Zero) throw new VlcException();
+    //    }
 
-        public void Dispose()
-        {
-            LibVlc.libvlc_release(Handle);
-        }
-    }
+    //    internal VlcMedia(IntPtr handle)
+    //    {
+    //        Handle = handle;
+    //    }
 
-    class VlcMedia : IDisposable
-    {
-        internal IntPtr Handle;
+    //    public void Dispose()
+    //    {
+    //        LibVlc.libvlc_media_release(Handle);
+    //    }
+    //}
 
-        public VlcMedia(VlcInstance instance, string url)
-        {
-            Handle = LibVlc.libvlc_media_new_location(instance.Handle, url);
-            if (Handle == IntPtr.Zero) throw new VlcException();
-        }
+    //public class VlcMediaPlayer : IDisposable
+    //{
+    //    internal IntPtr Handle;
+    //    private IntPtr _drawable;
+    //    private bool _playing, _paused;
+    //    private VlcEventManager _eventManager;
 
-        internal VlcMedia(IntPtr handle)
-        {
-            Handle = handle;
-        }
+    //    public VlcMediaPlayer(VlcMedia media)
+    //    {
+    //        Handle = LibVlc.libvlc_media_player_new_from_media(media.Handle);
+    //        _eventManager = new VlcEventManager(this);
+    //        if (Handle == IntPtr.Zero) throw new VlcException();
+    //    }
 
-        public void Dispose()
-        {
-            LibVlc.libvlc_media_release(Handle);
-        }
-    }
+    //    public void Dispose()
+    //    {
+    //        LibVlc.libvlc_media_player_release(Handle);
+    //    }
 
-    class VlcMediaPlayer : IDisposable
-    {
-        internal IntPtr Handle;
-        private IntPtr _drawable;
-        private bool _playing, _paused;
+    //    public IntPtr Drawable
+    //    {
+    //        get
+    //        {
+    //            return _drawable;
+    //        }
+    //        set
+    //        {
+    //            LibVlc.libvlc_media_player_set_hwnd(Handle, value);
+    //            _drawable = value;
+    //        }
+    //    }
 
-        public VlcMediaPlayer(VlcMedia media)
-        {
-            Handle = LibVlc.libvlc_media_player_new_from_media(media.Handle);
-            if (Handle == IntPtr.Zero) throw new VlcException();
-        }
+    //    public VlcMedia Media
+    //    {
+    //        get
+    //        {
+    //            IntPtr media = LibVlc.libvlc_media_player_get_media(Handle);
+    //            if (media == IntPtr.Zero) return null;
+    //            return new VlcMedia(media);
+    //        }
+    //        set
+    //        {
+    //            LibVlc.libvlc_media_player_set_media(Handle, value.Handle);
+    //        }
+    //    }
 
-        public void Dispose()
-        {
-            LibVlc.libvlc_media_player_release(Handle);
-        }
+    //    public bool IsPlaying { get { return _playing && !_paused; } }
 
-        public IntPtr Drawable
-        {
-            get
-            {
-                return _drawable;
-            }
-            set
-            {
-                LibVlc.libvlc_media_player_set_hwnd(Handle, value);
-                _drawable = value;
-            }
-        }
+    //    public bool IsPaused { get { return _playing && _paused; } }
 
-        public VlcMedia Media
-        {
-            get
-            {
-                IntPtr media = LibVlc.libvlc_media_player_get_media(Handle);
-                if (media == IntPtr.Zero) return null;
-                return new VlcMedia(media);
-            }
-            set
-            {
-                LibVlc.libvlc_media_player_set_media(Handle, value.Handle);
-            }
-        }
+    //    public bool IsStopped { get { return !_playing; } }
 
-        public bool IsPlaying { get { return _playing && !_paused; } }
+    //    #region methods
 
-        public bool IsPaused { get { return _playing && _paused; } }
+    //    public void Play()
+    //    {
+    //        int ret = LibVlc.libvlc_media_player_play(Handle);
+    //        if (ret == -1)
+    //            throw new VlcException();
 
-        public bool IsStopped { get { return !_playing; } }
+    //        _playing = true;
+    //        _paused = false;
+    //    }
 
-        #region methods
+    //    public void Pause()
+    //    {
+    //        LibVlc.libvlc_media_player_pause(Handle);
 
-        public void Play()
-        {
-            int ret = LibVlc.libvlc_media_player_play(Handle);
-            if (ret == -1)
-                throw new VlcException();
+    //        if (_playing)
+    //            _paused ^= true;
+    //    }
 
-            _playing = true;
-            _paused = false;
-        }
+    //    public void Stop()
+    //    {
+    //        LibVlc.libvlc_media_player_stop(Handle);
 
-        public void Pause()
-        {
-            LibVlc.libvlc_media_player_pause(Handle);
+    //        _playing = false;
+    //        _paused = false;
+    //    }
 
-            if (_playing)
-                _paused ^= true;
-        }
+    //    public void Mute()
+    //    {
+    //        LibVlc.libvlc_audio_toggle_mute(Handle);
+    //    }
 
-        public void Stop()
-        {
-            LibVlc.libvlc_media_player_stop(Handle);
+    //    public ulong GetVideoLength()
+    //    {
+    //        libvlc_exception_t Ex = new libvlc_exception_t();
+    //        return (ulong)LibVlc.libvlc_media_player_get_length(Handle, ref Ex);
+    //    }
 
-            _playing = false;
-            _paused = false;
-        }
-
-        public void Mute()
-        {
-            LibVlc.libvlc_audio_toggle_mute(Handle);
-        }
-
-        #endregion
-    }
+    //    #endregion
+    //}
 }

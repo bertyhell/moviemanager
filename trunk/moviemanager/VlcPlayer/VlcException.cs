@@ -6,18 +6,38 @@ using System.Runtime.InteropServices;
 
 namespace VlcPlayer
 {
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct libvlc_exception_t
+    {
+        public int b_raised;
+        public int i_code;
+        private IntPtr psz_message;
+
+        public string Message
+        {
+            get
+            {
+                return (psz_message != IntPtr.Zero) ? (Marshal.PtrToStringAnsi(psz_message)) : (null);
+            }
+        }
+    }
+
     public class VlcException : Exception
     {
-        protected string _err;
+        protected string Err;
 
         public VlcException()
-            : base()
         {
             IntPtr errorPointer = LibVlc.libvlc_errmsg();
-            _err = errorPointer == IntPtr.Zero ? "VLC Exception"
+            Err = errorPointer == IntPtr.Zero ? "VLC Exception"
                 : Marshal.PtrToStringAuto(errorPointer);
         }
 
-        public override string Message { get { return _err; } }
+        public VlcException(string exception)
+        {
+            Err = exception;
+        }
+
+        public override string Message { get { return Err; } }
     }
 }

@@ -60,6 +60,11 @@ namespace MovieManager.APP
         }
         #endregion
 
+        private void _videoGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MenuItemPlayClick(sender, e);
+        }
+
     }
 }
 

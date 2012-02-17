@@ -42,7 +42,7 @@
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
         <DataGrid x:Name="_videoGrid" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" ItemsSource="{Binding VideosView}" AlternatingRowBackground="#EEE"
-                          CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False">
+                          CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="_videoGrid_MouseDoubleClick">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>

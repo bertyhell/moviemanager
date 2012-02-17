@@ -178,7 +178,6 @@ namespace MovieManager.BL.Search
                         }
 
                         actors.Add(newActor);
-
                     }
                 }
             }

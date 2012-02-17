@@ -63,6 +63,8 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IVlcEventReceiver.cs" />
+    <Compile Include="libvlc_event_type_t.cs" />
     <Compile Include="Overlay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,15 +72,12 @@
       <DependentUpon>Overlay.cs</DependentUpon>
     </Compile>
     <Compile Include="OverlayAdorner.cs" />
-    <Compile Include="VLC.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="VlcPlayerControl.xaml.cs">
-      <DependentUpon>VlcPlayerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VlcWindow.xaml.cs">
-      <DependentUpon>VlcWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="VlcEventManager.cs" />
+    <Compile Include="VlcException.cs" />
+    <Compile Include="VlcInstance.cs" />
+    <Compile Include="VlcLib.cs" />
+    <Compile Include="VlcMedia.cs" />
+    <Compile Include="VlcMediaPlayer.cs" />
     <Compile Include="VlcWinForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,14 +85,6 @@
       <DependentUpon>VlcWinForm.cs</DependentUpon>
     </Compile>
     <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="VlcPlayerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="VlcWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -127,6 +118,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
