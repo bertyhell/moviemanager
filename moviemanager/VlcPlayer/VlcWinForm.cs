@@ -2,10 +2,11 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Common;
 
 namespace VlcPlayer
 {
-    public partial class VlcWinForm : Form
+    public partial class VlcWinForm : Form, IVlcEventReceiver
     {
         private readonly VlcInstance _vlcInstance;
         private VlcMediaPlayer _player;
@@ -29,8 +30,6 @@ namespace VlcPlayer
 
             _vlcInstance = new VlcInstance(args);
             _player = null;
-
-
         }
         
         #region Media Player Controls
@@ -51,7 +50,7 @@ namespace VlcPlayer
             using (VlcMedia media = new VlcMedia(_vlcInstance, fileName))
             {
                 if (_player == null)
-                    _player = new VlcMediaPlayer(media);
+                    _player = new VlcMediaPlayer(media, this);
                 else
                     _player.Media = media;
             }
@@ -61,8 +60,16 @@ namespace VlcPlayer
             _player.Play();
 
             ActivateOverlay();
+            SetVideoTimestamp();
         }
 
+        
+
+        public void SetVideoTimestamp()
+        {
+            _lblTimestamp.Text = TimestampUtilities.UlongToTimestampString(_player.GetVideoLength());
+        }
+        
         public void Pause()
         {
             if (!_player.IsPaused)
@@ -203,6 +210,15 @@ namespace VlcPlayer
             else if(keys == Keys.M)
                 _player.Mute();
         }
-        
+
+        public void OnTimeChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPausedChanged()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

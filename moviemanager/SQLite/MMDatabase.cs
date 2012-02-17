@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
 using Model;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Data.Common;
+using SQLite.DsVideosTableAdapters;
 
 
 namespace SQLite
@@ -21,25 +23,21 @@ namespace SQLite
             try
             {
                 //get all videos from  database
-                DsVideos datasetVideos = new DsVideos();
-                FillDatasetWithAllVideos(datasetVideos);
+                DsVideos DatasetVideos = new DsVideos();
+                FillDatasetWithAllVideos(DatasetVideos);
 
-                //to parse dates
-                DateTimeFormatInfo format = new DateTimeFormatInfo { FullDateTimePattern = "G" };
-
-                DsVideos.videos_genresDataTable VideosGenresDataTable = datasetVideos.videos_genres;
-                DsVideos.genresDataTable GenresDataTable = datasetVideos.genres;
+                DsVideos.videos_genresDataTable VideosGenresDataTable = DatasetVideos.videos_genres;
+                DsVideos.genresDataTable GenresDataTable = DatasetVideos.genres;
 
                 //Convert to ObservableCollection<Video>
-                foreach (DsVideos.videosRow Row in datasetVideos.videos.Rows)
+                foreach (DsVideos.videosRow Row in DatasetVideos.videos.Rows)
                 {
-                    DateTime Release = Row.release;
                     Video Video = new Video
                                       {
                                           Id = (int)Row.id,
                                           IdImdb = Row.id_imdb,
                                           Name = Row.name,
-                                          Release = Release,
+                                          Release = Row.release,
                                           Rating = Row.rating,
                                           RatingImdb = Row.rating_imdb,
                                           Path = Row.path,
@@ -54,14 +52,14 @@ namespace SQLite
                         Video.Genres.Add((string)GenreRow[GenresDataTable.gen_labelColumn]);
                     }
 
-                    DsVideos.moviesRow MoviesRow = datasetVideos.movies.Rows.Find(Video.Id) as DsVideos.moviesRow;
+                    DsVideos.moviesRow MoviesRow = DatasetVideos.movies.Rows.Find(Video.Id) as DsVideos.moviesRow;
                     if (MoviesRow != null)
                     {
                         Video = Video as Movie;
                     }
                     else
                     {
-                        DsVideos.episodesRow EpisodeRow = datasetVideos.episodes.Rows.Find(Video.Id) as DsVideos.episodesRow;
+                        DsVideos.episodesRow EpisodeRow = DatasetVideos.episodes.Rows.Find(Video.Id) as DsVideos.episodesRow;
                         if (EpisodeRow != null)
                         {
                             Video = Video as Episode;
@@ -91,7 +89,6 @@ namespace SQLite
         private static ObservableCollection<Video> InsertVideosHDD(IEnumerable<Video> videos, bool insertDuplicates)
         {
             ObservableCollection<Video> Duplicates = new ObservableCollection<Video>();
-            SQLiteDataAdapter Adap = Database.GetAdapter("select * from videos"); 
             DsVideos DatasetVideos = new DsVideos();
             FillDatasetWithAllVideos(DatasetVideos);
             foreach (Video Video in videos)
@@ -110,7 +107,9 @@ namespace SQLite
                 }
             }
 
-            Adap.Update(DatasetVideos, "videos");
+            (new videosTableAdapter()).Update(DatasetVideos);
+            //SQLiteCommand SqLiteCommand = new SqlCommand("insert into ", connection);
+            //DatasetVideos..Update(DatasetVideos, "videos");
 
             if (OnVideosChanged != null)
                 OnVideosChanged();
@@ -131,14 +130,18 @@ namespace SQLite
 
         private static void FillDatasetWithAllVideos(DsVideos datasetVideos)
         {
-            Dictionary<String, String> tables = new Dictionary<String, String>();
-            tables.Add(datasetVideos.videos.TableName, "SELECT * FROM " + datasetVideos.videos_genres.TableName);
-            tables.Add(datasetVideos.movies.TableName, "SELECT * FROM " + datasetVideos.movies.TableName);
-            tables.Add(datasetVideos.episodes.TableName, "SELECT * FROM " + datasetVideos.episodes.TableName);
-            tables.Add(datasetVideos.videos_genres.TableName, "SELECT * FROM " + datasetVideos.videos_genres.TableName);
-            tables.Add(datasetVideos.genres.TableName, "SELECT * FROM " + datasetVideos.genres.TableName);
+            (new videosTableAdapter()).Fill(datasetVideos.videos);
+            (new genresTableAdapter()).Fill(datasetVideos.genres);
+            (new videos_genresTableAdapter()).Fill(datasetVideos.videos_genres);
 
-            Database.FillDataset(datasetVideos, tables);
+            //Dictionary<String, String> tables = new Dictionary<String, String>();
+            //tables.Add(datasetVideos.videos.TableName, "SELECT * FROM " + datasetVideos.videos_genres.TableName);
+            //tables.Add(datasetVideos.movies.TableName, "SELECT * FROM " + datasetVideos.movies.TableName);
+            //tables.Add(datasetVideos.episodes.TableName, "SELECT * FROM " + datasetVideos.episodes.TableName);
+            //tables.Add(datasetVideos.videos_genres.TableName, "SELECT * FROM " + datasetVideos.videos_genres.TableName);
+            //tables.Add(datasetVideos.genres.TableName, "SELECT * FROM " + datasetVideos.genres.TableName);
+
+            //Database.FillDataset(datasetVideos, tables);
         }
 
         #endregion

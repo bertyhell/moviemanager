@@ -40,6 +40,7 @@
             this._pnlControls = new System.Windows.Forms.Panel();
             this._btnFullScreen = new System.Windows.Forms.Button();
             this._btnMute = new System.Windows.Forms.Button();
+            this._lblTimestamp = new System.Windows.Forms.Label();
             this._menubar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this._pnlControls.SuspendLayout();
@@ -104,7 +105,7 @@
             // 
             this._btnStop.Location = new System.Drawing.Point(24, 29);
             this._btnStop.Name = "_btnStop";
-            this._btnStop.Size = new System.Drawing.Size(75, 23);
+            this._btnStop.Size = new System.Drawing.Size(39, 23);
             this._btnStop.TabIndex = 2;
             this._btnStop.TabStop = false;
             this._btnStop.Text = "Stop";
@@ -113,9 +114,9 @@
             // 
             // _btnPause
             // 
-            this._btnPause.Location = new System.Drawing.Point(105, 29);
+            this._btnPause.Location = new System.Drawing.Point(69, 29);
             this._btnPause.Name = "_btnPause";
-            this._btnPause.Size = new System.Drawing.Size(75, 23);
+            this._btnPause.Size = new System.Drawing.Size(45, 23);
             this._btnPause.TabIndex = 2;
             this._btnPause.TabStop = false;
             this._btnPause.Text = "Pause";
@@ -124,9 +125,9 @@
             // 
             // _btnPlay
             // 
-            this._btnPlay.Location = new System.Drawing.Point(186, 29);
+            this._btnPlay.Location = new System.Drawing.Point(120, 29);
             this._btnPlay.Name = "_btnPlay";
-            this._btnPlay.Size = new System.Drawing.Size(75, 23);
+            this._btnPlay.Size = new System.Drawing.Size(38, 23);
             this._btnPlay.TabIndex = 2;
             this._btnPlay.TabStop = false;
             this._btnPlay.Text = "Play";
@@ -137,6 +138,7 @@
             // 
             this._pnlControls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this._pnlControls.Controls.Add(this._lblTimestamp);
             this._pnlControls.Controls.Add(this._btnFullScreen);
             this._pnlControls.Controls.Add(this._btnMute);
             this._pnlControls.Controls.Add(this._btnPlay);
@@ -150,9 +152,9 @@
             // 
             // _btnFullScreen
             // 
-            this._btnFullScreen.Location = new System.Drawing.Point(285, 29);
+            this._btnFullScreen.Location = new System.Drawing.Point(164, 29);
             this._btnFullScreen.Name = "_btnFullScreen";
-            this._btnFullScreen.Size = new System.Drawing.Size(75, 23);
+            this._btnFullScreen.Size = new System.Drawing.Size(72, 23);
             this._btnFullScreen.TabIndex = 5;
             this._btnFullScreen.TabStop = false;
             this._btnFullScreen.Text = "Full Screen";
@@ -161,7 +163,7 @@
             // 
             // _btnMute
             // 
-            this._btnMute.Location = new System.Drawing.Point(404, 29);
+            this._btnMute.Location = new System.Drawing.Point(242, 29);
             this._btnMute.Name = "_btnMute";
             this._btnMute.Size = new System.Drawing.Size(75, 23);
             this._btnMute.TabIndex = 4;
@@ -169,6 +171,15 @@
             this._btnMute.Text = "Mute";
             this._btnMute.UseVisualStyleBackColor = true;
             this._btnMute.Click += new System.EventHandler(this.BtnMuteClick);
+            // 
+            // _lblTimestamp
+            // 
+            this._lblTimestamp.AutoSize = true;
+            this._lblTimestamp.Location = new System.Drawing.Point(403, 35);
+            this._lblTimestamp.Name = "_lblTimestamp";
+            this._lblTimestamp.Size = new System.Drawing.Size(35, 13);
+            this._lblTimestamp.TabIndex = 6;
+            this._lblTimestamp.Text = "label1";
             // 
             // VlcWinForm
             // 
@@ -207,5 +218,6 @@
         private System.Windows.Forms.Panel _pnlControls;
         private System.Windows.Forms.Button _btnMute;
         private System.Windows.Forms.Button _btnFullScreen;
+        private System.Windows.Forms.Label _lblTimestamp;
     }
 }
