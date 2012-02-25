@@ -48,19 +48,21 @@ namespace MovieManager.APP.Panels.Search
             if (options.SearchForMovies)
             {
                 Movie movie;
+                int queryIsId;
                 try
                 {
-                    int queryIsId = Convert.ToInt32(options.SearchTerm);
-                    movie = new Movie();
-                    SearchTMDB.GetExtraMovieInfo(queryIsId, movie);
+                    queryIsId = Convert.ToInt32(options.SearchTerm);
                 }
                 catch
                 {
                     List<Movie> movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
                     //TODO 090: Make selection window
                     movie = movies.Count > 0 ? movies[0] : null;
+                    queryIsId = movie.IdTmdb;
                 }
-                SearchForMovie(movie);
+                movie = new Movie();
+                SearchTMDB.GetExtraMovieInfo(queryIsId, movie);
+                UpdateGuiForMovie(movie);
             }
         }
 
@@ -79,7 +81,7 @@ namespace MovieManager.APP.Panels.Search
             _layoutRoot.Children.Add(_overview);
         }
 
-        private void SearchForMovie(Movie movie)
+        private void UpdateGuiForMovie(Movie movie)
         {
             ResetGrid();
             MovieOverview overview = new MovieOverview();

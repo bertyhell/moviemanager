@@ -23,7 +23,7 @@ namespace Model
         }
 
         public List<string> ImageUrls { get; set; }
-        
+
         public List<Image> Images
         {
             get
@@ -56,5 +56,8 @@ namespace Model
         public String Birthplace { get; set; }
 
         public String Biography { get; set; }
+
+        public DateTime Birthday { get; set; }
+    
     }
 }

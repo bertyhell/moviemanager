@@ -34,10 +34,8 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <RadioButton GroupName="SearchFilter"  Grid.Row="0" Grid.Column="0" x:Name="_ChkActor" VerticalAlignment="Center"/>
-                <Label Grid.Row="0" Grid.Column="1" Content="{x:Static loc:Resource.Actor}" VerticalAlignment="Center"/>
-                <RadioButton IsChecked="True" GroupName="SearchFilter" Grid.Row="1" Grid.Column="0" x:Name="_ChkMovie" VerticalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="{x:Static loc:Resource.Movie}"/>
+                <RadioButton Content="{x:Static loc:Resource.Actor}" IsChecked="True" GroupName="SearchFilter"  Grid.Row="0" Grid.Column="0" x:Name="_ChkActor" VerticalAlignment="Center"/>
+                <RadioButton Content="{x:Static loc:Resource.Movie}" GroupName="SearchFilter" Grid.Row="1" Grid.Column="0" x:Name="_ChkMovie" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
         
@@ -63,10 +61,8 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <RadioButton  IsChecked="True" GroupName="SearchSource"  Grid.Row="0" Grid.Column="0" x:Name="_radTmdb" VerticalAlignment="Center"/>
-                <Label Grid.Row="0" Grid.Column="1" Content="TMDB" VerticalAlignment="Center"/>
-                <RadioButton GroupName="SearchSource" Grid.Row="1" Grid.Column="0" x:Name="_radImdb" VerticalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="IMDB"/>
+                <RadioButton  Content="TMDB" IsChecked="True" GroupName="SearchSource"  Grid.Row="0" Grid.Column="0" x:Name="_radTmdb" VerticalAlignment="Center"/>
+                <RadioButton Content="IMDB" GroupName="SearchSource" Grid.Row="1" Grid.Column="0" x:Name="_radImdb" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
 
@@ -89,7 +85,7 @@
                 <Label Content="Search Term"/>
                 <TextBox Grid.Row="0" Grid.Column="1" x:Name="_txtSearchTerm"/>
                 
-                <Button Grid.Row="2" Grid.Column="1" x:Name="_btnSearch" Content="Search" Click="BtnSearchClick"/>
+                <Button Grid.Row="2" Grid.Column="1" x:Name="_btnSearch" Content="Search" Click="BtnSearchClick" IsDefault="True" />
             </Grid>
         </Grid>
         
