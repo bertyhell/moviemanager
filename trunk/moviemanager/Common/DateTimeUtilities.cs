@@ -29,5 +29,22 @@ namespace Common
             }
             return datetime;
         }
+
+        public static DateTime ParseDate(String date, String stringFormat)
+        {
+            DateTimeFormatInfo format = new DateTimeFormatInfo();
+            DateTime datetime;
+            try
+            {
+                format.FullDateTimePattern = stringFormat;
+
+                datetime = DateTime.Parse(date, format);
+            }
+            catch
+            {
+                return DateTime.MinValue;
+            }
+            return datetime;
+        }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Markup;
 using Model;
 using SQLite;
 using System.ComponentModel;
@@ -19,6 +22,8 @@ namespace MovieManager.APP
 
         private MainController()
         {
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
             Videos.Clear();
             MMDatabase.SelectAllVideos(Videos);
             MMDatabase.OnVideosChanged += MMDatabaseOnVideoChanged;

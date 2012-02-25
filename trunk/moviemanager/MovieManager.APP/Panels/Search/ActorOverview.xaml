@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:loc="clr-namespace:MovieManager.APP.Localization" xmlns:Panels="clr-namespace:MovieManager.APP.Panels"
              mc:Ignorable="d" d:DesignWidth="500">
+    
     <Grid x:Name="_layoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -22,7 +23,7 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="White">
-            <Image x:Name="_imgActor" Source="{Binding Path=ImageUrls[3]}"></Image>
+            <Image x:Name="_imgActor" Source="{Binding Path=ImageUrls[0]}"></Image>
         </Border>
 
         <Grid x:Name="_actorInfo" Grid.Row="1" Grid.Column="3">
@@ -55,7 +56,7 @@
             <TextBox Grid.Row="3" Grid.Column="2" x:Name="_actorPopularity" IsReadOnly="True"></TextBox>
 
             <Label Grid.Row="5" Content="{x:Static loc:Resource.Birthday}" FontWeight="Bold"></Label>
-            <TextBox Grid.Row="5" Grid.Column="2" x:Name="_actorBirthday" IsReadOnly="True"></TextBox>
+            <TextBox Grid.Row="5" Grid.Column="2" x:Name="_actorBirthday" IsReadOnly="True" Text="{Binding Path=Birthday, StringFormat=\{0:d\}}"></TextBox>
 
             <Label Grid.Row="7" Content="{x:Static loc:Resource.Birthplace}" FontWeight="Bold"></Label>
             <TextBox Grid.Row="7" Grid.Column="2" x:Name="_actorBirthPlace" IsReadOnly="True" Text="{Binding Path=Birthplace}"></TextBox>

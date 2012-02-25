@@ -1,29 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Common;
 using Model;
 using System.Xml.Linq;
 using System.Web;
+using Newtonsoft.Json.Linq;
 
 namespace MovieManager.BL.Search
 {
     public class SearchTMDB
     {
+        private const string APIKEY = "02004323eee9878ce511ca57faf0b29c";
+
+        public static TMDBConfiguration _configuration;
+
+        static SearchTMDB()
+        {
+            _configuration = new TMDBConfiguration();
+            //Get configuration from server
+            Uri Request = new Uri("http://api.themoviedb.org/3/configuration?api_key=" + APIKEY);
+            String Response = SimpleWebRequest.DoJSONRequest(Request);
+
+            if (!string.IsNullOrEmpty(Response))
+            {
+                JObject JsonDoc = JObject.Parse(Response);
+                JToken Results = JsonDoc["images"];
+                _configuration.BaseUrl = (string)Results["base_url"];
+                foreach (JToken BackdropSizes in Results["backdrop_sizes"])
+                {
+                    _configuration.BackdropSizes.Add((string)BackdropSizes);
+                }
+                foreach (JToken PosterSizes in Results["poster_sizes"])
+                {
+                    _configuration.PosterSizes.Add((string)PosterSizes);
+                }
+                foreach (JToken ProfileSizes in Results["profile_sizes"])
+                {
+                    _configuration.ProfileSizes.Add((string)ProfileSizes);
+                }
+            }
+        }
+
+        #region videos
+
         public static List<Movie> GetVideoInfo(String query)
         {
             List<Movie> videos = new List<Movie>();
             try
             {
                 //do request
-                Uri request =
-                    new Uri("http://api.themoviedb.org/2.1/Movie.search/en/xml/02004323eee9878ce511ca57faf0b29c/" +
-                            HttpUtility.UrlEncode(query));
+                Uri request = new Uri("http://api.themoviedb.org/3/search/person?api_key=" + APIKEY + "&query="
+                                    + HttpUtility.UrlEncode(query));
                 String response = SimpleWebRequest.DoRequest(request);
 
                 if (!string.IsNullOrEmpty(response))
                 {
-
+                    //JObject JsonDoc = JObject.Parse(response);
                     XDocument xmlDoc = XDocument.Parse(response);
 
                     //get elements from xml
@@ -39,13 +73,13 @@ namespace MovieManager.BL.Search
                     //convert elements to Movie
                     foreach (var movie in localMovies)
                     {
-                        Movie newMovie = new Movie
+                        Movie NewMovie = new Movie
                                              {
                                                  IdImdb = movie.ImdbId,
                                                  IdTmdb = int.Parse(movie.TmdbId)
                                              };
-                        GetPosterFromMovie(movie.Images, newMovie);
-                        videos.Add(newMovie);
+                        GetPosterFromMovie(movie.Images, NewMovie);
+                        videos.Add(NewMovie);
 
                     }
                 }
@@ -95,7 +129,7 @@ namespace MovieManager.BL.Search
                         }
                         else
                         {
-                            movie.Images.Add(new ImageInfo {Uri = new Uri(url), Type = typeof (Movie)});
+                            movie.Images.Add(new ImageInfo { Uri = new Uri(url), Type = typeof(Movie) });
                         }
                     }
                 }
@@ -125,7 +159,7 @@ namespace MovieManager.BL.Search
                                   };
 
                 var movieVar = localMovies.ToList()[0];
-                GetImages(movieVar.Images,movie);
+                GetImages(movieVar.Images, movie);
                 movie.Name = movieVar.Name;
                 movie.Plot = movieVar.Plot;
 
@@ -138,101 +172,110 @@ namespace MovieManager.BL.Search
             }
         }
 
+        #endregion
+
+        #region actor
+
         public static List<Actor> SearchActor(String query)
         {
-            List<Actor> actors = new List<Actor>();
+            List<Actor> Actors = new List<Actor>();
             try
             {
 
                 //do request
-                Uri request = new Uri("http://api.themoviedb.org/2.1/Person.search/en/xml/02004323eee9878ce511ca57faf0b29c/" + HttpUtility.UrlEncode(query));
-                String response = SimpleWebRequest.DoRequest(request);
+                Uri Request = new Uri("http://api.themoviedb.org/3/search/person?api_key=" + APIKEY + "&query="
+                                    + HttpUtility.UrlEncode(query));
 
-                if (!string.IsNullOrEmpty(response))
+                String Response = SimpleWebRequest.DoJSONRequest(Request);
+
+                if (!string.IsNullOrEmpty(Response))
                 {
                     //Console.WriteLine(response);
 
-                    XDocument xmlDoc = XDocument.Parse(response);
+                    JObject JsonDoc = JObject.Parse(Response);
+                    //XDocument xmlDoc = XDocument.Parse(response);
 
-                    //get elements from xml
-                    var localActors = from person in xmlDoc.Descendants("person")
-                                      select new
-                                      {
-                                          TmdbID = Convert.ToInt32(person.Element("id").Value),
-                                          Name = person.Element("name").Value,
-                                          Images = person.Element("images").Nodes().ToList()
-                                      };
+                    //get elements from json
 
-                    //convert elements to actor
-                    foreach (var actor in localActors)
+                    JArray Results = (JArray)JsonDoc["results"];
+
+                    foreach (JToken JActor in Results)
                     {
-                        Actor newActor = new Actor
-                                             {
-                                                 Name = actor.Name,
-                                                 TmdbID = actor.TmdbID
-                                             };
-
-                        foreach (XElement image in actor.Images)
-                        {
-                            newActor.ImageUrls.Add(image.Attribute("url").Value);
-                        }
-
-                        actors.Add(newActor);
+                        Actor LocalActor = new Actor { TmdbID = (int)JActor["id"], Name = (string)JActor["name"] };
+                        LocalActor.ImageUrls.Add(_configuration.BaseUrl + _configuration.ProfileSizes[_configuration.ProfileSizes.Count - 1] +
+                                                                (string)JActor["profile_path"]);
+                        Actors.Add(LocalActor);
                     }
                 }
             }
             catch { }
 
-            return actors;
+            return Actors;
         }
 
 
-        public static void GetActorInfo(Actor Actor)
+        public static void GetActorInfo(Actor actor)
         {
             try
             {
-
                 //do request
-                Uri request = new Uri("http://api.themoviedb.org/2.1/Person.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + Actor.TmdbID);
-                String response = SimpleWebRequest.DoRequest(request);
+                Uri Request = new Uri("http://api.themoviedb.org/3/person/" + actor.TmdbID + "?api_key=" + APIKEY);
+                String Response = SimpleWebRequest.DoJSONRequest(Request);
 
-                //Console.WriteLine(Response);
-
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(Response))
                 {
-                    XDocument xDoc = XDocument.Parse(response);
+                    //Console.WriteLine(response);
 
-                    var actors = from actorEl in xDoc.Descendants("person")
-                                 select new
-                                 {
-                                     ImagesMovies = actorEl.Element("filmography").Nodes().ToList(),
-                                     BirthPlace = actorEl.Element("birthplace").Value,
-                                     Biography = actorEl.Element("biography").Value
-                                 };
+                    JObject JsonDoc = JObject.Parse(Response);
+                    //get elements from json
+                    actor.Biography = (string)JsonDoc["biography"];
+                    actor.Birthplace = (string)JsonDoc["place_of_birth"];
+                    actor.Birthday = ParseTmdbDate((string)JsonDoc["birthday"]);
+                    GetMovieListFromActor(actor);
+                    //TODO 010 add birthday, and more ...
+                }
+            }
+            catch { }
+        }
 
-                    //convert to a Actor object
-                    var actor = actors.ToList()[0];
-                    Actor.Birthplace = actor.BirthPlace;
-                    Actor.Biography = actor.Biography;
-                    foreach (XNode movieNode in actor.ImagesMovies)
+        public static void GetMovieListFromActor(Actor actor)
+        {
+            try
+            {
+                //do request
+                Uri Request = new Uri("http://api.themoviedb.org/3/person/" + actor.TmdbID + "/credits?api_key=" + APIKEY);
+                String Response = SimpleWebRequest.DoJSONRequest(Request);
+
+                if (!string.IsNullOrEmpty(Response))
+                {
+                    //Console.WriteLine(response);
+
+                    JObject JsonDoc = JObject.Parse(Response);
+                    //get elements from json
+                    JArray JMovies = (JArray)JsonDoc["cast"];
+                    foreach (JToken JMovie in JMovies)
                     {
-                        XElement movieEl = movieNode as XElement;
-                        if (movieEl != null)
-                        {
-                            string url = movieEl.Attribute("poster").Value;
-                            string name = movieEl.Attribute("name").Value;
-                            string id = movieEl.Attribute("id").Value;
-                            if (!string.IsNullOrEmpty(url))
-                                Actor.MovieImageUrls.Add(new ImageInfo { Uri = new Uri(url), Tag = id, Name = name, Type = typeof(Movie) });
-                        }
+                        actor.MovieImageUrls.Add(new ImageInfo
+                                                 {
+                                                     Uri = new Uri(_configuration.BaseUrl + _configuration.PosterSizes[_configuration.PosterSizes.Count - 1] + (string) JMovie["poster_path"]),
+                                                     Name = (string)JMovie["original_title"],
+                                                     Tag = JMovie["id"].ToString(),
+                                                     Type = typeof(Movie)
+                                                 });
                     }
+
+                    //TODO 010 add birthday, and more ...
                 }
             }
             catch { }
         }
 
 
+        #endregion
 
-
+        private static DateTime ParseTmdbDate(String stringDate)
+        {
+            return DateTimeUtilities.ParseDate(stringDate, "yyyy-MM-dd");
+        }
     }
 }
