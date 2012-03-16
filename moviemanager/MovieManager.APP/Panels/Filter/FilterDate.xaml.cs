@@ -8,7 +8,7 @@ namespace MovieManager.APP.Panels.Filter
     /// <summary>
     /// Interaction logic for FilterText.xaml
     /// </summary>
-    public partial class FilterText
+    public partial class FilterDate
     {
         private readonly string _property;
 
@@ -17,9 +17,10 @@ namespace MovieManager.APP.Panels.Filter
             Contains, DoesntContain, StartsWith, EndsWith, Regex
         }
 
-        public FilterText(string property, string label)
+        public FilterDate(string property, string label)
         {
             InitializeComponent();
+
             txtLabel.Text = label + ":";
             _property = property;
         }

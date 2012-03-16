@@ -16,6 +16,22 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <PublisherName>Taxrebel</PublisherName>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -75,9 +91,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Common\ComboboxWithCheckboxes.xaml">
+    <Page Include="Common\ProgressBarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\ProgressbarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\RegularExpressions\AddRegex.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\RegularExpressions\EpisodeRegexEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\Filter\FilterDate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Panels\Filter\FilterMultiOption.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +174,8 @@
     <Compile Include="Commands\AddVideosCommand.cs" />
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
     <Compile Include="Commands\AnalyseCommand.cs" />
+    <Compile Include="Commands\AddSerieCommand.cs" />
+    <Compile Include="Commands\EditEpisodeRegExCommand.cs" />
     <Compile Include="Commands\ExportVideosCommand.cs" />
     <Compile Include="Commands\FilterVideosCommand.cs" />
     <Compile Include="Commands\EmptyVideosCommand.cs" />
@@ -149,10 +183,23 @@
     <Compile Include="Common\CheckCombobox.xaml.cs">
       <DependentUpon>CheckCombobox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\ComboboxWithCheckboxes.xaml.cs">
-      <DependentUpon>ComboboxWithCheckboxes.xaml</DependentUpon>
+    <Compile Include="Common\ProgressBarControl.xaml.cs">
+      <DependentUpon>ProgressBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ProgressbarWindow.xaml.cs">
+      <DependentUpon>ProgressbarWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringListConverter.cs" />
+    <Compile Include="Panels\RegularExpressions\AddRegex.xaml.cs">
+      <DependentUpon>AddRegex.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\RegularExpressions\EpisodeRegexEditor.xaml.cs">
+      <DependentUpon>EpisodeRegexEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\RegularExpressions\EpisodeRegexEditorViewModel.cs" />
+    <Compile Include="Panels\Filter\FilterDate.xaml.cs">
+      <DependentUpon>FilterDate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\Filter\FilterMultiOption.xaml.cs">
       <DependentUpon>FilterMultiOption.xaml</DependentUpon>
     </Compile>
@@ -300,6 +347,43 @@
   <ItemGroup>
     <Resource Include="Images\excel_export_32.png" />
     <Resource Include="Images\excel_import_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\delete_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RegExp.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,8 +10,15 @@ namespace MovieManager.APP.Common
     /// </summary>
     public partial class CheckCombobox : INotifyPropertyChanged
     {
+
+        public String SelectedItemsString
+        {
+            get { return (SelectedItems != null? string.Join(",",SelectedItems) : ""); }
+        }
+
         public CheckCombobox()
         {
+            Items = new List<CheckableString>();
             InitializeComponent();
         }
 
@@ -21,16 +28,16 @@ namespace MovieManager.APP.Common
         {
             get
             {
-                return (from item in Items where item.IsSelected select item.Title).ToList();
+                return (from Item in Items where Item.IsSelected select Item.Title).ToList();
             }
         }
 
         public void SetItems(IEnumerable<string> items)
         {
-            Items = new List<CheckableString>();
-            foreach (string item in items)
+            Items.Clear();
+            foreach (string Item in items)
             {
-                Items.Add(new CheckableString { IsSelected = false, Title = item });
+                Items.Add(new CheckableString { IsSelected = false, Title = Item });
                 PropChanged("Items");
             }
         }
@@ -43,11 +50,13 @@ namespace MovieManager.APP.Common
             }
         }
 
-        public String OptionsLabel
-        {
-            get { return String.Join(", ", SelectedItems); }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            PropChanged("SelectedItemsString");
+            MainController.Instance.VideosView.Refresh();
+        }
     }
 }

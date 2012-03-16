@@ -1,0 +1,8 @@
+﻿<Window x:Class="MovieManager.APP.Common.ProgressbarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="89" Width="457" xmlns:my="clr-namespace:MovieManager.APP.Common" Topmost="True" WindowStartupLocation="CenterOwner" WindowStyle="None">
+    <Grid>
+        <my:ProgressBarControl HorizontalAlignment="Stretch" x:Name="progressBarControl1" VerticalAlignment="Stretch" />
+    </Grid>
+</Window>

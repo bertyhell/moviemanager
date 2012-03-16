@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using System.Windows.Forms;
+using Model;
 
 namespace MovieManager.APP.Panels.Filter
 {
@@ -24,6 +25,11 @@ namespace MovieManager.APP.Panels.Filter
                 if (!filterControl.FilterSucceeded((Video)video)) return false;
             }
             return true;
+        }
+
+        private void Image_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _controller.AppliedFilters.Remove((FilterControl) lstFilters.SelectedItem);
         }
     }
 }

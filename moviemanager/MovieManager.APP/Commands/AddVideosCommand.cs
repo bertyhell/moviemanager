@@ -5,12 +5,16 @@ using System.Windows.Forms;
 using System.IO;
 using Model;
 using System.Configuration;
+using MovieManager.APP.Common;
 using SQLite;
 
 namespace MovieManager.APP.Commands
 {
     class AddVideosCommand : ICommand
     {
+        private ObservableCollection<Video> _videos;
+        private ProgressbarWindow _progressWindow;
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -27,13 +31,25 @@ namespace MovieManager.APP.Commands
                                      };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ObservableCollection<Video> videos = new ObservableCollection<Video>();
+                _videos = new ObservableCollection<Video>();
                 foreach (String file in ofd.FileNames)
                 {
-                    MovieFileReader.GetVideos(new FileInfo(file), videos);
+                    _progressWindow = new ProgressbarWindow();
+                    _progressWindow.Title = "Getting Videos";
+                    _progressWindow.Owner = MainWindow.Instance;
+                    _progressWindow.ShowDialog(); 
+
+                    MovieFileReader FileReader = new MovieFileReader(new FileInfo(file));
+                    FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
+                    FileReader.RunWorkerAsync();
                 }
-                MMDatabase.InsertVideosHDD(videos);
             }
         }
+
+        void FileReader_OnGetVideoCompleted(object sender, GetVideoCompletedEventArgs e)
+        {
+            MMDatabase.InsertVideosHDD(e.Videos);
+        }
+
     }
 }

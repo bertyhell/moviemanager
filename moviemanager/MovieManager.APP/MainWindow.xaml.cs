@@ -13,16 +13,22 @@ namespace MovieManager.APP
     {
         readonly MainController _controller;
 
+        private static MainWindow _instance;
+        public static MainWindow Instance
+        {
+            get { return _instance; }
+        }
         public MainWindow()
         {
             InitializeComponent();
-
 
             _controller = MainController.Instance;
 
 
             DataContext = _controller;
             Loaded += MainWindowLoaded;
+
+            _instance = this;
         }
 
         void MainWindowLoaded(object sender, RoutedEventArgs e)

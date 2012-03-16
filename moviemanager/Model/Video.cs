@@ -10,7 +10,7 @@ namespace Model
 
     public enum VideoTypeEnum { Video, Movie, Episode };
 
-    public class Video : INotifyPropertyChanged
+    public class Video : INotifyPropertyChanged, IEditableObject
     {
         private int _id;
         private String _idImdb;
@@ -18,7 +18,7 @@ namespace Model
         private DateTime _release;
         private double _rating;
         private double _ratingImdb;
-        private ObservableCollection<String> _genres;
+        private List<String> _genres;
         private String _path; //path to movie
         private int _lastPlayLocation;
         private bool _watchedToEnd;
@@ -30,9 +30,9 @@ namespace Model
 
         public Video()
         {
-            _images =new List<ImageInfo>();
+            _images = new List<ImageInfo>();
             _subs = new ObservableCollection<Subtitle>();
-            _genres = new ObservableCollection<string>();
+            _genres = new List<string>();
         }
 
         public virtual VideoTypeEnum VideoType
@@ -46,15 +46,15 @@ namespace Model
             {
                 return new Movie
                            {
-                    Id = video.Id,
-                    IdImdb = video.IdImdb,
-                    Name = video.Name,
-                    Release = video.Release,
-                    Rating = video.Rating,
-                    RatingImdb = video.RatingImdb,
-                    Path = video.Path,
-                    LastPlayLocation = video.LastPlayLocation
-                };
+                               Id = video.Id,
+                               IdImdb = video.IdImdb,
+                               Name = video.Name,
+                               Release = video.Release,
+                               Rating = video.Rating,
+                               RatingImdb = video.RatingImdb,
+                               Path = video.Path,
+                               LastPlayLocation = video.LastPlayLocation
+                           };
 
             }
             if (resultingVideoType == VideoTypeEnum.Episode)
@@ -85,7 +85,7 @@ namespace Model
         }
 
         //return 
-        public ObservableCollection<String> Genres
+        public List<String> Genres
         {
             get { return _genres; }
             set
@@ -223,10 +223,10 @@ namespace Model
             }
             else if (movieLength - (iCurrentTimestamp) < movieLength * 10 / 100)
             {
-                MessageBoxResult result = MessageBox.Show("Do you want to mark this video as seen?\n"
+                MessageBoxResult Result = MessageBox.Show("Do you want to mark this video as seen?\n"
                     + "Press \"yes\" to mark this video as seen.\n"
                     + "Press \"no\" to save the current timestamp of the video.", "Choose Option", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                if (result == MessageBoxResult.Yes)
+                if (Result == MessageBoxResult.Yes)
                 {
                     _watchedToEnd = true;
                 }
@@ -267,7 +267,9 @@ namespace Model
         public String Plot
         {
             get { return _plot; }
-            set { _plot = value;
+            set
+            {
+                _plot = value;
                 OnPropertyChanged("Plot");
             }
         }
@@ -278,8 +280,101 @@ namespace Model
 
         private void OnPropertyChanged(string prop)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null && !_editInProgress)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        #region ieditableobject
+
+        private int _oldid;
+        private String _oldidImdb;
+        private String _oldname;
+        private DateTime _oldrelease;
+        private double _oldrating;
+        private double _oldratingImdb;
+        private List<String> _oldgenres;
+        private String _oldpath; //path to movie
+        private int _oldlastPlayLocation;
+        private bool _oldwatchedToEnd;
+        private ObservableCollection<Subtitle> _oldsubs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
+        //properties for searchresults
+        private Uri _oldposter;
+        private List<ImageInfo> _oldimages;
+        private String _oldplot;
+
+        private bool _editInProgress;
+
+        public void BeginEdit()
+        {
+            if (!_editInProgress)
+            {
+                _editInProgress = false;
+                _oldid = _id;
+                _oldidImdb = _idImdb;
+                _oldname = _name;
+                _oldrelease = _release;
+                _oldrating = _rating;
+                _oldratingImdb = _ratingImdb;
+                _oldgenres = _genres;
+                _oldlastPlayLocation = _lastPlayLocation;
+                _oldwatchedToEnd = _watchedToEnd;
+                _oldsubs = _subs;
+                _oldposter = _poster;
+                _oldimages = _images;
+                _oldplot = _plot;
+            }
+        }
+
+        public void EndEdit()
+        {
+            if (_editInProgress)
+            {
+                _editInProgress = false;
+                _oldidImdb = null;
+                _oldname = null;
+                _oldpath = null;
+                _oldgenres = null;
+                _oldposter = null;
+                _oldimages = null;
+                _oldplot = null;
+
+                OnPropertyChanged("Id");
+                OnPropertyChanged("IdImdb");
+                OnPropertyChanged("Name");
+                OnPropertyChanged("Release");
+                OnPropertyChanged("Rating");
+                OnPropertyChanged("RatingImdb");
+                OnPropertyChanged("Genres");
+                OnPropertyChanged("Path");
+                OnPropertyChanged("LastPlayLocation");
+                OnPropertyChanged("WatchedToEnd");
+                OnPropertyChanged("Poster");
+                OnPropertyChanged("Images");
+                OnPropertyChanged("Plot");
+            }
+        }
+
+        public void CancelEdit()
+        {
+            if (_editInProgress)
+            {
+                _editInProgress = false;
+                _id = _oldid;
+                _idImdb = _oldidImdb;
+                _name = _oldname;
+                _release = _oldrelease;
+                _rating = _oldrating;
+                _ratingImdb = _oldratingImdb;
+                _genres = _oldgenres;
+                _path = _oldpath;
+                _lastPlayLocation = _oldlastPlayLocation;
+                _watchedToEnd = _oldwatchedToEnd;
+                _subs = _oldsubs;
+                _poster = _oldposter;
+                _images = _oldimages;
+                _plot = _oldplot;
+            }
+        }
+        #endregion
     }
 }

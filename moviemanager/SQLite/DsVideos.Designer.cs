@@ -753,8 +753,7 @@ namespace SQLite {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
-                this.columnid.AutoIncrementSeed = -1;
-                this.columnid.AutoIncrementStep = -1;
+                this.columnid.AutoIncrementSeed = 1;
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
                 this.columnid_imdb.MaxLength = 10;
@@ -762,6 +761,7 @@ namespace SQLite {
                 this.columnname.MaxLength = 255;
                 this.columnpath.MaxLength = 255;
                 this.columnlast_play_location.AllowDBNull = false;
+                this.columnlast_play_location.DefaultValue = ((long)(0));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1262,10 +1262,10 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public serieRow AddserieRow(long id, string name) {
+            public serieRow AddserieRow(string name) {
                 serieRow rowserieRow = ((serieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        id,
+                        null,
                         name};
                 rowserieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowserieRow);
@@ -1309,8 +1309,11 @@ namespace SQLite {
                 base.Columns.Add(this.columnname);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
+                this.columnid.AutoIncrement = true;
+                this.columnid.AutoIncrementSeed = 1;
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
+                this.columnname.AutoIncrementSeed = 1;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 255;
             }
@@ -1760,6 +1763,8 @@ namespace SQLite {
             
             private global::System.Data.DataColumn columnruntime;
             
+            private global::System.Data.DataColumn columnepisode_number;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public episodesDataTable() {
@@ -1827,6 +1832,14 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn episode_numberColumn {
+                get {
+                    return this.columnepisode_number;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1862,13 +1875,14 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public episodesRow AddepisodesRow(serieRow parentserieRowByFK_episodes_0, long serie_id, long season, System.DateTime runtime) {
+            public episodesRow AddepisodesRow(serieRow parentserieRowByFK_episodes_0, long serie_id, long season, System.DateTime runtime, long episode_number) {
                 episodesRow rowepisodesRow = ((episodesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         serie_id,
                         season,
-                        runtime};
+                        runtime,
+                        episode_number};
                 if ((parentserieRowByFK_episodes_0 != null)) {
                     columnValuesArray[0] = parentserieRowByFK_episodes_0[0];
                 }
@@ -1905,6 +1919,7 @@ namespace SQLite {
                 this.columnserie_id = base.Columns["serie_id"];
                 this.columnseason = base.Columns["season"];
                 this.columnruntime = base.Columns["runtime"];
+                this.columnepisode_number = base.Columns["episode_number"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1918,6 +1933,8 @@ namespace SQLite {
                 base.Columns.Add(this.columnseason);
                 this.columnruntime = new global::System.Data.DataColumn("runtime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnruntime);
+                this.columnepisode_number = new global::System.Data.DataColumn("episode_number", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnepisode_number);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -3128,6 +3145,22 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public long episode_number {
+                get {
+                    try {
+                        return ((long)(this[this.tableepisodes.episode_numberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'episode_number\' in table \'episodes\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableepisodes.episode_numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public serieRow serieRow {
                 get {
                     return ((serieRow)(this.GetParentRow(this.Table.ParentRelations["FK_episodes_0"])));
@@ -3158,6 +3191,18 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetruntimeNull() {
                 this[this.tableepisodes.runtimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isepisode_numberNull() {
+                return this.IsNull(this.tableepisodes.episode_numberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setepisode_numberNull() {
+                this[this.tableepisodes.episode_numberColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5562,12 +5607,11 @@ namespace SQLite.DsVideosTableAdapters {
             tableMapping.ColumnMappings.Add("serie_id", "serie_id");
             tableMapping.ColumnMappings.Add("season", "season");
             tableMapping.ColumnMappings.Add("runtime", "runtime");
+            tableMapping.ColumnMappings.Add("episode_number", "episode_number");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [episodes] WHERE (([id] = @Original_id) AND ([serie_id] = @Original_s" +
-                "erie_id) AND ([season] = @Original_season) AND ((@IsNull_runtime = 1 AND [runtim" +
-                "e] IS NULL) OR ([runtime] = @Original_runtime)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [episodes] WHERE (([id] = @Original_id) AND ([serie_id] = @Original_serie_id) AND ([season] = @Original_season) AND ((@IsNull_episode_number = 1 AND [episode_number] IS NULL) OR ([episode_number] = @Original_episode_number)) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -5591,6 +5635,21 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_episode_number";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "episode_number";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_episode_number";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "episode_number";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@IsNull_runtime";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
@@ -5607,8 +5666,8 @@ namespace SQLite.DsVideosTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [episodes] ([id], [serie_id], [season], [runtime]) VALUES (@id, @seri" +
-                "e_id, @season, @runtime)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [episodes] ([id], [serie_id], [season], [episode_number], [runtime]) " +
+                "VALUES (@id, @serie_id, @season, @episode_number, @runtime)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id";
@@ -5629,6 +5688,12 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceColumn = "season";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@episode_number";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "episode_number";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@runtime";
             param.DbType = global::System.Data.DbType.DateTime;
             param.DbType = global::System.Data.DbType.DateTime;
@@ -5636,7 +5701,7 @@ namespace SQLite.DsVideosTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [episodes] SET [id] = @id, [serie_id] = @serie_id, [season] = @season, [runtime] = @runtime WHERE (([id] = @Original_id) AND ([serie_id] = @Original_serie_id) AND ([season] = @Original_season) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [episodes] SET [id] = @id, [serie_id] = @serie_id, [season] = @season, [episode_number] = @episode_number, [runtime] = @runtime WHERE (([id] = @Original_id) AND ([serie_id] = @Original_serie_id) AND ([season] = @Original_season) AND ((@IsNull_episode_number = 1 AND [episode_number] IS NULL) OR ([episode_number] = @Original_episode_number)) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id";
@@ -5655,6 +5720,12 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
             param.SourceColumn = "season";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@episode_number";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "episode_number";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@runtime";
@@ -5681,6 +5752,21 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
             param.SourceColumn = "season";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_episode_number";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "episode_number";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_episode_number";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "episode_number";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
@@ -5713,7 +5799,8 @@ namespace SQLite.DsVideosTableAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [serie_id], [season], [runtime] FROM [episodes]";
+            this._commandCollection[0].CommandText = "SELECT        id, serie_id, season, episode_number, runtime\r\nFROM            epis" +
+                "odes";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5774,17 +5861,25 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, long Original_serie_id, long Original_season, global::System.Nullable<global::System.DateTime> Original_runtime) {
+        public virtual int Delete(long Original_id, long Original_serie_id, long Original_season, global::System.Nullable<long> Original_episode_number, global::System.Nullable<global::System.DateTime> Original_runtime) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((long)(Original_serie_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((long)(Original_season));
-            if ((Original_runtime.HasValue == true)) {
+            if ((Original_episode_number.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_runtime.Value));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((long)(Original_episode_number.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_runtime.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_runtime.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5806,15 +5901,21 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(long id, long serie_id, long season, global::System.Nullable<global::System.DateTime> runtime) {
+        public virtual int Insert(long id, long serie_id, long season, global::System.Nullable<long> episode_number, global::System.Nullable<global::System.DateTime> runtime) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((long)(id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((long)(serie_id));
             this.Adapter.InsertCommand.Parameters[2].Value = ((long)(season));
-            if ((runtime.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(runtime.Value));
+            if ((episode_number.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((long)(episode_number.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((runtime.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(runtime.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5836,26 +5937,40 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(long id, long serie_id, long season, global::System.Nullable<global::System.DateTime> runtime, long Original_id, long Original_serie_id, long Original_season, global::System.Nullable<global::System.DateTime> Original_runtime) {
+        public virtual int Update(long id, long serie_id, long season, global::System.Nullable<long> episode_number, global::System.Nullable<global::System.DateTime> runtime, long Original_id, long Original_serie_id, long Original_season, global::System.Nullable<long> Original_episode_number, global::System.Nullable<global::System.DateTime> Original_runtime) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((long)(serie_id));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(season));
-            if ((runtime.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(runtime.Value));
+            if ((episode_number.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(episode_number.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(Original_id));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((long)(Original_serie_id));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(Original_season));
-            if ((Original_runtime.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_runtime.Value));
+            if ((runtime.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(runtime.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((long)(Original_id));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(Original_serie_id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_season));
+            if ((Original_episode_number.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((long)(Original_episode_number.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_runtime.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_runtime.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5877,8 +5992,8 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(long serie_id, long season, global::System.Nullable<global::System.DateTime> runtime, long Original_id, long Original_serie_id, long Original_season, global::System.Nullable<global::System.DateTime> Original_runtime) {
-            return this.Update(Original_id, serie_id, season, runtime, Original_id, Original_serie_id, Original_season, Original_runtime);
+        public virtual int Update(long serie_id, long season, global::System.Nullable<long> episode_number, global::System.Nullable<global::System.DateTime> runtime, long Original_id, long Original_serie_id, long Original_season, global::System.Nullable<long> Original_episode_number, global::System.Nullable<global::System.DateTime> Original_runtime) {
+            return this.Update(Original_id, serie_id, season, episode_number, runtime, Original_id, Original_serie_id, Original_season, Original_episode_number, Original_runtime);
         }
     }
     

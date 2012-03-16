@@ -18,13 +18,13 @@ namespace MovieManager.APP.Panels.Filter
                 switch (value)
                 {
                     case Filters.Name:
-                        AppliedFilters.Add(new FilterText("Name"));
+                        AppliedFilters.Add(new FilterText("Name", "Name"));
                         break;
                     case Filters.Path:
-                        AppliedFilters.Add(new FilterText("Path"));
+                        AppliedFilters.Add(new FilterText("Path", "Path"));
                         break;
                     case Filters.Genre:
-                        AppliedFilters.Add(new FilterMultiOption("Genre",MMDatabase.GetMovieGenres()));
+                        AppliedFilters.Add(new FilterMultiOption("Genres",MMDatabase.GetMovieGenres(), "Genres"));
                         break;
                 }
             }
