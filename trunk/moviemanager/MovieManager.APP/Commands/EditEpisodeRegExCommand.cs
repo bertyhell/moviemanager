@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Input;
-using SQLite;
+using MovieManager.APP.Panels.AddVideos;
+using MovieManager.APP.Panels.RegularExpressions;
 
 namespace MovieManager.APP.Commands
 {
-    class EmptyVideosCommand : ICommand
+    class EditEpisodeRegExCommand : ICommand
     {
         public bool CanExecute(object parameter)
         {
@@ -15,12 +19,8 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            MMDatabase.EmptyVideoTables();
-
-            for (int i = 0; i < MainController.Instance.Videos.Count; i++)
-            {
-                MainController.Instance.Videos.RemoveAt(0);
-            }
+            EpisodeRegexEditor RegexEditor = new EpisodeRegexEditor();
+            RegexEditor.Show();
         }
     }
 }

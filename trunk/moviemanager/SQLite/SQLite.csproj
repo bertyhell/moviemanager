@@ -49,15 +49,23 @@
       <DependentUpon>DsVideos.xsd</DependentUpon>
     </Compile>
     <Compile Include="MMDatabase.cs" />
-    <Compile Include="MovieFileReader.cs" />
+    <Compile Include="MovieFileReader.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RegexSettings\RegexConfigFileConstants.cs" />
+    <Compile Include="RegexSettings\RegexSettingsStorage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>

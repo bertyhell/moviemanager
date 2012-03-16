@@ -68,7 +68,8 @@
                 <ribbon:RibbonGroup>
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddVideo}" />
                   <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddVideoDir}" />
-                  <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.EmptyVideos}" />
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddSerie}" />
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.EmptyVideos}" />
                 </ribbon:RibbonGroup>
 
                 <ribbon:RibbonGroup>
@@ -78,6 +79,10 @@
 
                 <ribbon:RibbonGroup>
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.ExportVideos}"/>
+                </ribbon:RibbonGroup>
+
+                <ribbon:RibbonGroup>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.EditEpisodeRegexSettings}"/>
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>

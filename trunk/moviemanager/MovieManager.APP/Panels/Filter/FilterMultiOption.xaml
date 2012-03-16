@@ -11,8 +11,8 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Text="{Binding FilterType, StringFormat={}{0}: }" VerticalAlignment="Center" />
-        <ComboBox HorizontalAlignment="Left" Margin="2,6,0,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0" ItemsSource="{Binding MultiOptionOperationsLabels}" />
-        <my:CheckCombobox Grid.Column="2" Margin="0,9,12,9" x:Name="cbbOptions" MinWidth="30" VerticalAlignment="Center" />
+        <TextBlock HorizontalAlignment="Left" Text="{Binding FilterType, StringFormat={}{0}: }" VerticalAlignment="Center"  Name="txtLabel" />
+        <ComboBox HorizontalAlignment="Left" Margin="2,6,2,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0" ItemsSource="{Binding MultiOptionOperationsLabels}" SelectionChanged="cbbOperation_SelectionChanged" />
+        <my:CheckCombobox Grid.Column="2" Margin="0,6,0,6" x:Name="cbbOptions" MinWidth="30" VerticalAlignment="Center" />
     </Grid>
 </local:FilterControl>
