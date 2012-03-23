@@ -14,33 +14,33 @@ namespace MovieManager.BL.Search
     {
         private const string APIKEY = "02004323eee9878ce511ca57faf0b29c";
 
-        public static TMDBConfiguration _configuration;
+       // public static TMDBConfiguration _configuration;
 
         static SearchTMDB()
         {
-            _configuration = new TMDBConfiguration();
-            //Get configuration from server
-            Uri Request = new Uri("http://api.themoviedb.org/3/configuration?api_key=" + APIKEY);
-            String Response = SimpleWebRequest.DoJSONRequest(Request);
+            //_configuration = new TMDBConfiguration();
+            ////Get configuration from server
+            //Uri Request = new Uri("http://api.themoviedb.org/3/configuration?api_key=" + APIKEY);
+            //String Response = SimpleWebRequest.DoJSONRequest(Request);
 
-            if (!string.IsNullOrEmpty(Response))
-            {
-                JObject JsonDoc = JObject.Parse(Response);
-                JToken Results = JsonDoc["images"];
-                _configuration.BaseUrl = (string)Results["base_url"];
-                foreach (JToken BackdropSizes in Results["backdrop_sizes"])
-                {
-                    _configuration.BackdropSizes.Add((string)BackdropSizes);
-                }
-                foreach (JToken PosterSizes in Results["poster_sizes"])
-                {
-                    _configuration.PosterSizes.Add((string)PosterSizes);
-                }
-                foreach (JToken ProfileSizes in Results["profile_sizes"])
-                {
-                    _configuration.ProfileSizes.Add((string)ProfileSizes);
-                }
-            }
+            //if (!string.IsNullOrEmpty(Response))
+            //{
+            //    JObject JsonDoc = JObject.Parse(Response);
+            //    JToken Results = JsonDoc["images"];
+            //    _configuration.BaseUrl = (string)Results["base_url"];
+            //    foreach (JToken BackdropSizes in Results["backdrop_sizes"])
+            //    {
+            //        _configuration.BackdropSizes.Add((string)BackdropSizes);
+            //    }
+            //    foreach (JToken PosterSizes in Results["poster_sizes"])
+            //    {
+            //        _configuration.PosterSizes.Add((string)PosterSizes);
+            //    }
+            //    foreach (JToken ProfileSizes in Results["profile_sizes"])
+            //    {
+            //        _configuration.ProfileSizes.Add((string)ProfileSizes);
+            //    }
+            //}
         }
 
         #region videos
@@ -202,8 +202,8 @@ namespace MovieManager.BL.Search
                     foreach (JToken JActor in Results)
                     {
                         Actor LocalActor = new Actor { TmdbID = (int)JActor["id"], Name = (string)JActor["name"] };
-                        LocalActor.ImageUrls.Add(_configuration.BaseUrl + _configuration.ProfileSizes[_configuration.ProfileSizes.Count - 1] +
-                                                                (string)JActor["profile_path"]);
+                        //LocalActor.ImageUrls.Add(_configuration.BaseUrl + _configuration.ProfileSizes[_configuration.ProfileSizes.Count - 1] +
+                        //                                        (string)JActor["profile_path"]);
                         Actors.Add(LocalActor);
                     }
                 }
@@ -255,13 +255,13 @@ namespace MovieManager.BL.Search
                     JArray JMovies = (JArray)JsonDoc["cast"];
                     foreach (JToken JMovie in JMovies)
                     {
-                        actor.MovieImageUrls.Add(new ImageInfo
-                                                 {
-                                                     Uri = new Uri(_configuration.BaseUrl + _configuration.PosterSizes[_configuration.PosterSizes.Count - 1] + (string) JMovie["poster_path"]),
-                                                     Name = (string)JMovie["original_title"],
-                                                     Tag = JMovie["id"].ToString(),
-                                                     Type = typeof(Movie)
-                                                 });
+                        //actor.MovieImageUrls.Add(new ImageInfo
+                        //                         {
+                        //                             Uri = new Uri(_configuration.BaseUrl + _configuration.PosterSizes[_configuration.PosterSizes.Count - 1] + (string) JMovie["poster_path"]),
+                        //                             Name = (string)JMovie["original_title"],
+                        //                             Tag = JMovie["id"].ToString(),
+                        //                             Type = typeof(Movie)
+                        //                         });
                     }
 
                     //TODO 010 add birthday, and more ...

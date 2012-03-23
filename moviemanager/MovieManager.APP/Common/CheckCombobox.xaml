@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              d:DesignHeight="23" d:DesignWidth="118" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <ComboBox x:Name="OptionsCombobox" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Items}" IsReadOnly="true" IsEditable="True" Text="{Binding SelectedItemsString,Mode=OneWay}">
+        <ComboBox x:Name="OptionsCombobox" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Items}" IsReadOnly="true" IsEditable="True" Text="{Binding SelectedItemsString,Mode=OneWay}" MaxDropDownHeight="360">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox IsChecked="{Binding IsSelected}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked">

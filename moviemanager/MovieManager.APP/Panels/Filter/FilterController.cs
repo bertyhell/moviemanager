@@ -26,6 +26,12 @@ namespace MovieManager.APP.Panels.Filter
                     case Filters.Genre:
                         AppliedFilters.Add(new FilterMultiOption("Genres",MMDatabase.GetMovieGenres(), "Genres"));
                         break;
+                    case Filters.ReleaseDate:
+                        AppliedFilters.Add(new FilterDate("Release", "Release Date"));
+                        break;
+                    case Filters.Rating:
+                        AppliedFilters.Add(new FilterRating("Rating", "Rating"));
+                        break;
                 }
             }
         }

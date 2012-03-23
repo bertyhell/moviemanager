@@ -1,10 +1,10 @@
-﻿<local:FilterControl x:Class="MovieManager.APP.Panels.Filter.FilterDate"
+﻿<local:FilterControl x:Class="MovieManager.APP.Panels.Filter.FilterRating"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MovieManager.APP.Panels.Filter" mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="300" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             d:DesignHeight="80" d:DesignWidth="300" DataContext="{Binding RelativeSource={RelativeSource Self}}" xmlns:my="clr-namespace:MovieManager.APP.Panels">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -15,13 +15,14 @@
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="46*" />
         </Grid.RowDefinitions>
         
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Text="{Binding FilterType, StringFormat={}{0}: }" VerticalAlignment="Center"  Name="txtLabel" />
         <ComboBox HorizontalAlignment="Left" Margin="2,6,0,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0" ItemsSource="{Binding TextOperationsLabels}" SelectionChanged="CbbOperationSelectionChanged" />
-        <DatePicker Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" DisplayDate="{Binding FilterInputStart}"/>
-        <DatePicker Grid.Row="1" Grid.Column="3" DisplayDate="{Binding FilterInputEnd}" Visibility="{Binding DisplaySecondDate}"/>
+        <my:RatingEditorControl Grid.Column="4" Height="16" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Rating="{Binding FilterInputStart}" />
+        <my:RatingEditorControl Grid.Row="1" Grid.Column="4" Height="16" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Rating="{Binding FilterInputEnd}" Visibility="{Binding DisplaySecondRating}" />
     </Grid>
 </local:FilterControl>

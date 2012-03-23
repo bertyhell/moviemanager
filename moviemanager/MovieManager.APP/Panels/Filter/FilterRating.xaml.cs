@@ -8,9 +8,9 @@ using Model;
 namespace MovieManager.APP.Panels.Filter
 {
     /// <summary>
-    /// Interaction logic for FilterText.xaml
+    /// Interaction logic for FilterRating.xaml
     /// </summary>
-    public partial class FilterDate : INotifyPropertyChanged
+    public partial class FilterRating : INotifyPropertyChanged
     {
         private readonly string _property;
 
@@ -19,7 +19,7 @@ namespace MovieManager.APP.Panels.Filter
             Before, After, InBetween, NotBetween
         }
 
-        public FilterDate(string property, string label)
+        public FilterRating(string property, string label)
         {
             InitializeComponent();
 
@@ -29,13 +29,13 @@ namespace MovieManager.APP.Panels.Filter
 
         public List<String> TextOperationsLabels
         {
-            get { return new List<String> { "Before", "After", "In between", "Not between" }; }
+            get { return new List<String> { "Below", "Above", "In between", "Not between" }; }
         }
 
         public Filters FilterType { get; set; }
 
-        private DateTime _filterInputStart = DateTime.Today.Add(new TimeSpan(90, 0, 0, 0));
-        public DateTime FilterInputStart
+        private double _filterInputStart = 7;
+        public double FilterInputStart
         {
             get { return _filterInputStart; }
             set
@@ -45,10 +45,10 @@ namespace MovieManager.APP.Panels.Filter
             }
         }
 
-        public Visibility DisplaySecondDate { get; set; }
+        public Visibility DisplaySecondRating { get; set; }
 
-        private DateTime _filterInputEnd = DateTime.Today.Add(new TimeSpan(90, 0, 0, 0));
-        public DateTime FilterInputEnd
+        private double _filterInputEnd = 10;
+        public double FilterInputEnd
         {
             get { return _filterInputEnd; }
             set
@@ -60,17 +60,18 @@ namespace MovieManager.APP.Panels.Filter
 
         public override bool FilterSucceeded(Video video)
         {
-            DateTime Release = ((DateTime) typeof (Video).GetProperty(_property).GetValue(video, null));
+            double rating = ((double) typeof (Video).GetProperty(_property).GetValue(video, null));
             switch ((TextOperations)cbbOperation.SelectedIndex)
             {
+                
                 case TextOperations.Before:
-                    return Release < FilterInputStart;
+                    return rating < FilterInputStart;
                 case TextOperations.After:
-                    return Release > FilterInputStart;
+                    return rating > FilterInputStart;
                 case TextOperations.InBetween:
-                    return (Release > FilterInputStart) && (Release > FilterInputEnd);
+                    return (rating > FilterInputStart) && (rating > FilterInputEnd);
                 case TextOperations.NotBetween:
-                    return !(Release > FilterInputStart) && (Release > FilterInputEnd);
+                    return !(rating > FilterInputStart) && (rating > FilterInputEnd);
             }
             return false;
         }
@@ -80,12 +81,12 @@ namespace MovieManager.APP.Panels.Filter
             if(cbbOperation.SelectedIndex < 2)
             {
                 //hide second date picker
-                DisplaySecondDate = Visibility.Collapsed;
+                DisplaySecondRating = Visibility.Collapsed;
             }else
             {
-                DisplaySecondDate = Visibility.Visible;
+                DisplaySecondRating = Visibility.Visible;
             }
-            PropChanged("DisplaySecondDate");
+            PropChanged("DisplaySecondRating");
             MainController.Instance.VideosView.Refresh();
         }
 

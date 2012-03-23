@@ -40,23 +40,27 @@ namespace MovieManager.APP.Panels.Filter
 
         public override bool FilterSucceeded(Video video)
         {
-            switch ((TextOperations)cbbOperation.SelectedIndex)
+            try
             {
-                case TextOperations.Contains:
-                    return ((String)typeof(Video).GetProperty(_property).GetValue(video, null)).Contains(FilterInput);
-                case TextOperations.DoesntContain:
-                    return !((String)typeof(Video).GetProperty(_property).GetValue(video, null)).Contains(FilterInput);
-                case TextOperations.StartsWith:
-                    return !((String)typeof(Video).GetProperty(_property).GetValue(video, null)).StartsWith(FilterInput);
-                case TextOperations.EndsWith:
-                    return !((String)typeof(Video).GetProperty(_property).GetValue(video, null)).EndsWith(FilterInput);
-                case TextOperations.Regex:
-                    return Regex.IsMatch(((String)typeof(Video).GetProperty(_property).GetValue(video, null)), FilterInput);
-            }
+                String Text = (String) typeof (Video).GetProperty(_property).GetValue(video, null);
+                switch ((TextOperations) cbbOperation.SelectedIndex)
+                {
+                    case TextOperations.Contains:
+                        return Text.Contains(FilterInput);
+                    case TextOperations.DoesntContain:
+                        return !Text.Contains(FilterInput);
+                    case TextOperations.StartsWith:
+                        return !Text.StartsWith(FilterInput);
+                    case TextOperations.EndsWith:
+                        return !Text.EndsWith(FilterInput);
+                    case TextOperations.Regex:
+                        return Regex.IsMatch(Text, FilterInput);
+                }
+            }catch(ArgumentException){}
             return false;
         }
 
-        private void cbbOperation_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CbbOperationSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             MainController.Instance.VideosView.Refresh();
         }

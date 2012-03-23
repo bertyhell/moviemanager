@@ -26,33 +26,10 @@ namespace SQLite.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\Settings\\moviemanager.sql" +
-            "ite\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"Settings\\moviemanager.sqlite\"")]
         public string moviemanagerConnectionString {
             get {
                 return ((string)(this["moviemanagerConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\MovieManager.APP\\bin\\Debu" +
-            "g\\Settings\\moviemanager.sqlite\"")]
-        public string moviemanagerConnectionString1 {
-            get {
-                return ((string)(this["moviemanagerConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=F:\\berty\\Documents\\MovieManagerCSharp\\MovieManager.APP\\bin\\Debug\\Sett" +
-            "ings\\moviemanager.sqlite")]
-        public string moviemanagerConnectionString_bert {
-            get {
-                return ((string)(this["moviemanagerConnectionString_bert"]));
             }
         }
     }

@@ -51,7 +51,6 @@ namespace MovieManager.APP.Panels.Filter
             {
                 case TextOperations.Is:
                     //return ((String)typeof(Video).GetProperty(_property).GetValue(video, null)).Contains(FilterInput);
-
                     List<String> VideoOptions = ((List<String>)typeof(Video).GetProperty(_property).GetValue(video, null));
                     foreach (string SelectedOption in cbbOptions.SelectedItems)
                     {
