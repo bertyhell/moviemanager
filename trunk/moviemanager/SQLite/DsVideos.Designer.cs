@@ -3958,7 +3958,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4456,7 +4456,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4793,7 +4793,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5256,7 +5256,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5790,7 +5790,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6189,7 +6189,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6547,7 +6547,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString1;
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

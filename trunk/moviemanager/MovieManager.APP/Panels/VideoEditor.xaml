@@ -26,6 +26,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="10" />
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -50,8 +52,10 @@
         
         <Label Grid.Row="8" Grid.Column="1" Content="{x:Static loc:Resource.Videotype}"/>
         <ComboBox Grid.Row="8" Grid.Column="3" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding VideoType,Mode=OneTime}" SelectionChanged="ComboBoxSelectionChanged"/>
+        
+        <Label Grid.Row="10" Grid.Column="1" Content="{x:Static loc:Resource.Videotype}"/>
+        <DatePicker Grid.Row="10" Grid.Column="3" DisplayDate="{Binding Release}" />
 
-        <Panels:SubtitleEditor Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="4" HorizontalAlignment="Left"
-                           x:Name="subtitleEditor" VerticalAlignment="Top" Video="{Binding Path=DataContext, RelativeSource={RelativeSource Self},Mode=TwoWay}" />
+        <Panels:SubtitleEditor Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="4" HorizontalAlignment="Left" x:Name="subtitleEditor" VerticalAlignment="Top" Video="{Binding Path=DataContext, RelativeSource={RelativeSource Self},Mode=TwoWay}" Height="126" />
     </Grid>
 </Window>

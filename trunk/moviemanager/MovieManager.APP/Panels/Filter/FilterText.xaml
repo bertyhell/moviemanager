@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Text="{Binding FilterType, StringFormat={}{0}: }" VerticalAlignment="Center" Name="txtLabel" />
-        <ComboBox HorizontalAlignment="Left" Margin="2,6,2,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0" ItemsSource="{Binding TextOperationsLabels}" SelectionChanged="cbbOperation_SelectionChanged" />
+        <ComboBox HorizontalAlignment="Left" Margin="2,6,2,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0" ItemsSource="{Binding TextOperationsLabels}" SelectionChanged="CbbOperationSelectionChanged" />
       <TextBox HorizontalAlignment="Stretch" Margin="0,6,0,6" Text="{Binding Path=FilterInput, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Grid.Column="2" MinWidth="30" />
     </Grid>
 </local:FilterControl>

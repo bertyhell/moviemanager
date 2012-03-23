@@ -48,17 +48,17 @@ namespace MovieManager.APP.Panels
 
         public void RatingEditorControlMouseMove(object sender, MouseEventArgs e)
         {
-            double mousePositionX = e.GetPosition(this).X;
-            if (mousePositionX > _width)
+            double MousePositionX = e.GetPosition(this).X;
+            if (MousePositionX > _width)
             {
-                mousePositionX = _width;
+                MousePositionX = _width;
             }
             _oldMouseOverRating = _mouseOverRating;
 
             //Determine voted score
-            _mouseOverRating = mousePositionX * 2.0 / 16;
-            double hulp = Math.Floor(_mouseOverRating);
-            _mouseOverRating = hulp + ((_mouseOverRating - hulp < 0.5) ? 0 : 1);
+            _mouseOverRating = MousePositionX * 2.0 / 16;
+            double Hulp = Math.Floor(_mouseOverRating);
+            _mouseOverRating = Hulp + ((_mouseOverRating - Hulp < 0.5) ? 0 : 1);
 
             if (Math.Abs(_oldMouseOverRating - _mouseOverRating) > 0.005)
             {

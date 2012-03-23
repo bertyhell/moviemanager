@@ -99,6 +99,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\Filter\FilterRating.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Panels\RegularExpressions\AddRegex.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +194,9 @@
       <DependentUpon>ProgressbarWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringListConverter.cs" />
+    <Compile Include="Panels\Filter\FilterRating.xaml.cs">
+      <DependentUpon>FilterRating.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\RegularExpressions\AddRegex.xaml.cs">
       <DependentUpon>AddRegex.xaml</DependentUpon>
     </Compile>
