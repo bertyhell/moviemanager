@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Documents;
+using VlcPlayer.Events;
 
 namespace VlcPlayer
 {
@@ -11,14 +12,11 @@ namespace VlcPlayer
         internal IntPtr Handle;
         private IntPtr _drawable;
         private bool _playing, _paused;
-        private VlcEventManager _eventManager;
 
         public VlcMediaPlayer(VlcMedia media, VlcWinForm parentForm)
         {
             Handle = LibVlc.libvlc_media_player_new_from_media(media.Handle);
             _eventManager = new VlcEventManager(this);
-            _eventManager.EventReceivers.Add(parentForm);
-            _eventManager.InitializeEventManager();
             if (Handle == IntPtr.Zero) throw new VlcException();
         }
 
@@ -52,6 +50,13 @@ namespace VlcPlayer
             {
                 LibVlc.libvlc_media_player_set_media(Handle, value.Handle);
             }
+        }
+
+
+        private VlcEventManager _eventManager;
+        public VlcEventManager EventManager
+        {
+            get { return _eventManager; }
         }
 
         public bool IsPlaying { get { return _playing && !_paused; } }
@@ -108,8 +113,12 @@ namespace VlcPlayer
         public void SetCurrentTimestamp(ulong timestamp)
         {
             libvlc_exception_t Ex = new libvlc_exception_t();
-            LibVlc.libvlc_media_player_set_time(Handle,(Int64)timestamp, ref Ex);
+            LibVlc.libvlc_media_player_set_time(Handle, (Int64)timestamp, ref Ex);
         }
+
+        #endregion
+
+        #region events
 
         #endregion
     }

@@ -38,9 +38,9 @@
             this._btnPause = new System.Windows.Forms.Button();
             this._btnPlay = new System.Windows.Forms.Button();
             this._pnlControls = new System.Windows.Forms.Panel();
+            this._lblTimestamp = new System.Windows.Forms.Label();
             this._btnFullScreen = new System.Windows.Forms.Button();
             this._btnMute = new System.Windows.Forms.Button();
-            this._lblTimestamp = new System.Windows.Forms.Label();
             this._menubar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this._pnlControls.SuspendLayout();
@@ -96,10 +96,12 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar1.Location = new System.Drawing.Point(19, 5);
+            this.trackBar1.Maximum = 1200;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(460, 45);
             this.trackBar1.TabIndex = 3;
             this.trackBar1.TabStop = false;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // _btnStop
             // 
@@ -150,6 +152,15 @@
             this._pnlControls.Size = new System.Drawing.Size(492, 52);
             this._pnlControls.TabIndex = 4;
             // 
+            // _lblTimestamp
+            // 
+            this._lblTimestamp.AutoSize = true;
+            this._lblTimestamp.Location = new System.Drawing.Point(403, 35);
+            this._lblTimestamp.Name = "_lblTimestamp";
+            this._lblTimestamp.Size = new System.Drawing.Size(35, 13);
+            this._lblTimestamp.TabIndex = 6;
+            this._lblTimestamp.Text = "label1";
+            // 
             // _btnFullScreen
             // 
             this._btnFullScreen.Location = new System.Drawing.Point(164, 29);
@@ -172,15 +183,6 @@
             this._btnMute.UseVisualStyleBackColor = true;
             this._btnMute.Click += new System.EventHandler(this.BtnMuteClick);
             // 
-            // _lblTimestamp
-            // 
-            this._lblTimestamp.AutoSize = true;
-            this._lblTimestamp.Location = new System.Drawing.Point(403, 35);
-            this._lblTimestamp.Name = "_lblTimestamp";
-            this._lblTimestamp.Size = new System.Drawing.Size(35, 13);
-            this._lblTimestamp.TabIndex = 6;
-            this._lblTimestamp.Text = "label1";
-            // 
             // VlcWinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +194,7 @@
             this.MainMenuStrip = this._menubar;
             this.Name = "VlcWinForm";
             this.Text = "VlcWinForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VlcWinForm_FormClosing);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VlcWinFormKeyUp);
             this.Move += new System.EventHandler(this.VlcWinFormMove);
             this._menubar.ResumeLayout(false);

@@ -67,7 +67,11 @@ namespace VlcPlayer
         #endregion
 
         #region exception
-        
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.StdCall, ExactSpelling = true)]
+        [SuppressUnmanagedCodeSecurity]
+        public static extern void libvlc_exception_init(ref libvlc_exception_t exception);
+
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void libvlc_clearerr();
 

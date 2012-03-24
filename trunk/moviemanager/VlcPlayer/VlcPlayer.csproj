@@ -63,8 +63,11 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IVlcEventReceiver.cs" />
-    <Compile Include="libvlc_event_type_t.cs" />
+    <Compile Include="Events\libvlc_event_t.cs" />
+    <Compile Include="Events\libvlc_enums.cs" />
+    <Compile Include="Events\MediaStatistics.cs" />
+    <Compile Include="Events\MetaDataType.cs" />
+    <Compile Include="Events\VlcEventArgs.cs" />
     <Compile Include="Overlay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,7 +75,7 @@
       <DependentUpon>Overlay.cs</DependentUpon>
     </Compile>
     <Compile Include="OverlayAdorner.cs" />
-    <Compile Include="VlcEventManager.cs" />
+    <Compile Include="Events\VlcEventManager.cs" />
     <Compile Include="VlcException.cs" />
     <Compile Include="VlcInstance.cs" />
     <Compile Include="VlcLib.cs" />

@@ -6,7 +6,7 @@ using Common;
 
 namespace VlcPlayer
 {
-    public partial class VlcWinForm : Form, IVlcEventReceiver
+    public partial class VlcWinForm : Form
     {
         private readonly VlcInstance _vlcInstance;
         private VlcMediaPlayer _player;
@@ -31,7 +31,7 @@ namespace VlcPlayer
             _vlcInstance = new VlcInstance(args);
             _player = null;
         }
-        
+
         #region Media Player Controls
 
         public void PlayVideo()
@@ -60,16 +60,16 @@ namespace VlcPlayer
             _player.Play();
 
             ActivateOverlay();
-            SetVideoTimestamp();
+            AttachToEvents();
         }
 
-        
+
 
         public void SetVideoTimestamp()
         {
-            _lblTimestamp.Text = TimestampUtilities.UlongToTimestampString(_player.GetVideoLength());
+            _lblTimestamp.Text = TimestampUtilities.UlongToTimestampString(_player.GetCurrentTimestamp()) + "/" + TimestampUtilities.UlongToTimestampString(_player.GetVideoLength());
         }
-        
+
         public void Pause()
         {
             if (!_player.IsPaused)
@@ -207,18 +207,31 @@ namespace VlcPlayer
                 Pause();
 
             //audio
-            else if(keys == Keys.M)
+            else if (keys == Keys.M)
                 _player.Mute();
         }
 
-        public void OnTimeChanged()
+        #region event manager methods
+
+        private void AttachToEvents()
         {
-            throw new NotImplementedException();
+            _player.EventManager.TimeChanged += new EventHandler<VlcPlayer.Events.MediaPlayerTimeChanged>(EventManager_TimeChanged);
         }
 
-        public void OnPausedChanged()
+        void EventManager_TimeChanged(object sender, Events.MediaPlayerTimeChanged e)
         {
-            throw new NotImplementedException();
+            _lblTimestamp.Invoke(Delegate.CreateDelegate(typeof(SetTimeStamp), this, "SetVideoTimestamp"));
         }
+
+        private delegate void SetTimeStamp();
+
+        #endregion
+
+        private void VlcWinForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _player.EventManager.TimeChanged -= new EventHandler<VlcPlayer.Events.MediaPlayerTimeChanged>(EventManager_TimeChanged);
+            _player.Stop();
+        }
+
     }
 }
