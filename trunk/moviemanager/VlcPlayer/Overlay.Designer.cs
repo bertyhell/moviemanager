@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Red;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Overlay";
@@ -44,11 +44,13 @@
             this.Text = "FullScreenForm";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OverlayKeyUp);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OverlayMouseDoubleClick);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseMove);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
 
 
 

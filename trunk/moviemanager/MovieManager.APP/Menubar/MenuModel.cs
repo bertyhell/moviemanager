@@ -275,5 +275,34 @@ namespace MovieManager.APP.Menubar
                 }
             }
         }
+
+        public static ControlData EditSettings
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string Str = "Edit Settings";
+
+                    if (!DATA_COLLECTION.ContainsKey(Str))
+                    {
+                        const string ToolTipTitle = "Edit Settings";
+                        const string ToolTipDescription = "Edit Settings";
+                        ControlData ButtonData = new ControlData
+                        {
+                            Label = Str,
+                            SmallImage = new Uri("/MovieManager.APP;component/Images/settings_32.png", UriKind.Relative),
+                            ToolTipTitle = ToolTipTitle,
+                            ToolTipDescription = ToolTipDescription,
+                            Command = new EditSettingsCommand(),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[Str] = ButtonData;
+                    }
+
+                    return DATA_COLLECTION[Str];
+                }
+            }
+        }
     }
 }

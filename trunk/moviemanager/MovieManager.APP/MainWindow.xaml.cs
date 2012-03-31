@@ -3,6 +3,7 @@ using Model;
 using MovieManager.APP.Panels;
 using VlcPlayer;
 using System.Windows.Data;
+using System.IO;
 
 namespace MovieManager.APP
 {
@@ -71,6 +72,15 @@ namespace MovieManager.APP
             MenuItemPlayClick(sender, e);
         }
 
+        private void MenuItemRenameFileClick(object sender, RoutedEventArgs e)
+        {
+
+            Video SelectedVideo = (_videoGrid.SelectedItem as Video);
+            if (SelectedVideo != null)
+            {
+                //File.Move(SelectedVideo.Path, Path.Combine(Path.GetDirectoryName(SelectedVideo.Path), ));
+            }
+        }
     }
 }
 

@@ -117,41 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="fullscreen_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\fullscreen_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pause_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\pause_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="play_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\play_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="seek_backward_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\seek_backward_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="seek_forward_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\seek_forward_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="skip_backward_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\skip_backward_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="skip_forward_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\skip_forward_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stop_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\stop_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="volume_high_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\volume_high_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="volume_low_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\volume_low_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="volume_medium_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\volume_medium_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="volume_muted_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\volume_muted_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>
