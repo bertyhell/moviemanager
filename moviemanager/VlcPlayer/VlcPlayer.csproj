@@ -63,10 +63,17 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CustomTrackbar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\MediaPlayerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\MediaPlayerControl.Designer.cs">
+      <DependentUpon>MediaPlayerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Events\libvlc_event_t.cs" />
     <Compile Include="Events\libvlc_enums.cs" />
-    <Compile Include="Events\MediaStatistics.cs" />
-    <Compile Include="Events\MetaDataType.cs" />
     <Compile Include="Events\VlcEventArgs.cs" />
     <Compile Include="Overlay.cs">
       <SubType>Form</SubType>
@@ -106,6 +113,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Common\MediaPlayerControl.resx">
+      <DependentUpon>MediaPlayerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Overlay.resx">
       <DependentUpon>Overlay.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +137,26 @@
       <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\fullscreen_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\volume_high_32.png" />
+    <Resource Include="images\volume_low_32.png" />
+    <Resource Include="images\volume_medium_32.png" />
+    <Resource Include="images\volume_muted_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\play_32.png" />
+    <Resource Include="images\seek_backward_32.png" />
+    <Resource Include="images\seek_forward_32.png" />
+    <Resource Include="images\skip_backward_32.png" />
+    <Resource Include="images\skip_forward_32.png" />
+    <Resource Include="images\stop_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pause_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -91,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Common\ParameteredStringBuilder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Common\ProgressBarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Panels\RatingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\Settings\SettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\Settings\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,13 +191,18 @@
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
     <Compile Include="Commands\AnalyseCommand.cs" />
     <Compile Include="Commands\AddSerieCommand.cs" />
+    <Compile Include="Commands\EditSettingsCommand.cs" />
     <Compile Include="Commands\EditEpisodeRegExCommand.cs" />
     <Compile Include="Commands\ExportVideosCommand.cs" />
     <Compile Include="Commands\FilterVideosCommand.cs" />
     <Compile Include="Commands\EmptyVideosCommand.cs" />
+    <Compile Include="Commands\RenameFileCommand.cs" />
     <Compile Include="Common\CheckableString.cs" />
     <Compile Include="Common\CheckCombobox.xaml.cs">
       <DependentUpon>CheckCombobox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ParameteredStringBuilder.xaml.cs">
+      <DependentUpon>ParameteredStringBuilder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\ProgressBarControl.xaml.cs">
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>
@@ -225,6 +242,12 @@
       <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\RatingEditorControl.cs" />
+    <Compile Include="Panels\Settings\SettingsPanel.xaml.cs">
+      <DependentUpon>SettingsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Settings\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\SubtitleEditor.xaml.cs">
       <DependentUpon>SubtitleEditor.xaml</DependentUpon>
     </Compile>
@@ -391,6 +414,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\settings_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

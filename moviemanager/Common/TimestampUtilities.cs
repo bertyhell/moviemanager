@@ -7,11 +7,11 @@ namespace Common
 {
     public class TimestampUtilities
     {
-        public static string UlongToTimestampString(ulong timestamp)
+        public static string longToTimestampString(long timestamp)
         {
-            ulong Seconds = timestamp / 1000;
-            ulong Minutes = Seconds / 60;
-            ulong Hours = (ulong)Math.Floor((double)(Minutes / 60));
+            long Seconds = timestamp / 1000;
+            long Minutes = Seconds / 60;
+            long Hours = (long)Math.Floor((double)(Minutes / 60));
             Minutes = Minutes - Hours * 60;
             Seconds = Seconds - Minutes * 60 - Hours * 60 * 60;
             return Hours + ":" + Minutes.ToString("D2") + ":" + Seconds.ToString("D2");

@@ -98,25 +98,28 @@ namespace VlcPlayer
             LibVlc.libvlc_audio_toggle_mute(Handle);
         }
 
-        public ulong GetVideoLength()
+        public long VideoLength
         {
-            libvlc_exception_t Ex = new libvlc_exception_t();
-            return (ulong)LibVlc.libvlc_media_player_get_length(Handle, ref Ex);
+            get { return LibVlc.libvlc_media_player_get_length(Handle); }
         }
 
-        public ulong GetCurrentTimestamp()
+        public long CurrentTimestamp
         {
-            libvlc_exception_t Ex = new libvlc_exception_t();
-            return (ulong)LibVlc.libvlc_media_player_get_time(Handle, ref Ex);
-        }
-
-        public void SetCurrentTimestamp(ulong timestamp)
-        {
-            libvlc_exception_t Ex = new libvlc_exception_t();
-            LibVlc.libvlc_media_player_set_time(Handle, (Int64)timestamp, ref Ex);
+            get { return LibVlc.libvlc_media_player_get_time(Handle); }
+            set { LibVlc.libvlc_media_player_set_time(Handle, value); }
         }
 
         #endregion
+
+        #region volume
+
+        public int Volume
+        {
+            get { return LibVlc.libvlc_audio_get_volume(Handle); }
+            set { LibVlc.libvlc_audio_set_volume(Handle, value); }
+        }
+
+#endregion
 
         #region events
 

@@ -23,11 +23,9 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <menu:RibonMenubar Grid.ColumnSpan="3"  x:Name="_ribbonMenubar">
+        <menu:RibonMenubar Grid.ColumnSpan="3" /> 
 
-        </menu:RibonMenubar>
-
-        <!--left  panel-->
+      <!--left  panel-->
         <TabControl x:Name="_tabLeft" Grid.Row="1" Margin="5,0,0,0" Padding="0">
             <TabItem  ToolTip="Filters">
                 <TabItem.Header>
@@ -52,6 +50,7 @@
                 <ContextMenu >
                     <MenuItem Header="Play" Click="MenuItemPlayClick"/>
                     <MenuItem Header="Properties" Click="MenuItemPropertiesClick"  />
+                    <MenuItem Header="Rename File" Click="MenuItemRenameFileClick"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>

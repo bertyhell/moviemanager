@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Common;
+using VlcPlayer.Common;
 
 namespace VlcPlayer
 {
@@ -30,6 +31,18 @@ namespace VlcPlayer
 
             _vlcInstance = new VlcInstance(args);
             _player = null;
+            _pnlControls.VlcWinForm = this;
+        }
+
+        public bool IsFullScreen
+        {
+            get { return _isFullScreen; }
+            set { _isFullScreen = value; }
+        }
+
+        public MediaPlayerControl ControlPanel
+        {
+            get { return _pnlControls; }
         }
 
         #region Media Player Controls
@@ -60,15 +73,10 @@ namespace VlcPlayer
             _player.Play();
 
             ActivateOverlay();
-            AttachToEvents();
+            _pnlControls.Player = _player;
+            _pnlControls.AttachToEvents();
         }
 
-
-
-        public void SetVideoTimestamp()
-        {
-            _lblTimestamp.Text = TimestampUtilities.UlongToTimestampString(_player.GetCurrentTimestamp()) + "/" + TimestampUtilities.UlongToTimestampString(_player.GetVideoLength());
-        }
 
         public void Pause()
         {
@@ -83,6 +91,7 @@ namespace VlcPlayer
             _player.Stop();
         }
 
+
         public void ToggleFullScreen()
         {
             if (!_isFullScreen)
@@ -95,7 +104,9 @@ namespace VlcPlayer
                 FormBorderStyle = FormBorderStyle.None;
 
                 //change visual
-                _pnlControls.Visible = false;
+                this.Controls.Remove(_pnlControls);
+                this._overlayForm.Controls.Add(_pnlControls);
+                _pnlControls.ToggleFullScreen();
                 _menubar.Visible = false;
                 Location = new Point(0, 0);
                 Size = new Size((int)System.Windows.SystemParameters.PrimaryScreenWidth,
@@ -108,13 +119,16 @@ namespace VlcPlayer
             }
             else
             {
+
+                this._overlayForm.Controls.Remove(_pnlControls);
+                this.Controls.Add(_pnlControls);
+                _pnlControls.ToggleFullScreen();
                 FormBorderStyle = FormBorderStyle.Sizable;
                 Size = _previousFormSize;
                 Location = _previousFormLocation;
                 _pnlVideo.Size = _previousVideoPanelSize;
                 _pnlVideo.Location = _previousVideoPanelLocation;
                 _menubar.Visible = true;
-                _pnlControls.Visible = true;
                 _overlayForm.Location = CalculateOverlayLocation();
                 _overlayForm.Size = _pnlVideo.Size;
                 _isFullScreen = false;
@@ -140,32 +154,6 @@ namespace VlcPlayer
             _overlayForm.Close();
             base.OnClosing(e);
         }
-
-        private void BtnPauseClick(object sender, EventArgs e)
-        {
-            Pause();
-        }
-
-        private void BtnPlayClick(object sender, EventArgs e)
-        {
-            PlayVideo();
-        }
-
-        private void BtnStopClick(object sender, EventArgs e)
-        {
-            Stop();
-        }
-
-        private void BtnMuteClick(object sender, EventArgs e)
-        {
-            _player.Mute();
-        }
-
-        private void BtnFullScreenClick(object sender, EventArgs e)
-        {
-            ToggleFullScreen();
-        }
-
 
 
         #endregion
@@ -211,27 +199,14 @@ namespace VlcPlayer
                 _player.Mute();
         }
 
-        #region event manager methods
-
-        private void AttachToEvents()
-        {
-            _player.EventManager.TimeChanged += new EventHandler<VlcPlayer.Events.MediaPlayerTimeChanged>(EventManager_TimeChanged);
-        }
-
-        void EventManager_TimeChanged(object sender, Events.MediaPlayerTimeChanged e)
-        {
-            _lblTimestamp.Invoke(Delegate.CreateDelegate(typeof(SetTimeStamp), this, "SetVideoTimestamp"));
-        }
-
-        private delegate void SetTimeStamp();
-
-        #endregion
 
         private void VlcWinForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _player.EventManager.TimeChanged -= new EventHandler<VlcPlayer.Events.MediaPlayerTimeChanged>(EventManager_TimeChanged);
+            _pnlControls.DetachFromEvents();
             _player.Stop();
         }
+
+
 
     }
 }

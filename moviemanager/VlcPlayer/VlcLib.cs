@@ -49,20 +49,30 @@ namespace VlcPlayer
         public static extern void libvlc_media_player_pause(IntPtr player);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void libvlc_audio_toggle_mute(IntPtr player);
-
-        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void libvlc_media_player_stop(IntPtr player);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        public static extern Int64 libvlc_media_player_get_length(IntPtr libvlc_mediaplayer, ref libvlc_exception_t exception);
+        public static extern Int64 libvlc_media_player_get_length(IntPtr libvlc_mediaplayer);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Int64 libvlc_media_player_get_time(IntPtr libvlc_mediaplayer, ref libvlc_exception_t exception);
+        public static extern Int64 libvlc_media_player_get_time(IntPtr libvlc_mediaplayer);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_media_player_set_time(IntPtr libvlc_mediaplayer, Int64 time, ref libvlc_exception_t exception);
+        public static extern void libvlc_media_player_set_time(IntPtr libvlc_mediaplayer, Int64 time);
+
+        #endregion
+
+        #region volume
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void libvlc_audio_toggle_mute(IntPtr player);
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void libvlc_audio_set_volume(IntPtr player, int volume);
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int libvlc_audio_get_volume(IntPtr player);
 
         #endregion
 
