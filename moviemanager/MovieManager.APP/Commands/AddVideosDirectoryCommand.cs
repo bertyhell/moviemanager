@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
@@ -8,7 +9,7 @@ using SQLite;
 
 namespace MovieManager.APP.Commands
 {
-    class AddVideosDirectoryCommand : ICommand
+    class AddVideosDirectoryCommand : ICommand, INotifyPropertyChanged
     {
         private ProgressbarWindow _progressWindow;
 
@@ -17,16 +18,22 @@ namespace MovieManager.APP.Commands
             return true;
         }
 
+        private int _progress = 0;
+
+        public String ProgressString
+        {
+            get { return "Adding videos to database: " + _progress + "%"; }
+        }
+
         public event EventHandler CanExecuteChanged;
 
         public void Execute(object parameter)
         {
-            FolderBrowserDialog odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
-            if (odd.ShowDialog() == DialogResult.OK)
+            FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
+            if (Odd.ShowDialog() == DialogResult.OK)
             {
-                _progressWindow = new ProgressbarWindow {Title = "Getting Videos", Owner = MainWindow.Instance};
-
-                MovieFileReader FileReader = new MovieFileReader(new DirectoryInfo(odd.SelectedPath));
+                _progressWindow = new ProgressbarWindow { Owner = MainWindow.Instance, IsIndeterminate = true };
+                MovieFileReader FileReader = new MovieFileReader(new DirectoryInfo(Odd.SelectedPath), _progressWindow.ProgressString);
                 FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
                 FileReader.RunWorkerAsync();
                 _progressWindow.Show();
@@ -35,8 +42,14 @@ namespace MovieManager.APP.Commands
 
         void FileReader_OnGetVideoCompleted(object sender, GetVideoCompletedEventArgs e)
         {
+            _progressWindow.Close();
+            _progressWindow = new ProgressbarWindow { Owner = MainWindow.Instance, DataContext = this, IsIndeterminate = true };
+            _progressWindow.Show();
             MMDatabase.InsertVideosHDD(e.Videos);
             _progressWindow.Close();
+
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -10,19 +9,24 @@ using SQLite.RegexSettings;
 
 namespace SQLite
 {
-    public class MovieFileReader : BackgroundWorker
+    public class MovieFileReader : BackgroundWorker, INotifyPropertyChanged
     { // TODO 060: extends SwingWorker
 
         static readonly String[] VideoFileExtensions = { "ASX", "DTS", "GXF", "M2V", "M3U", "M4V", "MPEG1", "MPEG2", "MTS", "MXF", "OGM", "PLS", "BUP", "A52", "AAC", "B4S", "CUE", "DIVX", "DV", "FLV", "M1V", "M2TS", "MKV", "MOV", "MPEG4", "OMA", "SPX", "TS", "VLC", "VOB", "XSPF", "DAT", "BIN", "IFO", "PART", "3G2", "AVI", "MPEG", "MPG", "FLAC", "M4A", "MP1", "OGG", "WAV", "XM", "3GP", "WMV", "AC3", "ASF", "MOD", "MP2", "MP3", "MP4", "WMA", "MKA", "M4P" };
         static readonly String[] DELIMITERS = { "CD-1", "CD-2", "CD1", "CD2", "DVD-1", "DVD-2", "[Divx-ITA]", "[XviD-ITA]", "AC3", "DVDRip", "Xvid", "http", "www.", ".com", "shared", "powered", "sponsored", "sharelive", "filedonkey", "saugstube", "eselfilme", "eseldownloads", "emulemovies", "spanishare", "eselpsychos.de", "saughilfe.de", "goldesel.6x.to", "freedivx.org", "elitedivx", "deviance", "-ftv", "ftv", "-flt", "flt", "1080p", "720p", "1080i", "720i", "480", "x264", "ext", "ac3", "6ch", "axxo", "pukka", "klaxxon", "edition", "limited", "dvdscr", "screener", "unrated", "BRRIP", "subs", "_NL_", "m-hd" };
 
-        private DirectoryInfo _dir;
-        private FileInfo _file;
+        private readonly DirectoryInfo _dir;
+        private FileInfo _file; //TODO 090 are videos correctly added when files are selected instead of dir?
 
-        public MovieFileReader(DirectoryInfo dir)
+
+        private string _progressString;
+        
+        public MovieFileReader(DirectoryInfo dir, string progressString)
         {
             _dir = dir;
+            _progressString = progressString;
             _videos = new ObservableCollection<Video>();
+            
         }
         public MovieFileReader(FileInfo file)
         {
@@ -31,35 +35,37 @@ namespace SQLite
         }
 
         private ObservableCollection<Video> _videos;
+        private int _videosFound;
+
         public ObservableCollection<Video> Videos
         {
             get { return _videos; }
             set { _videos = value; }
         }
 
-        private static void GetVideos(DirectoryInfo dir, ObservableCollection<Video> videos)
+        private void GetVideos(DirectoryInfo dir, ObservableCollection<Video> videos)
         { // TODO 050 Add search options -> minimal size, limit extensions, ...
             try
             {
-                foreach (FileInfo file in dir.GetFiles())
+                foreach (FileInfo File in dir.GetFiles())
                 {
-
-                    if (file.Name.Length > file.Extension.Length)
-                        GetVideos(file, videos);
-
+                    if (File.Name.Length > File.Extension.Length)
+                        GetVideos(File, videos);
                 }
             }
-            catch (Exception e){}
-            try{
-            foreach (DirectoryInfo directory in dir.GetDirectories())
+            catch (Exception)
+            { }
+            try
             {
-                GetVideos(directory, videos);
+                foreach (DirectoryInfo Directory in dir.GetDirectories())
+                {
+                    GetVideos(Directory, videos);
+                }
             }
-            }
-            catch (Exception e){}
+            catch (Exception) { }
         }
 
-        private static void GetVideos(FileInfo file, ObservableCollection<Video> videos)
+        private void GetVideos(FileInfo file, ObservableCollection<Video> videos)
         {
             if (!string.IsNullOrEmpty(file.Extension) && VideoFileExtensions.Contains(file.Extension.ToUpper().Substring(1)))
             {
@@ -68,6 +74,9 @@ namespace SQLite
                     Path = file.FullName.Replace("\'", "''"),
                     Name = CleanTitle(file.Name.Substring(0, file.Name.LastIndexOf(".")))
                 });
+                _videosFound++;
+                _progressString = "Videos found: " + _videosFound;
+                PropertyChanged(this, new PropertyChangedEventArgs("ProgressString"));
                 Console.WriteLine(file.FullName);
             }
         }
@@ -78,23 +87,23 @@ namespace SQLite
          */
         public static String CleanTitle(String fileName)
         {
-            String movieName = fileName.ToLower();
-            foreach (String delimiter in DELIMITERS)
+            String MovieName = fileName.ToLower();
+            foreach (String Delimiter in DELIMITERS)
             {
-                int firstIndex = movieName.IndexOf(delimiter.ToLower());
-                if (firstIndex != -1)
+                int FirstIndex = MovieName.IndexOf(Delimiter.ToLower());
+                if (FirstIndex != -1)
                 {
-                    movieName = movieName.Substring(0, firstIndex);
+                    MovieName = MovieName.Substring(0, FirstIndex);
                 }
             }
 
-            return movieName.Replace(".", " ").Replace("(", " ").Replace(")", " ").Replace("_", " ").Trim();
+            return MovieName.Replace(".", " ").Replace("(", " ").Replace(")", " ").Replace("_", " ").Trim();
         }
 
 
         #region series
 
-        public static void GetSerie(DirectoryInfo dir, string seasonDir, string episodeString, ObservableCollection<Video> videos)
+        public void GetSerie(DirectoryInfo dir, string seasonDir, string episodeString, ObservableCollection<Video> videos)
         {
 
 
@@ -103,8 +112,7 @@ namespace SQLite
             GetVideos(dir, LocalVideos);
 
             //create Serie in database
-            Serie Serie = new Serie();
-            Serie.Name = dir.FullName.Substring(dir.FullName.LastIndexOf("\\") + 1);
+            Serie Serie = new Serie {Name = dir.FullName.Substring(dir.FullName.LastIndexOf("\\") + 1)};
             MMDatabase.AddSerie(Serie);
 
             //convert video to episode
@@ -115,7 +123,6 @@ namespace SQLite
                 //string Path = Video.Path.Remove(0, LastIndexOf);
 
                 //find episodenumber in Filename
-                Episode Episode = null;
                 bool RegexMatched = false;
                 int Index = 0;
                 ObservableCollection<String> RegularExpressions = RegexSettingsStorage.EpisodeRegularExpressions;
@@ -129,7 +136,7 @@ namespace SQLite
                         int SeasonNumber = int.Parse(Match.Groups[1].Value);
                         int EpisodeNumber = int.Parse(Match.Groups[2].Value);
 
-                        Episode = (Episode)Video.ConvertVideo(VideoTypeEnum.Episode, Video);
+                        Episode Episode = (Episode)Video.ConvertVideo(VideoTypeEnum.Episode, Video);
                         Episode.EpisodeNumber = EpisodeNumber;
                         Episode.Season = SeasonNumber;
                         Episode.SerieId = Serie.Id;
@@ -161,6 +168,8 @@ namespace SQLite
         {
 
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public class GetVideoCompletedEventArgs : EventArgs
