@@ -20,13 +20,13 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            FolderBrowserDialog odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
-            if (odd.ShowDialog() == DialogResult.OK)
+            FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = ConfigurationManager.AppSettings["defaultVideoLocation"] };
+            if (Odd.ShowDialog() == DialogResult.OK)
             {
                 ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
-                MovieFileReader.GetSerie(new DirectoryInfo(odd.SelectedPath), "", "", LocalVideos);
+                MovieFileReader MovieFileReader = new MovieFileReader(new DirectoryInfo(Odd.SelectedPath), null);
+                MovieFileReader.GetSerie(new DirectoryInfo(Odd.SelectedPath), "", "", LocalVideos);
                 MMDatabase.InsertVideosHDD(LocalVideos);
-
             }
         }
     }
