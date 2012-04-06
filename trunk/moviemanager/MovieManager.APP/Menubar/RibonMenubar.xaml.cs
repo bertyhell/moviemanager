@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace MovieManager.APP.Menubar
+﻿namespace MovieManager.APP.Menubar
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml

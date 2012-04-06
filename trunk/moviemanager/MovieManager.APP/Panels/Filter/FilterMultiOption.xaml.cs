@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Windows;
+using System.Linq;
 using Model;
 
 namespace MovieManager.APP.Panels.Filter
@@ -52,39 +50,26 @@ namespace MovieManager.APP.Panels.Filter
                 case TextOperations.Is:
                     //return ((String)typeof(Video).GetProperty(_property).GetValue(video, null)).Contains(FilterInput);
                     List<String> VideoOptions = ((List<String>)typeof(Video).GetProperty(_property).GetValue(video, null));
-                    foreach (string SelectedOption in cbbOptions.SelectedItems)
+                    if (cbbOptions.SelectedItems.Any(selectedOption => VideoOptions.Contains(selectedOption)))
                     {
-                        if(VideoOptions.Contains(SelectedOption))
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                     return false;
                 case TextOperations.IsAll:
                     VideoOptions = ((List<String>)typeof(Video).GetProperty(_property).GetValue(video, null));
-                    foreach (string SelectedOption in cbbOptions.SelectedItems)
+                    if (cbbOptions.SelectedItems.Any(selectedOption => !VideoOptions.Contains(selectedOption)))
                     {
-                        if (!VideoOptions.Contains(SelectedOption))
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                     return true;
                 case TextOperations.IsNot:
                     VideoOptions = ((List<String>)typeof(Video).GetProperty(_property).GetValue(video, null));
-                    foreach (string SelectedOption in cbbOptions.SelectedItems)
-                    {
-                        if (VideoOptions.Contains(SelectedOption))
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
+                    return cbbOptions.SelectedItems.All(selectedOption => !VideoOptions.Contains(selectedOption));
             }
             return false;
         }
 
-        private void cbbOperation_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CbbOperationSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             MainController.Instance.VideosView.Refresh();
         }

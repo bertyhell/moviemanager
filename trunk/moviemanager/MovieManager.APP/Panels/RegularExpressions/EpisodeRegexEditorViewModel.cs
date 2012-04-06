@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
-namespace MovieManager.APP.Panels.AddVideos
+namespace MovieManager.APP.Panels.RegularExpressions
 {
     class EpisodeRegexEditorViewModel : INotifyPropertyChanged
     {
@@ -32,25 +28,25 @@ namespace MovieManager.APP.Panels.AddVideos
         private string _selectedRegularExpression;
         public string SelectedRegularExpression { get { return _selectedRegularExpression; } set { _selectedRegularExpression = value; NotifyPropChanged("SelectedRegularExpression"); } }
 
-        public void MoveRegExUp(int RegExUp)
+        public void MoveRegExUp(int regExUp)
         {
-            if (RegExUp > 0 && RegExUp < _regularExpressions.Count)
+            if (regExUp > 0 && regExUp < _regularExpressions.Count)
             {
-                string Help = _regularExpressions[RegExUp];
-                _regularExpressions[RegExUp] = _regularExpressions[RegExUp - 1];
-                _regularExpressions[RegExUp - 1] = Help;
+                string Help = _regularExpressions[regExUp];
+                _regularExpressions[regExUp] = _regularExpressions[regExUp - 1];
+                _regularExpressions[regExUp - 1] = Help;
                 NotifyPropChanged("RegularExpressions");
                 NotifyPropChanged("SelectedRegularExpressions");
             }
         }
 
-        public void MoveRegExDown(int RegExUp)
+        public void MoveRegExDown(int regExUp)
         {
-            if (RegExUp < _regularExpressions.Count - 1 && RegExUp >= 0)
+            if (regExUp < _regularExpressions.Count - 1 && regExUp >= 0)
             {
-                string Help = _regularExpressions[RegExUp];
-                _regularExpressions[RegExUp] = _regularExpressions[RegExUp + 1];
-                _regularExpressions[RegExUp + 1] = Help;
+                string Help = _regularExpressions[regExUp];
+                _regularExpressions[regExUp] = _regularExpressions[regExUp + 1];
+                _regularExpressions[regExUp + 1] = Help;
                 NotifyPropChanged("RegularExpressions");
                 NotifyPropChanged("SelectedRegularExpressions");
             }

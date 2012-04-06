@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using System.Windows;
 using Model;
 
@@ -60,32 +59,25 @@ namespace MovieManager.APP.Panels.Filter
 
         public override bool FilterSucceeded(Video video)
         {
-            double rating = ((double) typeof (Video).GetProperty(_property).GetValue(video, null));
+            double Rating = ((double) typeof (Video).GetProperty(_property).GetValue(video, null));
             switch ((TextOperations)cbbOperation.SelectedIndex)
             {
                 
                 case TextOperations.Before:
-                    return rating < FilterInputStart;
+                    return Rating < FilterInputStart;
                 case TextOperations.After:
-                    return rating > FilterInputStart;
+                    return Rating > FilterInputStart;
                 case TextOperations.InBetween:
-                    return (rating > FilterInputStart) && (rating > FilterInputEnd);
+                    return (Rating > FilterInputStart) && (Rating > FilterInputEnd);
                 case TextOperations.NotBetween:
-                    return !(rating > FilterInputStart) && (rating > FilterInputEnd);
+                    return !(Rating > FilterInputStart) && (Rating > FilterInputEnd);
             }
             return false;
         }
 
         private void CbbOperationSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if(cbbOperation.SelectedIndex < 2)
-            {
-                //hide second date picker
-                DisplaySecondRating = Visibility.Collapsed;
-            }else
-            {
-                DisplaySecondRating = Visibility.Visible;
-            }
+            DisplaySecondRating = cbbOperation.SelectedIndex < 2 ? Visibility.Collapsed : Visibility.Visible;
             PropChanged("DisplaySecondRating");
             MainController.Instance.VideosView.Refresh();
         }

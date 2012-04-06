@@ -12,7 +12,6 @@ namespace MovieManager.APP.Commands
 {
     class AddVideosCommand : ICommand
     {
-        private ObservableCollection<Video> _videos;
         private ProgressbarWindow _progressWindow;
 
         public bool CanExecute(object parameter)
@@ -37,7 +36,7 @@ namespace MovieManager.APP.Commands
                                      };
             if (Ofd.ShowDialog() == DialogResult.OK)
             {
-                _videos = new ObservableCollection<Video>();
+                new ObservableCollection<Video>();
                 foreach (String File in Ofd.FileNames)
                 {
                     _progressWindow = new ProgressbarWindow(this) {Owner = MainWindow.Instance};

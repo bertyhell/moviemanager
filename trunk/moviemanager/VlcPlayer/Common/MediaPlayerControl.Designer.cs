@@ -119,7 +119,7 @@
             this._trbVolume.TabIndex = 23;
             this._trbVolume.TickFrequency = 50;
             this._trbVolume.Value = 100;
-            this._trbVolume.ValueChanged += new System.EventHandler(this.customTrackbar1_ValueChanged);
+            this._trbVolume.ValueChanged += new System.EventHandler(this.CustomTrackbar1ValueChanged);
             // 
             // _trbTimestamp
             // 
@@ -135,7 +135,7 @@
             this._trbTimestamp.TabIndex = 19;
             this._trbTimestamp.TabStop = false;
             this._trbTimestamp.TickStyle = System.Windows.Forms.TickStyle.None;
-            this._trbTimestamp.ValueChanged += new System.EventHandler(this._trbTimestamp_ValueChanged);
+            this._trbTimestamp.ValueChanged += new System.EventHandler(this.TrbTimestampValueChanged);
             // 
             // MediaPlayerControl
             // 

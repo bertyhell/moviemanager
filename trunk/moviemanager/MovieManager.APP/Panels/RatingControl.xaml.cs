@@ -11,7 +11,7 @@ namespace MovieManager.APP.Panels
     /// </summary>
     public partial class RatingControl
     {
-        public static readonly DependencyProperty RatingProperty =
+        public static readonly DependencyProperty RATING_PROPERTY =
             DependencyProperty.Register("Rating", typeof(Double), typeof(RatingControl), new PropertyMetadata(-2.0, RatingChanged));
 
         public static Uri EmptyStar = new Uri("/MovieManager.APP;component/Images/EmptyStar.png", UriKind.Relative);
@@ -40,8 +40,8 @@ namespace MovieManager.APP.Panels
 
         public Double Rating
         {
-            get { return (Double)GetValue(RatingProperty); }
-            set { SetValue(RatingProperty, value); }
+            get { return (Double)GetValue(RATING_PROPERTY); }
+            set { SetValue(RATING_PROPERTY, value); }
         }
 
         protected virtual void Init()
@@ -57,13 +57,13 @@ namespace MovieManager.APP.Panels
                 }
                 else
                     _layoutroot = new Grid();
-                for (int i = 0; i < _starCount; i++)
+                for (int I = 0; I < _starCount; I++)
                 {
                     _layoutroot.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(16)});
-                    Image localImage = ImageFactory.GetImage(EmptyStar);
-                    Grid.SetColumn(localImage, i);
-                    _stars.Add(localImage);
-                    _layoutroot.Children.Add(localImage);
+                    Image LocalImage = ImageFactory.GetImage(EmptyStar);
+                    Grid.SetColumn(LocalImage, I);
+                    _stars.Add(LocalImage);
+                    _layoutroot.Children.Add(LocalImage);
                 }
                 _isInitialized = true;
             }
@@ -75,24 +75,24 @@ namespace MovieManager.APP.Panels
         {
             if (rating < 0) rating = 0;
             // adapt the rating to the star count
-            double normalizedRating = rating / 10 * StarCount;
+            double NormalizedRating = rating / 10 * StarCount;
 
             //determine the amount of full colered stars
-            int selectedStarCount = (int)Math.Floor(normalizedRating);
+            int SelectedStarCount = (int)Math.Floor(NormalizedRating);
 
             //determine the remaining rating -> used to determine if a half colered star is needed
-            double ratingRest = normalizedRating - selectedStarCount;
-            selectedStarCount += (ratingRest > 0.75 ? 1 : 0);
-            int halfSelectedStarCount = (ratingRest <= 0.75 && ratingRest >= 0.25 ? 1 : 0);
+            double RatingRest = NormalizedRating - SelectedStarCount;
+            SelectedStarCount += (RatingRest > 0.75 ? 1 : 0);
+            int HalfSelectedStarCount = (RatingRest <= 0.75 && RatingRest >= 0.25 ? 1 : 0);
 
-            for (int i = 0; i < _starCount; i++)
+            for (int I = 0; I < _starCount; I++)
             {
-                if (i < selectedStarCount)
-                    Stars[i].Source = ImageFactory.GetImageSource(selectedStar);
-                else if (i < selectedStarCount + halfSelectedStarCount)
-                    Stars[i].Source = ImageFactory.GetImageSource(halfSelectedStar);
+                if (I < SelectedStarCount)
+                    Stars[I].Source = ImageFactory.GetImageSource(selectedStar);
+                else if (I < SelectedStarCount + HalfSelectedStarCount)
+                    Stars[I].Source = ImageFactory.GetImageSource(halfSelectedStar);
                 else
-                    Stars[i].Source = ImageFactory.GetImageSource(emptyStar);
+                    Stars[I].Source = ImageFactory.GetImageSource(emptyStar);
             }
 
         }
@@ -105,7 +105,8 @@ namespace MovieManager.APP.Panels
             }
             else
             {
-                (d as RatingControl).Init();
+                var Control = d as RatingControl;
+                if (Control != null) Control.Init();
             }
         }
 

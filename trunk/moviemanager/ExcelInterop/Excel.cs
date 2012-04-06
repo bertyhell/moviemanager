@@ -11,135 +11,131 @@ namespace ExcelInterop
 
         public static List<string> GetWorkSheets(string path)
         {
-            List<string> worksheets = new List<string>();
-            Application excelApp = null;
+            List<string> Worksheets = new List<string>();
+            Application ExcelApp = null;
 
             try
             {
-                excelApp = new Application();
+                ExcelApp = new Application();
 
-                Workbook wb = excelApp.Workbooks.Open(path);
-                worksheets.AddRange(from Worksheet ws in wb.Worksheets select ws.Name);
+                Workbook Wb = ExcelApp.Workbooks.Open(path);
+                Worksheets.AddRange(from Worksheet Ws in Wb.Worksheets select Ws.Name);
             }
             finally
             {
-                if ((excelApp != null))
+                if ((ExcelApp != null))
                 {
-                    excelApp.Quit();
+                    ExcelApp.Quit();
                 }
             }
 
-            return worksheets;
+            return Worksheets;
         }
 
         public static List<string> GetHeaders(string path, string worksheet)
         {
-            List<string> headers = new List<string>();
-            Application excelApp = null;
+            List<string> Headers = new List<string>();
+            Application ExcelApp = null;
 
             try
             {
-                excelApp = new Application();
+                ExcelApp = new Application();
 
-                Workbook wb = excelApp.Workbooks.Open(path);
-                Worksheet ws = (Worksheet) wb.Worksheets.Item[worksheet];
+                Workbook Wb = ExcelApp.Workbooks.Open(path);
+                Worksheet Ws = (Worksheet) Wb.Worksheets.Item[worksheet];
 
-                Range range = ws.Range["A1"];
+                Range Range = Ws.Range["A1"];
                 //TODO 010 remove empty rows and columns before import
-                while (range.Value2 != null)
+                while (Range.Value2 != null)
                 {
-                    headers.Add(range.Value2);
-                    range = range.Offset[0, 1];
+                    Headers.Add(Range.Value2);
+                    Range = Range.Offset[0, 1];
                 }
-                return headers;
+                return Headers;
             }
                 //TODO 030 seen in lessons, check how to correct rethrow
             finally
             {
-                if ((excelApp != null))
+                if ((ExcelApp != null))
                 {
-                    excelApp.Quit();
+                    ExcelApp.Quit();
                 }
             }
         }
 
-        public static void Data2Excel(DbDataReader data, IEnumerable<string> headers, string worksheetName)
+        public static void Data2Excel(DbDataReader data, IList<string> headers, string worksheetName)
         {
             if (headers == null) return;
             //is easier by: ExcelLibrary.DataSetHelper.CreateWorkbook("MyExcelFile.xls", ds); 
             //direct dataset to excelfile (didn't implement to excercise
-            Application excelApp = new Application {Visible = true};
-            Workbook wb = excelApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
-            Worksheet ws = wb.ActiveSheet;
-            ws.Name = worksheetName;
+            Application ExcelApp = new Application {Visible = true};
+            Workbook Wb = ExcelApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            Worksheet Ws = Wb.ActiveSheet;
+            Ws.Name = worksheetName;
 
-            Range range = ws.Range["A1"];
-            foreach (string header in headers)
+            Range Range = Ws.Range["A1"];
+
+            int NumberOfColumns = headers.Count();
+            for (int I = 0; I < NumberOfColumns; I++)
             {
-                range.Value2 = header;
-                range.Columns.AutoFit();
-                range = range.Offset[0, 1];
+                Range.Value2 = headers.ElementAt(I);
+                Range.Columns.AutoFit();
+                Range = Range.Offset[0, 1];
             }
 
-            dynamic numberOfColumns = headers.Count();
 
             while (data.Read())
             {
                 //next row
-                range = range.Offset[1, -numberOfColumns];
-                for (int col = 0; col <= numberOfColumns - 1; col++)
+                Range = Range.Offset[1, -NumberOfColumns];
+                for (int Col = 0; Col <= NumberOfColumns - 1; Col++)
                 {
-                    range.Value2 = data[col];
-                    range = range.Offset[0, 1];
+                    Range.Value2 = data[Col];
+                    Range = Range.Offset[0, 1];
                 }
             }
 
             //auto size columns
-            ws.UsedRange.Columns.AutoFit();
+            Ws.UsedRange.Columns.AutoFit();
         }
 
         public static List<List<string>> Excel2Data(string filePath, string worksheet, List<string> headers)
         {
-            Application excelApp = null;
-            List<List<string>> data;
+            Application ExcelApp = null;
+            List<List<string>> Data;
             try
             {
-                excelApp = new Application();
-                Workbook wb = excelApp.Workbooks.Add(filePath);
-                Worksheet ws = (Worksheet) wb.Worksheets.Item[worksheet];
+                ExcelApp = new Application();
+                Workbook Wb = ExcelApp.Workbooks.Add(filePath);
+                Worksheet Ws = (Worksheet) Wb.Worksheets.Item[worksheet];
 
-                if (ws.UsedRange.Rows.Count < 2)
+                if (Ws.UsedRange.Rows.Count < 2)
                 {
                     throw new IOException("Excel bestand bevat geen datarijen");
                 }
 
-                List<string> allHeaders = GetHeaders(filePath, worksheet);
+                List<string> AllHeaders = GetHeaders(filePath, worksheet);
 
 
                 //collect requested columns
-                List<int> importColumns = headers.Select(header => allHeaders.IndexOf(header) + 1).ToList();
+                List<int> ImportColumns = headers.Select(header => AllHeaders.IndexOf(header) + 1).ToList();
 
-                data = new List<List<string>>();
-                for (int row = 1; row <= ws.UsedRange.Rows.Count; row++)
+                Data = new List<List<string>>();
+                for (int Row = 1; Row <= Ws.UsedRange.Rows.Count; Row++)
                 {
-                    List<string> objectValues = importColumns.Select(col => ((Range) ws.UsedRange.Item[row, col]).Value2).Cast<string>().ToList();
-                    data.Add(objectValues);
+                    List<string> ObjectValues = ImportColumns.Select(col => ((Range) Ws.UsedRange.Item[Row, col]).Value2).Cast<string>().ToList();
+                    Data.Add(ObjectValues);
                 }
-                wb.Close();
+                Wb.Close();
             }
-            catch
+            finally//TODO 010 error bericht
             {
-                throw;
-                //TODO 010 error bericht
-            }
-            finally
-            {
-                if ((excelApp != null))
+                if ((ExcelApp != null))
                 {
-                    excelApp.Quit();
+                    ExcelApp.Quit();
                 }
             }
-            return data;
+            return Data;
         }
     }
 }

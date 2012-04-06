@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using Model;
@@ -13,15 +14,15 @@ namespace MovieManager.APP.Panels
     /// </summary>
     public partial class SubtitleEditor
     {
-        public static readonly DependencyProperty VideoProperty =
+        public static readonly DependencyProperty VIDEO_PROPERTY =
             DependencyProperty.Register("Video", typeof(Video), typeof(SubtitleEditor), new PropertyMetadata(null));
 
         public Video Video
         {
-            get { return (Video)GetValue(VideoProperty); }
+            get { return (Video)GetValue(VIDEO_PROPERTY); }
             set
             {
-                SetValue(VideoProperty, value);
+                SetValue(VIDEO_PROPERTY, value);
                 DataContext = value;
             }
         }
@@ -61,23 +62,14 @@ namespace MovieManager.APP.Panels
         //check for duplicate
         private bool AlreadyInSubs(String path)
         {
-            bool isDuplicate = false;
-            foreach (Subtitle sub in Video.Subs)
-            {
-                if (sub.Path == path)
-                {
-                    isDuplicate = true;
-                    break;
-                }
-            }
-            return isDuplicate;
+            return Video.Subs.Any(sub => sub.Path == path);
         }
 
         private void BtnDelSubtitleClick(object sender, RoutedEventArgs e)
         {
-            foreach(Subtitle sub in _grdSubs.SelectedItems)
+            foreach(Subtitle Sub in _grdSubs.SelectedItems)
             {
-                Video.Subs.Remove(sub);
+                Video.Subs.Remove(Sub);
             }
         }
     }

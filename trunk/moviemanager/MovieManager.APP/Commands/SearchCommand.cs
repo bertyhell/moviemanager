@@ -16,8 +16,8 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            SearchWindow window = new SearchWindow();
-            window.Show();
+            SearchWindow Window = new SearchWindow();
+            Window.Show();
         }
     }
 }

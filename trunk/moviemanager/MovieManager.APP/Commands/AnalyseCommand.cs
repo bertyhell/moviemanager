@@ -18,15 +18,15 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            foreach (Video video in MainController.Instance.Videos)
+            foreach (Video Video in MainController.Instance.Videos)
             {
-                if (video is Movie)
+                if (Video is Movie)
                 {
-                    List<Movie> movies = SearchTMDB.GetVideoInfo(video.Name);
-                    if (movies.Count > 0)
+                    List<Movie> Movies = SearchTMDB.GetVideoInfo(Video.Name);
+                    if (Movies.Count > 0)
                     {
-                        (video as Movie).IdImdb = movies[0].IdImdb;
-                        SearchTMDB.GetExtraMovieInfo(movies[0].IdTmdb, (Movie)video);
+                        (Video as Movie).IdImdb = Movies[0].IdImdb;
+                        SearchTMDB.GetExtraMovieInfo(Movies[0].IdTmdb, (Movie)Video);
                     }
                     //if(!string.IsNullOrEmpty(Video.IdImdb))
                     //SearchIMDB.GetVideoInfo(Video);

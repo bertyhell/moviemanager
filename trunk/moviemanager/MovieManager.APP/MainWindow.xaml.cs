@@ -3,7 +3,6 @@ using Model;
 using MovieManager.APP.Panels;
 using VlcPlayer;
 using System.Windows.Data;
-using System.IO;
 
 namespace MovieManager.APP
 {
@@ -40,34 +39,36 @@ namespace MovieManager.APP
         #region ContextMenu event handlers
         private void MenuItemPropertiesClick(object sender, RoutedEventArgs e)
         {
-            Video selectedVideo = (_videoGrid.SelectedItem as Video);
+            Video SelectedVideo = (_videoGrid.SelectedItem as Video);
 
-            VideoEditor editor = new VideoEditor();
-            editor.DataContext = selectedVideo;
+            VideoEditor Editor = new VideoEditor {DataContext = SelectedVideo};
 
-            Binding videoBinding = new Binding();
-            videoBinding.Source = selectedVideo;
-            videoBinding.Path = new PropertyPath(".");
-            videoBinding.Mode = BindingMode.TwoWay;
+            Binding VideoBinding = new Binding
+                                       {Source = SelectedVideo, Path = new PropertyPath("."), Mode = BindingMode.TwoWay};
 
-            editor.SetBinding(VideoEditor.VideoProperty, videoBinding);
-            editor.Show();
+            Editor.SetBinding(VideoEditor.VIDEO_PROPERTY, VideoBinding);
+            Editor.Show();
         }
 
         private void MenuItemPlayClick(object sender, RoutedEventArgs e)
         {
-            string path = (_videoGrid.SelectedItem as Video).Path;
-
-            if (path != null)
+            var Video = _videoGrid.SelectedItem as Video;
+            if (Video != null)
             {
-                VlcWinForm vlc = new VlcWinForm();
-                vlc.Show();
-                vlc.PlayVideo(path);
+                string Path = Video.Path;
+
+                if (Path != null)
+                {
+                    VlcWinForm Vlc = new VlcWinForm();
+                    Vlc.Show();
+                    Vlc.PlayVideo(Path);
+                }
             }
         }
+
         #endregion
 
-        private void _videoGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void VideoGridMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MenuItemPlayClick(sender, e);
         }

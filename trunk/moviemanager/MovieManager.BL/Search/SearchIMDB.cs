@@ -21,35 +21,38 @@ namespace MovieManager.BL.Search
 
         private static void GetVideoInfoFromId(Video video)
         {
+            Uri Request = new Uri("http://www.imdbapi.com/?r=XML&i=" + HttpUtility.UrlEncode(video.IdImdb));
             try
             {
                 //do request
-                Uri request = new Uri("http://www.imdbapi.com/?r=XML&i=" + HttpUtility.UrlEncode(video.IdImdb));
-                String response = SimpleWebRequest.DoRequest(request);
+                String Response = SimpleWebRequest.DoRequest(Request);
 
-                if (!string.IsNullOrEmpty(response))
+                if (!string.IsNullOrEmpty(Response))
                 {
-                    Console.WriteLine(response);
+                    Console.WriteLine(Response);
 
-                    XDocument xmlDoc = XDocument.Parse(response);
+                    XDocument XMLDoc = XDocument.Parse(Response);
 
                     //get elements from xml
-                    var localMovies = from mov in xmlDoc.Descendants("movie")
+                    var LocalMovies = from Mov in XMLDoc.Descendants("movie")
+                                      let XAttribute = Mov.Attribute("rating")
+                                      where XAttribute != null
+                                      let Attribute = Mov.Attribute("released")
+                                      where Attribute != null
                                       select new
                                       {
-                                          RatingImdb = mov.Attribute("rating").Value,
-                                          Release = mov.Attribute("released").Value
+                                          RatingImdb = XAttribute.Value,
+                                          Release = Attribute.Value
                                       };
 
-                    var vid = localMovies.ToList()[0];
-                    video.RatingImdb = double.Parse(vid.RatingImdb);
-                    video.Release = DateTimeUtilities.ParseDate(vid.Release);
+                    var Vid = LocalMovies.ToList()[0];
+                    video.RatingImdb = double.Parse(Vid.RatingImdb);
+                    video.Release = DateTimeUtilities.ParseDate(Vid.Release);
                 }
             }
             catch
             {
             }
         }
-
     }
 }

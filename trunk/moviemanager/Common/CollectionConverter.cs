@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Common
 {
@@ -7,12 +8,7 @@ namespace Common
     {
         public static List<T> ConvertObservableCollection(ObservableCollection<T> observableCollection)
         {
-            List<T> MyList = new List<T>();
-            foreach (T S in observableCollection)
-            {
-                    MyList.Add(S);
-            }
-            return MyList;
+            return observableCollection.ToList();
         }
 
         public static ObservableCollection<T> ConvertList(List<T> list)

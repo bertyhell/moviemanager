@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace MovieManager.BL
+﻿namespace MovieManager.BL
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -27,7 +27,7 @@ namespace VlcPlayer
         {
         }
 
-        private void Overlay_MouseMove(object sender, MouseEventArgs e)
+        private void OverlayMouseMove(object sender, MouseEventArgs e)
         {
             if(_parent.IsFullScreen && _parent.ControlPanel != null)
             {

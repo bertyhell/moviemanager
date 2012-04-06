@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using Model;
+﻿using Model;
 
 namespace MovieManager.APP.Panels.Search
 {

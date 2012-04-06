@@ -22,7 +22,7 @@
         <ComboBox Grid.Column="2" x:Name="cbbParameters" VerticalAlignment="Center" ItemsSource="{Binding Parameters}" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <ContentControl Content="{Binding}" MouseLeftButtonDown="List_MouseLeftButtonDown" MouseMove="List_MouseMove" />
+                    <ContentControl Content="{Binding}" MouseLeftButtonDown="ListMouseLeftButtonDown" MouseMove="ListMouseMove" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

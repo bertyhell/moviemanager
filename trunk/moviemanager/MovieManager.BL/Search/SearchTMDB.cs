@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Common;
 using Model;
@@ -45,23 +44,19 @@ namespace MovieManager.BL.Search
 
         public static List<Movie> GetVideoInfo(String query)
         {
-            List<Movie> videos = new List<Movie>();
+            List<Movie> Videos = new List<Movie>();
             try
             {
                 //do request
-                Uri request = new Uri("http://api.themoviedb.org/3/search/movie?api_key=" + APIKEY + "&query="
+                Uri Request = new Uri("http://api.themoviedb.org/3/search/movie?api_key=" + APIKEY + "&query="
                                     + HttpUtility.UrlEncode(query));
-                String Response = SimpleWebRequest.DoJSONRequest(request);
+                String Response = SimpleWebRequest.DoJSONRequest(Request);
 
                 if (!string.IsNullOrEmpty(Response))
                 {
                     JObject JsonDoc = JObject.Parse(Response);
                     JToken Results = JsonDoc["results"];
-                    foreach (JToken JToken in Results)
-                    {
-                        Movie Mov = new Movie() {Name = (string)JToken["title"]};
-                        videos.Add(Mov);
-                    }
+                    Videos.AddRange(Results.Select(jToken => new Movie {Name = (string) jToken["title"]}));
                 }
             }
 
@@ -69,30 +64,38 @@ namespace MovieManager.BL.Search
             {
             }
 
-            return videos;
+            return Videos;
         }
 
 
 
         private static void GetImages(IEnumerable<XNode> images, Movie movie)
         {
-            bool firstImage = true;
-            foreach (XNode imageNode in images)
+            bool FirstImage = true;
+            foreach (XNode ImageNode in images)
             {
-                XElement imageEl = imageNode as XElement;
-                if (imageEl != null && imageEl.Attribute("size").Value == "original")
+                XElement ImageEl = ImageNode as XElement;
+                if (ImageEl != null)
                 {
-                    string url = imageEl.Attribute("url").Value;
-                    if (!string.IsNullOrEmpty(url))
+                    var XAttribute = ImageEl.Attribute("size");
+                    if (XAttribute != null && (XAttribute.Value == "original"))
                     {
-                        if (firstImage)
+                        var Attribute = ImageEl.Attribute("url");
+                        if (Attribute != null)
                         {
-                            movie.Poster = new Uri(url);
-                            firstImage = false;
-                        }
-                        else
-                        {
-                            movie.Images.Add(new ImageInfo { Uri = new Uri(url), Type = typeof(Movie) });
+                            string Url = Attribute.Value;
+                            if (!string.IsNullOrEmpty(Url))
+                            {
+                                if (FirstImage)
+                                {
+                                    movie.Poster = new Uri(Url);
+                                    FirstImage = false;
+                                }
+                                else
+                                {
+                                    movie.Images.Add(new ImageInfo { Uri = new Uri(Url), Type = typeof(Movie) });
+                                }
+                            }
                         }
                     }
                 }
@@ -101,36 +104,51 @@ namespace MovieManager.BL.Search
 
         public static void GetExtraMovieInfo(int tmdbId, Movie movie)
         {
-            Uri request = new Uri("http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + tmdbId);
-            String response = SimpleWebRequest.DoRequest(request);
+            Uri Request = new Uri("http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + tmdbId);
+            String Response = SimpleWebRequest.DoRequest(Request);
 
-            if (!string.IsNullOrEmpty(response))
+            if (!string.IsNullOrEmpty(Response))
             {
                 //Console.WriteLine(Response);
 
-                XDocument xmlDoc = XDocument.Parse(response);
+                XDocument XMLDoc = XDocument.Parse(Response);
 
                 //get elements from xml
-                var localMovies = from movieEl in xmlDoc.Descendants("movie")
+                var LocalMovies = from MovieEl in XMLDoc.Descendants("movie")
+                                  let XElement = MovieEl.Element("overview")
+                                  where XElement != null
+                                  let Element = MovieEl.Element("name")
+                                  where Element != null
+                                  let XElement1 = MovieEl.Element("categories")
+                                  where XElement1 != null
+                                  let Element1 = MovieEl.Element("images")
+                                  where Element1 != null
+                                  let XElement2 = MovieEl.Element("cast")
+                                  where XElement2 != null
                                   select new
                                   {
-                                      Plot = movieEl.Element("overview").Value,
-                                      Name = movieEl.Element("name").Value,
-                                      Genres = movieEl.Element("categories").Nodes().ToList(),
-                                      Images = movieEl.Element("images").Nodes().ToList(),
-                                      Cast = movieEl.Element("cast").Nodes().ToList()
+                                      Plot = XElement.Value,
+                                      Name = Element.Value,
+                                      Genres = XElement1.Nodes().ToList(),
+                                      Images = Element1.Nodes().ToList(),
+                                      Cast = XElement2.Nodes().ToList()
                                   };
 
-                var movieVar = localMovies.ToList()[0];
-                GetImages(movieVar.Images, movie);
-                movie.Name = movieVar.Name;
-                movie.Plot = movieVar.Plot;
+                var MovieVar = LocalMovies.ToList()[0];
+                GetImages(MovieVar.Images, movie);
+                movie.Name = MovieVar.Name;
+                movie.Plot = MovieVar.Plot;
 
                 movie.Genres.Clear();
-                foreach (XNode genre in movieVar.Genres)
+                foreach (XNode Genre in MovieVar.Genres)
                 {
-                    XElement categoryElement = genre as XElement;
-                    movie.Genres.Add(categoryElement.Attribute("name").Value);
+                    XElement CategoryElement = Genre as XElement;
+                    if (CategoryElement != null)
+                    {
+                        var XAttribute = CategoryElement.Attribute("name");
+                        if (XAttribute != null)
+                            movie.Genres.Add(XAttribute.Value);
+                    }
                 }
             }
         }
@@ -171,7 +189,8 @@ namespace MovieManager.BL.Search
                     }
                 }
             }
-            catch { }
+            catch (Exception)
+            { }
 
             return Actors;
         }

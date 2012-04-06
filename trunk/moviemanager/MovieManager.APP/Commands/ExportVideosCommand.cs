@@ -15,8 +15,8 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            ExcelExportWindow exportWindow = new ExcelExportWindow();
-            exportWindow.Show();
+            ExcelExportWindow ExportWindow = new ExcelExportWindow();
+            ExportWindow.Show();
 
         }
     }

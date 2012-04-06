@@ -20,7 +20,7 @@ namespace MovieManager.APP.Panels
 
 
         private List<Image> _imagesElements;
-        public readonly static DependencyProperty ImagesProperty = DependencyProperty.Register("Images", typeof(List<ImageInfo>),
+        public readonly static DependencyProperty IMAGES_PROPERTY = DependencyProperty.Register("Images", typeof(List<ImageInfo>),
                                                                           typeof(MovieScrollPanel), new PropertyMetadata(new List<ImageInfo>(), OnImagesChanged));
 
 
@@ -37,10 +37,10 @@ namespace MovieManager.APP.Panels
 
         public List<ImageInfo> Images
         {
-            get { return (List<ImageInfo>)GetValue(ImagesProperty); }
+            get { return (List<ImageInfo>)GetValue(IMAGES_PROPERTY); }
             set
             {
-                SetValue(ImagesProperty, value);
+                SetValue(IMAGES_PROPERTY, value);
             }
         }
 
@@ -53,39 +53,45 @@ namespace MovieManager.APP.Panels
             if (panel.Images != null && panel.Images.Count > 0)
             {
                 panel._imagesElements = new List<Image>();
-                for (int i = 0; i < panel.Images.Count; i++)
+                for (int I = 0; I < panel.Images.Count; I++)
                 {
                     //add new elements
-                    Image newImage = new Image();
+                    Image NewImage = new Image
+                                         {
+                                             Source = ImageFactory.GetImage(panel.Images[I].Uri).Source,
+                                             Tag = panel.Images[I],
+                                             Margin = new Thickness(5)
+                                         };
                     //set sources
-                    newImage.Source = ImageFactory.GetImage(panel.Images[i].Uri).Source;
-                    newImage.Tag = panel.Images[i];
-                    newImage.Margin = new Thickness(5);
-                    newImage.MouseUp += panel.NewImageMouseUp;
+                    NewImage.MouseUp += panel.NewImageMouseUp;
 
-                    panel._layoutRoot.Children.Add(newImage);
+                    panel._layoutRoot.Children.Add(NewImage);
                     panel._layoutRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength() });
-                    Grid.SetColumn(newImage, i);
-                    panel._imagesElements.Add(newImage);
+                    Grid.SetColumn(NewImage, I);
+                    panel._imagesElements.Add(NewImage);
                 }
             }
         }
 
         private void NewImageMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ImageInfo info = (sender as Image).Tag as ImageInfo;
-            if (info != null && SearchEvent != null)
+            var Image = sender as Image;
+            if (Image != null)
             {
-                SearchEvent(new SearchEventArgs
+                ImageInfo Info = Image.Tag as ImageInfo;
+                if (Info != null && SearchEvent != null)
                 {
-                    SearchOptions = new SearchOptions
-                    {
-                        SearchForMovies = (info.Type == typeof(Movie)),
-                        SearchForActors = (info.Type == typeof(Actor)),
-                        SearchOnTmdb = true,
-                        SearchTerm = info.Tag,
-                    }
-                });
+                    SearchEvent(new SearchEventArgs
+                                    {
+                                        SearchOptions = new SearchOptions
+                                                            {
+                                                                SearchForMovies = (Info.Type == typeof(Movie)),
+                                                                SearchForActors = (Info.Type == typeof(Actor)),
+                                                                SearchOnTmdb = true,
+                                                                SearchTerm = Info.Tag,
+                                                            }
+                                    });
+                }
             }
         }
 

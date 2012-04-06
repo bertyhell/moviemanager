@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
 using Model;
 
 namespace MovieManager.APP.Panels.Filter
@@ -19,15 +19,10 @@ namespace MovieManager.APP.Panels.Filter
 
         public bool FilterVideo(object video)
         {
-
-            foreach (FilterControl filterControl in _controller.AppliedFilters)
-            {
-                if (!filterControl.FilterSucceeded((Video)video)) return false;
-            }
-            return true;
+            return _controller.AppliedFilters.All(filterControl => filterControl.FilterSucceeded((Video) video));
         }
 
-        private void Image_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ImageMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             _controller.AppliedFilters.Remove((FilterControl) lstFilters.SelectedItem);
         }

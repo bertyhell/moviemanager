@@ -44,7 +44,7 @@
             this.Text = "FullScreenForm";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OverlayKeyUp);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OverlayMouseDoubleClick);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Overlay_MouseMove);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OverlayMouseMove);
             this.ResumeLayout(false);
 
         }

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml;
-using System.Xml.Linq;
 
-namespace Common
+namespace Common.SettingsStorage
 {
     public class SettingsSaver
     {
-        private string _filePath;
-        private string _rootTag;
+        private readonly string _filePath;
+        private readonly string _rootTag;
         private XmlTextWriter _xmlWriter;
 
         public SettingsSaver(String filePath, string rootTag)
@@ -22,8 +20,7 @@ namespace Common
         public void CreateXmlWriter()
         {
             _tagNameList.Clear();
-            _xmlWriter = new XmlTextWriter(_filePath, null);
-            _xmlWriter.Formatting = Formatting.Indented;
+            _xmlWriter = new XmlTextWriter(_filePath, null) {Formatting = Formatting.Indented};
             _xmlWriter.WriteStartDocument();
             _xmlWriter.WriteStartElement(_rootTag);
         }
@@ -55,7 +52,7 @@ namespace Common
             if (NodeList.Count == 0)
                 return null;
 
-            return ((XmlElement)NodeList[0]).InnerText;
+            return NodeList[0].InnerText;
         }
 
         public void WriteStringList(List<String> stringList, string listName)
@@ -76,8 +73,6 @@ namespace Common
 
         public List<string> ReadStringList(string listName)
         {
-            List<string> StringList = new List<string>();
-
             XmlDocument Xdoc = new XmlDocument();
             Xdoc.Load(_filePath);
             XmlNodeList NodeList = Xdoc.GetElementsByTagName(listName);
@@ -85,12 +80,8 @@ namespace Common
                 return null;
 
             XmlNodeList ListElements = ((XmlElement)NodeList[0]).GetElementsByTagName("String");
-            foreach (XmlElement ListElement in ListElements)
-            {
-                StringList.Add(ListElement.InnerText);
-            }
 
-            return StringList;
+            return (from XmlElement ListElement in ListElements select ListElement.InnerText).ToList();
         }
 
         #region helperMethods

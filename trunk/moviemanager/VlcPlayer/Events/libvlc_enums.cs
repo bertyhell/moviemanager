@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace VlcPlayer
+﻿namespace VlcPlayer.Events
 {
+    // ReSharper disable InconsistentNaming
     public enum libvlc_state_t
     {
         libvlc_NothingSpecial = 0,
@@ -110,5 +106,5 @@ namespace VlcPlayer
         Ended,
         Error
     }
-
+    // ReSharper restore InconsistentNaming
 }

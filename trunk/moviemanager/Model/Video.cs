@@ -100,12 +100,12 @@ namespace Model
         {
             if (_genres.Count > 0)
             {
-                String genresString = _genres[0];
-                for (int i = 1; i < _genres.Count; i++)
+                String GenresString = _genres[0];
+                for (int I = 1; I < _genres.Count; I++)
                 {
-                    genresString += ", " + _genres[i];
+                    GenresString += ", " + _genres[I];
                 }
-                return genresString;
+                return GenresString;
             }
             return "";
         }

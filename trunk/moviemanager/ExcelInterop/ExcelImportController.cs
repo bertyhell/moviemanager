@@ -55,33 +55,34 @@ namespace ExcelInterop
                 _mappingItems.Clear();
                 if (ExcelColumns.Count() != 0)
                 {
-                    _mappingItems = new ObservableCollection<ExcelMappingItem>();
-                    _mappingItems.Add(new ExcelMappingItem
-                    {
-                        MMColumn = "Id*",
-                        ExcelColumn = GetBestMatch("Id", ExcelColumns)
-                    });
-                    _mappingItems.Add(new ExcelMappingItem
-                    {
-                        MMColumn = "Categorie (auto=leeg)",
-                        ExcelColumn = GetBestMatch("Categorie", ExcelColumns)
-                    });
-                    _mappingItems.Add(new ExcelMappingItem
-                    {
-                        MMColumn = "Ratio (auto = 1)",
-                        ExcelColumn = GetBestMatch("Ratio", ExcelColumns)
-                    });
-                    _mappingItems.Add(new ExcelMappingItem
-                    {
-                        MMColumn = "Stock totaal aantal (auto = 0)",
-                        ExcelColumn = GetBestMatch("Stock totaal aantal", ExcelColumns)
-                    });
-                    _mappingItems.Add(new ExcelMappingItem
-                    {
-                        MMColumn = "Stock rest aantal (auto = 0)",
-                        ExcelColumn = GetBestMatch("Stock rest aantal", ExcelColumns)
-                    });
-
+                    _mappingItems = new ObservableCollection<ExcelMappingItem>
+                                        {
+                                            new ExcelMappingItem
+                                                {
+                                                    MMColumn = "Id*",
+                                                    ExcelColumn = GetBestMatch("Id", ExcelColumns)
+                                                },
+                                            new ExcelMappingItem
+                                                {
+                                                    MMColumn = "Categorie (auto=leeg)",
+                                                    ExcelColumn = GetBestMatch("Categorie", ExcelColumns)
+                                                },
+                                            new ExcelMappingItem
+                                                {
+                                                    MMColumn = "Ratio (auto = 1)",
+                                                    ExcelColumn = GetBestMatch("Ratio", ExcelColumns)
+                                                },
+                                            new ExcelMappingItem
+                                                {
+                                                    MMColumn = "Stock totaal aantal (auto = 0)",
+                                                    ExcelColumn = GetBestMatch("Stock totaal aantal", ExcelColumns)
+                                                },
+                                            new ExcelMappingItem
+                                                {
+                                                    MMColumn = "Stock rest aantal (auto = 0)",
+                                                    ExcelColumn = GetBestMatch("Stock rest aantal", ExcelColumns)
+                                                }
+                                        };
                 }
                 PropChanged("MappingItems");
             }
@@ -98,13 +99,16 @@ namespace ExcelInterop
 
         public void GetImportFile()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.FileName = "Producten.xlsx";
-            openFileDialog.Filter = "Excel Bestanden(*.xls;*.xlsx)|*.XLS;*.XLSX|All files (*.*)|*.*";
-            DialogResult result = openFileDialog.ShowDialog();
-            if (result == DialogResult.OK) // Test result.
+            OpenFileDialog OpenFileDialog = new OpenFileDialog
+                                                {
+                                                    FileName = "Producten.xlsx",
+                                                    Filter =
+                                                        "Excel Bestanden(*.xls;*.xlsx)|*.XLS;*.XLSX|All files (*.*)|*.*"
+                                                };
+            DialogResult Result = OpenFileDialog.ShowDialog();
+            if (Result == DialogResult.OK) // Test result.
             {
-                FilePath = openFileDialog.FileName;
+                FilePath = OpenFileDialog.FileName;
                 PropChanged("FilePath");
             }
         }
@@ -126,17 +130,17 @@ namespace ExcelInterop
                 //required fields not mapped to "default"
                 if (MappingItems.All(item => !item.MMColumn.EndsWith("*") || item.ExcelColumn != "Auto"))
                 {
-                    List<string> excelHeaders = (from mappingItem in MappingItems where mappingItem.ExcelColumn != "Auto" select mappingItem.ExcelColumn).ToList();
-                    List<List<string>> data = Excel.Excel2Data(FilePath, SelectedWorksheet, excelHeaders);
+                    List<string> ExcelHeaders = (from MappingItem in MappingItems where MappingItem.ExcelColumn != "Auto" select MappingItem.ExcelColumn).ToList();
+                    List<List<string>> Data = Excel.Excel2Data(FilePath, SelectedWorksheet, ExcelHeaders);
 
-                    string errorMessage = "";
+                    string ErrorMessage = "";
 
                     //create video objects
                     const int idIndex = -1;
                     const int categoryIndex = -1;
-                    int ratioIndex = -1;
-                    int stockAantalIndex = -1;
-                    int stockRestAantalIndex = -1;
+                    int RatioIndex = -1;
+                    int StockAantalIndex = -1;
+                    int StockRestAantalIndex = -1;
 
                     //foreach (ExcelMappingItem item in MappingItems)
                     //{
@@ -160,33 +164,33 @@ namespace ExcelInterop
                     //    }
                     //}
 
-                    Video video = new Video();
-                    for (int i = 1; i <= data.Count - 1; i++)
+                    Video Video = new Video();
+                    for (int i = 1; i <= Data.Count - 1; i++)
                     {
                         try
                         {
-                            video.Id = int.Parse(data[i][idIndex]);
-                            video.IdImdb = (categoryIndex == -1 ? "" : data[i][categoryIndex]);
+                            Video.Id = int.Parse(Data[i][idIndex]);
+                            Video.IdImdb = (categoryIndex == -1 ? "" : Data[i][categoryIndex]);
                             //video.FPRatio = (categoryIndex == -1 ? 1 : data[i][ratioIndex]);
                             //video.FPAantal = (categoryIndex == -1 ? 0 : data[i][stockAantalIndex]);
                             //video.FPRestAantal = (categoryIndex == -1 ? 0 : data[i][stockRestAantalIndex]);
                             //video.FPFuifId = _fuifId;
 
-                            MMDatabase.InsertVideoHDD(video);
+                            MMDatabase.InsertVideoHDD(Video);
                             //TODO 020 ask to update items when first duplicate is encountered
                         }
-                        catch (FormatException e)
+                        catch (FormatException E)
                         {
-                            errorMessage += "\n" + "ProductId is geen getal: '" + data[i][idIndex] + "' (overgeslagen)\n\t" + e.Message;
+                            ErrorMessage += "\n" + "ProductId is geen getal: '" + Data[i][idIndex] + "' (overgeslagen)\n\t" + E.Message;
                         }
-                        catch (SqlException e)
+                        catch (SqlException E)
                         {
-                            errorMessage += "\n" + "Probleem met toevoegen tot database: '" + string.Join("|", data[i]) + "' (overgeslagen)\n\t" + e.Message;
+                            ErrorMessage += "\n" + "Probleem met toevoegen tot database: '" + string.Join("|", Data[i]) + "' (overgeslagen)\n\t" + E.Message;
                         }
                     }
 
 
-                    if (string.IsNullOrWhiteSpace(errorMessage))
+                    if (string.IsNullOrWhiteSpace(ErrorMessage))
                     {
                         //TODO 060 add error messages
                         //Microsoft.Windows.Controls.MessageBox.Show("Importeren voltooid\n Aantal geimporteerde producten: " + aantalImportedProducts, "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -224,16 +228,16 @@ namespace ExcelInterop
                 return 0;
             }
 
-            int[,] matrix = new int[firstString.Length + 1, secondString.Length + 1];
+            int[,] Matrix = new int[firstString.Length + 1, secondString.Length + 1];
 
             for (int i = 0; i <= firstString.Length; i++)
             {
-                matrix[i, 0] = i;
+                Matrix[i, 0] = i;
             }
             // deletion
             for (int j = 0; j <= secondString.Length; j++)
             {
-                matrix[0, j] = j;
+                Matrix[0, j] = j;
             }
             // insertion
             for (int i = 0; i <= firstString.Length - 1; i++)
@@ -242,18 +246,18 @@ namespace ExcelInterop
                 {
                     if (firstString[i] == secondString[j])
                     {
-                        matrix[i + 1, j + 1] = matrix[i, j];
+                        Matrix[i + 1, j + 1] = Matrix[i, j];
                     }
                     else
                     {
-                        matrix[i + 1, j + 1] = Math.Min(matrix[i, j + 1] + 1, matrix[i + 1, j] + 1);
+                        Matrix[i + 1, j + 1] = Math.Min(Matrix[i, j + 1] + 1, Matrix[i + 1, j] + 1);
                         //deletion or insertion
                         //substitution
-                        matrix[i + 1, j + 1] = Math.Min(matrix[i + 1, j + 1], matrix[i, j] + 1);
+                        Matrix[i + 1, j + 1] = Math.Min(Matrix[i + 1, j + 1], Matrix[i, j] + 1);
                     }
                 }
             }
-            return matrix[firstString.Length, secondString.Length];
+            return Matrix[firstString.Length, secondString.Length];
         }
 
         public static double GetSimilarity(string firstString, string secondString)
@@ -272,26 +276,26 @@ namespace ExcelInterop
                 return 1;
             }
 
-            int longestLenght = Math.Max(firstString.Length, secondString.Length);
-            int distance = GetLevensteinDistance(firstString, secondString);
-            double percent = distance / Convert.ToDouble(longestLenght);
-            return 1 - percent;
+            int LongestLenght = Math.Max(firstString.Length, secondString.Length);
+            int Distance = GetLevensteinDistance(firstString, secondString);
+            double Percent = Distance / Convert.ToDouble(LongestLenght);
+            return 1 - Percent;
         }
 
         public static string GetBestMatch(string s1, List<string> list)
         {
-            string bestMatch = list[0];
-            double bestSimilarity = 0;
-            foreach (string s2 in list)
+            string BestMatch = list[0];
+            double BestSimilarity = 0;
+            foreach (string S2 in list)
             {
-                double similarity = GetSimilarity(s1, s2);
-                if (similarity > bestSimilarity)
+                double Similarity = GetSimilarity(s1, S2);
+                if (Similarity > BestSimilarity)
                 {
-                    bestMatch = s2;
-                    bestSimilarity = similarity;
+                    BestMatch = S2;
+                    BestSimilarity = Similarity;
                 }
             }
-            return bestMatch;
+            return BestMatch;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

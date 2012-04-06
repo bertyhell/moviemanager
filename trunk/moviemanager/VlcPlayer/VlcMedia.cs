@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace VlcPlayer
 {
@@ -17,7 +14,7 @@ namespace VlcPlayer
 
         internal VlcMedia(IntPtr handle)
         {
-            this.Handle = handle;
+            Handle = handle;
         }
 
         public void Dispose()

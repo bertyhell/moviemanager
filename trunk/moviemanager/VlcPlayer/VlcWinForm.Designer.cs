@@ -102,7 +102,7 @@ namespace VlcPlayer
             this.MainMenuStrip = this._menubar;
             this.Name = "VlcWinForm";
             this.Text = "VlcWinForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VlcWinForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VlcWinFormFormClosing);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VlcWinFormKeyUp);
             this.Move += new System.EventHandler(this.VlcWinFormMove);
             this._menubar.ResumeLayout(false);

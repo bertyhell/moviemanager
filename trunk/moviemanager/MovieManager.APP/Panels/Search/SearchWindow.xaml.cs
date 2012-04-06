@@ -28,15 +28,15 @@ namespace MovieManager.APP.Panels.Search
         {
             if (options.SearchForActors)
             {
-                List<Actor> searchedActors = SearchTMDB.SearchActor(options.SearchTerm);
-                if (searchedActors.Count > 1)
+                List<Actor> SearchedActors = SearchTMDB.SearchActor(options.SearchTerm);
+                if (SearchedActors.Count > 1)
                 {
                     //TODO 090: Make selection window
-                    SearchForActor(searchedActors[0]);
+                    SearchForActor(SearchedActors[0]);
                 }
-                else if (searchedActors.Count == 1)
+                else if (SearchedActors.Count == 1)
                 {
-                    SearchForActor(searchedActors[0]);
+                    SearchForActor(SearchedActors[0]);
                 }
                 else
                 {
@@ -47,22 +47,22 @@ namespace MovieManager.APP.Panels.Search
 
             if (options.SearchForMovies)
             {
-                Movie movie;
-                int queryIsId;
+                Movie Movie;
+                int QueryIsId = 0;
                 try
                 {
-                    queryIsId = Convert.ToInt32(options.SearchTerm);
+                    QueryIsId = Convert.ToInt32(options.SearchTerm);
                 }
                 catch
                 {
-                    List<Movie> movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
+                    List<Movie> Movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
                     //TODO 090: Make selection window
-                    movie = movies.Count > 0 ? movies[0] : null;
-                    queryIsId = movie.IdTmdb;
+                    Movie = Movies.Count > 0 ? Movies[0] : null;
+                    if (Movie != null) QueryIsId = Movie.IdTmdb;
                 }
-                movie = new Movie();
-                SearchTMDB.GetExtraMovieInfo(queryIsId, movie);
-                UpdateGuiForMovie(movie);
+                Movie = new Movie();
+                SearchTMDB.GetExtraMovieInfo(QueryIsId, Movie);
+                UpdateGuiForMovie(Movie);
             }
         }
 
@@ -84,10 +84,9 @@ namespace MovieManager.APP.Panels.Search
         private void UpdateGuiForMovie(Movie movie)
         {
             ResetGrid();
-            MovieOverview overview = new MovieOverview();
-            overview.Movie = movie;
-            Grid.SetRow(overview, 1);
-            _layoutRoot.Children.Add(overview);
+            MovieOverview Overview = new MovieOverview {Movie = movie};
+            Grid.SetRow(Overview, 1);
+            _layoutRoot.Children.Add(Overview);
         }
 
         private void ResetGrid()

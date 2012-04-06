@@ -15,16 +15,18 @@ namespace ExcelInterop
         public ExcelExportController()
         {
             _exportProperties = new ObservableCollection<DatabaseMappingItem>();
-            List<String> headers = new List<String>();//TODO 070 get from database or enum
-            headers.Add("id");
-            headers.Add("id_imdb");
-            headers.Add("name");
-            headers.Add("release");
-            headers.Add("rating");
-            headers.Add("rating_imdb");
-            headers.Add("genre");
-            headers.Add("path");
-            headers.Add("last_play_location");
+            List<String> Headers = new List<String>
+                                       {
+                                           "id",
+                                           "id_imdb",
+                                           "name",
+                                           "release",
+                                           "rating",
+                                           "rating_imdb",
+                                           "genre",
+                                           "path",
+                                           "last_play_location"
+                                       };//TODO 070 get from database or enum
             _exportProperties.Add(new DatabaseMappingItem
                                       {
                                           MMColumn = "Id",
@@ -106,9 +108,9 @@ namespace ExcelInterop
 
         public void SelectAllNone()
         {
-            foreach (DatabaseMappingItem mappingItem in _exportProperties)
+            foreach (DatabaseMappingItem MappingItem in _exportProperties)
             {
-                mappingItem.Selected = _selectAllNone;
+                MappingItem.Selected = _selectAllNone;
             }
             _selectAllNone = !_selectAllNone;
         }
@@ -120,8 +122,7 @@ namespace ExcelInterop
                 //export
                 Excel.Data2Excel(
                     MMDatabase.GetVideosDataReader(),
-                    from mappingItem in ExportProperties where mappingItem.Selected select mappingItem.DatabaseColumn,
-                    "videos");
+                    (IList<string>) (from MappingItem in ExportProperties where MappingItem.Selected select MappingItem.DatabaseColumn), "videos");//TODO 060 check if this still works -> prob a problem with linq expression
             }
             else
             {
