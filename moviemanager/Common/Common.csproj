@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="CollectionConverter.cs" />
     <Compile Include="DateTimeUtilities.cs" />
+    <Compile Include="ProgressArgs.cs" />
     <Compile Include="SettingsStorage\DuplicateSettingsKeyException.cs" />
     <Compile Include="ImageFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

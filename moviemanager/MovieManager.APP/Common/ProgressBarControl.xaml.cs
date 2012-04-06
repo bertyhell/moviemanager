@@ -12,15 +12,58 @@ namespace MovieManager.APP.Common
             InitializeComponent();
         }
 
-        private string _progressString;
-        public string ProgressString
+        private string _message;
+        public string Message
         {
-            get { return _progressString; }
-            set { _progressString = value; 
-            PropertyChanged(this, new PropertyChangedEventArgs("ProgressString"));}
+            get { return _message; }
+            set
+            {
+                _message = value;
+                PropChanged("Message");
+            }
+
         }
 
-        public bool IsIndeterminate { get; set; }
+        private bool _isIndeterminate;
+        public bool IsIndeterminate
+        {
+            get { return _isIndeterminate; }
+            set
+            {
+                _isIndeterminate = value;
+                PropChanged("IsIndeterminate");
+            }
+        }
+
+        private int _maximum;
+        public int Maximum
+        {
+            get { return _maximum; }
+            set
+            {
+                _maximum = value;
+                PropChanged("Maximum");
+            }
+        }
+
+        private int _progressValue;
+        public int ProgressValue
+        {
+            get { return _progressValue; }
+            set
+            {
+                _progressValue = value;
+                PropChanged("Value");
+            }
+        }
+
+        public void PropChanged(string field)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("field"));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

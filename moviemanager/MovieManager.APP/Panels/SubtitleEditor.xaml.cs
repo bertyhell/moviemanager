@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using Model;
@@ -32,17 +33,22 @@ namespace MovieManager.APP.Panels
 
         private void BtnAddSubtitleClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog
+            String Path = ConfigurationManager.AppSettings["defaultVideoLocation"];
+            if (!new DirectoryInfo(Path).Exists)
             {
-                InitialDirectory = ConfigurationManager.AppSettings["defaultVideoLocation"],
+                Path = ConfigurationManager.AppSettings["defaultVideoLocation1"];
+            }
+            OpenFileDialog Ofd = new OpenFileDialog
+            {
+                InitialDirectory = Path,
                 Multiselect = true
             };
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (Ofd.ShowDialog() == DialogResult.OK)
             {
-                foreach (String file in ofd.FileNames)
+                foreach (String File in Ofd.FileNames)
                 {
-                    if (!AlreadyInSubs(file))
-                        Video.Subs.Add(new Subtitle { Path = file });
+                    if (!AlreadyInSubs(File))
+                        Video.Subs.Add(new Subtitle { Path = File });
                     else
                     {
                         MessageBox.Show(Localization.Resource.SubtitleAlreadyInMovie, Localization.Resource.Error,

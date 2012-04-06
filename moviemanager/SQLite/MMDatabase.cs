@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using Common;
 using Model;
 using System.Data.SQLite;
 using System.Globalization;
@@ -76,7 +79,7 @@ namespace SQLite
             return Database.GetReader("select * from videos");
         }
 
-        public static ObservableCollection<Video> InsertVideosHDD(ObservableCollection<Video> videos)
+        public static IList<Video> InsertVideosHDD(IList<Video> videos)
         {
             return InsertVideosHDD(videos, false);
         }
@@ -85,11 +88,17 @@ namespace SQLite
             InsertVideosHDD(videos, true);
         }
 
-        private static ObservableCollection<Video> InsertVideosHDD(IEnumerable<Video> videos, bool insertDuplicates)
+        public static event OnProgressInsertVideos InsertVideos;
+
+        public delegate void OnProgressInsertVideos(object sender, ProgressArgs args);
+
+        private static IList<Video> InsertVideosHDD(IList<Video> videos, bool insertDuplicates)
         {
-            ObservableCollection<Video> Duplicates = new ObservableCollection<Video>();
+            IList<Video> Duplicates = new List<Video>();
             DsVideos DatasetVideos = new DsVideos();
             FillDatasetWithAllVideos(DatasetVideos);
+            int I = 0;
+
             foreach (Video Video in videos)
             {
                 if (insertDuplicates || DatasetVideos.videos.Select(DatasetVideos.videos.pathColumn.ColumnName + " = '" + Video.Path + "'").Length == 0)
@@ -110,6 +119,9 @@ namespace SQLite
                 {
                     Duplicates.Add(Video);
                 }
+
+                I++;
+                InsertVideos(null, new ProgressArgs { MaxNumber = videos.Count(), ProgressNumber = I});
             }
 
             (new videosTableAdapter()).Update(DatasetVideos.videos);

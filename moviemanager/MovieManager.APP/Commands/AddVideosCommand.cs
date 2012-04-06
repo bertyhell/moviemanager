@@ -24,22 +24,26 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            OpenFileDialog ofd = new OpenFileDialog
+            String Path = ConfigurationManager.AppSettings["defaultVideoLocation"];
+            if (!new DirectoryInfo(Path).Exists)
+            {
+                Path = ConfigurationManager.AppSettings["defaultVideoLocation1"];
+            }
+            //FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = Path };
+            OpenFileDialog Ofd = new OpenFileDialog
                                      {
-                                         InitialDirectory = ConfigurationManager.AppSettings["defaultVideoLocation"],
+                                         InitialDirectory = Path,
                                          Multiselect = true
                                      };
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (Ofd.ShowDialog() == DialogResult.OK)
             {
                 _videos = new ObservableCollection<Video>();
-                foreach (String file in ofd.FileNames)
+                foreach (String File in Ofd.FileNames)
                 {
-                    _progressWindow = new ProgressbarWindow();
-                    _progressWindow.Title = "Getting Videos";
-                    _progressWindow.Owner = MainWindow.Instance;
+                    _progressWindow = new ProgressbarWindow {Title = "Getting Videos", Owner = MainWindow.Instance};
                     _progressWindow.ShowDialog(); 
 
-                    MovieFileReader FileReader = new MovieFileReader(new FileInfo(file));
+                    MovieFileReader FileReader = new MovieFileReader(new FileInfo(File));
                     FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
                     FileReader.RunWorkerAsync();
                 }
