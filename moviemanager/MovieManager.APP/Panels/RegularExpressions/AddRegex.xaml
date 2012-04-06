@@ -16,7 +16,7 @@
         <TextBox x:Name="_txtRegex"/>
         
         <StackPanel Grid.Row="2" HorizontalAlignment="Right">
-            <Button x:Name="_btnOK" Content="OK" IsDefault="True" Click="_btnOK_Click" />
+            <Button x:Name="_btnOK" Content="OK" IsDefault="True" Click="BtnOkClick" />
         </StackPanel>
         
     </Grid>

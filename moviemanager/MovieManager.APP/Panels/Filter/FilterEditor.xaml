@@ -28,7 +28,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <ContentControl Content="{Binding}" HorizontalAlignment="Stretch"/>
-                        <Image Grid.Column="1" Source="/MovieManager.APP;component/Images/delete_24.png" Width="16" Height="16" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="2,9,5,0" MouseUp="Image_MouseUp"/>
+                        <Image Grid.Column="1" Source="/MovieManager.APP;component/Images/delete_24.png" Width="16" Height="16" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="2,9,5,0" MouseUp="ImageMouseUp"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

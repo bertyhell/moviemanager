@@ -13,7 +13,7 @@ namespace SQLite
     public class MovieFileReader : BackgroundWorker
     { // TODO 060: extends SwingWorker
 
-        static readonly String[] VideoFileExtensions = { "ASX", "DTS", "GXF", "M2V", "M3U", "M4V", "MPEG1", "MPEG2", "MTS", "MXF", "OGM", "PLS", "BUP", "A52", "AAC", "B4S", "CUE", "DIVX", "DV", "FLV", "M1V", "M2TS", "MKV", "MOV", "MPEG4", "OMA", "SPX", "TS", "VLC", "VOB", "XSPF", "DAT", "BIN", "IFO", "PART", "3G2", "AVI", "MPEG", "MPG", "FLAC", "M4A", "MP1", "OGG", "WAV", "XM", "3GP", "WMV", "AC3", "ASF", "MOD", "MP2", "MP3", "MP4", "WMA", "MKA", "M4P" };
+        static readonly String[] VIDEO_FILE_EXTENSIONS = { "ASX", "DTS", "GXF", "M2V", "M3U", "M4V", "MPEG1", "MPEG2", "MTS", "MXF", "OGM", "PLS", "BUP", "A52", "AAC", "B4S", "CUE", "DIVX", "DV", "FLV", "M1V", "M2TS", "MKV", "MOV", "MPEG4", "OMA", "SPX", "TS", "VLC", "VOB", "XSPF", "DAT", "BIN", "IFO", "PART", "3G2", "AVI", "MPEG", "MPG", "FLAC", "M4A", "MP1", "OGG", "WAV", "XM", "3GP", "WMV", "AC3", "ASF", "MOD", "MP2", "MP3", "MP4", "WMA", "MKA", "M4P" };
         static readonly String[] DELIMITERS = { "CD-1", "CD-2", "CD1", "CD2", "DVD-1", "DVD-2", "[Divx-ITA]", "[XviD-ITA]", "AC3", "DVDRip", "Xvid", "http", "www.", ".com", "shared", "powered", "sponsored", "sharelive", "filedonkey", "saugstube", "eselfilme", "eseldownloads", "emulemovies", "spanishare", "eselpsychos.de", "saughilfe.de", "goldesel.6x.to", "freedivx.org", "elitedivx", "deviance", "-ftv", "ftv", "-flt", "flt", "1080p", "720p", "1080i", "720i", "480", "x264", "ext", "ac3", "6ch", "axxo", "pukka", "klaxxon", "edition", "limited", "dvdscr", "screener", "unrated", "BRRIP", "subs", "_NL_", "m-hd" };
 
         private readonly DirectoryInfo _dir;
@@ -50,8 +50,12 @@ namespace SQLite
                         GetVideos(File, videos);
                 }
             }
+// ReSharper disable EmptyGeneralCatchClause
             catch (Exception)
-            { }
+// ReSharper restore EmptyGeneralCatchClause
+            {
+                //ignate wiered fileName exception
+            }
             try
             {
                 foreach (DirectoryInfo Directory in dir.GetDirectories())
@@ -59,7 +63,9 @@ namespace SQLite
                     GetVideos(Directory, videos);
                 }
             }
+// ReSharper disable EmptyGeneralCatchClause
             catch (Exception) { }
+// ReSharper restore EmptyGeneralCatchClause
         }
 
         public event OnProgressVideoFound FoundVideo;
@@ -68,7 +74,7 @@ namespace SQLite
 
         private void GetVideos(FileInfo file, ObservableCollection<Video> videos)
         {
-            if (!string.IsNullOrEmpty(file.Extension) && VideoFileExtensions.Contains(file.Extension.ToUpper().Substring(1)))
+            if (!string.IsNullOrEmpty(file.Extension) && VIDEO_FILE_EXTENSIONS.Contains(file.Extension.ToUpper().Substring(1)))
             {
                 videos.Add(new Video
                 {

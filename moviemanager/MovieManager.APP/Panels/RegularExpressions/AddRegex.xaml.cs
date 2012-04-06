@@ -5,7 +5,7 @@ namespace MovieManager.APP.Panels.RegularExpressions
     /// <summary>
     /// Interaction logic for AddRegex.xaml
     /// </summary>
-    public partial class AddRegex : Window
+    public partial class AddRegex
     {
         public AddRegex()
         {
@@ -19,10 +19,10 @@ namespace MovieManager.APP.Panels.RegularExpressions
             set { _txtRegex.Text = value; }
         }
 
-        private void _btnOK_Click(object sender, RoutedEventArgs e)
+        private void BtnOkClick(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            this.Close();
+            Close();
         }
     }
 }

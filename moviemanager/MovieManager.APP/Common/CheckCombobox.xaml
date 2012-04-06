@@ -9,7 +9,7 @@
         <ComboBox x:Name="OptionsCombobox" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Items}" IsReadOnly="true" IsEditable="True" Text="{Binding SelectedItemsString,Mode=OneWay}" MaxDropDownHeight="360">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox IsChecked="{Binding IsSelected}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked">
+                    <CheckBox IsChecked="{Binding IsSelected}" Checked="CheckBoxChecked" Unchecked="CheckBoxChecked">
                         <TextBlock Text="{Binding Title}" />
                     </CheckBox>
                 </DataTemplate>

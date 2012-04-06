@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using MovieManager.APP.Panels.RegularExpressions;
 using MovieManager.APP.Panels.Settings;
 
 namespace MovieManager.APP.Commands

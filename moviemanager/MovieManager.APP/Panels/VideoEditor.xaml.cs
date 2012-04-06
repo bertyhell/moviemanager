@@ -9,15 +9,15 @@ namespace MovieManager.APP.Panels
     /// </summary>
     public partial class VideoEditor
     {
-        public static readonly DependencyProperty VideoProperty =
+        public static readonly DependencyProperty VIDEO_PROPERTY =
             DependencyProperty.Register("Video", typeof(Video), typeof(VideoEditor), new PropertyMetadata(default(Video)));
 
         public Video Video
         {
-            get { return (Video)GetValue(VideoProperty); }
+            get { return (Video)GetValue(VIDEO_PROPERTY); }
             set
             {
-                SetValue(VideoProperty, value);
+                SetValue(VIDEO_PROPERTY, value);
                 DataContext = value;
             }
         }
@@ -41,14 +41,14 @@ namespace MovieManager.APP.Panels
 
         private void ComboBoxSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            VideoTypeEnum videoType = (VideoTypeEnum)e.AddedItems[0];
-            if (Video.VideoType != videoType)
+            VideoTypeEnum VideoType = (VideoTypeEnum)e.AddedItems[0];
+            if (Video.VideoType != VideoType)
             {
-                ObservableCollection<Video> localVideos = MainController.Instance.Videos;
-                int index = localVideos.IndexOf(Video);
-                Video = Video.ConvertVideo(videoType, Video);
-                localVideos.RemoveAt(index);
-                localVideos.Insert(index,Video);
+                ObservableCollection<Video> LocalVideos = MainController.Instance.Videos;
+                int Index = LocalVideos.IndexOf(Video);
+                Video = Video.ConvertVideo(VideoType, Video);
+                LocalVideos.RemoveAt(Index);
+                LocalVideos.Insert(Index,Video);
             }
         }
     }

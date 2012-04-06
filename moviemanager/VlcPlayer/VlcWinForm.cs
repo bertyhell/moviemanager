@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Common;
 using VlcPlayer.Common;
 
 namespace VlcPlayer
@@ -23,13 +22,13 @@ namespace VlcPlayer
         {
             InitializeComponent();
             KeyPreview = true;
-            string[] args = new[] {
+            string[] Args = new[] {
                 "--ignore-config",
                 @"--plugin-path=C:\Program Files (x86)\VideoLAN\VLC\plugins"
                 //,"--vout-filter=deinterlace", "--deinterlace-mode=blend"
             };
 
-            _vlcInstance = new VlcInstance(args);
+            _vlcInstance = new VlcInstance(Args);
             _player = null;
             _pnlControls.VlcWinForm = this;
         }
@@ -49,23 +48,23 @@ namespace VlcPlayer
 
         public void PlayVideo()
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            OpenFileDialog OpenFileDialog1 = new OpenFileDialog();
 
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
                 return;
 
-            PlayVideo(openFileDialog1.FileName);
+            PlayVideo(OpenFileDialog1.FileName);
         }
 
         public void PlayVideo(String fileName)
         {
-            using (VlcMedia media = new VlcMedia(_vlcInstance, fileName))
+            using (VlcMedia Media = new VlcMedia(_vlcInstance, fileName))
             {
                 if (_player == null)
-                    _player = new VlcMediaPlayer(media, this);
+                    _player = new VlcMediaPlayer(Media, this);
                 else
-                    _player.Media = media;
+                    _player.Media = Media;
             }
 
             //_player.Drawable = _video.Handle;
@@ -104,8 +103,8 @@ namespace VlcPlayer
                 FormBorderStyle = FormBorderStyle.None;
 
                 //change visual
-                this.Controls.Remove(_pnlControls);
-                this._overlayForm.Controls.Add(_pnlControls);
+                Controls.Remove(_pnlControls);
+                _overlayForm.Controls.Add(_pnlControls);
                 _pnlControls.ToggleFullScreen();
                 _menubar.Visible = false;
                 Location = new Point(0, 0);
@@ -120,8 +119,8 @@ namespace VlcPlayer
             else
             {
 
-                this._overlayForm.Controls.Remove(_pnlControls);
-                this.Controls.Add(_pnlControls);
+                _overlayForm.Controls.Remove(_pnlControls);
+                Controls.Add(_pnlControls);
                 _pnlControls.ToggleFullScreen();
                 FormBorderStyle = FormBorderStyle.Sizable;
                 Size = _previousFormSize;
@@ -168,11 +167,11 @@ namespace VlcPlayer
 
         private Point CalculateOverlayLocation()
         {
-            int borderWidth = (Width - ClientSize.Width) / 2;
-            int borderHeight = (Height - ClientSize.Height) - borderWidth;
+            int BorderWidth = (Width - ClientSize.Width) / 2;
+            int BorderHeight = (Height - ClientSize.Height) - BorderWidth;
             return new Point(
-                Location.X + borderWidth + _pnlVideo.Location.X,
-                Location.Y + borderHeight + _pnlVideo.Location.Y
+                Location.X + BorderWidth + _pnlVideo.Location.X,
+                Location.Y + BorderHeight + _pnlVideo.Location.Y
                 );
         }
 
@@ -200,7 +199,7 @@ namespace VlcPlayer
         }
 
 
-        private void VlcWinForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void VlcWinFormFormClosing(object sender, FormClosingEventArgs e)
         {
             _pnlControls.DetachFromEvents();
             _player.Stop();

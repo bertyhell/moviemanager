@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Common;
 
@@ -39,8 +34,8 @@ namespace VlcPlayer.Common
         {
             if(!_form.IsFullScreen)
             {
-                _previousLocation = this.Location;
-                _previousWidth = this.Width;
+                _previousLocation = Location;
+                _previousWidth = Width;
                 Location = new Point(0, (int)System.Windows.SystemParameters.PrimaryScreenHeight - 100);
                 Width = (int) System.Windows.SystemParameters.PrimaryScreenWidth;
             }
@@ -89,8 +84,8 @@ namespace VlcPlayer.Common
 
         public void SetVideoTimestamp()
         {
-            _lblTimestamp.Text = TimestampUtilities.longToTimestampString(_player.CurrentTimestamp) + "/" +
-                                 TimestampUtilities.longToTimestampString(_player.VideoLength);
+            _lblTimestamp.Text = TimestampUtilities.LongToTimestampString(_player.CurrentTimestamp) + "/" +
+                                 TimestampUtilities.LongToTimestampString(_player.VideoLength);
         }
 
         public void SetTimestampTrackBarPosition()
@@ -106,15 +101,15 @@ namespace VlcPlayer.Common
 
         public void AttachToEvents()
         {
-            _player.EventManager.TimeChanged += new EventHandler<VlcPlayer.Events.MediaPlayerTimeChanged>(EventManager_TimeChanged);
+            _player.EventManager.TimeChanged += EventManagerTimeChanged;
         }
 
         public void DetachFromEvents()
         {
-            _player.EventManager.TimeChanged -= new EventHandler<VlcPlayer.Events.MediaPlayerTimeChanged>(EventManager_TimeChanged);
+            _player.EventManager.TimeChanged -= EventManagerTimeChanged;
         }
         
-        void EventManager_TimeChanged(object sender, Events.MediaPlayerTimeChanged e)
+        void EventManagerTimeChanged(object sender, Events.MediaPlayerTimeChanged e)
         {
             _lblTimestamp.Invoke(Delegate.CreateDelegate(typeof(SetTimeStamp), this, "SetVideoTimestamp"));
             _trbTimestamp.Invoke(Delegate.CreateDelegate(typeof(SetTimeStamp), this, "SetTimestampTrackBarPosition"));
@@ -128,14 +123,14 @@ namespace VlcPlayer.Common
 
         #region volume
 
-        private void customTrackbar1_ValueChanged(object sender, EventArgs e)
+        private void CustomTrackbar1ValueChanged(object sender, EventArgs e)
         {
             _player.Volume = _trbVolume.Value;
         }
 
         #endregion
 
-        private void _trbTimestamp_ValueChanged(object sender, EventArgs e)
+        private void TrbTimestampValueChanged(object sender, EventArgs e)
         {
             _player.CurrentTimestamp = (long)(_trbTimestamp.Value * 1.0 / _trbTimestamp.Maximum * _player.VideoLength);
         }

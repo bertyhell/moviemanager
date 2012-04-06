@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using System.Windows;
 using Model;
 
@@ -77,14 +76,7 @@ namespace MovieManager.APP.Panels.Filter
 
         private void CbbOperationSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if(cbbOperation.SelectedIndex < 2)
-            {
-                //hide second date picker
-                DisplaySecondDate = Visibility.Collapsed;
-            }else
-            {
-                DisplaySecondDate = Visibility.Visible;
-            }
+            DisplaySecondDate = cbbOperation.SelectedIndex < 2 ? Visibility.Collapsed : Visibility.Visible;
             PropChanged("DisplaySecondDate");
             MainController.Instance.VideosView.Refresh();
         }

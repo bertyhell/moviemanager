@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
-using VlcPlayer.Events;
 
-namespace VlcPlayer
+namespace VlcPlayer.Events
 {
     internal static class VlcEventManagerInterop
     {
@@ -29,9 +26,9 @@ namespace VlcPlayer
     public class VlcEventManager
     {
         protected VlcMediaPlayer m_eventProvider;
-        List<VlcEventManagerInterop.VlcEventHandlerDelegate> m_callbacks = new List<VlcEventManagerInterop.VlcEventHandlerDelegate>();
-        IntPtr hCallback1;
-        private IntPtr _mediaPlayer;
+        readonly List<VlcEventManagerInterop.VlcEventHandlerDelegate> m_callbacks = new List<VlcEventManagerInterop.VlcEventHandlerDelegate>();
+        readonly IntPtr hCallback1;
+        private readonly IntPtr _mediaPlayer;
 
         public VlcEventManager(VlcMediaPlayer eventProvider)
         {

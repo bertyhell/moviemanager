@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
-using MovieManager.APP.Panels.AddVideos;
 using MovieManager.APP.Panels.RegularExpressions;
 
 namespace MovieManager.APP.Commands

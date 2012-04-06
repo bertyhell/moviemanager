@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Documents;
 using VlcPlayer.Events;
 
 namespace VlcPlayer
@@ -53,7 +49,7 @@ namespace VlcPlayer
         }
 
 
-        private VlcEventManager _eventManager;
+        private readonly VlcEventManager _eventManager;
         public VlcEventManager EventManager
         {
             get { return _eventManager; }
@@ -69,8 +65,8 @@ namespace VlcPlayer
 
         public void Play()
         {
-            int ret = LibVlc.libvlc_media_player_play(Handle);
-            if (ret == -1)
+            int Ret = LibVlc.libvlc_media_player_play(Handle);
+            if (Ret == -1)
                 throw new VlcException();
 
             _playing = true;

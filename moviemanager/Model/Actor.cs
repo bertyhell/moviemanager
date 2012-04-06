@@ -28,26 +28,27 @@ namespace Model
         {
             get
             {
-                List<Image> localImages = new List<Image>();
-                foreach (string imageUrl in ImageUrls)
+                List<Image> LocalImages = new List<Image>();
+                foreach (string ImageUrl in ImageUrls)
                 {
                     try
                     {
-                        Image image = new Image();
+                        Image Image = new Image();
 
-                        BitmapImage bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.UriSource = new Uri(imageUrl, UriKind.Absolute);
-                        bitmap.EndInit();
+                        BitmapImage Bitmap = new BitmapImage();
+                        Bitmap.BeginInit();
+                        Bitmap.UriSource = new Uri(ImageUrl, UriKind.Absolute);
+                        Bitmap.EndInit();
 
-                        image.Source = bitmap;
-                        localImages.Add(image);
+                        Image.Source = Bitmap;
+                        LocalImages.Add(Image);
                     }
-                    catch
+                    catch (Exception E)
                     {
+                        Console.WriteLine("error in Actor: " + E.Message);
                     }
                 }
-                return localImages;
+                return LocalImages;
             }
         }
 

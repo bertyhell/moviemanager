@@ -17,7 +17,7 @@ namespace MovieManager.APP.Commands
         {
             MMDatabase.EmptyVideoTables();
 
-            for (int i = 0; i < MainController.Instance.Videos.Count; i++)
+            for (int I = 0; I < MainController.Instance.Videos.Count; I++)
             {
                 MainController.Instance.Videos.RemoveAt(0);
             }

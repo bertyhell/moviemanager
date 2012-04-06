@@ -53,13 +53,13 @@ namespace VlcPlayer
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
-        public static extern Int64 libvlc_media_player_get_length(IntPtr libvlc_mediaplayer);
+        public static extern Int64 libvlc_media_player_get_length(IntPtr libvlcMediaplayer);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Int64 libvlc_media_player_get_time(IntPtr libvlc_mediaplayer);
+        public static extern Int64 libvlc_media_player_get_time(IntPtr libvlcMediaplayer);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_media_player_set_time(IntPtr libvlc_mediaplayer, Int64 time);
+        public static extern void libvlc_media_player_set_time(IntPtr libvlcMediaplayer, Int64 time);
 
         #endregion
 

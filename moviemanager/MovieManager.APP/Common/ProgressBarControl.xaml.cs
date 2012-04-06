@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace MovieManager.APP.Common
+﻿namespace MovieManager.APP.Common
 {
     /// <summary>
     /// Interaction logic for ProgressBarControl.xaml

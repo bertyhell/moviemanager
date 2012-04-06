@@ -67,8 +67,7 @@ namespace SQLite
                     videos.Add(Video);
                 }
             }
-            catch
-            { }
+            catch (Exception E) { Console.WriteLine("Exception in GetVideos in MMDatabase: " + E.Message); }
         }
 
         public static DbDataReader GetVideosDataReader()
@@ -193,28 +192,28 @@ namespace SQLite
 
         public static List<String> GetMovieGenres()
         {
-            List<String> genres = new List<string>();
-            DbDataReader reader = Database.GetReader("SELECT gen_label FROM genres");
-            while (reader.Read())
+            List<String> Genres = new List<string>();
+            DbDataReader Reader = Database.GetReader("SELECT gen_label FROM genres");
+            while (Reader.Read())
             {
-                genres.Add((string)reader[0]);
+                Genres.Add((string)Reader[0]);
             }
-            return genres;
+            return Genres;
         }
 
         #region add series
 
         public static void AddSerie(Serie serie)
         {
-            DsVideos _dsVideos = new DsVideos();
-            (new serieTableAdapter()).Fill(_dsVideos.serie);
+            DsVideos DsVideos = new DsVideos();
+            (new serieTableAdapter()).Fill(DsVideos.serie);
 
-            DsVideos.serieRow SerieRow = _dsVideos.serie.NewserieRow();
+            DsVideos.serieRow SerieRow = DsVideos.serie.NewserieRow();
             SerieRow.name = serie.Name;
-            _dsVideos.serie.AddserieRow(SerieRow);
+            DsVideos.serie.AddserieRow(SerieRow);
             serie.Id = (int)SerieRow.id;
 
-            (new serieTableAdapter()).Update(_dsVideos.serie);
+            (new serieTableAdapter()).Update(DsVideos.serie);
         }
 
         #endregion

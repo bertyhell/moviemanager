@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 
 namespace VlcPlayer
@@ -11,7 +8,7 @@ namespace VlcPlayer
     {
         public int b_raised;
         public int i_code;
-        private IntPtr psz_message;
+        private readonly IntPtr psz_message;
 
         public string Message
         {
@@ -28,9 +25,9 @@ namespace VlcPlayer
 
         public VlcException()
         {
-            IntPtr errorPointer = LibVlc.libvlc_errmsg();
-            Err = errorPointer == IntPtr.Zero ? "VLC Exception"
-                : Marshal.PtrToStringAuto(errorPointer);
+            IntPtr ErrorPointer = LibVlc.libvlc_errmsg();
+            Err = ErrorPointer == IntPtr.Zero ? "VLC Exception"
+                : Marshal.PtrToStringAuto(ErrorPointer);
         }
 
         public VlcException(string exception)

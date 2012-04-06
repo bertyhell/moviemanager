@@ -7,44 +7,44 @@ namespace Common
     {
         public static DateTime ParseDate(String date)
         {
-            DateTimeFormatInfo format = new DateTimeFormatInfo();
-            DateTime datetime;
+            DateTimeFormatInfo Format = new DateTimeFormatInfo();
+            DateTime Datetime;
             try
             {
-                format.FullDateTimePattern = "d MMM yyyy";
+                Format.FullDateTimePattern = "d MMM yyyy";
 
-                datetime = DateTime.Parse(date, format);
+                Datetime = DateTime.Parse(date, Format);
             }
             catch
             {
                 try
                 {
-                    format.FullDateTimePattern = "yyyy";
-                    datetime = DateTime.Parse(date, format);
+                    Format.FullDateTimePattern = "yyyy";
+                    Datetime = DateTime.Parse(date, Format);
                 }
                 catch
                 {
                     return DateTime.MinValue;
                 }
             }
-            return datetime;
+            return Datetime;
         }
 
         public static DateTime ParseDate(String date, String stringFormat)
         {
-            DateTimeFormatInfo format = new DateTimeFormatInfo();
-            DateTime datetime;
+            DateTimeFormatInfo Format = new DateTimeFormatInfo();
+            DateTime Datetime;
             try
             {
-                format.FullDateTimePattern = stringFormat;
+                Format.FullDateTimePattern = stringFormat;
 
-                datetime = DateTime.Parse(date, format);
+                Datetime = DateTime.Parse(date, Format);
             }
             catch
             {
                 return DateTime.MinValue;
             }
-            return datetime;
+            return Datetime;
         }
     }
 }

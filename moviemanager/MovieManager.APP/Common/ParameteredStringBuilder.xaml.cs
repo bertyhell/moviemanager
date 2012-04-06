@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace MovieManager.APP.Common
@@ -60,12 +59,12 @@ namespace MovieManager.APP.Common
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void List_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ListMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _startPoint = e.GetPosition(null);
         }
 
-        private void List_MouseMove(object sender, MouseEventArgs e)
+        private void ListMouseMove(object sender, MouseEventArgs e)
         {
             // Get the current mouse position
             Point MousePos = e.GetPosition(null);

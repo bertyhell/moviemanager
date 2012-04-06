@@ -53,7 +53,7 @@ namespace MovieManager.APP.Common
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void CheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void CheckBoxChecked(object sender, System.Windows.RoutedEventArgs e)
         {
             PropChanged("SelectedItemsString");
             MainController.Instance.VideosView.Refresh();
