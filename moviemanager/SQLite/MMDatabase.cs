@@ -119,7 +119,7 @@ namespace SQLite
             var VideosTableAdapter = new videosTableAdapter();
             int NumberOfVideos = DatasetVideos.videos.Count;
             int NumberOfEpisodes = DatasetVideos.episodes.Count;
-            for (int I = 0; I < NumberOfVideos; I++)
+            for (int I = 0; I < NumberOfVideos; I++)//TODO 001 ping pong compare times with bulk insert
             {
                 VideosTableAdapter.Update(DatasetVideos.videos[I]);
                 InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = (I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes) });
