@@ -11,7 +11,7 @@ using MovieManager.APP.Panels.Filter;
 
 namespace MovieManager.APP
 {
-    public class MainController : IDisposable, INotifyPropertyChanged
+    public class MainController : INotifyPropertyChanged
     {
         private static readonly MainController INSTANCE = new MainController();
 
@@ -26,8 +26,7 @@ namespace MovieManager.APP
 
             Videos.Clear();
             MMDatabase.SelectAllVideos(Videos);
-            MMDatabase.OnVideosChanged += MMDatabaseOnVideoChanged;
-             _videosView = CollectionViewSource.GetDefaultView(Videos);
+            _videosView = CollectionViewSource.GetDefaultView(Videos);
         }
 
 
@@ -36,8 +35,10 @@ namespace MovieManager.APP
         public ICollectionView VideosView
         {
             get { return _videosView; }
-            set { _videosView = value;
-            PropChanged("VideosView");
+            set
+            {
+                _videosView = value;
+                PropChanged("VideosView");
             }
         }
 
@@ -52,7 +53,6 @@ namespace MovieManager.APP
             set
             {
                 _videos = value;
-                PropChanged("Videos");
             }
         }
 
@@ -67,17 +67,10 @@ namespace MovieManager.APP
             }
         }
 
-        void MMDatabaseOnVideoChanged()
+        public void UpdateVideos()
         {
-            _videos.Clear();
-            MMDatabase.SelectAllVideos(_videos);
-        }
-
-
-
-        public void Dispose()
-        {
-            MMDatabase.OnVideosChanged -= MMDatabaseOnVideoChanged;
+            Videos.Clear();
+            MMDatabase.SelectAllVideos(Videos);
         }
 
         public void PropChanged(String title)

@@ -31,41 +31,86 @@ namespace MovieManager.APP.Commands
             FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = Path };
             if (Odd.ShowDialog() == DialogResult.OK)
             {
-                _progressWindow = new ProgressbarWindow { Owner = MainWindow.Instance, IsIndeterminate = true, Message = "Searching videos: 0 found"};
+                Message = "Searching videos: 0 found";
+                _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = true, DataContext = this };
                 MovieFileReader FileReader = new MovieFileReader(new DirectoryInfo(Odd.SelectedPath));
                 FileReader.FoundVideo += FileReader_OnVideoFoundProgress;
                 FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
                 FileReader.RunWorkerAsync();
-                _progressWindow.Show();
+                _progressWindow.ShowDialog();
             }
         }
-        
-        public void FileReader_OnVideoFoundProgress(object sender, ProgressArgs args)
+
+        public void FileReader_OnVideoFoundProgress(object sender, ProgressEventArgs eventArgs)
         {
-            _progressWindow.Message = "Searching videos: " + args.ProgressNumber + " found";
+            Message = "Searching videos: " + eventArgs.ProgressNumber + " found";
         }
 
         void FileReader_OnGetVideoCompleted(object sender, GetVideoCompletedEventArgs e)
         {
             _progressWindow.Close();
-            _progressWindow = new ProgressbarWindow { Owner = MainWindow.Instance, IsIndeterminate = false, Message = "Adding to database: 0.0 %", Value = 0, Maximum = e.Videos.Count };
+            Message = "Adding videos to database: 0.0 %";
+            Value = 0;
+            Maximum = e.Videos.Count;
+            _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = false, DataContext = this };
             BGWInsertVideos BGWInsertVideos = new BGWInsertVideos(e.Videos);
-            MMDatabase.InsertVideos += MMDatabase_OnInsertVideosProgress;
-            BGWInsertVideos.OnInsertVideosCompleted += BGWInsertVideos_OnInsertVideosCompleted;
+            MMDatabase.InsertVideosProgress += FileReader_OnInsertVideosProgress;
+            BGWInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
             BGWInsertVideos.RunWorkerAsync();
-            _progressWindow.Show();
+            _progressWindow.ShowDialog();
         }
 
-        public void MMDatabase_OnInsertVideosProgress(object sender, ProgressArgs args)
+        private void FileReader_OnInsertVideosProgress(object sender, ProgressEventArgs e)
         {
-            double Perectage = (double)args.ProgressNumber / args.MaxNumber;
-            _progressWindow.Message = "Adding to database: " + Perectage + " %";
-            _progressWindow.Value = args.ProgressNumber;
+            Value = e.ProgressNumber;
+            Message = "Adding videos to database: " + Math.Round(e.ProgressNumber * 100.0 / e.MaxNumber, 1).ToString("N1") + " %";
         }
 
         void BGWInsertVideos_OnInsertVideosCompleted(object sender, EventArgs e)
         {
             _progressWindow.Close();
+            MainController.Instance.UpdateVideos();
+        }
+
+        private string _message;
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                PropChanged("Message");
+            }
+        }
+
+        private int _value;
+        public int Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                PropChanged("Value");
+            }
+        }
+
+        private int _maximum;
+        public int Maximum
+        {
+            get { return _maximum; }
+            set
+            {
+                _maximum = value;
+                PropChanged("Maximum");
+            }
+        }
+
+        public void PropChanged(string field)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(field));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
