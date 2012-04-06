@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using Common;
 using Model;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -9,7 +10,7 @@ using SQLite.RegexSettings;
 
 namespace SQLite
 {
-    public class MovieFileReader : BackgroundWorker, INotifyPropertyChanged
+    public class MovieFileReader : BackgroundWorker
     { // TODO 060: extends SwingWorker
 
         static readonly String[] VideoFileExtensions = { "ASX", "DTS", "GXF", "M2V", "M3U", "M4V", "MPEG1", "MPEG2", "MTS", "MXF", "OGM", "PLS", "BUP", "A52", "AAC", "B4S", "CUE", "DIVX", "DV", "FLV", "M1V", "M2TS", "MKV", "MOV", "MPEG4", "OMA", "SPX", "TS", "VLC", "VOB", "XSPF", "DAT", "BIN", "IFO", "PART", "3G2", "AVI", "MPEG", "MPG", "FLAC", "M4A", "MP1", "OGG", "WAV", "XM", "3GP", "WMV", "AC3", "ASF", "MOD", "MP2", "MP3", "MP4", "WMA", "MKA", "M4P" };
@@ -18,13 +19,9 @@ namespace SQLite
         private readonly DirectoryInfo _dir;
         private FileInfo _file; //TODO 090 are videos correctly added when files are selected instead of dir?
 
-
-        private string _progressString;
-        
-        public MovieFileReader(DirectoryInfo dir, string progressString)
+        public MovieFileReader(DirectoryInfo dir)
         {
             _dir = dir;
-            _progressString = progressString;
             _videos = new ObservableCollection<Video>();
             
         }
@@ -65,6 +62,10 @@ namespace SQLite
             catch (Exception) { }
         }
 
+        public event OnProgressVideoFound FoundVideo;
+
+        public delegate void OnProgressVideoFound(object sender, ProgressArgs args);
+
         private void GetVideos(FileInfo file, ObservableCollection<Video> videos)
         {
             if (!string.IsNullOrEmpty(file.Extension) && VideoFileExtensions.Contains(file.Extension.ToUpper().Substring(1)))
@@ -75,9 +76,8 @@ namespace SQLite
                     Name = CleanTitle(file.Name.Substring(0, file.Name.LastIndexOf(".")))
                 });
                 _videosFound++;
-                _progressString = "Videos found: " + _videosFound;
-                PropertyChanged(this, new PropertyChangedEventArgs("ProgressString"));
-                Console.WriteLine(file.FullName);
+                FoundVideo(this, new ProgressArgs{ProgressNumber = _videosFound});
+                Console.WriteLine(file.FullName);//TODO 010 remove found video output to console
             }
         }
         /**
@@ -163,13 +163,6 @@ namespace SQLite
             if (OnGetVideoCompleted != null)
                 OnGetVideoCompleted(this, new GetVideoCompletedEventArgs { Videos = _videos });
         }
-
-        protected override void OnProgressChanged(ProgressChangedEventArgs e)
-        {
-
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public class GetVideoCompletedEventArgs : EventArgs

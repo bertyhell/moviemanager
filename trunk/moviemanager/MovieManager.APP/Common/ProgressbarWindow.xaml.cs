@@ -1,25 +1,21 @@
-﻿using System.ComponentModel;
-using System.Windows;
-
-namespace MovieManager.APP.Common
+﻿namespace MovieManager.APP.Common
 {
     /// <summary>
     /// Interaction logic for ProgressbarWindow.xaml
     /// </summary>
-    public partial class ProgressbarWindow : INotifyPropertyChanged
+    public partial class ProgressbarWindow
     {
         public ProgressbarWindow()
         {
             InitializeComponent();
         }
 
-        public string ProgressString
+        public string Message
         {
-            get { return progressBarControl1.ProgressString; }
+            get { return progressBarControl1.Message; }
             set
             {
-                progressBarControl1.ProgressString = value;
-                PropChanged("ProgressString");
+                progressBarControl1.Message = value;
             }
         }
 
@@ -29,18 +25,25 @@ namespace MovieManager.APP.Common
             set
             {
                 progressBarControl1.IsIndeterminate = value;
-                PropChanged("IsIndeterminate");
             }
         }
 
-        public void PropChanged(string field)
+        public int Maximum
         {
-            if (PropertyChanged != null)
+            get { return progressBarControl1.Maximum; }
+            set
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(field));
+                progressBarControl1.Maximum = value;
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public int Value
+        {
+            get { return progressBarControl1.ProgressValue; }
+            set
+            {
+                progressBarControl1.ProgressValue = value;
+            }
+        }
     }
 }

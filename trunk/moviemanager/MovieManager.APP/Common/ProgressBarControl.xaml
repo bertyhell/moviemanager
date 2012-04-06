@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <ProgressBar Height="auto" HorizontalAlignment="Stretch" Name="progressbar" VerticalAlignment="Stretch" Width="auto" IsIndeterminate="{Binding IsIndeterminate}" />
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ProgressString}"></TextBlock>
+        <ProgressBar Height="auto" HorizontalAlignment="Stretch" Name="progressbar" VerticalAlignment="Stretch" Width="auto" IsIndeterminate="{Binding IsIndeterminate}" Maximum="{Binding Maximum}" Value="{Binding ProgressValue}" />
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Name="messagebox" Text="{Binding Message}"/>
     </Grid>
 </UserControl>
