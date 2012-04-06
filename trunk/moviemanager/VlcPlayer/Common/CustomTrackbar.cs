@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace VlcPlayer.Common
@@ -14,6 +11,12 @@ namespace VlcPlayer.Common
         protected override void OnValueChanged(EventArgs e)
         {
             if (!SuspendChangedEvent) base.OnValueChanged(e);
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            int MouseX = e.X - 10 - Location.X < 0 ? 0 : e.X - 10 - Location.X > Maximum ? Maximum : e.X - 10 - Location.X; //check bounderies of trackbar
+            Value = MouseX * (Maximum - Minimum) / (Width-20);
         }
     }
 }

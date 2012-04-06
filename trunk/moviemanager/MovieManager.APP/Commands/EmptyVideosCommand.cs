@@ -21,6 +21,7 @@ namespace MovieManager.APP.Commands
             {
                 MainController.Instance.Videos.RemoveAt(0);
             }
+            MainController.Instance.UpdateVideos();
         }
     }
 }

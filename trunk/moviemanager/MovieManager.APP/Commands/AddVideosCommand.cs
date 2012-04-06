@@ -40,7 +40,7 @@ namespace MovieManager.APP.Commands
                 _videos = new ObservableCollection<Video>();
                 foreach (String File in Ofd.FileNames)
                 {
-                    _progressWindow = new ProgressbarWindow {Title = "Getting Videos", Owner = MainWindow.Instance};
+                    _progressWindow = new ProgressbarWindow(this) {Owner = MainWindow.Instance};
                     _progressWindow.ShowDialog(); 
 
                     MovieFileReader FileReader = new MovieFileReader(new FileInfo(File));

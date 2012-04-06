@@ -4404,8 +4404,7 @@ namespace SQLite.DsVideosTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [videos_genres] ([video_id], [genre_id]) VALUES (@video_id, @genre_id" +
-                ")";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [videos_genres] ([video_id], [genre_id]) VALUES (@video_id, @genre_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@video_id";

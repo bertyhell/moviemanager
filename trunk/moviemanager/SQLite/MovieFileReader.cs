@@ -64,7 +64,7 @@ namespace SQLite
 
         public event OnProgressVideoFound FoundVideo;
 
-        public delegate void OnProgressVideoFound(object sender, ProgressArgs args);
+        public delegate void OnProgressVideoFound(object sender, ProgressEventArgs eventArgs);
 
         private void GetVideos(FileInfo file, ObservableCollection<Video> videos)
         {
@@ -76,7 +76,7 @@ namespace SQLite
                     Name = CleanTitle(file.Name.Substring(0, file.Name.LastIndexOf(".")))
                 });
                 _videosFound++;
-                FoundVideo(this, new ProgressArgs{ProgressNumber = _videosFound});
+                FoundVideo(this, new ProgressEventArgs{ProgressNumber = _videosFound});
                 Console.WriteLine(file.FullName);//TODO 010 remove found video output to console
             }
         }

@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using Common;
 using Model;
-using System.Data.SQLite;
-using System.Globalization;
 using System.Data.Common;
 using SQLite.DsVideosTableAdapters;
 
@@ -19,7 +14,9 @@ namespace SQLite
 
     public class MMDatabase
     {
-        public static event VideosChanged OnVideosChanged;
+        //public static event VideosChanged OnVideosChanged;
+        //don't use videos changed -> all database operations could be run in different thread -> different trhead has no access to observable collection
+        //update lists in maincontroller in commandobjects
 
         public static void SelectAllVideos(ObservableCollection<Video> videos)
         {
@@ -88,16 +85,15 @@ namespace SQLite
             InsertVideosHDD(videos, true);
         }
 
-        public static event OnProgressInsertVideos InsertVideos;
+        public static event OnInsertVideosProgress InsertVideosProgress;
 
-        public delegate void OnProgressInsertVideos(object sender, ProgressArgs args);
+        public delegate void OnInsertVideosProgress(object sender, ProgressEventArgs eventArgs);
 
-        private static IList<Video> InsertVideosHDD(IList<Video> videos, bool insertDuplicates)
+        private static IList<Video> InsertVideosHDD(IEnumerable<Video> videos, bool insertDuplicates)
         {
             IList<Video> Duplicates = new List<Video>();
             DsVideos DatasetVideos = new DsVideos();
             FillDatasetWithAllVideos(DatasetVideos);
-            int I = 0;
 
             foreach (Video Video in videos)
             {
@@ -119,16 +115,22 @@ namespace SQLite
                 {
                     Duplicates.Add(Video);
                 }
-
-                I++;
-                InsertVideos(null, new ProgressArgs { MaxNumber = videos.Count(), ProgressNumber = I});
             }
 
-            (new videosTableAdapter()).Update(DatasetVideos.videos);
-            (new episodesTableAdapter()).Update(DatasetVideos.episodes);
-
-            if (OnVideosChanged != null)
-                OnVideosChanged();
+            var VideosTableAdapter = new videosTableAdapter();
+            int NumberOfVideos = DatasetVideos.videos.Count;
+            int NumberOfEpisodes = DatasetVideos.episodes.Count;
+            for (int I = 0; I < NumberOfVideos; I++)
+            {
+                VideosTableAdapter.Update(DatasetVideos.videos[I]);
+                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = (I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes) });
+            }
+            var EpisodesTableAdapter = new episodesTableAdapter();
+            for (int I = 0; I < NumberOfEpisodes; I++)
+            {
+                EpisodesTableAdapter.Update(DatasetVideos.episodes[I]);
+                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = (NumberOfVideos + I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes) });
+            }
 
             //return the duplicates that are not inserted in the table
             return Duplicates;
@@ -158,8 +160,6 @@ namespace SQLite
         public static void EmptyTable(String tableName)
         {
             Database.ExecuteSQL("DELETE FROM " + tableName);
-            if (OnVideosChanged != null)
-                OnVideosChanged();
         }
 
 
@@ -219,4 +219,5 @@ namespace SQLite
 
         #endregion
     }
+
 }

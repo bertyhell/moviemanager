@@ -126,6 +126,7 @@
             this._trbTimestamp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this._trbTimestamp.BackColor = System.Drawing.SystemColors.Control;
             this._trbTimestamp.Location = new System.Drawing.Point(-1, 7);
             this._trbTimestamp.Maximum = 1200;
             this._trbTimestamp.Name = "_trbTimestamp";

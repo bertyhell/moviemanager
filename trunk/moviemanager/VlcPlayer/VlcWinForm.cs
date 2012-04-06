@@ -142,7 +142,7 @@ namespace VlcPlayer
             //activate overlay
             if (_overlayForm == null)
                 _overlayForm = new Overlay(this);
-            _overlayForm.Show(this);
+            _overlayForm.Show(this);//TODO 080 check if already visible -> now this throws an else exception
             _overlayForm.Focus();
             _overlayForm.Size = _pnlVideo.Size;
             _overlayForm.Location = CalculateOverlayLocation();

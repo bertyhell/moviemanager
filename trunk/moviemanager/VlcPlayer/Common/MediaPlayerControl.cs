@@ -139,6 +139,5 @@ namespace VlcPlayer.Common
         {
             _player.CurrentTimestamp = (long)(_trbTimestamp.Value * 1.0 / _trbTimestamp.Maximum * _player.VideoLength);
         }
-
     }
 }
