@@ -7,6 +7,6 @@
             <ColumnDefinition Width="152*" />
             <ColumnDefinition Width="399*" />
         </Grid.ColumnDefinitions>
-        <my:SettingsPanel Grid.Column="1" />
+        <my:SettingsPanel Grid.Column="1"/>
     </Grid>
 </Window>
