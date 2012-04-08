@@ -16,15 +16,15 @@
         </Grid.ColumnDefinitions>
         
         <Label Grid.Column="0" Content="{Binding Label}" VerticalAlignment="Center" />
-        <Grid x:Name="_parameteredString" Grid.Column="1" Drop="DropParameter" DragEnter="DragEnterParameter" AllowDrop="True" Background="Green">
+        <Grid x:Name="_parameterGrid" Grid.Column="1" Background="Green">
             <!--<TextBox></TextBox>-->
         </Grid>
-        <ComboBox Grid.Column="2" x:Name="cbbParameters" VerticalAlignment="Center" ItemsSource="{Binding Parameters}" >
+        <ComboBox Grid.Column="2" x:Name="cbbParameters" VerticalAlignment="Center" ItemsSource="{Binding Parameters}" SelectionChanged="cbbParameters_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <ContentControl Content="{Binding}" IsHitTestVisible="False"/>
-                        <Rectangle Panel.ZIndex="1" MouseLeftButtonDown="ListMouseLeftButtonDown" MouseMove="ComboItemMouseMove" Fill="#00FF0000" Tag="{Binding}" />
+                        <Rectangle Panel.ZIndex="1" Fill="#00FF0000" Tag="{Binding}" />
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
