@@ -88,47 +88,55 @@ namespace SQLite
 
         public delegate void OnInsertVideosProgress(object sender, ProgressEventArgs eventArgs);
 
-        private static IList<Video> InsertVideosHDD(IEnumerable<Video> videos, bool insertDuplicates)
+        private static IList<Video> InsertVideosHDD(IList<Video> videos, bool insertDuplicates)
         {
             IList<Video> Duplicates = new List<Video>();
             DsVideos DatasetVideos = new DsVideos();
             FillDatasetWithAllVideos(DatasetVideos);
 
-            foreach (Video Video in videos)
+            const int PERCENT_PREPARE_WORK = 5;
+            int PrepareWork = videos.Count * PERCENT_PREPARE_WORK / 100;
+
+
+            //report as first 5%
+            for (int I = 0; I < videos.Count; I++)
             {
-                if (insertDuplicates || DatasetVideos.videos.Select(DatasetVideos.videos.pathColumn.ColumnName + " = '" + Video.Path + "'").Length == 0)
+                if (insertDuplicates || DatasetVideos.videos.Select(DatasetVideos.videos.pathColumn.ColumnName + " = '" + videos[I].Path + "'").Length == 0)
                 {
 
                     DsVideos.videosRow Row = DatasetVideos.videos.NewvideosRow();
-                    Row.path = Video.Path;
-                    Row.name = Video.Name;
+                    Row.path = videos[I].Path;
+                    Row.name = videos[I].Name;
                     DatasetVideos.videos.AddvideosRow(Row);
-                    Video.Id = (int)Row.id;
+                    videos[I].Id = (int)Row.id;
 
-                    if (Video is Episode)
+                    if (videos[I] is Episode)
                     {
-                        InsertEpisodeRow((Episode)Video, DatasetVideos);
+                        InsertEpisodeRow((Episode)videos[I], DatasetVideos);
                     }
                 }
                 else
                 {
-                    Duplicates.Add(Video);
+                    Duplicates.Add(videos[I]);
                 }
+                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = videos.Count, ProgressNumber = I * PERCENT_PREPARE_WORK / 100 });//recalculate to 5%
             }
 
-            var VideosTableAdapter = new videosTableAdapter();
             int NumberOfVideos = DatasetVideos.videos.Count;
             int NumberOfEpisodes = DatasetVideos.episodes.Count;
+
+            //report as other 95% of progress
+            var VideosTableAdapter = new videosTableAdapter();
             for (int I = 0; I < NumberOfVideos; I++)//TODO 001 ping pong compare times with bulk insert
             {
                 VideosTableAdapter.Update(DatasetVideos.videos[I]);
-                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = (I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes) });
+                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of videos and then to 95%
             }
             var EpisodesTableAdapter = new episodesTableAdapter();
             for (int I = 0; I < NumberOfEpisodes; I++)
             {
                 EpisodesTableAdapter.Update(DatasetVideos.episodes[I]);
-                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = (NumberOfVideos + I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes) });
+                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((NumberOfVideos + I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of series and then to 95%
             }
 
             //return the duplicates that are not inserted in the table

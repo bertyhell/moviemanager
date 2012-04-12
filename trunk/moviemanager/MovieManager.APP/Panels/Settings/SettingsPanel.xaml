@@ -6,6 +6,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" xmlns:my="clr-namespace:MovieManager.APP.Common">
     <Grid>
-        <my:ParameteredStringBuilder Height="40" x:Name="parameteredStringBuilder1" VerticalAlignment="Top" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <my:ParameteredStringBuilder x:Name="parameteredStringBuilder1" VerticalAlignment="Center" />
     </Grid>
 </UserControl>

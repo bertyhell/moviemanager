@@ -17,12 +17,5 @@ namespace SQLite
         {
             MMDatabase.InsertVideosHDD(_videos);
         }
-
-        //public event EventHandler<EventArgs> OnInsertVideosCompleted;
-        //protected override void OnRunWorkerCompleted(RunWorkerCompletedEventArgs e)
-        //{
-        //    //if (OnInsertVideosCompleted != null)
-        //    //    OnInsertVideosCompleted(this, new EventArgs());
-        //}
     }
 }
