@@ -16,10 +16,10 @@
         </Grid.ColumnDefinitions>
         
         <Label Grid.Column="0" Content="{Binding Label}" VerticalAlignment="Center" />
-        <Grid x:Name="_parameterGrid" Grid.Column="1" Background="Green">
+        <Grid x:Name="_parameterGrid" Grid.Column="1" Background="#00000000">
             <!--<TextBox></TextBox>-->
         </Grid>
-        <ComboBox Grid.Column="2" x:Name="cbbParameters" VerticalAlignment="Center" ItemsSource="{Binding Parameters}" SelectionChanged="cbbParameters_SelectionChanged">
+        <ComboBox Grid.Column="2" x:Name="cbbParameters" VerticalAlignment="Stretch" ItemsSource="{Binding Parameters}" SelectionChanged="CbbParametersSelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

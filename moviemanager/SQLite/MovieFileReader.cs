@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,22 +18,23 @@ namespace SQLite
         static readonly String[] DELIMITERS = { "CD-1", "CD-2", "CD1", "CD2", "DVD-1", "DVD-2", "[Divx-ITA]", "[XviD-ITA]", "AC3", "DVDRip", "Xvid", "http", "www.", ".com", "shared", "powered", "sponsored", "sharelive", "filedonkey", "saugstube", "eselfilme", "eseldownloads", "emulemovies", "spanishare", "eselpsychos.de", "saughilfe.de", "goldesel.6x.to", "freedivx.org", "elitedivx", "deviance", "-ftv", "ftv", "-flt", "flt", "1080p", "720p", "1080i", "720i", "480", "x264", "ext", "ac3", "6ch", "axxo", "pukka", "klaxxon", "edition", "limited", "dvdscr", "screener", "unrated", "BRRIP", "subs", "_NL_", "m-hd" };
 
         private readonly DirectoryInfo _dir;
-        private FileInfo _file; //TODO 090 are videos correctly added when files are selected instead of dir?
+        private IList<FileInfo> _files;
 
         public MovieFileReader(DirectoryInfo dir)
         {
             _dir = dir;
             _videos = new ObservableCollection<Video>();
-            
+
         }
-        public MovieFileReader(FileInfo file)
+        public MovieFileReader(IList<FileInfo> files)
         {
-            _file = file;
+            _files = files;
             _videos = new ObservableCollection<Video>();
         }
 
         private ObservableCollection<Video> _videos;
         private int _videosFound;
+        private int _filesProcessed;
 
         public ObservableCollection<Video> Videos
         {
@@ -50,9 +52,9 @@ namespace SQLite
                         GetVideos(File, videos);
                 }
             }
-// ReSharper disable EmptyGeneralCatchClause
+            // ReSharper disable EmptyGeneralCatchClause
             catch (Exception)
-// ReSharper restore EmptyGeneralCatchClause
+            // ReSharper restore EmptyGeneralCatchClause
             {
                 //ignate wiered fileName exception
             }
@@ -63,16 +65,16 @@ namespace SQLite
                     GetVideos(Directory, videos);
                 }
             }
-// ReSharper disable EmptyGeneralCatchClause
+            // ReSharper disable EmptyGeneralCatchClause
             catch (Exception) { }
-// ReSharper restore EmptyGeneralCatchClause
+            // ReSharper restore EmptyGeneralCatchClause
         }
 
         public event OnProgressVideoFound FoundVideo;
 
         public delegate void OnProgressVideoFound(object sender, ProgressEventArgs eventArgs);
 
-        private void GetVideos(FileInfo file, ObservableCollection<Video> videos)
+        private void GetVideos(FileInfo file, ICollection<Video> videos, bool reportNonVideos = false)
         {
             if (!string.IsNullOrEmpty(file.Extension) && VIDEO_FILE_EXTENSIONS.Contains(file.Extension.ToUpper().Substring(1)))
             {
@@ -82,8 +84,16 @@ namespace SQLite
                     Name = CleanTitle(file.Name.Substring(0, file.Name.LastIndexOf(".")))
                 });
                 _videosFound++;
-                FoundVideo(this, new ProgressEventArgs{ProgressNumber = _videosFound});
+                if(!reportNonVideos)
+                {
+                    FoundVideo(this, new ProgressEventArgs { ProgressNumber = _videosFound });
+                }
                 Console.WriteLine(file.FullName);//TODO 010 remove found video output to console
+            }
+            if(reportNonVideos)
+            {
+                _filesProcessed++;
+                FoundVideo(this, new ProgressEventArgs { ProgressNumber = _filesProcessed });
             }
         }
         /**
@@ -118,7 +128,7 @@ namespace SQLite
             GetVideos(dir, LocalVideos);
 
             //create Serie in database
-            Serie Serie = new Serie {Name = dir.FullName.Substring(dir.FullName.LastIndexOf("\\") + 1)};
+            Serie Serie = new Serie { Name = dir.FullName.Substring(dir.FullName.LastIndexOf("\\") + 1) };
             MMDatabase.AddSerie(Serie);
 
             //convert video to episode
@@ -159,7 +169,19 @@ namespace SQLite
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
-            GetVideos(_dir, _videos);
+            if(_dir ==null)
+            {
+                //get videos from _videos
+                foreach (var File in _files)
+                {
+                    Console.WriteLine(File.FullName);
+                    GetVideos(File, _videos);
+                }
+            }else
+            {
+                //get videos from _dir
+                GetVideos(_dir, _videos);
+            }
         }
 
 
