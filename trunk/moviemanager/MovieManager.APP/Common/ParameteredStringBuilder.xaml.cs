@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,39 +24,39 @@ namespace MovieManager.APP.Common
         {
             InitializeComponent();
 
-            Parameters = new List<FrameworkElement> { new TextBox { Text = "test" }, new Button { Content = "aaaaaa" }, new Button { Content = "bbbbbb" }, new Button { Content = "cccccc" } };
 
             _parameterGrid.MouseLeftButtonUp += ParameterMouseUp; // TODO 020: Release drag between elements
             _parameterGrid.MouseMove += ParameterMouseMove;
             _insertionHint = new Rectangle { Fill = new SolidColorBrush(Colors.Gray), Width = 2, VerticalAlignment = VerticalAlignment.Stretch };
-            ContentItemsMargin = new Thickness(5, 0, 5, 0);
+            ContentItemsMargin = new Thickness(2, 5, 2, 5);
 
 
-#if DEBUG
-            for (int I = 1; I < Parameters.Count; I++)
-            {
-                _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            //#if DEBUG           
+            //            Parameters = new List<FrameworkElement> { new TextBox { Text = "test" }, new Button { Content = "aaaaaa" }, new Button { Content = "bbbbbb" }, new Button { Content = "cccccc" } };
 
-                Button Button = new Button { Content = ((Button)Parameters[I]).Content };
-                Rectangle Rect = new Rectangle { Tag = Button, Fill = new SolidColorBrush(Color.FromArgb(0, 1, 0, 0)) };
-                Rect.MouseLeftButtonDown += ParameterMouseDown;
-                Rect.Cursor = Cursors.SizeAll;
-                //Rect.MouseMove += ParameterMouseMove;
-                Rect.MouseUp += ParameterMouseUp;
-                Panel.SetZIndex(Rect, 1);
+            //            for (int I = 1; I < Parameters.Count; I++)
+            //            {
+            //                _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-                Grid NewParameter = new Grid();
-                NewParameter.Children.Add(Button);
-                NewParameter.Children.Add(Rect);
-                NewParameter.Margin = ContentItemsMargin;
+            //                Button Button = new Button { Content = ((Button)Parameters[I]).Content };
+            //                Rectangle Rect = new Rectangle { Tag = Button, Fill = new SolidColorBrush(Color.FromArgb(0, 1, 0, 0)) };
+            //                Rect.MouseLeftButtonDown += ParameterMouseDown;
+            //                //Rect.MouseMove += ParameterMouseMove;
+            //                Rect.MouseUp += ParameterMouseUp;
+            //                Panel.SetZIndex(Rect, 1);
+
+            //                Grid NewParameter = new Grid();
+            //                NewParameter.Children.Add(Button);
+            //                NewParameter.Children.Add(Rect);
+            //                NewParameter.Margin = ContentItemsMargin;
 
 
-                NewParameter.AllowDrop = true;
+            //                NewParameter.AllowDrop = true;
 
-                _parameterGrid.Children.Add(NewParameter);
-                Grid.SetColumn(NewParameter, I - 1);
-            }
-#endif
+            //                _parameterGrid.Children.Add(NewParameter);
+            //                Grid.SetColumn(NewParameter, I - 1);
+            //            }
+            //#endif
         }
 
         #region properties
@@ -88,6 +90,13 @@ namespace MovieManager.APP.Common
             set
             {
                 _parameters = value;
+                if (value != null)
+                {
+                    foreach (Control Control in value)
+                    {
+                        Control.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    }
+                }
                 PropChanged("Parameters");
             }
         }
@@ -106,6 +115,59 @@ namespace MovieManager.APP.Common
             }
         }
 
+        public string ParameteredString
+        {
+            get
+            {
+                List<FrameworkElement> Children = new List<FrameworkElement>();
+                foreach (FrameworkElement Child in _parameterGrid.Children)
+                {
+                    Children.Add(Child);
+                }
+                Children = Children.OrderBy(Grid.GetColumn).ToList();
+                string RetVal = "";
+                foreach (FrameworkElement Child in Children)
+                {
+                    if (Child is Grid)
+                    {
+                        RetVal += "{{" + ((Child as Grid).Children[0] as Button).Content + "}}";
+                    }
+                    else if (Child is TextBox)
+                    {
+                        RetVal += (Child as TextBox).Text;
+                    }
+                }
+                return RetVal;
+            }
+            set
+            {
+                string ParStr = value;
+                while (!string.IsNullOrEmpty(ParStr))
+                {
+                    //search string outside brackets
+                    int Index = ParStr.IndexOf("{{");
+                    if (Index == -1)
+                    {
+                        InsertParameter(typeof(TextBox), ParStr);
+                        return;
+                    }
+                    if (Index > 0)
+                        InsertParameter(typeof(TextBox), ParStr.Substring(0, Index));
+                    ParStr = ParStr.Substring(Index + 2);
+
+                    //search string between brackets
+                    Index = ParStr.IndexOf("}}");
+                    if (Index == -1)
+                        throw new ArgumentException("Invalid ParameterString: " + ParStr);
+                    if (Index != 0)
+                        InsertParameter(typeof(Button), ParStr.Substring(0, Index));// test if this is a parameter in the combobox
+
+                    ParStr = ParStr.Substring(Index + 2);
+                }
+            }
+        }
+
+
         #endregion
 
         private FrameworkElement GetChildHitByMouse(Grid grid)
@@ -113,7 +175,7 @@ namespace MovieManager.APP.Common
             foreach (FrameworkElement Child in grid.Children)
             {
                 Point Position = Mouse.GetPosition(Child);
-                if (Position.X > 0 && Position.X < Child.RenderSize.Width && Position.Y > 0 && Position.Y < Child.RenderSize.Height)
+                if (Position.X > -ContentItemsMargin.Left && Position.X < Child.RenderSize.Width + ContentItemsMargin.Right)
                 {
                     return Child;
                 }
@@ -125,7 +187,6 @@ namespace MovieManager.APP.Common
 
         private void ParameterMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("mouse down");
             _startPoint = e.GetPosition(null);
             if (sender is Rectangle)
             {
@@ -135,7 +196,6 @@ namespace MovieManager.APP.Common
 
         private void ParameterMouseMove(object sender, MouseEventArgs e)
         {
-            Console.Write(".");
             // Get the current mouse position
             Point MousePos = e.GetPosition(null);
             Vector Diff = _startPoint - MousePos;
@@ -147,6 +207,7 @@ namespace MovieManager.APP.Common
                                                                     SystemParameters.MinimumVerticalDragDistance))
             {
                 _isDragging = true;
+                Mouse.Capture(_parameterGrid);
                 //TODO 020: show drag icon
             }
 
@@ -157,10 +218,11 @@ namespace MovieManager.APP.Common
                 Point Position = e.GetPosition(_parameterGrid);
                 if (Position.X > 0 && Position.X < _parameterGrid.RenderSize.Width && Position.Y > 0 && Position.Y < _parameterGrid.RenderSize.Height)
                 {
+                    Window.GetWindow(this).Cursor = Cursors.SizeAll;
+
                     FrameworkElement HitByMouse = GetChildHitByMouse(_parameterGrid);
                     if (HitByMouse == null)
                     {
-                        _isDragging = false;
                         return;
                     }
 
@@ -177,13 +239,14 @@ namespace MovieManager.APP.Common
                     {
                         ColNew++;
                     }
-                    InsertParameter(_insertionHint, ColNew);
+                    InsertHint(_insertionHint, ColNew);
                     //Console.WriteLine("newcol: " + ColNew + " element: " + ((Button)((Grid)HitByMouse).Children[0]).Content);
                 }
                 else
                 {
                     //display remove parameter icon
                     //remove rectangle isertionHint
+                    Window.GetWindow(this).Cursor = new Cursor(new FileInfo("Cursors/delete.cur").FullName);
                     DeleteParameter(_insertionHint);
                 }
             }
@@ -191,10 +254,10 @@ namespace MovieManager.APP.Common
 
         void ParameterMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("mouse up");
+            Window.GetWindow(this).Cursor = Cursors.Arrow;
+
             if (_isDragging && _draggedElement != null)
             {
-
                 Point Position = e.GetPosition(_parameterGrid);
 
                 if (!(Position.X > 0 && Position.X < _parameterGrid.RenderSize.Width && Position.Y > 0 && Position.Y < _parameterGrid.RenderSize.Height))
@@ -250,7 +313,7 @@ namespace MovieManager.APP.Common
             int FromCol = Grid.GetColumn(param);
             if (FromCol != toCol)
             {
-                _parameterGrid.ColumnDefinitions[toCol].Width = new GridLength(1, GridUnitType.Star);
+                _parameterGrid.ColumnDefinitions[toCol].Width = new GridLength(1, GridUnitType.Auto);
 
                 //move param
                 if (toCol > FromCol)
@@ -281,7 +344,7 @@ namespace MovieManager.APP.Common
             }
         }
 
-        private void InsertParameter(FrameworkElement param, int col)
+        private void InsertHint(FrameworkElement param, int col)
         {
             //foreach (var ColDef in _parameterGrid.ColumnDefinitions)
             //{
@@ -300,6 +363,45 @@ namespace MovieManager.APP.Common
 
             _parameterGrid.Children.Add(param);
             Grid.SetColumn(param, col);
+        }
+
+
+        private void InsertParameter(Type controlType, string par)
+        {
+            FrameworkElement NewParameter;
+            if (controlType == typeof(TextBox))
+            {
+                NewParameter = new TextBox
+                                   {
+                                       Text = par,
+                                       Margin = ContentItemsMargin
+                                   };
+                NewParameter.MouseUp += ParameterMouseUp;
+            }
+            else if (controlType == typeof(Button))
+            {
+                Button Button = new Button { Content = par };
+                Rectangle Rect = new Rectangle { Tag = Button, Fill = new SolidColorBrush(Color.FromArgb(0, 1, 0, 0)) };
+                Rect.MouseLeftButtonDown += ParameterMouseDown;
+                Rect.Cursor = Cursors.SizeAll;
+                //Rect.MouseMove += ParameterMouseMove;
+                Rect.MouseUp += ParameterMouseUp;
+                Panel.SetZIndex(Rect, 1);
+
+                NewParameter = new Grid();
+                (NewParameter as Grid).Children.Add(Button);
+                (NewParameter as Grid).Children.Add(Rect);
+                NewParameter.Margin = ContentItemsMargin;
+            }
+            else
+            {
+                return;
+            }
+            NewParameter.AllowDrop = true; // TODO 005: can this be deleted?
+
+            _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+            Grid.SetColumn(NewParameter, _parameterGrid.Children.Count);
+            _parameterGrid.Children.Add(NewParameter);
         }
 
         private void DeleteParameter(FrameworkElement param)
@@ -324,6 +426,7 @@ namespace MovieManager.APP.Common
 
         private void CbbParametersSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //TODO 010:use functio insertparam
             if (e.AddedItems.Count == 0)
                 return;
 
@@ -332,8 +435,11 @@ namespace MovieManager.APP.Common
             FrameworkElement NewParameter;
             if (Parameter is TextBox)
             {
-                NewParameter = new TextBox { Text = ((TextBox)Parameter).Text };
-                NewParameter.Margin = ContentItemsMargin;
+                NewParameter = new TextBox
+                {
+                    Text = ((TextBox)Parameter).Text,
+                    Margin = ContentItemsMargin
+                };
                 NewParameter.MouseUp += ParameterMouseUp;
             }
             else if (Parameter is Button)
@@ -359,12 +465,12 @@ namespace MovieManager.APP.Common
 
             if (_parameterGrid.Children.Count == 0)
             {
-                _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
                 _parameterGrid.Children.Add(NewParameter);
             }
             else if (sender != _parameterGrid)
             {
-                _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
                 Grid.SetColumn(NewParameter, _parameterGrid.Children.Count);
                 _parameterGrid.Children.Add(NewParameter);
             }

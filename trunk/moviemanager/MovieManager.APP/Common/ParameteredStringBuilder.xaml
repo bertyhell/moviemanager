@@ -19,7 +19,7 @@
         <Grid x:Name="_parameterGrid" Grid.Column="1" Background="#00000000">
             <!--<TextBox></TextBox>-->
         </Grid>
-        <ComboBox Grid.Column="2" x:Name="cbbParameters" VerticalAlignment="Stretch" ItemsSource="{Binding Parameters}" SelectionChanged="CbbParametersSelectionChanged">
+        <ComboBox Grid.Column="2" x:Name="cbbParameters" VerticalAlignment="Stretch" ItemsSource="{Binding Parameters}" SelectionChanged="CbbParametersSelectionChanged" Margin="0,5,0,5" HorizontalContentAlignment="Stretch">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
