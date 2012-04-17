@@ -103,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\Analyse\AnalyseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Panels\Filter\FilterRating.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -211,6 +215,12 @@
       <DependentUpon>ProgressbarWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\StringListConverter.cs" />
+    <Compile Include="Panels\Analyse\AnalyseController.cs" />
+    <Compile Include="Panels\Analyse\AnalyseWindow.xaml.cs">
+      <DependentUpon>AnalyseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Analyse\FileNameFromPathExtractor.cs" />
+    <Compile Include="Panels\Analyse\FolderFromPathExtractor.cs" />
     <Compile Include="Panels\Filter\FilterRating.xaml.cs">
       <DependentUpon>FilterRating.xaml</DependentUpon>
     </Compile>
@@ -419,9 +429,6 @@
     <Resource Include="Images\settings_32.png" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="Images\cursors\delete.cur" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
