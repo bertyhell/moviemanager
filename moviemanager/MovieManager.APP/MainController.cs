@@ -42,7 +42,6 @@ namespace MovieManager.APP
             }
         }
 
-
         private ObservableCollection<Video> _videos = new ObservableCollection<Video>();
         public ObservableCollection<Video> Videos
         {

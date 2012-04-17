@@ -7,38 +7,31 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="auto" MinHeight="150"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="auto"/>
-
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="10*" MinWidth="20"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="10*" MinWidth="20"/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="1" Grid.Column="1" x:Name="_btnLeft" Click="BtnLeftClick">
+        <Button x:Name="_btnLeft" Click="BtnLeftClick">
             <Button.Content>
-                <Image Width="30" Source="/MovieManager.APP;component/Images/previous.png"/>
+                <Image Source="/MovieManager.APP;component/Images/previous.png"/>
             </Button.Content>
         </Button>
 
-        <ScrollViewer x:Name="_ImgScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="1" Grid.Column="3">
-            <Grid MouseWheel="LayoutRootMouseWheel" Background="White"  x:Name="_layoutRoot">
+        <ScrollViewer x:Name="_ImgScrollViewer" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Column="1" VerticalAlignment="Stretch">
+            <Grid MouseWheel="LayoutRootMouseWheel" Background="White"  x:Name="_layoutRoot" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="300"/>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
             </Grid>
         </ScrollViewer>
-        <Button Grid.Row="1" Grid.Column="5" x:Name="_btnRight" Click="BtnRightClick">
+        <Button Grid.Column="2" x:Name="_btnRight" Click="BtnRightClick">
             <Button.Content>
-                <Image Width="30" Source="/MovieManager.APP;component/Images/next.png"/>
+                <Image Source="/MovieManager.APP;component/Images/next.png"/>
             </Button.Content>
         </Button>
     </Grid>

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MovieManager.APP.Panels.Settings.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SettingsWindow" Height="300" Width="573" xmlns:my="clr-namespace:MovieManager.APP.Panels.Settings" WindowStartupLocation="CenterOwner">
+        Title="SettingsWindow" Height="300" Width="573" xmlns:my="clr-namespace:MovieManager.APP.Panels.Settings" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" ShowInTaskbar="False">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="152*" />
