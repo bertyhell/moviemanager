@@ -6,6 +6,7 @@ using System.IO;
 using System.Configuration;
 using Common;
 using MovieManager.APP.Common;
+using Ookii.Dialogs.Wpf;
 using SQLite;
 
 namespace MovieManager.APP.Commands
@@ -28,12 +29,18 @@ namespace MovieManager.APP.Commands
             {
                 Path = ConfigurationManager.AppSettings["defaultVideoLocation1"];
             }
-            FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = Path };
-            if (Odd.ShowDialog() == DialogResult.OK)
+
+
+
+
+            var Dialog = new VistaFolderBrowserDialog{Description = "Please select a folder.", UseDescriptionForTitle = true};
+// ReSharper disable PossibleInvalidOperationException
+            if( (bool) Dialog.ShowDialog(MainWindow.Instance) )
+// ReSharper restore PossibleInvalidOperationException
             {
                 Message = "Searching videos: 0 found";
                 _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = true, DataContext = this };
-                MovieFileReader FileReader = new MovieFileReader(new DirectoryInfo(Odd.SelectedPath));
+                var FileReader = new MovieFileReader(new DirectoryInfo(Dialog.SelectedPath));
                 FileReader.FoundVideo += FileReader_OnVideoFoundProgress;
                 FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
                 FileReader.RunWorkerAsync();
