@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using MovieManager.APP.Panels.Settings;
 
@@ -15,7 +16,12 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            SettingsWindow SettingsWindow = new SettingsWindow {Owner = MainWindow.Instance};
+            List<SettingsPanelBase> Panels = new List<SettingsPanelBase>{
+                new FileRenameSettingsPanel(),
+                new MediaPlayerSettingsPanel()
+            };
+
+            SettingsWindow SettingsWindow = new SettingsWindow(Panels) { Owner = MainWindow.Instance };
             SettingsWindow.ShowDialog();
         }
     }

@@ -119,7 +119,8 @@ namespace SQLite
                 {
                     Duplicates.Add(videos[I]);
                 }
-                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = videos.Count, ProgressNumber = I * PERCENT_PREPARE_WORK / 100 });//recalculate to 5%
+                if (InsertVideosProgress != null)
+                    InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = videos.Count, ProgressNumber = I * PERCENT_PREPARE_WORK / 100 });//recalculate to 5%
             }
 
             int NumberOfVideos = DatasetVideos.videos.Count;
@@ -130,13 +131,15 @@ namespace SQLite
             for (int I = 0; I < NumberOfVideos; I++)//TODO 001 ping pong compare times with bulk insert
             {
                 VideosTableAdapter.Update(DatasetVideos.videos[I]);
-                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of videos and then to 95%
+                if (InsertVideosProgress != null)
+                    InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of videos and then to 95%
             }
             var EpisodesTableAdapter = new episodesTableAdapter();
             for (int I = 0; I < NumberOfEpisodes; I++)
             {
                 EpisodesTableAdapter.Update(DatasetVideos.episodes[I]);
-                InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((NumberOfVideos + I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of series and then to 95%
+                if (InsertVideosProgress != null)
+                    InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((NumberOfVideos + I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of series and then to 95%
             }
 
             //return the duplicates that are not inserted in the table

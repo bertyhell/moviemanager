@@ -58,6 +58,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\lib\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\RibbonControlsLibrary.dll</HintPath>
@@ -143,7 +146,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panels\Settings\SettingsPanel.xaml">
+    <Page Include="Panels\Settings\InternalMediaPlayerSettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\Settings\MediaPlayerSettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\Settings\FileRenameSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,8 +263,15 @@
       <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\RatingEditorControl.cs" />
-    <Compile Include="Panels\Settings\SettingsPanel.xaml.cs">
-      <DependentUpon>SettingsPanel.xaml</DependentUpon>
+    <Compile Include="Panels\Settings\InternalMediaPlayerSettingsPanel.xaml.cs">
+      <DependentUpon>InternalMediaPlayerSettingsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Settings\SettingsPanelBase.cs" />
+    <Compile Include="Panels\Settings\MediaPlayerSettingsPanel.xaml.cs">
+      <DependentUpon>MediaPlayerSettingsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\Settings\FileRenameSettingsPanel.xaml.cs">
+      <DependentUpon>FileRenameSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\Settings\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -428,7 +446,12 @@
   <ItemGroup>
     <Resource Include="Images\settings_32.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\MediaPlayer_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\disk.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

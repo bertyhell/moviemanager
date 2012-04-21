@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Windows;
 using Model;
 using MovieManager.APP.Panels;
 using VlcPlayer;
@@ -41,10 +43,9 @@ namespace MovieManager.APP
         {
             Video SelectedVideo = (_videoGrid.SelectedItem as Video);
 
-            VideoEditor Editor = new VideoEditor {DataContext = SelectedVideo};
+            VideoEditor Editor = new VideoEditor { DataContext = SelectedVideo };
 
-            Binding VideoBinding = new Binding
-                                       {Source = SelectedVideo, Path = new PropertyPath("."), Mode = BindingMode.TwoWay};
+            Binding VideoBinding = new Binding { Source = SelectedVideo, Path = new PropertyPath("."), Mode = BindingMode.TwoWay };
 
             Editor.SetBinding(VideoEditor.VIDEO_PROPERTY, VideoBinding);
             Editor.Show();
@@ -75,11 +76,41 @@ namespace MovieManager.APP
 
         private void MenuItemRenameFileClick(object sender, RoutedEventArgs e)
         {
-
-            Video SelectedVideo = (_videoGrid.SelectedItem as Video);
-            if (SelectedVideo != null)
+            if (_videoGrid.SelectedItems != null)
             {
-                //File.Move(SelectedVideo.Path, Path.Combine(Path.GetDirectoryName(SelectedVideo.Path), ));
+                foreach (Video Video in _videoGrid.SelectedItems)
+                {
+                    try
+                    {
+                        string NewVideoName = Path.GetFileName(Video.Path); ;
+                        string VideoDir = Path.GetDirectoryName(Video.Path);
+                        if (Video is Movie)
+                        {
+                            string ParString = Properties.Settings.Default.RenamingMovieFileSequence;
+                            NewVideoName = ParString.Replace("{{MovieName}}", Video.Name);
+                            NewVideoName = NewVideoName.Replace("{{Year}}", Video.Release.Year.ToString());
+                        }
+
+                        else if (Video is Episode)
+                        {
+                            string ParString = Properties.Settings.Default.RenamingEpisodeFileSequence;
+                            //TODO 030: implement renaming for episodes
+                        }
+
+                        if (!string.IsNullOrEmpty(VideoDir) && File.Exists(Video.Path) && Directory.Exists(VideoDir))
+                        {
+                            string NewPath = Path.Combine(VideoDir, NewVideoName + Path.GetExtension(Video.Path));
+                            File.Move(Video.Path, NewPath);
+                            Video.Path = NewPath;
+                        }
+
+                        _videoGrid.Items.Refresh();
+                    }
+                    catch
+                    {
+
+                    }
+                }
             }
         }
     }
