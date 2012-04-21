@@ -2,7 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MovieManager.APP.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="abc" Type="Model.Actor" Scope="Application">
+    <Setting Name="RenamingMovieFileSequence" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RenamingEpisodeFileSequence" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
