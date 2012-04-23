@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,19 +10,24 @@ namespace MovieManager.APP.Common
     /// <summary>
     /// Interaction logic for NumericBox.xaml
     /// </summary>
-    public partial class NumericBox
+    public partial class NumericBox : INotifyPropertyChanged
     {
-        public static DependencyProperty NumberProperty = DependencyProperty.Register("Number", typeof (int), typeof (NumericBox), new PropertyMetadata(default(int)));
+
 
         public NumericBox()
         {
             InitializeComponent();
         }
 
-        public int Number
+        private string _text;//TODO 001 change this to dependancy property -> binding becomes possible
+        public String Text
         {
-            get { return (int) GetValue(NumberProperty); }
-            set { SetValue(NumberProperty, value); }
+            get { return _text; }
+            set
+            {
+                _text = value;
+                PropChanged("Text");
+            }
         }
 
 
@@ -52,5 +58,15 @@ namespace MovieManager.APP.Common
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        public void PropChanged(string title)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(title));
+            }
+        }
     }
 }

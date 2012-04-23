@@ -37,7 +37,6 @@ namespace SQLite
                         IdImdb = Row.id_imdb,
                         Name = Row.name,
                         Release = Row.release,
-                        ReleaseYearGuess = (int)Row.release_year_guess,
                         Rating = Row.rating,
                         RatingImdb = Row.rating_imdb,
                         Path = Row.path,
@@ -107,7 +106,6 @@ namespace SQLite
                     DsVideos.videosRow Row = DatasetVideos.videos.NewvideosRow();
                     Row.path = videos[I].Path;
                     Row.name = videos[I].Name;
-                    Row.release_year_guess = videos[I].ReleaseYearGuess;
                     DatasetVideos.videos.AddvideosRow(Row);
                     videos[I].Id = (int)Row.id;
 

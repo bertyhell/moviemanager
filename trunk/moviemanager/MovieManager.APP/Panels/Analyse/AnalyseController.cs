@@ -34,18 +34,16 @@ namespace MovieManager.APP.Panels.Analyse
             }
         }
 
-        private Video _selectedItem;
-        public Video SelectedItem
+        private Video _selectedVideoFile;
+        public Video SelectedVideoFile
         {
-            get { return _selectedItem; }
+            get { return _selectedVideoFile; }
             set
             {
-                _selectedItem = value;
-                PropChanged("SelectedItem");
+                _selectedVideoFile = value;
+                PropChanged("SelectedVideoFile");
             }
         }
-
-
 
         public void PropChanged(string title)
         {
@@ -57,7 +55,7 @@ namespace MovieManager.APP.Panels.Analyse
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void ManualSearch(string text, int number)
+        public void ManualSearch(string text, string number)
         {
             VideoInfos.Clear();
             foreach (var Video in SearchTMDB.GetVideoInfo(text))
@@ -67,7 +65,7 @@ namespace MovieManager.APP.Panels.Analyse
         }
 
         private object _selectedMovieInfo;
-        protected object SelectedMovieInfo
+        public object SelectedMovieInfo
         {
             get { return _selectedMovieInfo; }
             set

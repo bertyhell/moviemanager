@@ -87,22 +87,6 @@ namespace SQLite
                     //handle signle quotes in path name
                     Name = CleanTitle(FilenameWidthoutExt)
                 };
-                var RegEx1 = new Regex(".+[^0-9a-zA-Z]?([0-9]{4})[^0-9a-zA-Z]?");
-                var Match = RegEx1.Match(Video.Name);
-                if (Match.Success)
-                {
-                    var ReleaseYearGuess = Int32.Parse(Match.Groups[1].Value);
-                    if(ReleaseYearGuess > 1800 && ReleaseYearGuess < DateTime.Today.Year+20)
-                    {
-                        Video.ReleaseYearGuess = ReleaseYearGuess;
-                    }else
-                    {
-                        Video.ReleaseYearGuess = 0;
-                    }
-                }else
-                {
-                    Video.ReleaseYearGuess = 0;
-                }
                 videos.Add(Video);
                 _videosFound++;
                 if (!reportNonVideos)
