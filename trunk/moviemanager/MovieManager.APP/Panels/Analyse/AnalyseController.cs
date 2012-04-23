@@ -49,5 +49,10 @@ namespace MovieManager.APP.Panels.Analyse
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void ManualSearch(string text, int number)
+        {
+            
+        }
     }
 }

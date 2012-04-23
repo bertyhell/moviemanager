@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:analyse="clr-namespace:MovieManager.APP.Panels.Analyse"
-        Title="Analyse Videos" Height="700" Width="900" xmlns:my="clr-namespace:MovieManager.APP.Panels" xmlns:my1="clr-namespace:MovieManager.APP.Common" Icon="/MovieManager.APP;component/Images/analyse.png" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" ShowInTaskbar="False">
+        Title="Analyse Videos" Height="700" Width="900" xmlns:my="clr-namespace:MovieManager.APP.Panels" xmlns:my1="clr-namespace:MovieManager.APP.Common" Icon="/MovieManager.APP;component/Images/analyse.png" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
     <Window.Resources>
         <analyse:FileNameFromPathExtractor x:Key="FileNameFromPathExtractor" />
         <analyse:FolderFromPathExtractor x:Key="FolderFromPathExtractor" />
@@ -28,15 +28,21 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="right" Text="File name:" VerticalAlignment="center" Margin="5"/>
-                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" IsReadOnly="True" />
-                <TextBlock HorizontalAlignment="right" Text="Folder name:" VerticalAlignment="center" Grid.Row="1" Margin="5" />
-                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" Grid.Row="1" IsReadOnly="True" />
-                <TextBlock HorizontalAlignment="right" Text="Path:" VerticalAlignment="center" Grid.Row="2" Margin="5"/>
-                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" Grid.Row="2" IsReadOnly="True" />
-                <DataGrid Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Videos}" AlternatingRowBackground="#EEE"
+                <TextBlock HorizontalAlignment="right" Text="Title guess:" VerticalAlignment="center" Margin="5" />
+                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" Text="{Binding SelectedItem.Name}" Name="txtTitleGuess" Margin="0,9,75,9" />
+                <TextBlock HorizontalAlignment="right" Text="Release guess:" VerticalAlignment="center" Margin="5" Grid.Row="1" />
+                <my1:NumericBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" Number="{Binding SelectedItem.ReleaseYearGuess}" Grid.Row="1" Margin="0,0,75,0" x:Name="txtReleaseYearGuess" />
+                <TextBlock HorizontalAlignment="right" Text="File name:" VerticalAlignment="center" Margin="0,6,5,12" Grid.Row="2" />
+                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" IsReadOnly="True" Grid.Row="2" Margin="0,3,0,9"  Text="{Binding Converter={StaticResource FileNameFromPathExtractor}, Path=SelectedItem.Path, Mode=OneWay}" />
+                <TextBlock HorizontalAlignment="right" Text="Folder name:" VerticalAlignment="center" Grid.Row="3" Margin="5" />
+                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" Grid.Row="3" IsReadOnly="True" Text="{Binding Converter={StaticResource FolderFromPathExtractor}, Path=SelectedItem.Path, Mode=OneWay}" />
+                <TextBlock HorizontalAlignment="right" Text="Path:" VerticalAlignment="center" Grid.Row="4" Margin="5"/>
+                <TextBox HorizontalAlignment="Stretch" VerticalAlignment="center" Grid.Column="1" Grid.Row="4" IsReadOnly="True" Text="{Binding Path=SelectedItem.Path, Mode=OneWay}" />
+                <DataGrid Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Videos}" SelectedItem="{Binding SelectedItem}" AlternatingRowBackground="#EEE"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Single" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False">
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
@@ -44,12 +50,16 @@
                         </Style>
                     </DataGrid.CellStyle>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Title" Binding="{Binding Name}" />
                         <DataGridTextColumn Header="File" Binding="{Binding Path, Converter={StaticResource FileNameFromPathExtractor}}" />
-                        <DataGridTextColumn Header="Folder" Binding="{Binding Path, Converter={StaticResource FolderFromPathExtractor}}" />
                         <DataGridTextColumn Header="Path" Binding="{Binding Path}" />
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Grid.Column="1" Height="62" HorizontalAlignment="Left" Margin="172,9,0,0" Name="btnManualSearch" VerticalAlignment="Top" Width="69" Grid.RowSpan="2" Click="BtnManualSearchClick">
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center">Manual</TextBlock>
+                        <TextBlock HorizontalAlignment="Center">Search</TextBlock>
+                    </StackPanel>
+                </Button>
             </Grid>
         </GroupBox>
 
