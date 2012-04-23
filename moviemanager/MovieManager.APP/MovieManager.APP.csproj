@@ -94,6 +94,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Common\NumericBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Common\ParameteredStringBuilder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +219,9 @@
     <Compile Include="Common\CheckableString.cs" />
     <Compile Include="Common\CheckCombobox.xaml.cs">
       <DependentUpon>CheckCombobox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\NumericBox.xaml.cs">
+      <DependentUpon>NumericBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\ParameteredStringBuilder.xaml.cs">
       <DependentUpon>ParameteredStringBuilder.xaml</DependentUpon>

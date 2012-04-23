@@ -2,17 +2,18 @@
 <xs:schema id="DsVideos" targetNamespace="http://tempuri.org/DsVideos.xsd" xmlns:mstns="http://tempuri.org/DsVideos.xsd" xmlns="http://tempuri.org/DsVideos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="moviemanagerConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="moviemanagerConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SQLite.Properties.Settings.GlobalReference.Default.moviemanagerConnectionString1" Provider="System.Data.SQLite" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="moviemanagerConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="moviemanagerConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SQLite.Properties.Settings.GlobalReference.Default.moviemanagerConnectionString" Provider="System.Data.SQLite" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="moviemanagerConnectionString2" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="moviemanagerConnectionString2 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SQLite.Properties.Settings.GlobalReference.Default.moviemanagerConnectionString2" Provider="System.Data.SQLite" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="videosTableAdapter" GeneratorDataComponentClassName="videosTableAdapter" Name="videos" UserDataComponentName="videosTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="moviemanagerConnectionString1 (Settings)" DbObjectName="main.videos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="moviemanagerConnectionString2 (Settings)" DbObjectName="main.videos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [videos] WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))</CommandText>
+                    <CommandText>DELETE FROM [videos] WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_release_year_guess = 1 AND [release_year_guess] IS NULL) OR ([release_year_guess] = @Original_release_year_guess)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int64" Direction="Input" ParameterName="@Original_id" Precision="0" ProviderType="Int64" Scale="0" Size="0" SourceColumn="id" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_id_imdb" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="id_imdb" SourceColumnNullMapping="true" SourceVersion="Original" />
@@ -20,6 +21,8 @@
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_name" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="name" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_release" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="release" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_release" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="release" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_release_year_guess" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="release_year_guess" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int64" Direction="Input" ParameterName="@Original_release_year_guess" Precision="0" ProviderType="Int64" Scale="0" Size="0" SourceColumn="release_year_guess" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rating" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="rating" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="@Original_rating" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="rating" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rating_imdb" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="rating_imdb" SourceColumnNullMapping="true" SourceVersion="Original" />
@@ -32,11 +35,12 @@
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [videos] ([id_imdb], [name], [release], [rating], [rating_imdb], [path], [last_play_location]) VALUES (@id_imdb, @name, @release, @rating, @rating_imdb, @path, @last_play_location)</CommandText>
+                    <CommandText>INSERT INTO [videos] ([id_imdb], [name], [release], [release_year_guess], [rating], [rating_imdb], [path], [last_play_location]) VALUES (@id_imdb, @name, @release, @release_year_guess, @rating, @rating_imdb, @path, @last_play_location)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@id_imdb" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="id_imdb" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@name" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="name" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@release" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="release" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int64" Direction="Input" ParameterName="@release_year_guess" Precision="0" ProviderType="Int64" Scale="0" Size="0" SourceColumn="release_year_guess" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="@rating" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="rating" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="@rating_imdb" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="rating_imdb" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@path" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="path" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -45,18 +49,19 @@
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT [id], [id_imdb], [name], [release], [rating], [rating_imdb], [path], [last_play_location] FROM [videos]</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT id, id_imdb, name, release, release_year_guess, rating, rating_imdb, path, last_play_location FROM videos</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [videos] SET [id_imdb] = @id_imdb, [name] = @name, [release] = @release, [rating] = @rating, [rating_imdb] = @rating_imdb, [path] = @path, [last_play_location] = @last_play_location WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))</CommandText>
+                    <CommandText>UPDATE [videos] SET [id_imdb] = @id_imdb, [name] = @name, [release] = @release, [release_year_guess] = @release_year_guess, [rating] = @rating, [rating_imdb] = @rating_imdb, [path] = @path, [last_play_location] = @last_play_location WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_release_year_guess = 1 AND [release_year_guess] IS NULL) OR ([release_year_guess] = @Original_release_year_guess)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ([last_play_location] = @Original_last_play_location))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@id_imdb" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="id_imdb" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@name" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="name" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@release" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="release" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int64" Direction="Input" ParameterName="@release_year_guess" Precision="0" ProviderType="Int64" Scale="0" Size="0" SourceColumn="release_year_guess" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="@rating" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="rating" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="@rating_imdb" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="rating_imdb" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@path" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="path" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -67,6 +72,8 @@
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_name" Precision="0" ProviderType="String" Scale="0" Size="0" SourceColumn="name" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_release" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="release" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="@Original_release" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="release" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_release_year_guess" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="release_year_guess" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int64" Direction="Input" ParameterName="@Original_release_year_guess" Precision="0" ProviderType="Int64" Scale="0" Size="0" SourceColumn="release_year_guess" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rating" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="rating" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="@Original_rating" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="rating" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rating_imdb" Precision="0" ProviderType="Int32" Scale="0" Size="0" SourceColumn="rating_imdb" SourceColumnNullMapping="true" SourceVersion="Original" />
@@ -88,12 +95,13 @@
               <Mapping SourceColumn="rating_imdb" DataSetColumn="rating_imdb" />
               <Mapping SourceColumn="path" DataSetColumn="path" />
               <Mapping SourceColumn="last_play_location" DataSetColumn="last_play_location" />
+              <Mapping SourceColumn="release_year_guess" DataSetColumn="release_year_guess" />
             </Mappings>
             <Sources />
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="videos_genresTableAdapter" GeneratorDataComponentClassName="videos_genresTableAdapter" Name="videos_genres" UserDataComponentName="videos_genresTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="moviemanagerConnectionString1 (Settings)" DbObjectName="main.videos_genres" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="moviemanagerConnectionString (Settings)" DbObjectName="main.videos_genres" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [videos_genres] WHERE (([video_id] = @Original_video_id) AND ([genre_id] = @Original_genre_id))</CommandText>
@@ -139,7 +147,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="serieTableAdapter" GeneratorDataComponentClassName="serieTableAdapter" Name="serie" UserDataComponentName="serieTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="moviemanagerConnectionString1 (Settings)" DbObjectName="main.serie" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="moviemanagerConnectionString (Settings)" DbObjectName="main.serie" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [serie] WHERE (([id] = @Original_id) AND ([name] = @Original_name))</CommandText>
@@ -185,7 +193,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="moviesTableAdapter" GeneratorDataComponentClassName="moviesTableAdapter" Name="movies" UserDataComponentName="moviesTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="moviemanagerConnectionString1 (Settings)" DbObjectName="main.movies" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="moviemanagerConnectionString (Settings)" DbObjectName="main.movies" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [movies] WHERE (([id] = @Original_id) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)) AND ((@IsNull_franchise_id = 1 AND [franchise_id] IS NULL) OR ([franchise_id] = @Original_franchise_id)) AND ((@IsNull_id_tmdb = 1 AND [id_tmdb] IS NULL) OR ([id_tmdb] = @Original_id_tmdb)))</CommandText>
@@ -247,7 +255,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="episodesTableAdapter" GeneratorDataComponentClassName="episodesTableAdapter" Name="episodes" UserDataComponentName="episodesTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="moviemanagerConnectionString1 (Settings)" DbObjectName="main.episodes" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="moviemanagerConnectionString (Settings)" DbObjectName="main.episodes" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [episodes] WHERE (([id] = @Original_id) AND ([serie_id] = @Original_serie_id) AND ([season] = @Original_season) AND ((@IsNull_episode_number = 1 AND [episode_number] IS NULL) OR ([episode_number] = @Original_episode_number)) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)))</CommandText>
@@ -313,7 +321,7 @@ FROM            episodes</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="franchisesTableAdapter" GeneratorDataComponentClassName="franchisesTableAdapter" Name="franchises" UserDataComponentName="franchisesTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="moviemanagerConnectionString1 (Settings)" DbObjectName="main.franchises" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="moviemanagerConnectionString (Settings)" DbObjectName="main.franchises" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [franchises] WHERE (([id] = @Original_id) AND ([name] = @Original_name))</CommandText>
@@ -359,7 +367,7 @@ FROM            episodes</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="genresTableAdapter" GeneratorDataComponentClassName="genresTableAdapter" Name="genres" UserDataComponentName="genresTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="moviemanagerConnectionString1 (Settings)" DbObjectName="main.genres" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="moviemanagerConnectionString (Settings)" DbObjectName="main.genres" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [genres] WHERE (([gen_id] = @Original_gen_id) AND ([gen_label] = @Original_gen_label))</CommandText>
@@ -411,7 +419,78 @@ FROM            episodes</CommandText>
   <xs:element name="DsVideos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DsVideos" msprop:Generator_UserDSName="DsVideos">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="videos" msprop:Generator_TableClassName="videosDataTable" msprop:Generator_TableVarName="tablevideos" msprop:Generator_TablePropName="videos" msprop:Generator_RowDeletingName="videosRowDeleting" msprop:Generator_UserTableName="videos" msprop:Generator_RowChangingName="videosRowChanging" msprop:Generator_RowEvHandlerName="videosRowChangeEventHandler" msprop:Generator_RowDeletedName="videosRowDeleted" msprop:Generator_RowEvArgName="videosRowChangeEvent" msprop:Generator_RowChangedName="videosRowChanged" msprop:Generator_RowClassName="videosRow">
+        <xs:element name="videos_genres" msprop:Generator_TableClassName="videos_genresDataTable" msprop:Generator_TableVarName="tablevideos_genres" msprop:Generator_TablePropName="videos_genres" msprop:Generator_RowDeletingName="videos_genresRowDeleting" msprop:Generator_RowChangingName="videos_genresRowChanging" msprop:Generator_RowEvHandlerName="videos_genresRowChangeEventHandler" msprop:Generator_RowDeletedName="videos_genresRowDeleted" msprop:Generator_UserTableName="videos_genres" msprop:Generator_RowChangedName="videos_genresRowChanged" msprop:Generator_RowEvArgName="videos_genresRowChangeEvent" msprop:Generator_RowClassName="videos_genresRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="video_id" msprop:Generator_ColumnVarNameInTable="columnvideo_id" msprop:Generator_ColumnPropNameInRow="video_id" msprop:Generator_ColumnPropNameInTable="video_idColumn" msprop:Generator_UserColumnName="video_id" type="xs:long" />
+              <xs:element name="genre_id" msprop:Generator_ColumnVarNameInTable="columngenre_id" msprop:Generator_ColumnPropNameInRow="genre_id" msprop:Generator_ColumnPropNameInTable="genre_idColumn" msprop:Generator_UserColumnName="genre_id" type="xs:long" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="serie" msprop:Generator_TableClassName="serieDataTable" msprop:Generator_TableVarName="tableserie" msprop:Generator_TablePropName="serie" msprop:Generator_RowDeletingName="serieRowDeleting" msprop:Generator_RowChangingName="serieRowChanging" msprop:Generator_RowEvHandlerName="serieRowChangeEventHandler" msprop:Generator_RowDeletedName="serieRowDeleted" msprop:Generator_UserTableName="serie" msprop:Generator_RowChangedName="serieRowChanged" msprop:Generator_RowEvArgName="serieRowChangeEvent" msprop:Generator_RowClassName="serieRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
+              <xs:element name="name" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="movies" msprop:Generator_TableClassName="moviesDataTable" msprop:Generator_TableVarName="tablemovies" msprop:Generator_TablePropName="movies" msprop:Generator_RowDeletingName="moviesRowDeleting" msprop:Generator_RowChangingName="moviesRowChanging" msprop:Generator_RowEvHandlerName="moviesRowChangeEventHandler" msprop:Generator_RowDeletedName="moviesRowDeleted" msprop:Generator_UserTableName="movies" msprop:Generator_RowChangedName="moviesRowChanged" msprop:Generator_RowEvArgName="moviesRowChangeEvent" msprop:Generator_RowClassName="moviesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
+              <xs:element name="runtime" msprop:Generator_ColumnVarNameInTable="columnruntime" msprop:Generator_ColumnPropNameInRow="runtime" msprop:Generator_ColumnPropNameInTable="runtimeColumn" msprop:Generator_UserColumnName="runtime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="franchise_id" msprop:Generator_ColumnVarNameInTable="columnfranchise_id" msprop:Generator_ColumnPropNameInRow="franchise_id" msprop:Generator_ColumnPropNameInTable="franchise_idColumn" msprop:Generator_UserColumnName="franchise_id" type="xs:long" minOccurs="0" />
+              <xs:element name="id_tmdb" msprop:Generator_ColumnVarNameInTable="columnid_tmdb" msprop:Generator_ColumnPropNameInRow="id_tmdb" msprop:Generator_ColumnPropNameInTable="id_tmdbColumn" msprop:Generator_UserColumnName="id_tmdb" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="episodes" msprop:Generator_TableClassName="episodesDataTable" msprop:Generator_TableVarName="tableepisodes" msprop:Generator_TablePropName="episodes" msprop:Generator_RowDeletingName="episodesRowDeleting" msprop:Generator_RowChangingName="episodesRowChanging" msprop:Generator_RowEvHandlerName="episodesRowChangeEventHandler" msprop:Generator_RowDeletedName="episodesRowDeleted" msprop:Generator_UserTableName="episodes" msprop:Generator_RowChangedName="episodesRowChanged" msprop:Generator_RowEvArgName="episodesRowChangeEvent" msprop:Generator_RowClassName="episodesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
+              <xs:element name="serie_id" msprop:Generator_ColumnVarNameInTable="columnserie_id" msprop:Generator_ColumnPropNameInRow="serie_id" msprop:Generator_ColumnPropNameInTable="serie_idColumn" msprop:Generator_UserColumnName="serie_id" type="xs:long" />
+              <xs:element name="season" msprop:Generator_ColumnVarNameInTable="columnseason" msprop:Generator_ColumnPropNameInRow="season" msprop:Generator_ColumnPropNameInTable="seasonColumn" msprop:Generator_UserColumnName="season" type="xs:long" />
+              <xs:element name="runtime" msprop:Generator_ColumnVarNameInTable="columnruntime" msprop:Generator_ColumnPropNameInRow="runtime" msprop:Generator_ColumnPropNameInTable="runtimeColumn" msprop:Generator_UserColumnName="runtime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="episode_number" msprop:Generator_ColumnVarNameInTable="columnepisode_number" msprop:Generator_ColumnPropNameInRow="episode_number" msprop:Generator_ColumnPropNameInTable="episode_numberColumn" msprop:Generator_UserColumnName="episode_number" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="franchises" msprop:Generator_TableClassName="franchisesDataTable" msprop:Generator_TableVarName="tablefranchises" msprop:Generator_TablePropName="franchises" msprop:Generator_RowDeletingName="franchisesRowDeleting" msprop:Generator_RowChangingName="franchisesRowChanging" msprop:Generator_RowEvHandlerName="franchisesRowChangeEventHandler" msprop:Generator_RowDeletedName="franchisesRowDeleted" msprop:Generator_UserTableName="franchises" msprop:Generator_RowChangedName="franchisesRowChanged" msprop:Generator_RowEvArgName="franchisesRowChangeEvent" msprop:Generator_RowClassName="franchisesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="genres" msprop:Generator_TableClassName="genresDataTable" msprop:Generator_TableVarName="tablegenres" msprop:Generator_TablePropName="genres" msprop:Generator_RowDeletingName="genresRowDeleting" msprop:Generator_RowChangingName="genresRowChanging" msprop:Generator_RowEvHandlerName="genresRowChangeEventHandler" msprop:Generator_RowDeletedName="genresRowDeleted" msprop:Generator_UserTableName="genres" msprop:Generator_RowChangedName="genresRowChanged" msprop:Generator_RowEvArgName="genresRowChangeEvent" msprop:Generator_RowClassName="genresRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="gen_id" msprop:Generator_ColumnVarNameInTable="columngen_id" msprop:Generator_ColumnPropNameInRow="gen_id" msprop:Generator_ColumnPropNameInTable="gen_idColumn" msprop:Generator_UserColumnName="gen_id" type="xs:long" />
+              <xs:element name="gen_label" msprop:Generator_ColumnVarNameInTable="columngen_label" msprop:Generator_ColumnPropNameInRow="gen_label" msprop:Generator_ColumnPropNameInTable="gen_labelColumn" msprop:Generator_UserColumnName="gen_label">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="videos" msprop:Generator_TableClassName="videosDataTable" msprop:Generator_TableVarName="tablevideos" msprop:Generator_TablePropName="videos" msprop:Generator_RowDeletingName="videosRowDeleting" msprop:Generator_RowChangingName="videosRowChanging" msprop:Generator_RowEvHandlerName="videosRowChangeEventHandler" msprop:Generator_RowDeletedName="videosRowDeleted" msprop:Generator_UserTableName="videos" msprop:Generator_RowChangedName="videosRowChanged" msprop:Generator_RowEvArgName="videosRowChangeEvent" msprop:Generator_RowClassName="videosRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
@@ -440,87 +519,13 @@ FROM            episodes</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="last_play_location" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="last_play_location" msprop:Generator_ColumnVarNameInTable="columnlast_play_location" msprop:Generator_ColumnPropNameInTable="last_play_locationColumn" msprop:Generator_UserColumnName="last_play_location" type="xs:long" default="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="videos_genres" msprop:Generator_TableClassName="videos_genresDataTable" msprop:Generator_TableVarName="tablevideos_genres" msprop:Generator_TablePropName="videos_genres" msprop:Generator_RowDeletingName="videos_genresRowDeleting" msprop:Generator_UserTableName="videos_genres" msprop:Generator_RowChangingName="videos_genresRowChanging" msprop:Generator_RowEvHandlerName="videos_genresRowChangeEventHandler" msprop:Generator_RowDeletedName="videos_genresRowDeleted" msprop:Generator_RowEvArgName="videos_genresRowChangeEvent" msprop:Generator_RowChangedName="videos_genresRowChanged" msprop:Generator_RowClassName="videos_genresRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="video_id" msprop:Generator_ColumnVarNameInTable="columnvideo_id" msprop:Generator_ColumnPropNameInRow="video_id" msprop:Generator_ColumnPropNameInTable="video_idColumn" msprop:Generator_UserColumnName="video_id" type="xs:long" />
-              <xs:element name="genre_id" msprop:Generator_ColumnVarNameInTable="columngenre_id" msprop:Generator_ColumnPropNameInRow="genre_id" msprop:Generator_ColumnPropNameInTable="genre_idColumn" msprop:Generator_UserColumnName="genre_id" type="xs:long" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="serie" msprop:Generator_TableClassName="serieDataTable" msprop:Generator_TableVarName="tableserie" msprop:Generator_TablePropName="serie" msprop:Generator_RowDeletingName="serieRowDeleting" msprop:Generator_UserTableName="serie" msprop:Generator_RowChangingName="serieRowChanging" msprop:Generator_RowEvHandlerName="serieRowChangeEventHandler" msprop:Generator_RowDeletedName="serieRowDeleted" msprop:Generator_RowEvArgName="serieRowChangeEvent" msprop:Generator_RowChangedName="serieRowChanged" msprop:Generator_RowClassName="serieRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
-              <xs:element name="name" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="movies" msprop:Generator_TableClassName="moviesDataTable" msprop:Generator_TableVarName="tablemovies" msprop:Generator_TablePropName="movies" msprop:Generator_RowDeletingName="moviesRowDeleting" msprop:Generator_UserTableName="movies" msprop:Generator_RowChangingName="moviesRowChanging" msprop:Generator_RowEvHandlerName="moviesRowChangeEventHandler" msprop:Generator_RowDeletedName="moviesRowDeleted" msprop:Generator_RowEvArgName="moviesRowChangeEvent" msprop:Generator_RowChangedName="moviesRowChanged" msprop:Generator_RowClassName="moviesRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
-              <xs:element name="runtime" msprop:Generator_ColumnVarNameInTable="columnruntime" msprop:Generator_ColumnPropNameInRow="runtime" msprop:Generator_ColumnPropNameInTable="runtimeColumn" msprop:Generator_UserColumnName="runtime" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="franchise_id" msprop:Generator_ColumnVarNameInTable="columnfranchise_id" msprop:Generator_ColumnPropNameInRow="franchise_id" msprop:Generator_ColumnPropNameInTable="franchise_idColumn" msprop:Generator_UserColumnName="franchise_id" type="xs:long" minOccurs="0" />
-              <xs:element name="id_tmdb" msprop:Generator_ColumnVarNameInTable="columnid_tmdb" msprop:Generator_ColumnPropNameInRow="id_tmdb" msprop:Generator_ColumnPropNameInTable="id_tmdbColumn" msprop:Generator_UserColumnName="id_tmdb" type="xs:long" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="episodes" msprop:Generator_TableClassName="episodesDataTable" msprop:Generator_TableVarName="tableepisodes" msprop:Generator_TablePropName="episodes" msprop:Generator_RowDeletingName="episodesRowDeleting" msprop:Generator_UserTableName="episodes" msprop:Generator_RowChangingName="episodesRowChanging" msprop:Generator_RowEvHandlerName="episodesRowChangeEventHandler" msprop:Generator_RowDeletedName="episodesRowDeleted" msprop:Generator_RowEvArgName="episodesRowChangeEvent" msprop:Generator_RowChangedName="episodesRowChanged" msprop:Generator_RowClassName="episodesRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
-              <xs:element name="serie_id" msprop:Generator_ColumnVarNameInTable="columnserie_id" msprop:Generator_ColumnPropNameInRow="serie_id" msprop:Generator_ColumnPropNameInTable="serie_idColumn" msprop:Generator_UserColumnName="serie_id" type="xs:long" />
-              <xs:element name="season" msprop:Generator_ColumnVarNameInTable="columnseason" msprop:Generator_ColumnPropNameInRow="season" msprop:Generator_ColumnPropNameInTable="seasonColumn" msprop:Generator_UserColumnName="season" type="xs:long" />
-              <xs:element name="runtime" msprop:Generator_ColumnVarNameInTable="columnruntime" msprop:Generator_ColumnPropNameInRow="runtime" msprop:Generator_ColumnPropNameInTable="runtimeColumn" msprop:Generator_UserColumnName="runtime" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="episode_number" msprop:Generator_ColumnVarNameInTable="columnepisode_number" msprop:Generator_ColumnPropNameInRow="episode_number" msprop:Generator_ColumnPropNameInTable="episode_numberColumn" msprop:Generator_UserColumnName="episode_number" type="xs:long" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="franchises" msprop:Generator_TableClassName="franchisesDataTable" msprop:Generator_TableVarName="tablefranchises" msprop:Generator_TablePropName="franchises" msprop:Generator_RowDeletingName="franchisesRowDeleting" msprop:Generator_UserTableName="franchises" msprop:Generator_RowChangingName="franchisesRowChanging" msprop:Generator_RowEvHandlerName="franchisesRowChangeEventHandler" msprop:Generator_RowDeletedName="franchisesRowDeleted" msprop:Generator_RowEvArgName="franchisesRowChangeEvent" msprop:Generator_RowChangedName="franchisesRowChanged" msprop:Generator_RowClassName="franchisesRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:long" />
-              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="genres" msprop:Generator_TableClassName="genresDataTable" msprop:Generator_TableVarName="tablegenres" msprop:Generator_TablePropName="genres" msprop:Generator_RowDeletingName="genresRowDeleting" msprop:Generator_UserTableName="genres" msprop:Generator_RowChangingName="genresRowChanging" msprop:Generator_RowEvHandlerName="genresRowChangeEventHandler" msprop:Generator_RowDeletedName="genresRowDeleted" msprop:Generator_RowEvArgName="genresRowChangeEvent" msprop:Generator_RowChangedName="genresRowChanged" msprop:Generator_RowClassName="genresRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="gen_id" msprop:Generator_ColumnVarNameInTable="columngen_id" msprop:Generator_ColumnPropNameInRow="gen_id" msprop:Generator_ColumnPropNameInTable="gen_idColumn" msprop:Generator_UserColumnName="gen_id" type="xs:long" />
-              <xs:element name="gen_label" msprop:Generator_ColumnVarNameInTable="columngen_label" msprop:Generator_ColumnPropNameInRow="gen_label" msprop:Generator_ColumnPropNameInTable="gen_labelColumn" msprop:Generator_UserColumnName="gen_label">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
+              <xs:element name="release_year_guess" msprop:Generator_ColumnVarNameInTable="columnrelease_year_guess" msprop:Generator_ColumnPropNameInRow="release_year_guess" msprop:Generator_ColumnPropNameInTable="release_year_guessColumn" msprop:Generator_UserColumnName="release_year_guess" type="xs:long" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:videos" />
-      <xs:field xpath="mstns:id" />
-    </xs:unique>
-    <xs:unique name="videos_genres_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:videos_genres" />
       <xs:field xpath="mstns:video_id" />
       <xs:field xpath="mstns:genre_id" />
@@ -545,15 +550,19 @@ FROM            episodes</CommandText>
       <xs:selector xpath=".//mstns:genres" />
       <xs:field xpath="mstns:gen_id" />
     </xs:unique>
+    <xs:unique name="videos_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:videos" />
+      <xs:field xpath="mstns:id" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_videos_genres_0" msdata:parent="videos" msdata:child="videos_genres" msdata:parentkey="id" msdata:childkey="video_id" msprop:Generator_UserChildTable="videos_genres" msprop:Generator_ChildPropName="Getvideos_genresRows" msprop:Generator_UserParentTable="videos" msprop:Generator_UserRelationName="FK_videos_genres_0" msprop:Generator_RelationVarName="relationFK_videos_genres_0" msprop:Generator_ParentPropName="videosRow" />
-      <msdata:Relationship name="FK_movies_0" msdata:parent="videos" msdata:child="movies" msdata:parentkey="id" msdata:childkey="id" msprop:Generator_UserChildTable="movies" msprop:Generator_ChildPropName="GetmoviesRows" msprop:Generator_UserParentTable="videos" msprop:Generator_UserRelationName="FK_movies_0" msprop:Generator_RelationVarName="relationFK_movies_0" msprop:Generator_ParentPropName="videosRow" />
-      <msdata:Relationship name="FK_episodes_0" msdata:parent="serie" msdata:child="episodes" msdata:parentkey="id" msdata:childkey="id" msprop:Generator_UserChildTable="episodes" msprop:Generator_ChildPropName="GetepisodesRows" msprop:Generator_UserParentTable="serie" msprop:Generator_UserRelationName="FK_episodes_0" msprop:Generator_RelationVarName="relationFK_episodes_0" msprop:Generator_ParentPropName="serieRow" />
-      <msdata:Relationship name="FK_episodes_1" msdata:parent="videos" msdata:child="episodes" msdata:parentkey="id" msdata:childkey="id" msprop:Generator_UserChildTable="episodes" msprop:Generator_ChildPropName="GetepisodesRows" msprop:Generator_UserParentTable="videos" msprop:Generator_UserRelationName="FK_episodes_1" msprop:Generator_RelationVarName="relationFK_episodes_1" msprop:Generator_ParentPropName="videosRow" />
-      <msdata:Relationship name="FK_movies_1" msdata:parent="franchises" msdata:child="movies" msdata:parentkey="id" msdata:childkey="franchise_id" msprop:Generator_UserChildTable="movies" msprop:Generator_ChildPropName="GetmoviesRows" msprop:Generator_UserParentTable="franchises" msprop:Generator_UserRelationName="FK_movies_1" msprop:Generator_RelationVarName="relationFK_movies_1" msprop:Generator_ParentPropName="franchisesRow" />
-      <msdata:Relationship name="FK_genres_0" msdata:parent="videos_genres" msdata:child="genres" msdata:parentkey="genre_id" msdata:childkey="gen_id" msprop:Generator_UserChildTable="genres" msprop:Generator_ChildPropName="GetgenresRows" msprop:Generator_UserParentTable="videos_genres" msprop:Generator_UserRelationName="FK_genres_0" msprop:Generator_RelationVarName="relationFK_genres_0" msprop:Generator_ParentPropName="videos_genresRow" />
+      <msdata:Relationship name="FK_episodes_0" msdata:parent="serie" msdata:child="episodes" msdata:parentkey="id" msdata:childkey="id" msprop:Generator_UserChildTable="episodes" msprop:Generator_ChildPropName="GetepisodesRows" msprop:Generator_UserRelationName="FK_episodes_0" msprop:Generator_RelationVarName="relationFK_episodes_0" msprop:Generator_UserParentTable="serie" msprop:Generator_ParentPropName="serieRow" />
+      <msdata:Relationship name="FK_movies_1" msdata:parent="franchises" msdata:child="movies" msdata:parentkey="id" msdata:childkey="franchise_id" msprop:Generator_UserChildTable="movies" msprop:Generator_ChildPropName="GetmoviesRows" msprop:Generator_UserRelationName="FK_movies_1" msprop:Generator_RelationVarName="relationFK_movies_1" msprop:Generator_UserParentTable="franchises" msprop:Generator_ParentPropName="franchisesRow" />
+      <msdata:Relationship name="FK_genres_0" msdata:parent="videos_genres" msdata:child="genres" msdata:parentkey="genre_id" msdata:childkey="gen_id" msprop:Generator_UserChildTable="genres" msprop:Generator_ChildPropName="GetgenresRows" msprop:Generator_UserRelationName="FK_genres_0" msprop:Generator_RelationVarName="relationFK_genres_0" msprop:Generator_UserParentTable="videos_genres" msprop:Generator_ParentPropName="videos_genresRow" />
+      <msdata:Relationship name="FK_episodes_1" msdata:parent="videos" msdata:child="episodes" msdata:parentkey="id" msdata:childkey="id" msprop:Generator_UserChildTable="episodes" msprop:Generator_ChildPropName="GetepisodesRows" msprop:Generator_UserRelationName="FK_episodes_1" msprop:Generator_RelationVarName="relationFK_episodes_1" msprop:Generator_UserParentTable="videos" msprop:Generator_ParentPropName="videosRow" />
+      <msdata:Relationship name="FK_movies_0" msdata:parent="videos" msdata:child="movies" msdata:parentkey="id" msdata:childkey="id" msprop:Generator_UserChildTable="movies" msprop:Generator_ChildPropName="GetmoviesRows" msprop:Generator_UserRelationName="FK_movies_0" msprop:Generator_RelationVarName="relationFK_movies_0" msprop:Generator_UserParentTable="videos" msprop:Generator_ParentPropName="videosRow" />
+      <msdata:Relationship name="FK_videos_genres_0" msdata:parent="videos" msdata:child="videos_genres" msdata:parentkey="id" msdata:childkey="video_id" msprop:Generator_UserChildTable="videos_genres" msprop:Generator_ChildPropName="Getvideos_genresRows" msprop:Generator_UserRelationName="FK_videos_genres_0" msprop:Generator_RelationVarName="relationFK_videos_genres_0" msprop:Generator_UserParentTable="videos" msprop:Generator_ParentPropName="videosRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

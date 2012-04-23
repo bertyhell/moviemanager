@@ -22,7 +22,7 @@ namespace SQLite
         {
             try
             {
-                DsVideos DsVideos = new DsVideos();
+                var DsVideos = new DsVideos();
                 FillDatasetWithAllVideos(DsVideos);
 
                 DsVideos.videos_genresDataTable VideosGenresDataTable = DsVideos.videos_genres;
@@ -31,12 +31,13 @@ namespace SQLite
                 //Convert to ObservableCollection<Video>
                 foreach (DsVideos.videosRow Row in DsVideos.videos.Rows)
                 {
-                    Video Video = new Video
+                    var Video = new Video
                     {
                         Id = (int)Row.id,
                         IdImdb = Row.id_imdb,
                         Name = Row.name,
                         Release = Row.release,
+                        ReleaseYearGuess = (int)Row.release_year_guess,
                         Rating = Row.rating,
                         RatingImdb = Row.rating_imdb,
                         Path = Row.path,
@@ -46,19 +47,19 @@ namespace SQLite
                     //get genre from dataset
                     foreach (DataRow DataRow in VideosGenresDataTable.Select(VideosGenresDataTable.video_idColumn.ColumnName + " = " + Video.Id))
                     {
-                        int GenreID = (int)(long)DataRow[VideosGenresDataTable.genre_idColumn.ColumnName];
+                        var GenreID = (int)(long)DataRow[VideosGenresDataTable.genre_idColumn.ColumnName];
                         DataRow GenreRow = GenresDataTable.FindBygen_id(GenreID);
                         Video.Genres.Add((string)GenreRow[GenresDataTable.gen_labelColumn]);
                     }
 
-                    DsVideos.moviesRow MoviesRow = DsVideos.movies.Rows.Find(Video.Id) as DsVideos.moviesRow;
+                    var MoviesRow = DsVideos.movies.Rows.Find(Video.Id) as DsVideos.moviesRow;
                     if (MoviesRow != null)
                     {
                         Video = Video as Movie;
                     }
                     else
                     {
-                        DsVideos.episodesRow EpisodeRow = DsVideos.episodes.Rows.Find(Video.Id) as DsVideos.episodesRow;
+                        var EpisodeRow = DsVideos.episodes.Rows.Find(Video.Id) as DsVideos.episodesRow;
                         if (EpisodeRow != null)
                         {
                             Video = Video.ConvertVideo(VideoTypeEnum.Episode, Video);
@@ -91,13 +92,12 @@ namespace SQLite
         private static IList<Video> InsertVideosHDD(IList<Video> videos, bool insertDuplicates)
         {
             IList<Video> Duplicates = new List<Video>();
-            DsVideos DatasetVideos = new DsVideos();
+            var DatasetVideos = new DsVideos();
             FillDatasetWithAllVideos(DatasetVideos);
 
             const int PERCENT_PREPARE_WORK = 5;
             int PrepareWork = videos.Count * PERCENT_PREPARE_WORK / 100;
-
-
+            
             //report as first 5%
             for (int I = 0; I < videos.Count; I++)
             {
@@ -107,6 +107,7 @@ namespace SQLite
                     DsVideos.videosRow Row = DatasetVideos.videos.NewvideosRow();
                     Row.path = videos[I].Path;
                     Row.name = videos[I].Name;
+                    Row.release_year_guess = videos[I].ReleaseYearGuess;
                     DatasetVideos.videos.AddvideosRow(Row);
                     videos[I].Id = (int)Row.id;
 
@@ -164,14 +165,12 @@ namespace SQLite
             EmptyTable("franchises");
             EmptyTable("serie");
             EmptyTable("videos_genres");
-
         }
 
         public static void EmptyTable(String tableName)
         {
             Database.ExecuteSQL("DELETE FROM " + tableName);
         }
-
 
         # region fill dataset
 

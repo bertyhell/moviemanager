@@ -14,7 +14,7 @@ namespace SQLite
     public class MovieFileReader : BackgroundWorker
     { // TODO 060: extends SwingWorker
 
-        private static readonly int MINIMAL_VIDEO_SIZE = 30000000; //Bytes
+        private const int MINIMAL_VIDEO_SIZE = 30000000; //Bytes
         static readonly String[] VIDEO_FILE_EXTENSIONS = { "ASX", "DTS", "GXF", "M2V", "M3U", "M4V", "MPEG1", "MPEG2", "MTS", "MXF", "OGM", "BUP", "A52", "AAC", "B4S", "CUE", "DIVX", "DV", "FLV", "M1V", "M2TS", "MKV", "MOV", "MPEG4", "OMA", "SPX", "TS", "VLC", "VOB", "XSPF", "DAT", "BIN", "IFO", "PART", "3G2", "AVI", "MPEG", "MPG", "FLAC", "M4A", "MP1", "OGG", "WAV", "XM", "3GP", "WMV", "AC3", "ASF", "MOD", "MP2", "MP4", "WMA", "MKA", "M4P" };
         static readonly String[] DELIMITERS = { "CD-1", "CD-2", "CD1", "CD2", "DVD-1", "DVD-2", "[Divx-ITA]", "[XviD-ITA]", "AC3", "DVDRip", "Xvid", "http", "www.", ".com", "shared", "powered", "sponsored", "sharelive", "filedonkey", "saugstube", "eselfilme", "eseldownloads", "emulemovies", "spanishare", "eselpsychos.de", "saughilfe.de", "goldesel.6x.to", "freedivx.org", "elitedivx", "deviance", "-ftv", "ftv", "-flt", "flt", "1080p", "720p", "1080i", "720i", "480", "x264", "ext", "ac3", "6ch", "axxo", "pukka", "klaxxon", "edition", "limited", "dvdscr", "screener", "unrated", "BRRIP", "subs", "_NL_", "m-hd" };
 
@@ -91,8 +91,17 @@ namespace SQLite
                 var Match = RegEx1.Match(Video.Name);
                 if (Match.Success)
                 {
-                    var ReleaseYearGuess = Match.Groups[1].Value;
-                    Video.ReleaseYearGuess = Int32.Parse(ReleaseYearGuess);
+                    var ReleaseYearGuess = Int32.Parse(Match.Groups[1].Value);
+                    if(ReleaseYearGuess > 1800 && ReleaseYearGuess < DateTime.Today.Year+20)
+                    {
+                        Video.ReleaseYearGuess = ReleaseYearGuess;
+                    }else
+                    {
+                        Video.ReleaseYearGuess = 0;
+                    }
+                }else
+                {
+                    Video.ReleaseYearGuess = 0;
                 }
                 videos.Add(Video);
                 _videosFound++;

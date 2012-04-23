@@ -16,7 +16,7 @@ namespace Model
         private String _idImdb;
         private String _name;
         private DateTime _release;
-        private int _releaseYearGuess;
+        private int _releaseYearGuess = -1;
         private double _rating;
         private double _ratingImdb;
         private List<String> _genres;
@@ -78,6 +78,7 @@ namespace Model
                 IdImdb = video.IdImdb,
                 Name = video.Name,
                 Release = video.Release,
+                ReleaseYearGuess = video.ReleaseYearGuess,
                 Rating = video.Rating,
                 RatingImdb = video.RatingImdb,
                 Path = video.Path,
@@ -301,6 +302,7 @@ namespace Model
         private String _oldidImdb;
         private String _oldname;
         private DateTime _oldrelease;
+        private int _oldreleaseyearguess;
         private double _oldrating;
         private double _oldratingImdb;
         private List<String> _oldgenres;
@@ -324,6 +326,7 @@ namespace Model
                 _oldidImdb = _idImdb;
                 _oldname = _name;
                 _oldrelease = _release;
+                _oldreleaseyearguess = _releaseYearGuess;
                 _oldrating = _rating;
                 _oldratingImdb = _ratingImdb;
                 _oldgenres = _genres;
@@ -353,6 +356,7 @@ namespace Model
                 OnPropertyChanged("IdImdb");
                 OnPropertyChanged("Name");
                 OnPropertyChanged("Release");
+                OnPropertyChanged("ReleaseYearGuess");
                 OnPropertyChanged("Rating");
                 OnPropertyChanged("RatingImdb");
                 OnPropertyChanged("Genres");
@@ -374,6 +378,7 @@ namespace Model
                 _idImdb = _oldidImdb;
                 _name = _oldname;
                 _release = _oldrelease;
+                _releaseYearGuess = _oldreleaseyearguess;
                 _rating = _oldrating;
                 _ratingImdb = _oldratingImdb;
                 _genres = _oldgenres;

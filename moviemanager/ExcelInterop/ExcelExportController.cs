@@ -15,7 +15,7 @@ namespace ExcelInterop
         public ExcelExportController()
         {
             _exportProperties = new ObservableCollection<DatabaseMappingItem>();
-            List<String> Headers = new List<String>
+            var Headers = new List<String>
                                        {
                                            "id",
                                            "id_imdb",

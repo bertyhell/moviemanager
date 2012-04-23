@@ -204,7 +204,7 @@ namespace ExcelInterop
                 //Microsoft.Windows.Controls.MessageBox.Show("Bij verplichte items(*) mag de 'Auto'-waarde niet geselecteerd zijn?", "Verplichte velden", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 //TODO 060 add error messages
                 //Microsoft.Windows.Controls.MessageBox.Show(e.Message, "Gegevens niet gevonden", MessageBoxButton.OK, MessageBoxImage.Error);
