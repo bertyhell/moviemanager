@@ -57,6 +57,6 @@
             
         </StackPanel>
         
-        <Button x:Name="_btnSave" Grid.Row="2" Grid.Column="2" Content="{Binding Source={StaticResource LocStrings}, Path=Save}" Click="_btnSave_Click"/>
+        <Button x:Name="_btnSave" Grid.Row="2" Grid.Column="2" Content="{Binding Source={StaticResource LocStrings}, Path=Save}" Click="BtnSaveClick"/>
     </Grid>
 </Window>

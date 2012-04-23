@@ -25,7 +25,6 @@ namespace MovieManager.APP.Panels.Analyse
         private void DgrVideoFileListSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             txtReleaseYearGuess.Text = ((Video)dgrVideoFileList.SelectedItem).ReleaseYearGuess;
-
         }
     }
 }

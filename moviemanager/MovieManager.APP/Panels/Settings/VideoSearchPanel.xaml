@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Label Content="Minimum video size:" Height="28" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Center" Margin="5,0,0,0" />
         <TextBox Grid.Column="1" Height="23" HorizontalAlignment="Stretch" Margin="0,0,60,0" VerticalAlignment="Center" Name="txtVideoFileSize" />
-        <ComboBox Grid.Column="1" Height="23" HorizontalAlignment="Right" VerticalAlignment="Center" Width="55">
+        <ComboBox Grid.Column="1" Height="23" HorizontalAlignment="Right" VerticalAlignment="Center" Width="55" Name="cbbMagnitude">
             <ComboBoxItem IsSelected="True">Bytes</ComboBoxItem>
             <ComboBoxItem>KB</ComboBoxItem>
             <ComboBoxItem >MB</ComboBoxItem>
