@@ -1,8 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using System.Windows.Controls;
-using System.Windows.Input;
-
-namespace MovieManager.APP.Panels.Analyse
+﻿namespace MovieManager.APP.Panels.Analyse
 {
     /// <summary>
     /// Interaction logic for AnalysePanel.xaml
