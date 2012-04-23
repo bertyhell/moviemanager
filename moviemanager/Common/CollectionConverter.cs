@@ -13,7 +13,7 @@ namespace Common
 
         public static ObservableCollection<T> ConvertList(List<T> list)
         {
-            ObservableCollection<T> Collection = new ObservableCollection<T>();
+            var Collection = new ObservableCollection<T>();
             foreach (T S in list)
             {
                 Collection.Add(S);

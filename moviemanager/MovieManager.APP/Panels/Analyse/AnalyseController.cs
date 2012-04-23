@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Common;
 using Model;
+using MovieManager.BL.Search;
 using SQLite;
 
 namespace MovieManager.APP.Panels.Analyse
@@ -12,6 +15,10 @@ namespace MovieManager.APP.Panels.Analyse
         {
             Videos.Clear();
             MMDatabase.SelectAllVideos(Videos);
+            
+            VideoInfos.Add(new Movie { Name = "test1" });
+            VideoInfos.Add(new Movie { Name = "test2" });
+            VideoInfos.Add(new Movie { Name = "test3" });
         }
 
         private ObservableCollection<Video> _videos = new ObservableCollection<Video>();
@@ -52,7 +59,34 @@ namespace MovieManager.APP.Panels.Analyse
 
         public void ManualSearch(string text, int number)
         {
-            
+            VideoInfos.Clear();
+            foreach (var Video in SearchTMDB.GetVideoInfo(text))
+            {
+                VideoInfos.Add(Video);
+            }
+        }
+
+        private object _selectedMovieInfo;
+        protected object SelectedMovieInfo
+        {
+            get { return _selectedMovieInfo; }
+            set
+            {
+                _selectedMovieInfo = value;
+                PropChanged("SelectedMovieInfo");
+            }
+        }
+        private ObservableCollection<Video> _videoInfos = new ObservableCollection<Video>();
+        public ObservableCollection<Video> VideoInfos
+        {
+            get
+            {
+                return _videoInfos;
+            }
+            set
+            {
+                _videoInfos = value;
+            }
         }
     }
 }

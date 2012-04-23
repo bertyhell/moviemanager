@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:MovieManager.APP.Localization"
         xmlns:Settings="clr-namespace:MovieManager.APP.Panels.Settings"
-        Title="SettingsWindow" Height="600" Width="573" xmlns:my="clr-namespace:MovieManager.APP.Panels.Settings"
+        Title="SettingsWindow" Height="600" Width="573"
+        xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
         WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
     <Grid Margin="10">
 
@@ -34,10 +35,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <Label Content="{Binding Source={StaticResource LocStrings}, Path=Filter, StringFormat={}{0}:}" VerticalAlignment="Center"/>
-            <TextBox x:Name="_txtFilter" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0,0,0"/>
-
+            <extToolkit:WatermarkTextBox Watermark="Search"  x:Name="_txtFilter" Grid.Column="1" HorizontalAlignment="Stretch" />
             <TreeView x:Name="_trvSettingPanels" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding}" >
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type Settings:SettingsPanelBase}" ItemsSource="{Binding ChildPanels}">

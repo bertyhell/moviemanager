@@ -44,13 +44,13 @@ namespace MovieManager.BL.Search
 
         public static List<Movie> GetVideoInfo(String query)
         {
-            List<Movie> Videos = new List<Movie>();
+            var Videos = new List<Movie>();
             try
             {
                 //do request
-                Uri Request = new Uri("http://api.themoviedb.org/3/search/movie?api_key=" + APIKEY + "&query="
+                var Request = new Uri("http://api.themoviedb.org/3/search/movie?api_key=" + APIKEY + "&query="
                                     + HttpUtility.UrlEncode(query));
-                String Response = SimpleWebRequest.DoJSONRequest(Request);
+                var Response = SimpleWebRequest.DoJSONRequest(Request);
 
                 if (!string.IsNullOrEmpty(Response))
                 {
@@ -111,7 +111,7 @@ namespace MovieManager.BL.Search
             {
                 //Console.WriteLine(Response);
 
-                XDocument XMLDoc = XDocument.Parse(Response);
+                var XMLDoc = XDocument.Parse(Response);
 
                 //get elements from xml
                 var LocalMovies = from MovieEl in XMLDoc.Descendants("movie")
