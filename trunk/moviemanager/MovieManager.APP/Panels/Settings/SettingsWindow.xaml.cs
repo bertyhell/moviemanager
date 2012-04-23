@@ -8,17 +8,17 @@ namespace MovieManager.APP.Panels.Settings
     /// </summary>
     public partial class SettingsWindow
     {
-        private List<SettingsPanelBase> _settingsPanels;
+        private readonly List<SettingsPanelBase> _settingsPanels;
 
         public SettingsWindow(List<SettingsPanelBase> settingsPanels)
         {
             InitializeComponent();
             _settingsPanels = settingsPanels;
             _trvSettingPanels.DataContext = settingsPanels;
-            _trvSettingPanels.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(_trvSettingPanels_SelectedItemChanged);
+            _trvSettingPanels.SelectedItemChanged += TrvSettingPanelsSelectedItemChanged;
         }
 
-        void _trvSettingPanels_SelectedItemChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
+        void TrvSettingPanelsSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
           _settingsPanelHolder.Children.Clear();
             _settingsPanelHolder.Children.Add((UIElement) _trvSettingPanels.SelectedValue);
@@ -29,7 +29,7 @@ namespace MovieManager.APP.Panels.Settings
             get { return _settingsPanels; }
         }
 
-        private void _btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void BtnSaveClick(object sender, RoutedEventArgs e)
         {
             foreach (SettingsPanelBase SettingsPanel in _settingsPanels)
             {

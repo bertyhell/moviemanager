@@ -18,7 +18,8 @@ namespace MovieManager.APP.Commands
         {
             List<SettingsPanelBase> Panels = new List<SettingsPanelBase>{
                 new FileRenameSettingsPanel(),
-                new MediaPlayerSettingsPanel()
+                new MediaPlayerSettingsPanel(),
+                new VideoSearchPanel()
             };
 
             SettingsWindow SettingsWindow = new SettingsWindow(Panels) { Owner = MainWindow.Instance };

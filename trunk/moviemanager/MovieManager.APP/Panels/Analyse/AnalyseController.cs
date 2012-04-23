@@ -86,5 +86,7 @@ namespace MovieManager.APP.Panels.Analyse
                 _videoInfos = value;
             }
         }
+
+        //TODO 050 make analyse function multithreaded -> 1 thread for every movie lookup
     }
 }

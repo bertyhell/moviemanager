@@ -50,9 +50,9 @@ namespace MovieManager.APP.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200000000")]
-        public int MinimumVideoFileSize {
+        public long MinimumVideoFileSize {
             get {
-                return ((int)(this["MinimumVideoFileSize"]));
+                return ((long)(this["MinimumVideoFileSize"]));
             }
             set {
                 this["MinimumVideoFileSize"] = value;
