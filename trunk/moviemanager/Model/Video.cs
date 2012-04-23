@@ -16,6 +16,7 @@ namespace Model
         private String _idImdb;
         private String _name;
         private DateTime _release;
+        private int _releaseYearGuess;
         private double _rating;
         private double _ratingImdb;
         private List<String> _genres;
@@ -45,43 +46,43 @@ namespace Model
             if (resultingVideoType == VideoTypeEnum.Movie)
             {
                 return new Movie
-                           {
-                               Id = video.Id,
-                               IdImdb = video.IdImdb,
-                               Name = video.Name,
-                               Release = video.Release,
-                               Rating = video.Rating,
-                               RatingImdb = video.RatingImdb,
-                               Path = video.Path,
-                               LastPlayLocation = video.LastPlayLocation
-                           };
+                {
+                    Id = video.Id,
+                    IdImdb = video.IdImdb,
+                    Name = video.Name,
+                    Release = video.Release,
+                    Rating = video.Rating,
+                    RatingImdb = video.RatingImdb,
+                    Path = video.Path,
+                    LastPlayLocation = video.LastPlayLocation
+                };
 
             }
             if (resultingVideoType == VideoTypeEnum.Episode)
             {
                 return new Episode
-                           {
-                               Id = video.Id,
-                               IdImdb = video.IdImdb,
-                               Name = video.Name,
-                               Release = video.Release,
-                               Rating = video.Rating,
-                               RatingImdb = video.RatingImdb,
-                               Path = video.Path,
-                               LastPlayLocation = video.LastPlayLocation
-                           };
+                {
+                    Id = video.Id,
+                    IdImdb = video.IdImdb,
+                    Name = video.Name,
+                    Release = video.Release,
+                    Rating = video.Rating,
+                    RatingImdb = video.RatingImdb,
+                    Path = video.Path,
+                    LastPlayLocation = video.LastPlayLocation
+                };
             }
             return new Video
-                       {
-                           Id = video.Id,
-                           IdImdb = video.IdImdb,
-                           Name = video.Name,
-                           Release = video.Release,
-                           Rating = video.Rating,
-                           RatingImdb = video.RatingImdb,
-                           Path = video.Path,
-                           LastPlayLocation = video.LastPlayLocation
-                       };
+            {
+                Id = video.Id,
+                IdImdb = video.IdImdb,
+                Name = video.Name,
+                Release = video.Release,
+                Rating = video.Rating,
+                RatingImdb = video.RatingImdb,
+                Path = video.Path,
+                LastPlayLocation = video.LastPlayLocation
+            };
         }
 
         //return 
@@ -181,6 +182,16 @@ namespace Model
             {
                 _release = value;
                 OnPropertyChanged("Release");
+            }
+        }
+
+        public int ReleaseYearGuess
+        {
+            get { return _releaseYearGuess; }
+            set
+            {
+                _releaseYearGuess = value;
+                OnPropertyChanged("ReleaseYearGuess");
             }
         }
 
