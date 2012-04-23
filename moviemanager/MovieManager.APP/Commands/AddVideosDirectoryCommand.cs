@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Windows.Forms;
 using System.IO;
 using System.Configuration;
 using Common;
@@ -29,14 +28,18 @@ namespace MovieManager.APP.Commands
             {
                 Path = ConfigurationManager.AppSettings["defaultVideoLocation1"];
             }
+            if (!new DirectoryInfo(Path).Exists)
+            {
+                Path = ConfigurationManager.AppSettings["defaultVideoLocation2"];
+            }
 
 
 
 
-            var Dialog = new VistaFolderBrowserDialog{Description = "Please select a folder.", UseDescriptionForTitle = true};
-// ReSharper disable PossibleInvalidOperationException
-            if( (bool) Dialog.ShowDialog(MainWindow.Instance) )
-// ReSharper restore PossibleInvalidOperationException
+            var Dialog = new VistaFolderBrowserDialog { Description = "Please select a folder.", UseDescriptionForTitle = true, SelectedPath = Path };
+            // ReSharper disable PossibleInvalidOperationException
+            if ((bool)Dialog.ShowDialog(MainWindow.Instance))
+            // ReSharper restore PossibleInvalidOperationException
             {
                 Message = "Searching videos: 0 found";
                 _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = true, DataContext = this };
@@ -60,7 +63,7 @@ namespace MovieManager.APP.Commands
             Value = 0;
             Maximum = e.Videos.Count;
             _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = false, DataContext = this };
-            BGWInsertVideos BGWInsertVideos = new BGWInsertVideos(e.Videos);
+            var BGWInsertVideos = new BGWInsertVideos(e.Videos);
             MMDatabase.InsertVideosProgress += FileReader_OnInsertVideosProgress;
             BGWInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
             BGWInsertVideos.RunWorkerAsync();
