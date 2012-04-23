@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.ComponentModel;
 
@@ -16,7 +17,7 @@ namespace Model
         private String _idImdb;
         private String _name;
         private DateTime _release;
-        private int _releaseYearGuess = -1;
+        private String _releaseYearGuess = "";
         private double _rating;
         private double _ratingImdb;
         private List<String> _genres;
@@ -78,7 +79,6 @@ namespace Model
                 IdImdb = video.IdImdb,
                 Name = video.Name,
                 Release = video.Release,
-                ReleaseYearGuess = video.ReleaseYearGuess,
                 Rating = video.Rating,
                 RatingImdb = video.RatingImdb,
                 Path = video.Path,
@@ -186,13 +186,22 @@ namespace Model
             }
         }
 
-        public int ReleaseYearGuess
+        public String ReleaseYearGuess
         {
-            get { return _releaseYearGuess; }
-            set
+            get
             {
-                _releaseYearGuess = value;
-                OnPropertyChanged("ReleaseYearGuess");
+                var RegEx1 = new Regex(".+[^0-9a-zA-Z]?([0-9]{4})[^0-9a-zA-Z]?");
+                var Match = RegEx1.Match(Name);
+                if (Match.Success)
+                {
+                    var ReleaseYearGuessString = Match.Groups[1].Value;
+                    var ReleaseYearGuessInt = Int32.Parse(ReleaseYearGuessString);
+                    if (ReleaseYearGuessInt > 1800 && ReleaseYearGuessInt < DateTime.Today.Year + 20)//TODO 001 make this an option?
+                    {
+                        return ReleaseYearGuessString;
+                    }
+                }
+                return "";
             }
         }
 
@@ -302,7 +311,7 @@ namespace Model
         private String _oldidImdb;
         private String _oldname;
         private DateTime _oldrelease;
-        private int _oldreleaseyearguess;
+        private string _oldreleaseyearguess;
         private double _oldrating;
         private double _oldratingImdb;
         private List<String> _oldgenres;

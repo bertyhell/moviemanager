@@ -154,6 +154,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\Settings\VideoSearchPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Panels\Settings\InternalMediaPlayerSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,6 +278,9 @@
       <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\RatingEditorControl.cs" />
+    <Compile Include="Panels\Settings\VideoSearchPanel.xaml.cs">
+      <DependentUpon>VideoSearchPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\Settings\InternalMediaPlayerSettingsPanel.xaml.cs">
       <DependentUpon>InternalMediaPlayerSettingsPanel.xaml</DependentUpon>
     </Compile>

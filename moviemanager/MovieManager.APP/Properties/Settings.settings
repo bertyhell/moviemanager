@@ -8,5 +8,8 @@
     <Setting Name="RenamingEpisodeFileSequence" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="MinimumVideoFileSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200000000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

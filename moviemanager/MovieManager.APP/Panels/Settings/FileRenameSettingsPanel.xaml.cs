@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System;
-using System.Windows.Controls.Primitives;
 
 namespace MovieManager.APP.Panels.Settings
 {
     /// <summary>
     /// Interaction logic for FileRenameSettingsPanelBase.xaml
     /// </summary>
-    public partial class FileRenameSettingsPanel : SettingsPanelBase
+    public partial class FileRenameSettingsPanel
     {
 
 
