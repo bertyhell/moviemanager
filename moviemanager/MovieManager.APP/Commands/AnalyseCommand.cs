@@ -17,6 +17,12 @@ namespace MovieManager.APP.Commands
 
         public event EventHandler CanExecuteChanged;
 
+
+        public void OnExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, new EventArgs());
+        }
         public void Execute(object parameter)
         {
             //foreach (Video Video in MainController.Instance.Videos)

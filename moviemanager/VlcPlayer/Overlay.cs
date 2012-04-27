@@ -5,7 +5,6 @@ namespace VlcPlayer
     public partial class Overlay : Form
     {
         private readonly VlcWinForm _parent;
-        private bool _isControlPanelVisible = true;
 
         public Overlay(VlcWinForm parent)
         {
