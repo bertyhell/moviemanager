@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.APP", "MovieManager.APP\MovieManager.APP.csproj", "{F6064BDE-DADA-4205-8E12-3A48D243DA66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.BL", "MovieManager.BL\MovieManager.BL.csproj", "{E3B6B080-24B4-46F8-B2B2-96A358186ED8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VlcPlayer", "VlcPlayer\VlcPlayer.csproj", "{3DE5EFB7-7325-4666-BE6D-9FFB01643064}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A8201B25-CCC9-4EB6-8E32-6DE714BAB888}"
@@ -18,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D6017DF9-AE81-49B8-857A-495CE8275DB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelInterop", "ExcelInterop\ExcelInterop.csproj", "{948401DF-F23E-47C2-B524-8B7AA5B95A56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.WEB", "MovieManager.WEB\MovieManager.WEB.csproj", "{5E7E4873-8C9D-4BA8-A936-784387E2379F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,16 +39,6 @@ Global
 		{F6064BDE-DADA-4205-8E12-3A48D243DA66}.Release|Mixed Platforms.Build.0 = Release|x86
 		{F6064BDE-DADA-4205-8E12-3A48D243DA66}.Release|x86.ActiveCfg = Release|x86
 		{F6064BDE-DADA-4205-8E12-3A48D243DA66}.Release|x86.Build.0 = Release|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Debug|x86.ActiveCfg = Debug|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Debug|x86.Build.0 = Debug|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Release|Any CPU.ActiveCfg = Release|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Release|Mixed Platforms.Build.0 = Release|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Release|x86.ActiveCfg = Release|x86
-		{E3B6B080-24B4-46F8-B2B2-96A358186ED8}.Release|x86.Build.0 = Release|x86
 		{3DE5EFB7-7325-4666-BE6D-9FFB01643064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3DE5EFB7-7325-4666-BE6D-9FFB01643064}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DE5EFB7-7325-4666-BE6D-9FFB01643064}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -113,6 +103,17 @@ Global
 		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{948401DF-F23E-47C2-B524-8B7AA5B95A56}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Debug|x86.Build.0 = Debug|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5E7E4873-8C9D-4BA8-A936-784387E2379F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

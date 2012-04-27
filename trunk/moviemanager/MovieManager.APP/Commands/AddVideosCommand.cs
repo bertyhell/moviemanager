@@ -24,6 +24,12 @@ namespace MovieManager.APP.Commands
 
         public event EventHandler CanExecuteChanged;
 
+        public void OnExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, new EventArgs());
+        }
+
         public void Execute(object parameter)
         {
             String Path = ConfigurationManager.AppSettings["defaultVideoFilesLocation"];

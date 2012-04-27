@@ -27,6 +27,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3AFF0C8150762E2468C58FF10CFA1A9F"
+        "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3E0BAC216F5325675A3495391414545B"
         "OwnerKey" = "8:_CA5602EF9B6A0738F2689DF12D034130"
         "MsmSig" = "8:_UNDEFINED"
@@ -34,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_3E0BAC216F5325675A3495391414545B"
-        "OwnerKey" = "8:_6C69820D9C9682BAF41036529DEEB7B2"
+        "OwnerKey" = "8:_719B8C01E06B6C57A54406BD80EC11CA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,18 +57,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_43555EAEF994685AE6E91BD8B85E813A"
-        "OwnerKey" = "8:_6C69820D9C9682BAF41036529DEEB7B2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_43555EAEF994685AE6E91BD8B85E813A"
-        "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_46B54F75D0228636EA74C3100CFECECF"
         "OwnerKey" = "8:_CA5602EF9B6A0738F2689DF12D034130"
         "MsmSig" = "8:_UNDEFINED"
@@ -75,7 +69,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6C69820D9C9682BAF41036529DEEB7B2"
+        "MsmKey" = "8:_5C1832B5041B253F0F2A5025A3775546"
+        "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5C1832B5041B253F0F2A5025A3775546"
+        "OwnerKey" = "8:_719B8C01E06B6C57A54406BD80EC11CA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_719B8C01E06B6C57A54406BD80EC11CA"
         "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,14 +93,32 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7CCEE92057B7478BB09CF5FFF3E7B040"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_81B743B9B1E236087B62E56794BBB84E"
         "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
+        "MsmKey" = "8:_84775986D3274A26B3D5942C5020C2E8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8E7FE1D845C00EFDCA56C1F47947F087"
         "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8E7FE1D845C00EFDCA56C1F47947F087"
+        "OwnerKey" = "8:_719B8C01E06B6C57A54406BD80EC11CA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,13 +130,13 @@
         "Entry"
         {
         "MsmKey" = "8:_8E7FE1D845C00EFDCA56C1F47947F087"
-        "OwnerKey" = "8:_6C69820D9C9682BAF41036529DEEB7B2"
+        "OwnerKey" = "8:_46B54F75D0228636EA74C3100CFECECF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8E7FE1D845C00EFDCA56C1F47947F087"
-        "OwnerKey" = "8:_46B54F75D0228636EA74C3100CFECECF"
+        "MsmKey" = "8:_8F59478642642FD04855C221CB6E35DE"
+        "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -135,7 +159,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CD1917CFFC514027937DAF536DAB982C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FC27E9BC017E45F190209F9511343778"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -148,25 +184,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_719B8C01E06B6C57A54406BD80EC11CA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5C1832B5041B253F0F2A5025A3775546"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7A241A3C38605724149343937CC92919"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6C69820D9C9682BAF41036529DEEB7B2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_43555EAEF994685AE6E91BD8B85E813A"
+        "OwnerKey" = "8:_8F59478642642FD04855C221CB6E35DE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_81B743B9B1E236087B62E56794BBB84E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3AFF0C8150762E2468C58FF10CFA1A9F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -230,6 +278,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -254,6 +315,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -276,7 +350,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.0"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=131000"
                 }
@@ -298,6 +372,37 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.Windows.Shell.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3AFF0C8150762E2468C58FF10CFA1A9F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3AFF0C8150762E2468C58FF10CFA1A9F"
+                    {
+                    "Name" = "8:Ookii.Dialogs.Wpf.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Ookii.Dialogs.Wpf.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
@@ -346,37 +451,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_43555EAEF994685AE6E91BD8B85E813A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_43555EAEF994685AE6E91BD8B85E813A"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_46B54F75D0228636EA74C3100CFECECF"
             {
             "AssemblyRegister" = "3:1"
@@ -408,20 +482,51 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6C69820D9C9682BAF41036529DEEB7B2"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5C1832B5041B253F0F2A5025A3775546"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MovieManager.BL, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6C69820D9C9682BAF41036529DEEB7B2"
+                    "_5C1832B5041B253F0F2A5025A3775546"
                     {
-                    "Name" = "8:MovieManager.BL.exe"
+                    "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:MovieManager.BL.exe"
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_719B8C01E06B6C57A54406BD80EC11CA"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MovieManager.WEB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_719B8C01E06B6C57A54406BD80EC11CA"
+                    {
+                    "Name" = "8:MovieManager.WEB.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MovieManager.WEB.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
@@ -470,6 +575,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CCEE92057B7478BB09CF5FFF3E7B040"
+            {
+            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\Cursors\\delete.cur"
+            "TargetName" = "8:delete.cur"
+            "Tag" = "8:"
+            "Folder" = "8:_9E6A9A70FB624239BE1835C71F5B3AA0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_81B743B9B1E236087B62E56794BBB84E"
             {
             "AssemblyRegister" = "3:1"
@@ -501,6 +626,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_84775986D3274A26B3D5942C5020C2E8"
+            {
+            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\libvlccore.dll"
+            "TargetName" = "8:libvlccore.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8E7FE1D845C00EFDCA56C1F47947F087"
             {
             "AssemblyRegister" = "3:1"
@@ -515,6 +660,37 @@
                     }
                 }
             "SourcePath" = "8:Common.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8F59478642642FD04855C221CB6E35DE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WPFToolkit.Extended, Version=1.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8F59478642642FD04855C221CB6E35DE"
+                    {
+                    "Name" = "8:WPFToolkit.Extended.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:WPFToolkit.Extended.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
@@ -594,6 +770,46 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD1917CFFC514027937DAF536DAB982C"
+            {
+            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\libvlc.dll"
+            "TargetName" = "8:libvlc.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC27E9BC017E45F190209F9511343778"
+            {
+            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\Settings\\moviemanager.sqlite"
+            "TargetName" = "8:moviemanager.sqlite"
+            "Tag" = "8:"
+            "Folder" = "8:_6724E51A985B4CB5A3DC41A337F5CE67"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -613,7 +829,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_686AE5A70DC24CC68E8D650EAC78E65C"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder][ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -621,6 +837,28 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_6724E51A985B4CB5A3DC41A337F5CE67"
+                    {
+                    "Name" = "8:Settings"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_BB66B25B9091445EB32FC9252FD2C91A"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_9E6A9A70FB624239BE1835C71F5B3AA0"
+                    {
+                    "Name" = "8:Cursors"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_030B05D68E144F79B5D805DF1F716DDA"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_B6BA176CC8904E63B6C0DC6A1493FE6F"
@@ -651,7 +889,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MovieManager.SETUP"
         "ProductCode" = "8:{B9B6C7C2-2DD2-4100-BB01-5E366259D936}"
-        "PackageCode" = "8:{9D6443F2-79FE-405F-9A5E-A150C4939B9B}"
+        "PackageCode" = "8:{720C1F6E-9A91-4CD1-9E76-C37A71F8CF91}"
         "UpgradeCode" = "8:{DA969BDE-CBB8-4FF4-8B9B-7782C1E78D2B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -662,7 +900,7 @@
         "Manufacturer" = "8:Taxrebel"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:MovieManager.SETUP"
+        "Title" = "8:MovieManager"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Taxrebel"
         "Keywords" = "8:"
