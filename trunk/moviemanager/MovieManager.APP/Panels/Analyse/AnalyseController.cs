@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Common;
 using Model;
-using MovieManager.BL.Search;
+using MovieManager.WEB.Search;
 using SQLite;
 
 namespace MovieManager.APP.Panels.Analyse
@@ -15,10 +15,6 @@ namespace MovieManager.APP.Panels.Analyse
         {
             Videos.Clear();
             MMDatabase.SelectAllVideos(Videos);
-            
-            VideoInfos.Add(new Movie { Name = "test1" });
-            VideoInfos.Add(new Movie { Name = "test2" });
-            VideoInfos.Add(new Movie { Name = "test3" });
         }
 
         private ObservableCollection<Video> _videos = new ObservableCollection<Video>();
@@ -64,10 +60,10 @@ namespace MovieManager.APP.Panels.Analyse
             }
         }
 
-        private object _selectedMovieInfo;
-        public object SelectedMovieInfo
+        private Video _selectedMovieInfo;
+        public Video SelectedMovieInfo
         {
-            get { return _selectedMovieInfo; }
+            get { return _selectedMovieInfo;}
             set
             {
                 _selectedMovieInfo = value;

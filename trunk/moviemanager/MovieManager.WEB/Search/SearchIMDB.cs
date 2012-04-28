@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using Common;
 using Model;
 
-namespace MovieManager.BL.Search
+namespace MovieManager.WEB.Search
 {
     public class SearchIMDB
     {

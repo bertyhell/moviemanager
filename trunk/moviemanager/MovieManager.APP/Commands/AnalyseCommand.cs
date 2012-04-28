@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Model;
 using MovieManager.APP.Panels.Analyse;
-using MovieManager.BL.Search;
 
 namespace MovieManager.APP.Commands
 {

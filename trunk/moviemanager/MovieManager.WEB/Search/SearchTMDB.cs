@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using Common;
@@ -7,12 +8,12 @@ using Model;
 using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace MovieManager.BL.Search
+namespace MovieManager.WEB.Search
 {
     public class SearchTMDB
     {
         private const string APIKEY = "02004323eee9878ce511ca57faf0b29c";
-        
+
         //TODO 100: search movie info via API v3
         static SearchTMDB()
         {
@@ -56,7 +57,17 @@ namespace MovieManager.BL.Search
                 {
                     JObject JsonDoc = JObject.Parse(Response);
                     JToken Results = JsonDoc["results"];
-                    Videos.AddRange(Results.Select(jToken => new Movie {Name = (string) jToken["title"]}));
+
+                    foreach (JToken JToken in Results)
+                    {
+                        Videos.Add(new Movie
+                        {
+                            Name = (string)JToken["title"],
+                            IdTmdb = (int)JToken["id"],
+                            Images = new List<ImageInfo> { new ImageInfo { Uri = new Uri(TMDBConfiguration.BaseUrl + TMDBConfiguration.SeletedPosterSize + (string)JToken["poster_path"]) } },
+                            Release =ParseTmdbDate((string)JToken["release_date"])
+                        });
+                    }
                 }
             }
 
@@ -67,89 +78,36 @@ namespace MovieManager.BL.Search
             return Videos;
         }
 
-
-
-        private static void GetImages(IEnumerable<XNode> images, Movie movie)
+        public static void GetMovieImages(Movie movie)
         {
-            bool FirstImage = true;
-            foreach (XNode ImageNode in images)
+            Uri Request = new Uri("http://api.themoviedb.org/3/movie/" + movie.IdTmdb + "/images?api_key=" + APIKEY);
+            String Response = SimpleWebRequest.DoJSONRequest(Request);
+
+            if (!string.IsNullOrEmpty(Response))
             {
-                XElement ImageEl = ImageNode as XElement;
-                if (ImageEl != null)
-                {
-                    var XAttribute = ImageEl.Attribute("size");
-                    if (XAttribute != null && (XAttribute.Value == "original"))
-                    {
-                        var Attribute = ImageEl.Attribute("url");
-                        if (Attribute != null)
-                        {
-                            string Url = Attribute.Value;
-                            if (!string.IsNullOrEmpty(Url))
-                            {
-                                if (FirstImage)
-                                {
-                                    movie.Poster = new Uri(Url);
-                                    FirstImage = false;
-                                }
-                                else
-                                {
-                                    movie.Images.Add(new ImageInfo { Uri = new Uri(Url), Type = typeof(Movie) });
-                                }
-                            }
-                        }
-                    }
-                }
+                JObject JSonImages = JObject.Parse(Response);
+                JSonImages["posters"].ToList().ForEach(g => movie.Images.Add(
+                    new ImageInfo { Uri = new Uri(TMDBConfiguration.BaseUrl + TMDBConfiguration.SeletedPosterSize + g["file_path"]) })
+                );
+                JSonImages["backdrops"].ToList().ForEach(g => movie.Images.Add(
+                    new ImageInfo { Uri = new Uri(TMDBConfiguration.BaseUrl + TMDBConfiguration.SeletedBackdropSize + g["file_path"]) })
+                );
             }
         }
 
         public static void GetExtraMovieInfo(int tmdbId, Movie movie)
         {
-            Uri Request = new Uri("http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/02004323eee9878ce511ca57faf0b29c/" + tmdbId);
-            String Response = SimpleWebRequest.DoRequest(Request);
+            Uri Request = new Uri("http://api.themoviedb.org/3/movie/" + tmdbId + "?api_key=" + APIKEY);
+            String Response = SimpleWebRequest.DoJSONRequest(Request);
 
             if (!string.IsNullOrEmpty(Response))
             {
-                //Console.WriteLine(Response);
-
-                var XMLDoc = XDocument.Parse(Response);
-
-                //get elements from xml
-                var LocalMovies = from MovieEl in XMLDoc.Descendants("movie")
-                                  let XElement = MovieEl.Element("overview")
-                                  where XElement != null
-                                  let Element = MovieEl.Element("name")
-                                  where Element != null
-                                  let XElement1 = MovieEl.Element("categories")
-                                  where XElement1 != null
-                                  let Element1 = MovieEl.Element("images")
-                                  where Element1 != null
-                                  let XElement2 = MovieEl.Element("cast")
-                                  where XElement2 != null
-                                  select new
-                                  {
-                                      Plot = XElement.Value,
-                                      Name = Element.Value,
-                                      Genres = XElement1.Nodes().ToList(),
-                                      Images = Element1.Nodes().ToList(),
-                                      Cast = XElement2.Nodes().ToList()
-                                  };
-
-                var MovieVar = LocalMovies.ToList()[0];
-                GetImages(MovieVar.Images, movie);
-                movie.Name = MovieVar.Name;
-                movie.Plot = MovieVar.Plot;
-
-                movie.Genres.Clear();
-                foreach (XNode Genre in MovieVar.Genres)
-                {
-                    XElement CategoryElement = Genre as XElement;
-                    if (CategoryElement != null)
-                    {
-                        var XAttribute = CategoryElement.Attribute("name");
-                        if (XAttribute != null)
-                            movie.Genres.Add(XAttribute.Value);
-                    }
-                }
+                JObject JsonMovie = JObject.Parse(Response);
+                JsonMovie["genres"].ToList().ForEach(g => movie.Genres.Add((string)g["name"])); // get genres
+                movie.IdImdb = (string)JsonMovie["imdb_id"];
+                movie.Plot = (string)JsonMovie["overview"];
+                movie.Runtime = (int)JsonMovie["runtime"];
+                GetMovieImages(movie);
             }
         }
 
@@ -183,7 +141,7 @@ namespace MovieManager.BL.Search
                     foreach (JToken JActor in Results)
                     {
                         Actor LocalActor = new Actor { TmdbID = (int)JActor["id"], Name = (string)JActor["name"] };
-                        LocalActor.ImageUrls.Add(TMDBConfiguration.BaseUrl + TMDBConfiguration.ProfileSizes[TMDBConfiguration.ProfileSizes.Count - 1] +
+                        LocalActor.ImageUrls.Add(TMDBConfiguration.BaseUrl + TMDBConfiguration.SeletedPosterSize +
                                                                 (string)JActor["profile_path"]);
                         Actors.Add(LocalActor);
                     }
