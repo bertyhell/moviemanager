@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using MovieManager.BL.Search;
 using Model;
+using MovieManager.WEB.Search;
 
 namespace MovieManager.APP.Panels.Search
 {
@@ -47,11 +47,12 @@ namespace MovieManager.APP.Panels.Search
 
             if (options.SearchForMovies)
             {
-                Movie Movie;
+                Movie Movie = null;
                 int QueryIsId = 0;
                 try
                 {
                     QueryIsId = Convert.ToInt32(options.SearchTerm);
+                    Movie = new Movie();
                 }
                 catch
                 {
@@ -59,8 +60,9 @@ namespace MovieManager.APP.Panels.Search
                     //TODO 090: Make selection window
                     Movie = Movies.Count > 0 ? Movies[0] : null;
                     if (Movie != null) QueryIsId = Movie.IdTmdb;
+                    else return;
                 }
-                Movie = new Movie();
+                
                 SearchTMDB.GetExtraMovieInfo(QueryIsId, Movie);
                 UpdateGuiForMovie(Movie);
             }
