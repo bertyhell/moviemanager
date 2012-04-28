@@ -26,20 +26,10 @@ namespace SQLite.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"Settings\\moviemanager.sqlite\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=C:\\ProgramData\\MovieManager\\Database\\moviemanager.sqlite")]
         public string moviemanagerConnectionString {
             get {
                 return ((string)(this["moviemanagerConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=C:\\MMProject\\MovieManager.APP\\bin\\Debug\\Settings\\moviemanager.sqlite")]
-        public string moviemanagerConnectionString1 {
-            get {
-                return ((string)(this["moviemanagerConnectionString1"]));
             }
         }
     }

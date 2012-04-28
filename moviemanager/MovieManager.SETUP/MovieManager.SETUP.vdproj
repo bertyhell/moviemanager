@@ -345,12 +345,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2F520D5A1BCF451C82EC36336CCC062B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2F80565FB125C7FD70820DCDD5D245B9"
         "OwnerKey" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
         "MsmSig" = "8:_UNDEFINED"
@@ -520,6 +514,12 @@
         "Entry"
         {
         "MsmKey" = "8:_45EFB6D5B26042098232C18674660380"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4633BF5D6D564E17844F54D5FBD96B89"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -849,12 +849,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7CCEE92057B7478BB09CF5FFF3E7B040"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_7D279F6016B4489DB0A2A99027AEBC85"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -922,12 +916,6 @@
         "Entry"
         {
         "MsmKey" = "8:_84512B9B7E5241CD84CFC63F2A7AC09E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_84775986D3274A26B3D5942C5020C2E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1179,6 +1167,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A9A33153A74E4EB1BE2DED91A1F11416"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A9F39A653AE54D589400F2D57D08F342"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1186,6 +1180,12 @@
         "Entry"
         {
         "MsmKey" = "8:_AAC7D6F795B04B2080EFD8131D53504C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AAE63E55E088455DBBA63CCA0A3EF618"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1353,6 +1353,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C2102F4A2ECD4790A3057A2C7046C443"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C28C50BBD6394D448362BA877952FF7E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1395,6 +1401,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C8BDFBE7E53743FEBEF6FC97B252CBCB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C94607E1C2F04C62BC22ED54023DB768"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1426,12 +1438,6 @@
         "Entry"
         {
         "MsmKey" = "8:_CC3ABAD3B5834FA6846A2B283CE42A37"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CD1917CFFC514027937DAF536DAB982C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1905,7 +1911,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\MovieManager.SETUP.msi"
+        "OutputFilename" = "8:Debug\\MovieManagerSetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1919,7 +1925,7 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
+            "PrerequisitesLocation" = "2:2"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
@@ -1996,7 +2002,7 @@
                 "Message" = "8:[VSDNETMSG]"
                 "FrameworkVersion" = "8:.NETFramework,Version=v4.0"
                 "AllowLaterVersions" = "11:FALSE"
-                "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=131000"
+                "InstallUrl" = "8:http://www.microsoft.com/en-us/download/details.aspx?id=17851"
                 }
             }
         }
@@ -3104,26 +3110,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F520D5A1BCF451C82EC36336CCC062B"
-            {
-            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\Settings\\moviemanager.sqlite"
-            "TargetName" = "8:moviemanager.sqlite"
-            "Tag" = "8:"
-            "Folder" = "8:_6724E51A985B4CB5A3DC41A337F5CE67"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2F80565FB125C7FD70820DCDD5D245B9"
             {
             "AssemblyRegister" = "3:1"
@@ -3663,6 +3649,26 @@
             "TargetName" = "8:libpacketizer_flac_plugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_6326BCAA93734630B8464F8D6C4AFCE1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4633BF5D6D564E17844F54D5FBD96B89"
+            {
+            "SourcePath" = "8:..\\bin\\Debug\\lib\\libvlc.dll"
+            "TargetName" = "8:libvlc.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_F7CFE3AE32DF4C2EA20132BA09409D44"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4757,26 +4763,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CCEE92057B7478BB09CF5FFF3E7B040"
-            {
-            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\Cursors\\delete.cur"
-            "TargetName" = "8:delete.cur"
-            "Tag" = "8:"
-            "Folder" = "8:_9E6A9A70FB624239BE1835C71F5B3AA0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7D279F6016B4489DB0A2A99027AEBC85"
             {
             "SourcePath" = "8:..\\bin\\Debug\\lib\\plugins\\libgrey_yuv_plugin.dll"
@@ -5003,26 +4989,6 @@
             "TargetName" = "8:libspdif_mixer_plugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_6326BCAA93734630B8464F8D6C4AFCE1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_84775986D3274A26B3D5942C5020C2E8"
-            {
-            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\libvlccore.dll"
-            "TargetName" = "8:libvlccore.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_F7CFE3AE32DF4C2EA20132BA09409D44"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -5868,6 +5834,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9A33153A74E4EB1BE2DED91A1F11416"
+            {
+            "SourcePath" = "8:..\\bin\\Debug\\Cursors\\delete.cur"
+            "TargetName" = "8:delete.cur"
+            "Tag" = "8:"
+            "Folder" = "8:_9E6A9A70FB624239BE1835C71F5B3AA0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9F39A653AE54D589400F2D57D08F342"
             {
             "SourcePath" = "8:..\\bin\\Debug\\lib\\plugins\\libnetsync_plugin.dll"
@@ -5894,6 +5880,26 @@
             "TargetName" = "8:libgradient_plugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_6326BCAA93734630B8464F8D6C4AFCE1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AAE63E55E088455DBBA63CCA0A3EF618"
+            {
+            "SourcePath" = "8:..\\Database\\moviemanager.sqlite"
+            "TargetName" = "8:moviemanager.sqlite"
+            "Tag" = "8:"
+            "Folder" = "8:_A2BFA22CDD0C49F6A1D0FD77E976CA31"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -6421,6 +6427,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C2102F4A2ECD4790A3057A2C7046C443"
+            {
+            "SourcePath" = "8:..\\MovieManager.APP\\Images\\MMico.ico"
+            "TargetName" = "8:MMico.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C28C50BBD6394D448362BA877952FF7E"
             {
             "SourcePath" = "8:..\\bin\\Debug\\lib\\plugins\\librealvideo_plugin.dll"
@@ -6561,6 +6587,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C8BDFBE7E53743FEBEF6FC97B252CBCB"
+            {
+            "SourcePath" = "8:..\\bin\\Debug\\lib\\libvlccore.dll"
+            "TargetName" = "8:libvlccore.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_F7CFE3AE32DF4C2EA20132BA09409D44"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C94607E1C2F04C62BC22ED54023DB768"
             {
             "SourcePath" = "8:..\\bin\\Debug\\lib\\plugins\\libaudioscrobbler_plugin.dll"
@@ -6667,26 +6713,6 @@
             "TargetName" = "8:libcroppadd_plugin.dll"
             "Tag" = "8:"
             "Folder" = "8:_6326BCAA93734630B8464F8D6C4AFCE1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD1917CFFC514027937DAF536DAB982C"
-            {
-            "SourcePath" = "8:..\\MovieManager.APP\\bin\\Debug\\libvlc.dll"
-            "TargetName" = "8:libvlc.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_F7CFE3AE32DF4C2EA20132BA09409D44"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -7961,17 +7987,6 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_6724E51A985B4CB5A3DC41A337F5CE67"
-                    {
-                    "Name" = "8:Settings"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_BB66B25B9091445EB32FC9252FD2C91A"
-                        "Folders"
-                        {
-                        }
-                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_9E6A9A70FB624239BE1835C71F5B3AA0"
                     {
                     "Name" = "8:Cursors"
@@ -7999,6 +8014,51 @@
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
                             "Property" = "8:_CD1A5ABA9AEC4365B72D2D480824CE26"
+                                "Folders"
+                                {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_6A0E8D29E1394C20A05677874F24F316"
+            {
+            "DefaultLocation" = "8:[CommonAppDataFolder]"
+            "Name" = "8:ProgramData"
+            "AlwaysCreate" = "11:TRUE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:COMMONAPPDATAFOLDER"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_CDF7728000584B78963CDC7277B52D98"
+                    {
+                    "Name" = "8:MovieManager"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_C46504B2054A4E6792C3C6B7B0DF3DB4"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_A2BFA22CDD0C49F6A1D0FD77E976CA31"
+                            {
+                            "Name" = "8:Database"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_7B85FBDDA85F43C2A157181E1D178316"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_BAA1830F7C8D492995EB36512B1C7818"
+                            {
+                            "Name" = "8:Settings"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_2E067E0EEC9341F6B6C06B60DBC32188"
                                 "Folders"
                                 {
                                 }
@@ -8035,7 +8095,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MovieManager"
         "ProductCode" = "8:{B9B6C7C2-2DD2-4100-BB01-5E366259D936}"
-        "PackageCode" = "8:{9B5DC845-AA51-48D7-B6A5-47BE160ED018}"
+        "PackageCode" = "8:{B285DCE3-978C-4E5A-B88C-C02FE2F0BDA3}"
         "UpgradeCode" = "8:{DA969BDE-CBB8-4FF4-8B9B-7782C1E78D2B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -8155,6 +8215,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DD786F1EBC834E5FA96B540644FEE68D"
+            {
+            "Name" = "8:MovieManager v0.0.1"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:3"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_D93A0940C18B4DD493B4D269CBA1B8BF"
+            "Folder" = "8:_B6BA176CC8904E63B6C0DC6A1493FE6F"
+            "WorkingFolder" = "8:_686AE5A70DC24CC68E8D650EAC78E65C"
+            "Icon" = "8:_C2102F4A2ECD4790A3057A2C7046C443"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
