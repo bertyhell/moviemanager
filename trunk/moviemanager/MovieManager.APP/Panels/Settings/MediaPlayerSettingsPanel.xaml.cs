@@ -25,7 +25,7 @@ namespace MovieManager.APP.Panels.Settings
 
             //initialize base class variables;
             _panelName = "Media player";
-            _iconPath = "/MovieManager.APP;component/Images/MediaPlayer_32.png";
+            _iconPath = "/MovieManager;component/Images/MediaPlayer_32.png";
 
             _settingsPanels.Add(new InternalMediaPlayerSettingsPanel());
         }

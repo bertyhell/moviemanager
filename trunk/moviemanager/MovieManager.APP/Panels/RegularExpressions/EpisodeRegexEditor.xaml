@@ -20,16 +20,16 @@
         
         <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="5">
             <Button x:Name="_btnUp" Click="BtnUpClick">
-                <Image Source="/MovieManager.APP;component/Images/Up.png"  Width="32"></Image>
+                <Image Source="/MovieManager;component/Images/Up.png"  Width="32"></Image>
             </Button>
             <Button x:Name="_btnDown" Margin="0,5,0,5" Click="BtnDownClick">
-                <Image Source="/MovieManager.APP;component/Images/Down.png"  Width="32"></Image>
+                <Image Source="/MovieManager;component/Images/Down.png"  Width="32"></Image>
             </Button>
             <Button x:Name="_btnNew" Margin="0,0,0,5" Click="BtnNewClick">
-                <Image Source="/MovieManager.APP;component/Images/Add.png" ></Image>
+                <Image Source="/MovieManager;component/Images/Add.png" ></Image>
             </Button>
             <Button x:Name="_btnRemove" Click="BtnRemoveClick">
-                <Image Source="/MovieManager.APP;component/Images/Remove.png"></Image>
+                <Image Source="/MovieManager;component/Images/Remove.png"></Image>
             </Button>
         </StackPanel>
         

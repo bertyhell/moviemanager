@@ -9,8 +9,8 @@ namespace MovieManager.APP.Panels
     public class RatingEditorControl : RatingControl, IDisposable
     {
 
-        public static Uri MouseOverHalfSelectedStar = new Uri("/MovieManager.APP;component/Images/MouseOverHalfStar.png", UriKind.Relative);
-        public static Uri MouseOverSelectedStar = new Uri("/MovieManager.APP;component/Images/MouseOverStar.png", UriKind.Relative);
+        public static Uri MouseOverHalfSelectedStar = new Uri("/MovieManager;component/Images/MouseOverHalfStar.png", UriKind.Relative);
+        public static Uri MouseOverSelectedStar = new Uri("/MovieManager;component/Images/MouseOverStar.png", UriKind.Relative);
         private double _oldMouseOverRating = -1.0;
         private double _mouseOverRating = -1.0;
         private readonly int _width;

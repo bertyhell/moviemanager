@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using VlcPlayer.Common;
 
@@ -22,9 +24,15 @@ namespace VlcPlayer
         {
             InitializeComponent();
             KeyPreview = true;
+            string PluginPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if(string.IsNullOrEmpty(PluginPath))
+            {
+                throw new FileNotFoundException("VLC plugins not found");
+            }
             string[] Args = new[] {
                 "--ignore-config",
-                @"--plugin-path=C:\Program Files (x86)\VideoLAN\VLC\plugins"
+                @"--plugin-path=" + Path.Combine(PluginPath , "plugins")                
+                //@"--plugin-path=C:\Program Files (x86)\VideoLAN\VLC\plugins"
                 //,"--vout-filter=deinterlace", "--deinterlace-mode=blend"
             };
 

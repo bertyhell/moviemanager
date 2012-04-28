@@ -46,8 +46,8 @@
         <ribbon:Ribbon Grid.Row="0" Grid.ColumnSpan="3" x:Name="_ribbonMenubar">
             <!-- Applicatiemenu-->
             <ribbon:Ribbon.ApplicationMenu>
-                <ribbon:RibbonApplicationMenu  SmallImageSource="/MovieManager.APP;component/Images/picto.png">
-                    <ribbon:RibbonApplicationMenuItem Header="_Close" ImageSource="/MovieManager.APP;component/Images/close.png" />
+                <ribbon:RibbonApplicationMenu  SmallImageSource="/MovieManager;component/Images/picto.png">
+                    <ribbon:RibbonApplicationMenuItem Header="_Close" ImageSource="/MovieManager;component/Images/close.png" />
 
                 <ribbon:RibbonApplicationMenu.FooterPaneContent>
                     <Grid>

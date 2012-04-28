@@ -32,7 +32,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
                                                          ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                                                          ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                                                          Command = new AddVideosCommand(),
@@ -64,7 +64,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
                                                          ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                                                          ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                                                          Command = new AddVideosDirectoryCommand(),
@@ -93,7 +93,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
+                            SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
                             ToolTipTitle = ADD_SERIE_TOOL_TIP_TITLE,
                             ToolTipDescription = ADD_SERIE_TOOL_TIP_DESCRIPTION,
                             Command = new AddSerieCommand(),
@@ -122,7 +122,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/clear.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/MovieManager;component/Images/clear.png", UriKind.Relative),
                                                          ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                                                          ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                                                          Command = new EmptyVideosCommand(),
@@ -151,7 +151,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/excel_export_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/MovieManager;component/Images/excel_export_32.png", UriKind.Relative),
                             ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                             ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                             Command = new ExportVideosCommand(),
@@ -180,7 +180,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/search.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/MovieManager;component/Images/search.png", UriKind.Relative),
                                                          ToolTipTitle = "Search TMDB",
                                                          ToolTipDescription = "Search TMDB for info",
                                                          Command = new SearchCommand(),
@@ -207,7 +207,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/analyse.png", UriKind.Relative),
+                            SmallImage = new Uri("/MovieManager;component/Images/analyse.png", UriKind.Relative),
                             ToolTipTitle = "Analyse videos",
                             ToolTipDescription = "Analyse videos and search info on the web",
                             Command = new AnalyseCommand(),
@@ -235,7 +235,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager.APP;component/Images/add.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
                                                          Command = ApplicationCommands.Close,
                                                          KeyTip = "X",
                                                      };
@@ -262,7 +262,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/RegExp.gif", UriKind.Relative),
+                            SmallImage = new Uri("/MovieManager;component/Images/RegExp.gif", UriKind.Relative),
                             ToolTipTitle = TOOL_TIP_TITLE,
                             ToolTipDescription = TOOL_TIP_DESCRIPTION,
                             Command = new EditEpisodeRegExCommand(),
@@ -291,7 +291,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager.APP;component/Images/settings_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/MovieManager;component/Images/settings_32.png", UriKind.Relative),
                             ToolTipTitle = TOOL_TIP_TITLE,
                             ToolTipDescription = TOOL_TIP_DESCRIPTION,
                             Command = new EditSettingsCommand(),

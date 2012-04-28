@@ -17,7 +17,7 @@ namespace MovieManager.APP.Panels.Settings
 
             //initialize base class variables;
             _panelName = "File rename";
-            _iconPath = "/MovieManager.APP;component/Images/disk.png";
+            _iconPath = "/MovieManager;component/Images/disk.png";
 
             //movie string builder
             parameteredStringBuilderMovie.Parameters = new List<FrameworkElement> { new TextBox { Text = "Custom" }, new Button { Content = "MovieName" }, new Button { Content = "Year" } };
