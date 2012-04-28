@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SQLite;
 using System.Linq;
 
@@ -8,8 +9,7 @@ namespace SQLite
 
     public class Database
     {
-        private const String ConnString = "data source=\"Settings\\moviemanager.sqlite\"";
-        //private const String CONN_STRING = "data source=\"M:\\projects\\Open Source\\MovieManagerCSharp\\Settings\\moviemanager.sqlite\"";
+        private const String ConnString = @"data source='C:\ProgramData\MovieManager\Database\moviemanager.sqlite'";
         private static SQLiteConnection _conn;
 
         public static void ExecuteSQL(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
@@ -27,7 +27,8 @@ namespace SQLite
         {
             if (_conn == null)
             {
-                _conn = new SQLiteConnection(ConnString);
+                _conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["moviemanagerConnectionString"].ConnectionString);
+                //_conn = new SQLiteConnection(ConnString);
                 _conn.Open();
             }
             return _conn;

@@ -56,6 +56,9 @@
   <PropertyGroup>
     <ApplicationIcon>ico4.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
@@ -363,6 +366,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -489,7 +493,8 @@
   <PropertyGroup>
     <PostBuildEvent>move /y $(SolutionDir)bin\$(ConfigurationName)\*.dll $(SolutionDir)bin\$(ConfigurationName)\lib
 xcopy /y $(SolutionDir)lib\libvlc.dll $(SolutionDir)bin\$(ConfigurationName)\lib
-xcopy /y $(SolutionDir)lib\libvlccore.dll $(SolutionDir)bin\$(ConfigurationName)\lib</PostBuildEvent>
+xcopy /y $(SolutionDir)lib\libvlccore.dll $(SolutionDir)bin\$(ConfigurationName)\lib
+xcopy /y $(SolutionDir)Database\moviemanager.sqlite C:\ProgramData\MovieManager\Database</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
