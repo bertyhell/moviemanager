@@ -26,7 +26,7 @@ namespace MovieManager.APP.Panels.Settings
 
             //initialize base class variables;
             _panelName = "MMPlayer";
-            _iconPath = "/MovieManager.APP;component/Images/picto.png";
+            _iconPath = "/MovieManager;component/Images/picto.png";
         }
 
         public override bool SaveSettings()

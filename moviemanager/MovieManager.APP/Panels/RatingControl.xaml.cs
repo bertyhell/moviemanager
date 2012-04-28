@@ -14,9 +14,9 @@ namespace MovieManager.APP.Panels
         public static readonly DependencyProperty RATING_PROPERTY =
             DependencyProperty.Register("Rating", typeof(Double), typeof(RatingControl), new PropertyMetadata(-2.0, RatingChanged));
 
-        public static Uri EmptyStar = new Uri("/MovieManager.APP;component/Images/EmptyStar.png", UriKind.Relative);
-        public static Uri SelectedStar = new Uri("/MovieManager.APP;component/Images/SelectedStar.png", UriKind.Relative);
-        public static Uri HalfSelectedStar = new Uri("/MovieManager.APP;component/Images/HalfSelectedStar.png", UriKind.Relative);
+        public static Uri EmptyStar = new Uri("/MovieManager;component/Images/EmptyStar.png", UriKind.Relative);
+        public static Uri SelectedStar = new Uri("/MovieManager;component/Images/SelectedStar.png", UriKind.Relative);
+        public static Uri HalfSelectedStar = new Uri("/MovieManager;component/Images/HalfSelectedStar.png", UriKind.Relative);
         private List<Image> _stars = new List<Image>();
         private int _starCount = 5;
         private Boolean _isInitialized;

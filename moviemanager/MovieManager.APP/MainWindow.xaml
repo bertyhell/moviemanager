@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:menu="clr-namespace:MovieManager.APP.Menubar" xmlns:Filter="clr-namespace:MovieManager.APP.Panels.Filter"
         xmlns:conv="clr-namespace:MovieManager.APP.Converters"
-        Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="/MovieManager.APP;component/ico4.ico" WindowState="Maximized">
+        Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="/MovieManager;component/ico4.ico" WindowState="Maximized">
     <Grid>
         <Grid.Resources>
             <conv:StringListConverter x:Key="stringListConverter"/>
@@ -29,7 +29,7 @@
         <TabControl x:Name="_tabLeft" Grid.Row="1" Margin="5,0,0,0" Padding="0">
             <TabItem  ToolTip="Filters">
                 <TabItem.Header>
-                    <Image Source="/MovieManager.APP;component/Images/view-filter.png" Width="24"/>
+                    <Image Source="/MovieManager;component/Images/view-filter.png" Width="24"/>
                 </TabItem.Header>
                 <Filter:FilterEditor x:Name="_FilterEditor" />
             </TabItem>

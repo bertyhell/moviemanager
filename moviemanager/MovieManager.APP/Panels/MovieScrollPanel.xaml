@@ -18,7 +18,7 @@
 
         <Button x:Name="_btnLeft" Click="BtnLeftClick">
             <Button.Content>
-                <Image Source="/MovieManager.APP;component/Images/previous.png"/>
+                <Image Source="/MovieManager;component/Images/previous.png"/>
             </Button.Content>
         </Button>
 
@@ -31,7 +31,7 @@
         </ScrollViewer>
         <Button Grid.Column="2" x:Name="_btnRight" Click="BtnRightClick">
             <Button.Content>
-                <Image Source="/MovieManager.APP;component/Images/next.png"/>
+                <Image Source="/MovieManager;component/Images/next.png"/>
             </Button.Content>
         </Button>
     </Grid>

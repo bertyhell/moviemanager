@@ -15,7 +15,7 @@ namespace MovieManager.APP.Panels.Settings
 
             //initialize base class variables;
             _panelName = "Video file search";
-            _iconPath = "/MovieManager.APP;component/Images/search.png";
+            _iconPath = "/MovieManager;component/Images/search.png";
 
             LoadSettings();
         }

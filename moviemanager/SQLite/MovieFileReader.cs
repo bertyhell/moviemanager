@@ -91,14 +91,20 @@ namespace SQLite
                 _videosFound++;
                 if (!reportNonVideos)
                 {
-                    FoundVideo(this, new ProgressEventArgs { ProgressNumber = _videosFound });
+                    if (FoundVideo != null)
+                    {
+                        FoundVideo(this, new ProgressEventArgs {ProgressNumber = _videosFound});
+                    }
                 }
                 Console.WriteLine(file.FullName);//TODO 010 remove found video output to console
             }
             if (reportNonVideos)
             {
                 _filesProcessed++;
-                FoundVideo(this, new ProgressEventArgs { ProgressNumber = _filesProcessed });
+                if (FoundVideo != null)
+                {
+                    FoundVideo(this, new ProgressEventArgs {ProgressNumber = _filesProcessed});
+                }
             }
         }
         /**
