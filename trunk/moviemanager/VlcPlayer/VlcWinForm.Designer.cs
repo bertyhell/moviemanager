@@ -8,18 +8,7 @@ namespace VlcPlayer
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
 
         #region Windows Form Designer generated code
 
@@ -89,6 +78,7 @@ namespace VlcPlayer
             this._pnlControls.Player = null;
             this._pnlControls.Size = new System.Drawing.Size(492, 75);
             this._pnlControls.TabIndex = 2;
+            this._pnlControls.VideoEndReached = false;
             this._pnlControls.VlcWinForm = null;
             // 
             // VlcWinForm
@@ -102,8 +92,7 @@ namespace VlcPlayer
             this.MainMenuStrip = this._menubar;
             this.Name = "VlcWinForm";
             this.Text = "VlcWinForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VlcWinFormFormClosing);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.VlcWinFormKeyUp);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VlcWinForm_FormClosing);
             this.Move += new System.EventHandler(this.VlcWinFormMove);
             this._menubar.ResumeLayout(false);
             this._menubar.PerformLayout();

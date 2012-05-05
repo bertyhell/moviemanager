@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using VlcPlayer.Enums;
+using VlcPlayer.Events;
 
 namespace VlcPlayer
 {
@@ -19,11 +21,18 @@ namespace VlcPlayer
 
         #region media
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr libvlc_media_new_location(IntPtr pINSTANCE,
-          [MarshalAs(UnmanagedType.LPStr)] string pszMrl);
+        public static extern IntPtr libvlc_media_new_location(IntPtr pINSTANCE, [MarshalAs(UnmanagedType.LPStr)] string pszMrl);
+
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr libvlc_media_new_path(IntPtr pINSTANCE, [MarshalAs(UnmanagedType.LPStr)] string path);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void libvlc_media_release(IntPtr pMetaDesc);
+
+        [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
+        public static extern MediaPlayerState libvlc_media_get_state(IntPtr libvlc_media_inst);
+
         #endregion
 
         #region media player
@@ -49,7 +58,8 @@ namespace VlcPlayer
         public static extern void libvlc_media_player_pause(IntPtr player);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void libvlc_media_player_stop(IntPtr player);
+        [SuppressUnmanagedCodeSecurity]
+        public static extern void libvlc_media_player_stop(IntPtr player, ref LibvlcException exception);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SuppressUnmanagedCodeSecurity]
@@ -77,11 +87,7 @@ namespace VlcPlayer
         #endregion
 
         #region exception
-
-        [DllImport("libvlc", CallingConvention = CallingConvention.StdCall, ExactSpelling = true)]
-        [SuppressUnmanagedCodeSecurity]
-        public static extern void libvlc_exception_init(ref libvlc_exception_t exception);
-
+        
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl)]
         public static extern void libvlc_clearerr();
 

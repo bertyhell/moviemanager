@@ -12,9 +12,18 @@ namespace VlcPlayer
             if (Handle == IntPtr.Zero) throw new VlcException();
         }
 
+        public void Release()
+        {
+            if (Handle != IntPtr.Zero)
+            {
+                LibVlc.libvlc_release(Handle);
+                Handle = IntPtr.Zero;
+            }
+        }
+
         public void Dispose()
         {
-            LibVlc.libvlc_release(Handle);
+            Release();
         }
     }
 }

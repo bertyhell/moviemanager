@@ -11,6 +11,8 @@ namespace VlcPlayer.Common
         private VlcWinForm _form;
         private Point _previousLocation;
         private int _previousWidth;
+        private bool _videoEndReached;
+        private bool _attachedToEvents;
         
         public MediaPlayerControl()
         {
@@ -56,7 +58,7 @@ namespace VlcPlayer.Common
 
         private void BtnPlayClick(object sender, EventArgs e)
         {
-            _form.PlayVideo();
+            //_form.PlayVideo();
         }
 
         private void BtnStopClick(object sender, EventArgs e)
@@ -82,6 +84,17 @@ namespace VlcPlayer.Common
             set { _player = value; }
         }
 
+        public bool VideoEndReached
+        {
+            get { return _videoEndReached; }
+            set { _videoEndReached = value; }
+        }
+
+        public void ResetForNewVideo()
+        {
+            _videoEndReached = false;
+        }
+
         public void SetVideoTimestamp()
         {
             _lblTimestamp.Text = TimestampUtilities.LongToTimestampString(_player.CurrentTimestamp) + "/" +
@@ -101,19 +114,40 @@ namespace VlcPlayer.Common
 
         public void AttachToEvents()
         {
-            _player.EventManager.TimeChanged += EventManagerTimeChanged;
+            if (!_attachedToEvents)
+            {
+                _player.EventManager.TimeChanged += EventManagerTimeChanged;
+                _player.EventManager.MediaEnded += new EventHandler(EventManager_MediaEnded);
+                _attachedToEvents = true;
+            }
         }
 
         public void DetachFromEvents()
         {
-            _player.EventManager.TimeChanged -= EventManagerTimeChanged;
+            if (_attachedToEvents)
+            {
+                _player.EventManager.MediaEnded -= EventManager_MediaEnded;
+                _player.EventManager.TimeChanged -= EventManagerTimeChanged;
+                _attachedToEvents = false;
+            }
         }
         
         void EventManagerTimeChanged(object sender, Events.MediaPlayerTimeChanged e)
         {
-            _lblTimestamp.Invoke(Delegate.CreateDelegate(typeof(SetTimeStamp), this, "SetVideoTimestamp"));
-            _trbTimestamp.Invoke(Delegate.CreateDelegate(typeof(SetTimeStamp), this, "SetTimestampTrackBarPosition"));
+            try
+            {
+                _lblTimestamp.Invoke(Delegate.CreateDelegate(typeof (SetTimeStamp), this, "SetVideoTimestamp"));
+                _trbTimestamp.Invoke(Delegate.CreateDelegate(typeof (SetTimeStamp), this, "SetTimestampTrackBarPosition"));
+            }
+            catch
+            {
+            }
 
+        }
+
+        void EventManager_MediaEnded(object sender, EventArgs e)
+        {
+            _videoEndReached = true;
         }
 
         private delegate void SetTimeStamp();
