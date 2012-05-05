@@ -22,7 +22,7 @@ namespace Model
         private double _ratingImdb;
         private List<String> _genres;
         private String _path; //path to movie
-        private int _lastPlayLocation;
+        private ulong _lastPlayLocation;
         private bool _watchedToEnd;
         private ObservableCollection<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
@@ -215,7 +215,7 @@ namespace Model
             }
         }
 
-        public int LastPlayLocation
+        public ulong LastPlayLocation
         {
             get { return _lastPlayLocation; }
             set
@@ -235,7 +235,7 @@ namespace Model
             }
         }
 
-        public void MarkAsSeen(int movieLength, int iCurrentTimestamp, bool bWatchedToEnd)
+        public void MarkAsSeen(ulong movieLength, ulong iCurrentTimestamp, bool bWatchedToEnd)
         {
             if (bWatchedToEnd)
             {
@@ -316,7 +316,7 @@ namespace Model
         private double _oldratingImdb;
         private List<String> _oldgenres;
         private String _oldpath; //path to movie
-        private int _oldlastPlayLocation;
+        private ulong _oldlastPlayLocation;
         private bool _oldwatchedToEnd;
         private ObservableCollection<Subtitle> _oldsubs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults

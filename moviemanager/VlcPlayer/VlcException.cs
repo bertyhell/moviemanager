@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace VlcPlayer
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct libvlc_exception_t
+    internal struct LibvlcException
     {
         public int b_raised;
         public int i_code;

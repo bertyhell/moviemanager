@@ -1,4 +1,5 @@
 ﻿using System;
+using VlcPlayer.Enums;
 
 namespace VlcPlayer
 {
@@ -8,7 +9,7 @@ namespace VlcPlayer
 
         public VlcMedia(VlcInstance instance, string url)
         {
-            Handle = LibVlc.libvlc_media_new_location(instance.Handle, url);
+            Handle = LibVlc.libvlc_media_new_path(instance.Handle, url);
             if (Handle == IntPtr.Zero) throw new VlcException();
         }
 
@@ -17,9 +18,18 @@ namespace VlcPlayer
             Handle = handle;
         }
 
-        public void Dispose()
+        public MediaPlayerState State
+        {
+            get { return LibVlc.libvlc_media_get_state(Handle); }
+        }
+
+        public void Release()
         {
             LibVlc.libvlc_media_release(Handle);
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

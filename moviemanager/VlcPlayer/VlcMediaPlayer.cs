@@ -1,24 +1,31 @@
 ﻿using System;
+using System.Threading;
+using VlcPlayer.Enums;
 using VlcPlayer.Events;
 
 namespace VlcPlayer
 {
-    public class VlcMediaPlayer : IDisposable
+    public class VlcMediaPlayer
     {
         internal IntPtr Handle;
         private IntPtr _drawable;
         private bool _playing, _paused;
+
+        public delegate void OnIsBusyChanged(object sender, EventArgs e);
+
+        public event OnIsBusyChanged IsBusyChanged;
 
         public VlcMediaPlayer(VlcMedia media, VlcWinForm parentForm)
         {
             Handle = LibVlc.libvlc_media_player_new_from_media(media.Handle);
             _eventManager = new VlcEventManager(this);
             if (Handle == IntPtr.Zero) throw new VlcException();
+            else Media = media;
         }
 
         public void Dispose()
         {
-            LibVlc.libvlc_media_player_release(Handle);
+            HandleClosing();
         }
 
         public IntPtr Drawable
@@ -55,12 +62,6 @@ namespace VlcPlayer
             get { return _eventManager; }
         }
 
-        public bool IsPlaying { get { return _playing && !_paused; } }
-
-        public bool IsPaused { get { return _playing && _paused; } }
-
-        public bool IsStopped { get { return !_playing; } }
-
         #region methods
 
         public void Play()
@@ -81,12 +82,27 @@ namespace VlcPlayer
                 _paused ^= true;
         }
 
+        private void HandleClosing()
+        {
+            while (Media.State != MediaPlayerState.Stopped)
+            {
+                Thread.Sleep(50);
+            }
+            Media.Release();
+            LibVlc.libvlc_media_player_release(Handle);
+        }
+
         public void Stop()
         {
-            LibVlc.libvlc_media_player_stop(Handle);
+            if (Media.State != MediaPlayerState.Stopped)
+            {
+                LibvlcException ex = new LibvlcException();
+                LibVlc.libvlc_media_player_stop(Handle, ref ex);
+                if (ex.b_raised != 0)
+                    throw new VlcException(ex.Message);
 
-            _playing = false;
-            _paused = false;
+                LibVlc.libvlc_media_player_release(Handle);
+            }
         }
 
         public void Mute()

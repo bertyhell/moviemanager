@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using VlcPlayer.Enums;
 
 namespace VlcPlayer.Events
 {
@@ -104,7 +105,7 @@ namespace VlcPlayer.Events
     [StructLayout(LayoutKind.Sequential)]
     public struct media_state_changed
     {
-        public libvlc_state_t new_state;
+        public MediaPlayerState new_state;
     }
 
     /* media instance */

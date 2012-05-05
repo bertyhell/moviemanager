@@ -54,24 +54,12 @@ namespace MovieManager.APP
         private void MenuItemPlayClick(object sender, RoutedEventArgs e)
         {
             var Video = _videoGrid.SelectedItem as Video;
-            if (Video != null)
+            if (Video != null && Video.Path != null)
             {
-                string Path = Video.Path;
-
-                if (Path != null)
-                {
-                    VlcWinForm Vlc = new VlcWinForm();
-                    Vlc.Show();
-                    Vlc.PlayVideo(Path);
-                }
+                VlcWinForm Vlc = new VlcWinForm();
+                Vlc.Show();
+                Vlc.PlayVideo(Video);
             }
-        }
-
-        #endregion
-
-        private void VideoGridMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            MenuItemPlayClick(sender, e);
         }
 
         private void MenuItemRenameFileClick(object sender, RoutedEventArgs e)
@@ -113,6 +101,15 @@ namespace MovieManager.APP
                 }
             }
         }
+
+        #endregion
+
+        private void VideoGridMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MenuItemPlayClick(sender, e);
+        }
+
+
     }
 }
 

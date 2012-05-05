@@ -40,7 +40,7 @@ namespace SQLite
                         Rating = Row.rating,
                         RatingImdb = Row.rating_imdb,
                         Path = Row.path,
-                        LastPlayLocation = (int)Row.last_play_location
+                        LastPlayLocation = (ulong)Row.last_play_location
                     };
 
                     //get genre from dataset
