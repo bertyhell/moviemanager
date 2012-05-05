@@ -263,6 +263,11 @@ namespace Model
             }
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         #region properties for search results
 
         public Uri Poster

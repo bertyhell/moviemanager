@@ -18,7 +18,7 @@ namespace SQLite
         //don't use videos changed -> all database operations could be run in different thread -> different trhead has no access to observable collection
         //update lists in maincontroller in commandobjects
 
-        public static void SelectAllVideos(ObservableCollection<Video> videos)
+        public static void SelectAllVideos(IList<Video> videos)
         {
             try
             {
