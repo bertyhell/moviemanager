@@ -43,7 +43,7 @@ namespace MovieManager.APP.Commands
             //        //}
             //    }
             //}
-            AnalyseWindow AnalyseWindow = new AnalyseWindow(){Owner = MainWindow.Instance};
+            AnalyseWindow AnalyseWindow = new AnalyseWindow{Owner = MainWindow.Instance};
             AnalyseWindow.ShowDialog();
         }
     }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Common;
 using Model;
 using MovieManager.WEB.Search;
 using SQLite;
@@ -13,25 +12,32 @@ namespace MovieManager.APP.Panels.Analyse
     {
         public AnalyseController()
         {
-            Videos.Clear();
+            //TODO 030 use videos from maincontroller, don't recollect from database
+            IList<Video> Videos = new List<Video>();
             MMDatabase.SelectAllVideos(Videos);
+            AnalyseVideos.Clear();
+            IList<Video> CandidatesTest = new List<Video> { new Video { Name = "test1" }, new Video { Name = "test2" }, new Video { Name = "test3" } };
+            foreach (Video Video in Videos)
+            {
+                AnalyseVideos.Add(new AnalyseVideo { Video = Video, Candidates = CandidatesTest });
+            }
         }
 
-        private ObservableCollection<Video> _videos = new ObservableCollection<Video>();
-        public ObservableCollection<Video> Videos
+        private ObservableCollection<AnalyseVideo> _analyseVideos = new ObservableCollection<AnalyseVideo>();
+        public ObservableCollection<AnalyseVideo> AnalyseVideos
         {
             get
             {
-                return _videos;
+                return _analyseVideos;
             }
             set
             {
-                _videos = value;
+                _analyseVideos = value;
             }
         }
 
-        private Video _selectedVideoFile;
-        public Video SelectedVideoFile
+        private AnalyseVideo _selectedVideoFile;
+        public AnalyseVideo SelectedVideoFile
         {
             get { return _selectedVideoFile; }
             set
@@ -39,6 +45,19 @@ namespace MovieManager.APP.Panels.Analyse
                 _selectedVideoFile = value;
                 PropChanged("SelectedVideoFile");
             }
+        }
+
+        public void BeginAnalyse()
+        {
+            //begin automatic analysis
+            var AnalyseWorker = new AnalyseWorker(AnalyseVideos);
+            AnalyseWorker.RunWorkerCompleted += AnalyseWorker_RunWorkerCompleted;
+            AnalyseWorker.RunWorkerAsync();
+        }
+
+        void AnalyseWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Console.WriteLine("finished analysing :D");
         }
 
         public void PropChanged(string title)
@@ -49,39 +68,19 @@ namespace MovieManager.APP.Panels.Analyse
             }
         }
 
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void ManualSearch(string text, string number)
-        {
-            VideoInfos.Clear();
-            foreach (var Video in SearchTMDB.GetVideoInfo(text))
-            {
-                VideoInfos.Add(Video);
-            }
-        }
+        //public void ManualSearch(string text, string number)
+        //{
+        //    VideoInfos.Clear();
+        //    foreach (var Video in SearchTMDB.GetVideoInfo(text))
+        //    {
+        //        VideoInfos.Add(Video);
+        //    }
+        //}
 
-        private Video _selectedMovieInfo;
-        public Video SelectedMovieInfo
-        {
-            get { return _selectedMovieInfo;}
-            set
-            {
-                _selectedMovieInfo = value;
-                PropChanged("SelectedMovieInfo");
-            }
-        }
-        private ObservableCollection<Video> _videoInfos = new ObservableCollection<Video>();
-        public ObservableCollection<Video> VideoInfos
-        {
-            get
-            {
-                return _videoInfos;
-            }
-            set
-            {
-                _videoInfos = value;
-            }
-        }
 
         //TODO 050 make analyse function multithreaded -> 1 thread for every movie lookup
     }

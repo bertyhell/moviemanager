@@ -130,6 +130,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\Analyse\SuggestionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Panels\Filter\FilterRating.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -254,11 +258,18 @@
     </Compile>
     <Compile Include="Converters\StringListConverter.cs" />
     <Compile Include="Panels\Analyse\AnalyseController.cs" />
+    <Compile Include="Panels\Analyse\AnalyseVideo.cs" />
     <Compile Include="Panels\Analyse\AnalyseWindow.xaml.cs">
       <DependentUpon>AnalyseWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Panels\Analyse\AnalyseWorker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Panels\Analyse\FileNameFromPathExtractor.cs" />
     <Compile Include="Panels\Analyse\FolderFromPathExtractor.cs" />
+    <Compile Include="Panels\Analyse\SuggestionsWindow.xaml.cs">
+      <DependentUpon>SuggestionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\Filter\FilterRating.xaml.cs">
       <DependentUpon>FilterRating.xaml</DependentUpon>
     </Compile>
@@ -494,7 +505,8 @@
     <PostBuildEvent>move /y $(SolutionDir)bin\$(ConfigurationName)\*.dll $(SolutionDir)bin\$(ConfigurationName)\lib
 xcopy /y $(SolutionDir)lib\libvlc.dll $(SolutionDir)bin\$(ConfigurationName)\lib
 xcopy /y $(SolutionDir)lib\libvlccore.dll $(SolutionDir)bin\$(ConfigurationName)\lib
-xcopy /y $(SolutionDir)Database\moviemanager.sqlite C:\ProgramData\MovieManager\Database</PostBuildEvent>
+mkdir C:\ProgramData\MovieManager\Database
+xcopy $(SolutionDir)Database\moviemanager.sqlite C:\ProgramData\MovieManager\Database /e /d</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

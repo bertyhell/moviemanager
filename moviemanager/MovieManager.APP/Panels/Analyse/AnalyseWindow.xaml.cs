@@ -1,7 +1,4 @@
-﻿using System;
-using Model;
-
-namespace MovieManager.APP.Panels.Analyse
+﻿namespace MovieManager.APP.Panels.Analyse
 {
     /// <summary>
     /// Interaction logic for AnalysePanel.xaml
@@ -16,15 +13,10 @@ namespace MovieManager.APP.Panels.Analyse
             _controller = new AnalyseController();
             DataContext = _controller;
         }
-
-        private void BtnManualSearchClick(object sender, System.Windows.RoutedEventArgs e)
-        {
-            _controller.ManualSearch(txtTitleGuess.Text, txtReleaseYearGuess.Text);
-        }
         
-        private void DgrVideoFileListSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void BtnAnalyseClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            txtReleaseYearGuess.Text = ((Video)dgrVideoFileList.SelectedItem).ReleaseYearGuess;
+            _controller.BeginAnalyse();
         }
     }
 }
