@@ -36,7 +36,17 @@ namespace MovieManager.PLAYER
             };
 
             _vlcInstance = new VlcInstance(Args);
+            _mediaPlayerControl.Initialize(this);
         }
+
+        #region Properties
+
+        public VlcMediaPlayer Player
+        {
+            get { return _player; }
+        }
+
+        #endregion
 
 
         public void PlayVideo(Video video)
@@ -69,18 +79,19 @@ namespace MovieManager.PLAYER
         }
 
         #region full screen
-        
+
         public bool IsFullScreen
         {
             get { return _isFullScreen; }
             set { _isFullScreen = value; }
         }
-        
+
         public void ToggleFullScreen()
         {
-            /*
             if (!_isFullScreen)
             {
+                _mediaPlayerControl.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
+                //_pnlVideo.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
                 //save data
                 _previousFormLocation = Location;
                 _previousFormSize = Size;
@@ -89,9 +100,9 @@ namespace MovieManager.PLAYER
                 FormBorderStyle = FormBorderStyle.None;
 
                 //change visual
-                Controls.Remove(_pnlControls);
-                _overlayForm.Controls.Add(_pnlControls);
-                _pnlControls.ToggleFullScreen();
+                Controls.Remove(_mediaPlayerControl);
+                _overlayForm.Controls.Add(_mediaPlayerControl);
+                _mediaPlayerControl.ToggleFullScreen();
                 _menubar.Visible = false;
                 Location = new Point(0, 0);
                 Size = new Size((int)System.Windows.SystemParameters.PrimaryScreenWidth,
@@ -105,20 +116,21 @@ namespace MovieManager.PLAYER
             else
             {
 
-                _overlayForm.Controls.Remove(_pnlControls);
-                Controls.Add(_pnlControls);
-                _pnlControls.ToggleFullScreen();
+                _overlayForm.Controls.Remove(_mediaPlayerControl);
+                Controls.Add(_mediaPlayerControl);
+                _mediaPlayerControl.ToggleFullScreen();
                 FormBorderStyle = FormBorderStyle.Sizable;
                 Size = _previousFormSize;
                 Location = _previousFormLocation;
-                _pnlVideo.Size = _previousVideoPanelSize;
                 _pnlVideo.Location = _previousVideoPanelLocation;
+                _pnlVideo.Size = _previousVideoPanelSize;
                 _menubar.Visible = true;
                 _overlayForm.Location = CalculateOverlayLocation();
                 _overlayForm.Size = _pnlVideo.Size;
+                _mediaPlayerControl.Anchor = (AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
+                //_pnlVideo.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
                 _isFullScreen = false;
             }
-        */
         }
 
         private void ActivateOverlay()

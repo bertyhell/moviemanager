@@ -12,6 +12,7 @@
             InitializeComponent();
             _controller = new AnalyseController();
             DataContext = _controller;
+            progressbar.DataContext = _controller;
         }
         
         private void BtnAnalyseClick(object sender, System.Windows.RoutedEventArgs e)

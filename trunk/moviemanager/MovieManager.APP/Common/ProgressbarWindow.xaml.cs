@@ -9,16 +9,15 @@
         {
             InitializeComponent();
             progressBarControl1.DataContext = datacontext;
-
         }
 
-        public bool IsIndeterminate
-        {
-            get { return progressBarControl1.IsIndeterminate; }
-            set
-            {
-                progressBarControl1.IsIndeterminate = value;
-            }
-        }
+        //public bool IsIndeterminate
+        //{
+        //    get { return progressBarControl1.IsIndeterminate; }
+        //    set
+        //    {
+        //        progressBarControl1.IsIndeterminate = value;
+        //    }
+        //}
     }
 }

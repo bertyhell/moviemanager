@@ -10,13 +10,13 @@
             InitializeComponent();
         }
 
-        public bool IsIndeterminate
-        {
-            get { return progressbar.IsIndeterminate; }
-            set
-            {
-                progressbar.IsIndeterminate = value;
-            }
-        }
+        //public bool IsIndeterminate
+        //{
+        //    get { return progressbar.IsIndeterminate; }
+        //    set
+        //    {
+        //        progressbar.IsIndeterminate = value;
+        //    }
+        //}
     }
 }
