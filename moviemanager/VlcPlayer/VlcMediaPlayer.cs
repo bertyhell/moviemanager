@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using MovieManager.PLAYER;
 using VlcPlayer.Enums;
 using VlcPlayer.Events;
 
@@ -15,7 +16,7 @@ namespace VlcPlayer
 
         public event OnIsBusyChanged IsBusyChanged;
 
-        public VlcMediaPlayer(VlcMedia media, VlcWinForm parentForm)
+        public VlcMediaPlayer(VlcMedia media, MMPlayer parentForm)
         {
             Handle = LibVlc.libvlc_media_player_new_from_media(media.Handle);
             _eventManager = new VlcEventManager(this);

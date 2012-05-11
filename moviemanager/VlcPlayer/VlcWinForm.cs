@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Model;
+using MovieManager.PLAYER.interop;
 using VlcPlayer.Common;
 using VlcPlayer.Enums;
 
@@ -196,7 +197,7 @@ namespace VlcPlayer
             _overlayForm.Size = _pnlVideo.Size;
         }
 
-        private void VlcWinFormKeyUp(object sender, KeyEventArgs e)
+        private void FormKeyUp(object sender, KeyEventArgs e)
         {
             HandleKeys(e.KeyCode);
         }
@@ -216,6 +217,7 @@ namespace VlcPlayer
 
         private void VlcWinForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            VlcLibInterop.StopVideo(_player);
             //Thread t = new Thread(new ThreadStart(HandleCloseForm));
             //t.Start();
             //while (t.IsAlive)

@@ -46,8 +46,8 @@ namespace MovieManager.APP.Commands
                 Message = "Searching videos: 0 found";
                 Value = 0;
                 Maximum = Ofd.FileNames.Count();
-
-                _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = false, DataContext = this };
+                IsIndeterminate = false;
+                _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, DataContext = this };
 
                 MovieFileReader FileReader = new MovieFileReader(Ofd.FileNames.Select(file => new FileInfo(file)).ToList());
                 FileReader.FoundVideo += FileReader_OnVideoFilesProcessingProgress;
@@ -69,7 +69,8 @@ namespace MovieManager.APP.Commands
             Message = "Adding videos to database: 0.0 %";
             Value = 0;
             Maximum = e.Videos.Count;
-            _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = false, DataContext = this };
+            IsIndeterminate = false;
+            _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, DataContext = this };
             BGWInsertVideos BGWInsertVideos = new BGWInsertVideos(e.Videos);
             MMDatabase.InsertVideosProgress += FileReader_OnInsertVideosProgress;
             BGWInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
@@ -119,6 +120,17 @@ namespace MovieManager.APP.Commands
             {
                 _maximum = value;
                 PropChanged("Maximum");
+            }
+        }
+
+        private bool _isIndeterminate;
+        public bool IsIndeterminate
+        {
+            get { return _isIndeterminate; }
+            set
+            {
+                _isIndeterminate = value;
+                PropChanged("IsIndetermined");
             }
         }
 

@@ -72,10 +72,16 @@
     <Compile Include="Common\MediaPlayerControl.Designer.cs">
       <DependentUpon>MediaPlayerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enums\MediaPlayerState.cs" />
-    <Compile Include="Enums\MediaState.cs" />
+    <Compile Include="Enums\libvlc_enums.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\MediaPlayerState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\MediaState.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Events\libvlc_event_t.cs" />
-    <Compile Include="Enums\libvlc_enums.cs" />
     <Compile Include="Events\VlcEventArgs.cs" />
     <Compile Include="Overlay.cs">
       <SubType>Form</SubType>
@@ -142,6 +148,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieManager.PLAYER\MovieManager.PLAYER.csproj">
+      <Project>{C8B06303-3B2F-417B-8EE2-CD812F257277}</Project>
+      <Name>MovieManager.PLAYER</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

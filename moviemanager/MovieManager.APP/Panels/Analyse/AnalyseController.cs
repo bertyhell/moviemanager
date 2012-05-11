@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Common;
 using Model;
-using MovieManager.WEB.Search;
 using SQLite;
 
 namespace MovieManager.APP.Panels.Analyse
 {
     class AnalyseController : INotifyPropertyChanged
     {
+
         public AnalyseController()
         {
             //TODO 030 use videos from maincontroller, don't recollect from database
             IList<Video> Videos = new List<Video>();
             MMDatabase.SelectAllVideos(Videos);
             AnalyseVideos.Clear();
-            IList<Video> CandidatesTest = new List<Video> { new Video { Name = "test1" }, new Video { Name = "test2" }, new Video { Name = "test3" } };
             foreach (Video Video in Videos)
             {
-                AnalyseVideos.Add(new AnalyseVideo { Video = Video, Candidates = CandidatesTest });
+                AnalyseVideos.Add(new AnalyseVideo { Video = Video });
             }
         }
 
@@ -50,13 +50,31 @@ namespace MovieManager.APP.Panels.Analyse
         public void BeginAnalyse()
         {
             //begin automatic analysis
+
             var AnalyseWorker = new AnalyseWorker(AnalyseVideos);
+            IsIndeterminate = true;
+            Message = "Contacting webservice...";
+            AnalyseWorker.VideoInfoProgress += AnalyseWorker_VideoInfoProgress;
             AnalyseWorker.RunWorkerCompleted += AnalyseWorker_RunWorkerCompleted;
             AnalyseWorker.RunWorkerAsync();
         }
 
-        void AnalyseWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        public void AnalyseWorker_VideoInfoProgress(object sender, ProgressEventArgs args)
         {
+            VideoProgressHandler(args);
+        }
+
+        private void VideoProgressHandler(ProgressEventArgs args)
+        {
+            IsIndeterminate = false;
+            Message = "Analysing videos: " + args.ProgressNumber + " / " + args.MaxNumber;
+            Maximum = args.MaxNumber;
+            Value = args.ProgressNumber;
+        }
+
+        public void AnalyseWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //TODO 050 get posters of analysed videos
             Console.WriteLine("finished analysing :D");
         }
 
@@ -68,6 +86,49 @@ namespace MovieManager.APP.Panels.Analyse
             }
         }
 
+        private string _message;
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                PropChanged("Message");
+            }
+        }
+
+        private int _value;
+        public int Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                PropChanged("Value");
+            }
+        }
+
+        private int _maximum = 100;
+        public int Maximum
+        {
+            get { return _maximum; }
+            set
+            {
+                _maximum = value;
+                PropChanged("Maximum");
+            }
+        }
+
+        private bool _isIndeterminate;
+        public bool IsIndeterminate
+        {
+            get { return _isIndeterminate; }
+            set
+            {
+                _isIndeterminate = value;
+                PropChanged("IsIndeterminate");
+            }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

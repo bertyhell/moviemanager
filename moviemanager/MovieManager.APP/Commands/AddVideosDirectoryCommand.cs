@@ -48,7 +48,8 @@ namespace MovieManager.APP.Commands
             // ReSharper restore PossibleInvalidOperationException
             {
                 Message = "Searching videos: 0 found";
-                _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = true, DataContext = this };
+                IsIndeterminate = true;
+                _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, DataContext = this };
                 var FileReader = new MovieFileReader(new DirectoryInfo(Dialog.SelectedPath));
                 FileReader.FoundVideo += FileReader_OnVideoFoundProgress;
                 FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
@@ -68,7 +69,8 @@ namespace MovieManager.APP.Commands
             Message = "Adding videos to database: 0.0 %";
             Value = 0;
             Maximum = e.Videos.Count;
-            _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, IsIndeterminate = false, DataContext = this };
+            IsIndeterminate = false;
+            _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance,DataContext = this };
             var BGWInsertVideos = new BGWInsertVideos(e.Videos);
             MMDatabase.InsertVideosProgress += FileReader_OnInsertVideosProgress;
             BGWInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
@@ -118,6 +120,17 @@ namespace MovieManager.APP.Commands
             {
                 _maximum = value;
                 PropChanged("Maximum");
+            }
+        }
+
+        private bool _isIndeterminate;
+        public bool IsIndeterminate
+        {
+            get { return _isIndeterminate; }
+            set
+            {
+                _isIndeterminate = value;
+                PropChanged("IsIndetermined");
             }
         }
 

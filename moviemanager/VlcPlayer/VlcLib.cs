@@ -4,7 +4,7 @@ using System.Security;
 using VlcPlayer.Enums;
 using VlcPlayer.Events;
 
-namespace VlcPlayer
+namespace MovieManager.PLAYER
 {
     // http://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc.html
 

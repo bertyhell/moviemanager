@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Media;
 using Model;
 
 namespace MovieManager.APP.Panels.Analyse
@@ -10,6 +11,7 @@ namespace MovieManager.APP.Panels.Analyse
         {
             Candidates = new List<Video>();
             SelectedCandidateIndex = -1;
+            MatchPercentage = -1;
         }
 
         private Video _video;
@@ -50,6 +52,20 @@ namespace MovieManager.APP.Panels.Analyse
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(field));
+            }
+        }
+
+        private int _matchPercentage;
+        public int MatchPercentage
+        {
+            get
+            {
+                return _matchPercentage;//Brushes.BlueViolet; 
+            }
+            set
+            {
+                _matchPercentage = value;
+                PropChanged("MatchPercentage");
             }
         }
 

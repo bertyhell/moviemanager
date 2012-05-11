@@ -2,29 +2,38 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:analyse="clr-namespace:MovieManager.APP.Panels.Analyse"
-        Title="Analyse Videos" Height="700" Width="900" xmlns:my1="clr-namespace:MovieManager.APP.Common" Icon="/MovieManager;component/Images/analyse.png" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
+        Title="Analyse Videos" Height="700" Width="900" xmlns:common="clr-namespace:MovieManager.APP.Common"
+        xmlns:Model="clr-namespace:Model;assembly=Model" Icon="/MovieManager;component/Images/analyse.png" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
     <Window.Resources>
         <analyse:FileNameFromPathExtractor x:Key="FileNameFromPathExtractor" />
         <analyse:FolderFromPathExtractor x:Key="FolderFromPathExtractor" />
+        <common:Int2ColorConverter x:Key="Int2ColorConverter" />
+
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding AnalyseVideos}" SelectedItem="{Binding SelectedVideoFile}" AlternatingRowBackground="#EEE"
+        <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding AnalyseVideos}" SelectedItem="{Binding SelectedVideoFile}" 
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Single" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" Name="dgrVideoFileList" Margin="0,10,0,0">
+            <!--AlternatingRowBackground="#EEE"-->
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
                 </Style>
             </DataGrid.CellStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="{Binding MatchPercentage, Converter={StaticResource Int2ColorConverter}}" />
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title Guess" Binding="{Binding Video.Name}" />
                 <DataGridTemplateColumn Header="Candidates">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Candidates}" />
+                            <ComboBox ItemsSource="{Binding Candidates}" SelectedIndex="{Binding SelectedCandidateIndex}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
@@ -40,7 +49,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <my1:ProgressBarControl Margin="0,0,160,0" />
+        <common:ProgressBarControl Margin="0,0,160,0" x:Name="progressbar" />
         <Button HorizontalAlignment="Right" Width="150" Name="btnAnalyse" Click="BtnAnalyseClick">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/MovieManager;component/Images/analyse.png" Stretch="Uniform" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>

@@ -28,18 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this._pnlBackground = new System.Windows.Forms.Panel();
             this.SuspendLayout();
-            // 
-            // _pnlBackground
-            // 
-            this._pnlBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this._pnlBackground.Location = new System.Drawing.Point(-1, -1);
-            this._pnlBackground.Name = "_pnlBackground";
-            this._pnlBackground.Size = new System.Drawing.Size(815, 149);
-            this._pnlBackground.TabIndex = 0;
             // 
             // Overlay
             // 
@@ -47,10 +36,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(812, 146);
-            this.Controls.Add(this._pnlBackground);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Overlay";
-            this.Opacity = 0.5D;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -64,7 +51,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel _pnlBackground;
+
+
 
 
 
