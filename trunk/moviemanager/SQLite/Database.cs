@@ -9,7 +9,7 @@ namespace SQLite
 
     public class Database
     {
-        private const String ConnString = @"data source='C:\ProgramData\MovieManager\Database\moviemanager.sqlite'";
+        //private const String ConnString = @"data source='C:\ProgramData\MovieManager\Database\moviemanager.sqlite'";
         private static SQLiteConnection _conn;
 
         public static void ExecuteSQL(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
@@ -18,9 +18,21 @@ namespace SQLite
             Cmd.ExecuteNonQuery();
         }
 
+        public static void ExecuteSQL(SQLiteConnection conn, string sql)
+        {
+            SQLiteCommand Cmd = GetCommand(conn, sql);
+            Cmd.ExecuteNonQuery();
+        }
+
         public static void ExecuteSQL(string sql, params SQLiteParameter[] @params)
         {
             ExecuteSQL(GetConnection(), null, sql, @params);
+        }
+
+        public static void CreateDatabaseFile(string pathToDatabase)
+        {
+            SQLiteConnection.CreateFile(pathToDatabase);
+            //return GetConnection(pathToDatabase);
         }
 
         public static SQLiteConnection GetConnection()
@@ -28,7 +40,17 @@ namespace SQLite
             if (_conn == null)
             {
                 _conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["moviemanagerConnectionString"].ConnectionString);
-                //_conn = new SQLiteConnection(ConnString);
+                _conn.Open();
+            }
+            return _conn;
+        }
+
+        public static SQLiteConnection GetConnection(string path)
+        {
+
+            if (_conn == null)
+            {
+                _conn = new SQLiteConnection("data source=" + path);
                 _conn.Open();
             }
             return _conn;
@@ -36,12 +58,27 @@ namespace SQLite
 
         public static SQLiteCommand GetCommand(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteCommand Cmd = new SQLiteCommand(sql) {Transaction = transaction, Connection = conn};
+            SQLiteCommand Cmd = new SQLiteCommand(sql) { Transaction = transaction, Connection = conn };
             foreach (SQLiteParameter Param in @params)
             {
                 Cmd.Parameters.Add(Param);
             }
             return Cmd;
+        }
+
+        public static SQLiteCommand GetCommand(SQLiteConnection conn, string sql, params SQLiteParameter[] @params)
+        {
+            SQLiteCommand Cmd = new SQLiteCommand(sql) { Connection = conn };
+            foreach (SQLiteParameter Param in @params)
+            {
+                Cmd.Parameters.Add(Param);
+            }
+            return Cmd;
+        }
+
+        public static SQLiteCommand GetCommand(SQLiteConnection conn, string sql)
+        {
+            return new SQLiteCommand(sql) { Connection = conn };
         }
 
         public static SQLiteCommand GetCommand(string sql, params SQLiteParameter[] @params)
@@ -67,7 +104,7 @@ namespace SQLite
 
         public static SQLiteDataAdapter GetAdapter(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
-            SQLiteDataAdapter Adapter=null;
+            SQLiteDataAdapter Adapter = null;
             try
             {
                 SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
@@ -80,7 +117,7 @@ namespace SQLite
             return Adapter;
         }
 
-        public static bool FillDataset( DsVideos dataSet, Dictionary<String,String> tableNames)
+        public static bool FillDataset(DsVideos dataSet, Dictionary<String, String> tableNames)
         {
             return tableNames.Aggregate(true, (current, pair) => current & FillDataset(dataSet, pair.Key, pair.Value));
         }
@@ -105,5 +142,6 @@ namespace SQLite
         {
 
         }
+
     }
 }

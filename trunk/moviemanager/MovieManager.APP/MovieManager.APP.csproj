@@ -170,6 +170,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\Settings\DatabaseSettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Panels\Settings\VideoSearchPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,6 +238,7 @@
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
     <Compile Include="Commands\AnalyseCommand.cs" />
     <Compile Include="Commands\AddSerieCommand.cs" />
+    <Compile Include="Commands\CreateDatabaseCommand.cs" />
     <Compile Include="Commands\EditSettingsCommand.cs" />
     <Compile Include="Commands\EditEpisodeRegExCommand.cs" />
     <Compile Include="Commands\ExportVideosCommand.cs" />
@@ -302,6 +307,9 @@
       <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\RatingEditorControl.cs" />
+    <Compile Include="Panels\Settings\DatabaseSettingsPanel.xaml.cs">
+      <DependentUpon>DatabaseSettingsPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\Settings\VideoSearchPanel.xaml.cs">
       <DependentUpon>VideoSearchPanel.xaml</DependentUpon>
     </Compile>
@@ -504,6 +512,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\database_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

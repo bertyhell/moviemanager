@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 using System.Windows.Input;
-using MovieManager.APP.Panels.Settings;
+using SQLite;
 
 namespace MovieManager.APP.Commands
 {
-    class EditSettingsCommand : ICommand
+    class CreateDatabaseCommand : ICommand
     {
         public bool CanExecute(object parameter)
         {
@@ -22,15 +26,11 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            List<SettingsPanelBase> Panels = new List<SettingsPanelBase>{
-                new DatabaseSettingsPanel(),
-                new FileRenameSettingsPanel(),
-                new MediaPlayerSettingsPanel(),
-                new VideoSearchPanel()
-            };
-
-            SettingsWindow SettingsWindow = new SettingsWindow(Panels) { Owner = MainWindow.Instance };
-            SettingsWindow.ShowDialog();
+            SaveFileDialog Ofd = new SaveFileDialog();
+            if (Ofd.ShowDialog() == DialogResult.OK)
+            {
+                MMDatabase.CreateDatabase(Ofd.FileName);
+            }
         }
     }
 }

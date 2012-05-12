@@ -186,6 +186,13 @@ namespace Model
             }
         }
 
+        private long _runtime;
+        public long Runtime
+        {
+            get { return _runtime; }
+            set { _runtime = value; }
+        }
+
         public String ReleaseYearGuess
         {
             get
@@ -328,6 +335,7 @@ namespace Model
         private Uri _oldposter;
         private List<ImageInfo> _oldimages;
         private String _oldplot;
+        private long _oldRuntime;
 
         private bool _editInProgress;
 
@@ -350,6 +358,7 @@ namespace Model
                 _oldposter = _poster;
                 _oldimages = _images;
                 _oldplot = _plot;
+                _oldRuntime = _runtime;
             }
         }
 
@@ -365,7 +374,6 @@ namespace Model
                 _oldposter = null;
                 _oldimages = null;
                 _oldplot = null;
-
                 OnPropertyChanged("Id");
                 OnPropertyChanged("IdImdb");
                 OnPropertyChanged("Name");
@@ -380,6 +388,7 @@ namespace Model
                 OnPropertyChanged("Poster");
                 OnPropertyChanged("Images");
                 OnPropertyChanged("Plot");
+                OnPropertyChanged("Runtime");
             }
         }
 
@@ -403,6 +412,7 @@ namespace Model
                 _poster = _oldposter;
                 _images = _oldimages;
                 _plot = _oldplot;
+                _runtime = _oldRuntime;
             }
         }
         #endregion
