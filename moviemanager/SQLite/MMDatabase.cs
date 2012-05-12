@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SQLite;
 using Common;
 using Model;
 using System.Data.Common;
@@ -17,6 +18,53 @@ namespace SQLite
         //public static event VideosChanged OnVideosChanged;
         //don't use videos changed -> all database operations could be run in different thread -> different trhead has no access to observable collection
         //update lists in maincontroller in commandobjects
+
+        public static void CreateDatabase(string pathToDatabase)
+        {
+            Database.CreateDatabaseFile(pathToDatabase);
+            SQLiteConnection Conn = Database.GetConnection(pathToDatabase);
+
+
+
+            string SQLQuery = "CREATE TABLE Genres ( gen_id INTEGER PRIMARY KEY AUTOINCREMENT, gen_label TEXT NOT NULL UNIQUE )";
+            Database.ExecuteSQL(Conn, SQLQuery);
+
+             SQLQuery = "CREATE TABLE Franchises (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL)";
+            Database.ExecuteSQL(Conn, SQLQuery);
+
+            SQLQuery = "CREATE TABLE Series (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL)";
+            Database.ExecuteSQL(Conn, SQLQuery);
+            
+            SQLQuery = "CREATE TABLE Videos ( id INTEGER PRIMARY KEY AUTOINCREMENT, id_imdb VARCHAR(10), name VARCHAR(255) NOT NULL, release DATE, rating DOUBLE, rating_imdb DOUBLE, path VARCHAR(255), last_play_location INTEGER default 0, runtime TIME )";
+            Database.ExecuteSQL(Conn, SQLQuery);
+
+            SQLQuery = "CREATE TABLE Movies ( id INTEGER PRIMARY KEY, franchise_id INTEGER, id_tmdb INTEGER," +
+                                              " FOREIGN KEY(id) REFERENCES Videos(id)" +
+                                              " FOREIGN KEY(franchise_id) REFERENCES Franchises(id))";
+            Database.ExecuteSQL(Conn, SQLQuery);
+
+            SQLQuery = "CREATE TABLE Episodes ( id INTEGER PRIMARY KEY, serie_id INTEGER NOT NULL, season INTEGER NOT NULL, episode_number," +
+                                              " FOREIGN KEY(id) REFERENCES Videos(id)" +
+                                              " FOREIGN KEY(serie_id) REFERENCES Series(id))";
+            Database.ExecuteSQL(Conn, SQLQuery);
+
+            SQLQuery = "CREATE TABLE Videos_genres ( video_id INTEGER NOT NULL, genre_id INTEGER NOT NULL," +
+                                                    "UNIQUE (video_id, genre_id) ON CONFLICT ABORT, " +
+                                                    "FOREIGN KEY(video_id) REFERENCES Videos(id)," +
+                                                    "FOREIGN KEY(genre_id) REFERENCES Genres(gen_id))";
+            Database.ExecuteSQL(Conn, SQLQuery);
+
+            SQLQuery = "CREATE TABLE Database_version ( id INTEGER PRIMARY KEY AUTOINCREMENT, version INTEGER NOT NULL, timestamp DATETIME default current_timestamp , description VARCHAR(255) )";
+            Database.ExecuteSQL(Conn, SQLQuery);
+
+            AddDefaultValues_version001(Conn);
+        }
+
+        private static void AddDefaultValues_version001(SQLiteConnection Conn)
+        {
+            string SQLQuery = "INSERT INTO Database_version (version, description) values (1, 'table creation')";
+            Database.ExecuteSQL(Conn, SQLQuery);
+        }
 
         public static void SelectAllVideos(IList<Video> videos)
         {

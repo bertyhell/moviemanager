@@ -2,6 +2,7 @@
 {
     public class Movie : Video
     {
+        //TODO 100: implement inotifypropertychanged
         public override VideoTypeEnum VideoType
         {
             get { return VideoTypeEnum.Movie; }
@@ -9,7 +10,6 @@
 
         public int FranchiseID { get; set; }
 
-        public long Runtime { get; set; }
 
         public int IdTmdb { get; set; }
     }
