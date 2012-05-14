@@ -55,16 +55,9 @@ namespace MovieManager.APP
             var Video = _videoGrid.SelectedItem as Video;
             if (Video != null && Video.Path != null)
             {
-//<<<<<<< .mine
-//                //TODO 099 enable this again after remake of vlc
-//                //VlcWinForm Vlc = new VlcWinForm();
-//                //Vlc.Show();
-//                //Vlc.PlayVideo(Video);
-//=======
-//                MMPlayer Vlc = new MMPlayer();
-//                Vlc.Show();
-//                Vlc.PlayVideo(Video);
-//>>>>>>> .r76
+                //MMPlayer Vlc = new MMPlayer();
+                //Vlc.Show();
+                //Vlc.PlayVideo(Video);
             }
         }
 
