@@ -240,7 +240,8 @@
     <Compile Include="Commands\AddVideosDirectoryCommand.cs" />
     <Compile Include="Commands\AnalyseCommand.cs" />
     <Compile Include="Commands\AddSerieCommand.cs" />
-    <Compile Include="Commands\CreateDatabaseCommand.cs" />
+    <Compile Include="Commands\ConvertDatabaseCommand.cs" />
+    <Compile Include="Commands\SelectDatabaseFileCommand.cs" />
     <Compile Include="Commands\EditSettingsCommand.cs" />
     <Compile Include="Commands\EditEpisodeRegExCommand.cs" />
     <Compile Include="Commands\ExportVideosCommand.cs" />
@@ -265,7 +266,9 @@
     <Compile Include="Common\ProgressbarWindow.xaml.cs">
       <DependentUpon>ProgressbarWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\IntToVersionConverter.cs" />
     <Compile Include="Converters\StringListConverter.cs" />
+    <Compile Include="Converters\TimestampConverter.cs" />
     <Compile Include="Panels\Analyse\AnalyseController.cs" />
     <Compile Include="Panels\Analyse\AnalyseVideo.cs" />
     <Compile Include="Panels\Analyse\AnalyseWindow.xaml.cs">
