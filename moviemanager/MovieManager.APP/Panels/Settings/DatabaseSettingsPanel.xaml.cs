@@ -30,11 +30,11 @@ namespace MovieManager.APP.Panels.Settings
         {
             InitializeComponent();
 
-
             //initialize base class variables;
             _panelName = "Database";
             _iconPath = "/MovieManager;component/Images/database_32.png";
 
+            //TODO 050: Initialize textbox with current database file
             _txtFilePath.DataContext = _fileCommand;
             _databaseDetails = MMDatabaseCreation.GetDatabaseDetails();
             _txtDatabaseVersion.DataContext = _databaseDetails;
@@ -45,7 +45,7 @@ namespace MovieManager.APP.Panels.Settings
 
         private void _btnCreateDatabase_Click(object sender, RoutedEventArgs e)
         {
-            ConvertDatabaseCommand ConvertCommand = new ConvertDatabaseCommand();
+            ConvertDatabaseCommand ConvertCommand = new ConvertDatabaseCommand(_txtFilePath.Text);
             ConvertCommand.Execute(null);
         }
 

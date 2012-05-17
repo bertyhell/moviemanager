@@ -2252,6 +2252,8 @@ namespace SQLite {
             
             private global::System.Data.DataColumn columnruntime;
             
+            private static System.DateTime columnrelease_defaultValue = global::System.DateTime.Parse("1990-01-01T00:00:00");
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public VideosDataTable() {
@@ -2477,6 +2479,7 @@ namespace SQLite {
                 this.columnid_imdb.MaxLength = 10;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 255;
+                this.columnrelease.DefaultValue = ((System.DateTime)(VideosDataTable.columnrelease_defaultValue));
                 this.columnpath.MaxLength = 255;
             }
             
@@ -3016,6 +3019,8 @@ namespace SQLite {
             
             private VideosDataTable tableVideos;
             
+            private static System.DateTime release_nullValue = global::System.DateTime.Parse("1990-01-01T00:00:00");
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal VideosRow(global::System.Data.DataRowBuilder rb) : 
@@ -3038,11 +3043,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string id_imdb {
                 get {
-                    try {
-                        return ((string)(this[this.tableVideos.id_imdbColumn]));
+                    if (this.Isid_imdbNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'id_imdb\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableVideos.id_imdbColumn]));
                     }
                 }
                 set {
@@ -3065,11 +3070,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime release {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableVideos.releaseColumn]));
+                    if (this.IsreleaseNull()) {
+                        return VideosRow.release_nullValue;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'release\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((global::System.DateTime)(this[this.tableVideos.releaseColumn]));
                     }
                 }
                 set {
@@ -3081,11 +3086,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double rating {
                 get {
-                    try {
-                        return ((double)(this[this.tableVideos.ratingColumn]));
+                    if (this.IsratingNull()) {
+                        return -1D;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'rating\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((double)(this[this.tableVideos.ratingColumn]));
                     }
                 }
                 set {
@@ -3097,11 +3102,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double rating_imdb {
                 get {
-                    try {
-                        return ((double)(this[this.tableVideos.rating_imdbColumn]));
+                    if (this.Israting_imdbNull()) {
+                        return -1D;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'rating_imdb\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((double)(this[this.tableVideos.rating_imdbColumn]));
                     }
                 }
                 set {
@@ -3129,11 +3134,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public long last_play_location {
                 get {
-                    try {
-                        return ((long)(this[this.tableVideos.last_play_locationColumn]));
+                    if (this.Islast_play_locationNull()) {
+                        return 0;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'last_play_location\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((long)(this[this.tableVideos.last_play_locationColumn]));
                     }
                 }
                 set {
