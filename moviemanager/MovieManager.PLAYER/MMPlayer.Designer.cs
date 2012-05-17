@@ -32,8 +32,10 @@
             this._menubar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._pnlControlsContentholder = new System.Windows.Forms.Panel();
             this._mediaPlayerControl = new MovieManager.PLAYER.Common.MediaPlayerControl();
             this._menubar.SuspendLayout();
+            this._pnlControlsContentholder.SuspendLayout();
             this.SuspendLayout();
             // 
             // _pnlVideo
@@ -72,11 +74,20 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
+            // _pnlControlsContentholder
+            // 
+            this._pnlControlsContentholder.Controls.Add(this._mediaPlayerControl);
+            this._pnlControlsContentholder.Location = new System.Drawing.Point(0, 403);
+            this._pnlControlsContentholder.Name = "_pnlControlsContentholder";
+            this._pnlControlsContentholder.Size = new System.Drawing.Size(543, 75);
+            this._pnlControlsContentholder.TabIndex = 2;
+            // 
             // _mediaPlayerControl
             // 
             this._mediaPlayerControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this._mediaPlayerControl.Location = new System.Drawing.Point(0, 401);
+            this._mediaPlayerControl.BackColor = System.Drawing.Color.Red;
+            this._mediaPlayerControl.Location = new System.Drawing.Point(0, -1);
             this._mediaPlayerControl.Name = "_mediaPlayerControl";
             this._mediaPlayerControl.Size = new System.Drawing.Size(543, 76);
             this._mediaPlayerControl.TabIndex = 0;
@@ -87,7 +98,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 477);
-            this.Controls.Add(this._mediaPlayerControl);
+            this.Controls.Add(this._pnlControlsContentholder);
             this.Controls.Add(this._pnlVideo);
             this.Controls.Add(this._menubar);
             this.MainMenuStrip = this._menubar;
@@ -98,6 +109,7 @@
             this.Move += new System.EventHandler(this.FormMove);
             this._menubar.ResumeLayout(false);
             this._menubar.PerformLayout();
+            this._pnlControlsContentholder.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,5 +122,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private Common.MediaPlayerControl _mediaPlayerControl;
+        private System.Windows.Forms.Panel _pnlControlsContentholder;
     }
 }
