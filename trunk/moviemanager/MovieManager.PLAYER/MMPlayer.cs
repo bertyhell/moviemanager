@@ -22,6 +22,7 @@ namespace MovieManager.PLAYER
         private Size _previousFormSize;
         private Point _previousVideoPanelLocation;
         private Size _previousVideoPanelSize;
+        private FormWindowState _previousIsMaximized;
         private bool _isFullScreen;
         Overlay _overlayForm;
 
@@ -97,6 +98,9 @@ namespace MovieManager.PLAYER
                 _previousFormSize = Size;
                 _previousVideoPanelLocation = _pnlVideo.Location;
                 _previousVideoPanelSize = _pnlVideo.Size;
+
+                _previousIsMaximized = this.WindowState;
+                this.WindowState = FormWindowState.Normal;
                 FormBorderStyle = FormBorderStyle.None;
 
                 //change visual
@@ -104,9 +108,9 @@ namespace MovieManager.PLAYER
                 _overlayForm.Controls.Add(_mediaPlayerControl);
                 _mediaPlayerControl.ToggleFullScreen();
                 _menubar.Visible = false;
-                Location = new Point(0, 0);
                 Size = new Size((int)System.Windows.SystemParameters.PrimaryScreenWidth,
                                (int)System.Windows.SystemParameters.PrimaryScreenHeight);
+                Location = new Point(0, 0);
                 _pnlVideo.Location = new Point(0, 0);
                 _pnlVideo.Size = new Size((int)System.Windows.SystemParameters.PrimaryScreenWidth,
                                           (int)System.Windows.SystemParameters.PrimaryScreenHeight);
@@ -115,21 +119,23 @@ namespace MovieManager.PLAYER
             }
             else
             {
-
                 _overlayForm.Controls.Remove(_mediaPlayerControl);
                 Controls.Add(_mediaPlayerControl);
+
                 _mediaPlayerControl.ToggleFullScreen();
+                this.WindowState = _previousIsMaximized;
                 FormBorderStyle = FormBorderStyle.Sizable;
                 Size = _previousFormSize;
                 Location = _previousFormLocation;
+                _menubar.Visible = true;
                 _pnlVideo.Location = _previousVideoPanelLocation;
                 _pnlVideo.Size = _previousVideoPanelSize;
-                _menubar.Visible = true;
                 _overlayForm.Location = CalculateOverlayLocation();
                 _overlayForm.Size = _pnlVideo.Size;
-                _mediaPlayerControl.Anchor = (AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
                 //_pnlVideo.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
                 _isFullScreen = false;
+                
+                _mediaPlayerControl.Anchor = (AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
             }
         }
 
@@ -176,6 +182,8 @@ namespace MovieManager.PLAYER
 
         public void HandleKeys(Keys keys)
         {
+
+            //TODO 001: closes overlay closes video (ALT + F4)
             //video
             if (keys == Keys.F)
                 ToggleFullScreen();

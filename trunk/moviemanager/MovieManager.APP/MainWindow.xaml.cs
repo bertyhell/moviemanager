@@ -4,6 +4,7 @@ using System.Windows;
 using Model;
 using MovieManager.APP.Panels;
 using System.Windows.Data;
+using MovieManager.PLAYER;
 
 namespace MovieManager.APP
 {
@@ -55,9 +56,9 @@ namespace MovieManager.APP
             var Video = _videoGrid.SelectedItem as Video;
             if (Video != null && Video.Path != null)
             {
-                //MMPlayer Vlc = new MMPlayer();
-                //Vlc.Show();
-                //Vlc.PlayVideo(Video);
+                MMPlayer Vlc = new MMPlayer();
+                Vlc.Show();
+                Vlc.PlayVideo(Video);
             }
         }
 
