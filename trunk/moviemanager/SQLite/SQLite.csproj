@@ -46,12 +46,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Database.cs" />
+    <Compile Include="dsDatabaseVersion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDatabaseVersion.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DsVideos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DsVideos.xsd</DependentUpon>
     </Compile>
     <Compile Include="MMDatabase.cs" />
+    <Compile Include="MMDatabaseCreation.cs" />
     <Compile Include="MovieFileReader.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -76,6 +82,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="dsDatabaseVersion.xsc">
+      <DependentUpon>dsDatabaseVersion.xsd</DependentUpon>
+    </None>
+    <None Include="dsDatabaseVersion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDatabaseVersion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsDatabaseVersion.xss">
+      <DependentUpon>dsDatabaseVersion.xsd</DependentUpon>
+    </None>
     <None Include="DsVideos.xsc">
       <DependentUpon>DsVideos.xsd</DependentUpon>
     </None>

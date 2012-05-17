@@ -7,6 +7,7 @@ using Common;
 using Model;
 using System.Data.Common;
 using SQLite.DsVideosTableAdapters;
+using SQLite.dsDatabaseVersionTableAdapters;
 
 
 namespace SQLite
@@ -15,69 +16,18 @@ namespace SQLite
 
     public class MMDatabase
     {
-        //public static event VideosChanged OnVideosChanged;
-        //don't use videos changed -> all database operations could be run in different thread -> different trhead has no access to observable collection
-        //update lists in maincontroller in commandobjects
-
-        public static void CreateDatabase(string pathToDatabase)
-        {
-            Database.CreateDatabaseFile(pathToDatabase);
-            SQLiteConnection Conn = Database.GetConnection(pathToDatabase);
-
-
-
-            string SQLQuery = "CREATE TABLE Genres ( gen_id INTEGER PRIMARY KEY AUTOINCREMENT, gen_label TEXT NOT NULL UNIQUE )";
-            Database.ExecuteSQL(Conn, SQLQuery);
-
-             SQLQuery = "CREATE TABLE Franchises (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL)";
-            Database.ExecuteSQL(Conn, SQLQuery);
-
-            SQLQuery = "CREATE TABLE Series (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL)";
-            Database.ExecuteSQL(Conn, SQLQuery);
-            
-            SQLQuery = "CREATE TABLE Videos ( id INTEGER PRIMARY KEY AUTOINCREMENT, id_imdb VARCHAR(10), name VARCHAR(255) NOT NULL, release DATE, rating DOUBLE, rating_imdb DOUBLE, path VARCHAR(255), last_play_location INTEGER default 0, runtime TIME )";
-            Database.ExecuteSQL(Conn, SQLQuery);
-
-            SQLQuery = "CREATE TABLE Movies ( id INTEGER PRIMARY KEY, franchise_id INTEGER, id_tmdb INTEGER," +
-                                              " FOREIGN KEY(id) REFERENCES Videos(id)" +
-                                              " FOREIGN KEY(franchise_id) REFERENCES Franchises(id))";
-            Database.ExecuteSQL(Conn, SQLQuery);
-
-            SQLQuery = "CREATE TABLE Episodes ( id INTEGER PRIMARY KEY, serie_id INTEGER NOT NULL, season INTEGER NOT NULL, episode_number," +
-                                              " FOREIGN KEY(id) REFERENCES Videos(id)" +
-                                              " FOREIGN KEY(serie_id) REFERENCES Series(id))";
-            Database.ExecuteSQL(Conn, SQLQuery);
-
-            SQLQuery = "CREATE TABLE Videos_genres ( video_id INTEGER NOT NULL, genre_id INTEGER NOT NULL," +
-                                                    "UNIQUE (video_id, genre_id) ON CONFLICT ABORT, " +
-                                                    "FOREIGN KEY(video_id) REFERENCES Videos(id)," +
-                                                    "FOREIGN KEY(genre_id) REFERENCES Genres(gen_id))";
-            Database.ExecuteSQL(Conn, SQLQuery);
-
-            SQLQuery = "CREATE TABLE Database_version ( id INTEGER PRIMARY KEY AUTOINCREMENT, version INTEGER NOT NULL, timestamp DATETIME default current_timestamp , description VARCHAR(255) )";
-            Database.ExecuteSQL(Conn, SQLQuery);
-
-            AddDefaultValues_version001(Conn);
-        }
-
-        private static void AddDefaultValues_version001(SQLiteConnection Conn)
-        {
-            string SQLQuery = "INSERT INTO Database_version (version, description) values (1, 'table creation')";
-            Database.ExecuteSQL(Conn, SQLQuery);
-        }
-
-        public static void SelectAllVideos(IList<Video> videos)
+       public static void SelectAllVideos(IList<Video> videos)
         {
             try
             {
                 var DsVideos = new DsVideos();
                 FillDatasetWithAllVideos(DsVideos);
 
-                DsVideos.videos_genresDataTable VideosGenresDataTable = DsVideos.videos_genres;
-                DsVideos.genresDataTable GenresDataTable = DsVideos.genres;
+                DsVideos.Videos_genresDataTable VideosGenresDataTable = DsVideos.Videos_genres;
+                DsVideos.GenresDataTable GenresDataTable = DsVideos.Genres;
 
                 //Convert to ObservableCollection<Video>
-                foreach (DsVideos.videosRow Row in DsVideos.videos.Rows)
+                foreach (DsVideos.VideosRow Row in DsVideos.Videos.Rows)
                 {
                     var Video = new Video
                     {
@@ -99,14 +49,14 @@ namespace SQLite
                         Video.Genres.Add((string)GenreRow[GenresDataTable.gen_labelColumn]);
                     }
 
-                    var MoviesRow = DsVideos.movies.Rows.Find(Video.Id) as DsVideos.moviesRow;
+                    var MoviesRow = DsVideos.Movies.Rows.Find(Video.Id) as DsVideos.MoviesRow;
                     if (MoviesRow != null)
                     {
                         Video = Video as Movie;
                     }
                     else
                     {
-                        var EpisodeRow = DsVideos.episodes.Rows.Find(Video.Id) as DsVideos.episodesRow;
+                        var EpisodeRow = DsVideos.Episodes.Rows.Find(Video.Id) as DsVideos.EpisodesRow;
                         if (EpisodeRow != null)
                         {
                             Video = Video.ConvertVideo(VideoTypeEnum.Episode, Video);
@@ -144,17 +94,17 @@ namespace SQLite
 
             const int PERCENT_PREPARE_WORK = 5;
             int PrepareWork = videos.Count * PERCENT_PREPARE_WORK / 100;
-            
+
             //report as first 5%
             for (int I = 0; I < videos.Count; I++)
             {
-                if (insertDuplicates || DatasetVideos.videos.Select(DatasetVideos.videos.pathColumn.ColumnName + " = '" + videos[I].Path + "'").Length == 0)
+                if (insertDuplicates || DatasetVideos.Videos.Select(DatasetVideos.Videos.pathColumn.ColumnName + " = '" + videos[I].Path + "'").Length == 0)
                 {
 
-                    DsVideos.videosRow Row = DatasetVideos.videos.NewvideosRow();
+                    DsVideos.VideosRow Row = DatasetVideos.Videos.NewVideosRow();
                     Row.path = videos[I].Path;
                     Row.name = videos[I].Name;
-                    DatasetVideos.videos.AddvideosRow(Row);
+                    DatasetVideos.Videos.AddVideosRow(Row);
                     videos[I].Id = (int)Row.id;
 
                     if (videos[I] is Episode)
@@ -170,21 +120,21 @@ namespace SQLite
                     InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = videos.Count, ProgressNumber = I * PERCENT_PREPARE_WORK / 100 });//recalculate to 5%
             }
 
-            int NumberOfVideos = DatasetVideos.videos.Count;
-            int NumberOfEpisodes = DatasetVideos.episodes.Count;
+            int NumberOfVideos = DatasetVideos.Videos.Count;
+            int NumberOfEpisodes = DatasetVideos.Episodes.Count;
 
             //report as other 95% of progress
-            var VideosTableAdapter = new videosTableAdapter();
+            var VideosTableAdapter = new VideosTableAdapter();
             for (int I = 0; I < NumberOfVideos; I++)//TODO 001 ping pong compare times with bulk insert
             {
-                VideosTableAdapter.Update(DatasetVideos.videos[I]);
+                VideosTableAdapter.Update(DatasetVideos.Videos[I]);
                 if (InsertVideosProgress != null)
                     InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of videos and then to 95%
             }
-            var EpisodesTableAdapter = new episodesTableAdapter();
+            var EpisodesTableAdapter = new EpisodesTableAdapter();
             for (int I = 0; I < NumberOfEpisodes; I++)
             {
-                EpisodesTableAdapter.Update(DatasetVideos.episodes[I]);
+                EpisodesTableAdapter.Update(DatasetVideos.Episodes[I]);
                 if (InsertVideosProgress != null)
                     InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((NumberOfVideos + I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of series and then to 95%
             }
@@ -195,12 +145,12 @@ namespace SQLite
 
         private static void InsertEpisodeRow(Episode episode, DsVideos dsVideos)
         {
-            DsVideos.episodesRow EpisodesRow = dsVideos.episodes.NewepisodesRow();
+            DsVideos.EpisodesRow EpisodesRow = dsVideos.Episodes.NewEpisodesRow();
             EpisodesRow.id = episode.Id;
             EpisodesRow.serie_id = episode.SerieId;
             EpisodesRow.season = episode.Season;
             EpisodesRow.episode_number = episode.EpisodeNumber;
-            dsVideos.episodes.AddepisodesRow(EpisodesRow);
+            dsVideos.Episodes.AddEpisodesRow(EpisodesRow);
         }
 
         public static void EmptyVideoTables()
@@ -222,12 +172,12 @@ namespace SQLite
 
         private static void FillDatasetWithAllVideos(DsVideos datasetVideos)
         {
-            (new videosTableAdapter()).Fill(datasetVideos.videos);
-            (new episodesTableAdapter()).Fill(datasetVideos.episodes);
-            (new moviesTableAdapter()).Fill(datasetVideos.movies);
-            (new genresTableAdapter()).Fill(datasetVideos.genres);
-            (new videos_genresTableAdapter()).Fill(datasetVideos.videos_genres);
-            (new serieTableAdapter()).Fill(datasetVideos.serie);
+            (new VideosTableAdapter()).Fill(datasetVideos.Videos);
+            (new EpisodesTableAdapter()).Fill(datasetVideos.Episodes);
+            (new MoviesTableAdapter()).Fill(datasetVideos.Movies);
+            (new GenresTableAdapter()).Fill(datasetVideos.Genres);
+            (new Videos_genresTableAdapter()).Fill(datasetVideos.Videos_genres);
+            (new SeriesTableAdapter()).Fill(datasetVideos.Series);
 
             //Dictionary<String, String> tables = new Dictionary<String, String>();
             //tables.Add(datasetVideos.videos.TableName, "SELECT * FROM " + datasetVideos.videos_genres.TableName);
@@ -262,14 +212,14 @@ namespace SQLite
         public static void AddSerie(Serie serie)
         {
             DsVideos DsVideos = new DsVideos();
-            (new serieTableAdapter()).Fill(DsVideos.serie);
+            (new SeriesTableAdapter()).Fill(DsVideos.Series);
 
-            DsVideos.serieRow SerieRow = DsVideos.serie.NewserieRow();
+            DsVideos.SeriesRow SerieRow = DsVideos.Series.NewSeriesRow();
             SerieRow.name = serie.Name;
-            DsVideos.serie.AddserieRow(SerieRow);
+            DsVideos.Series.AddSeriesRow(SerieRow);
             serie.Id = (int)SerieRow.id;
 
-            (new serieTableAdapter()).Update(DsVideos.serie);
+            (new SeriesTableAdapter()).Update(DsVideos.Series);
         }
 
         #endregion

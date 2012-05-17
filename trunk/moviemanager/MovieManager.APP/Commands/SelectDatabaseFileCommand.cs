@@ -6,10 +6,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Windows.Input;
 using SQLite;
+using System.ComponentModel;
 
 namespace MovieManager.APP.Commands
 {
-    class CreateDatabaseCommand : ICommand
+    class SelectDatabaseFileCommand : ICommand, INotifyPropertyChanged
     {
         public bool CanExecute(object parameter)
         {
@@ -26,11 +27,26 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            SaveFileDialog Ofd = new SaveFileDialog();
+            OpenFileDialog Ofd = new OpenFileDialog() { CheckFileExists = false, Filter = "SQLite files (*.sqlite)|*.sqlite" };
             if (Ofd.ShowDialog() == DialogResult.OK)
             {
-                MMDatabase.CreateDatabase(Ofd.FileName);
+                _pathToFile = Ofd.FileName;
+                OnPropertyChanged("PathToFile");
             }
+        }
+
+        private string _pathToFile = "";
+        public string PathToFile
+        {
+            get { return _pathToFile; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string fieldName)
+        {
+            if( PropertyChanged !=null)
+                PropertyChanged(this,new PropertyChangedEventArgs(fieldName));
         }
     }
 }

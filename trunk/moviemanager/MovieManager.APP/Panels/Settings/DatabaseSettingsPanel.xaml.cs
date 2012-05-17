@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SQLite;
 using MovieManager.APP.Commands;
+using Model;
 
 namespace MovieManager.APP.Panels.Settings
 {
@@ -21,6 +22,10 @@ namespace MovieManager.APP.Panels.Settings
     /// </summary>
     public partial class DatabaseSettingsPanel
     {
+        private SelectDatabaseFileCommand _fileCommand = new SelectDatabaseFileCommand();
+        private DatabaseDetails _databaseDetails;
+        
+
         public DatabaseSettingsPanel()
         {
             InitializeComponent();
@@ -29,12 +34,24 @@ namespace MovieManager.APP.Panels.Settings
             //initialize base class variables;
             _panelName = "Database";
             _iconPath = "/MovieManager;component/Images/database_32.png";
+
+            _txtFilePath.DataContext = _fileCommand;
+            _databaseDetails = MMDatabaseCreation.GetDatabaseDetails();
+            _txtDatabaseVersion.DataContext = _databaseDetails;
+            _txtDatabaseRequiredVersion.DataContext = _databaseDetails;
+            _grdVersionDetails.DataContext = _databaseDetails;
+
         }
 
         private void _btnCreateDatabase_Click(object sender, RoutedEventArgs e)
         {
-            CreateDatabaseCommand Command =new CreateDatabaseCommand();
-            Command.Execute(null);
+            ConvertDatabaseCommand ConvertCommand = new ConvertDatabaseCommand();
+            ConvertCommand.Execute(null);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _fileCommand.Execute(null);
         }
     }
 }
