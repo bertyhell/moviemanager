@@ -1,0 +1,14 @@
+C:\MMProject\MovieManager.PLAYER\bin\Debug\MovieManager.PLAYER.dll
+C:\MMProject\MovieManager.PLAYER\bin\Debug\MovieManager.PLAYER.pdb
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.dll
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.pdb
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.MMPlayer.resources
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.csproj.GenerateResource.Cache
+C:\MMProject\MovieManager.PLAYER\bin\Debug\Model.dll
+C:\MMProject\MovieManager.PLAYER\bin\Debug\Model.pdb
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.csprojResolveAssemblyReference.cache
+C:\MMProject\MovieManager.PLAYER\obj\Debug\VlcPlayer.Overlay.resources
+C:\MMProject\MovieManager.PLAYER\bin\Debug\Common.dll
+C:\MMProject\MovieManager.PLAYER\bin\Debug\Common.pdb
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.Common.MediaPlayerControl.resources
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.Properties.Resources.resources
