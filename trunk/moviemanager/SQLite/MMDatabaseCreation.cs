@@ -11,6 +11,9 @@ namespace SQLite
     public class MMDatabaseCreation
     {
         private static readonly int CURRENT_DATABASE_VERSION = 1;
+        private static SQLiteConnection _conn;
+        private static string _pathToDatabaseFile;
+
 
         //public static event VideosChanged OnVideosChanged;
         //don't use videos changed -> all database operations could be run in different thread -> different trhead has no access to observable collection
@@ -18,15 +21,20 @@ namespace SQLite
 
         public static bool ConvertDatabase(string pathToDatabase)
         {
+            _conn = Database.GetConnection(pathToDatabase);
+            _pathToDatabaseFile = pathToDatabase;
+
             bool Retval = true;
-            DatabaseDetails details = GetDatabaseDetails();
+            DatabaseDetails details = null;
+            try { details = GetDatabaseDetails(); }
+            catch
+            {
+                details = new DatabaseDetails() { DatabaseVersion = 1, RequiredVersion = CURRENT_DATABASE_VERSION };
+                Retval &= CreateDatabase();
+            }
+
             if (details.DatabaseVersion == CURRENT_DATABASE_VERSION)
                 return Retval;
-
-            if (details.DatabaseVersion < 1)
-            {
-                Retval &= CreateDatabase(pathToDatabase);
-            }
 
             if (Retval && details.DatabaseVersion < 2)
             {
@@ -38,6 +46,7 @@ namespace SQLite
             }
 
             UpdateDatabaseDetails(details);
+            _conn = null;
 
             return Retval;
 
@@ -45,51 +54,48 @@ namespace SQLite
         }
 
 
-        public static bool CreateDatabase(string pathToDatabase)
+        public static bool CreateDatabase()
         {
             bool Retval = false;
 
             try
             {
-                Database.CreateDatabaseFile(pathToDatabase);
-                SQLiteConnection Conn = Database.GetConnection(pathToDatabase);
-
                 string SQLQuery =
                     "CREATE TABLE Genres ( gen_id INTEGER PRIMARY KEY AUTOINCREMENT, gen_label TEXT NOT NULL UNIQUE )";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
                 SQLQuery = "CREATE TABLE Franchises (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL)";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
                 SQLQuery = "CREATE TABLE Series (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL)";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
                 SQLQuery =
                     "CREATE TABLE Videos ( id INTEGER PRIMARY KEY AUTOINCREMENT, id_imdb VARCHAR(10), name VARCHAR(255) NOT NULL, release DATE, rating DOUBLE, rating_imdb DOUBLE, path VARCHAR(255), last_play_location INTEGER default 0, runtime TIME, PlayCount INTEGER DEFAULT 0)";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
                 SQLQuery = "CREATE TABLE Movies ( id INTEGER PRIMARY KEY, franchise_id INTEGER, id_tmdb INTEGER," +
                            " FOREIGN KEY(id) REFERENCES Videos(id)" +
                            " FOREIGN KEY(franchise_id) REFERENCES Franchises(id))";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
                 SQLQuery =
                     "CREATE TABLE Episodes ( id INTEGER PRIMARY KEY, serie_id INTEGER NOT NULL, season INTEGER NOT NULL, episode_number," +
                     " FOREIGN KEY(id) REFERENCES Videos(id)" +
                     " FOREIGN KEY(serie_id) REFERENCES Series(id))";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
                 SQLQuery = "CREATE TABLE Videos_genres ( video_id INTEGER NOT NULL, genre_id INTEGER NOT NULL," +
                            "UNIQUE (video_id, genre_id) ON CONFLICT ABORT, " +
                            "FOREIGN KEY(video_id) REFERENCES Videos(id)," +
                            "FOREIGN KEY(genre_id) REFERENCES Genres(gen_id))";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
                 SQLQuery =
                     "CREATE TABLE Database_version ( id INTEGER PRIMARY KEY AUTOINCREMENT, version INTEGER NOT NULL, timestamp DATETIME default current_timestamp , description VARCHAR(255) )";
-                Database.ExecuteSQL(Conn, SQLQuery);
+                Database.ExecuteSQL(_conn, SQLQuery);
 
-                AddDefaultValues_version001(Conn);
+                AddDefaultValues_version001(_conn);
 
                 Retval = true;
             }
@@ -99,10 +105,10 @@ namespace SQLite
             return Retval;
         }
 
-        private static void AddDefaultValues_version001(SQLiteConnection Conn)
+        private static void AddDefaultValues_version001(SQLiteConnection _conn)
         {
             string SQLQuery = "INSERT INTO Database_version (version, description) values (1, 'table creation')";
-            Database.ExecuteSQL(Conn, SQLQuery);
+            Database.ExecuteSQL(_conn, SQLQuery);
         }
 
         private static bool CreateTablesv002()
@@ -126,6 +132,8 @@ namespace SQLite
             dsDatabaseVersion DataSet = new dsDatabaseVersion();
 
             Database_versionTableAdapter DatabaseVersionTableAdapter = new Database_versionTableAdapter();
+            if (_conn != null)
+                DatabaseVersionTableAdapter.Connection = _conn;
             DatabaseVersionTableAdapter.Fill(DataSet.Database_version);
 
             int DatabaseVersion = 0;
@@ -185,7 +193,7 @@ namespace SQLite
                     RetVal = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
             return RetVal;

@@ -32,7 +32,6 @@ namespace SQLite
         public static void CreateDatabaseFile(string pathToDatabase)
         {
             SQLiteConnection.CreateFile(pathToDatabase);
-            //return GetConnection(pathToDatabase);
         }
 
         public static SQLiteConnection GetConnection()
