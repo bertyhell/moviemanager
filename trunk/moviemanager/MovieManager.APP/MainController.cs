@@ -27,10 +27,11 @@ namespace MovieManager.APP
             Videos.Clear();
             MMDatabase.SelectAllVideos(Videos);
             _videosView = CollectionViewSource.GetDefaultView(Videos);
+
+            //init log
+            //new LogInitializer().EnableLogger();
         }
-
-
-
+        
         private ICollectionView _videosView;
         public ICollectionView VideosView
         {
