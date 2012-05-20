@@ -60,6 +60,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\lib\Microsoft.Windows.Shell.dll</HintPath>
       <Private>True</Private>
@@ -108,6 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings.cs" />
     <Page Include="Common\CheckCombobox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -254,6 +258,7 @@
     <Compile Include="Common\CheckCombobox.xaml.cs">
       <DependentUpon>CheckCombobox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogInitializer.cs" />
     <Compile Include="Common\NumericBox.xaml.cs">
       <DependentUpon>NumericBox.xaml</DependentUpon>
     </Compile>
@@ -523,7 +528,8 @@
 xcopy /y $(SolutionDir)lib\libvlc.dll $(SolutionDir)bin\$(ConfigurationName)\lib
 xcopy /y $(SolutionDir)lib\libvlccore.dll $(SolutionDir)bin\$(ConfigurationName)\lib
 mkdir C:\ProgramData\MovieManager\Database
-xcopy $(SolutionDir)Database\moviemanager.sqlite C:\ProgramData\MovieManager\Database /e /d</PostBuildEvent>
+xcopy $(SolutionDir)Database\moviemanager.sqlite C:\ProgramData\MovieManager\Database /e /d
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

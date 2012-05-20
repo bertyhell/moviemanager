@@ -155,12 +155,12 @@ namespace SQLite
 
         public static void EmptyVideoTables()
         {
-            EmptyTable("videos");
-            EmptyTable("episodes");
-            EmptyTable("movies");
-            EmptyTable("franchises");
-            EmptyTable("serie");
-            EmptyTable("videos_genres");
+            EmptyTable("Videos");
+            EmptyTable("Episodes");
+            EmptyTable("Movies");
+            EmptyTable("Franchises");
+            EmptyTable("Series");
+            EmptyTable("Videos_genres");
         }
 
         public static void EmptyTable(String tableName)
