@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Media;
 using Model;
 
 namespace MovieManager.APP.Panels.Analyse
 {
-    class AnalyseVideo : INotifyPropertyChanged
+    public class AnalyseVideo : INotifyPropertyChanged
     {
         public AnalyseVideo()
         {
-            Candidates = new List<Video>();
+            Candidates = new ObservableCollection<Video>();
             SelectedCandidateIndex = -1;
             MatchPercentage = -1;
         }
@@ -21,6 +21,10 @@ namespace MovieManager.APP.Panels.Analyse
             set
             {
                 _video = value;
+                if (SearchString == null)
+                {
+                    SearchString = _video.Name;
+                }
                 PropChanged("Video");
             }
         }
@@ -47,6 +51,17 @@ namespace MovieManager.APP.Panels.Analyse
             }
         }
 
+        private string _searchString;
+        public string SearchString
+        {
+            get { return _searchString; }
+            set
+            {
+                _searchString = value;
+                PropChanged("SearchString");
+            }
+        }
+        
         private void PropChanged(string field)
         {
             if (PropertyChanged != null)

@@ -1,4 +1,6 @@
-﻿namespace MovieManager.APP.Panels.Analyse
+﻿using System.Windows.Controls;
+
+namespace MovieManager.APP.Panels.Analyse
 {
     /// <summary>
     /// Interaction logic for AnalysePanel.xaml
@@ -18,6 +20,13 @@
         private void BtnAnalyseClick(object sender, System.Windows.RoutedEventArgs e)
         {
             _controller.BeginAnalyse();
+        }
+
+        private void dgrVideoFileList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            AnalyseVideo AnalyseVideo = (AnalyseVideo) ((DataGrid) sender).SelectedItem;
+            SuggestionsWindow Window = new SuggestionsWindow(AnalyseVideo);
+            Window.ShowDialog();
         }
     }
 }
