@@ -12,9 +12,9 @@ namespace MovieManager.APP.Common
     {
         private static readonly ColorPercent[] PERCENT_COLORS = new[]
                                 {
-                                    new ColorPercent{Percent = 0, Red = 255, Green = 0, Blue = 0}, 
-                                    new ColorPercent{Percent = 0.5, Red = 255, Green = 255, Blue = 0}, 
-                                    new ColorPercent{Percent = 1, Red = 0, Green = 255, Blue = 0}
+                                    new ColorPercent{Percent = 0, Red = 240, Green = 128, Blue = 128}, 
+                                    new ColorPercent{Percent = 0.66, Red = 255, Green = 215, Blue = 0}, 
+                                    new ColorPercent{Percent = 1, Red = 144, Green = 238, Blue = 144}
                                 };
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
