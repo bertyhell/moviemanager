@@ -22,12 +22,6 @@ namespace MovieManager.APP.Commands
         public void Execute(object parameter)
         {
             MMDatabase.EmptyVideoTables();
-
-            for (int I = 0; I < MainController.Instance.Videos.Count; I++)
-            {
-                MainController.Instance.Videos.RemoveAt(0);
-            }
-            MainController.Instance.UpdateVideos();
         }
     }
 }

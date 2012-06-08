@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Model;
+using MovieManager.PLAYER.Common;
 using MovieManager.PLAYER.interop;
-using VlcPlayer;
 
 namespace MovieManager.PLAYER
 {
@@ -45,6 +45,11 @@ namespace MovieManager.PLAYER
         public VlcMediaPlayer Player
         {
             get { return _player; }
+        }
+
+        public MediaPlayerControl ControlBar
+        {
+            get { return _mediaPlayerControl; }
         }
 
         #endregion
@@ -91,22 +96,19 @@ namespace MovieManager.PLAYER
         {
             if (!_isFullScreen)
             {
-                _mediaPlayerControl.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
-                //_pnlVideo.Anchor = (AnchorStyles.Left | AnchorStyles.Top);
                 //save data
+                _previousIsMaximized = this.WindowState;
                 _previousFormLocation = Location;
                 _previousFormSize = Size;
                 _previousVideoPanelLocation = _pnlVideo.Location;
                 _previousVideoPanelSize = _pnlVideo.Size;
 
-                _previousIsMaximized = this.WindowState;
                 this.WindowState = FormWindowState.Normal;
                 FormBorderStyle = FormBorderStyle.None;
 
                 //change visual
                 Controls.Remove(_mediaPlayerControl);
-                _overlayForm.Controls.Add(_mediaPlayerControl);
-                _mediaPlayerControl.ToggleFullScreen();
+                _overlayForm.AddControlBar(_mediaPlayerControl);
                 _menubar.Visible = false;
                 Size = new Size((int)System.Windows.SystemParameters.PrimaryScreenWidth,
                                (int)System.Windows.SystemParameters.PrimaryScreenHeight);
@@ -119,11 +121,9 @@ namespace MovieManager.PLAYER
             }
             else
             {
-                _overlayForm.Controls.Remove(_mediaPlayerControl);
-                Controls.Add(_mediaPlayerControl);
+                _overlayForm.RemoveControlBar();
+                _pnlControlBarHolder.Controls.Add(_mediaPlayerControl);
 
-                _mediaPlayerControl.ToggleFullScreen();
-                this.WindowState = _previousIsMaximized;
                 FormBorderStyle = FormBorderStyle.Sizable;
                 Size = _previousFormSize;
                 Location = _previousFormLocation;
@@ -133,9 +133,10 @@ namespace MovieManager.PLAYER
                 _overlayForm.Location = CalculateOverlayLocation();
                 _overlayForm.Size = _pnlVideo.Size;
                 //_pnlVideo.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
+
+
+                this.WindowState = _previousIsMaximized;
                 _isFullScreen = false;
-                
-                _mediaPlayerControl.Anchor = (AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
             }
         }
 
@@ -172,7 +173,7 @@ namespace MovieManager.PLAYER
 
         private void VideoPanelResize(object sender, EventArgs e)
         {
-            _overlayForm.Size = _pnlVideo.Size;
+            _overlayForm.Redraw(_pnlVideo.Size);
         }
 
         private void FormKeyUp(object sender, KeyEventArgs e)
@@ -188,16 +189,64 @@ namespace MovieManager.PLAYER
             if (keys == Keys.F)
                 ToggleFullScreen();
             else if (keys == Keys.Space)
-                _player.Stop();
+                _player.Pause();
 
             //audio
             else if (keys == Keys.M)
                 _player.Mute();
+
+            //with control mask
+            else if (Control.ModifierKeys == Keys.Control)
+            {
+                //Audio
+                if (keys == Keys.Up)
+                {
+                    _player.RaiseVolume();
+                    _overlayForm.SetMessage("Volume " + _player.Volume);
+                }
+                else if (keys == Keys.Down)
+                {
+                    _player.LowerVolume();
+                    _mediaPlayerControl.RefreshVolumeTrackbarPostion();
+                    _overlayForm.SetMessage("Volume " + _player.Volume);
+                }
+            }
         }
 
         private void MMPlayer_FormClosing(object sender, FormClosingEventArgs e)
         {
             _player.Release();
         }
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+                _vlcInstance.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region menu items
+
+        private void alwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TopMost = !TopMost;
+            if (this.TopMost)
+                ((ToolStripMenuItem)sender).CheckState = CheckState.Unchecked;
+            else
+                ((ToolStripMenuItem)sender).CheckState = CheckState.Checked;
+
+        }
+
+        #endregion
     }
 }

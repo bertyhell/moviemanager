@@ -37,6 +37,41 @@ namespace Model
             _genres = new List<string>();
         }
 
+        public Video(Video brother)
+        {
+            _id = brother.Id;
+            _idImdb = brother.IdImdb;
+            _name = brother.Name;
+            _release = brother.Release;
+            _rating = brother.Rating;
+            _ratingImdb = brother.RatingImdb;
+            _genres = brother.Genres;
+            _path = brother.Path;
+            _lastPlayLocation = brother.LastPlayLocation;
+            _watchedToEnd = brother.WatchedToEnd;
+            _subs = brother.Subs;
+            _poster = brother.Poster;
+            _images = brother.Images;
+            _plot = brother.Plot;
+            _runtime = brother.Runtime; 
+        }
+
+        public void CopyAnalyseVideoInfo(Video brother, Boolean overwrite = true)
+        {
+            //TODO 040 default null values opslaan in centrale locatie
+            //TODO 080 also do this for movie and episode
+            IdImdb = string.IsNullOrEmpty(IdImdb) || overwrite ? brother.IdImdb : IdImdb;
+            Name = string.IsNullOrEmpty(Name) || overwrite ? brother.Name : Name;
+            Release = Release.Year == 1900 || overwrite ? brother.Release : Release;
+            RatingImdb = RatingImdb < 0 || overwrite ? brother.RatingImdb : RatingImdb;
+            Genres = Genres == null || Genres.Count == 0 || overwrite ? brother.Genres : Genres;
+            Subs = Genres == null || Subs.Count == 0 || overwrite ? brother.Subs : Subs;
+            Poster = Poster == null || overwrite ? brother.Poster : Poster;
+            Images = Images == null ||Images.Count == 0 || overwrite ? brother.Images : Images;
+            Plot = string.IsNullOrEmpty(Plot) || overwrite ? brother.Plot : Plot;
+            Runtime = Runtime == 0 || overwrite ? brother.Runtime : Runtime; 
+        }
+
         public virtual VideoTypeEnum VideoType
         {
             get { return VideoTypeEnum.Video; }

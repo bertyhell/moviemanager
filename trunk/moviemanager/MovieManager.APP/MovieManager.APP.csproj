@@ -111,6 +111,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\UpdateVideosCommand.cs" />
+    <Compile Include="Common\DefaultValues.cs" />
     <Compile Include="Settings.cs" />
     <Page Include="Common\CheckCombobox.xaml">
       <SubType>Designer</SubType>
@@ -275,7 +277,6 @@
     <Compile Include="Converters\StringListConverter.cs" />
     <Compile Include="Converters\TimestampConverter.cs" />
     <Compile Include="Panels\Analyse\AnalyseController.cs" />
-    <Compile Include="Panels\Analyse\AnalyseVideo.cs" />
     <Compile Include="Panels\Analyse\AnalyseWindow.xaml.cs">
       <DependentUpon>AnalyseWindow.xaml</DependentUpon>
     </Compile>

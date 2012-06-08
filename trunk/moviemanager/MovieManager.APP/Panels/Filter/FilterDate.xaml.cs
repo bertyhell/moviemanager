@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using Model;
+using MovieManager.APP.Common;
 
 namespace MovieManager.APP.Panels.Filter
 {
@@ -33,7 +34,7 @@ namespace MovieManager.APP.Panels.Filter
 
         public Filters FilterType { get; set; }
 
-        private DateTime _filterInputStart = DateTime.Today.Add(new TimeSpan(90, 0, 0, 0));
+        private DateTime _filterInputStart = DefaultValues.FILTER_START_DATE;
         public DateTime FilterInputStart
         {
             get { return _filterInputStart; }
@@ -46,7 +47,7 @@ namespace MovieManager.APP.Panels.Filter
 
         public Visibility DisplaySecondDate { get; set; }
 
-        private DateTime _filterInputEnd = DateTime.Today.Add(new TimeSpan(90, 0, 0, 0));
+        private DateTime _filterInputEnd = DefaultValues.FILTER_END_DATE;
         public DateTime FilterInputEnd
         {
             get { return _filterInputEnd; }

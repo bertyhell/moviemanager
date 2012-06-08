@@ -38,23 +38,6 @@ namespace MovieManager.PLAYER.Common
 
         #endregion
 
-        public void ToggleFullScreen()
-        {
-            if (!_form.IsFullScreen)
-            {
-                _previousLocation = Location;
-                _previousWidth = Width;
-                Location = new Point(0, (int)System.Windows.SystemParameters.PrimaryScreenHeight - 100);
-                Width = (int)System.Windows.SystemParameters.PrimaryScreenWidth;
-            }
-            else
-            {
-                Location = _previousLocation;
-                Width = _previousWidth;
-            }
-        }
-
-
         #region button event handlers
 
         private void BtnPauseClick(object sender, EventArgs e)
@@ -111,6 +94,13 @@ namespace MovieManager.PLAYER.Common
         }*/
 
 
+        public void RefreshVolumeTrackbarPostion()
+        {
+            _trbVolume.SuspendChangedEvent = true;
+            _trbVolume.Value = _form.Player.Volume;
+            _trbVolume.SuspendChangedEvent = false;
+        }
+
         #region event manager methods
         /*
         public void AttachToEvents()
@@ -160,7 +150,7 @@ namespace MovieManager.PLAYER.Common
 
         private void CustomTrackbar1ValueChanged(object sender, EventArgs e)
         {
-            //_form.Player.Volume = _trbVolume.Value;
+            _form.Player.Volume = _trbVolume.Value;
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using SQLite;
 
 namespace MovieManager.APP.Panels.Filter
@@ -9,7 +10,7 @@ namespace MovieManager.APP.Panels.Filter
         Name, Path, Genre, ReleaseDate, Rating
     }
 
-    public class FilterController
+    public class FilterController : INotifyPropertyChanged
     {
         public Filters SelectedFilter
         {
@@ -33,7 +34,13 @@ namespace MovieManager.APP.Panels.Filter
                         AppliedFilters.Add(new FilterRating("Rating", "Rating"));
                         break;
                 }
+                PropChanged("SelectedFilterIndex");
             }
+        }
+
+        public int SelectedFilterIndex
+        {
+            get { return -1; }
         }
 
         private ObservableCollection<FilterControl> _appliedFilters= new ObservableCollection<FilterControl>();
@@ -41,6 +48,16 @@ namespace MovieManager.APP.Panels.Filter
         {
             get { return _appliedFilters; }
             set { _appliedFilters = value; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void PropChanged(string field)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(field));
+            }
         }
     }
 }

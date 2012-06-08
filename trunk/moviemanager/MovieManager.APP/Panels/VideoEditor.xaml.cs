@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using Model;
+using MovieManager.APP.Commands;
 
 namespace MovieManager.APP.Panels
 {
@@ -50,6 +51,17 @@ namespace MovieManager.APP.Panels
                 LocalVideos.RemoveAt(Index);
                 LocalVideos.Insert(Index,Video);
             }
+        }
+
+        /// <summary>
+        /// Save button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateVideosCommand UpdateVideosCommand = new UpdateVideosCommand(this.Video);
+            UpdateVideosCommand.Execute(new object());
         }
     }
 }

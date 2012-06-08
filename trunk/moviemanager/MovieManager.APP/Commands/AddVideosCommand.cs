@@ -87,7 +87,6 @@ namespace MovieManager.APP.Commands
         void BGWInsertVideos_OnInsertVideosCompleted(object sender, EventArgs e)
         {
             _progressWindow.Close();
-            MainController.Instance.UpdateVideos();
         }
 
         private string _message;

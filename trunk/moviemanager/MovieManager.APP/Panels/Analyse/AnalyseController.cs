@@ -144,5 +144,18 @@ namespace MovieManager.APP.Panels.Analyse
 
 
         //TODO 050 make analyse function multithreaded -> 1 thread for every movie lookup
+        public void SaveVideos()
+        {
+            var Videos = new List<Video>();
+            foreach (var AnalyseVideo in AnalyseVideos)
+            {
+                if (AnalyseVideo.SelectedCandidate != null)
+                {
+                    AnalyseVideo.Video.CopyAnalyseVideoInfo(AnalyseVideo.SelectedCandidate);
+                    Videos.Add(AnalyseVideo.Video);
+                }
+            }
+            MMDatabase.UpdateVideos(Videos);
+        }
     }
 }

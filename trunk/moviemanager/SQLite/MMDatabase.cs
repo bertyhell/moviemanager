@@ -12,11 +12,9 @@ using SQLite.dsDatabaseVersionTableAdapters;
 
 namespace SQLite
 {
-    public delegate void VideosChanged();
-
     public class MMDatabase
     {
-       public static void SelectAllVideos(IList<Video> videos)
+        public static void SelectAllVideos(IList<Video> videos)
         {
             try
             {
@@ -52,7 +50,7 @@ namespace SQLite
                     var MoviesRow = DsVideos.Movies.Rows.Find(Video.Id) as DsVideos.MoviesRow;
                     if (MoviesRow != null)
                     {
-                        Video = Video as Movie;
+                        Video = Video.ConvertVideo(VideoTypeEnum.Movie, Video);
                     }
                     else
                     {
@@ -140,6 +138,8 @@ namespace SQLite
             }
 
             //return the duplicates that are not inserted in the table
+
+            OnVideosChanged();
             return Duplicates;
         }
 
@@ -161,9 +161,10 @@ namespace SQLite
             EmptyTable("Franchises");
             EmptyTable("Series");
             EmptyTable("Videos_genres");
+            OnVideosChanged();
         }
 
-        public static void EmptyTable(String tableName)
+        private static void EmptyTable(String tableName)
         {
             Database.ExecuteSQL("DELETE FROM " + tableName);
         }
@@ -191,9 +192,206 @@ namespace SQLite
 
         #endregion
 
-        public static void InsertVideoHDD(Video video)
+        /// <summary>
+        /// Update a List of Videos, Episodes and Movies
+        /// </summary>
+        /// <param name="videos"></param>
+        /// <returns></returns>
+        public static bool UpdateVideos(List<Video> videos)
         {
-            throw new NotImplementedException();
+            bool RetVal = true;
+
+            try
+            {
+                var DatasetVideos = new DsVideos();
+                FillDatasetWithAllVideos(DatasetVideos);
+
+                foreach (Video Video in videos)
+                {
+                    RetVal &= UpdateVideo(Video, DatasetVideos);
+                }
+            }
+            catch (Exception ex)
+            {
+                RetVal = false;
+            }
+
+            OnVideosChanged();
+            return RetVal;
+        }
+
+        /// <summary>
+        /// Updates one Video, Episode, Movie
+        /// </summary>
+        /// <param name="video"></param>
+        /// <returns></returns>
+        public static bool UpdateVideo(Video video)
+        {
+            bool RetVal = true;
+
+            try
+            {
+                var DatasetVideos = new DsVideos();
+                FillDatasetWithAllVideos(DatasetVideos);
+                RetVal &= UpdateVideo(video, DatasetVideos);
+            }
+            catch (Exception ex)
+            {
+                RetVal = false;
+            }
+
+            return RetVal;
+        }
+
+        /// <summary>
+        /// Updates one Video, Episode, Movie
+        /// </summary>
+        /// <param name="video"></param>
+        /// <param name="datasetVideos"></param>
+        /// <returns></returns>
+        public static bool UpdateVideo(Video video, DsVideos datasetVideos)
+        {
+            if (video == null || datasetVideos == null)
+                return false;
+
+            bool RetVal = true;
+
+            try
+            {
+                //check if row exists
+                DsVideos.VideosRow VideosRow = null;
+                if (video.Id > 0)
+                {
+                    VideosRow = datasetVideos.Videos.FindByid(video.Id);
+                }
+
+                bool Add = false;
+                if (VideosRow == null)
+                {
+                    //if not exist --> new row
+                    VideosRow = datasetVideos.Videos.NewVideosRow();
+                    Add = true;
+                }
+
+                //set values
+                VideosRow.id = video.Id;
+                VideosRow.id_imdb = video.IdImdb;
+                VideosRow.name = video.Name;
+                VideosRow.release = video.Release;
+                VideosRow.rating = video.Rating;
+                VideosRow.rating_imdb = video.RatingImdb;
+                VideosRow.path = video.Path;
+                VideosRow.last_play_location = (long)video.LastPlayLocation;
+
+                if (Add)
+                    datasetVideos.Videos.AddVideosRow(VideosRow);
+
+                RetVal &= ((new VideosTableAdapter()).Update(datasetVideos) > 0);
+
+                //update movie or episode
+                if (video.VideoType == VideoTypeEnum.Movie)
+                    RetVal &= UpdateMovie((Movie)video, datasetVideos);
+                else if (video.VideoType == VideoTypeEnum.Episode)
+                    RetVal &= UpdateEpisode((Episode)video, datasetVideos);
+
+            }
+            catch (Exception ex)
+            {
+                RetVal = false;
+            }
+
+            return RetVal;
+        }
+
+        private static bool UpdateEpisode(Episode episode, DsVideos datasetVideos)
+        {
+            bool RetVal = true;
+
+            try
+            {
+                //remove movie record if there is one
+                DsVideos.MoviesRow MoviesRow = datasetVideos.Movies.FindByid(episode.Id);
+                if (MoviesRow != null)
+                {
+                    datasetVideos.Movies.RemoveMoviesRow(MoviesRow);
+                    RetVal &= ((new MoviesTableAdapter()).Update(datasetVideos) > 0);
+                }
+
+                //add episode information
+                DsVideos.EpisodesRow EpisodesRow = null;
+
+                if (episode.Id > 0)
+                    EpisodesRow = datasetVideos.Episodes.FindByid(episode.Id);
+
+                bool Add = false;
+                if (EpisodesRow == null)
+                {
+                    EpisodesRow = datasetVideos.Episodes.NewEpisodesRow();
+                    Add = true;
+                }
+
+                EpisodesRow.id = episode.Id;
+                EpisodesRow.serie_id = episode.SerieId;
+                EpisodesRow.season = episode.Season;
+                EpisodesRow.episode_number = episode.EpisodeNumber;
+
+                if (Add)
+                    datasetVideos.Episodes.AddEpisodesRow(EpisodesRow);
+
+                //update
+                RetVal &= ((new EpisodesTableAdapter()).Update(datasetVideos) > 0);
+            }
+            catch (Exception ex)
+            {
+                RetVal = false;
+            }
+
+            return RetVal;
+        }
+
+        private static bool UpdateMovie(Movie movie, DsVideos datasetVideos)
+        {
+            bool RetVal = true;
+
+            try
+            {
+                //remove movie record if there is one
+                DsVideos.EpisodesRow EpisodeRow = datasetVideos.Episodes.FindByid(movie.Id);
+                if (EpisodeRow != null)
+                {
+                    datasetVideos.Episodes.RemoveEpisodesRow(EpisodeRow);
+                    RetVal &= ((new EpisodesTableAdapter()).Update(datasetVideos) > 0);
+                }
+
+                //add episode information
+                DsVideos.MoviesRow MoviesRow = null;
+
+                if (movie.Id > 0)
+                    MoviesRow = datasetVideos.Movies.FindByid(movie.Id);
+
+                bool Add = false;
+                if (MoviesRow == null)
+                {
+                    MoviesRow = datasetVideos.Movies.NewMoviesRow();
+                    Add = true;
+                }
+
+                MoviesRow.id = movie.Id;
+                MoviesRow.franchise_id = movie.FranchiseID;
+                MoviesRow.id_tmdb = movie.IdTmdb;
+
+                if (Add)
+                    datasetVideos.Movies.AddMoviesRow(MoviesRow);
+
+                //update
+                RetVal &= ((new MoviesTableAdapter()).Update(datasetVideos) > 0);
+            }
+            catch (Exception ex)
+            {
+                RetVal = false;
+            }
+
+            return RetVal;
         }
 
         public static List<String> GetMovieGenres()
@@ -223,6 +421,17 @@ namespace SQLite
         }
 
         #endregion
+
+
+        public delegate void VideosChangedDel();
+
+        public static event VideosChangedDel VideosChanged;
+
+        private static void OnVideosChanged()
+        {
+            if (VideosChanged != null)
+                VideosChanged();
+        }
     }
 
 }

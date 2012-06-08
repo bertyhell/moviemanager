@@ -28,6 +28,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="10" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -57,5 +59,7 @@
         <DatePicker Grid.Row="10" Grid.Column="3" DisplayDate="{Binding Release}" />
 
         <Panels:SubtitleEditor Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="4" HorizontalAlignment="Left" x:Name="subtitleEditor" VerticalAlignment="Top" Video="{Binding Path=DataContext, RelativeSource={RelativeSource Self},Mode=TwoWay}" Height="126" />
+    
+        <Button Content="save" Grid.Row="14" Grid.Column="3" Click="Button_Click" />
     </Grid>
 </Window>

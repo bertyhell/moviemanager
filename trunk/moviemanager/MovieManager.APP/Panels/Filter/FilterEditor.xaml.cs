@@ -25,6 +25,12 @@ namespace MovieManager.APP.Panels.Filter
         private void ImageMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             _controller.AppliedFilters.Remove((FilterControl) lstFilters.SelectedItem);
+            MainController.Instance.Refresh();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            cbbFilters.SelectedIndex = -1;
         }
     }
 }

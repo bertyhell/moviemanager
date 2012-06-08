@@ -466,7 +466,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="release" msprop:nullValue="1990-01-01T00:00:00+01:00" msprop:Generator_ColumnPropNameInRow="release" msprop:Generator_ColumnVarNameInTable="columnrelease" msprop:Generator_ColumnPropNameInTable="releaseColumn" msprop:Generator_UserColumnName="release" type="xs:dateTime" default="1990-01-01T00:00:00+01:00" minOccurs="0" />
+              <xs:element name="release" msprop:nullValue="1900-01-01T00:00:00+01:00" msprop:Generator_ColumnPropNameInRow="release" msprop:Generator_ColumnVarNameInTable="columnrelease" msprop:Generator_ColumnPropNameInTable="releaseColumn" msprop:Generator_UserColumnName="release" type="xs:dateTime" default="1900-01-01T00:00:00+01:00" minOccurs="0" />
               <xs:element name="rating" msprop:nullValue="-1" msprop:Generator_ColumnPropNameInRow="rating" msprop:Generator_ColumnVarNameInTable="columnrating" msprop:Generator_ColumnPropNameInTable="ratingColumn" msprop:Generator_UserColumnName="rating" type="xs:double" minOccurs="0" />
               <xs:element name="rating_imdb" msprop:nullValue="-1" msprop:Generator_ColumnPropNameInRow="rating_imdb" msprop:Generator_ColumnVarNameInTable="columnrating_imdb" msprop:Generator_ColumnPropNameInTable="rating_imdbColumn" msprop:Generator_UserColumnName="rating_imdb" type="xs:double" minOccurs="0" />
               <xs:element name="path" msprop:Generator_ColumnVarNameInTable="columnpath" msprop:Generator_ColumnPropNameInRow="path" msprop:Generator_ColumnPropNameInTable="pathColumn" msprop:Generator_UserColumnName="path" minOccurs="0">
