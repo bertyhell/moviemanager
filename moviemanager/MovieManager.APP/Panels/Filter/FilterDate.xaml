@@ -20,8 +20,8 @@
         </Grid.RowDefinitions>
         
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Text="{Binding FilterType, StringFormat={}{0}: }" VerticalAlignment="Center"  Name="txtLabel" />
-        <ComboBox HorizontalAlignment="Left" Margin="2,6,0,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="0" ItemsSource="{Binding TextOperationsLabels}" SelectionChanged="CbbOperationSelectionChanged" />
-        <DatePicker Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" DisplayDate="{Binding FilterInputStart}"/>
-        <DatePicker Grid.Row="1" Grid.Column="3" DisplayDate="{Binding FilterInputEnd}" Visibility="{Binding DisplaySecondDate}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="2,6,0,6" Name="cbbOperation" VerticalAlignment="Center" Grid.Column="1" Width="80" SelectedIndex="1" ItemsSource="{Binding TextOperationsLabels}" SelectionChanged="CbbOperationSelectionChanged" />
+        <DatePicker Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" DisplayDate="{Binding FilterInputStart, UpdateSourceTrigger=PropertyChanged}"/>
+        <DatePicker Grid.Row="1" Grid.Column="3" DisplayDate="{Binding FilterInputEnd}" Visibility="{Binding DisplaySecondDate, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </local:FilterControl>

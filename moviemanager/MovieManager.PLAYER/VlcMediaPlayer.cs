@@ -97,6 +97,16 @@ namespace MovieManager.PLAYER
             set { VlcLibInterop.SetAudioVolume(this, value); }
         }
 
+        public void RaiseVolume()
+        {
+            Volume = (Volume < 175 ? Volume + 25 : 200);
+        }
+
+        public void LowerVolume()
+        {
+            Volume = (Volume > 25 ? Volume - 25 : 0);
+        }
+
         #endregion
 
         #region events

@@ -20,7 +20,7 @@ namespace MovieManager.APP.Panels.Analyse
             AnalyseVideo = analyseVideo;
             InitializeComponent();
             this.DataContext = this;
-            progressbar.DataContext = this;
+            //progressbar.DataContext = this;
         }
 
         private AnalyseVideo _analyseVideo;
@@ -31,17 +31,6 @@ namespace MovieManager.APP.Panels.Analyse
             {
                 _analyseVideo = value;
                 PropChanged("AnalyseVideo");
-            }
-        }
-
-        private Video _selectedCandidate;
-        public Video SelectedCandidate
-        {
-            get { return _selectedCandidate; }
-            set
-            {
-                _selectedCandidate = value;
-                PropChanged("SelectedCandidate");
             }
         }
 
@@ -59,6 +48,18 @@ namespace MovieManager.APP.Panels.Analyse
             AnalyseVideo.SearchString = txtSearchString.Text;
             var AnalyseWorker = new AnalyseWorker(AnalyseVideo);
             AnalyseWorker.RunWorkerAsync();
+        }
+
+        
+        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        {
+            AnalyseVideo.SelectedCandidateIndex = -1;
+            this.Close();
+        }
+
+        private void BtnOkClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

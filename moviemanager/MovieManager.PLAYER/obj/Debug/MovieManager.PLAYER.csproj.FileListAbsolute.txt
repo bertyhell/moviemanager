@@ -8,7 +8,7 @@ C:\MMproject\MovieManager.PLAYER\bin\Debug\Model.pdb
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.Common.MediaPlayerControl.resources
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.Properties.Resources.resources
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.MMPlayer.resources
-C:\MMproject\MovieManager.PLAYER\obj\Debug\VlcPlayer.Overlay.resources
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.csproj.GenerateResource.Cache
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.dll
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.pdb
+C:\MMProject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.Overlay.resources

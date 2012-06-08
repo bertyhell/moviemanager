@@ -2252,7 +2252,7 @@ namespace SQLite {
             
             private global::System.Data.DataColumn columnruntime;
             
-            private static System.DateTime columnrelease_defaultValue = global::System.DateTime.Parse("1990-01-01T00:00:00");
+            private static System.DateTime columnrelease_defaultValue = global::System.DateTime.Parse("1900-01-01T00:00:00");
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -3019,7 +3019,7 @@ namespace SQLite {
             
             private VideosDataTable tableVideos;
             
-            private static System.DateTime release_nullValue = global::System.DateTime.Parse("1990-01-01T00:00:00");
+            private static System.DateTime release_nullValue = global::System.DateTime.Parse("1900-01-01T00:00:00");
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]

@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using Model;
+using SQLite;
 
 namespace MovieManager.APP.Panels.Analyse
 {
@@ -27,6 +29,12 @@ namespace MovieManager.APP.Panels.Analyse
             AnalyseVideo AnalyseVideo = (AnalyseVideo) ((DataGrid) sender).SelectedItem;
             SuggestionsWindow Window = new SuggestionsWindow(AnalyseVideo);
             Window.ShowDialog();
+        }
+
+        private void BtnSaveClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            _controller.SaveVideos();
+            this.Close();
         }
     }
 }

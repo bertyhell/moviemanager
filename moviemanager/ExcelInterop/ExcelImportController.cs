@@ -176,7 +176,6 @@ namespace ExcelInterop
                             //video.FPRestAantal = (categoryIndex == -1 ? 0 : data[i][stockRestAantalIndex]);
                             //video.FPFuifId = _fuifId;
 
-                            MMDatabase.InsertVideoHDD(Video);
                             //TODO 020 ask to update items when first duplicate is encountered
                         }
                         catch (FormatException E)

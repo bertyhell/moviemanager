@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Model;
 
-namespace MovieManager.APP.Panels.Analyse
+namespace Model
 {
     public class AnalyseVideo : INotifyPropertyChanged
     {
@@ -48,6 +47,21 @@ namespace MovieManager.APP.Panels.Analyse
             {
                 _selectedCandidateIndex = value;
                 PropChanged("SelectedCandidateIndex");
+                PropChanged("SelectedCandidate");
+            }
+        }
+
+        public Video SelectedCandidate
+        {
+            get
+            {
+                if(SelectedCandidateIndex == -1)
+                {
+                    return null;
+                }else
+                {
+                    return Candidates[SelectedCandidateIndex];
+                }
             }
         }
 
@@ -61,7 +75,7 @@ namespace MovieManager.APP.Panels.Analyse
                 PropChanged("SearchString");
             }
         }
-        
+
         private void PropChanged(string field)
         {
             if (PropertyChanged != null)

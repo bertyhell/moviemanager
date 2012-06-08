@@ -28,8 +28,15 @@ namespace MovieManager.APP
             MMDatabase.SelectAllVideos(Videos);
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
+            MMDatabase.VideosChanged += new MMDatabase.VideosChangedDel(MMDatabase_VideosChanged);
+
             //init log
             //new LogInitializer().EnableLogger();
+        }
+
+        void MMDatabase_VideosChanged()
+        {
+            ReloadVideos();
         }
         
         private ICollectionView _videosView;
@@ -67,17 +74,22 @@ namespace MovieManager.APP
             }
         }
 
-        public void UpdateVideos()
+        public void ReloadVideos()
         {
             Videos.Clear();
             MMDatabase.SelectAllVideos(Videos);
         }
 
-        public void PropChanged(String title)
+        public void Refresh()
+        {
+            VideosView.Refresh();
+        }
+
+        public void PropChanged(String field)
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(title));
+                PropertyChanged(this, new PropertyChangedEventArgs(field));
             }
         }
 
