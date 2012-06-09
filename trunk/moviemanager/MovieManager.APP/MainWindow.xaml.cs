@@ -5,6 +5,7 @@ using Model;
 using MovieManager.APP.Panels;
 using System.Windows.Data;
 using MovieManager.PLAYER;
+using log4net.Core;
 
 namespace MovieManager.APP
 {
@@ -23,6 +24,11 @@ namespace MovieManager.APP
         public MainWindow()
         {
             InitializeComponent();
+            GlobalLogger.Instance.MovieManagerLogger.Info("Program Started");
+            //GlobalLogger.Instance.LogLevel = Level.Error;
+
+            //GlobalLogger.Instance.MovieManagerLogger.Info("write info");
+            //GlobalLogger.Instance.MovieManagerLogger.Error("write error");
 
             _controller = MainController.Instance;
 
