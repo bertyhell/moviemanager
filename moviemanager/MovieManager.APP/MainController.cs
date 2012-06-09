@@ -31,7 +31,7 @@ namespace MovieManager.APP
             MMDatabase.VideosChanged += new MMDatabase.VideosChangedDel(MMDatabase_VideosChanged);
 
             //init log
-            //new LogInitializer().EnableLogger();
+            //new GlobalLogger().EnableLogger();
         }
 
         void MMDatabase_VideosChanged()

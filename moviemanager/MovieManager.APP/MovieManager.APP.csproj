@@ -260,7 +260,7 @@
     <Compile Include="Common\CheckCombobox.xaml.cs">
       <DependentUpon>CheckCombobox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LogInitializer.cs" />
+    <Compile Include="GlobalLogger.cs" />
     <Compile Include="Common\NumericBox.xaml.cs">
       <DependentUpon>NumericBox.xaml</DependentUpon>
     </Compile>
