@@ -529,7 +529,7 @@
 xcopy /y $(SolutionDir)lib\libvlc.dll $(SolutionDir)bin\$(ConfigurationName)\lib
 xcopy /y $(SolutionDir)lib\libvlccore.dll $(SolutionDir)bin\$(ConfigurationName)\lib
 mkdir C:\ProgramData\MovieManager\Database
-xcopy $(SolutionDir)Database\moviemanager.sqlite C:\ProgramData\MovieManager\Database /e /d
+xcopy $(SolutionDir)Database\moviemanager.sqlite C:\ProgramData\MovieManager\Database /e /d /n
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

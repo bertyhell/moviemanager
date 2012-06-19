@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace MovieManager.APP.Panels.Settings
 {
@@ -30,7 +31,7 @@ namespace MovieManager.APP.Panels.Settings
                 SelectedMagnitudeIndex++;
             }
             cbbMagnitude.SelectedIndex = SelectedMagnitudeIndex;
-            txtVideoFileSize.Text = Bytes.ToString();
+            txtVideoFileSize.Text = Bytes.ToString(CultureInfo.InvariantCulture);
         }
 
         public override bool SaveSettings()

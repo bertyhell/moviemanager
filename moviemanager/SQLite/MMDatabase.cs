@@ -14,6 +14,15 @@ namespace SQLite
 {
     public class MMDatabase
     {
+        private static string _connectionString;
+
+        public static void Init(String connectionString)
+        {
+            Database.Init(connectionString);
+            MMDatabaseCreation.Init(connectionString);
+            _connectionString = connectionString;
+        }
+
         public static void SelectAllVideos(IList<Video> videos)
         {
             try
@@ -64,11 +73,6 @@ namespace SQLite
                 }
             }
             catch (Exception E) { Console.WriteLine("Exception in GetVideos in MMDatabase: " + E.Message); }
-        }
-
-        public static DbDataReader GetVideosDataReader()
-        {
-            return Database.GetReader("select * from videos");
         }
 
         public static IList<Video> InsertVideosHDD(IList<Video> videos)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Forms;
-using Common;
 using Model;
 
 namespace MovieManager.APP.Panels.Analyse
@@ -19,7 +16,7 @@ namespace MovieManager.APP.Panels.Analyse
         {
             AnalyseVideo = analyseVideo;
             InitializeComponent();
-            this.DataContext = this;
+            DataContext = this;
             //progressbar.DataContext = this;
         }
 

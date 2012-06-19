@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using SQLite;
 
@@ -25,7 +22,10 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            MMDatabaseCreation.ConvertDatabase(_path);
+            string DatabasePath = Properties.Settings.Default.DatabasePath;
+            string ConnectionString = Properties.Settings.Default.ConnectionString.ToString().Replace("{path}", DatabasePath);
+
+            MMDatabaseCreation.ConvertDatabase(ConnectionString);
         }
     }
 }
