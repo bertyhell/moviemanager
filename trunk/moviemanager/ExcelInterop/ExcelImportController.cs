@@ -42,15 +42,15 @@ namespace ExcelInterop
             }
         }
 
-        private string _selectedWorksheet;
-        public string SelectedWorksheet
+        private int _selectedWorksheetIndex;
+        public int SelectedWorksheetIndex
         {
-            get { return _selectedWorksheet; }
+            get { return _selectedWorksheetIndex; }
             set
             {
-                _selectedWorksheet = value;
+                _selectedWorksheetIndex = value;
                 //update mapping
-                ExcelColumns = Excel.GetHeaders(FilePath, _selectedWorksheet);
+                ExcelColumns = Excel.GetHeaders(FilePath, _selectedWorksheetIndex);
                 ExcelColumns.Insert(0, "Default");
                 _mappingItems.Clear();
                 if (ExcelColumns.Count() != 0)
@@ -89,6 +89,8 @@ namespace ExcelInterop
         }
 
         private ObservableCollection<ExcelMappingItem> _mappingItems;
+
+
         public ObservableCollection<ExcelMappingItem> MappingItems
         {
             get { return _mappingItems; }
@@ -131,7 +133,7 @@ namespace ExcelInterop
                 if (MappingItems.All(item => !item.MMColumn.EndsWith("*") || item.ExcelColumn != "Auto"))
                 {
                     List<string> ExcelHeaders = (from MappingItem in MappingItems where MappingItem.ExcelColumn != "Auto" select MappingItem.ExcelColumn).ToList();
-                    List<List<string>> Data = Excel.Excel2Data(FilePath, SelectedWorksheet, ExcelHeaders);
+                    List<List<string>> Data = Excel.Excel2Data(FilePath, SelectedWorksheetIndex, ExcelHeaders);
 
                     string ErrorMessage = "";
 

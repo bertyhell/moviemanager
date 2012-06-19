@@ -12,21 +12,26 @@ namespace SQLite
         //private const String ConnString = @"data source='C:\ProgramData\MovieManager\Database\moviemanager.sqlite'";
         private static SQLiteConnection _conn;
 
+        public static void Init(string connectionString)
+        {
+            _conn = GetConnection(connectionString);
+        }
+
         public static void ExecuteSQL(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
             SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
             Cmd.ExecuteNonQuery();
         }
 
-        public static void ExecuteSQL(SQLiteConnection conn, string sql)
+        public static void ExecuteSQL(string sql)
         {
-            SQLiteCommand Cmd = GetCommand(conn, sql);
+            SQLiteCommand Cmd = GetCommand(_conn, sql);
             Cmd.ExecuteNonQuery();
         }
 
-        public static void ExecuteSQL(string sql, params SQLiteParameter[] @params)
+        public static void ExecuteSQL(string connectionString, string sql, params SQLiteParameter[] @params)
         {
-            ExecuteSQL(GetConnection(), null, sql, @params);
+            ExecuteSQL(GetConnection(connectionString), null, sql, @params);
         }
 
         public static void CreateDatabaseFile(string pathToDatabase)
@@ -34,22 +39,11 @@ namespace SQLite
             SQLiteConnection.CreateFile(pathToDatabase);
         }
 
-        public static SQLiteConnection GetConnection()
+        public static SQLiteConnection GetConnection(string connectionString)
         {
             if (_conn == null)
             {
-                _conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["moviemanagerConnectionString"].ConnectionString);
-                _conn.Open();
-            }
-            return _conn;
-        }
-
-        public static SQLiteConnection GetConnection(string path)
-        {
-
-            if (_conn == null)
-            {
-                _conn = new SQLiteConnection("data source=" + path);
+                _conn = new SQLiteConnection(connectionString);
                 _conn.Open();
             }
             return _conn;
@@ -80,14 +74,14 @@ namespace SQLite
             return new SQLiteCommand(sql) { Connection = conn };
         }
 
-        public static SQLiteCommand GetCommand(string sql, params SQLiteParameter[] @params)
-        {
-            return GetCommand(GetConnection(), null, sql, @params);
-        }
+        //public static SQLiteCommand GetCommand(string connectionString, string sql, params SQLiteParameter[] @params)
+        //{
+        //    return GetCommand(GetConnection(connectionString), null, sql, @params);
+        //}
 
         public static SQLiteDataReader GetReader(string sql, params SQLiteParameter[] @params)
         {
-            return GetReader(GetConnection(), null, sql, @params);
+            return GetReader(_conn, null, sql, @params);
         }
 
         public static SQLiteDataReader GetReader(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
@@ -98,15 +92,15 @@ namespace SQLite
 
         public static SQLiteDataAdapter GetAdapter(string sql, params SQLiteParameter[] @params)
         {
-            return GetAdapter(GetConnection(), null, sql, @params);
+            return GetAdapter(null, sql, @params);
         }
 
-        public static SQLiteDataAdapter GetAdapter(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
+        public static SQLiteDataAdapter GetAdapter(SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
             SQLiteDataAdapter Adapter = null;
             try
             {
-                SQLiteCommand Cmd = GetCommand(conn, transaction, sql, @params);
+                SQLiteCommand Cmd = GetCommand(_conn, transaction, sql, @params);
                 Adapter = new SQLiteDataAdapter(Cmd);
             }
             catch (Exception E)
@@ -139,8 +133,7 @@ namespace SQLite
 
         public static void UpdateDatabase(DsVideos dataset)
         {
-
+            throw new Exception("not yet implemented (database.cs: updateDatabase)");
         }
-
     }
 }

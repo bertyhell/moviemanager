@@ -11,8 +11,14 @@
     <Setting Name="MinimumVideoFileSize" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">200000000</Value>
     </Setting>
-    <Setting Name="connectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="DatabasePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ProgramData\MovieManager\Database\moviemanager.sqlite</Value>
     </Setting>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">data source={path}</Value>
+    </Setting>
+    <!--<Setting Name="connectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>-->
   </Settings>
 </SettingsFile>

@@ -106,13 +106,13 @@ namespace MovieManager.APP
 
         private void CreateLogDb(FileInfo file)
         {
-            using (var conn = new SQLiteConnection())
+            using (var Conn = new SQLiteConnection())
             {
-                conn.ConnectionString = string.Format("Data Source={0};New=True;Compress=True;Synchronous=Off", file.FullName);
-                conn.Open();
-                var cmd = conn.CreateCommand();
+                Conn.ConnectionString = string.Format("Data Source={0};New=True;Compress=True;Synchronous=Off", file.FullName);
+                Conn.Open();
+                var Cmd = Conn.CreateCommand();
 
-                cmd.CommandText =
+                Cmd.CommandText =
                                  @"CREATE TABLE Log(
                             LogId     INTEGER PRIMARY KEY,
                             Date      DATETIME NOT NULL,
@@ -121,9 +121,9 @@ namespace MovieManager.APP
                             Message   TEXT DEFAULT NULL
                         );";
 
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conn.Close();
+                Cmd.ExecuteNonQuery();
+                Cmd.Dispose();
+                Conn.Close();
             }
         }
 

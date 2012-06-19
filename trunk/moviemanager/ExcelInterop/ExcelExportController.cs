@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
+using Model;
 using SQLite;
 
 namespace ExcelInterop
@@ -120,9 +123,19 @@ namespace ExcelInterop
             if (ExportProperties.Any(mappingItem => mappingItem.Selected))
             {
                 //export
-                Excel.Data2Excel(
-                    MMDatabase.GetVideosDataReader(),
-                    (IList<string>) (from MappingItem in ExportProperties where MappingItem.Selected select MappingItem.DatabaseColumn), "videos");//TODO 060 check if this still works -> prob a problem with linq expression
+                var Videos = new List<Video>();
+                MMDatabase.SelectAllVideos(Videos);
+                List<string> Props = new List<string>();
+                foreach(DatabaseMappingItem MappingItem in ExportProperties)
+                {
+                    if(MappingItem.Selected)
+                    {
+                        Props.Add(MappingItem.DatabaseColumn);
+                    }
+                }
+                string ExportPath = Path.Combine(Path.GetTempPath(), "exportedVideos.xls");
+                Excel.Videos2Excel(Videos, Props, ExportPath, "videos");
+                Process.Start(Path.GetTempPath());
             }
             else
             {
