@@ -305,6 +305,14 @@ namespace Model
             }
         }
 
+        public static List<string> ExportableProperties
+        {
+            get
+            {
+                return new List<string> { "Id", "IdImdb", "Name", "Release", "Rating", "RatingImdb", "Genres", "Path", "LastPlayLocation", "WatchedToEnd", "Subs", "Poster", "Images", "Plot", "Runtime" };
+            }
+        } 
+
         public override string ToString()
         {
             return Name;

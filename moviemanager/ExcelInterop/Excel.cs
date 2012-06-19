@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Data.Common;
 using System.IO;
-//using ExcelLibrary.SpreadSheet;
-//using Microsoft.Office.Interop.Excel;
-using ExcelLibrary.SpreadSheet;
 using Model;
-using QiHe.CodeLib;
-
-//using QiHe.CodeLib;
-//using Workbook = Microsoft.Office.Interop.Excel.Workbook;
-//using Worksheet = Microsoft.Office.Interop.Excel.Worksheet;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
 
 namespace ExcelInterop
 {
@@ -22,14 +14,15 @@ namespace ExcelInterop
         {
 
 
-            // open xls file
-            Workbook Book = Workbook.Load(path);
+
+            //// open xls file
+            //HSSFWorkbook Workbook = new HSSFWorkbook();
 
             List<string> Names = new List<string>();
-            for (int I = 0; I < Book.Worksheets.Count; I++)
-            {
-                Names.Add(Book.Worksheets[0].Name);
-            }
+            //for (int I = 0; I < Workbook.Workboo.Count; I++)
+            //{
+            //    Names.Add(Workbook.Worksheets[0].Name);
+            //}
             return Names;
 
             //    List<string> Worksheets = new List<string>();
@@ -55,15 +48,15 @@ namespace ExcelInterop
 
         public static List<string> GetHeaders(string path, int worksheetIndex)
         {
-            Workbook Book = Workbook.Load(path);
-            Worksheet Sheet = Book.Worksheets[worksheetIndex];
+            //Workbook Book = Workbook.Load(path);
+            //Worksheet Sheet = Book.Worksheets[worksheetIndex];
             List<string> Headers = new List<string>();
 
-            int RowIndex = Sheet.Cells.FirstRowIndex;
-            for (int ColIndex = 0; ColIndex < Sheet.Cells.LastColIndex; ColIndex++)
-            {
-                Headers.Add(Sheet.Cells[RowIndex, ColIndex].Value.ToString());
-            }
+            //int RowIndex = Sheet.Cells.FirstRowIndex;
+            //for (int ColIndex = 0; ColIndex < Sheet.Cells.LastColIndex; ColIndex++)
+            //{
+            //    Headers.Add(Sheet.Cells[RowIndex, ColIndex].Value.ToString());
+            //}
 
             return Headers;
 
@@ -119,48 +112,44 @@ namespace ExcelInterop
             //    }
         }
 
-        public static void Videos2Excel(List<Video> objects, IList<String> props, string filepath, string worksheetname)
+        public static void Objects2Excel(List<Video> objects, IList<String> props, string filepath, string sheetName)
         {
             if (props != null && props.Count != 0)
             {
-                Workbook Workbook = new Workbook();
-                Worksheet Worksheet = new Worksheet(worksheetname);
-                Worksheet.Cells[0, 1] = new Cell((short)1);
-                Worksheet.Cells[2, 0] = new Cell(9999999);
-                Worksheet.Cells[3, 3] = new Cell((decimal)3.45);
-                Worksheet.Cells[2, 2] = new Cell("Text string");
-                Worksheet.Cells[2, 4] = new Cell("Second string");
-                Worksheet.Cells[4, 0] = new Cell(32764.5, "#,##0.00");
-                Worksheet.Cells[5, 1] = new Cell(DateTime.Now, @"YYYY\-MM\-DD");
-                Worksheet.Cells.ColumnWidth[0, 1] = 3000;
-                Workbook.Worksheets.Add(Worksheet);
-                Workbook.Save(filepath);
 
-                //// open xls file
-                //Workbook book = Workbook.Load(file);
-                //Worksheet sheet = book.Worksheets[0];
 
-                //// traverse cells
-                //foreach (Pair<Pair<int, int>, Cell> cell in sheet.Cells)
-                //{
-                //    dgvCells[cell.Left.Right, cell.Left.Left].Value = cell.Right.Value;
-                //}
+                HSSFWorkbook Workbook = new HSSFWorkbook();
 
-                //// traverse rows by Index
-                //for (int rowIndex = sheet.Cells.FirstRowIndex;
-                //     rowIndex <= sheet.Cells.LastRowIndex;
-                //     rowIndex++)
-                //{
-                //    Row row = sheet.Cells.GetRow(rowIndex);
-                //    for (int colIndex = row.FirstColIndex;
-                //         colIndex <= row.LastColIndex;
-                //         colIndex++)
-                //    {
-                //        Cell cell = row.GetCell(colIndex);
-                //    }
-                //}
+                ISheet Sheet = Workbook.CreateSheet(sheetName);
+
+                //write headers
+                IRow Row = Sheet.CreateRow(0);
+                for (int ColIndex = 0; ColIndex < props.Count; ColIndex++)
+                {
+                    ICell Cell = Row.CreateCell(ColIndex);
+                    Cell.SetCellType(CellType.STRING);
+                    Cell.SetCellValue(props[ColIndex]);
+                }
+                //write values
+                for (int RowIndex = 1; RowIndex <= objects.Count; RowIndex++)
+                {
+                    Row = Sheet.CreateRow(RowIndex);
+                    for (int ColIndex = 0; ColIndex < props.Count; ColIndex++)
+                    {
+                        ICell Cell = Row.CreateCell(ColIndex);
+                        Cell.SetCellType(CellType.STRING);
+                        object Value = objects[RowIndex-1].GetType().GetProperty(props[ColIndex]).GetValue(objects[RowIndex-1], null);
+                        if(Value != null)
+                        {
+                            Cell.SetCellValue(Value.ToString());
+                        }
+                    } 
+                }
+
+                FileStream File = new FileStream(filepath, FileMode.Create, FileAccess.Write);
+                Workbook.Write(File);
+                File.Close();
             }
-            //create new xls file
         }
 
         public static List<List<string>> Excel2Data(string filePath, int worksheetIndex, List<string> headers)

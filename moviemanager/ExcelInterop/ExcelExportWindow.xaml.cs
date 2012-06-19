@@ -33,5 +33,10 @@ namespace ExcelInterop
             Close();
 
         }
+
+        private void BtnBrowseClick(object sender, RoutedEventArgs e)
+        {
+            _controller.Browse();
+        }
     }
 }

@@ -13,7 +13,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MovieManager.SETUP", "Movie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D6017DF9-AE81-49B8-857A-495CE8275DB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelInterop", "ExcelInterop\ExcelInterop.csproj", "{948401DF-F23E-47C2-B524-8B7AA5B95A56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportImport", "ExcelInterop\ExportImport.csproj", "{948401DF-F23E-47C2-B524-8B7AA5B95A56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.WEB", "MovieManager.WEB\MovieManager.WEB.csproj", "{5E7E4873-8C9D-4BA8-A936-784387E2379F}"
 EndProject

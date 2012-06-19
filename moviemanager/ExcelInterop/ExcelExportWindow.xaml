@@ -9,29 +9,38 @@
 
     <Grid x:Name="LayoutRoot" Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.885*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="331*" />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ListBox Padding="5" ItemsSource="{Binding ExportProperties}" Name="ListExportProperties">
+        <TextBox Margin="0,0,108,8" Text="{Binding ExportFilePath}" VerticalContentAlignment="Center"></TextBox>
+        <Button Margin="0,0,0,8" Grid.Row="0" HorizontalAlignment="Right" Width="100" Name="BtnBrowse" Click="BtnBrowseClick">
+            <StackPanel Orientation="Horizontal" >
+                <Image Height="24" Width="24" Source="/ExcelInterop;component/images/browse_32.png"/>
+                <TextBlock TextWrapping="NoWrap" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Browse"/></TextBlock>
+            </StackPanel>
+        </Button>
+        
+        <ListBox Padding="5" ItemsSource="{Binding ExportProperties}" Name="ListExportProperties" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox Content="{Binding MMColumn}" IsChecked="{Binding Selected}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Margin="0,8,0,0" Grid.Row="1" HorizontalAlignment="Left" Width="100" Name="BtnSelectAllNone" Click="BtnSelectAllNoneClick">
+        <Button Margin="0,8,0,0" Grid.Row="2" HorizontalAlignment="Left" Width="100" Name="BtnSelectAllNone" Click="BtnSelectAllNoneClick">
             <TextBlock TextWrapping="NoWrap" TextAlignment="Center"><Run Language="nl-be" Text="Alle / Geen"/></TextBlock>
         </Button>
-        <Button HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="1" Width="100" Name="BtnExport" Click="BtnExportClick">
-            <StackPanel Orientation="Horizontal" Width="91.333">
+        <Button HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="2" Width="100" Name="BtnExport" Click="BtnExportClick">
+            <StackPanel Orientation="Horizontal">
                 <Image Height="32" Width="32" Source="/ExcelInterop;component/images/excel_export_32.png"/>
                 <TextBlock TextWrapping="NoWrap" Width="53.913" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Exporteer"/></TextBlock>
             </StackPanel>
         </Button>
-        <Button Margin="0,8,104,0" Grid.Row="1" HorizontalAlignment="Right" Width="100" Name="BtnAbort" Click="BtnAbortClick">
-            <StackPanel Orientation="Horizontal" Width="85.333">
+        <Button Margin="0,8,104,0" Grid.Row="2" HorizontalAlignment="Right" Width="100" Name="BtnAbort" Click="BtnAbortClick">
+            <StackPanel Orientation="Horizontal">
                 <Image Height="32" Width="32" Source="/ExcelInterop;component/images/cancel_32.png" />
-                <TextBlock TextWrapping="NoWrap" Width="51.246" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Annuleer"/></TextBlock>
+                <TextBlock TextWrapping="NoWrap" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Abort"/></TextBlock>
             </StackPanel>
         </Button>
     </Grid>
