@@ -414,9 +414,9 @@
       <Name>Common</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\ExcelInterop\ExcelInterop.csproj">
+    <ProjectReference Include="..\ExcelInterop\ExportImport.csproj">
       <Project>{948401DF-F23E-47C2-B524-8B7AA5B95A56}</Project>
-      <Name>ExcelInterop</Name>
+      <Name>ExportImport</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">

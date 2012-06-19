@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Windows;
+using System.Windows.Forms;
 using Model;
 using SQLite;
 
@@ -17,73 +17,22 @@ namespace ExcelInterop
 
         public ExcelExportController()
         {
-            _exportProperties = new ObservableCollection<DatabaseMappingItem>();
-            var Headers = new List<String>
-                                       {
-                                           "id",
-                                           "id_imdb",
-                                           "name",
-                                           "release",
-                                           "rating",
-                                           "rating_imdb",
-                                           "genre",
-                                           "path",
-                                           "last_play_location"
-                                       };//TODO 070 get from database or enum
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "Id",
-                                          DatabaseColumn = "Id",
-                                          Selected = true
-                                      });
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "IMDB id",
-                                          DatabaseColumn = "id_imdb",
-                                          Selected = true
-                                      });
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "Name",
-                                          DatabaseColumn = "name",
-                                          Selected = true
-                                      });
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "Release date",
-                                          DatabaseColumn = "release",
-                                          Selected = true
-                                      });
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "IMDB rating",
-                                          DatabaseColumn = "rating_imdb",
-                                          Selected = true
-                                      });
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "Genre",
-                                          DatabaseColumn = "genre",
-                                          Selected = true
-                                      });
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "Video file path",
-                                          DatabaseColumn = "path",
-                                          Selected = true
-                                      });
-            _exportProperties.Add(new DatabaseMappingItem
-                                      {
-                                          MMColumn = "Last play location",
-                                          DatabaseColumn = "last_play_location",
-                                          Selected = true
-                                      });
+            _exportProperties = new ObservableCollection<ObjectMappingItem>();
+            foreach (var Prop in Video.ExportableProperties)
+            {
+                _exportProperties.Add(new ObjectMappingItem
+                {
+                    MMColumn = Prop,
+                    ObjectProperty = Prop,
+                    Selected = true
+                });
+            }
             _selectAllNone = false;
-            ExportFilePath = "";
+            ExportFilePath = Path.Combine(Path.GetTempPath(), "exportedVideos.xls");
         }
 
-        private ObservableCollection<DatabaseMappingItem> _exportProperties;
-        public ObservableCollection<DatabaseMappingItem> ExportProperties
+        private ObservableCollection<ObjectMappingItem> _exportProperties;
+        public ObservableCollection<ObjectMappingItem> ExportProperties
         {
             get { return _exportProperties; }
             set { _exportProperties = value; }
@@ -111,7 +60,7 @@ namespace ExcelInterop
 
         public void SelectAllNone()
         {
-            foreach (DatabaseMappingItem MappingItem in _exportProperties)
+            foreach (ObjectMappingItem MappingItem in _exportProperties)
             {
                 MappingItem.Selected = _selectAllNone;
             }
@@ -126,16 +75,15 @@ namespace ExcelInterop
                 var Videos = new List<Video>();
                 MMDatabase.SelectAllVideos(Videos);
                 List<string> Props = new List<string>();
-                foreach(DatabaseMappingItem MappingItem in ExportProperties)
+                foreach(ObjectMappingItem MappingItem in ExportProperties)
                 {
                     if(MappingItem.Selected)
                     {
-                        Props.Add(MappingItem.DatabaseColumn);
+                        Props.Add(MappingItem.ObjectProperty);
                     }
                 }
-                string ExportPath = Path.Combine(Path.GetTempPath(), "exportedVideos.xls");
-                Excel.Videos2Excel(Videos, Props, ExportPath, "videos");
-                Process.Start(Path.GetTempPath());
+                Excel.Objects2Excel(Videos, Props, ExportFilePath, "videos");
+                Process.Start("explorer.exe", "/select, " + ExportFilePath);//select file in explorer
             }
             else
             {
@@ -143,5 +91,20 @@ namespace ExcelInterop
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Browse()
+        {
+
+            //FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = Path };
+            SaveFileDialog SaveFileDialog = new SaveFileDialog
+                                     {
+                                         InitialDirectory = Path.GetTempPath(),
+                                         FileName = "exportedVideos.xls"
+                                     };
+            if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ExportFilePath = SaveFileDialog.FileName;
+            }
+        }
     }
 }
