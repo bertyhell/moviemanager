@@ -24,11 +24,6 @@ namespace MovieManager.APP
         public MainWindow()
         {
             InitializeComponent();
-            //GlobalLogger.Instance.MovieManagerLogger.Info("Program Started");
-            //GlobalLogger.Instance.LogLevel = Level.Error;
-
-            //GlobalLogger.Instance.MovieManagerLogger.Info("write info");
-            //GlobalLogger.Instance.MovieManagerLogger.Error("write error");
 
             _controller = MainController.Instance;
             _controller.WindowInstance = this;

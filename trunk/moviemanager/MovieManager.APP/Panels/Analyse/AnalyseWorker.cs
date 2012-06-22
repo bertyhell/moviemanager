@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Documents;
@@ -39,7 +40,7 @@ namespace MovieManager.APP.Panels.Analyse
             foreach (var AnalyseVideo in _analyseVideos)
             {
                 //Console.WriteLine(AnalyseVideo.Video.Name);
-                var Candidates = new List<Video>();
+                var Candidates = new ObservableCollection<Video>();
                 foreach (var VideoInfo in SearchTMDB.GetVideoInfo(AnalyseVideo.SearchString))
                 {
                     Candidates.Add(VideoInfo);
@@ -58,6 +59,7 @@ namespace MovieManager.APP.Panels.Analyse
                 {
                     AnalyseVideo.MatchPercentage = 0;
                 }
+                AnalyseVideo.AnalyseNeeded = false;
                 Counter++;
                 OnVideoInfoProgress(new ProgressEventArgs(){MaxNumber = _analyseVideos.Count, ProgressNumber = Counter});
             }

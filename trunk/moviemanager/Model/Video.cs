@@ -29,12 +29,14 @@ namespace Model
         private Uri _poster;
         private List<ImageInfo> _images;
         private String _plot;
+        private bool _analyseCompleted;
 
         public Video()
         {
             _images = new List<ImageInfo>();
             _subs = new ObservableCollection<Subtitle>();
             _genres = new List<string>();
+            _analyseCompleted = false;
         }
 
         public Video(Video brother)
@@ -53,7 +55,8 @@ namespace Model
             _poster = brother.Poster;
             _images = brother.Images;
             _plot = brother.Plot;
-            _runtime = brother.Runtime; 
+            _runtime = brother.Runtime;
+            _analyseCompleted = brother.AnalyseCompleted;
         }
 
         public void CopyAnalyseVideoInfo(Video brother, Boolean overwrite = true)
@@ -69,7 +72,8 @@ namespace Model
             Poster = Poster == null || overwrite ? brother.Poster : Poster;
             Images = Images == null ||Images.Count == 0 || overwrite ? brother.Images : Images;
             Plot = string.IsNullOrEmpty(Plot) || overwrite ? brother.Plot : Plot;
-            Runtime = Runtime == 0 || overwrite ? brother.Runtime : Runtime; 
+            Runtime = Runtime == 0 || overwrite ? brother.Runtime : Runtime;
+            AnalyseCompleted = brother.AnalyseCompleted;
         }
 
         public virtual VideoTypeEnum VideoType
@@ -129,22 +133,13 @@ namespace Model
             {
                 _genres = value;
                 OnPropertyChanged("Genres");
-                OnPropertyChanged("GenresString");
             }
         }
 
-        public String GetGenresString()
+        public bool AnalyseCompleted
         {
-            if (_genres.Count > 0)
-            {
-                String GenresString = _genres[0];
-                for (int I = 1; I < _genres.Count; I++)
-                {
-                    GenresString += ", " + _genres[I];
-                }
-                return GenresString;
-            }
-            return "";
+            get { return _analyseCompleted; }
+            set { _analyseCompleted = value; OnPropertyChanged("AnalyseCompleted"); }
         }
 
         public int Id

@@ -47,23 +47,22 @@ namespace MovieManager.APP.Panels.Search
 
             if (options.SearchForMovies)
             {
-                Movie Movie = null;
-                int QueryIsId = 0;
+                Movie Movie;
                 try
                 {
-                    QueryIsId = Convert.ToInt32(options.SearchTerm);
+
                     Movie = new Movie();
+                    Movie.IdTmdb = Convert.ToInt32(options.SearchTerm);
                 }
                 catch
                 {
                     List<Movie> Movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
                     //TODO 090: Make selection window
                     Movie = Movies.Count > 0 ? Movies[0] : null;
-                    if (Movie != null) QueryIsId = Movie.IdTmdb;
-                    else return;
+                    if (Movie == null) return;
                 }
-                
-                SearchTMDB.GetExtraMovieInfo(QueryIsId, Movie);
+
+                SearchTMDB.GetExtraMovieInfo(Movie);
                 UpdateGuiForMovie(Movie);
             }
         }

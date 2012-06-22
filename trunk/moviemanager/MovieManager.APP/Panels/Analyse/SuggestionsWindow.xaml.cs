@@ -47,6 +47,13 @@ namespace MovieManager.APP.Panels.Analyse
             AnalyseWorker.RunWorkerAsync();
         }
 
+        private void SearchDetailsButtonClick(object sender, RoutedEventArgs e)
+        {
+            GetDetailWorker DetailWorker = new GetDetailWorker(_analyseVideo.Candidates);
+            DetailWorker.RunWorkerAsync();
+        }
+        
+
         
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
