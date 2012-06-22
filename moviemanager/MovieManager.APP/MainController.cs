@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Threading;
+using APP;
 using Model;
 using SQLite;
 using System.ComponentModel;
@@ -41,7 +43,6 @@ namespace MovieManager.APP
             //init log
             //new GlobalLogger().EnableLogger();
         }
-
 
         
         private ICollectionView _videosView;

@@ -95,15 +95,17 @@ namespace MovieManager.WEB.Search
             }
         }
 
-        public static void GetExtraMovieInfo(int tmdbId, Movie movie)
+        public static void GetExtraMovieInfo(Movie movie)
         {
-            Uri Request = new Uri("http://api.themoviedb.org/3/movie/" + tmdbId + "?api_key=" + APIKEY);
+            Uri Request = new Uri("http://api.themoviedb.org/3/movie/" + movie.IdTmdb + "?api_key=" + APIKEY);
             String Response = SimpleWebRequest.DoJSONRequest(Request);
 
             if (!string.IsNullOrEmpty(Response))
             {
                 JObject JsonMovie = JObject.Parse(Response);
-                JsonMovie["genres"].ToList().ForEach(g => movie.Genres.Add((string)g["name"])); // get genres
+                List<string> Genres = new List<string>();
+                JsonMovie["genres"].ToList().ForEach(g => Genres.Add((string)g["name"])); // get genres
+                movie.Genres = Genres;
                 movie.IdImdb = (string)JsonMovie["imdb_id"];
                 movie.Plot = (string)JsonMovie["overview"];
                 movie.Runtime = (int)JsonMovie["runtime"];

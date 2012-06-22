@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:my="clr-namespace:MovieManager.APP.Panels"
         xmlns:conv="clr-namespace:MovieManager.APP.Converters" xmlns:common="clr-namespace:MovieManager.APP.Common"
-        Title="SuggestionsWindow" Height="407" Width="725" Loaded="BtnOkClick">
+        Title="SuggestionsWindow" Height="561" Width="725">
     <Grid>
         <Grid.Resources>
             <conv:StringListConverter x:Key="stringListConv"/>
@@ -27,12 +27,13 @@
 
         <TextBlock HorizontalAlignment="Right" Text="Title:" VerticalAlignment="Center" Margin="0,6,5,12" Grid.Row="0" />
         <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Text="{Binding AnalyseVideo.Video.Name,Mode=OneTime}" Grid.Row="0" Name="txtSearchString" />
-        <Button Grid.Column="2" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="30" Margin="10,0,0,0" Click="SearchButtonClick" Name="btnSearch" />
+        <Button Grid.Column="2" Content="Analyse" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="30" Margin="10,0,0,0" Click="SearchButtonClick" Name="btnSearch" />
+        <Button Grid.Column="2" Content="Get details" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="30" Margin="100,0,0,0" Click="SearchDetailsButtonClick" Name="btnSearchDetails" />
         <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding AnalyseVideo.Candidates}"
                   AlternatingRowBackground="#EEE"
                   CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Single" 
                   IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1"
-                  SelectedValue="{Binding SelectedCandidate}">
+                  SelectedIndex="{Binding AnalyseVideo.SelectedCandidateIndex}">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
@@ -53,10 +54,10 @@
         <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"  Text="{Binding AnalyseVideo.SelectedCandidate.Genres, Converter={StaticResource stringListConv}}" />
         <TextBlock HorizontalAlignment="Right" Text="Plot:" VerticalAlignment="Center" Margin="5" Grid.Row="5" />
         <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2" Margin="0,5"  Text="{Binding AnalyseVideo.SelectedCandidate.Plot}"/>
-        <Border Grid.Column="2" BorderThickness="0" Background="White" Grid.RowSpan="4" Grid.Row="1" Margin="10,0,0,0">
-            <Image x:Name="_imgMovie" Source="{Binding Path=AnalyseVideo.SelectedCandidate.Poster}" ></Image>
+        <Border Grid.Column="2" BorderThickness="0" Background="White" Grid.RowSpan="1" Grid.Row="1" Margin="10,0,0,0">
+            <Image x:Name="_imgMovie" Source="{Binding AnalyseVideo.SelectedCandidate.Images[0].Uri}" ></Image>
         </Border>
-        <my:MovieScrollPanel Grid.Column="2" Grid.Row="5" Grid.RowSpan="2" HorizontalAlignment="Stretch" x:Name="movieScrollPanel1" VerticalAlignment="Stretch" Margin="10,5,0,5" />
+        <my:MovieScrollPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="5" HorizontalAlignment="Stretch" x:Name="movieScrollPanel1" Images="{Binding Path=AnalyseVideo.SelectedCandidate.Images}"  VerticalAlignment="Stretch" Margin="10,9,0,5" />
 
         <Button Grid.Column="2" Grid.Row="7" Width="75"  HorizontalAlignment="Right" VerticalAlignment="Stretch" Content="Cancel" Click="BtnCancelClick"></Button>
         <Button Grid.Column="2" Grid.Row="7" Width="75" Margin="0,0,80,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Content="OK"></Button>

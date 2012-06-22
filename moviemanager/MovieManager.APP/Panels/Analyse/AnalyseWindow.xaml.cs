@@ -18,23 +18,27 @@ namespace MovieManager.APP.Panels.Analyse
             DataContext = _controller;
             progressbar.DataContext = _controller;
         }
-        
+
         private void BtnAnalyseClick(object sender, System.Windows.RoutedEventArgs e)
         {
             _controller.BeginAnalyse();
         }
-
-        private void dgrVideoFileList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            AnalyseVideo AnalyseVideo = (AnalyseVideo) ((DataGrid) sender).SelectedItem;
-            SuggestionsWindow Window = new SuggestionsWindow(AnalyseVideo);
-            Window.ShowDialog();
-        }
-
+        
         private void BtnSaveClick(object sender, System.Windows.RoutedEventArgs e)
         {
             _controller.SaveVideos();
-            this.Close();
+            Close();
+        }
+
+        private void dgrVideoFileList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            _controller.SelectedVideoFile.AnalyseNeeded = true;
+        }
+
+        private void BtnDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SuggestionsWindow Window = new SuggestionsWindow(_controller.SelectedVideoFile);
+            Window.Show();
         }
     }
 }

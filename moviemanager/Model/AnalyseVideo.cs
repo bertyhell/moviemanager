@@ -11,6 +11,18 @@ namespace Model
             Candidates = new ObservableCollection<Video>();
             SelectedCandidateIndex = -1;
             MatchPercentage = -1;
+            AnalyseNeeded = true;
+        }
+
+        private bool _analyseNeeded;
+        public bool AnalyseNeeded
+        {
+            get { return _analyseNeeded; }
+            set
+            {
+                _analyseNeeded = value;
+                PropChanged("AnalyseNeeded");
+            }
         }
 
         private Video _video;
@@ -28,8 +40,9 @@ namespace Model
             }
         }
 
-        private IList<Video> _candidates;
-        public IList<Video> Candidates
+        private ObservableCollection<Video> _candidates;
+
+        public ObservableCollection<Video> Candidates
         {
             get { return _candidates; }
             set
@@ -55,10 +68,11 @@ namespace Model
         {
             get
             {
-                if(SelectedCandidateIndex == -1)
+                if (SelectedCandidateIndex == -1)
                 {
                     return null;
-                }else
+                }
+                else
                 {
                     return Candidates[SelectedCandidateIndex];
                 }

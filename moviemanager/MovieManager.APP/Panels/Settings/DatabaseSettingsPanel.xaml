@@ -27,7 +27,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         
-        <TextBox x:Name="_txtFilePath" Text="{Binding PathToFile}" />
+        <TextBox x:Name="_txtFilePath" Text="{Binding PathToFile, Mode=OneWay}" />
         <Button Grid.Row="0" Grid.Column="2" Content="Browse ..." Click="Button_Click" />
 
         <Grid Grid.Row="2">

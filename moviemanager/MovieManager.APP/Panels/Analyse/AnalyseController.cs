@@ -75,6 +75,7 @@ namespace MovieManager.APP.Panels.Analyse
         public void AnalyseWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //TODO 050 get posters of analysed videos
+
             Console.WriteLine("finished analysing :D");
         }
 
