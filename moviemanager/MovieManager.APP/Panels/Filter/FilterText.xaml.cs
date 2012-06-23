@@ -56,7 +56,9 @@ namespace MovieManager.APP.Panels.Filter
                     case TextOperations.Regex:
                         return Regex.IsMatch(Text, FilterInput);
                 }
-            }catch(ArgumentException){}
+            }catch(ArgumentException)
+            {
+            }
             return false;
         }
 
