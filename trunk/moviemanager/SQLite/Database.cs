@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace SQLite
 {
-
     public class Database
     {
         //private const String ConnString = @"data source='C:\ProgramData\MovieManager\Database\moviemanager.sqlite'";

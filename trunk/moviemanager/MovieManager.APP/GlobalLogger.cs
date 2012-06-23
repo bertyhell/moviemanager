@@ -44,6 +44,11 @@ namespace MovieManager.APP
             get { return LogManager.GetLogger("VlcPlayer"); }
         }
 
+        public static string FormatExceptionForLog(string className, string functionName, string exception)
+        {
+            return string.Format("Class: {0} \nFunction: {1} \nMessage: {2}", className, functionName, exception);
+        }
+
         private IAppender GetSqliteAppender()
         {
             // setup the appender

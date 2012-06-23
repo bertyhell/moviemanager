@@ -45,7 +45,7 @@ namespace Model
                     }
                     catch (Exception E)
                     {
-                        Console.WriteLine("error in Actor: " + E.Message);
+                        GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("SettingsPanelBase", "SaveAllSettings", Ex.Message));
                     }
                 }
                 return LocalImages;

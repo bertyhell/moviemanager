@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using Model;
@@ -95,9 +96,9 @@ namespace MovieManager.APP
 
                         _videoGrid.Items.Refresh();
                     }
-                    catch
+                    catch(Exception ex)
                     {
-
+                        GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("MainWindow","MenuItemRenameFileClick",ex.Message));
                     }
                 }
             }

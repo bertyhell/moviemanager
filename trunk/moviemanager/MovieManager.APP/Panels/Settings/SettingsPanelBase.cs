@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace MovieManager.APP.Panels.Settings
@@ -44,8 +45,9 @@ namespace MovieManager.APP.Panels.Settings
                 }
                 RetVal = Succeeded;
             }
-            catch
+            catch(Exception Ex)
             {
+                GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("SettingsPanelBase", "SaveAllSettings", Ex.Message));
             }
             return RetVal;
         }
