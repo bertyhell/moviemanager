@@ -91,6 +91,14 @@
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.EditSettings}" />
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
+
+
+
+            <ribbon:RibbonTab Header="Debug">
+                <ribbon:RibbonGroup Header="Log">
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.Logging}" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
         </ribbon:Ribbon>
     </Grid>
 </UserControl>

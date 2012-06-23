@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using MovieManager.APP.Commands;
+using MovieManager.APP.Commands.Debug;
 
 namespace MovieManager.APP.Menubar
 {
@@ -295,6 +296,35 @@ namespace MovieManager.APP.Menubar
                             ToolTipTitle = TOOL_TIP_TITLE,
                             ToolTipDescription = TOOL_TIP_DESCRIPTION,
                             Command = new EditSettingsCommand(),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ButtonData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
+        public static ControlData Logging
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Logging";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string LOGGGING_TOOL_TIP_TITLE = "Logging";
+                        const string LOGGING_TOOL_TIP_DESCRIPTION = "Logging";
+                        ControlData ButtonData = new ControlData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/log_32.png", UriKind.Relative),
+                            ToolTipTitle = LOGGGING_TOOL_TIP_TITLE,
+                            ToolTipDescription = LOGGING_TOOL_TIP_DESCRIPTION,
+                            Command = new LoggingToolCommand(),
                             KeyTip = "",
                         };
                         DATA_COLLECTION[STR] = ButtonData;
