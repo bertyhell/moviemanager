@@ -111,6 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />
     <Compile Include="Common\DefaultValues.cs" />
     <Compile Include="Common\ExceptionMessageBox.xaml.cs">
@@ -424,15 +425,18 @@
       <Name>Common</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\ExcelInterop\ExportImport.csproj">
+    <ProjectReference Include="..\ExportImport\ExportImport.csproj">
       <Project>{948401DF-F23E-47C2-B524-8B7AA5B95A56}</Project>
       <Name>ExportImport</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieManager.LOG\MovieManager.LOG.csproj">
+      <Project>{8C2B5F04-EF8F-46B8-B775-FD602B8AFAED}</Project>
+      <Name>MovieManager.LOG</Name>
     </ProjectReference>
     <ProjectReference Include="..\MovieManager.PLAYER\MovieManager.PLAYER.csproj">
       <Project>{C8B06303-3B2F-417B-8EE2-CD812F257277}</Project>
@@ -535,6 +539,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\zoom_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\log_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
