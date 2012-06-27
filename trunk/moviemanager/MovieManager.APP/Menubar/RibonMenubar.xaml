@@ -79,6 +79,7 @@
 
                 <ribbon:RibbonGroup>
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.ExportVideos}"/>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.ImportVideos}"/>
                 </ribbon:RibbonGroup>
 
                 <ribbon:RibbonGroup>

@@ -111,6 +111,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\ImportVideosCommand.cs" />
     <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />
     <Compile Include="Common\DefaultValues.cs" />

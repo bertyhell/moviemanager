@@ -166,6 +166,35 @@ namespace MovieManager.APP.Menubar
             }
         }
 
+        public static ControlData ImportVideos
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Import videos";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string ADD_VIDEOS_TOOL_TIP_TITLE = "Import videos from Excel";
+                        const string ADD_VIDEOS_TOOL_TIP_DESCRIPTION = "Import videos from Excel";
+                        ControlData ButtonData = new ControlData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/excel_import_32.png", UriKind.Relative),
+                            ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
+                            ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
+                            Command = new ImportVideosCommand(),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ButtonData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
         #region web
 
         public static ControlData SearchWeb
