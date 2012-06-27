@@ -5,7 +5,7 @@
 	mc:Ignorable="d"
 	x:Class="ExcelInterop.ExcelExportWindow"
 	Title="Exporteer naar excel"
-	Width="460" Height="480" Icon="/ExcelInterop;component/images/excel_export_32.png">
+	Width="460" Height="480" Icon="/ExportImport;component/images/excel_export_32.png">
 
     <Grid x:Name="LayoutRoot" Margin="10">
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
         <TextBox Margin="0,0,108,8" Text="{Binding ExportFilePath}" VerticalContentAlignment="Center"></TextBox>
         <Button Margin="0,0,0,8" Grid.Row="0" HorizontalAlignment="Right" Width="100" Name="BtnBrowse" Click="BtnBrowseClick">
             <StackPanel Orientation="Horizontal" >
-                <Image Height="24" Width="24" Source="/ExcelInterop;component/images/browse_32.png"/>
+                <Image Height="24" Width="24" Source="/ExportImport;component/images/browse_32.png"/>
                 <TextBlock TextWrapping="NoWrap" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Browse"/></TextBlock>
             </StackPanel>
         </Button>
@@ -33,13 +33,13 @@
         </Button>
         <Button HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="2" Width="100" Name="BtnExport" Click="BtnExportClick">
             <StackPanel Orientation="Horizontal">
-                <Image Height="32" Width="32" Source="/ExcelInterop;component/images/excel_export_32.png"/>
+                <Image Height="32" Width="32" Source="/ExportImport;component/images/excel_export_32.png"/>
                 <TextBlock TextWrapping="NoWrap" Width="53.913" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Exporteer"/></TextBlock>
             </StackPanel>
         </Button>
         <Button Margin="0,8,104,0" Grid.Row="2" HorizontalAlignment="Right" Width="100" Name="BtnAbort" Click="BtnAbortClick">
             <StackPanel Orientation="Horizontal">
-                <Image Height="32" Width="32" Source="/ExcelInterop;component/images/cancel_32.png" />
+                <Image Height="32" Width="32" Source="/ExportImport;component/images/cancel_32.png" />
                 <TextBlock TextWrapping="NoWrap" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Abort"/></TextBlock>
             </StackPanel>
         </Button>

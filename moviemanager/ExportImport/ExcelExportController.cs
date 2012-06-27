@@ -99,7 +99,8 @@ namespace ExcelInterop
             SaveFileDialog SaveFileDialog = new SaveFileDialog
                                      {
                                          InitialDirectory = Path.GetTempPath(),
-                                         FileName = "exportedVideos.xls"
+                                         FileName = "exportedVideos.xls",
+                                         Filter = "Excel Files(*.xls;*.xlsx)|*.XLS;*.XLSX|All files (*.*)|*.*"
                                      };
             if (SaveFileDialog.ShowDialog() == DialogResult.OK)
             {

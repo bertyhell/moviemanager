@@ -45,7 +45,8 @@ namespace Model
                     }
                     catch (Exception E)
                     {
-                        GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("SettingsPanelBase", "SaveAllSettings", Ex.Message));
+                        //TODO 080 uncomment and fix missing dll errors
+                        //GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("SettingsPanelBase", "SaveAllSettings", Ex.Message));
                     }
                 }
                 return LocalImages;
