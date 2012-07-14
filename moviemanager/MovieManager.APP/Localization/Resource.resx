@@ -180,6 +180,9 @@
   <data name="Source" xml:space="preserve">
     <value>source</value>
   </data>
+  <data name="StartPlayingOnDoubleClickInMainView" xml:space="preserve">
+    <value>Start playing on double click (in main view)</value>
+  </data>
   <data name="SubtitleAlreadyInMovie" xml:space="preserve">
     <value>Subtitle already in movie</value>
   </data>
