@@ -349,7 +349,7 @@ namespace Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged(string prop)
+        protected void OnPropertyChanged(string prop)
         {
             if (PropertyChanged != null && !_editInProgress)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
