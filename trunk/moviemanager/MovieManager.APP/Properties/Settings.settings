@@ -17,8 +17,14 @@
     <Setting Name="ConnectionString" Type="System.String" Scope="User">
       <Value Profile="(Default)">data source={path}</Value>
     </Setting>
-    <!--<Setting Name="connectionString" Type="System.String" Scope="User">
+    <Setting Name="VisibleMainViewColumns" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>-->
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MediaPlayerPlayOnDoubleClick" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -48,6 +48,7 @@
     <Compile Include="CollectionConverter.cs" />
     <Compile Include="DateTimeUtilities.cs" />
     <Compile Include="ProgressEventArgs.cs" />
+    <Compile Include="SerializableKeyValuePair.cs" />
     <Compile Include="SettingsStorage\DuplicateSettingsKeyException.cs" />
     <Compile Include="ImageFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

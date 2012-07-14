@@ -4,9 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:settings="clr-namespace:MovieManager.APP.Panels.Settings"
-             mc:Ignorable="d" 
+                            xmlns:Localization="clr-namespace:MovieManager.APP.Localization" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <settings:SettingsPanelBase.Resources>
+        <Localization:Resource x:Key="LocStrings"/>
+    </settings:SettingsPanelBase.Resources>
     <Grid>
-        <Label Content="VLC"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <CheckBox Content="{Binding Source={StaticResource LocStrings},Path=StartPlayingOnDoubleClickInMainView}" IsChecked="{Binding PlayOnDoubleCLick}"/>
     </Grid>
 </settings:SettingsPanelBase>
