@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Xml;
 using Common;
 using Model;
 using System.Xml.Linq;
@@ -10,32 +12,26 @@ using Newtonsoft.Json.Linq;
 
 namespace MovieManager.WEB.Search
 {
-    public class SearchTMDB
+    public class SearchTVDB
     {
-        private const string APIKEY = "02004323eee9878ce511ca57faf0b29c";
+        private const string APIKEY = "E5E33524E2E1E724";
+        private static readonly List<string> MIRRORS =new List<string>(); 
 
-        static SearchTMDB()
+        static SearchTVDB()
         {
             //Get configuration from server
-            Uri Request = new Uri("http://api.themoviedb.org/3/configuration?api_key=" + APIKEY);
-            String Response = SimpleWebRequest.DoJSONRequest(Request);
+
+            Uri Request = new Uri("http://www.thetvdb.com/api/"+APIKEY+"/mirrors.xml");
+            String Response = SimpleWebRequest.DoRequest(Request);
 
             if (!string.IsNullOrEmpty(Response))
             {
-                JObject JsonDoc = JObject.Parse(Response);
-                JToken Results = JsonDoc["images"];
-                TMDBConfiguration.BaseUrl = (string)Results["base_url"];
-                foreach (JToken BackdropSizes in Results["backdrop_sizes"])
+                XmlDocument Doc = new XmlDocument();
+                Doc.LoadXml(Response);
+                Doc.GetElementsByTagName("mirror");
+                foreach (XmlElement  MirrorNode in Doc.GetElementsByTagName("mirror"))
                 {
-                    TMDBConfiguration.BackdropSizes.Add((string)BackdropSizes);
-                }
-                foreach (JToken PosterSizes in Results["poster_sizes"])
-                {
-                    TMDBConfiguration.PosterSizes.Add((string)PosterSizes);
-                }
-                foreach (JToken ProfileSizes in Results["profile_sizes"])
-                {
-                    TMDBConfiguration.ProfileSizes.Add((string)ProfileSizes);
+                    MIRRORS.Add(MirrorNode.GetElementsByTagName("mirrorpath")[0].Value);
                 }
             }
         }

@@ -14,6 +14,8 @@ using System.Xml.Serialization;
 
 namespace MovieManager.APP
 {
+    //TODO 030 get date format from client pc
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -249,7 +251,6 @@ namespace MovieManager.APP
     }
 }
 
-//TODO 100: Filter Movies
 //TODO 090: gezochte folders bijhouden + (automatische refresh in background)
 //TODO 070: apparte settingsfile
 //TODO 070: verschillende video types: episode, movie, ...

@@ -2,16 +2,42 @@
 {
     public class Episode : Video
     {
-        //TODO 100: implement inotifypropertychanged
         public override VideoTypeEnum VideoType
         {
             get { return VideoTypeEnum.Episode; }
         }
 
-        public int EpisodeNumber { get; set; }
-        
-        public int Season { get; set; }
+        private int _episodeNumber;
+        public int EpisodeNumber
+        {
+            get { return _episodeNumber; }
+            set
+            {
+                _episodeNumber = value;
+                OnPropertyChanged("EpisodeNumber");
+            }
+        }
 
-        public int SerieId { get; set; }
+        private int _season;
+        public int Season
+        {
+            get { return _season; }
+            set
+            {
+                _season = value;
+                OnPropertyChanged("Season");
+            }
+        }
+
+        private int _serieId;
+        public int SerieId
+        {
+            get { return _serieId; }
+            set
+            {
+                _serieId = value;
+                OnPropertyChanged("SerieId");
+            }
+        }
     }
 }

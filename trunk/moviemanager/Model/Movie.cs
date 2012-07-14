@@ -2,15 +2,31 @@
 {
     public class Movie : Video
     {
-        //TODO 100: implement inotifypropertychanged
         public override VideoTypeEnum VideoType
         {
             get { return VideoTypeEnum.Movie; }
         }
 
-        public int FranchiseID { get; set; }
+        private int _franchiseID;
+        public int FranchiseID
+        {
+            get { return _franchiseID; }
+            set
+            {
+                _franchiseID = value;
+                OnPropertyChanged("FranchiseID");
+            }
+        }
 
-
-        public int IdTmdb { get; set; }
+        private int _idTmdb;
+        public int IdTmdb
+        {
+            get { return _idTmdb; }
+            set
+            {
+                _idTmdb = value;
+                OnPropertyChanged("IdTmdb");
+            }
+        }
     }
 }
