@@ -107,7 +107,8 @@ namespace MovieManager.PLAYER
                 FormBorderStyle = FormBorderStyle.None;
 
                 //change visual
-                Controls.Remove(_mediaPlayerControl);
+                _pnlControlBarHolder.Controls.Remove(_mediaPlayerControl);
+                _pnlControlBarHolder.Visible = false;
                 _overlayForm.AddControlBar(_mediaPlayerControl);
                 _menubar.Visible = false;
                 Size = new Size((int)System.Windows.SystemParameters.PrimaryScreenWidth,
@@ -116,6 +117,7 @@ namespace MovieManager.PLAYER
                 _pnlVideo.Location = new Point(0, 0);
                 _pnlVideo.Size = new Size((int)System.Windows.SystemParameters.PrimaryScreenWidth,
                                           (int)System.Windows.SystemParameters.PrimaryScreenHeight);
+                _pnlVideo.Refresh();
                 _isFullScreen = true;
 
             }
@@ -123,7 +125,7 @@ namespace MovieManager.PLAYER
             {
                 _overlayForm.RemoveControlBar();
                 _pnlControlBarHolder.Controls.Add(_mediaPlayerControl);
-
+                _pnlControlBarHolder.Visible = true;
                 FormBorderStyle = FormBorderStyle.Sizable;
                 Size = _previousFormSize;
                 Location = _previousFormLocation;
