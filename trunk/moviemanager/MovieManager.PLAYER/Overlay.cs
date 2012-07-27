@@ -94,6 +94,8 @@ namespace MovieManager.PLAYER
         {
             if (!IsDisposed)
             {
+                this.Visible = false;
+                this.Visible = true;
                 this.Size = new Size(0, 0);
                 this.Size = newSize;
             }
@@ -118,7 +120,11 @@ namespace MovieManager.PLAYER
         {
             ClearMessage();
         }
+
+        protected override void OnClosed(System.EventArgs e)
+        {
+            _parent.Close();
+            base.OnClosed(e);
+        }
     }
-
-
 }

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this._lblTimestamp = new System.Windows.Forms.Label();
-            this._btnFullScreen = new System.Windows.Forms.Button();
             this._btnMute = new System.Windows.Forms.Button();
             this._btnPlay = new System.Windows.Forms.Button();
             this._btnPause = new System.Windows.Forms.Button();
             this._btnStop = new System.Windows.Forms.Button();
             this._trbVolume = new MovieManager.PLAYER.Common.CustomTrackbar();
             this._trbTimestamp = new MovieManager.PLAYER.Common.CustomTrackbar();
+            this._btnFullScreen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._trbVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._trbTimestamp)).BeginInit();
             this.SuspendLayout();
@@ -48,19 +48,6 @@
             this._lblTimestamp.Size = new System.Drawing.Size(35, 13);
             this._lblTimestamp.TabIndex = 22;
             this._lblTimestamp.Text = "label1";
-            // 
-            // _btnFullScreen
-            // 
-            this._btnFullScreen.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this._btnFullScreen.AutoSize = true;
-            this._btnFullScreen.Image = global::MovieManager.PLAYER.Properties.Resources.fullscreen_32;
-            this._btnFullScreen.Location = new System.Drawing.Point(321, 29);
-            this._btnFullScreen.Name = "_btnFullScreen";
-            this._btnFullScreen.Size = new System.Drawing.Size(40, 38);
-            this._btnFullScreen.TabIndex = 21;
-            this._btnFullScreen.TabStop = false;
-            this._btnFullScreen.UseVisualStyleBackColor = true;
-            this._btnFullScreen.Click += new System.EventHandler(this.BtnFullScreenClick);
             // 
             // _btnMute
             // 
@@ -137,6 +124,19 @@
             this._trbTimestamp.TickStyle = System.Windows.Forms.TickStyle.None;
             this._trbTimestamp.ValueChanged += new System.EventHandler(this.TrbTimestampValueChanged);
             // 
+            // _btnFullScreen
+            // 
+            this._btnFullScreen.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this._btnFullScreen.AutoSize = true;
+            this._btnFullScreen.Image = global::MovieManager.PLAYER.Properties.Resources.fullscreen_32;
+            this._btnFullScreen.Location = new System.Drawing.Point(321, 29);
+            this._btnFullScreen.Name = "_btnFullScreen";
+            this._btnFullScreen.Size = new System.Drawing.Size(40, 38);
+            this._btnFullScreen.TabIndex = 21;
+            this._btnFullScreen.TabStop = false;
+            this._btnFullScreen.UseVisualStyleBackColor = true;
+            this._btnFullScreen.Click += new System.EventHandler(this.BtnFullScreenClick);
+            // 
             // MediaPlayerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -162,12 +162,12 @@
 
         private CustomTrackbar _trbVolume;
         private System.Windows.Forms.Label _lblTimestamp;
-        private System.Windows.Forms.Button _btnFullScreen;
         private System.Windows.Forms.Button _btnMute;
         private System.Windows.Forms.Button _btnPlay;
         private System.Windows.Forms.Button _btnPause;
         private System.Windows.Forms.Button _btnStop;
         private CustomTrackbar _trbTimestamp;
+        private System.Windows.Forms.Button _btnFullScreen;
 
 
     }
