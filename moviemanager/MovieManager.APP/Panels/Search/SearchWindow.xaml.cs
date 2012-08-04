@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Model;
+using Model.Interfaces;
 using MovieManager.WEB.Search;
 
 namespace MovieManager.APP.Panels.Search
@@ -31,8 +33,10 @@ namespace MovieManager.APP.Panels.Search
                 List<Actor> SearchedActors = SearchTMDB.SearchActor(options.SearchTerm);
                 if (SearchedActors.Count > 1)
                 {
-                    //TODO 090: Make selection window
-                    SearchForActor(SearchedActors[0]);
+                    ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = SearchedActors.ToList<IThumbnailInfoRetriever>() };
+                    Window.ShowDialog();
+
+                    SearchForActor((Actor)Window.SelectedThumbnailDescription);
                 }
                 else if (SearchedActors.Count == 1)
                 {
@@ -47,7 +51,7 @@ namespace MovieManager.APP.Panels.Search
 
             if (options.SearchForMovies)
             {
-                Movie Movie;
+                Movie Movie = null;
                 try
                 {
 
@@ -57,11 +61,19 @@ namespace MovieManager.APP.Panels.Search
                 catch
                 {
                     List<Movie> Movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
-                    //TODO 090: Make selection window
-                    Movie = Movies.Count > 0 ? Movies[0] : null;
-                    if (Movie == null) return;
-                }
+                    if(Movies.Count > 1)
+                    {
+                        ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = Movies.ToList<IThumbnailInfoRetriever>() };
+                        Window.ShowDialog();
 
+                        Movie = (Movie)Window.SelectedThumbnailDescription;
+                    }
+                    else if (Movies.Count == 1)
+                    {
+                        Movie = Movies.Count > 0 ? Movies[0] : null;
+                    }
+                }
+                if (Movie == null) return;
                 SearchTMDB.GetExtraMovieInfo(Movie);
                 UpdateGuiForMovie(Movie);
             }

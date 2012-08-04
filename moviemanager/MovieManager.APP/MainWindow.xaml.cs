@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Markup;
 using Common;
 using Model;
 using MovieManager.APP.Panels;
 using System.Windows.Data;
+using MovieManager.LOG;
 using MovieManager.PLAYER;
 using log4net.Core;
 using System.Windows.Controls;
@@ -129,7 +132,10 @@ namespace MovieManager.APP
         void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem Item = (MenuItem)sender;
-            Item.IsChecked = !((MenuItem)sender).IsChecked;
+            if (Item.IsChecked && _videoGrid.Columns.Count > 1 || !Item.IsChecked)
+            {
+                Item.IsChecked = !Item.IsChecked;
+            }
         }
 
         void MenuItem_Unchecked(object sender, RoutedEventArgs e)
@@ -230,13 +236,17 @@ namespace MovieManager.APP
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            //TODO 050 check if all column are checked off and program is restarted -> no crach
-
             List<Pair<string, bool>> VisibleMainViewColumns = new List<Pair<string, bool>>();
+            bool OneColumnVisible = false;
             foreach (MenuItem Item in _columnsContextMenu.Items)
             {
+                if (!OneColumnVisible & Item.IsChecked)
+                    OneColumnVisible = true;
                 VisibleMainViewColumns.Add(new Pair<string, bool>(Item.Header.ToString(), Item.IsChecked));
             }
+
+            if (!OneColumnVisible)
+                VisibleMainViewColumns[0].Value = true;
 
             XmlSerializer Serializer = new XmlSerializer(typeof(List<Pair<string, bool>>));
             StringWriter StringWriter = new StringWriter();
@@ -254,4 +264,3 @@ namespace MovieManager.APP
 //TODO 090: gezochte folders bijhouden + (automatische refresh in background)
 //TODO 070: apparte settingsfile
 //TODO 070: verschillende video types: episode, movie, ...
-//TODO 050: tmdb search engine

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.ComponentModel;
+using Model.Interfaces;
 
 namespace Model
 {
@@ -11,7 +12,7 @@ namespace Model
 
     public enum VideoTypeEnum { Video, Movie, Episode };
 
-    public class Video : INotifyPropertyChanged, IEditableObject
+    public class Video : INotifyPropertyChanged, IEditableObject, IThumbnailInfoRetriever
     {
         private int _id;
         private String _idImdb;
@@ -70,7 +71,7 @@ namespace Model
             Genres = Genres == null || Genres.Count == 0 || overwrite ? brother.Genres : Genres;
             Subs = Genres == null || Subs.Count == 0 || overwrite ? brother.Subs : Subs;
             Poster = Poster == null || overwrite ? brother.Poster : Poster;
-            Images = Images == null ||Images.Count == 0 || overwrite ? brother.Images : Images;
+            Images = Images == null || Images.Count == 0 || overwrite ? brother.Images : Images;
             Plot = string.IsNullOrEmpty(Plot) || overwrite ? brother.Plot : Plot;
             Runtime = Runtime == 0 || overwrite ? brother.Runtime : Runtime;
             AnalyseCompleted = brother.AnalyseCompleted;
@@ -160,6 +161,21 @@ namespace Model
                 _idImdb = value;
                 OnPropertyChanged("IdImdb");
             }
+        }
+
+        public ImageInfo Thumbnail
+        {
+            get
+            {
+                if (_images.Count > 0) return _images[0];
+                return null;
+            }
+            set { _images.Insert(0, value); }
+        }
+        public DateTime Year
+        {
+            get { return _release; }
+            set { _release = value; }
         }
 
         public String Name
@@ -306,7 +322,7 @@ namespace Model
             {
                 return new List<string> { "Id", "IdImdb", "Name", "Release", "Rating", "RatingImdb", "Genres", "Path", "LastPlayLocation", "WatchedToEnd", "Subs", "Poster", "Images", "Plot", "Runtime" };
             }
-        } 
+        }
 
         public override string ToString()
         {

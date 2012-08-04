@@ -3,7 +3,7 @@ using System.IO;
 
 namespace MovieManager.APP.Common
 {
-    class DefaultValues
+    public class DefaultValues
     {
         public static readonly DateTime NULL_DATE = new DateTime(1900,1,1);
         public static readonly DateTime FILTER_START_DATE = DateTime.Now.AddYears(-2);

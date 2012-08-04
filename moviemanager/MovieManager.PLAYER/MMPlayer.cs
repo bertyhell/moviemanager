@@ -147,7 +147,8 @@ namespace MovieManager.PLAYER
             //activate overlay
             if (_overlayForm == null)
                 _overlayForm = new Overlay(this);
-            _overlayForm.Show(this);//TODO 080 check if already visible -> now this throws an else exception
+            if (!_overlayForm.Visible)
+                _overlayForm.Show(this);
             _overlayForm.Focus();
             _overlayForm.Size = _pnlVideo.Size;
             _overlayForm.Location = CalculateOverlayLocation();
@@ -185,8 +186,6 @@ namespace MovieManager.PLAYER
 
         public void HandleKeys(Keys keys)
         {
-
-            //TODO 001: closes overlay closes video (ALT + F4)
             //video
             if (keys == Keys.F)
                 ToggleFullScreen();

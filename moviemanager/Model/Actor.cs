@@ -2,17 +2,34 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Model.Interfaces;
+using MovieManager.LOG;
 
 namespace Model
 {
-    public class Actor
+    public class Actor : IThumbnailInfoRetriever
     {
         public Actor()
         {
             ImageUrls = new List<String>();
-            MovieImageUrls= new List<ImageInfo>();
+            MovieImageUrls = new List<ImageInfo>();
         }
 
+        public ImageInfo Thumbnail
+        {
+            get
+            {
+                if (ImageUrls.Count > 0)
+                    return new ImageInfo{Uri = new Uri(ImageUrls[0])};
+                return null;
+            }
+            set { throw new NotImplementedException(); }
+        }
+        public DateTime Year
+        {
+            get { return Birthday; }
+            set { Birthday = value; }
+        }
         public string Name { get; set; }
 
         public int TmdbID { get; set; }
@@ -43,10 +60,9 @@ namespace Model
                         Image.Source = Bitmap;
                         LocalImages.Add(Image);
                     }
-                    catch (Exception E)
+                    catch (Exception Ex)
                     {
-                        //TODO 080 uncomment and fix missing dll errors
-                        //GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("SettingsPanelBase", "SaveAllSettings", Ex.Message));
+                        GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("SettingsPanelBase", "SaveAllSettings", Ex.Message));
                     }
                 }
                 return LocalImages;
@@ -60,6 +76,6 @@ namespace Model
         public String Biography { get; set; }
 
         public DateTime Birthday { get; set; }
-    
+
     }
 }

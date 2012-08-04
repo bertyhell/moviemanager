@@ -26,5 +26,11 @@
     <Setting Name="MediaPlayerPlayOnDoubleClick" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Log_Level" Type="MovieManager.LOG.LogLevelEnum" Scope="User">
+      <Value Profile="(Default)">Error</Value>
+    </Setting>
+    <Setting Name="Log_enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

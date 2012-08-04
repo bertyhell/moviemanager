@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CollectionConverter.cs" />
     <Compile Include="DateTimeUtilities.cs" />
+    <Compile Include="DefaultValues.cs" />
     <Compile Include="ProgressEventArgs.cs" />
     <Compile Include="SerializableKeyValuePair.cs" />
     <Compile Include="SettingsStorage\DuplicateSettingsKeyException.cs" />

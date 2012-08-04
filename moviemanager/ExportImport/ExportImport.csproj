@@ -34,6 +34,10 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\lib\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MovieManager.LOG\bin\Debug\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI">
       <HintPath>..\lib\NPOI.dll</HintPath>
     </Reference>
@@ -88,6 +92,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieManager.LOG\MovieManager.LOG.csproj">
+      <Project>{8C2B5F04-EF8F-46B8-B775-FD602B8AFAED}</Project>
+      <Name>MovieManager.LOG</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQLite\SQLite.csproj">
       <Project>{EF7C715E-4C61-43D6-B83D-90F0FF38424F}</Project>

@@ -9,12 +9,11 @@ using log4net;
 using log4net.Appender;
 using log4net.Config;
 using log4net.Core;
-using log4net.Filter;
 using log4net.Layout;
 
-namespace MovieManager.APP
+namespace MovieManager.LOG
 {
-    class GlobalLogger
+    public class GlobalLogger
     {
         private static readonly GlobalLogger INSTANCE = new GlobalLogger();
 
@@ -28,10 +27,30 @@ namespace MovieManager.APP
             get { return INSTANCE; }
         }
 
-        public Level LogLevel
+        public LogLevelEnum LogLevel
         {
-            get { return LogManager.GetRepository().Threshold; }
-            set { LogManager.GetRepository().Threshold = value; }
+            get
+            {
+                if (LogManager.GetRepository().Threshold == Level.Error) return LogLevelEnum.Error;
+                else if (LogManager.GetRepository().Threshold == Level.Debug) return LogLevelEnum.Debug;
+                else return LogLevelEnum.Info;
+            }
+            set
+            {
+                switch (value)
+                {
+                    case LogLevelEnum.Error:
+                        LogManager.GetRepository().Threshold = Level.Error;
+                        break;
+                    case LogLevelEnum.Debug:
+                        LogManager.GetRepository().Threshold = Level.Debug;
+                        break;
+                    default:
+                        LogManager.GetRepository().Threshold = Level.Info;
+                        break;
+
+                }
+            }
         }
 
         public ILog MovieManagerLogger
