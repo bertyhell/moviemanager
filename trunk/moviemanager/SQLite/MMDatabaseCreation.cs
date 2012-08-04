@@ -25,6 +25,7 @@ namespace SQLite
 
         public static bool ConvertDatabase(string connectionString)
         {
+            Init(connectionString);
             bool Retval = true;
             DatabaseDetails Details;
             try { Details = GetDatabaseDetails(); }
@@ -93,6 +94,10 @@ namespace SQLite
 
                 SQLQuery =
                     "CREATE TABLE Database_version ( id INTEGER PRIMARY KEY AUTOINCREMENT, version INTEGER NOT NULL, timestamp DATETIME default current_timestamp , description VARCHAR(255) )";
+                Database.ExecuteSQL(SQLQuery);
+
+
+                SQLQuery = "CREATE TABLE Video_folders ( id INTEGER PRIMARY KEY AUTOINCREMENT, path VARCHAR(255) NOT NULL UNIQUE, auto_update INTEGER DEFAULT 0 )";
                 Database.ExecuteSQL(SQLQuery);
 
                 AddDefaultValuesVersion001(_conn);

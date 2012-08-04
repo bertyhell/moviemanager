@@ -127,6 +127,7 @@ namespace SQLite
 
             //report as other 95% of progress
             var VideosTableAdapter = new VideosTableAdapter();
+            VideosTableAdapter.Connection = Database.GetConnection();
             for (int I = 0; I < NumberOfVideos; I++)//TODO 001 ping pong compare times with bulk insert
             {
                 VideosTableAdapter.Update(DatasetVideos.Videos[I]);
@@ -134,6 +135,7 @@ namespace SQLite
                     InsertVideosProgress(null, new ProgressEventArgs { MaxNumber = NumberOfVideos, ProgressNumber = PrepareWork + ((I + 1) * NumberOfVideos / (NumberOfVideos + NumberOfEpisodes)) * (100 - PERCENT_PREPARE_WORK) / 100 });//recalculate to number of videos and then to 95%
             }
             var EpisodesTableAdapter = new EpisodesTableAdapter();
+            EpisodesTableAdapter.Connection = Database.GetConnection();
             for (int I = 0; I < NumberOfEpisodes; I++)
             {
                 EpisodesTableAdapter.Update(DatasetVideos.Episodes[I]);
@@ -177,21 +179,25 @@ namespace SQLite
 
         private static void FillDatasetWithAllVideos(DsVideos datasetVideos)
         {
-            (new VideosTableAdapter()).Fill(datasetVideos.Videos);
-            (new EpisodesTableAdapter()).Fill(datasetVideos.Episodes);
-            (new MoviesTableAdapter()).Fill(datasetVideos.Movies);
-            (new GenresTableAdapter()).Fill(datasetVideos.Genres);
-            (new Videos_genresTableAdapter()).Fill(datasetVideos.Videos_genres);
-            (new SeriesTableAdapter()).Fill(datasetVideos.Series);
+            VideosTableAdapter VideosTableAdapter = new VideosTableAdapter();
+            VideosTableAdapter.Connection = Database.GetConnection();
+            EpisodesTableAdapter EpisodesTableAdapter = new EpisodesTableAdapter();
+            EpisodesTableAdapter.Connection = Database.GetConnection();
+            MoviesTableAdapter MoviesTableAdapter = new MoviesTableAdapter();
+            MoviesTableAdapter.Connection = Database.GetConnection();
+            GenresTableAdapter GenresTableAdapter = new GenresTableAdapter();
+            GenresTableAdapter.Connection = Database.GetConnection();
+            Videos_genresTableAdapter Videos_genresTableAdapter = new Videos_genresTableAdapter();
+            Videos_genresTableAdapter.Connection = Database.GetConnection();
+            SeriesTableAdapter SeriesTableAdapter = new SeriesTableAdapter();
+            SeriesTableAdapter.Connection = Database.GetConnection();
 
-            //Dictionary<String, String> tables = new Dictionary<String, String>();
-            //tables.Add(datasetVideos.videos.TableName, "SELECT * FROM " + datasetVideos.videos_genres.TableName);
-            //tables.Add(datasetVideos.movies.TableName, "SELECT * FROM " + datasetVideos.movies.TableName);
-            //tables.Add(datasetVideos.episodes.TableName, "SELECT * FROM " + datasetVideos.episodes.TableName);
-            //tables.Add(datasetVideos.videos_genres.TableName, "SELECT * FROM " + datasetVideos.videos_genres.TableName);
-            //tables.Add(datasetVideos.genres.TableName, "SELECT * FROM " + datasetVideos.genres.TableName);
-
-            //Database.FillDataset(datasetVideos, tables);
+            VideosTableAdapter.Fill(datasetVideos.Videos);
+            EpisodesTableAdapter.Fill(datasetVideos.Episodes);
+            MoviesTableAdapter.Fill(datasetVideos.Movies);
+            GenresTableAdapter.Fill(datasetVideos.Genres);
+            Videos_genresTableAdapter.Fill(datasetVideos.Videos_genres);
+            SeriesTableAdapter.Fill(datasetVideos.Series);
         }
 
         #endregion
@@ -290,7 +296,9 @@ namespace SQLite
                 if (Add)
                     datasetVideos.Videos.AddVideosRow(VideosRow);
 
-                RetVal &= ((new VideosTableAdapter()).Update(datasetVideos) > 0);
+                VideosTableAdapter VideosTableAdapter = new VideosTableAdapter();
+                VideosTableAdapter.Connection = Database.GetConnection();
+                RetVal &= (VideosTableAdapter.Update(datasetVideos) > 0);
 
                 //update movie or episode
                 if (video.VideoType == VideoTypeEnum.Movie)
@@ -318,7 +326,9 @@ namespace SQLite
                 if (MoviesRow != null)
                 {
                     datasetVideos.Movies.RemoveMoviesRow(MoviesRow);
-                    RetVal &= ((new MoviesTableAdapter()).Update(datasetVideos) > 0);
+                    MoviesTableAdapter MoviesTableAdapter = new MoviesTableAdapter();
+                    MoviesTableAdapter.Connection = Database.GetConnection();
+                    RetVal &= (MoviesTableAdapter.Update(datasetVideos) > 0);
                 }
 
                 //add episode information
@@ -343,7 +353,9 @@ namespace SQLite
                     datasetVideos.Episodes.AddEpisodesRow(EpisodesRow);
 
                 //update
-                RetVal &= ((new EpisodesTableAdapter()).Update(datasetVideos) > 0);
+                EpisodesTableAdapter EpisodesTableAdapter = new EpisodesTableAdapter();
+                EpisodesTableAdapter.Connection = Database.GetConnection();
+                RetVal &= (EpisodesTableAdapter.Update(datasetVideos) > 0);
             }
             catch (Exception ex)
             {
@@ -364,7 +376,9 @@ namespace SQLite
                 if (EpisodeRow != null)
                 {
                     datasetVideos.Episodes.RemoveEpisodesRow(EpisodeRow);
-                    RetVal &= ((new EpisodesTableAdapter()).Update(datasetVideos) > 0);
+                    EpisodesTableAdapter EpisodesTableAdapter = new EpisodesTableAdapter();
+                    EpisodesTableAdapter.Connection = Database.GetConnection();
+                    RetVal &= (EpisodesTableAdapter.Update(datasetVideos) > 0);
                 }
 
                 //add episode information
@@ -388,7 +402,9 @@ namespace SQLite
                     datasetVideos.Movies.AddMoviesRow(MoviesRow);
 
                 //update
-                RetVal &= ((new MoviesTableAdapter()).Update(datasetVideos) > 0);
+                MoviesTableAdapter MoviesTableAdapter = new MoviesTableAdapter();
+                MoviesTableAdapter.Connection = Database.GetConnection();
+                RetVal &= (MoviesTableAdapter.Update(datasetVideos) > 0);
             }
             catch (Exception ex)
             {
@@ -414,14 +430,16 @@ namespace SQLite
         public static void AddSerie(Serie serie)
         {
             DsVideos DsVideos = new DsVideos();
-            (new SeriesTableAdapter()).Fill(DsVideos.Series);
+            SeriesTableAdapter SeriesTableAdapter = new SeriesTableAdapter();
+            SeriesTableAdapter.Connection = Database.GetConnection();
+            SeriesTableAdapter.Fill(DsVideos.Series);
 
             DsVideos.SeriesRow SerieRow = DsVideos.Series.NewSeriesRow();
             SerieRow.name = serie.Name;
             DsVideos.Series.AddSeriesRow(SerieRow);
             serie.Id = (int)SerieRow.id;
 
-            (new SeriesTableAdapter()).Update(DsVideos.Series);
+            SeriesTableAdapter.Update(DsVideos.Series);
         }
 
         #endregion

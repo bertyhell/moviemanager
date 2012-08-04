@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -49,12 +53,19 @@
     <Compile Include="DatabaseDetails.cs" />
     <Compile Include="Franchise.cs" />
     <Compile Include="ImageInfo.cs" />
+    <Compile Include="Interfaces\IThumbnailInfoRetriever.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Serie.cs" />
     <Compile Include="Subtitle.cs" />
     <Compile Include="Video.cs" />
     <Compile Include="Episode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovieManager.LOG\MovieManager.LOG.csproj">
+      <Project>{8c2b5f04-ef8f-46b8-b775-fd602b8afaed}</Project>
+      <Name>MovieManager.LOG</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

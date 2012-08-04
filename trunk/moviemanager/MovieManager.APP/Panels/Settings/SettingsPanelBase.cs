@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using MovieManager.LOG;
 
 namespace MovieManager.APP.Panels.Settings
 {
@@ -27,6 +28,9 @@ namespace MovieManager.APP.Panels.Settings
             get { return _iconPath; }
             set { _iconPath = value; }
         }
+
+        public bool IsSelected { get; set; }
+        public bool IsExpanded { get; set; }
 
         /// <summary>
         /// Save the settings of the current panel and its childpanels

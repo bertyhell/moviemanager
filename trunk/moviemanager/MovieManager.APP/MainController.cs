@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Data;
@@ -8,6 +9,8 @@ using System.Windows.Markup;
 using System.Windows.Threading;
 using APP;
 using Model;
+using MovieManager.APP.Commands;
+using MovieManager.APP.Panels.Settings;
 using SQLite;
 using System.ComponentModel;
 using MovieManager.APP.Panels.Filter;
@@ -25,26 +28,28 @@ namespace MovieManager.APP
 
         private MainController()
         {
-            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
-            
-
             //init database
             string DatabasePath = Properties.Settings.Default.DatabasePath;
+            bool DatabaseUpdated = false;
+            if (!File.Exists(DatabasePath))
+            {
+                EditSettingsCommand EditSettingsCommand = new EditSettingsCommand(typeof(DatabaseSettingsPanel));
+                EditSettingsCommand.Execute(null);
+                DatabaseUpdated = true;
+            }
             string ConnectionString = Properties.Settings.Default.ConnectionString.Replace("{path}", DatabasePath);
             MMDatabase.Init(ConnectionString);
-            MMDatabaseCreation.ConvertDatabase(ConnectionString);
+            if (!DatabaseUpdated)
+                MMDatabaseCreation.ConvertDatabase(ConnectionString);
 
             Videos.Clear();
             MMDatabase.SelectAllVideos(Videos);
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
             MMDatabase.VideosChanged += MMDatabaseVideosChanged;
-
-            //init log
-            //new GlobalLogger().EnableLogger();
         }
 
-        
+
         private ICollectionView _videosView;
         public ICollectionView VideosView
         {

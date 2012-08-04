@@ -114,14 +114,24 @@
     <Compile Include="Commands\ImportVideosCommand.cs" />
     <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />
-    <Compile Include="Common\DefaultValues.cs" />
     <Compile Include="Common\ExceptionMessageBox.xaml.cs">
       <DependentUpon>ExceptionMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\EnumBooleanConverter.cs" />
     <Compile Include="Panels\Analyse\GetDetailWorker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Panels\Settings\LoggingSettingsPanel.xaml.cs">
+      <DependentUpon>LoggingSettingsPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\Settings\MediaPlayerSettingsViewModel.cs" />
+    <Compile Include="Panels\Settings\SettingsPanelBase.cs" />
+    <Compile Include="Panels\ThumbnailDescriptionControl.xaml.cs">
+      <DependentUpon>ThumbnailDescriptionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ThumbnailDescriptionListWindow.xaml.cs">
+      <DependentUpon>ThumbnailDescriptionListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Page Include="Common\CheckCombobox.xaml">
       <SubType>Designer</SubType>
@@ -195,6 +205,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\Settings\LoggingSettingsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Panels\Settings\VideoSearchPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -216,6 +230,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Panels\SubtitleEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\ThumbnailDescriptionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\ThumbnailDescriptionListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,7 +295,6 @@
     <Compile Include="Common\CheckCombobox.xaml.cs">
       <DependentUpon>CheckCombobox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GlobalLogger.cs" />
     <Compile Include="Common\NumericBox.xaml.cs">
       <DependentUpon>NumericBox.xaml</DependentUpon>
     </Compile>
@@ -341,7 +362,6 @@
     <Compile Include="Panels\Settings\InternalMediaPlayerSettingsPanel.xaml.cs">
       <DependentUpon>InternalMediaPlayerSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panels\Settings\SettingsPanelBase.cs" />
     <Compile Include="Panels\Settings\MediaPlayerSettingsPanel.xaml.cs">
       <DependentUpon>MediaPlayerSettingsPanel.xaml</DependentUpon>
     </Compile>

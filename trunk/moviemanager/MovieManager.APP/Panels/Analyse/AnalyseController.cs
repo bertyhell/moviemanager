@@ -13,9 +13,7 @@ namespace MovieManager.APP.Panels.Analyse
 
         public AnalyseController()
         {
-            //TODO 030 use videos from maincontroller, don't recollect from database
-            IList<Video> Videos = new List<Video>();
-            MMDatabase.SelectAllVideos(Videos);
+            IList<Video> Videos = MainController.Instance.Videos;
             AnalyseVideos.Clear();
             foreach (Video Video in Videos)
             {

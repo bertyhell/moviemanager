@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Common;
 using ExcelInterop;
 using Model;
+using MovieManager.LOG;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -152,7 +153,7 @@ namespace ExportImport
             }catch(Exception Ex)
             {
                 MessageBox.Show(Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //TODO 030 add to logger LOGGER
+                GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog(typeof(ExcelImportController).FullName, "Import", Ex.Message));
             }
         }
 

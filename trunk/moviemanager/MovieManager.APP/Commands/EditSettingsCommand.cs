@@ -7,6 +7,33 @@ namespace MovieManager.APP.Commands
 {
     class EditSettingsCommand : ICommand
     {
+        private SettingsWindow _settingsWindow;
+        private List<SettingsPanelBase> _panels;
+        public EditSettingsCommand()
+        {
+            _panels = new List<SettingsPanelBase>{
+                new DatabaseSettingsPanel(),
+                new FileRenameSettingsPanel(),
+                new LoggingSettingsPanel(),
+                new MediaPlayerSettingsPanel(),
+                new VideoSearchPanel()
+            };
+
+        }
+
+        public EditSettingsCommand(Type visiblePanel)
+            : this()
+        {
+            Object Object =Activator.CreateInstance(visiblePanel);
+            if(!(Object is SettingsPanelBase))
+                throw new TypeInitializationException(this.GetType().FullName, new Exception("The given type " + visiblePanel.FullName + " does not implement interface 'SettingsPanelBase'"));
+
+            SettingsPanelBase Panel = (SettingsPanelBase) Object;
+            Panel.IsExpanded = true;
+            Panel.IsSelected = true;
+            _panels = new List<SettingsPanelBase> { Panel };
+        }
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -22,15 +49,8 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            List<SettingsPanelBase> Panels = new List<SettingsPanelBase>{
-                new DatabaseSettingsPanel(),
-                new FileRenameSettingsPanel(),
-                new MediaPlayerSettingsPanel(),
-                new VideoSearchPanel()
-            };
-
-            SettingsWindow SettingsWindow = new SettingsWindow(Panels) { Owner = MainWindow.Instance };
-            SettingsWindow.ShowDialog();
+            _settingsWindow = new SettingsWindow(_panels) { Owner = MainWindow.Instance };
+            _settingsWindow.ShowDialog();
         }
     }
 }

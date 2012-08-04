@@ -48,6 +48,11 @@ namespace SQLite
             return _conn;
         }
 
+        public static SQLiteConnection GetConnection()
+        {
+            return _conn;
+        }
+
         public static SQLiteCommand GetCommand(SQLiteConnection conn, SQLiteTransaction transaction, string sql, params SQLiteParameter[] @params)
         {
             SQLiteCommand Cmd = new SQLiteCommand(sql) { Transaction = transaction, Connection = conn };

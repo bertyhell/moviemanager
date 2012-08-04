@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:conv="clr-namespace:MovieManager.APP.Converters"
-                       xmlns:Settings="clr-namespace:MovieManager.APP.Panels.Settings" mc:Ignorable="d" 
+                 xmlns:Settings="clr-namespace:MovieManager.APP.Panels.Settings" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
+
     <Settings:SettingsPanelBase.Resources>
         <conv:IntToVersionConverter x:Key="IntToVersionConverters"/>
         <conv:TimestampConverter x:Key="TimestampConverter"/>
     </Settings:SettingsPanelBase.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,17 +20,17 @@
             <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        
-        <TextBox x:Name="_txtFilePath" Text="{Binding PathToFile, Mode=OneWay}" />
+
+        <TextBox x:Name="_txtFilePath" Text="{Binding PathToDatabase}" IsReadOnly="True" />
         <Button Grid.Row="0" Grid.Column="2" Content="Browse ..." Click="Button_Click" />
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" DataContext="{Binding DatabaseDetails}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="10"/>
@@ -38,7 +38,7 @@
                 <RowDefinition Height="10"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="10"/>
@@ -51,10 +51,10 @@
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Required version: "/>
             <TextBox x:Name="_txtDatabaseRequiredVersion" Grid.Row="2" Grid.Column="2" Text="{Binding RequiredVersion, Mode=OneWay, Converter={StaticResource IntToVersionConverters}}" IsReadOnly="True" />
 
-            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="Update database" Click="_btnCreateDatabase_Click"/>
+            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="Update/Create database" Click="_btnCreateDatabase_Click"/>
         </Grid>
 
-        <DataGrid x:Name="_grdVersionDetails" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding VersionRecords, Mode=OneWay}" AutoGenerateColumns="False" GridLinesVisibility="None">
+        <DataGrid x:Name="_grdVersionDetails" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" DataContext="{Binding DatabaseDetails}" ItemsSource="{Binding VersionRecords, Mode=OneWay}" AutoGenerateColumns="False" GridLinesVisibility="None">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Version" Binding="{Binding Version, Converter={StaticResource IntToVersionConverters}}" />
                 <DataGridTextColumn Header="Timestamp" Binding="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"/>

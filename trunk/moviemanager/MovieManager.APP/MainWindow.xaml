@@ -73,7 +73,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Release date" Binding="{Binding Release, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Release date" Binding="{Binding Release, StringFormat=\{0:d\}}" />
             </DataGrid.Columns>
         </DataGrid>
         

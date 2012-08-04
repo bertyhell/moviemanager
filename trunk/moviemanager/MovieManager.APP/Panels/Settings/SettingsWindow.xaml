@@ -11,32 +11,38 @@
         <Grid.Resources>
             <local:Resource x:Key="LocStrings"/>
         </Grid.Resources>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <extToolkit:WatermarkTextBox Watermark="Search"  x:Name="_txtFilter" Grid.Column="1" HorizontalAlignment="Stretch" />
             <TreeView x:Name="_trvSettingPanels" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding}" >
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected}"/>
+                        <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded}"/>
+                    </Style>
+                </TreeView.Resources>
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type Settings:SettingsPanelBase}" ItemsSource="{Binding ChildPanels}">
                         <StackPanel Orientation="Horizontal">
@@ -52,11 +58,11 @@
                 </TreeView.ItemContainerStyle>
             </TreeView>
         </Grid>
-        
+
         <StackPanel x:Name="_settingsPanelHolder" Grid.Row="0" Grid.Column="2">
-            
+
         </StackPanel>
-        
+
         <Button x:Name="_btnSave" Grid.Row="2" Grid.Column="2" Content="{Binding Source={StaticResource LocStrings}, Path=Save}" Click="BtnSaveClick"/>
     </Grid>
 </Window>
