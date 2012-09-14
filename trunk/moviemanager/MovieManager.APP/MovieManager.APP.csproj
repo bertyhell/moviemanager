@@ -111,25 +111,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cache\ApplicationCache.cs" />
     <Compile Include="Commands\ImportVideosCommand.cs" />
     <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />
     <Compile Include="Common\ExceptionMessageBox.xaml.cs">
       <DependentUpon>ExceptionMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="Converters\EnumBooleanConverter.cs" />
     <Compile Include="Panels\Analyse\GetDetailWorker.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Panels\Common\PreviewItem.xaml.cs">
+      <DependentUpon>PreviewItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\Settings\LoggingSettingsPanel.xaml.cs">
       <DependentUpon>LoggingSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\Settings\MediaPlayerSettingsViewModel.cs" />
     <Compile Include="Panels\Settings\SettingsPanelBase.cs" />
-    <Compile Include="Panels\ThumbnailDescriptionControl.xaml.cs">
+    <Compile Include="Panels\Common\ThumbnailDescriptionControl.xaml.cs">
       <DependentUpon>ThumbnailDescriptionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panels\ThumbnailDescriptionListWindow.xaml.cs">
+    <Compile Include="Panels\Common\ThumbnailDescriptionListWindow.xaml.cs">
       <DependentUpon>ThumbnailDescriptionListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
@@ -162,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Panels\Analyse\SuggestionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\Common\PreviewItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,11 +242,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panels\ThumbnailDescriptionControl.xaml">
+    <Page Include="Panels\Common\ThumbnailDescriptionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panels\ThumbnailDescriptionListWindow.xaml">
+    <Page Include="Panels\Common\ThumbnailDescriptionListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -266,10 +275,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Panels\Search\SearchWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -564,6 +569,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\log_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\no_image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

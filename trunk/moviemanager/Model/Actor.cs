@@ -7,7 +7,7 @@ using MovieManager.LOG;
 
 namespace Model
 {
-    public class Actor : IThumbnailInfoRetriever
+    public class Actor : IPreviewInfoRetriever
     {
         public Actor()
         {
@@ -25,6 +25,13 @@ namespace Model
             }
             set { throw new NotImplementedException(); }
         }
+
+        public Uri Poster
+        {
+            get { return new Uri(ImageUrls[0]); }
+            set{}
+        }
+
         public DateTime Year
         {
             get { return Birthday; }

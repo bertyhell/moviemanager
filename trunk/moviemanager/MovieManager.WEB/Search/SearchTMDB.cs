@@ -37,6 +37,9 @@ namespace MovieManager.WEB.Search
                 {
                     TMDBConfiguration.ProfileSizes.Add((string)ProfileSizes);
                 }
+                //TODO 100: retrieve image size from settings
+                //TODO 060: Connect to service when starting app
+                //TODO 005: Cache the image sizes --> no internet
             }
         }
 

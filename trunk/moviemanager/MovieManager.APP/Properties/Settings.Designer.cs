@@ -142,5 +142,41 @@ namespace MovieManager.APP.Properties {
                 this["Log_enabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\alexander\\Videos\\TheVideoCollector\\Cache")]
+        public string Cache_folder {
+            get {
+                return ((string)(this["Cache_folder"]));
+            }
+            set {
+                this["Cache_folder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("High")]
+        public global::Common.ImageQuality ImageQuality {
+            get {
+                return ((global::Common.ImageQuality)(this["ImageQuality"]));
+            }
+            set {
+                this["ImageQuality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Cache_enabled {
+            get {
+                return ((bool)(this["Cache_enabled"]));
+            }
+            set {
+                this["Cache_enabled"] = value;
+            }
+        }
     }
 }

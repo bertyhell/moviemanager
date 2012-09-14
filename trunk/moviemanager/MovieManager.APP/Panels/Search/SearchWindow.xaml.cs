@@ -33,10 +33,10 @@ namespace MovieManager.APP.Panels.Search
                 List<Actor> SearchedActors = SearchTMDB.SearchActor(options.SearchTerm);
                 if (SearchedActors.Count > 1)
                 {
-                    ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = SearchedActors.ToList<IThumbnailInfoRetriever>() };
+                    ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = SearchedActors.ToList<IPreviewInfoRetriever>() };
                     Window.ShowDialog();
 
-                    SearchForActor((Actor)Window.SelectedThumbnailDescription);
+                    SearchForActor((Actor)Window.SelectedPreviewDescription);
                 }
                 else if (SearchedActors.Count == 1)
                 {
@@ -63,10 +63,10 @@ namespace MovieManager.APP.Panels.Search
                     List<Movie> Movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
                     if(Movies.Count > 1)
                     {
-                        ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = Movies.ToList<IThumbnailInfoRetriever>() };
+                        ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = Movies.ToList<IPreviewInfoRetriever>() };
                         Window.ShowDialog();
 
-                        Movie = (Movie)Window.SelectedThumbnailDescription;
+                        Movie = (Movie)Window.SelectedPreviewDescription;
                     }
                     else if (Movies.Count == 1)
                     {
