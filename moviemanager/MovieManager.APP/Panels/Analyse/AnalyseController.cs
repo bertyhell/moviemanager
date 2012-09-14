@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
+using System.IO;
 using Common;
 using Model;
+using MovieManager.APP.Cache;
 using SQLite;
 
 namespace MovieManager.APP.Panels.Analyse
@@ -148,9 +151,23 @@ namespace MovieManager.APP.Panels.Analyse
             var Videos = new List<Video>();
             foreach (var AnalyseVideo in AnalyseVideos)
             {
+                Video Video = AnalyseVideo.SelectedCandidate;
                 if (AnalyseVideo.SelectedCandidate != null)
                 {
                     AnalyseVideo.Video.CopyAnalyseVideoInfo(AnalyseVideo.SelectedCandidate);
+                    Dictionary<string, Image> Images = new Dictionary<string, Image>();
+                    foreach (ImageInfo ImageInfo in Video.Images)
+                    {
+                        if (ImageInfo.Uri != null)
+                        {
+                            string FileName = Path.GetFileName(ImageInfo.Uri.AbsolutePath);
+                            if (FileName != null)
+                                Images.Add(FileName, Image.FromFile(ImageInfo.Uri.AbsoluteUri));
+                        }
+                    }
+                    ApplicationCache.AddVideoImages(Video.Id, Images,CacheImageType.Backdrops);
+
+
                     Videos.Add(AnalyseVideo.Video);
                 }
             }

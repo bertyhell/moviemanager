@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -31,5 +32,18 @@ namespace Common
 
             return ImageSource;
         }
+
+        public static void SaveImageToHDD(string url, string pathOnHdd)
+        {
+            WebClient Client = new WebClient();
+            Client.DownloadFile(url,pathOnHdd);
+        }
+    }
+
+    public enum ImageQuality
+    {
+        Low = 0,
+        Medium = 1,
+        High = 2
     }
 }

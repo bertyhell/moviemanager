@@ -12,7 +12,7 @@ namespace Model
 
     public enum VideoTypeEnum { Video, Movie, Episode };
 
-    public class Video : INotifyPropertyChanged, IEditableObject, IThumbnailInfoRetriever
+    public class Video : INotifyPropertyChanged, IEditableObject, IPreviewInfoRetriever
     {
         private int _id;
         private String _idImdb;
@@ -333,7 +333,12 @@ namespace Model
 
         public Uri Poster
         {
-            get { return _poster; }
+            get
+            {
+                if (_poster == null && _images != null && _images.Count > 0)
+                    return _images[0].Uri;
+                return _poster;
+            }
             set
             {
                 _poster = value;
@@ -348,6 +353,8 @@ namespace Model
             {
                 _images = value;
                 OnPropertyChanged("Images");
+                if(_poster == null)
+                    OnPropertyChanged("Poster");
             }
         }
 

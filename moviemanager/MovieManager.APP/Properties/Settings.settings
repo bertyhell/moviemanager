@@ -32,5 +32,14 @@
     <Setting Name="Log_enabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Cache_folder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\alexander\Videos\TheVideoCollector\Cache</Value>
+    </Setting>
+    <Setting Name="ImageQuality" Type="Common.ImageQuality" Scope="User">
+      <Value Profile="(Default)">High</Value>
+    </Setting>
+    <Setting Name="Cache_enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

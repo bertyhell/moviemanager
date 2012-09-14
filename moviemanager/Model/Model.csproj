@@ -53,7 +53,7 @@
     <Compile Include="DatabaseDetails.cs" />
     <Compile Include="Franchise.cs" />
     <Compile Include="ImageInfo.cs" />
-    <Compile Include="Interfaces\IThumbnailInfoRetriever.cs" />
+    <Compile Include="Interfaces\IPreviewInfoRetriever.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Serie.cs" />
     <Compile Include="Subtitle.cs" />
