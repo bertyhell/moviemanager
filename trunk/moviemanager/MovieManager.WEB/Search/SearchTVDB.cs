@@ -137,9 +137,9 @@ namespace MovieManager.WEB.Search
 
                     foreach (JToken JActor in Results)
                     {
-                        Actor LocalActor = new Actor { TmdbID = (int)JActor["id"], Name = (string)JActor["name"] };
-                        LocalActor.ImageUrls.Add(TMDBConfiguration.BaseUrl + TMDBConfiguration.SeletedPosterSize +
-                                                                (string)JActor["profile_path"]);
+                        Actor LocalActor = new Actor { TmdbId = (int)JActor["id"], Name = (string)JActor["name"] };
+                        LocalActor.Images.Add(new ImageInfo(){Uri= new Uri(TMDBConfiguration.BaseUrl + TMDBConfiguration.SeletedPosterSize +
+                                                                (string)JActor["profile_path"])});
                         Actors.Add(LocalActor);
                     }
                 }
@@ -156,7 +156,7 @@ namespace MovieManager.WEB.Search
             try
             {
                 //do request
-                Uri Request = new Uri("http://api.themoviedb.org/3/person/" + actor.TmdbID + "?api_key=" + APIKEY);
+                Uri Request = new Uri("http://api.themoviedb.org/3/person/" + actor.TmdbId + "?api_key=" + APIKEY);
                 String Response = SimpleWebRequest.DoJSONRequest(Request);
 
                 if (!string.IsNullOrEmpty(Response))
@@ -180,7 +180,7 @@ namespace MovieManager.WEB.Search
             try
             {
                 //do request
-                Uri Request = new Uri("http://api.themoviedb.org/3/person/" + actor.TmdbID + "/credits?api_key=" + APIKEY);
+                Uri Request = new Uri("http://api.themoviedb.org/3/person/" + actor.TmdbId + "/credits?api_key=" + APIKEY);
                 String Response = SimpleWebRequest.DoJSONRequest(Request);
 
                 if (!string.IsNullOrEmpty(Response))

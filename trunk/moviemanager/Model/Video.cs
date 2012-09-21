@@ -14,7 +14,7 @@ namespace Model
 
     public class Video : INotifyPropertyChanged, IEditableObject, IPreviewInfoRetriever
     {
-        private int _id;
+        private uint _id;
         private String _idImdb;
         private String _name;
         private DateTime _release;
@@ -27,7 +27,7 @@ namespace Model
         private bool _watchedToEnd;
         private ObservableCollection<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
-        private Uri _poster;
+        private ImageInfo _poster;
         private List<ImageInfo> _images;
         private String _plot;
         private bool _analyseCompleted;
@@ -64,6 +64,7 @@ namespace Model
         {
             //TODO 040 default null values opslaan in centrale locatie
             //TODO 080 also do this for movie and episode
+            //Id = Id == 0 || overwrite ? brother.Id : Id;
             IdImdb = string.IsNullOrEmpty(IdImdb) || overwrite ? brother.IdImdb : IdImdb;
             Name = string.IsNullOrEmpty(Name) || overwrite ? brother.Name : Name;
             Release = Release.Year == 1900 || overwrite ? brother.Release : Release;
@@ -143,7 +144,7 @@ namespace Model
             set { _analyseCompleted = value; OnPropertyChanged("AnalyseCompleted"); }
         }
 
-        public int Id
+        public uint Id
         {
             get { return _id; }
             set
@@ -331,12 +332,12 @@ namespace Model
 
         #region properties for search results
 
-        public Uri Poster
+        public ImageInfo Poster
         {
             get
             {
                 if (_poster == null && _images != null && _images.Count > 0)
-                    return _images[0].Uri;
+                    return _images[0];
                 return _poster;
             }
             set
@@ -380,7 +381,7 @@ namespace Model
 
         #region ieditableobject
 
-        private int _oldid;
+        private uint _oldid;
         private String _oldidImdb;
         private String _oldname;
         private DateTime _oldrelease;
@@ -393,7 +394,7 @@ namespace Model
         private bool _oldwatchedToEnd;
         private ObservableCollection<Subtitle> _oldsubs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
-        private Uri _oldposter;
+        private ImageInfo _oldposter;
         private List<ImageInfo> _oldimages;
         private String _oldplot;
         private long _oldRuntime;

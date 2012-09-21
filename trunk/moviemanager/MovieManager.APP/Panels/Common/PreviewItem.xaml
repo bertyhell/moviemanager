@@ -7,16 +7,16 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="_contentGrid">
-        
+
         <Grid.Resources>
             <Conv:ImageSourceConverter x:Key="ImageSourceConv"/>
         </Grid.Resources>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding Item.Poster, Converter={StaticResource ImageSourceConv}}"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding Item, Converter={StaticResource ImageSourceConv}}"/>
         <Label Content="{Binding Item.Name}" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" />
     </Grid>
 </UserControl>

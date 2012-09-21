@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using Model.Interfaces;
-using MovieManager.LOG;
 
 namespace Model
 {
@@ -11,25 +8,62 @@ namespace Model
     {
         public Actor()
         {
-            ImageUrls = new List<String>();
+            Images = new List<ImageInfo>();
             MovieImageUrls = new List<ImageInfo>();
         }
+
+        public uint Id { get; set; }
 
         public ImageInfo Thumbnail
         {
             get
             {
-                if (ImageUrls.Count > 0)
-                    return new ImageInfo{Uri = new Uri(ImageUrls[0])};
-                return null;
+                if (Images.Count > 0)
+                {
+                    return Images[0];
+                }
+                else
+                {
+                    return null;
+                }
             }
-            set { throw new NotImplementedException(); }
+            set
+            {
+                if (Images.Count > 0)
+                {
+                    Images[0] = value;
+                }
+                else
+                {
+                    Images.Add(value);
+                }
+            }
         }
 
-        public Uri Poster
+        public ImageInfo Poster
         {
-            get { return new Uri(ImageUrls[0]); }
-            set{}
+            get
+            {
+                if (Images.Count > 0)
+                {
+                    return Images[0];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (Images.Count > 0)
+                {
+                    Images[0] = value;
+                }
+                else
+                {
+                    Images.Add(value);
+                }
+            }
         }
 
         public DateTime Year
@@ -39,42 +73,19 @@ namespace Model
         }
         public string Name { get; set; }
 
-        public int TmdbID { get; set; }
+        public int TmdbId { get; set; }
 
-        public void AddImage(String url)
+        public void AddImage(Uri imageUri)
         {
-            ImageUrls.Add(url);
+            Images.Add(new ImageInfo { Uri = imageUri });
         }
 
-        public List<string> ImageUrls { get; set; }
-
-        public List<Image> Images
+        public void AddImage(ImageInfo imageInfo)
         {
-            get
-            {
-                List<Image> LocalImages = new List<Image>();
-                foreach (string ImageUrl in ImageUrls)
-                {
-                    try
-                    {
-                        Image Image = new Image();
-
-                        BitmapImage Bitmap = new BitmapImage();
-                        Bitmap.BeginInit();
-                        Bitmap.UriSource = new Uri(ImageUrl, UriKind.Absolute);
-                        Bitmap.EndInit();
-
-                        Image.Source = Bitmap;
-                        LocalImages.Add(Image);
-                    }
-                    catch (Exception Ex)
-                    {
-                        GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("SettingsPanelBase", "SaveAllSettings", Ex.Message));
-                    }
-                }
-                return LocalImages;
-            }
+            Images.Add(imageInfo);
         }
+
+        public List<ImageInfo> Images { get; set; }
 
         public List<ImageInfo> MovieImageUrls { get; set; }
 

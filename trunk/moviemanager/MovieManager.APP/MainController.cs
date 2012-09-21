@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
-using System.Threading;
-using System.Windows;
 using System.Windows.Data;
-using System.Windows.Markup;
-using System.Windows.Threading;
-using APP;
+using Common;
 using Model;
+using MovieManager.APP.Cache;
 using MovieManager.APP.Commands;
 using MovieManager.APP.Panels.Settings;
 using SQLite;
@@ -47,6 +44,7 @@ namespace MovieManager.APP
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
             MMDatabase.VideosChanged += MMDatabaseVideosChanged;
+            //ApplicationCache.AddVideoImages(66, new List<Uri>() { new Uri("http://www.cathedral-design.be/upload/google-logo-voor-nieuws-5178_google_logo.jpg") }, CacheImageType.Images, ImageQuality.High);
         }
 
 

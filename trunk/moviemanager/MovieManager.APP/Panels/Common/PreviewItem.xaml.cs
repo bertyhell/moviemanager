@@ -9,14 +9,12 @@ namespace MovieManager.APP.Panels.Common
     /// <summary>
     /// Interaction logic for PreviewItem.xaml
     /// </summary>
-    public partial class PreviewItem : UserControl
+    public partial class PreviewItem : UserControl, INotifyPropertyChanged
     {
-        private readonly PreviewItemController _controller = new PreviewItemController();
-
         public PreviewItem()
         {
             InitializeComponent();
-            _contentGrid.DataContext = _controller;
+            _contentGrid.DataContext = this;
         }
 
         public static readonly DependencyProperty ITEM_PROPERTY =
@@ -24,22 +22,9 @@ namespace MovieManager.APP.Panels.Common
 
         public static void ItemPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            ((PreviewItem)sender)._controller.Item = (IPreviewInfoRetriever)e.NewValue;
+            ((PreviewItem)sender).Item = (IPreviewInfoRetriever)e.NewValue;
         }
 
-
-        public IPreviewInfoRetriever Item
-        {
-            get { return _controller.Item; }
-            set
-            {
-                _controller.Item = value;
-            }
-        }
-    }
-
-    public class PreviewItemController : INotifyPropertyChanged
-    {
         private IPreviewInfoRetriever _item;
         public IPreviewInfoRetriever Item
         {
@@ -54,12 +39,11 @@ namespace MovieManager.APP.Panels.Common
             }
         }
 
-        protected void OnPropChanged(string field)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(field));
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropChanged(string propertyName)
+        {
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
