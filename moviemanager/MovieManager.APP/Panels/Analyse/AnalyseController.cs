@@ -152,9 +152,9 @@ namespace MovieManager.APP.Panels.Analyse
             foreach (var AnalyseVideo in AnalyseVideos)
             {
                 Video Video = AnalyseVideo.SelectedCandidate;
-                if (AnalyseVideo.SelectedCandidate != null)
+                if (Video != null)
                 {
-                    AnalyseVideo.Video.CopyAnalyseVideoInfo(AnalyseVideo.SelectedCandidate);
+                    AnalyseVideo.Video.CopyAnalyseVideoInfo(Video);
                     var Images = new List<Uri>();
                     foreach (ImageInfo ImageInfo in Video.Images)
                     {

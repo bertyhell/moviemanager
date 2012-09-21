@@ -41,20 +41,41 @@ namespace MovieManager.APP.Cache
             }
         }
 
-        public static void AddVideoImage(uint videoId, Uri image, CacheImageType imageType, ImageQuality imageQuality)
+        public static Uri AddVideoImage(uint videoId, Uri image, CacheImageType imageType, ImageQuality imageQuality)
         {
-
-            if ((int)imageType >= (int)CacheImageType.PostersAndImages)
-                throw new NotSupportedException("Combined cache image type not supported for setters!");
-
-            string VideosDir = Path.Combine(_cacheFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), imageQuality.ToString());
-
-            Directory.CreateDirectory(VideosDir);
-            Stream ImageStream = WebRequest.Create(image).GetResponse().GetResponseStream();
-            if (ImageStream != null)
+            try
             {
-                Bitmap Bmp = (Bitmap)Image.FromStream(ImageStream);
-                Bmp.Save(Path.Combine(VideosDir, Math.Abs(image.GetHashCode()) + ".jpg"));
+                if ((int)imageType >= (int)CacheImageType.PostersAndImages)
+                    throw new NotSupportedException("Combined cache image type not supported for setters!");
+
+                string VideosDir = Path.Combine(_cacheFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), imageQuality.ToString());
+
+                Directory.CreateDirectory(VideosDir);
+                Stream ImageStream = WebRequest.Create(image).GetResponse().GetResponseStream();
+                if (ImageStream != null)
+                {
+                    Bitmap Bmp = (Bitmap)Image.FromStream(ImageStream);
+                    string FilePath = Path.Combine(VideosDir, Math.Abs(image.GetHashCode()) + ".jpg");
+
+                    Bmp.Save(FilePath);
+                    return new Uri(FilePath);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (WebException Ex)
+            {
+                if (Ex.Message.Contains("404"))
+                {
+                    //ignore exception
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
 

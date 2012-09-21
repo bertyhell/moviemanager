@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MovieManager.PLAYER.enums;
-using System.Windows.Forms;
 
 namespace MovieManager.PLAYER.interop
 {
