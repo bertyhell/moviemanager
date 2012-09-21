@@ -155,17 +155,15 @@ namespace MovieManager.APP.Panels.Analyse
                 if (AnalyseVideo.SelectedCandidate != null)
                 {
                     AnalyseVideo.Video.CopyAnalyseVideoInfo(AnalyseVideo.SelectedCandidate);
-                    Dictionary<string, Image> Images = new Dictionary<string, Image>();
+                    var Images = new List<Uri>();
                     foreach (ImageInfo ImageInfo in Video.Images)
                     {
                         if (ImageInfo.Uri != null)
                         {
-                            string FileName = Path.GetFileName(ImageInfo.Uri.AbsolutePath);
-                            if (FileName != null)
-                                Images.Add(FileName, Image.FromFile(ImageInfo.Uri.AbsoluteUri));
+                                Images.Add(new Uri(ImageInfo.Uri.AbsoluteUri));
                         }
                     }
-                    ApplicationCache.AddVideoImages(Video.Id, Images,CacheImageType.Backdrops);
+                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.High);
 
 
                     Videos.Add(AnalyseVideo.Video);

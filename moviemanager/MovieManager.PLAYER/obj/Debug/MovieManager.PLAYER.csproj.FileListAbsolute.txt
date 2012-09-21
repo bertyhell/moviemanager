@@ -12,8 +12,3 @@ C:\MMproject\MovieManager.PLAYER\bin\Debug\Common.pdb
 C:\MMproject\MovieManager.PLAYER\bin\Debug\Model.pdb
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.dll
 C:\MMproject\MovieManager.PLAYER\obj\Debug\MovieManager.PLAYER.pdb
-C:\MMProject\MovieManager.PLAYER\bin\Debug\MovieManager.LOG.dll
-C:\MMProject\MovieManager.PLAYER\bin\Debug\log4net.dll
-C:\MMProject\MovieManager.PLAYER\bin\Debug\System.Data.SQLite.dll
-C:\MMProject\MovieManager.PLAYER\bin\Debug\MovieManager.LOG.pdb
-C:\MMProject\MovieManager.PLAYER\bin\Debug\System.Data.SQLite.xml

@@ -38,7 +38,7 @@ namespace SQLite
                 {
                     var Video = new Video
                     {
-                        Id = (int)Row.id,
+                        Id = (uint) Row.id,
                         IdImdb = Row.id_imdb,
                         Name = Row.name,
                         Release = Row.release,
@@ -51,8 +51,8 @@ namespace SQLite
                     //get genre from dataset
                     foreach (DataRow DataRow in VideosGenresDataTable.Select(VideosGenresDataTable.video_idColumn.ColumnName + " = " + Video.Id))
                     {
-                        var GenreID = (int)(long)DataRow[VideosGenresDataTable.genre_idColumn.ColumnName];
-                        DataRow GenreRow = GenresDataTable.FindBygen_id(GenreID);
+                        var GenreId = (int)(long)DataRow[VideosGenresDataTable.genre_idColumn.ColumnName];
+                        DataRow GenreRow = GenresDataTable.FindBygen_id(GenreId);
                         Video.Genres.Add((string)GenreRow[GenresDataTable.gen_labelColumn]);
                     }
 
@@ -107,7 +107,7 @@ namespace SQLite
                     Row.path = videos[I].Path;
                     Row.name = videos[I].Name;
                     DatasetVideos.Videos.AddVideosRow(Row);
-                    videos[I].Id = (int)Row.id;
+                    videos[I].Id = (uint) Row.id;
 
                     if (videos[I] is Episode)
                     {

@@ -16,6 +16,7 @@ namespace MovieManager.APP
     {
         void DispatcherUnhandledExceptionEventHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+#if RELEASE
             // Process unhandled exception
             new ExceptionMessageBox(e.Exception, "Unhandled exeption has occured, please send this info to info.taxrebel@gmail.com").Show();
 
@@ -24,6 +25,7 @@ namespace MovieManager.APP
 
             // Prevent default unhandled exception processing
             e.Handled = true;
+#endif
         }
 
         protected override void OnStartup(System.Windows.StartupEventArgs e)

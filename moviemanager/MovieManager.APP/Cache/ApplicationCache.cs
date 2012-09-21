@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Windows.Media;
 using Common;
-using MovieManager.WEB.Search;
+using Model;
 
 namespace MovieManager.APP.Cache
 {
     public class ApplicationCache
     {
-        private static string _videosFolder;
-        private static string _actorsFolder;
+        private static string _cacheFolder;
 
         static ApplicationCache()
         {
@@ -23,50 +23,83 @@ namespace MovieManager.APP.Cache
         {
             var CacheFolder = Properties.Settings.Default.Cache_folder;
             Directory.CreateDirectory(CacheFolder);
-            _videosFolder = Path.Combine(CacheFolder, "Videos");
-            Directory.CreateDirectory(_videosFolder);
-            _actorsFolder = Path.Combine(CacheFolder, "Actors");
-            Directory.CreateDirectory(_actorsFolder);
+            _cacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), @"TheVideoCollector\Cache");//TODO 060 allow to change in settings
+
         }
 
-        public static void AddVideoImages(int videoId, Dictionary<string,Image> images, CacheImageType imageType)
+        public static void AddVideoImages(uint videoId, List<Uri> images, CacheImageType imageType, ImageQuality imageQuality)
         {
-            if((int)imageType >= (int)CacheImageType.PostersAndBackdrops)
+            if ((int)imageType >= (int)CacheImageType.PostersAndImages)
                 throw new NotSupportedException("Combined cache image type not supported for setters!");
-            ImageQuality BackdropSize = Properties.Settings.Default.ImageQuality;
-            string VideoDir = Path.Combine(_videosFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), BackdropSize.ToString());
-            Directory.CreateDirectory(VideoDir);
-            foreach (KeyValuePair<string, Image> Pair in images)
+
+            string VideosDir = Path.Combine(_cacheFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), imageQuality.ToString());
+
+            Directory.CreateDirectory(VideosDir);
+            foreach (Uri ImageUri in images)
             {
-                Pair.Value.Save(Path.Combine(VideoDir, Pair.Key));
+                AddVideoImage(videoId, ImageUri, imageType, imageQuality);
             }
         }
 
-        public static List<Image> GetImages(int videoId, CacheImageType imageType)
+        public static void AddVideoImage(uint videoId, Uri image, CacheImageType imageType, ImageQuality imageQuality)
         {
-            List<Image> RetVal = new List<Image>();
 
+            if ((int)imageType >= (int)CacheImageType.PostersAndImages)
+                throw new NotSupportedException("Combined cache image type not supported for setters!");
+
+            string VideosDir = Path.Combine(_cacheFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), imageQuality.ToString());
+
+            Directory.CreateDirectory(VideosDir);
+            Stream ImageStream = WebRequest.Create(image).GetResponse().GetResponseStream();
+            if (ImageStream != null)
+            {
+                Bitmap Bmp = (Bitmap)Image.FromStream(ImageStream);
+                Bmp.Save(Path.Combine(VideosDir, Math.Abs(image.GetHashCode()) + ".jpg"));
+            }
+        }
+
+        public static List<ImageSource> GetImages(int videoId, CacheImageType imageType)
+        {
+            var RetVal = new List<ImageSource>();
+
+            string VideoDir = Path.Combine(_cacheFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), Properties.Settings.Default.ImageQuality.ToString());
+
+            foreach (string ImagePath in Directory.GetFiles(VideoDir))
+            {
+                ImageSourceConverter Converter = new ImageSourceConverter();
+                RetVal.Add((ImageSource)Converter.ConvertTo(ImagePath, typeof(ImageSource)));
+            }
             return RetVal;
         }
 
-        public static Image GetImage(string uri, CacheImageType imageType)
+        public static Uri GetImage(uint videoId, Uri imageUri, CacheImageType imageType)
         {
-            string hashCode = uri.GetHashCode();
-            ImageQuality minImageQuality = Properties.Settings.Default.ImageQuality;
-            string VideoDir = Path.Combine(_videosFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), minImageQuality.ToString());
+            string FilePath = Path.Combine(
+                _cacheFolder,
+                videoId.ToString(CultureInfo.InvariantCulture),
+                imageType.ToString(),
+                Properties.Settings.Default.ImageQuality.ToString(),
+                Math.Abs(imageUri.GetHashCode()) + ".jpg");
+
+            //TODO 030 check higher quality images
+            //TODO 060 download image if not in cache
+            //TODO make 1 get method
+
+            if (!File.Exists(FilePath))
+            {
+                AddVideoImage(videoId, imageUri, imageType, Properties.Settings.Default.ImageQuality);
+            }
+            return new Uri(FilePath);
 
         }
-
-
-
     }
 
     public enum CacheImageType
     {
-        Backdrops = 0,
+        Images = 0,
         Posters = 1,
-        Profiles = 2,
-        PostersAndBackdrops =3
+        Portraits = 2,
+        PostersAndImages = 3
     }
 
 }
