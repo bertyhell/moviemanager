@@ -291,6 +291,7 @@ namespace SQLite
                 VideosRow.rating = video.Rating;
                 VideosRow.rating_imdb = video.RatingImdb;
                 VideosRow.path = video.Path;
+                VideosRow.poster = video.Poster;
                 VideosRow.last_play_location = (long)video.LastPlayLocation;
 
                 if (Add)
