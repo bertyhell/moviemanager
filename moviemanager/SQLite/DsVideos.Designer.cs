@@ -3156,11 +3156,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string poster {
                 get {
-                    try {
-                        return ((string)(this[this.tableVideos.posterColumn]));
+                    if (this.IsposterNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'poster\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableVideos.posterColumn]));
                     }
                 }
                 set {

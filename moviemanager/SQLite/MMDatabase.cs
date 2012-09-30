@@ -38,7 +38,7 @@ namespace SQLite
                 {
                     var Video = new Video
                     {
-                        Id = (uint) Row.id,
+                        Id = (uint)Row.id,
                         IdImdb = Row.id_imdb,
                         Name = Row.name,
                         Release = Row.release,
@@ -47,6 +47,8 @@ namespace SQLite
                         Path = Row.path,
                         LastPlayLocation = (ulong)Row.last_play_location
                     };
+                    if (!String.IsNullOrEmpty(Row.poster))
+                        Video.Poster = new ImageInfo { Uri = new Uri(Row.poster) };
 
                     //get genre from dataset
                     foreach (DataRow DataRow in VideosGenresDataTable.Select(VideosGenresDataTable.video_idColumn.ColumnName + " = " + Video.Id))

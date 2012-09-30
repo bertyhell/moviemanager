@@ -7,7 +7,7 @@ namespace SQLite
 {
     public class MMDatabaseCreation
     {
-        private static readonly int CURRENT_DATABASE_VERSION = 1;
+        public static readonly int CURRENT_DATABASE_VERSION = 1;
         private static SQLiteConnection _conn;
 
 
