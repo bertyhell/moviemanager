@@ -72,7 +72,7 @@ namespace SQLite
                 Database.ExecuteSQL(SQLQuery);
 
                 SQLQuery =
-                    "CREATE TABLE Videos ( id INTEGER PRIMARY KEY AUTOINCREMENT, id_imdb VARCHAR(10), name VARCHAR(255) NOT NULL, release DATE, rating DOUBLE, rating_imdb DOUBLE, path VARCHAR(255), last_play_location INTEGER default 0, runtime TIME, PlayCount INTEGER DEFAULT 0)";
+                    "CREATE TABLE Videos ( id INTEGER PRIMARY KEY AUTOINCREMENT, id_imdb VARCHAR(10) DEFAULT NULL, name VARCHAR(255) NOT NULL, release DATE, rating DOUBLE DEFAULT -1, rating_imdb DOUBLE DEFAULT -1, path VARCHAR(255), last_play_location INTEGER default 0, runtime TIME, play_count INTEGER DEFAULT 0, poster VARCHAR(255) )";
                 Database.ExecuteSQL(SQLQuery);
 
                 SQLQuery = "CREATE TABLE Movies ( id INTEGER PRIMARY KEY, franchise_id INTEGER, id_tmdb INTEGER," +
