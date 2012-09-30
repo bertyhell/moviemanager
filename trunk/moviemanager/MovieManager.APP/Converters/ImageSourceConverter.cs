@@ -31,7 +31,7 @@ namespace MovieManager.APP.Converters
                         {
                             BitmapImage ImagePosterSource = new BitmapImage();
                             ImagePosterSource.BeginInit();
-                            ImagePosterSource.UriSource = new Uri("C:/MMproject/MovieManager.APP/Images/no_image.png");
+                            ImagePosterSource.UriSource = LocalImageUri;
 
                             // To save significant application memory, set the DecodePixelWidth or  
                             // DecodePixelHeight of the BitmapImage value of the image source to the desired 

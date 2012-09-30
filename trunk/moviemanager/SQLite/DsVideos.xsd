@@ -485,7 +485,7 @@
               <xs:element name="last_play_location" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="last_play_location" msprop:Generator_ColumnVarNameInTable="columnlast_play_location" msprop:Generator_ColumnPropNameInTable="last_play_locationColumn" msprop:Generator_UserColumnName="last_play_location" type="xs:long" default="0" minOccurs="0" />
               <xs:element name="runtime" msprop:Generator_ColumnVarNameInTable="columnruntime" msprop:Generator_ColumnPropNameInRow="runtime" msprop:Generator_ColumnPropNameInTable="runtimeColumn" msprop:Generator_UserColumnName="runtime" type="xs:dateTime" minOccurs="0" />
               <xs:element name="play_count" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="play_count" msprop:Generator_ColumnVarNameInTable="columnplay_count" msprop:Generator_ColumnPropNameInTable="play_countColumn" msprop:Generator_UserColumnName="play_count" type="xs:long" default="0" minOccurs="0" />
-              <xs:element name="poster" msprop:Generator_ColumnVarNameInTable="columnposter" msprop:Generator_ColumnPropNameInRow="poster" msprop:Generator_ColumnPropNameInTable="posterColumn" msprop:Generator_UserColumnName="poster" minOccurs="0">
+              <xs:element name="poster" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="poster" msprop:Generator_ColumnVarNameInTable="columnposter" msprop:Generator_ColumnPropNameInTable="posterColumn" msprop:Generator_UserColumnName="poster" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />

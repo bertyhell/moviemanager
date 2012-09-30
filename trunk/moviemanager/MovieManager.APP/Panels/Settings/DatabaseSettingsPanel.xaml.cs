@@ -27,11 +27,8 @@ namespace MovieManager.APP.Panels.Settings
             this.DataContext = this;
             _pathToDatabase = Properties.Settings.Default.DatabasePath;
 
-            if (File.Exists(_pathToDatabase))
-            {
-                MMDatabaseCreation.Init(Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
-                DatabaseDetails = MMDatabaseCreation.GetDatabaseDetails();
-            }
+            InitDatabaseVersionControl();
+
         }
 
         public string PathToDatabase
@@ -58,17 +55,27 @@ namespace MovieManager.APP.Panels.Settings
         {
             ConvertDatabaseCommand ConvertCommand = new ConvertDatabaseCommand(_txtFilePath.Text);
             ConvertCommand.Execute(null);
-            if (File.Exists(_pathToDatabase))
-            {
-                MMDatabaseCreation.Init(Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
-                DatabaseDetails = MMDatabaseCreation.GetDatabaseDetails();
-            }
+            InitDatabaseVersionControl();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _fileCommand.Execute(null);
             PathToDatabase = _fileCommand.PathToFile;
+            InitDatabaseVersionControl();
+        }
+
+        private void InitDatabaseVersionControl()
+        {
+            if (File.Exists(_pathToDatabase))
+            {
+                MMDatabaseCreation.Init(Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
+                DatabaseDetails = MMDatabaseCreation.GetDatabaseDetails();
+            }
+            else
+            {
+                DatabaseDetails = new DatabaseDetails { DatabaseVersion = 0, RequiredVersion = MMDatabaseCreation.CURRENT_DATABASE_VERSION };
+            }
         }
 
         public override bool SaveSettings()
