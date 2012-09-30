@@ -2239,7 +2239,11 @@ namespace SQLite {
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 255;
                 this.columnrelease.DefaultValue = ((System.DateTime)(VideosDataTable.columnrelease_defaultValue));
+                this.columnrating.DefaultValue = ((double)(-1D));
+                this.columnrating_imdb.DefaultValue = ((double)(-1D));
                 this.columnpath.MaxLength = 255;
+                this.columnlast_play_location.DefaultValue = ((long)(0));
+                this.columnplay_count.DefaultValue = ((long)(0));
                 this.columnposter.MaxLength = 255;
             }
             
@@ -3136,11 +3140,11 @@ namespace SQLite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public long play_count {
                 get {
-                    try {
-                        return ((long)(this[this.tableVideos.play_countColumn]));
+                    if (this.Isplay_countNull()) {
+                        return 0;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'play_count\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((long)(this[this.tableVideos.play_countColumn]));
                     }
                 }
                 set {
