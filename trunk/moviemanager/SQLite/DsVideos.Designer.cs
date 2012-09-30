@@ -24,8 +24,6 @@ namespace SQLite {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class DsVideos : global::System.Data.DataSet {
         
-        private Videos_genresDataTable tableVideos_genres;
-        
         private EpisodesDataTable tableEpisodes;
         
         private FranchisesDataTable tableFranchises;
@@ -38,9 +36,7 @@ namespace SQLite {
         
         private VideosDataTable tableVideos;
         
-        private global::System.Data.DataRelation relationFK_Videos_genres_0;
-        
-        private global::System.Data.DataRelation relationFK_Videos_genres_1;
+        private Videos_genresDataTable tableVideos_genres;
         
         private global::System.Data.DataRelation relationFK_Episodes_0;
         
@@ -49,6 +45,10 @@ namespace SQLite {
         private global::System.Data.DataRelation relationFK_Movies_0;
         
         private global::System.Data.DataRelation relationFK_Movies_1;
+        
+        private global::System.Data.DataRelation relationFK_Videos_genres_0;
+        
+        private global::System.Data.DataRelation relationFK_Videos_genres_1;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -78,9 +78,6 @@ namespace SQLite {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Videos_genres"] != null)) {
-                    base.Tables.Add(new Videos_genresDataTable(ds.Tables["Videos_genres"]));
-                }
                 if ((ds.Tables["Episodes"] != null)) {
                     base.Tables.Add(new EpisodesDataTable(ds.Tables["Episodes"]));
                 }
@@ -99,6 +96,9 @@ namespace SQLite {
                 if ((ds.Tables["Videos"] != null)) {
                     base.Tables.Add(new VideosDataTable(ds.Tables["Videos"]));
                 }
+                if ((ds.Tables["Videos_genres"] != null)) {
+                    base.Tables.Add(new Videos_genresDataTable(ds.Tables["Videos_genres"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -115,16 +115,6 @@ namespace SQLite {
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Videos_genresDataTable Videos_genres {
-            get {
-                return this.tableVideos_genres;
-            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -184,6 +174,16 @@ namespace SQLite {
         public VideosDataTable Videos {
             get {
                 return this.tableVideos;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public Videos_genresDataTable Videos_genres {
+            get {
+                return this.tableVideos_genres;
             }
         }
         
@@ -254,9 +254,6 @@ namespace SQLite {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Videos_genres"] != null)) {
-                    base.Tables.Add(new Videos_genresDataTable(ds.Tables["Videos_genres"]));
-                }
                 if ((ds.Tables["Episodes"] != null)) {
                     base.Tables.Add(new EpisodesDataTable(ds.Tables["Episodes"]));
                 }
@@ -274,6 +271,9 @@ namespace SQLite {
                 }
                 if ((ds.Tables["Videos"] != null)) {
                     base.Tables.Add(new VideosDataTable(ds.Tables["Videos"]));
+                }
+                if ((ds.Tables["Videos_genres"] != null)) {
+                    base.Tables.Add(new Videos_genresDataTable(ds.Tables["Videos_genres"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -308,12 +308,6 @@ namespace SQLite {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableVideos_genres = ((Videos_genresDataTable)(base.Tables["Videos_genres"]));
-            if ((initTable == true)) {
-                if ((this.tableVideos_genres != null)) {
-                    this.tableVideos_genres.InitVars();
-                }
-            }
             this.tableEpisodes = ((EpisodesDataTable)(base.Tables["Episodes"]));
             if ((initTable == true)) {
                 if ((this.tableEpisodes != null)) {
@@ -350,12 +344,18 @@ namespace SQLite {
                     this.tableVideos.InitVars();
                 }
             }
-            this.relationFK_Videos_genres_0 = this.Relations["FK_Videos_genres_0"];
-            this.relationFK_Videos_genres_1 = this.Relations["FK_Videos_genres_1"];
+            this.tableVideos_genres = ((Videos_genresDataTable)(base.Tables["Videos_genres"]));
+            if ((initTable == true)) {
+                if ((this.tableVideos_genres != null)) {
+                    this.tableVideos_genres.InitVars();
+                }
+            }
             this.relationFK_Episodes_0 = this.Relations["FK_Episodes_0"];
             this.relationFK_Episodes_1 = this.Relations["FK_Episodes_1"];
             this.relationFK_Movies_0 = this.Relations["FK_Movies_0"];
             this.relationFK_Movies_1 = this.Relations["FK_Movies_1"];
+            this.relationFK_Videos_genres_0 = this.Relations["FK_Videos_genres_0"];
+            this.relationFK_Videos_genres_1 = this.Relations["FK_Videos_genres_1"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -366,8 +366,6 @@ namespace SQLite {
             this.Namespace = "http://tempuri.org/DsVideos.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableVideos_genres = new Videos_genresDataTable();
-            base.Tables.Add(this.tableVideos_genres);
             this.tableEpisodes = new EpisodesDataTable();
             base.Tables.Add(this.tableEpisodes);
             this.tableFranchises = new FranchisesDataTable();
@@ -380,14 +378,8 @@ namespace SQLite {
             base.Tables.Add(this.tableSeries);
             this.tableVideos = new VideosDataTable();
             base.Tables.Add(this.tableVideos);
-            this.relationFK_Videos_genres_0 = new global::System.Data.DataRelation("FK_Videos_genres_0", new global::System.Data.DataColumn[] {
-                        this.tableGenres.gen_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableVideos_genres.genre_idColumn}, false);
-            this.Relations.Add(this.relationFK_Videos_genres_0);
-            this.relationFK_Videos_genres_1 = new global::System.Data.DataRelation("FK_Videos_genres_1", new global::System.Data.DataColumn[] {
-                        this.tableVideos.idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableVideos_genres.video_idColumn}, false);
-            this.Relations.Add(this.relationFK_Videos_genres_1);
+            this.tableVideos_genres = new Videos_genresDataTable();
+            base.Tables.Add(this.tableVideos_genres);
             this.relationFK_Episodes_0 = new global::System.Data.DataRelation("FK_Episodes_0", new global::System.Data.DataColumn[] {
                         this.tableSeries.idColumn}, new global::System.Data.DataColumn[] {
                         this.tableEpisodes.serie_idColumn}, false);
@@ -404,12 +396,14 @@ namespace SQLite {
                         this.tableVideos.idColumn}, new global::System.Data.DataColumn[] {
                         this.tableMovies.idColumn}, false);
             this.Relations.Add(this.relationFK_Movies_1);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeVideos_genres() {
-            return false;
+            this.relationFK_Videos_genres_0 = new global::System.Data.DataRelation("FK_Videos_genres_0", new global::System.Data.DataColumn[] {
+                        this.tableGenres.gen_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableVideos_genres.genre_idColumn}, false);
+            this.Relations.Add(this.relationFK_Videos_genres_0);
+            this.relationFK_Videos_genres_1 = new global::System.Data.DataRelation("FK_Videos_genres_1", new global::System.Data.DataColumn[] {
+                        this.tableVideos.idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableVideos_genres.video_idColumn}, false);
+            this.Relations.Add(this.relationFK_Videos_genres_1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -445,6 +439,12 @@ namespace SQLite {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeVideos() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeVideos_genres() {
             return false;
         }
         
@@ -504,9 +504,6 @@ namespace SQLite {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void Videos_genresRowChangeEventHandler(object sender, Videos_genresRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void EpisodesRowChangeEventHandler(object sender, EpisodesRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -524,274 +521,8 @@ namespace SQLite {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void VideosRowChangeEventHandler(object sender, VideosRowChangeEvent e);
         
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Videos_genresDataTable : global::System.Data.TypedTableBase<Videos_genresRow> {
-            
-            private global::System.Data.DataColumn columnvideo_id;
-            
-            private global::System.Data.DataColumn columngenre_id;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Videos_genresDataTable() {
-                this.TableName = "Videos_genres";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Videos_genresDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected Videos_genresDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn video_idColumn {
-                get {
-                    return this.columnvideo_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn genre_idColumn {
-                get {
-                    return this.columngenre_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Videos_genresRow this[int index] {
-                get {
-                    return ((Videos_genresRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Videos_genresRowChangeEventHandler Videos_genresRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Videos_genresRowChangeEventHandler Videos_genresRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Videos_genresRowChangeEventHandler Videos_genresRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Videos_genresRowChangeEventHandler Videos_genresRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddVideos_genresRow(Videos_genresRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Videos_genresRow AddVideos_genresRow(VideosRow parentVideosRowByFK_Videos_genres_1, GenresRow parentGenresRowByFK_Videos_genres_0) {
-                Videos_genresRow rowVideos_genresRow = ((Videos_genresRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null};
-                if ((parentVideosRowByFK_Videos_genres_1 != null)) {
-                    columnValuesArray[0] = parentVideosRowByFK_Videos_genres_1[0];
-                }
-                if ((parentGenresRowByFK_Videos_genres_0 != null)) {
-                    columnValuesArray[1] = parentGenresRowByFK_Videos_genres_0[0];
-                }
-                rowVideos_genresRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowVideos_genresRow);
-                return rowVideos_genresRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                Videos_genresDataTable cln = ((Videos_genresDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new Videos_genresDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnvideo_id = base.Columns["video_id"];
-                this.columngenre_id = base.Columns["genre_id"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnvideo_id = new global::System.Data.DataColumn("video_id", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnvideo_id);
-                this.columngenre_id = new global::System.Data.DataColumn("genre_id", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columngenre_id);
-                this.columnvideo_id.AllowDBNull = false;
-                this.columngenre_id.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Videos_genresRow NewVideos_genresRow() {
-                return ((Videos_genresRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Videos_genresRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(Videos_genresRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.Videos_genresRowChanged != null)) {
-                    this.Videos_genresRowChanged(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.Videos_genresRowChanging != null)) {
-                    this.Videos_genresRowChanging(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.Videos_genresRowDeleted != null)) {
-                    this.Videos_genresRowDeleted(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.Videos_genresRowDeleting != null)) {
-                    this.Videos_genresRowDeleting(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveVideos_genresRow(Videos_genresRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DsVideos ds = new DsVideos();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Videos_genresDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void Videos_genresRowChangeEventHandler(object sender, Videos_genresRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2252,6 +1983,10 @@ namespace SQLite {
             
             private global::System.Data.DataColumn columnruntime;
             
+            private global::System.Data.DataColumn columnplay_count;
+            
+            private global::System.Data.DataColumn columnposter;
+            
             private static System.DateTime columnrelease_defaultValue = global::System.DateTime.Parse("1900-01-01T00:00:00");
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2361,6 +2096,22 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn play_countColumn {
+                get {
+                    return this.columnplay_count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn posterColumn {
+                get {
+                    return this.columnposter;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2396,7 +2147,7 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VideosRow AddVideosRow(string id_imdb, string name, System.DateTime release, double rating, double rating_imdb, string path, long last_play_location, System.DateTime runtime) {
+            public VideosRow AddVideosRow(string id_imdb, string name, System.DateTime release, double rating, double rating_imdb, string path, long last_play_location, System.DateTime runtime, long play_count, string poster) {
                 VideosRow rowVideosRow = ((VideosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2407,7 +2158,9 @@ namespace SQLite {
                         rating_imdb,
                         path,
                         last_play_location,
-                        runtime};
+                        runtime,
+                        play_count,
+                        poster};
                 rowVideosRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVideosRow);
                 return rowVideosRow;
@@ -2446,6 +2199,8 @@ namespace SQLite {
                 this.columnpath = base.Columns["path"];
                 this.columnlast_play_location = base.Columns["last_play_location"];
                 this.columnruntime = base.Columns["runtime"];
+                this.columnplay_count = base.Columns["play_count"];
+                this.columnposter = base.Columns["poster"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2469,6 +2224,10 @@ namespace SQLite {
                 base.Columns.Add(this.columnlast_play_location);
                 this.columnruntime = new global::System.Data.DataColumn("runtime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnruntime);
+                this.columnplay_count = new global::System.Data.DataColumn("play_count", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnplay_count);
+                this.columnposter = new global::System.Data.DataColumn("poster", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnposter);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -2481,6 +2240,7 @@ namespace SQLite {
                 this.columnname.MaxLength = 255;
                 this.columnrelease.DefaultValue = ((System.DateTime)(VideosDataTable.columnrelease_defaultValue));
                 this.columnpath.MaxLength = 255;
+                this.columnposter.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2608,61 +2368,271 @@ namespace SQLite {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
+        ///Represents the strongly named DataTable class.
         ///</summary>
-        public partial class Videos_genresRow : global::System.Data.DataRow {
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class Videos_genresDataTable : global::System.Data.TypedTableBase<Videos_genresRow> {
             
-            private Videos_genresDataTable tableVideos_genres;
+            private global::System.Data.DataColumn columnvideo_id;
+            
+            private global::System.Data.DataColumn columngenre_id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Videos_genresRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableVideos_genres = ((Videos_genresDataTable)(this.Table));
+            public Videos_genresDataTable() {
+                this.TableName = "Videos_genres";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public long video_id {
-                get {
-                    return ((long)(this[this.tableVideos_genres.video_idColumn]));
+            internal Videos_genresDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
                 }
-                set {
-                    this[this.tableVideos_genres.video_idColumn] = value;
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected Videos_genresDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn video_idColumn {
+                get {
+                    return this.columnvideo_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public long genre_id {
+            public global::System.Data.DataColumn genre_idColumn {
                 get {
-                    return ((long)(this[this.tableVideos_genres.genre_idColumn]));
-                }
-                set {
-                    this[this.tableVideos_genres.genre_idColumn] = value;
+                    return this.columngenre_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public GenresRow GenresRow {
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
                 get {
-                    return ((GenresRow)(this.GetParentRow(this.Table.ParentRelations["FK_Videos_genres_0"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Videos_genres_0"]);
+                    return this.Rows.Count;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VideosRow VideosRow {
+            public Videos_genresRow this[int index] {
                 get {
-                    return ((VideosRow)(this.GetParentRow(this.Table.ParentRelations["FK_Videos_genres_1"])));
+                    return ((Videos_genresRow)(this.Rows[index]));
                 }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Videos_genres_1"]);
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Videos_genresRowChangeEventHandler Videos_genresRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Videos_genresRowChangeEventHandler Videos_genresRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Videos_genresRowChangeEventHandler Videos_genresRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event Videos_genresRowChangeEventHandler Videos_genresRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddVideos_genresRow(Videos_genresRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Videos_genresRow AddVideos_genresRow(VideosRow parentVideosRowByFK_Videos_genres_1, GenresRow parentGenresRowByFK_Videos_genres_0) {
+                Videos_genresRow rowVideos_genresRow = ((Videos_genresRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null};
+                if ((parentVideosRowByFK_Videos_genres_1 != null)) {
+                    columnValuesArray[0] = parentVideosRowByFK_Videos_genres_1[0];
                 }
+                if ((parentGenresRowByFK_Videos_genres_0 != null)) {
+                    columnValuesArray[1] = parentGenresRowByFK_Videos_genres_0[0];
+                }
+                rowVideos_genresRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowVideos_genresRow);
+                return rowVideos_genresRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                Videos_genresDataTable cln = ((Videos_genresDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new Videos_genresDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnvideo_id = base.Columns["video_id"];
+                this.columngenre_id = base.Columns["genre_id"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnvideo_id = new global::System.Data.DataColumn("video_id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnvideo_id);
+                this.columngenre_id = new global::System.Data.DataColumn("genre_id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngenre_id);
+                this.columnvideo_id.AllowDBNull = false;
+                this.columngenre_id.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Videos_genresRow NewVideos_genresRow() {
+                return ((Videos_genresRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new Videos_genresRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(Videos_genresRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.Videos_genresRowChanged != null)) {
+                    this.Videos_genresRowChanged(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.Videos_genresRowChanging != null)) {
+                    this.Videos_genresRowChanging(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.Videos_genresRowDeleted != null)) {
+                    this.Videos_genresRowDeleted(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.Videos_genresRowDeleting != null)) {
+                    this.Videos_genresRowDeleting(this, new Videos_genresRowChangeEvent(((Videos_genresRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveVideos_genresRow(Videos_genresRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DsVideos ds = new DsVideos();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "Videos_genresDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
             }
         }
         
@@ -3044,7 +3014,7 @@ namespace SQLite {
             public string id_imdb {
                 get {
                     if (this.Isid_imdbNull()) {
-                        return null;
+                        return "null";
                     }
                     else {
                         return ((string)(this[this.tableVideos.id_imdbColumn]));
@@ -3164,6 +3134,38 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public long play_count {
+                get {
+                    try {
+                        return ((long)(this[this.tableVideos.play_countColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'play_count\' in table \'Videos\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVideos.play_countColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string poster {
+                get {
+                    try {
+                        return ((string)(this[this.tableVideos.posterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'poster\' in table \'Videos\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVideos.posterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Isid_imdbNull() {
                 return this.IsNull(this.tableVideos.id_imdbColumn);
             }
@@ -3248,13 +3250,26 @@ namespace SQLite {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Videos_genresRow[] GetVideos_genresRows() {
-                if ((this.Table.ChildRelations["FK_Videos_genres_1"] == null)) {
-                    return new Videos_genresRow[0];
-                }
-                else {
-                    return ((Videos_genresRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Videos_genres_1"])));
-                }
+            public bool Isplay_countNull() {
+                return this.IsNull(this.tableVideos.play_countColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setplay_countNull() {
+                this[this.tableVideos.play_countColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsposterNull() {
+                return this.IsNull(this.tableVideos.posterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetposterNull() {
+                this[this.tableVideos.posterColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3278,38 +3293,74 @@ namespace SQLite {
                     return ((MoviesRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Movies_1"])));
                 }
             }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class Videos_genresRowChangeEvent : global::System.EventArgs {
-            
-            private Videos_genresRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Videos_genresRowChangeEvent(Videos_genresRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
+            public Videos_genresRow[] GetVideos_genresRows() {
+                if ((this.Table.ChildRelations["FK_Videos_genres_1"] == null)) {
+                    return new Videos_genresRow[0];
+                }
+                else {
+                    return ((Videos_genresRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Videos_genres_1"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class Videos_genresRow : global::System.Data.DataRow {
+            
+            private Videos_genresDataTable tableVideos_genres;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal Videos_genresRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableVideos_genres = ((Videos_genresDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Videos_genresRow Row {
+            public long video_id {
                 get {
-                    return this.eventRow;
+                    return ((long)(this[this.tableVideos_genres.video_idColumn]));
+                }
+                set {
+                    this[this.tableVideos_genres.video_idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
+            public long genre_id {
                 get {
-                    return this.eventAction;
+                    return ((long)(this[this.tableVideos_genres.genre_idColumn]));
+                }
+                set {
+                    this[this.tableVideos_genres.genre_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public GenresRow GenresRow {
+                get {
+                    return ((GenresRow)(this.GetParentRow(this.Table.ParentRelations["FK_Videos_genres_0"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Videos_genres_0"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public VideosRow VideosRow {
+                get {
+                    return ((VideosRow)(this.GetParentRow(this.Table.ParentRelations["FK_Videos_genres_1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Videos_genres_1"]);
                 }
             }
         }
@@ -3517,247 +3568,44 @@ namespace SQLite {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class Videos_genresRowChangeEvent : global::System.EventArgs {
+            
+            private Videos_genresRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Videos_genresRowChangeEvent(Videos_genresRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Videos_genresRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace SQLite.DsVideosTableAdapters {
     
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class Videos_genresTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
-        
-        private global::System.Data.SQLite.SQLiteConnection _connection;
-        
-        private global::System.Data.SQLite.SQLiteTransaction _transaction;
-        
-        private global::System.Data.SQLite.SQLiteCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public Videos_genresTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SQLite.SQLiteDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SQLite.SQLiteConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SQLite.SQLiteCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SQLite.SQLiteTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SQLite.SQLiteCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SQLite.SQLiteDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Videos_genres";
-            tableMapping.ColumnMappings.Add("video_id", "video_id");
-            tableMapping.ColumnMappings.Add("genre_id", "genre_id");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Videos_genres] ([video_id], [genre_id]) VALUES (@video_id, @genre_id" +
-                ")";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@video_id";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "video_id";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@genre_id";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "genre_id";
-            this._adapter.InsertCommand.Parameters.Add(param);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
-            this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [video_id], [genre_id] FROM [Videos_genres]";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DsVideos.Videos_genresDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DsVideos.Videos_genresDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            DsVideos.Videos_genresDataTable dataTable = new DsVideos.Videos_genresDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DsVideos.Videos_genresDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DsVideos dataSet) {
-            return this.Adapter.Update(dataSet, "Videos_genres");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(long video_id, long genre_id) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((long)(video_id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((long)(genre_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-    }
     
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
@@ -5795,10 +5643,12 @@ namespace SQLite.DsVideosTableAdapters {
             tableMapping.ColumnMappings.Add("path", "path");
             tableMapping.ColumnMappings.Add("last_play_location", "last_play_location");
             tableMapping.ColumnMappings.Add("runtime", "runtime");
+            tableMapping.ColumnMappings.Add("play_count", "play_count");
+            tableMapping.ColumnMappings.Add("poster", "poster");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Videos] WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ((@IsNull_last_play_location = 1 AND [last_play_location] IS NULL) OR ([last_play_location] = @Original_last_play_location)) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Videos] WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ((@IsNull_last_play_location = 1 AND [last_play_location] IS NULL) OR ([last_play_location] = @Original_last_play_location)) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)) AND ((@IsNull_play_count = 1 AND [play_count] IS NULL) OR ([play_count] = @Original_play_count)) AND ((@IsNull_poster = 1 AND [poster] IS NULL) OR ([poster] = @Original_poster)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -5916,11 +5766,38 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceColumn = "runtime";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_play_count";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "play_count";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_play_count";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "play_count";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_poster";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "poster";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_poster";
+            param.DbType = global::System.Data.DbType.String;
+            param.SourceColumn = "poster";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Videos] ([id_imdb], [name], [release], [rating], [rating_imdb], [pat" +
-                "h], [last_play_location], [runtime]) VALUES (@id_imdb, @name, @release, @rating," +
-                " @rating_imdb, @path, @last_play_location, @runtime)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Videos] ([id_imdb], [name], [release], [rating], [rating_imdb], [path], [last_play_location], [runtime], [play_count], [poster]) VALUES (@id_imdb, @name, @release, @rating, @rating_imdb, @path, @last_play_location, @runtime, @play_count, @poster)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id_imdb";
@@ -5967,9 +5844,20 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.DateTime;
             param.SourceColumn = "runtime";
             this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@play_count";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "play_count";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@poster";
+            param.DbType = global::System.Data.DbType.String;
+            param.SourceColumn = "poster";
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Videos] SET [id_imdb] = @id_imdb, [name] = @name, [release] = @release, [rating] = @rating, [rating_imdb] = @rating_imdb, [path] = @path, [last_play_location] = @last_play_location, [runtime] = @runtime WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ((@IsNull_last_play_location = 1 AND [last_play_location] IS NULL) OR ([last_play_location] = @Original_last_play_location)) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Videos] SET [id_imdb] = @id_imdb, [name] = @name, [release] = @release, [rating] = @rating, [rating_imdb] = @rating_imdb, [path] = @path, [last_play_location] = @last_play_location, [runtime] = @runtime, [play_count] = @play_count, [poster] = @poster WHERE (([id] = @Original_id) AND ((@IsNull_id_imdb = 1 AND [id_imdb] IS NULL) OR ([id_imdb] = @Original_id_imdb)) AND ([name] = @Original_name) AND ((@IsNull_release = 1 AND [release] IS NULL) OR ([release] = @Original_release)) AND ((@IsNull_rating = 1 AND [rating] IS NULL) OR ([rating] = @Original_rating)) AND ((@IsNull_rating_imdb = 1 AND [rating_imdb] IS NULL) OR ([rating_imdb] = @Original_rating_imdb)) AND ((@IsNull_path = 1 AND [path] IS NULL) OR ([path] = @Original_path)) AND ((@IsNull_last_play_location = 1 AND [last_play_location] IS NULL) OR ([last_play_location] = @Original_last_play_location)) AND ((@IsNull_runtime = 1 AND [runtime] IS NULL) OR ([runtime] = @Original_runtime)) AND ((@IsNull_play_count = 1 AND [play_count] IS NULL) OR ([play_count] = @Original_play_count)) AND ((@IsNull_poster = 1 AND [poster] IS NULL) OR ([poster] = @Original_poster)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id_imdb";
@@ -6015,6 +5903,17 @@ namespace SQLite.DsVideosTableAdapters {
             param.DbType = global::System.Data.DbType.DateTime;
             param.DbType = global::System.Data.DbType.DateTime;
             param.SourceColumn = "runtime";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@play_count";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "play_count";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@poster";
+            param.DbType = global::System.Data.DbType.String;
+            param.SourceColumn = "poster";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -6132,6 +6031,35 @@ namespace SQLite.DsVideosTableAdapters {
             param.SourceColumn = "runtime";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_play_count";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "play_count";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_play_count";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "play_count";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@IsNull_poster";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "poster";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_poster";
+            param.DbType = global::System.Data.DbType.String;
+            param.SourceColumn = "poster";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6148,7 +6076,7 @@ namespace SQLite.DsVideosTableAdapters {
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [id], [id_imdb], [name], [release], [rating], [rating_imdb], [path], [last" +
-                "_play_location], [runtime] FROM [Videos]";
+                "_play_location], [runtime], [play_count], [poster] FROM [Videos]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6209,7 +6137,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, string Original_id_imdb, string Original_name, global::System.Nullable<global::System.DateTime> Original_release, global::System.Nullable<double> Original_rating, global::System.Nullable<double> Original_rating_imdb, string Original_path, global::System.Nullable<long> Original_last_play_location, global::System.Nullable<global::System.DateTime> Original_runtime) {
+        public virtual int Delete(long Original_id, string Original_id_imdb, string Original_name, global::System.Nullable<global::System.DateTime> Original_release, global::System.Nullable<double> Original_rating, global::System.Nullable<double> Original_rating_imdb, string Original_path, global::System.Nullable<long> Original_last_play_location, global::System.Nullable<global::System.DateTime> Original_runtime, global::System.Nullable<long> Original_play_count, string Original_poster) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
             if ((Original_id_imdb == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -6273,6 +6201,22 @@ namespace SQLite.DsVideosTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
+            if ((Original_play_count.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((long)(Original_play_count.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((Original_poster == null)) {
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((string)(Original_poster));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6293,7 +6237,7 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string id_imdb, string name, global::System.Nullable<global::System.DateTime> release, global::System.Nullable<double> rating, global::System.Nullable<double> rating_imdb, string path, global::System.Nullable<long> last_play_location, global::System.Nullable<global::System.DateTime> runtime) {
+        public virtual int Insert(string id_imdb, string name, global::System.Nullable<global::System.DateTime> release, global::System.Nullable<double> rating, global::System.Nullable<double> rating_imdb, string path, global::System.Nullable<long> last_play_location, global::System.Nullable<global::System.DateTime> runtime, global::System.Nullable<long> play_count, string poster) {
             if ((id_imdb == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -6342,6 +6286,18 @@ namespace SQLite.DsVideosTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
+            if ((play_count.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((long)(play_count.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((poster == null)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(poster));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6371,6 +6327,8 @@ namespace SQLite.DsVideosTableAdapters {
                     string path, 
                     global::System.Nullable<long> last_play_location, 
                     global::System.Nullable<global::System.DateTime> runtime, 
+                    global::System.Nullable<long> play_count, 
+                    string poster, 
                     long Original_id, 
                     string Original_id_imdb, 
                     string Original_name, 
@@ -6379,7 +6337,9 @@ namespace SQLite.DsVideosTableAdapters {
                     global::System.Nullable<double> Original_rating_imdb, 
                     string Original_path, 
                     global::System.Nullable<long> Original_last_play_location, 
-                    global::System.Nullable<global::System.DateTime> Original_runtime) {
+                    global::System.Nullable<global::System.DateTime> Original_runtime, 
+                    global::System.Nullable<long> Original_play_count, 
+                    string Original_poster) {
             if ((id_imdb == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -6428,68 +6388,96 @@ namespace SQLite.DsVideosTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(Original_id));
-            if ((Original_id_imdb == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            if ((play_count.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(play_count.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_id_imdb));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((poster == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(poster));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((long)(Original_id));
+            if ((Original_id_imdb == null)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_id_imdb));
             }
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_name));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_name));
             }
             if ((Original_release.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((System.DateTime)(Original_release.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_rating.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(Original_rating.Value));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_release.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            if ((Original_rating_imdb.HasValue == true)) {
+            if ((Original_rating.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(Original_rating_imdb.Value));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(Original_rating.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            if ((Original_path == null)) {
+            if ((Original_rating_imdb.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(Original_rating_imdb.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_path));
-            }
-            if ((Original_last_play_location.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((long)(Original_last_play_location.Value));
-            }
-            else {
+            if ((Original_path == null)) {
                 this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            if ((Original_runtime.HasValue == true)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Original_path));
+            }
+            if ((Original_last_play_location.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(Original_runtime.Value));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((long)(Original_last_play_location.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            if ((Original_runtime.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((System.DateTime)(Original_runtime.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            if ((Original_play_count.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((long)(Original_play_count.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            if ((Original_poster == null)) {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_poster));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6509,6 +6497,243 @@ namespace SQLite.DsVideosTableAdapters {
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class Videos_genresTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
+        
+        private global::System.Data.SQLite.SQLiteConnection _connection;
+        
+        private global::System.Data.SQLite.SQLiteTransaction _transaction;
+        
+        private global::System.Data.SQLite.SQLiteCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public Videos_genresTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SQLite.SQLiteDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SQLite.SQLiteConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SQLite.SQLiteCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SQLite.SQLiteTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SQLite.SQLiteCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SQLite.SQLiteDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Videos_genres";
+            tableMapping.ColumnMappings.Add("video_id", "video_id");
+            tableMapping.ColumnMappings.Add("genre_id", "genre_id");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Videos_genres] ([video_id], [genre_id]) VALUES (@video_id, @genre_id" +
+                ")";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@video_id";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "video_id";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@genre_id";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "genre_id";
+            this._adapter.InsertCommand.Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SQLite.SQLiteConnection();
+            this._connection.ConnectionString = global::SQLite.Properties.Settings.Default.moviemanagerConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
+            this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT [video_id], [genre_id] FROM [Videos_genres]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(DsVideos.Videos_genresDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual DsVideos.Videos_genresDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            DsVideos.Videos_genresDataTable dataTable = new DsVideos.Videos_genresDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DsVideos.Videos_genresDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(DsVideos dataSet) {
+            return this.Adapter.Update(dataSet, "Videos_genres");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(long video_id, long genre_id) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((long)(video_id));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((long)(genre_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6519,8 +6744,6 @@ namespace SQLite.DsVideosTableAdapters {
     public partial class TableAdapterManager : global::System.ComponentModel.Component {
         
         private UpdateOrderOption _updateOrder;
-        
-        private Videos_genresTableAdapter _videos_genresTableAdapter;
         
         private EpisodesTableAdapter _episodesTableAdapter;
         
@@ -6534,6 +6757,8 @@ namespace SQLite.DsVideosTableAdapters {
         
         private VideosTableAdapter _videosTableAdapter;
         
+        private Videos_genresTableAdapter _videos_genresTableAdapter;
+        
         private bool _backupDataSetBeforeUpdate;
         
         private global::System.Data.IDbConnection _connection;
@@ -6546,20 +6771,6 @@ namespace SQLite.DsVideosTableAdapters {
             }
             set {
                 this._updateOrder = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
-        public Videos_genresTableAdapter Videos_genresTableAdapter {
-            get {
-                return this._videos_genresTableAdapter;
-            }
-            set {
-                this._videos_genresTableAdapter = value;
             }
         }
         
@@ -6649,6 +6860,20 @@ namespace SQLite.DsVideosTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public Videos_genresTableAdapter Videos_genresTableAdapter {
+            get {
+                return this._videos_genresTableAdapter;
+            }
+            set {
+                this._videos_genresTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -6665,10 +6890,6 @@ namespace SQLite.DsVideosTableAdapters {
             get {
                 if ((this._connection != null)) {
                     return this._connection;
-                }
-                if (((this._videos_genresTableAdapter != null) 
-                            && (this._videos_genresTableAdapter.Connection != null))) {
-                    return this._videos_genresTableAdapter.Connection;
                 }
                 if (((this._episodesTableAdapter != null) 
                             && (this._episodesTableAdapter.Connection != null))) {
@@ -6694,6 +6915,10 @@ namespace SQLite.DsVideosTableAdapters {
                             && (this._videosTableAdapter.Connection != null))) {
                     return this._videosTableAdapter.Connection;
                 }
+                if (((this._videos_genresTableAdapter != null) 
+                            && (this._videos_genresTableAdapter.Connection != null))) {
+                    return this._videos_genresTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -6707,9 +6932,6 @@ namespace SQLite.DsVideosTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._videos_genresTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._episodesTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -6726,6 +6948,9 @@ namespace SQLite.DsVideosTableAdapters {
                     count = (count + 1);
                 }
                 if ((this._videosTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._videos_genresTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -6775,15 +7000,6 @@ namespace SQLite.DsVideosTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._videos_genresTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Videos_genres.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._videos_genresTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._episodesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Episodes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -6799,6 +7015,15 @@ namespace SQLite.DsVideosTableAdapters {
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._moviesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._videos_genresTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Videos_genres.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._videos_genresTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6844,14 +7069,6 @@ namespace SQLite.DsVideosTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._videos_genresTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Videos_genres.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._videos_genresTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._episodesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Episodes.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -6868,6 +7085,14 @@ namespace SQLite.DsVideosTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._videos_genresTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Videos_genres.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._videos_genresTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -6878,6 +7103,14 @@ namespace SQLite.DsVideosTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(DsVideos dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._videos_genresTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Videos_genres.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._videos_genresTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._moviesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Movies.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -6891,14 +7124,6 @@ namespace SQLite.DsVideosTableAdapters {
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._episodesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._videos_genresTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Videos_genres.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._videos_genresTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6973,11 +7198,6 @@ namespace SQLite.DsVideosTableAdapters {
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._videos_genresTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._videos_genresTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._episodesTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._episodesTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -7005,6 +7225,11 @@ namespace SQLite.DsVideosTableAdapters {
             }
             if (((this._videosTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._videosTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._videos_genresTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._videos_genresTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -7040,15 +7265,6 @@ namespace SQLite.DsVideosTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._videos_genresTableAdapter != null)) {
-                    revertConnections.Add(this._videos_genresTableAdapter, this._videos_genresTableAdapter.Connection);
-                    this._videos_genresTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(workConnection));
-                    this._videos_genresTableAdapter.Transaction = ((global::System.Data.SQLite.SQLiteTransaction)(workTransaction));
-                    if (this._videos_genresTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._videos_genresTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._videos_genresTableAdapter.Adapter);
-                    }
-                }
                 if ((this._episodesTableAdapter != null)) {
                     revertConnections.Add(this._episodesTableAdapter, this._episodesTableAdapter.Connection);
                     this._episodesTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(workConnection));
@@ -7101,6 +7317,15 @@ namespace SQLite.DsVideosTableAdapters {
                     if (this._videosTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._videosTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._videosTableAdapter.Adapter);
+                    }
+                }
+                if ((this._videos_genresTableAdapter != null)) {
+                    revertConnections.Add(this._videos_genresTableAdapter, this._videos_genresTableAdapter.Connection);
+                    this._videos_genresTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(workConnection));
+                    this._videos_genresTableAdapter.Transaction = ((global::System.Data.SQLite.SQLiteTransaction)(workTransaction));
+                    if (this._videos_genresTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._videos_genresTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._videos_genresTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -7161,10 +7386,6 @@ namespace SQLite.DsVideosTableAdapters {
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._videos_genresTableAdapter != null)) {
-                    this._videos_genresTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._videos_genresTableAdapter]));
-                    this._videos_genresTableAdapter.Transaction = null;
-                }
                 if ((this._episodesTableAdapter != null)) {
                     this._episodesTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._episodesTableAdapter]));
                     this._episodesTableAdapter.Transaction = null;
@@ -7188,6 +7409,10 @@ namespace SQLite.DsVideosTableAdapters {
                 if ((this._videosTableAdapter != null)) {
                     this._videosTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._videosTableAdapter]));
                     this._videosTableAdapter.Transaction = null;
+                }
+                if ((this._videos_genresTableAdapter != null)) {
+                    this._videos_genresTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._videos_genresTableAdapter]));
+                    this._videos_genresTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
