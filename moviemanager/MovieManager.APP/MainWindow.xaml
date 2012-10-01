@@ -39,8 +39,7 @@
         <GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
-        <!--<Common:PreviewItem Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" ImageSource="Images/no_image.png" Description="Tesrt1235466dgf" Width="250" Height="400" />-->
-        <ListView Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}">
+        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
@@ -55,7 +54,7 @@
             </ListView.ItemTemplate>
         </ListView>
         
-        <DataGrid x:Name="_videoGrid" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" ItemsSource="{Binding VideosView}" AlternatingRowBackground="#EEE" Visibility="Collapsed"
+        <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" ItemsSource="{Binding VideosView}" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">

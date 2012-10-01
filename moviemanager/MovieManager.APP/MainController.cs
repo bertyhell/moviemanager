@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Data;
 using Common;
 using Model;
@@ -45,6 +46,9 @@ namespace MovieManager.APP
 
             MMDatabase.VideosChanged += MMDatabaseVideosChanged;
             //ApplicationCache.AddVideoImages(66, new List<Uri>() { new Uri("http://www.cathedral-design.be/upload/google-logo-voor-nieuws-5178_google_logo.jpg") }, CacheImageType.Images, ImageQuality.High);
+
+            IsIconsViewVisible = Visibility.Visible;//TODO 020 check if any of the videos has been analysed --> none == hide iconsview
+            IsDetailViewVisible = Visibility.Collapsed;
         }
 
 
@@ -85,6 +89,7 @@ namespace MovieManager.APP
         }
 
         private MainWindow _windowInstance;
+
         public MainWindow WindowInstance
         {
             set { _windowInstance = value; }
@@ -106,6 +111,40 @@ namespace MovieManager.APP
         public void Refresh()
         {
             VideosView.Refresh();
+        }
+
+        private Visibility _isDetailViewVisible;
+        public Visibility  IsDetailViewVisible
+        {
+            get { return _isDetailViewVisible; }
+            set { _isDetailViewVisible = value;
+            PropChanged("IsDetailViewVisible");
+            }
+        }
+
+        private Visibility _isIconsViewVisible;
+        public Visibility IsIconsViewVisible
+        {
+            get { return _isIconsViewVisible; }
+            set
+            {
+                _isIconsViewVisible = value;
+                PropChanged("IsIconsViewVisible");
+            }
+        }
+
+        public void ToggleViews()
+        {
+            if(IsDetailViewVisible == Visibility.Collapsed)
+            {
+                IsDetailViewVisible = Visibility.Visible;
+                IsIconsViewVisible = Visibility.Collapsed;
+            }else
+            {
+                IsDetailViewVisible = Visibility.Collapsed;
+                IsIconsViewVisible = Visibility.Visible;
+                
+            }
         }
 
         public void PropChanged(String field)

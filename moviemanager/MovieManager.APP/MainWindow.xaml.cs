@@ -43,7 +43,7 @@ namespace MovieManager.APP
             DataContext = _controller;
             Loaded += MainWindowLoaded;
 
-            foreach (DataGridColumn Column in _videoGrid.Columns)
+            foreach (DataGridColumn Column in _videoDetails.Columns)
             {
                 _dataGridColumns.Add(Column.Header.ToString(), Column);
             }
@@ -55,7 +55,7 @@ namespace MovieManager.APP
         private void InitVisualColumns()
         {
             var TempColumnsInOrder = new List<DataGridColumn>();
-            TempColumnsInOrder.AddRange(_videoGrid.Columns);
+            TempColumnsInOrder.AddRange(_videoDetails.Columns);
             try
             {
                 string VisibleColumns = Properties.Settings.Default.VisibleMainViewColumns;
@@ -70,7 +70,7 @@ namespace MovieManager.APP
                 }
                 catch (Exception)
                 {
-                    foreach (DataGridColumn DataGridColumn in _videoGrid.Columns)
+                    foreach (DataGridColumn DataGridColumn in _videoDetails.Columns)
                     {
                         VisibleMainViewColumns.Add(new Pair<string, bool>(DataGridColumn.Header.ToString(), true));
                     }
@@ -78,7 +78,7 @@ namespace MovieManager.APP
                 }
 
                 if (ReadSettingsSucceeded)
-                    _videoGrid.Columns.Clear();
+                    _videoDetails.Columns.Clear();
                 if (VisibleMainViewColumns.Count == 0)
                 {
                     throw new IndexOutOfRangeException();
@@ -91,7 +91,7 @@ namespace MovieManager.APP
                         throw new NullReferenceException();
                     }
                     if (ReadSettingsSucceeded && ColumnDetails.Value)
-                        _videoGrid.Columns.Add(_dataGridColumns[ColumnDetails.Key]);
+                        _videoDetails.Columns.Add(_dataGridColumns[ColumnDetails.Key]);
 
                     CreateAndAddMenuItem(ColumnDetails);
                 }
@@ -99,10 +99,10 @@ namespace MovieManager.APP
             catch (Exception)
             {
                 //if error in settings string --> show all columns
-                _videoGrid.Columns.Clear();
+                _videoDetails.Columns.Clear();
                 foreach (DataGridColumn Column in TempColumnsInOrder)
                 {
-                    _videoGrid.Columns.Add(Column);
+                    _videoDetails.Columns.Add(Column);
                     CreateAndAddMenuItem(new Pair<string, bool>(Column.Header.ToString(), true));
                 }
 
@@ -115,7 +115,7 @@ namespace MovieManager.APP
                 Property = DataGridColumnHeader.ContextMenuProperty,
                 Value = _columnsContextMenu,
             });
-            _videoGrid.ColumnHeaderStyle = HeaderStyle;
+            _videoDetails.ColumnHeaderStyle = HeaderStyle;
         }
 
         private void CreateAndAddMenuItem(Pair<string, bool> columnDetails)
@@ -132,7 +132,7 @@ namespace MovieManager.APP
         void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem Item = (MenuItem)sender;
-            if (Item.IsChecked && _videoGrid.Columns.Count > 1 || !Item.IsChecked)
+            if (Item.IsChecked && _videoDetails.Columns.Count > 1 || !Item.IsChecked)
             {
                 Item.IsChecked = !Item.IsChecked;
             }
@@ -141,11 +141,11 @@ namespace MovieManager.APP
         void MenuItem_Unchecked(object sender, RoutedEventArgs e)
         {
             MenuItem Item = (MenuItem)sender;
-            foreach (DataGridColumn Column in _videoGrid.Columns)
+            foreach (DataGridColumn Column in _videoDetails.Columns)
             {
                 if (Column.Header.ToString() == Item.Header.ToString())
                 {
-                    _videoGrid.Columns.Remove(Column);
+                    _videoDetails.Columns.Remove(Column);
                     break;
                 }
             }
@@ -153,7 +153,7 @@ namespace MovieManager.APP
 
         void MenuItem_Checked(object sender, RoutedEventArgs e)
         {
-            _videoGrid.Columns.Add(_dataGridColumns[((MenuItem)sender).Header.ToString()]);
+            _videoDetails.Columns.Add(_dataGridColumns[((MenuItem)sender).Header.ToString()]);
         }
 
 
@@ -165,7 +165,7 @@ namespace MovieManager.APP
         #region ContextMenu event handlers
         private void MenuItemPropertiesClick(object sender, RoutedEventArgs e)
         {
-            Video SelectedVideo = (_videoGrid.SelectedItem as Video);
+            Video SelectedVideo = (_videoDetails.SelectedItem as Video);
 
             VideoEditor Editor = new VideoEditor { DataContext = SelectedVideo };
 
@@ -177,7 +177,7 @@ namespace MovieManager.APP
 
         private void MenuItemPlayClick(object sender, RoutedEventArgs e)
         {
-            var Video = _videoGrid.SelectedItem as Video;
+            var Video = _videoDetails.SelectedItem as Video;
             if (Video != null && Video.Path != null)
             {
                 MMPlayer Vlc = new MMPlayer();
@@ -188,9 +188,9 @@ namespace MovieManager.APP
 
         private void MenuItemRenameFileClick(object sender, RoutedEventArgs e)
         {
-            if (_videoGrid.SelectedItems != null)
+            if (_videoDetails.SelectedItems != null)
             {
-                foreach (Video Video in _videoGrid.SelectedItems)
+                foreach (Video Video in _videoDetails.SelectedItems)
                 {
                     try
                     {
@@ -216,7 +216,7 @@ namespace MovieManager.APP
                             Video.Path = NewPath;
                         }
 
-                        _videoGrid.Items.Refresh();
+                        _videoDetails.Items.Refresh();
                     }
                     catch (Exception ex)
                     {
