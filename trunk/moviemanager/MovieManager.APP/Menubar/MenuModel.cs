@@ -345,15 +345,44 @@ namespace MovieManager.APP.Menubar
 
                     if (!DATA_COLLECTION.ContainsKey(STR))
                     {
-                        const string LOGGGING_TOOL_TIP_TITLE = "Logging";
+                        const string LOGGING_TOOL_TIP_TITLE = "Logging";
                         const string LOGGING_TOOL_TIP_DESCRIPTION = "Logging";
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
                             SmallImage = new Uri("/MovieManager;component/Images/log_32.png", UriKind.Relative),
-                            ToolTipTitle = LOGGGING_TOOL_TIP_TITLE,
+                            ToolTipTitle = LOGGING_TOOL_TIP_TITLE,
                             ToolTipDescription = LOGGING_TOOL_TIP_DESCRIPTION,
                             Command = new LoggingToolCommand(),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ButtonData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
+        public static ControlData View
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "View";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string VIEW_TOOL_TIP_TITLE = "View";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Chnage the videos view";
+                        ControlData ButtonData = new ControlData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
+                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            Command = new ChangeViewCommand(),
                             KeyTip = "",
                         };
                         DATA_COLLECTION[STR] = ButtonData;

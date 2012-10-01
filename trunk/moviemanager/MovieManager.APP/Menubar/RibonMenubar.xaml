@@ -85,8 +85,15 @@
                 <ribbon:RibbonGroup>
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.EditEpisodeRegexSettings}"/>
                 </ribbon:RibbonGroup>
-            </ribbon:RibbonTab>            
-            
+            </ribbon:RibbonTab>
+
+
+            <ribbon:RibbonTab Header="View">
+                <ribbon:RibbonGroup Header="View">
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.View}"  />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+
             <ribbon:RibbonTab Header="Settings">
                 <ribbon:RibbonGroup Header="settings">
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.EditSettings}" />
