@@ -34,6 +34,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
@@ -50,6 +51,7 @@
     <Compile Include="DefaultValues.cs" />
     <Compile Include="ProgressEventArgs.cs" />
     <Compile Include="SerializableKeyValuePair.cs" />
+    <Compile Include="SettingsStorage\CustomSettingsProvider.cs" />
     <Compile Include="SettingsStorage\DuplicateSettingsKeyException.cs" />
     <Compile Include="ImageFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
