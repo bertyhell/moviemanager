@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="RegexSettings\RegexConfigFileConstants.cs" />
     <Compile Include="RegexSettings\RegexSettingsStorage.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
