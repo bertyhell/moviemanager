@@ -114,15 +114,18 @@ namespace MovieManager.APP
         }
 
         private Visibility _isDetailViewVisible;
-        public Visibility  IsDetailViewVisible
+        public Visibility IsDetailViewVisible
         {
             get { return _isDetailViewVisible; }
-            set { _isDetailViewVisible = value;
-            PropChanged("IsDetailViewVisible");
+            set
+            {
+                _isDetailViewVisible = value;
+                PropChanged("IsDetailViewVisible");
             }
         }
 
         private Visibility _isIconsViewVisible;
+
         public Visibility IsIconsViewVisible
         {
             get { return _isIconsViewVisible; }
@@ -135,17 +138,75 @@ namespace MovieManager.APP
 
         public void ToggleViews()
         {
-            if(IsDetailViewVisible == Visibility.Collapsed)
+            if (IsDetailViewVisible == Visibility.Collapsed)
             {
                 IsDetailViewVisible = Visibility.Visible;
                 IsIconsViewVisible = Visibility.Collapsed;
-            }else
+            }
+            else
             {
                 IsDetailViewVisible = Visibility.Collapsed;
                 IsIconsViewVisible = Visibility.Visible;
-                
             }
         }
+
+        #region zooming + events
+
+        private int _minWidth = 60;
+        private int _maxWidth = 500;
+        private int _zoomStep = 30;
+
+        private int _previewWidth = 200;
+
+        public int PreviewWidth
+        {
+            get { return _previewWidth; }
+            set
+            {
+                //TODO 020 zoomout on details and then zoom in --> slow or error?
+                if (value < _minWidth && _previewWidth >= _minWidth)
+                {
+                    //change view when icons are to little
+                    ToggleViews();
+                    _previewWidth = _minWidth - _zoomStep;
+                }
+                else if (value >= _minWidth && _previewWidth < _minWidth)
+                {
+                    ToggleViews();
+                    _previewWidth = _minWidth;
+                }
+                else if(value > _maxWidth)
+                {
+                    _previewWidth = _maxWidth;
+                }
+                else
+                {
+                    _previewWidth = value;
+                }
+                PropChanged("PreviewWidth");
+                PropChanged("PreviewHeight");
+            }
+        }
+
+        public int PreviewHeight
+        {
+            get { return (int)(_previewWidth * 1.5); }
+        }
+
+        public void Zoom(bool zoomIn)
+        {
+            if (zoomIn)
+            {
+                PreviewWidth += _zoomStep;
+            }
+            else
+            {
+                PreviewWidth -= _zoomStep;
+            }
+        }
+
+        #endregion
+
 
         public void PropChanged(String field)
         {

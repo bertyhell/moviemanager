@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:menu="clr-namespace:MovieManager.APP.Menubar" xmlns:Filter="clr-namespace:MovieManager.APP.Panels.Filter"
         xmlns:conv="clr-namespace:MovieManager.APP.Converters" xmlns:Panels="clr-namespace:MovieManager.APP.Panels"
-        xmlns:Common="clr-namespace:MovieManager.APP.Panels.Common" Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="/MovieManager;component/ico4.ico" WindowState="Maximized">
+        xmlns:Common="clr-namespace:MovieManager.APP.Panels.Common" Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="/MovieManager;component/ico4.ico" WindowState="Maximized" PreviewMouseWheel="Window_PreviewMouseWheel_1">
     <Grid>
         <Grid.Resources>
             <conv:StringListConverter x:Key="stringListConverter"/>
@@ -39,7 +39,7 @@
         <GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
-        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}">
+        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
@@ -49,13 +49,14 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                        <Common:PreviewItem Item="{Binding}" Width="200" Height="300" Margin="5" />
+                    <Common:PreviewItem Item="{Binding}" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
+                                                    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" Margin="5" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         
         <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" ItemsSource="{Binding VideosView}" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}"
-                          CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick">
+                          CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick" PreviewMouseWheel="MouseWheel">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
