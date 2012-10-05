@@ -14,6 +14,7 @@ using MovieManager.PLAYER;
 using log4net.Core;
 using System.Windows.Controls;
 using System.Xml.Serialization;
+using System.Windows.Input;
 
 namespace MovieManager.APP
 {
@@ -257,7 +258,17 @@ namespace MovieManager.APP
             base.OnClosing(e);
         }
 
+        private void Window_PreviewMouseWheel_1(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                _controller.Zoom(e.Delta > 0);
+        }
 
+        private void MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                e.Handled = true;
+        }
     }
 }
 

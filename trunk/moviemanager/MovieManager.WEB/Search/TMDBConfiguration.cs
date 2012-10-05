@@ -9,6 +9,7 @@ namespace MovieManager.WEB.Search
             BackdropSizes = new List<string>();
             PosterSizes = new List<string>();
             ProfileSizes = new List<string>();
+            SelectedPosterSizeIndex = 5;
         }
 
         public static List<string> BackdropSizes { get; set; }

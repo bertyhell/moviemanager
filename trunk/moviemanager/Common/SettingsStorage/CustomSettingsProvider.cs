@@ -96,7 +96,7 @@ namespace Common.SettingsStorage
                 ConfigurationManager.AppSettings.Set(setting.Name, settingValue);
             }
 
-            myConfig.SaveAs("C:\\Users\\alexander\\AppData\\Roaming\\Taxrebel\\moviemanager\\settings\\settings.config", ConfigurationSaveMode.);
+            myConfig.SaveAs("C:\\Users\\alexander\\AppData\\Roaming\\Taxrebel\\moviemanager\\settings\\settings.config", ConfigurationSaveMode.Full);//TODO 090 continue alex
             return values;
         }
 
