@@ -67,7 +67,7 @@ namespace MovieManager.APP.Cache
             }
             catch (WebException Ex)
             {
-                if (Ex.Message.Contains("404"))
+                if (Ex.Message.Contains("404") || Ex.Message.Contains("400"))//TODO 020 replace by regex   \(4[0-9]{2}\)
                 {
                     //ignore exception
                     return null;

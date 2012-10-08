@@ -24,6 +24,10 @@ namespace MovieManager.APP.Commands
         }
         public void Execute(object parameter)
         {
+            //TODO 030 if no videos in database --> don't show analyse window --> show popup or statusbar error
+
+
+
             //foreach (Video Video in MainController.Instance.Videos)
             //{
             //    if (Video is Movie)
