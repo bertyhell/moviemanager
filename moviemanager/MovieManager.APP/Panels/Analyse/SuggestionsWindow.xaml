@@ -60,6 +60,6 @@
         <my:MovieScrollPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="5" HorizontalAlignment="Stretch" x:Name="movieScrollPanel1" Images="{Binding Path=AnalyseVideo.SelectedCandidate.Images}"  VerticalAlignment="Stretch" Margin="10,9,0,5" />
 
         <Button Grid.Column="2" Grid.Row="7" Width="75"  HorizontalAlignment="Right" VerticalAlignment="Stretch" Content="Cancel" Click="BtnCancelClick"></Button>
-        <Button Grid.Column="2" Grid.Row="7" Width="75" Margin="0,0,80,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Content="OK"></Button>
+        <Button Grid.Column="2" Grid.Row="7" Width="75" Margin="0,0,80,0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Content="OK" Click="BtnOkClick"></Button>
     </Grid>
 </Window>

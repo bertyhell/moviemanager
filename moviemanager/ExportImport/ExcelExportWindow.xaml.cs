@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ExcelInterop
+namespace ExportImport
 {
     public partial class ExcelExportWindow
     {

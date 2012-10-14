@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using ExcelInterop;
 using Model;
 using SQLite;
 
-namespace ExcelInterop
+namespace ExportImport
 {
     public class ExcelExportController : INotifyPropertyChanged
     {

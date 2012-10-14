@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Model
@@ -8,7 +7,7 @@ namespace Model
     {
         public AnalyseVideo()
         {
-            Candidates = new ObservableCollection<Video>();
+            Candidates = new List<Video>();
             SelectedCandidateIndex = -1;
             MatchPercentage = -1;
             AnalyseNeeded = true;
@@ -40,9 +39,19 @@ namespace Model
             }
         }
 
-        private ObservableCollection<Video> _candidates;
+        //filled by a couple of title guesses derived from the folder and filename of the video
+        public List<string> TitleGuesses
+        {
+            get { return _titleGuesses; }
+            set
+            {
+                _titleGuesses = value;
+                PropChanged("TitleGuesses");
+            }
+        }
 
-        public ObservableCollection<Video> Candidates
+        private List<Video> _candidates;
+        public List<Video> Candidates
         {
             get { return _candidates; }
             set
@@ -99,6 +108,8 @@ namespace Model
         }
 
         private int _matchPercentage;
+        private List<string> _titleGuesses;
+
         public int MatchPercentage
         {
             get

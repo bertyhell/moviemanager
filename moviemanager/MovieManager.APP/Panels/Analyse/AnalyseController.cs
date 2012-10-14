@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
 using Common;
 using Model;
 using MovieManager.APP.Cache;
@@ -13,6 +11,9 @@ namespace MovieManager.APP.Panels.Analyse
 {
     class AnalyseController : INotifyPropertyChanged
     {
+        //TODO 095 add progressbar for saving videoinfo after analyse
+        //TODO 100 add progressbar for downloading poster images to cache after analyse
+
 
         public AnalyseController()
         {
@@ -20,7 +21,7 @@ namespace MovieManager.APP.Panels.Analyse
             AnalyseVideos.Clear();
             foreach (Video Video in Videos)
             {
-                AnalyseVideos.Add(new AnalyseVideo { Video = Video });
+                AnalyseVideos.Add(new AnalyseVideo { Video = Video, TitleGuesses = VideoTitleExtractor.GetTitleGuesses(Video.Path) });
             }
         }
 
@@ -55,12 +56,12 @@ namespace MovieManager.APP.Panels.Analyse
             var AnalyseWorker = new AnalyseWorker(AnalyseVideos);
             IsIndeterminate = true;
             Message = "Contacting webservice...";
-            AnalyseWorker.VideoInfoProgress += AnalyseWorker_VideoInfoProgress;
-            AnalyseWorker.RunWorkerCompleted += AnalyseWorker_RunWorkerCompleted;
+            AnalyseWorker.VideoInfoProgress += AnalyseWorkerVideoInfoProgress;
+            AnalyseWorker.RunWorkerCompleted += AnalyseWorkerRunWorkerCompleted;
             AnalyseWorker.RunWorkerAsync();
         }
 
-        public void AnalyseWorker_VideoInfoProgress(object sender, ProgressEventArgs args)
+        public void AnalyseWorkerVideoInfoProgress(object sender, ProgressEventArgs args)
         {
             VideoProgressHandler(args);
         }
@@ -73,7 +74,7 @@ namespace MovieManager.APP.Panels.Analyse
             Value = args.ProgressNumber;
         }
 
-        public void AnalyseWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        public void AnalyseWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //TODO 050 get posters of analysed videos
 
@@ -132,18 +133,7 @@ namespace MovieManager.APP.Panels.Analyse
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void ManualSearch(string text, string number)
-        //{
-        //    VideoInfos.Clear();
-        //    foreach (var Video in SearchTMDB.GetVideoInfo(text))
-        //    {
-        //        VideoInfos.Add(Video);
-        //    }
-        //}
-
 
         //TODO 050 make analyse function multithreaded -> 1 thread for every movie lookup
         public void SaveVideos()
@@ -163,7 +153,7 @@ namespace MovieManager.APP.Panels.Analyse
                                 Images.Add(new Uri(ImageInfo.Uri.AbsoluteUri));
                         }
                     }
-                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.High);
+                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.Medium);
 
 
                     Videos.Add(AnalyseVideo.Video);

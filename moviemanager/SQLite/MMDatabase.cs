@@ -398,7 +398,7 @@ namespace SQLite
                 }
 
                 MoviesRow.id = movie.Id;
-                MoviesRow.franchise_id = movie.FranchiseID;
+                MoviesRow.franchise_id = movie.FranchiseId;
                 MoviesRow.id_tmdb = movie.IdTmdb;
 
                 if (Add)

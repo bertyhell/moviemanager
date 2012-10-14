@@ -16,8 +16,6 @@ namespace SQLite
 
         private const int MINIMAL_VIDEO_SIZE = 30000000; //Bytes
         static readonly String[] VIDEO_FILE_EXTENSIONS = { "ASX", "DTS", "GXF", "M2V", "M3U", "M4V", "MPEG1", "MPEG2", "MTS", "MXF", "OGM", "BUP", "A52", "AAC", "B4S", "CUE", "DIVX", "DV", "FLV", "M1V", "M2TS", "MKV", "MOV", "MPEG4", "OMA", "SPX", "TS", "VLC", "VOB", "XSPF", "DAT", "BIN", "IFO", "PART", "3G2", "AVI", "MPEG", "MPG", "FLAC", "M4A", "MP1", "OGG", "WAV", "XM", "3GP", "WMV", "AC3", "ASF", "MOD", "MP2", "MP4", "WMA", "MKA", "M4P" };
-        static readonly String[] DELIMITERS = { "CD-1", "CD-2", "CD1", "CD2", "DVD-1", "DVD-2", "[Divx-ITA]", "[XviD-ITA]", "AC3", "DVDRip", "Xvid", "http", "www.", ".com", "shared", "powered", "sponsored", "sharelive", "filedonkey", "saugstube", "eselfilme", "eseldownloads", "emulemovies", "spanishare", "eselpsychos.de", "saughilfe.de", "goldesel.6x.to", "freedivx.org", "elitedivx", "deviance", "-ftv", "ftv", "-flt", "flt", "1080p", "720p", "1080i", "720i", "480", "x264", "ext", "ac3", "6ch", "axxo", "pukka", "klaxxon", "edition", "limited", "dvdscr", "screener", "unrated", "BRRIP", "subs", "_NL_", "m-hd", "ts", "dvd rip" };
-        static readonly String[] REMOVE_CHARS = { ".", "(", ")", "{", "}", "[", "]", "_", "-" };
 
         private readonly DirectoryInfo _dir;
         private readonly IList<FileInfo> _files;
@@ -81,13 +79,13 @@ namespace SQLite
             if (!string.IsNullOrEmpty(file.Extension) && VIDEO_FILE_EXTENSIONS.Contains(file.Extension.ToUpper().Substring(1)) && file.Length > MINIMAL_VIDEO_SIZE)//TODO 030 use settings property
             {
 
-                string FilenameWidthoutExt = file.Name.Substring(0, file.Name.LastIndexOf("."));
+                string FilenameWidthoutExt = file.Name.Substring(0, file.Name.LastIndexOf(".", StringComparison.Ordinal));
                 var Video = new Video
                 {
                     //TODO 010 fix this workaround
                     Path = file.FullName.Replace("\'", "''"),
                     //handle signle quotes in path name
-                    Name = CleanTitle(FilenameWidthoutExt)
+                    Name = VideoTitleExtractor.CleanTitle(FilenameWidthoutExt)
                 };
                 videos.Add(Video);
                 _videosFound++;
@@ -108,29 +106,6 @@ namespace SQLite
                     FoundVideo(this, new ProgressEventArgs {ProgressNumber = _filesProcessed});
                 }
             }
-        }
-
-        /// <summary>
-        /// cleans up title, returns the cleaned up title
-        /// </summary>
-        /// <param name="fileName">original file name</param>
-        /// <returns>cleaned up filename, should be closest to movie title with year</returns>
-        public static String CleanTitle(String fileName)
-        {
-            String MovieName = fileName.ToLower();
-            foreach (String Delimiter in DELIMITERS)
-            {
-                int FirstIndex = Regex.Match(MovieName, "^.*[^0-9a-z](" + Regex.Escape(Delimiter.ToLower()) + ")($|[^0-9a-z].*$)").Groups[1].Index;
-                if (FirstIndex > 0){
-                    MovieName = MovieName.Substring(0, FirstIndex);
-                }
-            }
-            foreach (var RemoveChar in REMOVE_CHARS)
-            {
-                MovieName = MovieName.Replace(RemoveChar, " ");
-            }
-
-            return MovieName.Trim();
         }
         
         #region series
