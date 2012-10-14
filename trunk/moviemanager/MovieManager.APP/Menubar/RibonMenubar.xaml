@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="158" d:DesignWidth="798" 
+             d:DesignHeight="158" 
+             d:DesignWidth="798" 
              xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
-             xmlns:data ="clr-namespace:MovieManager.APP.Menubar">
+             xmlns:data ="clr-namespace:MovieManager.APP.Menubar"
+             xmlns:ViewModel="clr-namespace:MovieManager.APP.ViewModel">
     <Grid>
         <Grid.Resources>
             <Style x:Key="RibbonControlStyle">
@@ -42,32 +44,32 @@
                 <Setter Property="Command" Value="{Binding Command}" />
             </Style>
         </Grid.Resources>
-        
+
         <ribbon:Ribbon Grid.Row="0" Grid.ColumnSpan="3" x:Name="_ribbonMenubar">
             <!-- Applicatiemenu-->
             <ribbon:Ribbon.ApplicationMenu>
                 <ribbon:RibbonApplicationMenu  SmallImageSource="/MovieManager;component/Images/picto.png">
                     <ribbon:RibbonApplicationMenuItem Header="_Close" ImageSource="/MovieManager;component/Images/close.png" />
 
-                <ribbon:RibbonApplicationMenu.FooterPaneContent>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <ribbon:RibbonButton Grid.Column="2" DataContext="{x:Static data:MenuModel.ExitMM}" />
-                    </Grid>
-                </ribbon:RibbonApplicationMenu.FooterPaneContent>
+                    <ribbon:RibbonApplicationMenu.FooterPaneContent>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ribbon:RibbonButton Grid.Column="2" DataContext="{x:Static data:MenuModel.ExitMM}" />
+                        </Grid>
+                    </ribbon:RibbonApplicationMenu.FooterPaneContent>
 
                 </ribbon:RibbonApplicationMenu>
             </ribbon:Ribbon.ApplicationMenu>
-            
-            
+
+
             <ribbon:RibbonTab x:Name="_ribbonHometab" Header="Home">
                 <ribbon:RibbonGroup>
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddVideo}" />
-                  <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddVideoDir}" />
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddVideoDir}" />
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.AddSerie}" />
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.EmptyVideos}" />
                 </ribbon:RibbonGroup>
@@ -90,9 +92,19 @@
 
             <ribbon:RibbonTab Header="View">
                 <ribbon:RibbonGroup Header="View">
-                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.View}"  />
+                    <ribbon:RibbonMenuButton DataContext="{x:Static data:MenuModel.ChangeView}">
+                        <ribbon:RibbonMenuItem Header="_Reset to Quick Styles from Template" KeyTip="R" ImageSource="{x:Null}"/>
+                        <ribbon:RibbonMenuItem Header="Reset _Document Quick Styles" KeyTip="D" ImageSource="{x:Null}"/>
+                        <ribbon:RibbonMenuItem Header="Save as _Quick Style Set..." KeyTip="Q" ImageSource="{x:Null}"/>
+                      
+                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewBigIcons}" />
+                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewMediumIcons}" />
+                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewSmallIcons}" />
+                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewDetails}" />
+                    </ribbon:RibbonMenuButton>
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
+
 
             <ribbon:RibbonTab Header="Settings">
                 <ribbon:RibbonGroup Header="settings">

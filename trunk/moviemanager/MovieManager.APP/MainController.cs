@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Data;
-using Common;
 using Model;
-using MovieManager.APP.Cache;
 using MovieManager.APP.Commands;
 using MovieManager.APP.Panels.Settings;
 using SQLite;
@@ -136,7 +133,7 @@ namespace MovieManager.APP
             }
         }
 
-        public void ToggleViews()
+        public void ChangeView(ViewStates requestedViewState)
         {
             if (IsDetailViewVisible == Visibility.Collapsed)
             {
@@ -152,9 +149,9 @@ namespace MovieManager.APP
 
         #region zooming + events
 
-        private int _minWidth = 60;
-        private int _maxWidth = 500;
-        private int _zoomStep = 30;
+        private const int MIN_WIDTH = 60;
+        private const int MAX_WIDTH = 500;
+        private const int ZOOM_STEP = 30;
 
         private int _previewWidth = 200;
 
@@ -164,20 +161,20 @@ namespace MovieManager.APP
             set
             {
                 //TODO 020 zoomout on details and then zoom in --> slow or error?
-                if (value < _minWidth && _previewWidth >= _minWidth)
+                if (value < MIN_WIDTH && _previewWidth >= MIN_WIDTH)
                 {
                     //change view when icons are to little
-                    ToggleViews();
-                    _previewWidth = _minWidth - _zoomStep;
+                    ChangeView(ViewStates.Details);
+                    _previewWidth = MIN_WIDTH - ZOOM_STEP;
                 }
-                else if (value >= _minWidth && _previewWidth < _minWidth)
+                else if (value >= MIN_WIDTH && _previewWidth < MIN_WIDTH)
                 {
-                    ToggleViews();
-                    _previewWidth = _minWidth;
+                    ChangeView(ViewStates.SmallIcons);
+                    _previewWidth = MIN_WIDTH;
                 }
-                else if(value > _maxWidth)
+                else if(value > MAX_WIDTH)
                 {
-                    _previewWidth = _maxWidth;
+                    _previewWidth = MAX_WIDTH;
                 }
                 else
                 {
@@ -197,11 +194,11 @@ namespace MovieManager.APP
         {
             if (zoomIn)
             {
-                PreviewWidth += _zoomStep;
+                PreviewWidth += ZOOM_STEP;
             }
             else
             {
-                PreviewWidth -= _zoomStep;
+                PreviewWidth -= ZOOM_STEP;
             }
         }
 

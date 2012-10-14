@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ExcelInterop
+namespace ExportImport
 {
 	public class ObjectMappingItem : INotifyPropertyChanged
 	{

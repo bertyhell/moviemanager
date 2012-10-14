@@ -364,28 +364,144 @@ namespace MovieManager.APP.Menubar
             }
         }
 
-        public static ControlData View
+        public static ControlData ChangeView //TODO 070 check why the **** this doesn't work :@ (wasted 3 hours)
         {
             get
             {
                 lock (LOCK_OBJECT)
                 {
-                    const string STR = "View";
+                    const string STR = "Change View";
 
                     if (!DATA_COLLECTION.ContainsKey(STR))
                     {
-                        const string VIEW_TOOL_TIP_TITLE = "View";
-                        const string VIEW_TOOL_TIP_DESCRIPTION = "Chnage the videos view";
-                        ControlData ButtonData = new ControlData
+                        const string VIEW_TOOL_TIP_TITLE = "Change View";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Change view";
+
+                        MenuButtonData MenuButtonData = new MenuButtonData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
+                            LargeImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
-                            Command = new ChangeViewCommand(),
                             KeyTip = "",
                         };
-                        DATA_COLLECTION[STR] = ButtonData;
+                        DATA_COLLECTION[STR] = MenuButtonData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
+        public static ControlData ViewBigIcons
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Big icons";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string VIEW_TOOL_TIP_TITLE = "Big icons";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to big icons";
+                        MenuItemData ItemData = new MenuItemData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/view_big_icons_16.png", UriKind.Relative),
+                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            Command = new ChangeViewCommand(ViewStates.BigIcons),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ItemData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
+        public static ControlData ViewMediumIcons
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Medium icons";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string VIEW_TOOL_TIP_TITLE = "Medium icons";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to medium icons";
+                        MenuItemData ItemData = new MenuItemData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/view_medium_icons_16.png", UriKind.Relative),
+                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            Command = new ChangeViewCommand(ViewStates.MediumIcons),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ItemData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
+        public static ControlData ViewSmallIcons
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Small icons";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string VIEW_TOOL_TIP_TITLE = "Small icons";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to small icons";
+                        MenuItemData ItemData = new MenuItemData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/view_small_icons_16.png", UriKind.Relative),
+                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            Command = new ChangeViewCommand(ViewStates.SmallIcons),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ItemData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
+        public static ControlData ViewDetails
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Details";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string VIEW_TOOL_TIP_TITLE = "Details";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to show details";
+                        MenuItemData ItemData = new MenuItemData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/view_details_icons_16.png", UriKind.Relative),
+                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            Command = new ChangeViewCommand(ViewStates.Details),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ItemData;
                     }
 
                     return DATA_COLLECTION[STR];

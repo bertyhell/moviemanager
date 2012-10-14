@@ -325,6 +325,10 @@ namespace Model
             }
         }
 
+        public double TitleMatchRatio { get; set; }
+
+
+
         public override string ToString()
         {
             return Name;

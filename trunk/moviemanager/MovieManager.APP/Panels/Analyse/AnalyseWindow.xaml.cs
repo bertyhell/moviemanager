@@ -30,12 +30,12 @@ namespace MovieManager.APP.Panels.Analyse
             Close();
         }
 
-        private void dgrVideoFileList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void DgrVideoFileListRowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             _controller.SelectedVideoFile.AnalyseNeeded = true;
         }
 
-        private void BtnDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void BtnDetailsClick(object sender, System.Windows.RoutedEventArgs e)
         {
             SuggestionsWindow Window = new SuggestionsWindow(_controller.SelectedVideoFile);
             Window.Show();

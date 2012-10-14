@@ -42,7 +42,6 @@ namespace MovieManager.APP.Commands
                                      };
             if (Ofd.ShowDialog() == DialogResult.OK)
             {
-                new ObservableCollection<Video>();
                 Message = "Searching videos: 0 found";
                 Value = 0;
                 Maximum = Ofd.FileNames.Count();
