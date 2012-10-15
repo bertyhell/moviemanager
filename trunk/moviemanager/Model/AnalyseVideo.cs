@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Model
@@ -9,7 +10,6 @@ namespace Model
         {
             Candidates = new List<Video>();
             SelectedCandidateIndex = -1;
-            MatchPercentage = -1;
             AnalyseNeeded = true;
         }
 
@@ -40,6 +40,7 @@ namespace Model
         }
 
         //filled by a couple of title guesses derived from the folder and filename of the video
+        private List<string> _titleGuesses;
         public List<string> TitleGuesses
         {
             get { return _titleGuesses; }
@@ -57,7 +58,11 @@ namespace Model
             set
             {
                 _candidates = value;
+                if (Candidates.Count > 0) SelectedCandidateIndex = 0;
+
+
                 PropChanged("Candidates");
+                PropChanged("MatchPercentage");
             }
         }
 
@@ -68,8 +73,11 @@ namespace Model
             set
             {
                 _selectedCandidateIndex = value;
+
+
                 PropChanged("SelectedCandidateIndex");
                 PropChanged("SelectedCandidate");
+                PropChanged("MatchPercentage");
             }
         }
 
@@ -107,19 +115,16 @@ namespace Model
             }
         }
 
-        private int _matchPercentage;
-        private List<string> _titleGuesses;
-
-        public int MatchPercentage
+        public double MatchPercentage
         {
             get
             {
-                return _matchPercentage;//Brushes.BlueViolet; 
-            }
-            set
-            {
-                _matchPercentage = value;
-                PropChanged("MatchPercentage");
+                if (AnalyseNeeded) return -1;
+                if (Candidates.Count > 0)
+                {
+                    return Math.Sin(Candidates[SelectedCandidateIndex].TitleMatchRatio * Math.PI - Math.PI / 2) / 2 + 0.5; //good devision between red and green (not much matchrations close to 0 or 0.3 --> sin pushes values more to 0 and 1 --> colors are more extreme)
+                }
+                return 0;//red
             }
         }
 

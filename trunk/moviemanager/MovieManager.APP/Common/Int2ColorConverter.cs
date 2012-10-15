@@ -19,10 +19,10 @@ namespace MovieManager.APP.Common
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (targetType == typeof(Brush) && value is int)
+            if (targetType == typeof(Brush) && value is double)
             {
-                int Percent = (int)value;
-                if (Percent < 0 || Percent > 100)
+                double Percent = (double) value;
+                if (Percent < 0 || Percent > 1)
                 {
                     return null;
                 }
@@ -38,15 +38,14 @@ namespace MovieManager.APP.Common
 
         public static Color Percent2Color(double percent)
         {
-            double Pct = percent / 100.0;
             for (var I = 0; I < PERCENT_COLORS.Length; I++)
             {
-                if (Pct <= PERCENT_COLORS[I].Percent)
+                if (percent <= PERCENT_COLORS[I].Percent)
                 {
                     ColorPercent Lower = I-1 < 0 ? new ColorPercent{Percent = 0.1, Red = 0, Green = 0, Blue = 0} : PERCENT_COLORS[I - 1];
                     var Upper = PERCENT_COLORS[I];
                     var Range = Upper.Percent - Lower.Percent;
-                    var RangePct = (Pct - Lower.Percent) / Range;
+                    var RangePct = (percent - Lower.Percent) / Range;
                     var PctLower = 1 - RangePct;
                     var PctUpper = RangePct;
                     byte Red = (byte)Math.Round(Lower.Red * PctLower + Upper.Red * PctUpper);

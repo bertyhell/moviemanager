@@ -1,6 +1,4 @@
 ﻿using System.Windows.Controls;
-using Model;
-using SQLite;
 
 namespace MovieManager.APP.Panels.Analyse
 {
