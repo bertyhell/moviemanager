@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using Common;
 using Model;
 using MovieManager.WEB.Search;
@@ -37,8 +38,10 @@ namespace MovieManager.APP.Panels.Analyse
             int Counter = 0;
             foreach (AnalyseVideo AnalyseVideo in _analyseVideos)
             {
+                //TODO 070 split up in different analysing passes --> only reanalyse videos where no good match was found (or selected by user)
+
                 string FileNameGuess = AnalyseVideo.TitleGuesses[0];
-                string FolderNameGuess = AnalyseVideo.TitleGuesses[1];
+                string FolderNameGuess = AnalyseVideo.TitleGuesses.Count>1?AnalyseVideo.TitleGuesses[1]:null;
 
                 //Console.WriteLine(AnalyseVideo.Video.Name);
                 var Candidates = new SortedSet<Video>(new SimilarityComparer());//sort candidates by their match score with the original filename and foldername
@@ -48,35 +51,23 @@ namespace MovieManager.APP.Panels.Analyse
                     {
                         //add pairs of similarity and videoInfo to the list
                         //similarity == max of similarity between to the original guesses for filename and foldername and the videoinfo name from the webservice
-                        VideoInfo.TitleMatchRatio = Math.Max(StringSimilarity.GetSimilarity(VideoInfo.Name, FileNameGuess), StringSimilarity.GetSimilarity(VideoInfo.Name, FolderNameGuess));
-                        Candidates.Add(VideoInfo);//TODO 080 avoid duplicates (tried with equatable<> interface and sortedset --> doesn't work yet)
+                        List<double> Similarities = new List<double>();
+                        Similarities.Add(StringSimilarity.GetSimilarity(VideoInfo.Name + " " + VideoInfo.Release.Year, FileNameGuess));
+                        Similarities.Add(StringSimilarity.GetSimilarity(VideoInfo.Name, FileNameGuess));
+                        if(FolderNameGuess != null)
+                        {
+                            Similarities.Add(StringSimilarity.GetSimilarity(VideoInfo.Name + " " + VideoInfo.Release.Year, FolderNameGuess));
+                            Similarities.Add(StringSimilarity.GetSimilarity(VideoInfo.Name, FolderNameGuess));
+                        }
+                        VideoInfo.TitleMatchRatio = Similarities.Max();
+                        if(!Candidates.Contains(VideoInfo)) Candidates.Add(VideoInfo);
                     }
                 }
-                var UniqueSortedCandidates = new List<Video>();
                 //TODO 070 add option so user can disable info being changed for this video --> none of the videoInfo's from webservice are correct (maybe video isn't famous enough) --> shouldn't change all movieinfo --> abort analyse for this video
-                foreach (Video Candidate in Candidates)
-                {
-                    UniqueSortedCandidates.Add(Candidate);
-                }
-                AnalyseVideo.Candidates = UniqueSortedCandidates;
-                //set selected index
-                if (AnalyseVideo.Candidates.Count > 1)
-                {
-                    AnalyseVideo.SelectedCandidateIndex = 0;
-                    AnalyseVideo.MatchPercentage = 33;
-                }
-                else if (AnalyseVideo.Candidates.Count > 0)
-                {
-                    AnalyseVideo.SelectedCandidateIndex = 0;
-                    AnalyseVideo.MatchPercentage = 100;
-                }
-                else
-                {
-                    AnalyseVideo.MatchPercentage = 0;
-                }
+                AnalyseVideo.Candidates = Candidates.ToList();
                 AnalyseVideo.AnalyseNeeded = false;
                 Counter++;
-                OnVideoInfoProgress(new ProgressEventArgs() { MaxNumber = _analyseVideos.Count, ProgressNumber = Counter });
+                OnVideoInfoProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = Counter });
             }
         }
     }

@@ -39,7 +39,8 @@
         <GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
-        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel">
+        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" 
+                  ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
@@ -49,14 +50,12 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <VirtualizingStackPanel>
-                        <Common:PreviewItem Item="{Binding}" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
+                    <Common:PreviewItem VirtualizingStackPanel.IsVirtualizing="True" Item="{Binding}" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
                                                     Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" Margin="5" />
-                    </VirtualizingStackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
         <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" ItemsSource="{Binding VideosView}" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick" PreviewMouseWheel="MouseWheel">
             <DataGrid.CellStyle>

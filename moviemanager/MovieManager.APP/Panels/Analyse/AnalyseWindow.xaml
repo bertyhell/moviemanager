@@ -40,7 +40,21 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Title Guess" Binding="{Binding Video.Name}" />
+                
+                <!--<DataGridTextColumn Header="Title Guess" Binding="{Binding Video.Name}" IsReadOnly="False" />-->
+                <DataGridTemplateColumn Header="Title Guesses">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding TitleGuesses}" SelectedIndex="0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding TitleGuesses}" IsReadOnly="False" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                
                 <!-- TODO 080 change title guess by combobox with all titleguesses (but still allow user to edit by typing-->
                 <DataGridTemplateColumn Header="Candidates">
                     <DataGridTemplateColumn.CellTemplate>
@@ -50,9 +64,10 @@
                                     <DataTemplate>
                                         <TextBlock>
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} ({1})">
+                                                <MultiBinding StringFormat="{}{0} ({1})({2})">
                                                     <Binding Path="Name"/>
                                                     <Binding Path="Release.Year"/>
+                                                    <Binding Path="TitleMatchRatio"/>
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
@@ -68,9 +83,10 @@
                                     <DataTemplate>
                                         <TextBlock>
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} ({1})">
+                                                <MultiBinding StringFormat="{}{0} ({1})({2})">
                                                     <Binding Path="Name"/>
                                                     <Binding Path="Release.Year"/>
+                                                    <Binding Path="TitleMatchRatio"/>
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
@@ -80,9 +96,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="File" Binding="{Binding Video.Path, Converter={StaticResource FileNameFromPathExtractor}}" IsReadOnly="False" />
-                <DataGridTextColumn Header="Folder" Binding="{Binding Video.Path, Converter={StaticResource FolderFromPathExtractor}}" />
-                <DataGridTextColumn Header="Path" Binding="{Binding Video.Path}" />
+                <DataGridTextColumn Header="File" Binding="{Binding Video.Path, Converter={StaticResource FileNameFromPathExtractor}}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Folder" Binding="{Binding Video.Path, Converter={StaticResource FolderFromPathExtractor}}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Path" Binding="{Binding Video.Path}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

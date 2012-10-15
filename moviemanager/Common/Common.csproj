@@ -59,6 +59,7 @@
     <Compile Include="SimpleWebRequest.cs" />
     <Compile Include="StringSimilarity.cs" />
     <Compile Include="TimestampUtilities.cs" />
+    <Compile Include="UniqueCollection.cs" />
     <Compile Include="VideoTitleExtractor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
