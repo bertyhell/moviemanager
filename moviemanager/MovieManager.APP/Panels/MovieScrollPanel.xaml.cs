@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using Common;
 using Model;
 using MovieManager.APP.Panels.Search;
+using SearchOptions = MovieManager.APP.Panels.Search.SearchOptions;
 
 namespace MovieManager.APP.Panels
 {
@@ -20,11 +21,10 @@ namespace MovieManager.APP.Panels
 
 
         private List<Image> _imagesElements;
-        public readonly static DependencyProperty IMAGES_PROPERTY = DependencyProperty.Register("Images", typeof(List<ImageInfo>),
+        public readonly static DependencyProperty ImagesProperty = DependencyProperty.Register("Images", typeof(List<ImageInfo>),
                                                                           typeof(MovieScrollPanel), new PropertyMetadata(new List<ImageInfo>(), OnImagesChanged));
 
-
-        private const double RepositionSpeed = 100;
+        private const double REPOSITION_SPEED = 100;
 
         private double _currentScrollViewPosition;
 
@@ -37,10 +37,10 @@ namespace MovieManager.APP.Panels
 
         public List<ImageInfo> Images
         {
-            get { return (List<ImageInfo>)GetValue(IMAGES_PROPERTY); }
+            get { return (List<ImageInfo>)GetValue(ImagesProperty); }
             set
             {
-                SetValue(IMAGES_PROPERTY, value);
+                SetValue(ImagesProperty, value);
             }
         }
 
@@ -102,12 +102,12 @@ namespace MovieManager.APP.Panels
 
         private void BtnLeftClick(object sender, RoutedEventArgs e)
         {
-            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition - RepositionSpeed);
+            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition - REPOSITION_SPEED);
         }
 
         private void BtnRightClick(object sender, RoutedEventArgs e)
         {
-            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition + RepositionSpeed);
+            _ImgScrollViewer.ScrollToHorizontalOffset(_currentScrollViewPosition + REPOSITION_SPEED);
         }
 
         public void ImgScrollViewerScrollChanged(object sender, ScrollChangedEventArgs e)

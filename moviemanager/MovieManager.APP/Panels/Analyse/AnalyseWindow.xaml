@@ -12,12 +12,14 @@
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition />
             <RowDefinition Height="10" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding AnalyseVideos}" SelectedItem="{Binding SelectedVideoFile}" 
+        <DataGrid Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding AnalyseVideos}" SelectedItem="{Binding SelectedVideoFile}" 
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Single" CanUserResizeRows="False" AutoGenerateColumns="False" Name="dgrVideoFileList" Margin="0,10,0,0" RowEditEnding="DgrVideoFileListRowEditEnding">
             <!--AlternatingRowBackground="#EEE"-->
             <DataGrid.CellStyle>
@@ -102,13 +104,14 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <common:ProgressBarControl Margin="0,0,160,0" x:Name="progressbar" />
-        <Button HorizontalAlignment="Right" Width="150" Name="btnAnalyse" Click="BtnAnalyseClick">
+        <common:ProgressBarControl Margin="0,0,160,0" x:Name="progressbarTotal" />
+        <common:ProgressBarControl Margin="0,0,160,0" Grid.Row="2" x:Name="progressbarPass" />
+        <Button HorizontalAlignment="Right" Width="150" Name="btnAnalyse" Click="BtnAnalyseClick" Grid.RowSpan="3">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/MovieManager;component/Images/analyse.png" Stretch="Uniform" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <TextBlock Text="Start Analysis" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5"></TextBlock>
             </StackPanel>
         </Button>
-        <Button Content="Save" Grid.Row="3" HorizontalAlignment="Right"  Name="button1" VerticalAlignment="Stretch" Width="75" Click="BtnSaveClick" />
+        <Button Content="Save" Grid.Row="5" HorizontalAlignment="Right"  Name="button1" VerticalAlignment="Stretch" Width="75" Click="BtnSaveClick" />
     </Grid>
 </Window>
