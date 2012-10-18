@@ -14,7 +14,8 @@ namespace MovieManager.APP.Panels.Analyse
             InitializeComponent();
             _controller = new AnalyseController();
             DataContext = _controller;
-            progressbar.DataContext = _controller;
+            progressbarTotal.DataContext = _controller.ProgressBarInfoTotal;
+            progressbarPass.DataContext = _controller.ProgressBarInfoPass;
         }
 
         private void BtnAnalyseClick(object sender, System.Windows.RoutedEventArgs e)

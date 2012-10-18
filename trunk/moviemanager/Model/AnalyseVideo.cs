@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Model
@@ -59,10 +60,9 @@ namespace Model
             {
                 _candidates = value;
                 if (Candidates.Count > 0) SelectedCandidateIndex = 0;
-
-
                 PropChanged("Candidates");
                 PropChanged("MatchPercentage");
+                PropChanged("SelectedCandidateIndex");
             }
         }
 
