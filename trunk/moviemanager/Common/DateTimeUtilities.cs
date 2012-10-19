@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Common
+namespace MovieManager.Common
 {
     public class DateTimeUtilities
     {
