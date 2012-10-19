@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MovieManager.APP.Common
+namespace MovieManager.Common
 {
     public class DefaultValues
     {
@@ -9,10 +9,12 @@ namespace MovieManager.APP.Common
         public static readonly DateTime FILTER_START_DATE = DateTime.Now.AddYears(-2);
         public static readonly DateTime FILTER_END_DATE = DateTime.Now.AddYears(-10);
 
+        public static readonly string PATH_USER_APPDATA = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static readonly string PATH_PROGRAM_DATA = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
         public static readonly string PATH_LOGGING_SUBDIR = "Log";
+        public static readonly string PATH_SETTINGS_SUBDIR = "Settings";
 
-        public static readonly string PATH_APPLICATION_SUBDIR = "MovieManager";
+        public static readonly string PATH_APPLICATION_SUBDIR = "TheMovieCollector";
 
         public static readonly string LOG_FILENAME = "moviemanager_log.sqlite";
 
