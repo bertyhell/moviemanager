@@ -6,21 +6,29 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Common.SettingsStorage
+namespace MovieManager.Common.SettingsStorage
 {
     public sealed class CustomSettingsProvider : SettingsProvider
     {
+        private string _appSettingsPath;
+        private string _userSettingsPath;
+        private bool _userSettingsFileFound;
+        private bool _appSettingsFileFound;
+
         private NameValueCollection settingValues = new NameValueCollection();
-        private Configuration myConfig;
-        private ClientSettingsSection usrSettingsSection;
-        private ClientSettingsSection appSettingsSection;
-        private System.Type settingsType;
+        private Configuration _myConfig;
+        private ClientSettingsSection _usrSettingsSection;
+        private ClientSettingsSection _appSettingsSection;
+        private System.Type _settingsType;
+
+        public CustomSettingsProvider()
+        {}
 
         public override string ApplicationName
         {
             get
             {
-                return System.Reflection.Assembly.GetCallingAssembly().GetName().Name;
+                return System.Reflection.Assembly.GetEntryAssembly().GetName().Name;
             }
             set
             {
@@ -31,55 +39,99 @@ namespace Common.SettingsStorage
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         {
             base.Initialize(this.ApplicationName, settingValues);
+            _userSettingsPath = Path.Combine(DefaultValues.PATH_USER_APPDATA, DefaultValues.PATH_APPLICATION_SUBDIR, DefaultValues.PATH_SETTINGS_SUBDIR,
+                                 this.ApplicationName + ".Settings.config");
+            _appSettingsPath = Path.Combine(DefaultValues.PATH_PROGRAM_DATA, DefaultValues.PATH_APPLICATION_SUBDIR, DefaultValues.PATH_SETTINGS_SUBDIR,
+                                 this.ApplicationName + ".Settings.config");
+
+            _userSettingsFileFound = File.Exists(_userSettingsPath);
+            _appSettingsFileFound = File.Exists(_appSettingsPath);
+
+        }
+
+        private void CreateConfigFile(string filePath)
+        {
+            const string XML = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration>\n</configuration>";
+
+            System.IO.StreamWriter FileWriter = new System.IO.StreamWriter(filePath);
+            FileWriter.WriteLine(XML);
+            FileWriter.Close();
+        }
+
+        private void GetConfiguration(string exeLocation)
+        {
+            if (!_userSettingsFileFound)CreateConfigFile(_userSettingsPath);
+            if(!_appSettingsFileFound) CreateConfigFile(_appSettingsPath);
+
+            string fileName = _settingsType.Assembly.Location;
+
+            ExeConfigurationFileMap ExeConfigurationFileMap = new ExeConfigurationFileMap();
+            ExeConfigurationFileMap.ExeConfigFilename = fileName + ".config";
+            ExeConfigurationFileMap.ExeConfigFilename = "C:\\ProgramData\\TheMovieCollector\\Settings\\moviemanager.settings.config";
+            //ExeConfigurationFileMap.MachineConfigFilename = "C:\\ProgramData\\TheMovieCollector\\Settings\\moviemanager.settings.config";
+            ExeConfigurationFileMap.MachineConfigFilename =  fileName + ".config";
+            ExeConfigurationFileMap.RoamingUserConfigFilename = _userSettingsPath;
+            ExeConfigurationFileMap.LocalUserConfigFilename = _userSettingsPath;
+            _myConfig = ConfigurationManager.OpenMappedExeConfiguration(ExeConfigurationFileMap,
+                                                                       ConfigurationUserLevel.PerUserRoamingAndLocal);
+
+
+            // Get the collection of the section groups.
+            ApplicationSettingsGroup AppSettingsGroup = (ApplicationSettingsGroup)_myConfig.SectionGroups["applicationSettings"];
+            UserSettingsGroup UsrSettingsGroup = (UserSettingsGroup)_myConfig.SectionGroups["userSettings"];
+
+
+            if (AppSettingsGroup == null)
+            {
+                ApplicationSettingsGroup AppGrp = new ApplicationSettingsGroup();
+                AppGrp.ForceDeclaration(true);
+                _myConfig.SectionGroups.Add("applicationSettings", AppGrp);
+                //
+                _appSettingsSection = new ClientSettingsSection();
+                _appSettingsSection.SectionInformation.RequirePermission = false;
+                _appSettingsSection.SectionInformation.ForceDeclaration(true);
+                _appSettingsSection.SectionInformation.ForceSave = true;
+                AppGrp.Sections.Add(_settingsType.FullName, _appSettingsSection);
+            }
+            else
+            {
+                _appSettingsSection = (ClientSettingsSection)AppSettingsGroup.Sections[_settingsType.FullName];
+            }
+
+            if (UsrSettingsGroup == null)
+            {
+                UserSettingsGroup UsrGrp = new UserSettingsGroup();
+                UsrGrp.ForceDeclaration(true);
+                _myConfig.SectionGroups.Add("userSettings", UsrGrp);
+                //
+                _usrSettingsSection = new ClientSettingsSection();
+                _usrSettingsSection.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToLocalUser;
+                _usrSettingsSection.SectionInformation.RequirePermission = false;
+                _usrSettingsSection.SectionInformation.ForceDeclaration(true);
+                _usrSettingsSection.SectionInformation.ForceSave = true;
+                UsrGrp.Sections.Add(_settingsType.FullName, _usrSettingsSection);
+            }
+            else
+            {
+                _usrSettingsSection = (ClientSettingsSection)UsrSettingsGroup.Sections[_settingsType.FullName];
+            }
+
+            if (!_userSettingsFileFound ||! _appSettingsFileFound)
+            {
+                _userSettingsFileFound = true; // must be before force save --> otherwis infinite loop
+                _appSettingsFileFound = true; // must be before force save --> otherwis infinite loop
+                ForceSave();
+            }
+
         }
 
         public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection collection)
         {
-            //ConfigurationManager.OpenExeConfiguration()
-            string appDataPath = "moviemanager";
-            string commonApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string commonAppDataPath = Path.Combine(commonApplicationData, appDataPath);
 
-            settingsType = (Type)context["SettingsClassType"];
-            string fileName = settingsType.Assembly.Location;
+            _settingsType = (Type)context["SettingsClassType"];
 
-            myConfig = ConfigurationManager.OpenExeConfiguration(fileName);
-
-            if (myConfig.HasFile)
-            {
-
-            }
-            else
-            {
-            }
-
-
-            // Get the collection of the section groups.
-            ApplicationSettingsGroup appSettingsGroup = (ApplicationSettingsGroup)myConfig.SectionGroups["applicationSettings"];
-            UserSettingsGroup usrSettingsGroup = (UserSettingsGroup)myConfig.SectionGroups["userSettings"];
-
-            if (usrSettingsGroup == null)
-            {
-                UserSettingsGroup usrGrp = new UserSettingsGroup();
-                usrGrp.ForceDeclaration(true);
-                myConfig.SectionGroups.Add("userSettings", usrGrp);
-                //
-                usrSettingsSection = new ClientSettingsSection();
-                usrSettingsSection.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToLocalUser;
-                usrSettingsSection.SectionInformation.RequirePermission = false;
-                usrSettingsSection.SectionInformation.ForceDeclaration(true);
-                usrSettingsSection.SectionInformation.ForceSave = true;
-                usrGrp.Sections.Add(settingsType.FullName, usrSettingsSection);
-            }
-            else
-            {
-                usrSettingsSection = (ClientSettingsSection)usrSettingsGroup.Sections[settingsType.FullName];
-            }
-
-            UserSettingsGroup UserSettingsGrp = new UserSettingsGroup();
-            UserSettingsGrp.ForceDeclaration(true);
-
-
+            if (_myConfig == null)
+                GetConfiguration(_settingsType.Assembly.Location);
 
             SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
 
@@ -96,7 +148,6 @@ namespace Common.SettingsStorage
                 ConfigurationManager.AppSettings.Set(setting.Name, settingValue);
             }
 
-            myConfig.SaveAs("C:\\Users\\alexander\\AppData\\Roaming\\Taxrebel\\moviemanager\\settings\\settings.config", ConfigurationSaveMode.Full);//TODO 090 continue alex
             return values;
         }
 
@@ -106,7 +157,7 @@ namespace Common.SettingsStorage
             if ((setting.Attributes.ContainsKey(typeof(ApplicationScopedSettingAttribute))) &&
                 (!setting.Attributes.ContainsKey(typeof(SpecialSettingAttribute))))
             {
-                SettingElement appSetting = appSettingsSection.Settings.Get(setting.Name);
+                SettingElement appSetting = _appSettingsSection.Settings.Get(setting.Name);
                 if (appSetting != null)
                     return appSetting.Value.ValueXml.InnerText.TrimEnd();
                 else
@@ -120,7 +171,7 @@ namespace Common.SettingsStorage
             //if (usrSettingsSection != null)
             else if (setting.Attributes.ContainsKey(typeof(UserScopedSettingAttribute)))
             {
-                SettingElement usrSetting = usrSettingsSection.Settings.Get(setting.Name);
+                SettingElement usrSetting = _usrSettingsSection.Settings.Get(setting.Name);
                 if (usrSetting != null)
                     return usrSetting.Value.ValueXml.InnerText.TrimEnd();
                 else
@@ -133,7 +184,7 @@ namespace Common.SettingsStorage
             }
             else
             {
-                ConnectionStringSettings connStr = myConfig.ConnectionStrings.ConnectionStrings[settingsType.FullName + "." + setting.Name];
+                ConnectionStringSettings connStr = _myConfig.ConnectionStrings.ConnectionStrings[_settingsType.FullName + "." + setting.Name];
                 if (connStr != null)
                     return connStr.ConnectionString;
                 else
@@ -143,7 +194,97 @@ namespace Common.SettingsStorage
 
         public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection collection)
         {
+            foreach (SettingsPropertyValue SettingsPropertyValue in collection)
+            {
+                SetConfigValue(SettingsPropertyValue);
+            }
+        }
 
+        public void Save()
+        {
+            _myConfig.Save(ConfigurationSaveMode.Full);
+            GetConfiguration(_settingsType.Assembly.Location);
+        }
+
+        public void ForceSave()
+        {
+            if (_myConfig.SectionGroups["userSettings"] != null)
+            {
+                foreach (ConfigurationSection Section in _myConfig.SectionGroups["userSettings"].Sections)
+                {
+                    Section.SectionInformation.ForceSave = true;
+                }
+            }
+
+            _myConfig.Save(ConfigurationSaveMode.Full);
+            GetConfiguration(_settingsType.Assembly.Location);
+
+            if (_myConfig.SectionGroups["applicationSettings"] != null)
+            {
+                foreach (ConfigurationSection Section in _myConfig.SectionGroups["applicationSettings"].Sections)
+                {
+                    Section.SectionInformation.ForceSave = true;
+                }
+            };
+            _myConfig.Save(ConfigurationSaveMode.Full);
+            GetConfiguration(_settingsType.Assembly.Location);
+        }
+
+
+
+        private void SetConfigValue(SettingsPropertyValue value)
+        {
+            SettingsAttributeDictionary SettingAttributes = value.Property.Attributes;
+            if (SettingAttributes.ContainsKey(typeof(ApplicationScopedSettingAttribute)) && (!SettingAttributes.ContainsKey(typeof(SpecialSettingAttribute))))
+            {
+                SettingElement AppSetting = _appSettingsSection.Settings.Get(value.Name);
+                if (AppSetting == null)
+                {
+                    AppSetting = new SettingElement(value.Name, SettingsSerializeAs.String);
+                }
+                if (!AppSetting.Value.ValueXml.InnerText.Equals(value.PropertyValue.ToString()))
+                {
+                    AppSetting.Value.ValueXml.InnerXml = value.SerializedValue.ToString();
+                    _appSettingsSection.SectionInformation.ForceSave = true;
+                }
+                return;
+            }
+            else if (value.Property.Attributes.ContainsKey(typeof(UserScopedSettingAttribute)))
+            {
+
+                SettingElement UserSetting = _usrSettingsSection.Settings.Get(value.Name);
+                if (UserSetting == null)
+                {
+                    UserSetting = new SettingElement(value.Name, SettingsSerializeAs.String);
+                }
+                if (!UserSetting.Value.ValueXml.InnerText.Equals(value.PropertyValue.ToString()))
+                {
+                    UserSetting.Value.ValueXml.InnerXml = value.SerializedValue.ToString();
+                    _usrSettingsSection.SectionInformation.ForceSave = true;
+                }
+                return;
+            }
+            else
+            {
+                ConnectionStringSettings ConnStr = _myConfig.ConnectionStrings.ConnectionStrings[_settingsType.FullName + "." + value.Name];
+                if (ConnStr == null)
+                {
+                    ConnStr = new ConnectionStringSettings(_settingsType.FullName + "." + value.Name, value.PropertyValue.ToString());
+                    _myConfig.ConnectionStrings.ConnectionStrings.Add(ConnStr);
+                    _myConfig.ConnectionStrings.SectionInformation.ForceSave = true;
+                }
+                else
+                {
+                    string StrVal = value.PropertyValue.ToString();
+                    if (!ConnStr.ConnectionString.Equals(StrVal))
+                    {
+                        ConnStr.ConnectionString = StrVal;
+                        _myConfig.ConnectionStrings.SectionInformation.ForceSave = true;
+                    }
+
+                }
+                return;
+            }
         }
     }
 }
