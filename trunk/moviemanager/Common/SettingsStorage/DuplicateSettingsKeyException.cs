@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.SettingsStorage
+namespace MovieManager.Common.SettingsStorage
 {
     public class DuplicateSettingsKeyException: Exception
     {
