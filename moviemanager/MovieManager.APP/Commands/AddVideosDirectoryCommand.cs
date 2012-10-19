@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.IO;
 using System.Configuration;
-using Common;
 using MovieManager.APP.Common;
+using MovieManager.Common;
 using Ookii.Dialogs.Wpf;
 using SQLite;
 

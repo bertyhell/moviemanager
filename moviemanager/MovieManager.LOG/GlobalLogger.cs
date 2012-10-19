@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using MovieManager.APP.Common;
+using MovieManager.Common;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
@@ -76,7 +76,8 @@ namespace MovieManager.LOG
             LogFilename = Path.Combine(DefaultValues.LogDirectory, LogFilename);
 
             var dbFile = new FileInfo(LogFilename);
-
+            if (!string.IsNullOrEmpty(dbFile.DirectoryName))
+                Directory.CreateDirectory(dbFile.DirectoryName);
             if (!dbFile.Exists)
             {
                 CreateLogDb(dbFile);

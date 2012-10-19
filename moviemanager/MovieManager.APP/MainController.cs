@@ -176,7 +176,7 @@ namespace MovieManager.APP
                 {
                     _previewWidth = MAX_WIDTH;
                 }
-                else
+                else if (value >= MIN_WIDTH && value <= MAX_WIDTH)
                 {
                     _previewWidth = value;
                 }

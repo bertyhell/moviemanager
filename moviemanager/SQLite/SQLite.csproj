@@ -76,9 +76,9 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\MovieManager.Common.csproj">
       <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
-      <Name>Common</Name>
+      <Name>MovieManager.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>

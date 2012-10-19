@@ -5,8 +5,8 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Windows.Media;
-using Common;
 using Model;
+using MovieManager.Common;
 
 namespace MovieManager.APP.Cache
 {

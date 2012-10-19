@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SQLite;
-using Common;
 using Model;
 using System.Data.Common;
+using MovieManager.Common;
 using SQLite.DsVideosTableAdapters;
 using SQLite.dsDatabaseVersionTableAdapters;
 

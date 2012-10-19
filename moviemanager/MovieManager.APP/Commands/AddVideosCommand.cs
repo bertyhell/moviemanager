@@ -5,10 +5,10 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
-using Common;
 using Model;
 using System.Configuration;
 using MovieManager.APP.Common;
+using MovieManager.Common;
 using SQLite;
 
 namespace MovieManager.APP.Commands

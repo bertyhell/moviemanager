@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using Common;
 using Model;
 using MovieManager.APP.Panels.Search;
+using MovieManager.Common;
 using SearchOptions = MovieManager.APP.Panels.Search.SearchOptions;
 
 namespace MovieManager.APP.Panels

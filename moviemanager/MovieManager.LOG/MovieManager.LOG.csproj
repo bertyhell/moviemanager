@@ -117,9 +117,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\MovieManager.Common.csproj">
       <Project>{d6017df9-ae81-49b8-857a-495ce8275db0}</Project>
-      <Name>Common</Name>
+      <Name>MovieManager.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

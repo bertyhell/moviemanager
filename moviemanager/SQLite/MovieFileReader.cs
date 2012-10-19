@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using Common;
 using Model;
 using System.IO;
 using System.Text.RegularExpressions;
+using MovieManager.Common;
 using SQLite.RegexSettings;
 
 namespace SQLite

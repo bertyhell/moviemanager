@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Bing;
-using Common;
 using Model;
+using MovieManager.Common;
 using MovieManager.WEB.Search;
 
 namespace MovieManager.APP.Panels.Analyse

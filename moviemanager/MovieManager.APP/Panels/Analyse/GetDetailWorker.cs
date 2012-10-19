@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Documents;
-using Common;
 using Model;
+using MovieManager.Common;
 using MovieManager.WEB.Search;
 
 namespace MovieManager.APP.Panels.Analyse

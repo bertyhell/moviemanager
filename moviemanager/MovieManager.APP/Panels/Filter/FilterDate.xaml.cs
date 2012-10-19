@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using Model;
 using MovieManager.APP.Common;
+using MovieManager.Common;
 
 namespace MovieManager.APP.Panels.Filter
 {
