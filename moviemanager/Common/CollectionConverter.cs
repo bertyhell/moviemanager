@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Common
+namespace MovieManager.Common
 {
     public static class CollectionConverter<T>
     {
