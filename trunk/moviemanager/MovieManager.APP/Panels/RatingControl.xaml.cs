@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using Common;
+using MovieManager.Common;
 
 namespace MovieManager.APP.Panels
 {

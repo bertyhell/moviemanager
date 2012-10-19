@@ -42,6 +42,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -83,7 +85,6 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Data.SQLite, Version=1.0.82.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Program Files (x86)\System.Data.SQLite\2010\bin\System.Data.SQLite.dll</HintPath>
@@ -169,6 +170,11 @@
     </Compile>
     <Compile Include="Panels\Common\ThumbnailDescriptionListWindow.xaml.cs">
       <DependentUpon>ThumbnailDescriptionListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Page Include="Common\CheckCombobox.xaml">
@@ -453,11 +459,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Localization\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
@@ -471,7 +472,7 @@
     </None>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
@@ -480,9 +481,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\MovieManager.Common.csproj">
       <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
-      <Name>Common</Name>
+      <Name>MovieManager.Common</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\ExportImport\ExportImport.csproj">
@@ -607,18 +608,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\view_32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\view_big_icons_16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\view_details_16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\view_medium_icons_16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\view_small_icons_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

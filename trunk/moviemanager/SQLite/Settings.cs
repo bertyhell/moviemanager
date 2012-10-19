@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-using Common.SettingsStorage;
+using MovieManager.Common.SettingsStorage;
 
 namespace SQLite.Properties {
     

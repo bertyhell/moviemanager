@@ -1,24 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.IO;
+using System.Configuration;
+using MovieManager.APP.Common;
+using Ookii.Dialogs.Wpf;
+using SQLite;
 
 namespace MovieManager.APP.Commands
 {
-    public enum ViewStates
+    class ChangeViewCommand : ICommand, INotifyPropertyChanged
     {
-        BigIcons, MediumIcons, SmallIcons, Details
-    }
-
-    public class ChangeViewCommand : ICommand, INotifyPropertyChanged
-    {
-
-        private readonly ViewStates _requestedViewState;
-
-
-        public ChangeViewCommand(ViewStates state)
-        {
-            _requestedViewState = state;
-        }
 
         public bool CanExecute(object parameter)
         {
@@ -35,7 +27,7 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            MainController.Instance.ChangeView(_requestedViewState);//TODO 030 add the state of the view to the settings + resore on startup
+            MainController.Instance.ToggleViews();//TODO 030 add the state of the view to the settings + resore on startup
         }
 
         public void PropChanged(string field)

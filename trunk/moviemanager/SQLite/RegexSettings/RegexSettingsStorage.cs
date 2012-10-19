@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Common;
-using Common.SettingsStorage;
+using MovieManager.Common;
+using MovieManager.Common.SettingsStorage;
 
 namespace SQLite.RegexSettings
 {

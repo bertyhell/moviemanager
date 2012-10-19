@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-using Common.SettingsStorage;
+using MovieManager.Common.SettingsStorage;
 
 namespace MovieManager.APP.Properties {
     
@@ -10,17 +10,19 @@ namespace MovieManager.APP.Properties {
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
     //[SettingsManageability(System.Configuration.SettingsManageability.Roaming)]
-    //[SettingsProvider(typeof(CustomSettingsProvider))]
-    internal sealed partial class Settings {
-        
+    [SettingsProvider(typeof(CustomSettingsProvider))]
+    public sealed partial class Settings
+    {
+        private CustomSettingsProvider _provider = null;
+
         public Settings() {
             //this.Providers.Add(new CustomSettingsProvider());
             // // To add event handlers for saving and changing settings, uncomment the lines below:
             //
             // this.SettingChanging += this.SettingChangingEventHandler;
             //
-            // this.SettingsSaving += this.SettingsSavingEventHandler;
-            //
+            this.SettingsSaving += this.SettingsSavingEventHandler;
+            
         }
         
         private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
@@ -28,7 +30,22 @@ namespace MovieManager.APP.Properties {
         }
         
         private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
-            // Add code to handle the SettingsSaving event here.
+            if(_provider == null)
+            {
+                foreach (var Provider in this.Providers)
+                {
+                    if(Provider is CustomSettingsProvider)
+                    {
+                        _provider = (CustomSettingsProvider)Provider;
+                    }
+                }
+            }
+            _provider.Save();
+        }
+
+        protected override void OnSettingChanging(object sender, SettingChangingEventArgs e)
+        {
+            base.OnSettingChanging(sender, e);
         }
     }
 }

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLite", "SQLite\SQLite.csproj", "{EF7C715E-4C61-43D6-B83D-90F0FF38424F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D6017DF9-AE81-49B8-857A-495CE8275DB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.Common", "Common\MovieManager.Common.csproj", "{D6017DF9-AE81-49B8-857A-495CE8275DB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.WEB", "MovieManager.WEB\MovieManager.WEB.csproj", "{5E7E4873-8C9D-4BA8-A936-784387E2379F}"
 EndProject
