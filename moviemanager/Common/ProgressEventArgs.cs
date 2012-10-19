@@ -1,6 +1,6 @@
 using System;
 
-namespace Common
+namespace MovieManager.Common
 {
     public class ProgressEventArgs : EventArgs
     {
