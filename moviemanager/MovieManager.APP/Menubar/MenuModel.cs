@@ -364,6 +364,36 @@ namespace MovieManager.APP.Menubar
             }
         }
 
+        public static ControlData TogglePreviewMargin
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Toggle Margin";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string VIEW_TOOL_TIP_TITLE = "Toggle Margin";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Toggle Margin";
+
+                        ControlData MenuButtonData = new ControlData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/margin_32.png", UriKind.Relative),
+                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            Command = new ToggleMarginCommand(),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = MenuButtonData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
         public static ControlData ChangeView //TODO 070 check why the **** this doesn't work :@ (wasted 3 hours)
         {
             get

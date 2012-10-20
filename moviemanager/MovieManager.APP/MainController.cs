@@ -147,6 +147,17 @@ namespace MovieManager.APP
             }
         }
 
+        private int _previewItemMargin = 5;
+        public int PreviewItemMargin
+        {
+            get { return _previewItemMargin; }
+            set
+            {
+                _previewItemMargin = value;
+                PropChanged("PreviewItemMargin");
+            }
+        }
+
         #region zooming + events
 
         private const int MIN_WIDTH = 60;
@@ -172,7 +183,7 @@ namespace MovieManager.APP
                     ChangeView(ViewStates.SmallIcons);
                     _previewWidth = MIN_WIDTH;
                 }
-                else if(value > MAX_WIDTH)
+                else if (value > MAX_WIDTH)
                 {
                     _previewWidth = MAX_WIDTH;
                 }
