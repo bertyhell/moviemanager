@@ -53,7 +53,9 @@ namespace MovieManager.Common.SettingsStorage
         {
             const string XML = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration>\n</configuration>";
 
-            System.IO.StreamWriter FileWriter = new System.IO.StreamWriter(filePath);
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath)); //else exception when not existing
+
+            System.IO.StreamWriter FileWriter = new StreamWriter(filePath);
             FileWriter.WriteLine(XML);
             FileWriter.Close();
         }

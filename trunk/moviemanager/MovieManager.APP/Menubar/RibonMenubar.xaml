@@ -7,8 +7,7 @@
              d:DesignHeight="158" 
              d:DesignWidth="798" 
              xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon"
-             xmlns:data ="clr-namespace:MovieManager.APP.Menubar"
-             xmlns:ViewModel="clr-namespace:MovieManager.APP.ViewModel">
+             xmlns:data ="clr-namespace:MovieManager.APP.Menubar">
     <Grid>
         <Grid.Resources>
             <Style x:Key="RibbonControlStyle">
@@ -93,15 +92,12 @@
             <ribbon:RibbonTab Header="View">
                 <ribbon:RibbonGroup Header="View">
                     <ribbon:RibbonMenuButton DataContext="{x:Static data:MenuModel.ChangeView}">
-                        <ribbon:RibbonMenuItem Header="_Reset to Quick Styles from Template" KeyTip="R" ImageSource="{x:Null}"/>
-                        <ribbon:RibbonMenuItem Header="Reset _Document Quick Styles" KeyTip="D" ImageSource="{x:Null}"/>
-                        <ribbon:RibbonMenuItem Header="Save as _Quick Style Set..." KeyTip="Q" ImageSource="{x:Null}"/>
-                      
                         <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewBigIcons}" />
                         <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewMediumIcons}" />
                         <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewSmallIcons}" />
                         <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewDetails}" />
                     </ribbon:RibbonMenuButton>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.TogglePreviewMargin}"/>
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
 

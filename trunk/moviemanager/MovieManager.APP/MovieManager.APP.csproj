@@ -118,6 +118,7 @@
     </ApplicationDefinition>
     <Compile Include="Cache\ApplicationCache.cs" />
     <Compile Include="Commands\ChangeViewCommand.cs" />
+    <Compile Include="Commands\ToggleMarginCommand.cs" />
     <Compile Include="Commands\ImportVideosCommand.cs" />
     <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
-using System.IO;
 using Model;
 using MovieManager.APP.Cache;
+using MovieManager.APP.Common;
 using MovieManager.Common;
 using SQLite;
 
@@ -13,14 +12,19 @@ namespace MovieManager.APP.Panels.Analyse
 {
     class AnalyseController : INotifyPropertyChanged
     {
+        //TODO 095 add progressbar for saving videoinfo after analyse
+        //TODO 100 add progressbar for downloading poster images to cache after analyse
 
         public AnalyseController()
         {
+
+            ProgressBarInfoTotal = new ProgressBarInfo();
+            ProgressBarInfoPass = new ProgressBarInfo();
             IList<Video> Videos = MainController.Instance.Videos;
             AnalyseVideos.Clear();
             foreach (Video Video in Videos)
             {
-                AnalyseVideos.Add(new AnalyseVideo { Video = Video });
+                AnalyseVideos.Add(new AnalyseVideo { Video = Video, TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(Video.Path) });
             }
         }
 
@@ -53,33 +57,41 @@ namespace MovieManager.APP.Panels.Analyse
             //begin automatic analysis
 
             var AnalyseWorker = new AnalyseWorker(AnalyseVideos);
-            IsIndeterminate = true;
-            Message = "Contacting webservice...";
-            AnalyseWorker.VideoInfoProgress += AnalyseWorker_VideoInfoProgress;
-            AnalyseWorker.RunWorkerCompleted += AnalyseWorker_RunWorkerCompleted;
+            ProgressBarInfoTotal.IsIndeterminate = true;
+            ProgressBarInfoTotal.Message = "Contacting webservice...";
+            AnalyseWorker.TotalProgress += AnalyseWorkerTotalProgress;
+            AnalyseWorker.PassProgress += AnalyseWorkerPassProgress;
+            AnalyseWorker.RunWorkerCompleted += AnalyseWorkerRunWorkerCompleted;
             AnalyseWorker.RunWorkerAsync();
         }
 
-        public void AnalyseWorker_VideoInfoProgress(object sender, ProgressEventArgs args)
+        public void AnalyseWorkerTotalProgress(object sender, ProgressEventArgs args)
         {
-            VideoProgressHandler(args);
+            ProgressBarInfoTotal.IsIndeterminate = false;
+            ProgressBarInfoTotal.Message = args.Message;
+            ProgressBarInfoTotal.Maximum = args.MaxNumber;
+            ProgressBarInfoTotal.Value = args.ProgressNumber;
         }
 
-        private void VideoProgressHandler(ProgressEventArgs args)
+        public void AnalyseWorkerPassProgress(object sender, ProgressEventArgs args)
         {
-            IsIndeterminate = false;
-            Message = "Analysing videos: " + args.ProgressNumber + " / " + args.MaxNumber;
-            Maximum = args.MaxNumber;
-            Value = args.ProgressNumber;
+            ProgressBarInfoPass.IsIndeterminate = false;
+            ProgressBarInfoPass.Message = "Analysing videos: " + args.ProgressNumber + " / " + args.MaxNumber;
+            ProgressBarInfoPass.Maximum = args.MaxNumber;
+            ProgressBarInfoPass.Value = args.ProgressNumber;
         }
 
-        public void AnalyseWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        public void AnalyseWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //TODO 050 get posters of analysed videos
 
             Console.WriteLine("finished analysing :D");
         }
 
+        public ProgressBarInfo ProgressBarInfoTotal { get; set; }
+        public ProgressBarInfo ProgressBarInfoPass { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         public void PropChanged(string title)
         {
             if (PropertyChanged != null)
@@ -87,63 +99,6 @@ namespace MovieManager.APP.Panels.Analyse
                 PropertyChanged(this, new PropertyChangedEventArgs(title));
             }
         }
-
-        private string _message;
-        public string Message
-        {
-            get { return _message; }
-            set
-            {
-                _message = value;
-                PropChanged("Message");
-            }
-        }
-
-        private int _value;
-        public int Value
-        {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                PropChanged("Value");
-            }
-        }
-
-        private int _maximum = 100;
-        public int Maximum
-        {
-            get { return _maximum; }
-            set
-            {
-                _maximum = value;
-                PropChanged("Maximum");
-            }
-        }
-
-        private bool _isIndeterminate;
-        public bool IsIndeterminate
-        {
-            get { return _isIndeterminate; }
-            set
-            {
-                _isIndeterminate = value;
-                PropChanged("IsIndeterminate");
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void ManualSearch(string text, string number)
-        //{
-        //    VideoInfos.Clear();
-        //    foreach (var Video in SearchTMDB.GetVideoInfo(text))
-        //    {
-        //        VideoInfos.Add(Video);
-        //    }
-        //}
-
 
         //TODO 050 make analyse function multithreaded -> 1 thread for every movie lookup
         public void SaveVideos()
@@ -160,10 +115,10 @@ namespace MovieManager.APP.Panels.Analyse
                     {
                         if (ImageInfo.Uri != null)
                         {
-                                Images.Add(new Uri(ImageInfo.Uri.AbsoluteUri));
+                            Images.Add(new Uri(ImageInfo.Uri.AbsoluteUri));
                         }
                     }
-                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.High);
+                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.Medium);
 
 
                     Videos.Add(AnalyseVideo.Video);

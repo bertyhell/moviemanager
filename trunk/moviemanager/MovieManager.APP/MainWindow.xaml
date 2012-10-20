@@ -51,7 +51,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Common:PreviewItem VirtualizingStackPanel.IsVirtualizing="True" Item="{Binding}" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
-                                                    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" Margin="5" />
+                                                    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" Margin="{Binding previewItemMargin}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
