@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:menu="clr-namespace:MovieManager.APP.Menubar" xmlns:Filter="clr-namespace:MovieManager.APP.Panels.Filter"
         xmlns:conv="clr-namespace:MovieManager.APP.Converters" xmlns:Panels="clr-namespace:MovieManager.APP.Panels"
-        xmlns:Common="clr-namespace:MovieManager.APP.Panels.Common" Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="/MovieManager;component/ico4.ico" WindowState="Maximized" PreviewMouseWheel="Window_PreviewMouseWheel_1">
+        xmlns:Common="clr-namespace:MovieManager.APP.Panels.Common" Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="Window_PreviewMouseWheel_1">
     <Grid>
         <Grid.Resources>
             <conv:StringListConverter x:Key="stringListConverter"/>

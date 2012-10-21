@@ -56,7 +56,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>ico4.ico</ApplicationIcon>
+    <ApplicationIcon>tmc_ico_1.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -510,9 +510,6 @@
     <Resource Include="Images\clear.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ico4.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\next.png" />
     <Resource Include="Images\previous.png" />
   </ItemGroup>
@@ -603,6 +600,15 @@
   <ItemGroup>
     <Resource Include="Images\header_32.png" />
     <Resource Include="Images\margin_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tmc_icon_1_256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tmc_ico_1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="SplashScreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

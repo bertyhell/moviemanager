@@ -22,15 +22,16 @@ namespace SQLite
             Cmd.ExecuteNonQuery();
         }
 
-        public static void ExecuteSQL(string sql)
-        {
-            SQLiteCommand Cmd = GetCommand(_conn, sql);
-            Cmd.ExecuteNonQuery();
-        }
-
         public static void ExecuteSQL(string connectionString, string sql, params SQLiteParameter[] @params)
         {
             ExecuteSQL(GetConnection(connectionString), null, sql, @params);
+        }
+
+        public static void ExecuteSQL(string sql, params SQLiteParameter[] @params)
+        {
+            SQLiteCommand Cmd = GetCommand(_conn, null, sql, @params);
+
+            Cmd.ExecuteNonQuery();
         }
 
         public static void CreateDatabaseFile(string pathToDatabase)
