@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MovieManager.APP.Commands
 {
-    class ToggleMarginCommand : ICommand
+    class TogglePreviewTitleCommand : ICommand
     {
 
         public bool CanExecute(object parameter)
@@ -22,7 +23,7 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            MainController.Instance.PreviewItemMargin = MainController.Instance.PreviewItemMargin > 0 ? 0 : 5;//TODO 003 make this work
+            MainController.Instance.PreviewTitleVisibility = MainController.Instance.PreviewTitleVisibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;//TODO 003 make this work
         }
     }
 }

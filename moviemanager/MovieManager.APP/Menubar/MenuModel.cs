@@ -383,7 +383,7 @@ namespace MovieManager.APP.Menubar
                             SmallImage = new Uri("/MovieManager;component/Images/margin_32.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
-                            Command = new ToggleMarginCommand(),
+                            Command = new TogglePreviewMarginCommand(),
                             KeyTip = "",
                         };
                         DATA_COLLECTION[STR] = MenuButtonData;
@@ -394,25 +394,26 @@ namespace MovieManager.APP.Menubar
             }
         }
 
-        public static ControlData ChangeView //TODO 070 check why the **** this doesn't work :@ (wasted 3 hours)
+        public static ControlData TogglePreviewTitle
         {
             get
             {
                 lock (LOCK_OBJECT)
                 {
-                    const string STR = "Change View";
+                    const string STR = "Toggle Title";
 
                     if (!DATA_COLLECTION.ContainsKey(STR))
                     {
-                        const string VIEW_TOOL_TIP_TITLE = "Change View";
-                        const string VIEW_TOOL_TIP_DESCRIPTION = "Change view";
+                        const string VIEW_TOOL_TIP_TITLE = "Toggle Title";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Toggle Title";
 
-                        MenuButtonData MenuButtonData = new MenuButtonData
+                        ControlData MenuButtonData = new ControlData
                         {
                             Label = STR,
-                            LargeImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/MovieManager;component/Images/header_32.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            Command = new TogglePreviewTitleCommand(),
                             KeyTip = "",
                         };
                         DATA_COLLECTION[STR] = MenuButtonData;
@@ -422,6 +423,35 @@ namespace MovieManager.APP.Menubar
                 }
             }
         }
+
+        //public static ControlData ChangeView //TODO 070 check why the **** this doesn't work :@ (wasted 3 hours)
+        //{
+        //    get
+        //    {
+        //        lock (LOCK_OBJECT)
+        //        {
+        //            const string STR = "Change View";
+
+        //            if (!DATA_COLLECTION.ContainsKey(STR))
+        //            {
+        //                const string VIEW_TOOL_TIP_TITLE = "Change View";
+        //                const string VIEW_TOOL_TIP_DESCRIPTION = "Change view";
+
+        //                MenuButtonData MenuButtonData = new MenuButtonData
+        //                {
+        //                    Label = STR,
+        //                    LargeImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
+        //                    ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+        //                    ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+        //                    KeyTip = "",
+        //                };
+        //                DATA_COLLECTION[STR] = MenuButtonData;
+        //            }
+
+        //            return DATA_COLLECTION[STR];
+        //        }
+        //    }
+        //}
 
         public static ControlData ViewBigIcons
         {
@@ -435,7 +465,7 @@ namespace MovieManager.APP.Menubar
                     {
                         const string VIEW_TOOL_TIP_TITLE = "Big icons";
                         const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to big icons";
-                        MenuItemData ItemData = new MenuItemData
+                        ControlData ItemData = new ControlData
                         {
                             Label = STR,
                             SmallImage = new Uri("/MovieManager;component/Images/view_big_icons_16.png", UriKind.Relative),
@@ -464,7 +494,7 @@ namespace MovieManager.APP.Menubar
                     {
                         const string VIEW_TOOL_TIP_TITLE = "Medium icons";
                         const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to medium icons";
-                        MenuItemData ItemData = new MenuItemData
+                        ControlData ItemData = new ControlData
                         {
                             Label = STR,
                             SmallImage = new Uri("/MovieManager;component/Images/view_medium_icons_16.png", UriKind.Relative),
@@ -493,7 +523,7 @@ namespace MovieManager.APP.Menubar
                     {
                         const string VIEW_TOOL_TIP_TITLE = "Small icons";
                         const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to small icons";
-                        MenuItemData ItemData = new MenuItemData
+                        ControlData ItemData = new ControlData
                         {
                             Label = STR,
                             SmallImage = new Uri("/MovieManager;component/Images/view_small_icons_16.png", UriKind.Relative),
@@ -522,7 +552,7 @@ namespace MovieManager.APP.Menubar
                     {
                         const string VIEW_TOOL_TIP_TITLE = "Details";
                         const string VIEW_TOOL_TIP_DESCRIPTION = "Change view to show details";
-                        MenuItemData ItemData = new MenuItemData
+                        ControlData ItemData = new ControlData
                         {
                             Label = STR,
                             SmallImage = new Uri("/MovieManager;component/Images/view_details_icons_16.png", UriKind.Relative),

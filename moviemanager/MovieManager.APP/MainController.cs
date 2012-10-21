@@ -201,6 +201,17 @@ namespace MovieManager.APP
             get { return (int)(_previewWidth * 1.5); }
         }
 
+        private Visibility _previewTitleVisibility;
+        public Visibility PreviewTitleVisibility
+        {
+            get { return _previewTitleVisibility; }
+            set
+            {
+                _previewTitleVisibility = value;
+                PropChanged("PreviewTitleVisibility");
+            }
+        }
+
         public void Zoom(bool zoomIn)
         {
             if (zoomIn)
