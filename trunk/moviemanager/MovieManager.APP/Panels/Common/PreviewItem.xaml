@@ -17,6 +17,6 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding Item, Converter={StaticResource ImageSourceConv}}"/>
-        <Label Content="{Binding Item.Name}" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" />
+        <Label Content="{Binding Item.Name}" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Visibility="{Binding LabelVisibility}" />
     </Grid>
 </UserControl>

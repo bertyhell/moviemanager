@@ -89,15 +89,16 @@
             </ribbon:RibbonTab>
 
 
-            <ribbon:RibbonTab Header="View">
-                <ribbon:RibbonGroup Header="View">
-                    <ribbon:RibbonMenuButton DataContext="{x:Static data:MenuModel.ChangeView}">
-                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewBigIcons}" />
-                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewMediumIcons}" />
-                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewSmallIcons}" />
-                        <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewDetails}" />
-                    </ribbon:RibbonMenuButton>
+            <ribbon:RibbonTab Header="Display">
+                <ribbon:RibbonGroup>
+                    <!--<ribbon:RibbonMenuButton DataContext="{x:Static data:MenuModel.ChangeView}">-->
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.ViewBigIcons}" />
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.ViewMediumIcons}" />
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.ViewSmallIcons}" />
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.ViewDetails}" />
+                    <!--</ribbon:RibbonMenuButton>-->
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.TogglePreviewMargin}"/>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.TogglePreviewTitle}"/>
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
 

@@ -118,7 +118,8 @@
     </ApplicationDefinition>
     <Compile Include="Cache\ApplicationCache.cs" />
     <Compile Include="Commands\ChangeViewCommand.cs" />
-    <Compile Include="Commands\ToggleMarginCommand.cs" />
+    <Compile Include="Commands\Copy of ToggleMarginCommand.cs" />
+    <Compile Include="Commands\TogglePreviewTitleCommand.cs" />
     <Compile Include="Commands\ImportVideosCommand.cs" />
     <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />
@@ -128,33 +129,6 @@
     <Compile Include="Common\ProgressBarInfo.cs" />
     <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="Converters\EnumBooleanConverter.cs" />
-    <Compile Include="Menubar\ApplicationMenuItemData.cs" />
-    <Compile Include="Menubar\ApplicationSplitMenuItemData.cs" />
-    <Compile Include="Menubar\ButtonData.cs" />
-    <Compile Include="Menubar\CheckBoxData.cs" />
-    <Compile Include="Menubar\ComboBoxData.cs" />
-    <Compile Include="Menubar\ContextualTabGroupData.cs" />
-    <Compile Include="Menubar\GalleryCategoryData.cs" />
-    <Compile Include="Menubar\GalleryData.cs" />
-    <Compile Include="Menubar\GalleryItemData.cs" />
-    <Compile Include="Menubar\GroupData.cs" />
-    <Compile Include="Menubar\MenuButtonData.cs" />
-    <Compile Include="Menubar\MenuItemData.cs" />
-    <Compile Include="Menubar\QatItem.cs" />
-    <Compile Include="Menubar\QatItems.cs" />
-    <Compile Include="Menubar\RadioButtonData.cs" />
-    <Compile Include="Menubar\RecentDocumentData.cs" />
-    <Compile Include="Menubar\RibbonData.cs" />
-    <Compile Include="Menubar\RowColumnCount.cs" />
-    <Compile Include="Menubar\SeparatorData.cs" />
-    <Compile Include="Menubar\SplitButtonData.cs" />
-    <Compile Include="Menubar\SplitMenuItemData.cs" />
-    <Compile Include="Menubar\StylesSet.cs" />
-    <Compile Include="Menubar\TabData.cs" />
-    <Compile Include="Menubar\TextBoxData.cs" />
-    <Compile Include="Menubar\ThemeFonts.cs" />
-    <Compile Include="Menubar\ToggleButtonData.cs" />
-    <Compile Include="Menubar\ViewModel.cs" />
     <Compile Include="Panels\Analyse\GetDetailWorker.cs">
       <SubType>Component</SubType>
     </Compile>

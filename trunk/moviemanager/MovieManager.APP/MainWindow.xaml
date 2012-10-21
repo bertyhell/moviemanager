@@ -50,8 +50,14 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Common:PreviewItem VirtualizingStackPanel.IsVirtualizing="True" Item="{Binding}" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
-                                                    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" Margin="{Binding previewItemMargin}" />
+                    <Common:PreviewItem 
+                        VirtualizingStackPanel.IsVirtualizing="True" 
+                        Item="{Binding}" 
+                        Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
+                        Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" 
+                        Margin="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.previewItemMargin}"
+                        LabelVisibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewTitleVisibility}"
+                        />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
