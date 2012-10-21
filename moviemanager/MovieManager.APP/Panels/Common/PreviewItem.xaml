@@ -9,7 +9,7 @@
     <Grid x:Name="_contentGrid">
 
         <Grid.Resources>
-            <Conv:ImageSourceConverter x:Key="ImageSourceConv"/>
+            <Conv:AppImageSourceConverter x:Key="ImageSourceConv"/>
         </Grid.Resources>
 
         <Grid.RowDefinitions>

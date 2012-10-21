@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Windows.Media;
+using MovieManager.APP.Converters;
 
 namespace MovieManager.APP.Menubar
 {
@@ -18,7 +20,7 @@ namespace MovieManager.APP.Menubar
                 if (_label != value)
                 {
                     _label = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("Label"));
+                    OnPropertyChanged("Label");
                 }
             }
         }
@@ -36,7 +38,8 @@ namespace MovieManager.APP.Menubar
                 if (_largeImage != value)
                 {
                     _largeImage = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("LargeImage"));
+                    OnPropertyChanged("LargeImage");
+                    OnPropertyChanged("LargeImageSource");
                 }
             }
         }
@@ -46,7 +49,7 @@ namespace MovieManager.APP.Menubar
         {
             get
             {
-                return _smallImage;
+                return _smallImage;   
             }
 
             set
@@ -54,7 +57,7 @@ namespace MovieManager.APP.Menubar
                 if (_smallImage != value)
                 {
                     _smallImage = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("SmallImage"));
+                    OnPropertyChanged("SmallImage");
                 }
             }
         }
@@ -72,10 +75,11 @@ namespace MovieManager.APP.Menubar
                 if (_toolTipTitle != value)
                 {
                     _toolTipTitle = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ToolTipTitle"));
+                    OnPropertyChanged("ToolTipTitle");
                 }
             }
         }
+
         private string _toolTipTitle;
 
         public string ToolTipDescription
@@ -90,7 +94,7 @@ namespace MovieManager.APP.Menubar
                 if (_toolTipDescription != value)
                 {
                     _toolTipDescription = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ToolTipDescription"));
+                    OnPropertyChanged("ToolTipDescription");
                 }
             }
         }
@@ -108,7 +112,7 @@ namespace MovieManager.APP.Menubar
                 if (_toolTipImage != value)
                 {
                     _toolTipImage = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ToolTipImage"));
+                    OnPropertyChanged("ToolTipImage");
                 }
             }
         }
@@ -126,7 +130,7 @@ namespace MovieManager.APP.Menubar
                 if (_toolTipFooterTitle != value)
                 {
                     _toolTipFooterTitle = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ToolTipFooterTitle"));
+                    OnPropertyChanged("ToolTipFooterTitle");
                 }
             }
         }
@@ -144,7 +148,7 @@ namespace MovieManager.APP.Menubar
                 if (_toolTipFooterDescription != value)
                 {
                     _toolTipFooterDescription = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ToolTipFooterDescription"));
+                    OnPropertyChanged("ToolTipFooterDescription");
                 }
             }
         }
@@ -162,7 +166,7 @@ namespace MovieManager.APP.Menubar
                 if (_toolTipFooterImage != value)
                 {
                     _toolTipFooterImage = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("ToolTipFooterImage"));
+                    OnPropertyChanged("ToolTipFooterImage");
                 }
             }
         }
@@ -180,7 +184,7 @@ namespace MovieManager.APP.Menubar
                 if (_command != value)
                 {
                     _command = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("Command"));
+                    OnPropertyChanged("Command");
                 }
             }
         }
@@ -198,21 +202,23 @@ namespace MovieManager.APP.Menubar
                 if (_keyTip != value)
                 {
                     _keyTip = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("KeyTip"));
+                    OnPropertyChanged("KeyTip");
                 }
             }
         }
+
+        public bool IsChecked { get; set; }
         private string _keyTip;
 
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        protected void OnPropertyChanged(string field)
         {
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, e);
+                PropertyChanged(this, new PropertyChangedEventArgs(field));
             }
         }
 

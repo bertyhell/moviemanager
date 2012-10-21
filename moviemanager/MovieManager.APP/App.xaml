@@ -4,14 +4,11 @@
              DispatcherUnhandledException="DispatcherUnhandledExceptionEventHandler"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="{x:Type ListBoxItem}" x:Key="NonFocusableListBoxItem">
-            <Setter Property="Focusable" Value="false"/>
-        </Style>
-        <Style TargetType="ListBoxItem" x:Key="BackgroundColorListBoxItem"><!-- don't show selection > same background color -->
-            <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFEEEEEE"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-            </Style.Resources>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MovieManager;component/Styles/Application.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
+    
 </Application>

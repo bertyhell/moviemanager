@@ -118,17 +118,21 @@
     </ApplicationDefinition>
     <Compile Include="Cache\ApplicationCache.cs" />
     <Compile Include="Commands\ChangeViewCommand.cs" />
-    <Compile Include="Commands\Copy of ToggleMarginCommand.cs" />
-    <Compile Include="Commands\TogglePreviewTitleCommand.cs" />
     <Compile Include="Commands\ImportVideosCommand.cs" />
     <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
+    <Compile Include="Commands\TogglePreviewMarginCommand.cs" />
+    <Compile Include="Commands\TogglePreviewTitleCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />
     <Compile Include="Common\ExceptionMessageBox.xaml.cs">
       <DependentUpon>ExceptionMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\ProgressBarInfo.cs" />
-    <Compile Include="Converters\ImageSourceConverter.cs" />
+    <Compile Include="Converters\AppImageSourceConverter.cs" />
     <Compile Include="Converters\EnumBooleanConverter.cs" />
+    <Compile Include="Menubar\ControlData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Menubar\MenuModel.cs" />
     <Compile Include="Panels\Analyse\GetDetailWorker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -405,8 +409,6 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menubar\ControlData.cs" />
-    <Compile Include="Menubar\MenuModel.cs" />
     <Compile Include="Menubar\RibonMenubar.xaml.cs">
       <DependentUpon>RibonMenubar.xaml</DependentUpon>
     </Compile>
@@ -424,6 +426,14 @@
     <Compile Include="Panels\Search\SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Styles\Application.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Ribbon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -583,6 +593,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\view_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\view_big_icons_16.png" />
+    <Resource Include="Images\view_details_16.png" />
+    <Resource Include="Images\view_medium_icons_16.png" />
+    <Resource Include="Images\view_small_icons_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

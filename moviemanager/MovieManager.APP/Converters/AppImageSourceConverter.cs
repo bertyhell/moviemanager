@@ -13,7 +13,7 @@ using Image = System.Windows.Controls.Image;
 
 namespace MovieManager.APP.Converters
 {
-    public class ImageSourceConverter : IValueConverter
+    public class AppImageSourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
