@@ -52,11 +52,11 @@ namespace MovieManager.APP.Panels.Analyse
             }
         }
 
-        public void BeginAnalyse()
+        public void BeginAnalyse(bool fullAnalyse = true)
         {
             //begin automatic analysis
 
-            var AnalyseWorker = new AnalyseWorker(AnalyseVideos);
+            var AnalyseWorker = new AnalyseWorker(AnalyseVideos, fullAnalyse);
             ProgressBarInfoTotal.IsIndeterminate = true;
             ProgressBarInfoTotal.Message = "Contacting webservice...";
             AnalyseWorker.TotalProgress += AnalyseWorkerTotalProgress;

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace MovieManager.APP.Panels.Analyse
 {
@@ -38,6 +39,11 @@ namespace MovieManager.APP.Panels.Analyse
         {
             SuggestionsWindow Window = new SuggestionsWindow(_controller.SelectedVideoFile);
             Window.Show();
+        }
+
+        private void BtnQuickAnalyseClick(object sender, RoutedEventArgs e)
+        {
+            _controller.BeginAnalyse(false);
         }
     }
 }

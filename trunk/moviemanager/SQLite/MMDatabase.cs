@@ -49,7 +49,7 @@ namespace SQLite
                     };
                     if (!String.IsNullOrEmpty(Row.poster))
                         Video.Poster = new ImageInfo { Uri = new Uri(Row.poster) };
-
+                    
                     //get genre from dataset
                     foreach (DataRow DataRow in VideosGenresDataTable.Select(VideosGenresDataTable.video_idColumn.ColumnName + " = " + Video.Id))
                     {
@@ -109,7 +109,7 @@ namespace SQLite
                     Row.path = videos[I].Path;
                     Row.name = videos[I].Name;
                     DatasetVideos.Videos.AddVideosRow(Row);
-                    videos[I].Id = (uint) Row.id;
+                    videos[I].Id = (uint)Row.id;
 
                     if (videos[I] is Episode)
                     {
@@ -221,6 +221,10 @@ namespace SQLite
                 foreach (Video Video in videos)
                 {
                     RetVal &= UpdateVideo(Video, DatasetVideos);
+                    foreach (string Genre in Video.Genres)
+                    {
+                        InsertVideoGenre(Video.Id, Genre);
+                    }
                 }
             }
             catch (Exception ex)
@@ -230,6 +234,31 @@ namespace SQLite
 
             OnVideosChanged();
             return RetVal;
+        }
+
+        public static void InsertVideoGenre(uint videoId, string genreLabel)
+        {
+            SQLiteDataReader Reader = null;
+            try
+            {
+                Reader = Database.GetReader("SELECT gen_id from Genres where gen_label = ?", new SQLiteParameter("gen_label", genreLabel));
+                if (!Reader.Read()) //TODO 001 should be only 0 or 1 results --> maybe add an assure test?
+                {
+                    Reader.Close();
+                    Database.ExecuteSQL("INSERT INTO Genres (gen_label) VALUES (?)", new SQLiteParameter("gen_label", genreLabel));
+                }
+                //genre already in database --> add link between video and genre
+                int GenreId = Reader.GetInt32(0);
+                Reader = Database.GetReader("SELECT 1 from Videos_genres where gen_id = ? && video_id = ?", new SQLiteParameter("gen_id", GenreId), new SQLiteParameter("video_id", videoId));
+                if (!Reader.Read()) //link between video and genre not yet in database
+                {
+                    Reader.Close();
+                    Database.ExecuteSQL("INSERT INTO Videos_genres (video_id, gen_id) VALUES (?,?)", new SQLiteParameter("video_id", videoId), new SQLiteParameter("gen_id", GenreId));
+                }
+            }finally
+            {
+                if(Reader != null && !Reader.IsClosed) Reader.Close();
+            }
         }
 
         /// <summary>
@@ -405,8 +434,7 @@ namespace SQLite
                     datasetVideos.Movies.AddMoviesRow(MoviesRow);
 
                 //update
-                MoviesTableAdapter MoviesTableAdapter = new MoviesTableAdapter();
-                MoviesTableAdapter.Connection = Database.GetConnection();
+                MoviesTableAdapter MoviesTableAdapter = new MoviesTableAdapter {Connection = Database.GetConnection()};
                 RetVal &= (MoviesTableAdapter.Update(datasetVideos) > 0);
             }
             catch (Exception ex)
@@ -423,7 +451,7 @@ namespace SQLite
             DbDataReader Reader = Database.GetReader("SELECT gen_label FROM genres");
             while (Reader.Read())
             {
-                Genres.Add((string)Reader[0]);
+                Genres.Add(Reader.GetString(0));
             }
             return Genres;
         }

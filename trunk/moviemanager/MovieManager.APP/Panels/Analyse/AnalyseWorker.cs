@@ -12,10 +12,12 @@ namespace MovieManager.APP.Panels.Analyse
     class AnalyseWorker : BackgroundWorker
     {
         private readonly IList<AnalyseVideo> _analyseVideos;
+        private readonly bool _fullAnalyse;
 
-        public AnalyseWorker(IList<AnalyseVideo> analyseVideos)
+        public AnalyseWorker(IList<AnalyseVideo> analyseVideos, bool fullAnalyse)
         {
             _analyseVideos = analyseVideos;
+            _fullAnalyse = fullAnalyse;
         }
 
         public AnalyseWorker(AnalyseVideo analyseVideo)
@@ -48,10 +50,9 @@ namespace MovieManager.APP.Panels.Analyse
 
             int TotalProgressCounter = 0;
             int PassProgressCounter = 0;
-
-            OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * 3, ProgressNumber = 0, Message = "Pass 1/3" });
-            OnPassProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = 0 });
-
+            int passes = 1;
+            if (_fullAnalyse) passes = 3;
+            
             //pass1 (filename / foldername)
             foreach (AnalyseVideo AnalyseVideo in _analyseVideos)
             {
@@ -65,76 +66,79 @@ namespace MovieManager.APP.Panels.Analyse
 
                 TotalProgressCounter++;
                 PassProgressCounter++;
-                OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * 3, ProgressNumber = TotalProgressCounter, Message = "Pass 1/3" });
+                OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * passes, ProgressNumber = TotalProgressCounter, Message = "Pass 1/" + passes });
                 OnPassProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter });
             }
 
             PassProgressCounter = 0;
             OnPassProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter });
 
-            //pass2 (remove prefix / suffixes)
-            foreach (AnalyseVideo AnalyseVideo in _analyseVideos)
+            if (_fullAnalyse)
             {
-                if (AnalyseVideo.Candidates.Count == 0 || AnalyseVideo.MatchPercentage < 0.5)
+                //pass2 (remove prefix / suffixes)
+                foreach (AnalyseVideo AnalyseVideo in _analyseVideos)
                 {
-                    string FileNameGuess = AnalyseVideo.TitleGuesses[0];
-                    string FolderNameGuess = AnalyseVideo.TitleGuesses.Count > 1 ? AnalyseVideo.TitleGuesses[1] : null;
-
-                    string FileName = Path.GetFileNameWithoutExtension(AnalyseVideo.Video.Path);
-                    if (FileName != null)
+                    if (AnalyseVideo.Candidates.Count == 0 || AnalyseVideo.MatchPercentage < 0.5)
                     {
-                        List<string> FileNameGuesses = VideoTitleExtractor.GetTitleGuessesFromString(FileName.ToLower(), true);
-                        AnalyseVideo.TitleGuesses.AddRange(FileNameGuesses);
-                    }
-                    var DirectoryName = Path.GetDirectoryName(AnalyseVideo.Video.Path);
-                    if (DirectoryName != null)
-                    {
-                        string FolderName = DirectoryName.Split(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).Last().ToLower();
-                        List<string> FolderNameGuesses = VideoTitleExtractor.GetTitleGuessesFromString(FolderName, true);
-                        AnalyseVideo.TitleGuesses.AddRange(FolderNameGuesses);
-                    }
+                        string FileNameGuess = AnalyseVideo.TitleGuesses[0];
+                        string FolderNameGuess = AnalyseVideo.TitleGuesses.Count > 1 ? AnalyseVideo.TitleGuesses[1] : null;
 
-                    FillCandidates(AnalyseVideo, FileNameGuess, FolderNameGuess);
+                        string FileName = Path.GetFileNameWithoutExtension(AnalyseVideo.Video.Path);
+                        if (FileName != null)
+                        {
+                            List<string> FileNameGuesses = VideoTitleExtractor.GetTitleGuessesFromString(FileName.ToLower(), true);
+                            AnalyseVideo.TitleGuesses.AddRange(FileNameGuesses);
+                        }
+                        var DirectoryName = Path.GetDirectoryName(AnalyseVideo.Video.Path);
+                        if (DirectoryName != null)
+                        {
+                            string FolderName = DirectoryName.Split(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).Last().ToLower();
+                            List<string> FolderNameGuesses = VideoTitleExtractor.GetTitleGuessesFromString(FolderName, true);
+                            AnalyseVideo.TitleGuesses.AddRange(FolderNameGuesses);
+                        }
+
+                        FillCandidates(AnalyseVideo, FileNameGuess, FolderNameGuess);
+                    }
+                    TotalProgressCounter++;
+                    PassProgressCounter++;
+                    OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * passes, ProgressNumber = TotalProgressCounter, Message = "Pass 2/" + passes });
+                    OnPassProgress(new ProgressEventArgs {MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter});
                 }
-                TotalProgressCounter++;
-                PassProgressCounter++;
-                OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * 3, ProgressNumber = TotalProgressCounter, Message = "Pass 2/3" });
-                OnPassProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter });
-            }
 
-            PassProgressCounter = 0;
-            OnPassProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter });
+                PassProgressCounter = 0;
+                OnPassProgress(new ProgressEventArgs {MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter});
 
-            //pass3 (websearch)
-            foreach (AnalyseVideo AnalyseVideo in _analyseVideos)
-            {
-                if (AnalyseVideo.Candidates.Count == 0 || AnalyseVideo.MatchPercentage < 0.5)
+                //pass3 (websearch)
+                foreach (AnalyseVideo AnalyseVideo in _analyseVideos)
                 {
-
-                    AnalyseVideo.TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(AnalyseVideo.Video.Path);//TODO 004 optimize this --> also gets done in pass1 --> remember somehow
-                    string FileNameGuess = AnalyseVideo.TitleGuesses[0];
-                    string FolderNameGuess = AnalyseVideo.TitleGuesses.Count > 1 ? AnalyseVideo.TitleGuesses[1] : null;
-
-                    AnalyseVideo.TitleGuesses.Clear();
-                    foreach (string SearchResult in BingSearch.Search(FileNameGuess))
+                    if (AnalyseVideo.Candidates.Count == 0 || AnalyseVideo.MatchPercentage < 0.5)
                     {
-                        AnalyseVideo.TitleGuesses.Add(VideoTitleExtractor.CleanTitle(SearchResult));
-                    }
 
-                    if (FolderNameGuess != null)
-                    {
-                        foreach (string SearchResult in BingSearch.Search(FolderNameGuess))
+                        AnalyseVideo.TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(AnalyseVideo.Video.Path); //TODO 004 optimize this --> also gets done in pass1 --> remember somehow
+                        string FileNameGuess = AnalyseVideo.TitleGuesses[0];
+                        string FolderNameGuess = AnalyseVideo.TitleGuesses.Count > 1 ? AnalyseVideo.TitleGuesses[1] : null;
+
+                        AnalyseVideo.TitleGuesses.Clear();
+                        foreach (string SearchResult in BingSearch.Search(FileNameGuess))
                         {
                             AnalyseVideo.TitleGuesses.Add(VideoTitleExtractor.CleanTitle(SearchResult));
                         }
-                    }
 
-                    FillCandidates(AnalyseVideo, FileNameGuess, FolderNameGuess);
+                        if (FolderNameGuess != null)
+                        {
+                            foreach (string SearchResult in BingSearch.Search(FolderNameGuess))
+                            {
+                                AnalyseVideo.TitleGuesses.Add(VideoTitleExtractor.CleanTitle(SearchResult));
+                            }
+                        }
+
+                        FillCandidates(AnalyseVideo, FileNameGuess, FolderNameGuess);
+                    }
+                    TotalProgressCounter++;
+                    PassProgressCounter++;
+                    OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * passes, ProgressNumber = TotalProgressCounter, Message = "Pass 3/" + passes });
+                    OnPassProgress(new ProgressEventArgs {MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter});
                 }
-                TotalProgressCounter++;
-                PassProgressCounter++;
-                OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * 3, ProgressNumber = TotalProgressCounter, Message = "Pass 3/3" });
-                OnPassProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter });
             }
         }
 

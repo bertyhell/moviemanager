@@ -7,6 +7,8 @@ namespace MovieManager.APP.Panels.Settings
 {
     public class SettingsPanelBase : UserControl
     {
+        //TODO 060 ask to clear cache when changing poster download size
+
         protected string _panelName;
         protected string _iconPath;
         protected List<SettingsPanelBase> _settingsPanels = new List<SettingsPanelBase>();
