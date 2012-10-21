@@ -64,7 +64,7 @@
 
 
             <ribbon:RibbonTab Header="View">
-                <ribbon:RibbonGroup Header="View">
+                <ribbon:RibbonGroup>
                     <ribbon:RibbonMenuButton DataContext="{x:Static data:MenuModel.ChangeView}">
                         <ribbon:RibbonMenuButton.Items>
                             <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewBigIcons}"/>
@@ -73,6 +73,10 @@
                             <ribbon:RibbonMenuItem DataContext="{x:Static data:MenuModel.ViewDetails}" />
                         </ribbon:RibbonMenuButton.Items>
                     </ribbon:RibbonMenuButton>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.TogglePreviewMargin}"/>
+                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.TogglePreviewTitle}"/>
                 </ribbon:RibbonGroup>
             </ribbon:RibbonTab>
 

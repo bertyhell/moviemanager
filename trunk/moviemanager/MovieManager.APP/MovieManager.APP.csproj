@@ -600,6 +600,10 @@
     <Resource Include="Images\view_medium_icons_16.png" />
     <Resource Include="Images\view_small_icons_16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\header_32.png" />
+    <Resource Include="Images\margin_32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>move /y $(SolutionDir)bin\$(ConfigurationName)\*.dll $(SolutionDir)bin\$(ConfigurationName)\lib

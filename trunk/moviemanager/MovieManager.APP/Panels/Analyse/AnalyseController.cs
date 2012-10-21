@@ -101,7 +101,7 @@ namespace MovieManager.APP.Panels.Analyse
         }
 
         //TODO 050 make analyse function multithreaded -> 1 thread for every movie lookup
-        public void SaveVideos()
+        public void SaveVideos()//TODO 070 do this in a backgroundworker with progressbar
         {
             var Videos = new List<Video>();
             foreach (var AnalyseVideo in AnalyseVideos)
@@ -118,7 +118,7 @@ namespace MovieManager.APP.Panels.Analyse
                             Images.Add(new Uri(ImageInfo.Uri.AbsoluteUri));
                         }
                     }
-                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.Medium);
+                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.Medium);//TODO 070 move this to a seperate backgroundworker
 
 
                     Videos.Add(AnalyseVideo.Video);
