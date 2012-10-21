@@ -364,6 +364,33 @@ namespace MovieManager.APP.Menubar
             }
         }
 
+        public static ControlData TogglePreviewTitle
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Toggle Title";
+
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        ControlData ButtonData = new ControlData
+                        {
+                            Label = STR,
+                            SmallImage = new Uri("/MovieManager;component/Images/header_32.png", UriKind.Relative),
+                            ToolTipTitle = "Toggle Title",
+                            ToolTipDescription = "Toggle Title",
+                            Command = new TogglePreviewTitleCommand(),
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = ButtonData;
+                    }
+
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
+
         public static ControlData TogglePreviewMargin
         {
             get
@@ -377,7 +404,7 @@ namespace MovieManager.APP.Menubar
                         const string VIEW_TOOL_TIP_TITLE = "Toggle Margin";
                         const string VIEW_TOOL_TIP_DESCRIPTION = "Toggle Margin";
 
-                        ControlData MenuButtonData = new ControlData
+                        ControlData ButtonData = new ControlData
                         {
                             Label = STR,
                             SmallImage = new Uri("/MovieManager;component/Images/margin_32.png", UriKind.Relative),
@@ -386,37 +413,7 @@ namespace MovieManager.APP.Menubar
                             Command = new TogglePreviewMarginCommand(),
                             KeyTip = "",
                         };
-                        DATA_COLLECTION[STR] = MenuButtonData;
-                    }
-
-                    return DATA_COLLECTION[STR];
-                }
-            }
-        }
-
-        public static ControlData TogglePreviewTitle
-        {
-            get
-            {
-                lock (LOCK_OBJECT)
-                {
-                    const string STR = "Toggle Title";
-
-                    if (!DATA_COLLECTION.ContainsKey(STR))
-                    {
-                        const string VIEW_TOOL_TIP_TITLE = "Toggle Title";
-                        const string VIEW_TOOL_TIP_DESCRIPTION = "Toggle Title";
-
-                        ControlData MenuButtonData = new ControlData
-                        {
-                            Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/header_32.png", UriKind.Relative),
-                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
-                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
-                            Command = new TogglePreviewTitleCommand(),
-                            KeyTip = "",
-                        };
-                        DATA_COLLECTION[STR] = MenuButtonData;
+                        DATA_COLLECTION[STR] = ButtonData;
                     }
 
                     return DATA_COLLECTION[STR];
