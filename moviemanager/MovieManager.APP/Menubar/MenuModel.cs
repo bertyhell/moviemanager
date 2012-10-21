@@ -424,34 +424,34 @@ namespace MovieManager.APP.Menubar
             }
         }
 
-        //public static ControlData ChangeView //TODO 070 check why the **** this doesn't work :@ (wasted 3 hours)
-        //{
-        //    get
-        //    {
-        //        lock (LOCK_OBJECT)
-        //        {
-        //            const string STR = "Change View";
+        public static ControlData ChangeView //TODO 070 check why the **** this doesn't work :@ (wasted 3 hours)
+        {
+            get
+            {
+                lock (LOCK_OBJECT)
+                {
+                    const string STR = "Change View";
 
-        //            if (!DATA_COLLECTION.ContainsKey(STR))
-        //            {
-        //                const string VIEW_TOOL_TIP_TITLE = "Change View";
-        //                const string VIEW_TOOL_TIP_DESCRIPTION = "Change view";
+                    if (!DATA_COLLECTION.ContainsKey(STR))
+                    {
+                        const string VIEW_TOOL_TIP_TITLE = "Change View";
+                        const string VIEW_TOOL_TIP_DESCRIPTION = "Change view";
 
-        //                MenuButtonData MenuButtonData = new MenuButtonData
-        //                {
-        //                    Label = STR,
-        //                    LargeImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
-        //                    ToolTipTitle = VIEW_TOOL_TIP_TITLE,
-        //                    ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
-        //                    KeyTip = "",
-        //                };
-        //                DATA_COLLECTION[STR] = MenuButtonData;
-        //            }
+                        ControlData MenuButtonData = new ControlData
+                        {
+                            Label = STR,
+                            LargeImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
+                            ToolTipTitle = VIEW_TOOL_TIP_TITLE,
+                            ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
+                            KeyTip = "",
+                        };
+                        DATA_COLLECTION[STR] = MenuButtonData;
+                    }
 
-        //            return DATA_COLLECTION[STR];
-        //        }
-        //    }
-        //}
+                    return DATA_COLLECTION[STR];
+                }
+            }
+        }
 
         public static ControlData ViewBigIcons
         {
@@ -555,7 +555,7 @@ namespace MovieManager.APP.Menubar
                         ControlData ItemData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/view_details_icons_16.png", UriKind.Relative),
+                            SmallImage = new Uri("/MovieManager;component/Images/view_details_16.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
                             Command = new ChangeViewCommand(ViewStates.Details),
