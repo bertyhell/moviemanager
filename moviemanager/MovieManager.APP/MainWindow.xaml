@@ -40,7 +40,7 @@
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
         <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" 
-                  ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel">
+                  ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel" ScrollViewer.IsDeferredScrollingEnabled="True">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
@@ -50,8 +50,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Common:PreviewItem 
-                        VirtualizingStackPanel.IsVirtualizing="True" 
+                    <Common:PreviewItem
                         Item="{Binding}" 
                         Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
                         Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" 

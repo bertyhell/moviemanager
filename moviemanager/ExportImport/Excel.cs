@@ -61,7 +61,7 @@ namespace ExcelInterop
             return Headers;
         }
 
-        public static void Objects2Excel(List<Video> objects, IList<String> props, string filepath, string sheetName)
+        public static void Objects2Excel(IList<Video> objects, IList<String> props, string filepath, string sheetName)
         {
 
             if (props != null && props.Count != 0)

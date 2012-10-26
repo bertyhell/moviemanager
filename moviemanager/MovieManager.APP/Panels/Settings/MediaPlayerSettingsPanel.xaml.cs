@@ -29,7 +29,7 @@ namespace MovieManager.APP.Panels.Settings
             _iconPath = "/MovieManager;component/Images/MediaPlayer_32.png";
             _model = new MediaPlayerSettingsViewModel
                                                      {
-                                                         PlayOnDoubleCLick = Properties.Settings.Default.MediaPlayerPlayOnDoubleClick
+                                                         PlayOnDoubleCLick = APP.Properties.Settings.Default.MediaPlayerPlayOnDoubleClick
                                                      };
             this.DataContext = _model;
             
@@ -40,7 +40,7 @@ namespace MovieManager.APP.Panels.Settings
 
         public override bool SaveSettings()
         {
-            Properties.Settings.Default.MediaPlayerPlayOnDoubleClick = _model.PlayOnDoubleCLick;
+            APP.Properties.Settings.Default.MediaPlayerPlayOnDoubleClick = _model.PlayOnDoubleCLick;
             return true;
         }
     }

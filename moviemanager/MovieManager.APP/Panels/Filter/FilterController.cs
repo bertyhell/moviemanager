@@ -25,7 +25,7 @@ namespace MovieManager.APP.Panels.Filter
                         AppliedFilters.Add(new FilterText("Path", "Path"));
                         break;
                     case Filters.Genre:
-                        AppliedFilters.Add(new FilterMultiOption("Genres",MMDatabase.GetMovieGenres(), "Genres"));
+                        AppliedFilters.Add(new FilterMultiOption("Genres",TmcDatabase.GetMovieGenres(), "Genres"));
                         break;
                     case Filters.ReleaseDate:
                         AppliedFilters.Add(new FilterDate("Release", "Release Date"));

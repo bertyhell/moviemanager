@@ -3,9 +3,12 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Data;
+using DataVirtualization;
 using Model;
 using MovieManager.APP.Commands;
 using MovieManager.APP.Panels.Settings;
+using MovieManager.APP.Properties;
+using MovieManager.Common;
 using SQLite;
 using System.ComponentModel;
 using MovieManager.APP.Panels.Filter;
@@ -24,7 +27,7 @@ namespace MovieManager.APP
         private MainController()
         {
             //init database
-            string DatabasePath = Properties.Settings.Default.DatabasePath;
+            string DatabasePath = Settings.Default.DatabasePath;
             bool DatabaseUpdated = false;
             if (!File.Exists(DatabasePath))
             {
@@ -32,16 +35,15 @@ namespace MovieManager.APP
                 EditSettingsCommand.Execute(null);
                 DatabaseUpdated = true;
             }
-            string ConnectionString = Properties.Settings.Default.ConnectionString.Replace("{path}", DatabasePath);
-            MMDatabase.Init(ConnectionString);
+            string ConnectionString = Settings.Default.ConnectionString.Replace("{path}", DatabasePath);
+            TmcDatabase.Init(ConnectionString);
             if (!DatabaseUpdated)
                 MMDatabaseCreation.ConvertDatabase(ConnectionString);
 
-            Videos.Clear();
-            MMDatabase.SelectAllVideos(Videos);
+            ReloadVideos();
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
-            MMDatabase.VideosChanged += MMDatabaseVideosChanged;
+            TmcDatabase.VideosChanged += MMDatabaseVideosChanged;
             //ApplicationCache.AddVideoImages(66, new List<Uri>() { new Uri("http://www.cathedral-design.be/upload/google-logo-voor-nieuws-5178_google_logo.jpg") }, CacheImageType.Images, ImageQuality.High);
 
             IsIconsViewVisible = Visibility.Visible;//TODO 020 check if any of the videos has been analysed --> none == hide iconsview
@@ -60,8 +62,8 @@ namespace MovieManager.APP
             }
         }
 
-        private ObservableCollection<Video> _videos = new ObservableCollection<Video>();
-        public ObservableCollection<Video> Videos
+        private AsyncVirtualizingCollection<Video> _videos;
+        public AsyncVirtualizingCollection<Video> Videos
         {
             get
             {
@@ -94,8 +96,8 @@ namespace MovieManager.APP
 
         public void ReloadVideos()
         {
-            Videos.Clear();
-            MMDatabase.SelectAllVideos(Videos);
+            //Videos = new AsyncVirtualizingCollection<T>(new ItemsProvider(), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
+            Videos = new AsyncVirtualizingCollection<Video>(new ItemsProvider<Video>(TmcDatabase.SelectAllVideos()), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
         }
 
         private delegate void ReloadVideosDelegate();

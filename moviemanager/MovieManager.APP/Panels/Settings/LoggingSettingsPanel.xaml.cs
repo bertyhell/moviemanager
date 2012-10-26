@@ -28,8 +28,8 @@ namespace MovieManager.APP.Panels.Settings
         {
             InitializeComponent();
 
-            LoggingEnabled = Properties.Settings.Default.Log_enabled;
-            SelectedLogLevel = Properties.Settings.Default.Log_Level;
+            LoggingEnabled = APP.Properties.Settings.Default.Log_enabled;
+            SelectedLogLevel = APP.Properties.Settings.Default.Log_Level;
             _panelName = "Logging";
             _iconPath = "/MovieManager;component/Images/log_32.png";
             this.DataContext = this;
@@ -63,8 +63,8 @@ namespace MovieManager.APP.Panels.Settings
 
         public override bool SaveSettings()
         {
-            Properties.Settings.Default.Log_enabled = LoggingEnabled;
-            Properties.Settings.Default.Log_Level = SelectedLogLevel;
+            APP.Properties.Settings.Default.Log_enabled = LoggingEnabled;
+            APP.Properties.Settings.Default.Log_Level = SelectedLogLevel;
             return base.SaveSettings();
         }
     }

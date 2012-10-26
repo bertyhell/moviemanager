@@ -25,7 +25,7 @@ namespace MovieManager.APP.Panels.Settings
             _iconPath = "/MovieManager;component/Images/database_32.png";
 
             this.DataContext = this;
-            _pathToDatabase = Properties.Settings.Default.DatabasePath;
+            _pathToDatabase = APP.Properties.Settings.Default.DatabasePath;
 
             InitDatabaseVersionControl();
 
@@ -69,7 +69,7 @@ namespace MovieManager.APP.Panels.Settings
         {
             if (File.Exists(_pathToDatabase))
             {
-                MMDatabaseCreation.Init(Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
+                MMDatabaseCreation.Init(APP.Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
                 DatabaseDetails = MMDatabaseCreation.GetDatabaseDetails();
             }
             else
@@ -80,7 +80,7 @@ namespace MovieManager.APP.Panels.Settings
 
         public override bool SaveSettings()
         {
-            Properties.Settings.Default.DatabasePath = _pathToDatabase;
+            APP.Properties.Settings.Default.DatabasePath = _pathToDatabase;
             return base.SaveSettings();
         }
 

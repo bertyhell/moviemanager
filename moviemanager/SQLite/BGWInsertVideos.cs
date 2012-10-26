@@ -15,7 +15,7 @@ namespace SQLite
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
-            MMDatabase.InsertVideosHDD(_videos);
+            TmcDatabase.InsertVideosHDD(_videos);
         }
     }
 }

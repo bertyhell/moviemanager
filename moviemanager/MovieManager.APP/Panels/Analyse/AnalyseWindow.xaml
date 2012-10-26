@@ -20,8 +20,7 @@
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding AnalyseVideos}" SelectedItem="{Binding SelectedVideoFile}" 
-                          CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Single" CanUserResizeRows="False" AutoGenerateColumns="False" Name="dgrVideoFileList" Margin="0,10,0,0" RowEditEnding="DgrVideoFileListRowEditEnding">
-            <!--AlternatingRowBackground="#EEE"-->
+                          CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Single" CanUserResizeRows="False" AutoGenerateColumns="False" Name="dgrVideoFileList" Margin="0,10,0,0" RowEditEnding="DgrVideoFileListRowEditEnding" VirtualizingStackPanel.VirtualizationMode="Standard">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="BorderThickness" Value="0"/>
@@ -50,11 +49,6 @@
                             <ComboBox ItemsSource="{Binding TitleGuesses}" SelectedIndex="0" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding TitleGuesses}" IsReadOnly="False" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 
                 <!-- TODO 080 change title guess by combobox with all titleguesses (but still allow user to edit by typing-->
@@ -78,25 +72,6 @@
                             </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Candidates}" SelectedIndex="{Binding SelectedCandidateIndex}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} ({1})({2})">
-                                                    <Binding Path="Name"/>
-                                                    <Binding Path="Release.Year"/>
-                                                    <Binding Path="TitleMatchRatio"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="File" Binding="{Binding Video.Path, Converter={StaticResource FileNameFromPathExtractor}}" IsReadOnly="True" />
                 <DataGridTextColumn Header="Folder" Binding="{Binding Video.Path, Converter={StaticResource FolderFromPathExtractor}}" IsReadOnly="True" />
