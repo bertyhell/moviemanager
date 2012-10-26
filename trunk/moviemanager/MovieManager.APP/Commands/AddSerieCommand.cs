@@ -40,7 +40,7 @@ namespace MovieManager.APP.Commands
                 ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
                 MovieFileReader MovieFileReader = new MovieFileReader(new DirectoryInfo(Odd.SelectedPath));
                 MovieFileReader.GetSerie(new DirectoryInfo(Odd.SelectedPath), "", "", LocalVideos);
-                MMDatabase.InsertVideosHDD(LocalVideos);
+                TmcDatabase.InsertVideosHDD(LocalVideos);
             }
         }
     }

@@ -71,7 +71,7 @@ namespace MovieManager.APP.Commands
             IsIndeterminate = false;
             _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, DataContext = this };
             BGWInsertVideos BGWInsertVideos = new BGWInsertVideos(e.Videos);
-            MMDatabase.InsertVideosProgress += FileReader_OnInsertVideosProgress;
+            TmcDatabase.InsertVideosProgress += FileReader_OnInsertVideosProgress;
             BGWInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
             BGWInsertVideos.RunWorkerAsync();
             _progressWindow.ShowDialog();

@@ -120,7 +120,7 @@ namespace SQLite
 
             //create Serie in database
             Serie Serie = new Serie { Name = dir.FullName.Substring(dir.FullName.LastIndexOf("\\") + 1) };
-            MMDatabase.AddSerie(Serie);
+            TmcDatabase.AddSerie(Serie);
 
             //convert video to episode
             foreach (Video Video in LocalVideos)

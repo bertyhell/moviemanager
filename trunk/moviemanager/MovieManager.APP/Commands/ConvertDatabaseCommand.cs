@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using MovieManager.APP.Properties;
 using SQLite;
 
 namespace MovieManager.APP.Commands
@@ -22,8 +23,8 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            string DatabasePath = Properties.Settings.Default.DatabasePath;
-            string ConnectionString = Properties.Settings.Default.ConnectionString.ToString().Replace("{path}", DatabasePath);
+            string DatabasePath = Settings.Default.DatabasePath;
+            string ConnectionString = Settings.Default.ConnectionString.ToString().Replace("{path}", DatabasePath);
 
             MMDatabaseCreation.ConvertDatabase(ConnectionString);
         }

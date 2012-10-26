@@ -30,15 +30,15 @@ namespace MovieManager.APP.Panels.Settings
 
         private void LoadSettings()
         {
-            parameteredStringBuilderEpisode.ParameteredString = Properties.Settings.Default.RenamingEpisodeFileSequence;
-            parameteredStringBuilderMovie.ParameteredString = Properties.Settings.Default.RenamingMovieFileSequence;
+            parameteredStringBuilderEpisode.ParameteredString = APP.Properties.Settings.Default.RenamingEpisodeFileSequence;
+            parameteredStringBuilderMovie.ParameteredString = APP.Properties.Settings.Default.RenamingMovieFileSequence;
         }
 
         public override bool SaveSettings()
         {
-            Properties.Settings.Default.RenamingMovieFileSequence = parameteredStringBuilderMovie.ParameteredString;
-            Properties.Settings.Default.RenamingEpisodeFileSequence = parameteredStringBuilderEpisode.ParameteredString;
-            Properties.Settings.Default.Save();
+            APP.Properties.Settings.Default.RenamingMovieFileSequence = parameteredStringBuilderMovie.ParameteredString;
+            APP.Properties.Settings.Default.RenamingEpisodeFileSequence = parameteredStringBuilderEpisode.ParameteredString;
+            APP.Properties.Settings.Default.Save();
 
             return true;
         }

@@ -21,7 +21,7 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            MMDatabase.EmptyVideoTables();
+            TmcDatabase.EmptyVideoTables();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
 using APP;
+using MovieManager.APP.Properties;
 using MovieManager.LOG;
 using log4net.Core;
 
@@ -31,7 +32,7 @@ namespace MovieManager.APP
         protected override void OnStartup(System.Windows.StartupEventArgs e)
         {
             //TODO 050: implement option to disable logging (already stored in settings) 
-            GlobalLogger.Instance.LogLevel = MovieManager.APP.Properties.Settings.Default.Log_Level;
+            GlobalLogger.Instance.LogLevel = Settings.Default.Log_Level;
             GlobalLogger.Instance.MovieManagerLogger.Info("Program started");
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
             base.OnStartup(e);

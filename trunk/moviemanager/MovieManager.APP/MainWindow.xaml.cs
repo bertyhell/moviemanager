@@ -8,6 +8,7 @@ using System.Windows.Markup;
 using Model;
 using MovieManager.APP.Panels;
 using System.Windows.Data;
+using MovieManager.APP.Properties;
 using MovieManager.Common;
 using MovieManager.LOG;
 using MovieManager.PLAYER;
@@ -59,7 +60,7 @@ namespace MovieManager.APP
             TempColumnsInOrder.AddRange(_videoDetails.Columns);
             try
             {
-                string VisibleColumns = Properties.Settings.Default.VisibleMainViewColumns;
+                string VisibleColumns = Settings.Default.VisibleMainViewColumns;
 
                 List<Pair<string, bool>> VisibleMainViewColumns = new List<Pair<string, bool>>();
                 bool ReadSettingsSucceeded = true;
@@ -199,14 +200,14 @@ namespace MovieManager.APP
                         string VideoDir = Path.GetDirectoryName(Video.Path);
                         if (Video is Movie)
                         {
-                            string ParString = Properties.Settings.Default.RenamingMovieFileSequence;
+                            string ParString = Settings.Default.RenamingMovieFileSequence;
                             NewVideoName = ParString.Replace("{{MovieName}}", Video.Name);
                             NewVideoName = NewVideoName.Replace("{{Year}}", Video.Release.Year.ToString());
                         }
 
                         else if (Video is Episode)
                         {
-                            string ParString = Properties.Settings.Default.RenamingEpisodeFileSequence;
+                            string ParString = Settings.Default.RenamingEpisodeFileSequence;
                             //TODO 030: implement renaming for episodes
                         }
 
@@ -231,7 +232,7 @@ namespace MovieManager.APP
 
         private void VideoGridMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (Properties.Settings.Default.MediaPlayerPlayOnDoubleClick)
+            if (Settings.Default.MediaPlayerPlayOnDoubleClick)
                 MenuItemPlayClick(sender, e);
         }
 
@@ -252,8 +253,8 @@ namespace MovieManager.APP
             XmlSerializer Serializer = new XmlSerializer(typeof(List<Pair<string, bool>>));
             StringWriter StringWriter = new StringWriter();
             Serializer.Serialize(StringWriter, VisibleMainViewColumns);
-            Properties.Settings.Default.VisibleMainViewColumns = StringWriter.ToString();
-            Properties.Settings.Default.Save();
+            Settings.Default.VisibleMainViewColumns = StringWriter.ToString();
+            Settings.Default.Save();
 
             base.OnClosing(e);
         }

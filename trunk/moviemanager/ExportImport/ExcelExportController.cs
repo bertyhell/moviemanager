@@ -72,8 +72,7 @@ namespace ExportImport
             if (ExportProperties.Any(mappingItem => mappingItem.Selected))
             {
                 //export
-                var Videos = new List<Video>();
-                MMDatabase.SelectAllVideos(Videos);
+                IList<Video> Videos = TmcDatabase.SelectAllVideos();
                 List<string> Props = new List<string>();
                 foreach(ObjectMappingItem MappingItem in ExportProperties)
                 {

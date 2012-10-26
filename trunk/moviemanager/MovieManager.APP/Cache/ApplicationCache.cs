@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Media;
 using Model;
+using MovieManager.APP.Properties;
 using MovieManager.Common;
 
 namespace MovieManager.APP.Cache
@@ -21,7 +22,7 @@ namespace MovieManager.APP.Cache
 
         public static void Init()
         {
-            var CacheFolder = Properties.Settings.Default.Cache_folder;
+            var CacheFolder = Settings.Default.Cache_folder;
             Directory.CreateDirectory(CacheFolder);
             _cacheFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), @"TheVideoCollector\Cache");//TODO 060 allow to change in settings
 
@@ -83,7 +84,7 @@ namespace MovieManager.APP.Cache
         {
             var RetVal = new List<ImageSource>();
 
-            string VideoDir = Path.Combine(_cacheFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), Properties.Settings.Default.ImageQuality.ToString());
+            string VideoDir = Path.Combine(_cacheFolder, videoId.ToString(CultureInfo.InvariantCulture), imageType.ToString(), Settings.Default.ImageQuality.ToString());
 
             foreach (string ImagePath in Directory.GetFiles(VideoDir))
             {
@@ -99,7 +100,7 @@ namespace MovieManager.APP.Cache
                 _cacheFolder,
                 videoId.ToString(CultureInfo.InvariantCulture),
                 imageType.ToString(),
-                Properties.Settings.Default.ImageQuality.ToString(),
+                Settings.Default.ImageQuality.ToString(),
                 Math.Abs(imageUri.GetHashCode()) + ".jpg");
 
             //TODO 030 check higher quality images
@@ -108,7 +109,7 @@ namespace MovieManager.APP.Cache
 
             if (!File.Exists(FilePath))
             {
-                AddVideoImage(videoId, imageUri, imageType, Properties.Settings.Default.ImageQuality);
+                AddVideoImage(videoId, imageUri, imageType, Settings.Default.ImageQuality);
             }
             return new Uri(FilePath);
 

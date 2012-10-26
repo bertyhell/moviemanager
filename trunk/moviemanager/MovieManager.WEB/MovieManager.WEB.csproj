@@ -56,13 +56,13 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\MovieManager.Common.csproj">
-      <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
-      <Name>MovieManager.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMC.Common\MovieManager.Common.csproj">
+      <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
+      <Name>MovieManager.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

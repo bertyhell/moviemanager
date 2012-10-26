@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Data;
+﻿using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using MovieManager.Common;

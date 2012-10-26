@@ -24,7 +24,7 @@ namespace MovieManager.APP.Commands
 
         public void Execute(object parameter)
         {
-            MMDatabase.UpdateVideos(_video);
+            TmcDatabase.UpdateVideos(_video);
         }
 
         public bool CanExecute(object parameter)

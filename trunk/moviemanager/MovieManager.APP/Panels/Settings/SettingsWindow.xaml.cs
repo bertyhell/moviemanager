@@ -48,7 +48,7 @@ namespace MovieManager.APP.Panels.Settings
             {
                 SettingsPanel.SaveSettings();
             }
-            Properties.Settings.Default.Save();
+            APP.Properties.Settings.Default.Save();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -148,7 +148,7 @@ namespace ExportImport
                         }
                     }
                     List<Video> Data = Excel.Excel2Videos(FilePath, SelectedWorksheetIndex, ImportMappingItems);
-                    MMDatabase.InsertVideosHDD(Data);
+                    TmcDatabase.InsertVideosHDD(Data);
                 }
             }catch(Exception Ex)
             {
