@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Markup;
 using Model;
+using MovieManager.APP.Commands;
 using MovieManager.APP.Panels;
 using System.Windows.Data;
 using MovieManager.APP.Properties;
@@ -179,12 +180,14 @@ namespace MovieManager.APP
 
         private void MenuItemPlayClick(object sender, RoutedEventArgs e)
         {
-            var Video = _videoDetails.SelectedItem as Video;
-            if (Video != null && Video.Path != null)
+            PlayVideoCommand PlayCommand = new PlayVideoCommand();
+            if (_videoIcons.IsVisible)
             {
-                MMPlayer Vlc = new MMPlayer();
-                Vlc.Show();
-                Vlc.PlayVideo(Video);
+                PlayCommand.Execute(_videoIcons.SelectedItem);
+            }
+            else
+            {
+                PlayCommand.Execute(_videoDetails.SelectedItem);
             }
         }
 

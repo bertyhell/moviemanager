@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\MovieManager.LOG\bin\Debug\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,6 +55,8 @@
     <Compile Include="Common\MediaPlayerControl.Designer.cs">
       <DependentUpon>MediaPlayerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic\MediaPlayerSettings.cs" />
+    <Compile Include="Logic\PlayerProcessStatus.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -97,6 +102,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieManager.LOG\MovieManager.LOG.csproj">
+      <Project>{8c2b5f04-ef8f-46b8-b775-fd602b8afaed}</Project>
+      <Name>MovieManager.LOG</Name>
     </ProjectReference>
     <ProjectReference Include="..\TMC.Common\MovieManager.Common.csproj">
       <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>

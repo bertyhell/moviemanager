@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using DataVirtualization;
 using Model;
 using MovieManager.APP.Commands;
 
@@ -46,7 +45,7 @@ namespace MovieManager.APP.Panels
             VideoTypeEnum VideoType = (VideoTypeEnum)e.AddedItems[0];
             if (Video.VideoType != VideoType)
             {
-                AsyncVirtualizingCollection<Video> LocalVideos = MainController.Instance.Videos;
+                ObservableCollection<Video> LocalVideos = MainController.Instance.Videos;
                 int Index = LocalVideos.IndexOf(Video);
                 Video = Video.ConvertVideo(VideoType, Video);
                 LocalVideos.RemoveAt(Index);

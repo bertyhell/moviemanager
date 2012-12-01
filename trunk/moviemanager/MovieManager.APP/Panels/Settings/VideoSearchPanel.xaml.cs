@@ -45,7 +45,6 @@ namespace MovieManager.APP.Panels.Settings
                 Size = Int64.Parse(txtVideoFileSize.Text) * (long)Math.Pow(1000, cbbMagnitude.SelectedIndex);
             }
             Properties.Settings.Default.MinimumVideoFileSize = Size;
-            Properties.Settings.Default.Save();
 
             return true;
         }

@@ -41,5 +41,11 @@
     <Setting Name="testje" Type="System.String" Scope="Application">
       <Value Profile="(Default)">jepla</Value>
     </Setting>
+    <Setting Name="SelectedMediaPlayer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">VLC</Value>
+    </Setting>
+    <Setting Name="MediaPlayerSettings" Type="MovieManager.PLAYER.Logic.MediaPlayerSettings" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

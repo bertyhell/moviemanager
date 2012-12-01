@@ -22,7 +22,7 @@ namespace MovieManager.APP.Properties
             //
             // this.SettingChanging += this.SettingChangingEventHandler;
             //
-            this.SettingsSaving += this.SettingsSavingEventHandler;
+            //this.SettingsSaving += this.SettingsSavingEventHandler;
             
         }
         
@@ -30,19 +30,19 @@ namespace MovieManager.APP.Properties
             // Add code to handle the SettingChangingEvent event here.
         }
         
-        private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
-            if(_provider == null)
-            {
-                foreach (var Provider in this.Providers)
-                {
-                    if(Provider is CustomSettingsProvider)
-                    {
-                        _provider = (CustomSettingsProvider)Provider;
-                    }
-                }
-            }
-            _provider.Save();
-        }
+        //private void SettingsSavingEventHandler(object sender, System.ComponentModel.CancelEventArgs e) {
+        //    if(_provider == null)
+        //    {
+        //        foreach (var Provider in this.Providers)
+        //        {
+        //            if(Provider is CustomSettingsProvider)
+        //            {
+        //                _provider = (CustomSettingsProvider)Provider;
+        //            }
+        //        }
+        //    }
+        //    _provider.Save();
+        //}
 
         protected override void OnSettingChanging(object sender, SettingChangingEventArgs e)
         {
