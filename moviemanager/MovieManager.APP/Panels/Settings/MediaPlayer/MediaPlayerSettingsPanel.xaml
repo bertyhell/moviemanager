@@ -1,0 +1,29 @@
+﻿<settings:SettingsPanelBase x:Class="MovieManager.APP.Panels.Settings.MediaPlayerSettingsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:settings="clr-namespace:MovieManager.APP.Panels.Settings"
+                            xmlns:Localization="clr-namespace:MovieManager.APP.Localization" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <settings:SettingsPanelBase.Resources>
+        <Localization:Resource x:Key="LocStrings"/>
+    </settings:SettingsPanelBase.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <CheckBox Grid.ColumnSpan="2" Content="{Binding Source={StaticResource LocStrings},Path=StartPlayingOnDoubleClickInMainView}" IsChecked="{Binding PlayOnDoubleCLick}"/>
+        
+        <Label Grid.Row="2" Content="{Binding Source={StaticResource LocStrings},Path=DefaultPlayer,StringFormat={}{0}:}"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding MediaPlayers.Keys}" SelectedItem="{Binding SelectedMediaPlayer}"/>
+    </Grid>
+</settings:SettingsPanelBase>

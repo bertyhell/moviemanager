@@ -46,12 +46,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncVirtualizingCollection.cs" />
     <Compile Include="CollectionConverter.cs" />
+    <Compile Include="CommandHelper.cs" />
     <Compile Include="DateTimeUtilities.cs" />
     <Compile Include="DefaultValues.cs" />
-    <Compile Include="IItemsProvider.cs" />
     <Compile Include="ProgressEventArgs.cs" />
+    <Compile Include="RegistryHelper.cs" />
     <Compile Include="SerializableKeyValuePair.cs" />
     <Compile Include="SettingsStorage\CustomSettingsProvider.cs" />
     <Compile Include="SettingsStorage\DuplicateSettingsKeyException.cs" />
@@ -62,9 +62,7 @@
     <Compile Include="StringSimilarity.cs" />
     <Compile Include="TimestampUtilities.cs" />
     <Compile Include="UniqueCollection.cs" />
-    <Compile Include="ItemsProvider.cs" />
     <Compile Include="VideoTitleExtractor.cs" />
-    <Compile Include="VirtualizingCollection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

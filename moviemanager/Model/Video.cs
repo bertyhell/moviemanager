@@ -24,7 +24,7 @@ namespace Model
         private List<String> _genres;
         private String _path; //path to movie
         private ulong _lastPlayLocation;
-        private bool _watchedToEnd;
+        private uint _playCount;
         private ObservableCollection<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
         private ImageInfo _poster;
@@ -51,7 +51,7 @@ namespace Model
             _genres = brother.Genres;
             _path = brother.Path;
             _lastPlayLocation = brother.LastPlayLocation;
-            _watchedToEnd = brother.WatchedToEnd;
+            _playCount = brother.PlayCount;
             _subs = brother.Subs;
             _poster = brother.Poster;
             _images = brother.Images;
@@ -279,22 +279,22 @@ namespace Model
             }
         }
 
-        public bool WatchedToEnd
+        public uint PlayCount
         {
-            get { return _watchedToEnd; }
+            get { return _playCount; }
             set
             {
-                _watchedToEnd = value;
-                OnPropertyChanged("WatchedToEnd");
+                _playCount = value;
+                OnPropertyChanged("PlayCount");
             }
         }
 
-        public void MarkAsSeen(ulong movieLength, ulong iCurrentTimestamp, bool bWatchedToEnd)
+        public void CheckVideoSeen(ulong movieLength, ulong iCurrentTimestamp, bool bWatchedToEnd)
         {
             if (bWatchedToEnd)
             {
                 //mark as seen
-                _watchedToEnd = true;
+                _playCount++;
             }
             else if (movieLength - (iCurrentTimestamp) < movieLength * 10 / 100)
             {
@@ -303,7 +303,7 @@ namespace Model
                     + "Press \"no\" to save the current timestamp of the video.", "Choose Option", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                 if (Result == MessageBoxResult.Yes)
                 {
-                    _watchedToEnd = true;
+                    _playCount++;
                 }
                 else
                 {
@@ -321,7 +321,7 @@ namespace Model
         {
             get
             {
-                return new List<string> { "Id", "IdImdb", "Name", "Release", "Rating", "RatingImdb", "Genres", "Path", "LastPlayLocation", "WatchedToEnd", "Subs", "Poster", "Images", "Plot", "Runtime" };
+                return new List<string> { "Id", "IdImdb", "Name", "Release", "Rating", "RatingImdb", "Genres", "Path", "LastPlayLocation", "PlayCount", "Subs", "Poster", "Images", "Plot", "Runtime" };
             }
         }
 
@@ -395,7 +395,7 @@ namespace Model
         private List<String> _oldgenres;
         private String _oldpath; //path to movie
         private ulong _oldlastPlayLocation;
-        private bool _oldwatchedToEnd;
+        private uint _oldPlayCount;
         private ObservableCollection<Subtitle> _oldsubs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
         private ImageInfo _oldposter;
@@ -419,7 +419,7 @@ namespace Model
                 _oldratingImdb = _ratingImdb;
                 _oldgenres = _genres;
                 _oldlastPlayLocation = _lastPlayLocation;
-                _oldwatchedToEnd = _watchedToEnd;
+                _oldPlayCount = _playCount;
                 _oldsubs = _subs;
                 _oldposter = _poster;
                 _oldimages = _images;
@@ -450,7 +450,7 @@ namespace Model
                 OnPropertyChanged("Genres");
                 OnPropertyChanged("Path");
                 OnPropertyChanged("LastPlayLocation");
-                OnPropertyChanged("WatchedToEnd");
+                OnPropertyChanged("PlayCount");
                 OnPropertyChanged("Poster");
                 OnPropertyChanged("Images");
                 OnPropertyChanged("Plot");
@@ -473,7 +473,7 @@ namespace Model
                 _genres = _oldgenres;
                 _path = _oldpath;
                 _lastPlayLocation = _oldlastPlayLocation;
-                _watchedToEnd = _oldwatchedToEnd;
+                _playCount = _oldPlayCount;
                 _subs = _oldsubs;
                 _poster = _oldposter;
                 _images = _oldimages;

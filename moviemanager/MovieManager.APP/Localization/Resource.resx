@@ -132,6 +132,9 @@
   <data name="Birthplace" xml:space="preserve">
     <value>Birthplace:</value>
   </data>
+  <data name="DefaultPlayer" xml:space="preserve">
+    <value>Default player</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Data;
-using DataVirtualization;
 using Model;
 using MovieManager.APP.Commands;
 using MovieManager.APP.Panels.Settings;
@@ -40,6 +41,7 @@ namespace MovieManager.APP
             if (!DatabaseUpdated)
                 MMDatabaseCreation.ConvertDatabase(ConnectionString);
 
+            _videos = new ObservableCollection<Video>();
             ReloadVideos();
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
@@ -62,8 +64,8 @@ namespace MovieManager.APP
             }
         }
 
-        private AsyncVirtualizingCollection<Video> _videos;
-        public AsyncVirtualizingCollection<Video> Videos
+        private ObservableCollection<Video> _videos;
+        public ObservableCollection<Video> Videos
         {
             get
             {
@@ -73,6 +75,13 @@ namespace MovieManager.APP
             {
                 _videos = value;
             }
+        }
+
+        private List<Video> _videosList;
+        public List<Video> VideosList
+        {
+            get { return _videosList; }
+            set { _videosList = value; }
         }
 
         private FilterEditor _filterEditor;
@@ -97,7 +106,12 @@ namespace MovieManager.APP
         public void ReloadVideos()
         {
             //Videos = new AsyncVirtualizingCollection<T>(new ItemsProvider(), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
-            Videos = new AsyncVirtualizingCollection<Video>(new ItemsProvider<Video>(TmcDatabase.SelectAllVideos()), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
+            _videosList = (List<Video>)TmcDatabase.SelectAllVideos();
+            _videos.Clear();
+            foreach (Video Video in _videosList)
+            {
+                _videos.Add(Video);
+            }
         }
 
         private delegate void ReloadVideosDelegate();

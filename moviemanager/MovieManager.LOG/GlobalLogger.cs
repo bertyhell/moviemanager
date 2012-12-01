@@ -7,6 +7,7 @@ using log4net.Appender;
 using log4net.Config;
 using log4net.Core;
 using log4net.Layout;
+using System;
 
 namespace MovieManager.LOG
 {
@@ -60,9 +61,14 @@ namespace MovieManager.LOG
             get { return LogManager.GetLogger("VlcPlayer"); }
         }
 
-        public static string FormatExceptionForLog(string className, string functionName, string exception)
+        public static string FormatExceptionForLog(string className, string functionName, Exception exception)
         {
-            return string.Format("Class: {0} \nFunction: {1} \nMessage: {2}", className, functionName, exception);
+            return FormatExceptionForLog(className, functionName, exception.Message);
+        }
+
+        public static string FormatExceptionForLog(string className, string functionName, string exceptionMessage)
+        {
+            return string.Format("Class: {0} \nFunction: {1} \nMessage: {2}", className, functionName, exceptionMessage);
         }
 
         private IAppender GetSqliteAppender()

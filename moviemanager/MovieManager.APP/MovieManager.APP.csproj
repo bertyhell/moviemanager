@@ -120,6 +120,7 @@
     <Compile Include="Commands\ChangeViewCommand.cs" />
     <Compile Include="Commands\ImportVideosCommand.cs" />
     <Compile Include="Commands\Debug\LoggingToolCommand.cs" />
+    <Compile Include="Commands\PlayVideoCommand.cs" />
     <Compile Include="Commands\TogglePreviewMarginCommand.cs" />
     <Compile Include="Commands\TogglePreviewTitleCommand.cs" />
     <Compile Include="Commands\UpdateVideosCommand.cs" />
@@ -142,7 +143,7 @@
     <Compile Include="Panels\Settings\LoggingSettingsPanel.xaml.cs">
       <DependentUpon>LoggingSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panels\Settings\MediaPlayerSettingsViewModel.cs" />
+    <Compile Include="Panels\Settings\MediaPlayer\MediaPlayerSettingsViewModel.cs" />
     <Compile Include="Panels\Settings\SettingsPanelBase.cs" />
     <Compile Include="Panels\Common\ThumbnailDescriptionControl.xaml.cs">
       <DependentUpon>ThumbnailDescriptionControl.xaml</DependentUpon>
@@ -240,11 +241,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Panels\Settings\InternalMediaPlayerSettingsPanel.xaml">
+    <Page Include="Panels\Settings\MediaPlayer\InternalMediaPlayerSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Panels\Settings\MediaPlayerSettingsPanel.xaml">
+    <Page Include="Panels\Settings\MediaPlayer\MediaPlayerSettingsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -382,10 +383,10 @@
     <Compile Include="Panels\Settings\VideoSearchPanel.xaml.cs">
       <DependentUpon>VideoSearchPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panels\Settings\InternalMediaPlayerSettingsPanel.xaml.cs">
+    <Compile Include="Panels\Settings\MediaPlayer\InternalMediaPlayerSettingsPanel.xaml.cs">
       <DependentUpon>InternalMediaPlayerSettingsPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Panels\Settings\MediaPlayerSettingsPanel.xaml.cs">
+    <Compile Include="Panels\Settings\MediaPlayer\MediaPlayerSettingsPanel.xaml.cs">
       <DependentUpon>MediaPlayerSettingsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\Settings\FileRenameSettingsPanel.xaml.cs">

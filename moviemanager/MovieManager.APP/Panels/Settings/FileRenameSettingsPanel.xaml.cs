@@ -38,8 +38,6 @@ namespace MovieManager.APP.Panels.Settings
         {
             APP.Properties.Settings.Default.RenamingMovieFileSequence = parameteredStringBuilderMovie.ParameteredString;
             APP.Properties.Settings.Default.RenamingEpisodeFileSequence = parameteredStringBuilderEpisode.ParameteredString;
-            APP.Properties.Settings.Default.Save();
-
             return true;
         }
     }

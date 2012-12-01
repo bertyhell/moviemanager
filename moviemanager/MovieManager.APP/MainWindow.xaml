@@ -7,6 +7,18 @@
     <Grid>
         <Grid.Resources>
             <conv:StringListConverter x:Key="stringListConverter"/>
+                <Style x:Key="lvStyle" TargetType="{x:Type ListView}">
+                    <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+                    <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
+                    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="True"/>
+                    <Setter Property="ListView.ItemsSource" Value="{Binding}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsLoading}" Value="True">
+                            <Setter Property="ListView.Cursor" Value="Wait"/>
+                            <Setter Property="ListView.Background" Value="LightGray"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
         </Grid.Resources>
 
 
@@ -39,8 +51,8 @@
         <GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
-        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" 
-                  ItemsSource="{Binding VideosView}"  Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel" ScrollViewer.IsDeferredScrollingEnabled="True">
+        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}" MouseDoubleClick="VideoGridMouseDoubleClick"
+                  Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel" Style="{DynamicResource ResourceKey=lvStyle}" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
@@ -61,7 +73,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" ItemsSource="{Binding VideosView}" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}"
+        <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}" ItemsSource="{Binding VideosView}"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick" PreviewMouseWheel="MouseWheel">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
@@ -96,6 +108,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Release date" Binding="{Binding Release, StringFormat=\{0:d\}}" />
+                <DataGridTextColumn Header="Play count" Binding="{Binding PlayCount}" />
             </DataGrid.Columns>
         </DataGrid>
 

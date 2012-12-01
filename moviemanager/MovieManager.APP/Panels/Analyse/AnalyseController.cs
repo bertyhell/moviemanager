@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using DataVirtualization;
 using Model;
 using MovieManager.APP.Cache;
 using MovieManager.APP.Common;
@@ -21,7 +20,7 @@ namespace MovieManager.APP.Panels.Analyse
 
             ProgressBarInfoTotal = new ProgressBarInfo();
             ProgressBarInfoPass = new ProgressBarInfo();
-            AsyncVirtualizingCollection<Video> Videos = MainController.Instance.Videos;
+            List<Video> Videos = MainController.Instance.VideosList;
             AnalyseVideos.Clear();
             foreach (Video Video in Videos)
             {
