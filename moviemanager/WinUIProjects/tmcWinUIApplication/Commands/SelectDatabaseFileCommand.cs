@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.ComponentModel;
-using MovieManager.APP.Localization;
+using Tmc.WinUI.Application.Localization;
 
-namespace MovieManager.APP.Commands
+namespace Tmc.WinUI.Application.Commands
 {
     class SelectDatabaseFileCommand : ICommand, INotifyPropertyChanged
     {

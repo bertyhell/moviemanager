@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Documents;
 using Model;
-using MovieManager.Common;
-using MovieManager.WEB.Search;
+using Tmc.BusinessRules.Web.Search;
+using Tmc.SystemFrameworks.Common;
 
-namespace MovieManager.APP.Panels.Analyse
+namespace Tmc.WinUI.Application.Panels.Analyse
 {
     class GetDetailWorker : BackgroundWorker
     {
@@ -41,8 +38,8 @@ namespace MovieManager.APP.Panels.Analyse
                 Movie Movie = Video as Movie;
                 if (Movie != null)
                 {
-                    SearchTMDB.GetExtraMovieInfo(Movie);
-                    SearchTMDB.GetMovieImages(Movie);
+                    SearchTmdb.GetExtraMovieInfo(Movie);
+                    SearchTmdb.GetMovieImages(Movie);
                     Movie.AnalyseCompleted = true;
                 }
                 OnVideoInfoProgress(new ProgressEventArgs() { MaxNumber = _videos.Count, ProgressNumber = I });

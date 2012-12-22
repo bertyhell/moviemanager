@@ -5,10 +5,8 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
 using System.Configuration;
-using MovieManager.APP;
-using MovieManager.APP.Common;
-using MovieManager.Common;
 using Tmc.DataAccess.Sqlite;
+using Tmc.SystemFrameworks.Common;
 using Tmc.WinUI.Application.Common;
 
 namespace Tmc.WinUI.Application.Commands

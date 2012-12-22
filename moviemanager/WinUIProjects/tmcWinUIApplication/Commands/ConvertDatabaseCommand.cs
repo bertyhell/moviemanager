@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using MovieManager.APP.Properties;
 using Tmc.DataAccess.Sqlite;
+using Tmc.WinUI.Application.Properties;
 
 namespace Tmc.WinUI.Application.Commands
 {

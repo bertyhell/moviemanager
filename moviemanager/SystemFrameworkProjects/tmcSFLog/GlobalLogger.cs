@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using MovieManager.Common;
+using Tmc.SystemFrameworks.Common;
 using log4net;
 using log4net.Appender;
 using log4net.Config;
@@ -30,8 +30,8 @@ namespace Tmc.SystemFrameworks.Log
             get
             {
                 if (LogManager.GetRepository().Threshold == Level.Error) return LogLevelEnum.Error;
-                else if (LogManager.GetRepository().Threshold == Level.Debug) return LogLevelEnum.Debug;
-                else return LogLevelEnum.Info;
+                if (LogManager.GetRepository().Threshold == Level.Debug) return LogLevelEnum.Debug;
+                return LogLevelEnum.Info;
             }
             set
             {
@@ -153,20 +153,6 @@ namespace Tmc.SystemFrameworks.Log
                 Cmd.Dispose();
                 Conn.Close();
             }
-        }
-
-        void RemoveAppender(ILog logger)
-        {
-            // check if we have one
-            //if (databaseAdapter != null)
-            //{
-            //    // cast to required interface
-            //    IAppenderAttachable ConnectionAppender = (IAppenderAttachable)logger.Logger;
-            //    // remove the appendier
-            //    ConnectionAppender.RemoveAppender(databaseAdapter);
-            //    // set to null
-            //    databaseAdapter = null;
-            //}
         }
     }
 

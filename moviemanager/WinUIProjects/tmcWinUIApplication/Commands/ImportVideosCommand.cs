@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
-using ExcelInterop;
+using Tmc.BusinessRules.ExportImport;
 
-namespace MovieManager.APP.Commands
+namespace Tmc.WinUI.Application.Commands
 {
     class ImportVideosCommand : ICommand
     {

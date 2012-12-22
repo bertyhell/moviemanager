@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MovieManager.APP.Common
+namespace Tmc.WinUI.Application.Common
 {
     public class CheckableString
     {

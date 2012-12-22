@@ -3,9 +3,9 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
-	x:Class="ExcelInterop.ExcelImportWindow"
+	x:Class="Tmc.BusinessRules.ExportImport.ExcelImportWindow"
 	Title="Importeer vanuit Excel"
-	Width="640" Height="480" Icon="/ExportImport;component/images/excel_import_32.png" Loaded="WindowLoaded">
+	Width="640" Height="480" Icon="/Tmc.BusinessRules.ExportImport;component/images/excel_import_32.png" Loaded="WindowLoaded">
     <Window.Resources>
         <!--<DataTemplate x:Key="excelColumnsTemplate">
             <ComboBox Width="220"  ItemsSource="{Binding Path=DataContext.ExcelColumns, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" SelectedItem="{Binding ExcelColumn}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
@@ -59,18 +59,18 @@
         </ListView>-->
         <Button HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="3" Width="100" Name="BtnImport" Click="BtnImportClick">
             <StackPanel Orientation="Horizontal" Width="91.333">
-                <Image Height="32" Width="32" Source="/ExportImport;component/images/ok_32.png"/>
+                <Image Height="32" Width="32" Source="/Tmc.BusinessRules.ExportImport;component/images/ok_32.png"/>
                 <TextBlock TextWrapping="NoWrap" Width="53.913" Margin="5,0,0,0" Text="Importeer" VerticalAlignment="Center"/>
             </StackPanel>
         </Button>
         <Button Margin="0,8,104,0" Grid.Row="3" HorizontalAlignment="Right" Width="100" Name="BtnAbort" Click="BtnAbortClick">
             <StackPanel Orientation="Horizontal" Width="85.333">
-                <Image Height="32" Width="32" Source="/ExportImport;component/images/cancel_32.png"/>
+                <Image Height="32" Width="32" Source="/Tmc.BusinessRules.ExportImport;component/images/cancel_32.png"/>
                 <TextBlock TextWrapping="NoWrap" Width="51.246" Margin="5,0,0,0" VerticalAlignment="Center"><Run Language="nl-be" Text="Annuleer"/></TextBlock>
             </StackPanel>
         </Button>
         <Button HorizontalAlignment="Right" Margin="0" Width="35" Height="35" Name="btnBrowse" VerticalAlignment="Center" Click="BtnBrowseClick">
-            <Image Height="28" Width="28" Source="/ExportImport;component/images/browse_32.png" VerticalAlignment="Center"/>
+            <Image Height="28" Width="28" Source="/Tmc.BusinessRules.ExportImport;component/images/browse_32.png" VerticalAlignment="Center"/>
         </Button>
 
     </Grid>

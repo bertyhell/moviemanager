@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public class StringSimilarity
     {
@@ -73,18 +73,18 @@ namespace MovieManager.Common
             // insertion
             for (int I = 0; I <= firstString.Length - 1; I++)
             {
-                for (int j = 0; j <= secondString.Length - 1; j++)
+                for (int J = 0; J <= secondString.Length - 1; J++)
                 {
-                    if (firstString[I] == secondString[j])
+                    if (firstString[I] == secondString[J])
                     {
-                        Matrix[I + 1, j + 1] = Matrix[I, j];
+                        Matrix[I + 1, J + 1] = Matrix[I, J];
                     }
                     else
                     {
-                        Matrix[I + 1, j + 1] = Math.Min(Matrix[I, j + 1] + 1, Matrix[I + 1, j] + 1);
+                        Matrix[I + 1, J + 1] = Math.Min(Matrix[I, J + 1] + 1, Matrix[I + 1, J] + 1);
                         //deletion or insertion
                         //substitution
-                        Matrix[I + 1, j + 1] = Math.Min(Matrix[I + 1, j + 1], Matrix[I, j] + 1);
+                        Matrix[I + 1, J + 1] = Math.Min(Matrix[I + 1, J + 1], Matrix[I, J] + 1);
                     }
                 }
             }

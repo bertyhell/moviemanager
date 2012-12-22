@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     [Serializable]
     [XmlType(TypeName = "Pair")]

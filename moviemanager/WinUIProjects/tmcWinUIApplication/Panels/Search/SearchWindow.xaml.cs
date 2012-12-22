@@ -5,7 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using Model;
 using Model.Interfaces;
-using MovieManager.WEB.Search;
+using Tmc.BusinessRules.Web.Search;
+using Tmc.WinUI.Application.Localization;
+using Tmc.WinUI.Application.Panels.Common;
 using Tmc.WinUI.Application.Panels.Search;
 
 namespace MovieManager.APP.Panels.Search
@@ -31,7 +33,7 @@ namespace MovieManager.APP.Panels.Search
         {
             if (options.SearchForActors)
             {
-                List<Actor> SearchedActors = SearchTMDB.SearchActor(options.SearchTerm);
+                List<Actor> SearchedActors = SearchTmdb.SearchActor(options.SearchTerm);
                 if (SearchedActors.Count > 1)
                 {
                     ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = SearchedActors.ToList<IPreviewInfoRetriever>() };
@@ -45,7 +47,7 @@ namespace MovieManager.APP.Panels.Search
                 }
                 else
                 {
-                    MessageBox.Show(Localization.Resource.NoResultsFound, Localization.Resource.NoActorsWereFound,
+                    MessageBox.Show(Resource.NoResultsFound, Resource.NoActorsWereFound,
                                     MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
@@ -61,7 +63,7 @@ namespace MovieManager.APP.Panels.Search
                 }
                 catch
                 {
-                    List<Movie> Movies = SearchTMDB.GetVideoInfo(options.SearchTerm);
+                    List<Movie> Movies = SearchTmdb.GetVideoInfo(options.SearchTerm);
                     if(Movies.Count > 1)
                     {
                         ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = Movies.ToList<IPreviewInfoRetriever>() };
@@ -75,7 +77,7 @@ namespace MovieManager.APP.Panels.Search
                     }
                 }
                 if (Movie == null) return;
-                SearchTMDB.GetExtraMovieInfo(Movie);
+                SearchTmdb.GetExtraMovieInfo(Movie);
                 UpdateGuiForMovie(Movie);
             }
         }
@@ -83,7 +85,7 @@ namespace MovieManager.APP.Panels.Search
         private void SearchForActor(Actor actor)
         {
             ResetGrid();
-            SearchTMDB.GetActorInfo(actor);
+            SearchTmdb.GetActorInfo(actor);
 
             if (_overview == null)
             {

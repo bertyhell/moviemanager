@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace MovieManager.APP.Panels.RegularExpressions
+namespace Tmc.WinUI.Application.Panels.RegularExpressions
 {
     class EpisodeRegexEditorViewModel : INotifyPropertyChanged
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace MovieManager.APP.Panels.Settings
+namespace Tmc.WinUI.Application.Panels.Settings
 {
     /// <summary>
     /// Interaction logic for FileRenameSettingsPanelBase.xaml

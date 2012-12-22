@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using MovieManager.Common;
+using Tmc.SystemFrameworks.Common;
 
-namespace MovieManager.APP.Panels
+namespace Tmc.WinUI.Application.Panels
 {
     /// <summary>
     /// Interaction logic for RatingEditor.xaml

@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using MovieManager.APP.Panels.Search;
 
-namespace MovieManager.APP.Commands
+namespace Tmc.WinUI.Application.Commands
 {
     class SearchCommand : ICommand
     {

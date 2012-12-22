@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<RegExSettings>
-  <EpisodeRegExList>
-    <String>[Ss](\d{1,2})[Ee](\d{1,2})</String>
-    <String>[^a-zA-Z0-9](\d{1,2})(\d{2})[^a-zA-Z0-9]</String>
-  </EpisodeRegExList>
-</RegExSettings>

@@ -1,4 +1,4 @@
-﻿namespace ExportImport
+﻿namespace Tmc.BusinessRules.ExportImport
 {
     public class ExcelMappingItem
     {

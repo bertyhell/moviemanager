@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MovieManager.APP.Panels.Settings
+namespace Tmc.WinUI.Application.Panels.Settings
 {
     /// <summary>
     /// Interaction logic for FileRenameSettingsPanelBase.xaml
@@ -30,14 +30,14 @@ namespace MovieManager.APP.Panels.Settings
 
         private void LoadSettings()
         {
-            parameteredStringBuilderEpisode.ParameteredString = APP.Properties.Settings.Default.RenamingEpisodeFileSequence;
-            parameteredStringBuilderMovie.ParameteredString = APP.Properties.Settings.Default.RenamingMovieFileSequence;
+            parameteredStringBuilderEpisode.ParameteredString = Tmc.WinUI.Application.Properties.Settings.Default.RenamingEpisodeFileSequence;
+            parameteredStringBuilderMovie.ParameteredString = Tmc.WinUI.Application.Properties.Settings.Default.RenamingMovieFileSequence;
         }
 
         public override bool SaveSettings()
         {
-            APP.Properties.Settings.Default.RenamingMovieFileSequence = parameteredStringBuilderMovie.ParameteredString;
-            APP.Properties.Settings.Default.RenamingEpisodeFileSequence = parameteredStringBuilderEpisode.ParameteredString;
+            Tmc.WinUI.Application.Properties.Settings.Default.RenamingMovieFileSequence = parameteredStringBuilderMovie.ParameteredString;
+            Tmc.WinUI.Application.Properties.Settings.Default.RenamingEpisodeFileSequence = parameteredStringBuilderEpisode.ParameteredString;
             return true;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public class SimpleWebRequest
     {        /**
@@ -9,7 +9,7 @@ namespace MovieManager.Common
          * @param url
          * @return
          */
-        public static String DoJSONRequest(Uri url)
+        public static String DoJsonRequest(Uri url)
         {
 
             WebClient Client = new WebClient();

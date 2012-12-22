@@ -1,15 +1,9 @@
-﻿using System.IO;
-using Model;
+﻿using Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
-using MovieManager.PLAYER;
-using MovieManager.Common;
 using MovieManager.PLAYER.Logic;
 
-namespace MovieManager.APP.Commands
+namespace Tmc.WinUI.Application.Commands
 {
     class PlayVideoCommand :ICommand
     {

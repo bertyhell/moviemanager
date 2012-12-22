@@ -146,9 +146,9 @@ namespace Tmc.WinUI.Application.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("High")]
-        public global::MovieManager.Common.ImageQuality ImageQuality {
+        public global::Tmc.SystemFrameworks.Common.ImageQuality ImageQuality {
             get {
-                return ((global::MovieManager.Common.ImageQuality)(this["ImageQuality"]));
+                return ((global::Tmc.SystemFrameworks.Common.ImageQuality)(this["ImageQuality"]));
             }
             set {
                 this["ImageQuality"] = value;

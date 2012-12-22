@@ -5,8 +5,8 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Windows.Media;
-using MovieManager.APP.Properties;
-using MovieManager.Common;
+using Tmc.SystemFrameworks.Common;
+using Tmc.WinUI.Application.Properties;
 
 namespace Tmc.WinUI.Application.Cache
 {

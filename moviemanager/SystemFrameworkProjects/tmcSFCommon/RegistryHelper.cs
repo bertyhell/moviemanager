@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public static class RegistryHelper
     {
@@ -12,7 +8,7 @@ namespace MovieManager.Common
         {
             string RetVal = null;
             const string REGISTRY_KEY = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-            using (Microsoft.Win32.RegistryKey Key = Registry.LocalMachine.OpenSubKey(REGISTRY_KEY))
+            using (RegistryKey Key = Registry.LocalMachine.OpenSubKey(REGISTRY_KEY))
             {
                 if (Key != null)
                     foreach (string SubkeyName in Key.GetSubKeyNames())

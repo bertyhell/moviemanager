@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ExportImport
+namespace Tmc.BusinessRules.ExportImport
 {
 	public class ObjectMappingItem : INotifyPropertyChanged
 	{

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
+using Tmc.SystemFrameworks.Log.Properties;
 
 namespace Tmc.SystemFrameworks.Log.Model
 {
     class LogDatabase
     {
-        private static string _connectionString = @"data source=C:\ProgramData\MovieManager\Log\moviemanager_log.sqlite";
+        private const string CONNECTION_STRING = @"data source=C:\ProgramData\MovieManager\Log\moviemanager_log.sqlite";
         private static SQLiteConnection _conn;
 
         static LogDatabase()
@@ -18,17 +19,19 @@ namespace Tmc.SystemFrameworks.Log.Model
         {
             ObservableCollection<LoggingEntry> RetVal = new ObservableCollection<LoggingEntry>();
             DsLogging LoggingDataset = new DsLogging();
-            FillLoggingDataset(LoggingDataset);
-            foreach (DsLogging.LogRow LogRow in LoggingDataset.Log.Rows)
+            if (FillLoggingDataset(LoggingDataset))
             {
-                RetVal.Add(new LoggingEntry
-                               {
-                                   Id = LogRow.LogId,
-                                   Level = LogRow.Level,
-                                   Logger = LogRow.Logger,
-                                   Message =  LogRow.Message,
-                                   Timestamp = LogRow.Date
-                               });
+                foreach (DsLogging.LogRow LogRow in LoggingDataset.Log.Rows)
+                {
+                    RetVal.Add(new LoggingEntry
+                        {
+                            Id = LogRow.LogId,
+                            Level = LogRow.Level,
+                            Logger = LogRow.Logger,
+                            Message = LogRow.Message,
+                            Timestamp = LogRow.Date
+                        });
+                }
             }
             return RetVal;
         } 
@@ -72,14 +75,13 @@ namespace Tmc.SystemFrameworks.Log.Model
             return new SQLiteCommand(sql) { Connection = conn };
         }
 
-        private static SQLiteConnection GetConnection()
+        private static void GetConnection()
         {
             if (_conn == null)
             {
-                _conn = new SQLiteConnection(_connectionString);
+                _conn = new SQLiteConnection(CONNECTION_STRING);
                 _conn.Open();
             }
-            return _conn;
         }
 
         #endregion

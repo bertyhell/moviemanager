@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using Tmc.WinUI.Application;
 
-namespace MovieManager.APP.Commands
+namespace Tmc.WinUI.Application.Commands
 {
     class TogglePreviewMarginCommand : ICommand
     {

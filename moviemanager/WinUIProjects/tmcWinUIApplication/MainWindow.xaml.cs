@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls.Primitives;
-using System.Windows.Markup;
 using Model;
-using MovieManager.APP.Commands;
-using MovieManager.APP.Panels;
 using System.Windows.Data;
-using MovieManager.APP.Properties;
-using MovieManager.Common;
-using MovieManager.PLAYER;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
-using Tmc.WinUI.Application;
-using log4net.Core;
+using Tmc.WinUI.Application.Commands;
 using System.Windows.Controls;
 using System.Xml.Serialization;
 using System.Windows.Input;
+using Tmc.WinUI.Application.Panels;
+using Tmc.WinUI.Application.Properties;
 
-namespace MovieManager.APP
+namespace Tmc.WinUI.Application
 {
     //TODO 030 get date format from client pc
 

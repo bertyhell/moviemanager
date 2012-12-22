@@ -1,6 +1,6 @@
 using System;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public class ProgressEventArgs : EventArgs
     {

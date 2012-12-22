@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using MovieManager.Common;
-using MovieManager.Common.SettingsStorage;
+using Tmc.SystemFrameworks.Common;
+using Tmc.SystemFrameworks.Common.SettingsStorage;
 
 namespace Tmc.DataAccess.Sqlite.RegexSettings
 {

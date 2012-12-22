@@ -5,8 +5,8 @@ using System.Data;
 using System.Data.SqlServerCe;
 using Model;
 using System.Data.Common;
-using MovieManager.Common;
 using Tmc.DataAccess.Sqlite.DsVideosTableAdapters;
+using Tmc.SystemFrameworks.Common;
 
 namespace Tmc.DataAccess.Sqlite
 {

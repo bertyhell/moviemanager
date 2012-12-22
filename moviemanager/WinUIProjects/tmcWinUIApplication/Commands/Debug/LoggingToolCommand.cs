@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Tmc.SystemFrameworks.Log;
 
-namespace MovieManager.APP.Commands.Debug
+namespace Tmc.WinUI.Application.Commands.Debug
 {
     class LoggingToolCommand : ICommand
     {

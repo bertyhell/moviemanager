@@ -6,8 +6,8 @@ using System.Linq;
 using Model;
 using System.IO;
 using System.Text.RegularExpressions;
-using MovieManager.Common;
 using Tmc.DataAccess.Sqlite.RegexSettings;
+using Tmc.SystemFrameworks.Common;
 
 namespace Tmc.DataAccess.Sqlite
 {

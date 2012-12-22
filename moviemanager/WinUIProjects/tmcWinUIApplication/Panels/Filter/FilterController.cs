@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Tmc.DataAccess.Sqlite;
 
-namespace MovieManager.APP.Panels.Filter
+namespace Tmc.WinUI.Application.Panels.Filter
 {
 
     public enum Filters

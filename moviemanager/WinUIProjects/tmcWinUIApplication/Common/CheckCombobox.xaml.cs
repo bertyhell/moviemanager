@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Tmc.WinUI.Application;
 
-namespace MovieManager.APP.Common
+namespace Tmc.WinUI.Application.Common
 {
     /// <summary>
     /// Interaction logic for CheckCombobox.xaml

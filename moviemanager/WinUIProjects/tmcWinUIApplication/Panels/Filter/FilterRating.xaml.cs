@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using Model;
-using Tmc.WinUI.Application;
 
-namespace MovieManager.APP.Panels.Filter
+namespace Tmc.WinUI.Application.Panels.Filter
 {
     /// <summary>
     /// Interaction logic for FilterRating.xaml

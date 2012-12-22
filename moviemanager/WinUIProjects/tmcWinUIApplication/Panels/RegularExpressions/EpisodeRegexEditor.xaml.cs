@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Tmc.DataAccess.Sqlite.RegexSettings;
 
-namespace MovieManager.APP.Panels.RegularExpressions
+namespace Tmc.WinUI.Application.Panels.RegularExpressions
 {
     /// <summary>
     /// Interaction logic for EpisodeRegexEditor.xaml

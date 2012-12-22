@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using MovieManager.Common;
 using System.Xml.Serialization;
 using System.Collections;
 using System.ComponentModel;
+using Tmc.SystemFrameworks.Common;
 
 namespace MovieManager.PLAYER.Logic
 {

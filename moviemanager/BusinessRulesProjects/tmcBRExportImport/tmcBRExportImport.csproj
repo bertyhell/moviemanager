@@ -8,8 +8,8 @@
     <ProjectGuid>{948401DF-F23E-47C2-B524-8B7AA5B95A56}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExportImport</RootNamespace>
-    <AssemblyName>ExportImport</AssemblyName>
+    <RootNamespace>Tmc.BusinessRules.ExportImport</RootNamespace>
+    <AssemblyName>Tmc.BusinessRules.ExportImport</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

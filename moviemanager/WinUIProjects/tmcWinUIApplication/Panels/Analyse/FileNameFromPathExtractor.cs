@@ -2,9 +2,8 @@
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
-using Model;
 
-namespace MovieManager.APP.Panels.Analyse
+namespace Tmc.WinUI.Application.Panels.Analyse
 {
     class FileNameFromPathExtractor : IValueConverter
     {

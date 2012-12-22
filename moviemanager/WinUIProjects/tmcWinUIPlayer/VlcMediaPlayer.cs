@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using MovieManager.PLAYER.enums;
 using MovieManager.PLAYER.interop;
 using System.Windows.Forms;
@@ -13,16 +12,12 @@ namespace MovieManager.PLAYER
         internal IntPtr Handle;
 
         #endregion
-
-        private VlcMedia _media;
-
+        
         public VlcMediaPlayer(VlcMedia media, Panel panel)
         {
             VlcLibInterop.InitializeMediaPlayer(this, media);
             VlcLibInterop.SetDisplayPanelForPlayer(this, panel);
-            _media = media;
         }
-
 
         public VlcMedia Media
         {

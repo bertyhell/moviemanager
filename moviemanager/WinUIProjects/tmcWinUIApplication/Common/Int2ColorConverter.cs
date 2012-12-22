@@ -1,12 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Tmc.WinUI.Application.Common;
 
-namespace MovieManager.APP.Common
+namespace Tmc.WinUI.Application.Common
 {
     class Int2ColorConverter : IValueConverter
     {

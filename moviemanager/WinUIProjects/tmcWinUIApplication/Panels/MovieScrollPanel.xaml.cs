@@ -2,14 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using Model;
-using MovieManager.APP.Panels.Search;
-using MovieManager.Common;
+using Tmc.SystemFrameworks.Common;
+using Tmc.WinUI.Application.Panels.Search;
 using SearchOptions = Tmc.WinUI.Application.Panels.Search.SearchOptions;
 
-namespace MovieManager.APP.Panels
+namespace Tmc.WinUI.Application.Panels
 {
-
-
     public delegate void ClickedOnSearch(SearchEventArgs e);
 
     /// <summary>

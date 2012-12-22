@@ -2,10 +2,9 @@
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace MovieManager.APP.Common
+namespace Tmc.WinUI.Application.Common
 {
     /// <summary>
     /// Interaction logic for NumericBox.xaml

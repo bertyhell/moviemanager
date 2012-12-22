@@ -1,9 +1,7 @@
-﻿using ExportImport;
+﻿using System.Windows;
 
-namespace ExcelInterop
+namespace Tmc.BusinessRules.ExportImport
 {
-    using System.Windows;
-
     public partial class ExcelImportWindow
     {
 

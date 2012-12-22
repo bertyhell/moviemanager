@@ -1,4 +1,4 @@
-﻿namespace MovieManager.Common
+﻿namespace Tmc.SystemFrameworks.Common
 {
     public class TimestampUtilities
     {

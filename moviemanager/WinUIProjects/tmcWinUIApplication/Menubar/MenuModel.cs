@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using MovieManager.APP.Commands;
-using MovieManager.APP.Commands.Debug;
 using Tmc.WinUI.Application.Commands;
+using Tmc.WinUI.Application.Commands.Debug;
 
 namespace Tmc.WinUI.Application.Menubar
 {

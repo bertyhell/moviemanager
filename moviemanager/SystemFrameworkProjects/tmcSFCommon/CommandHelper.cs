@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Diagnostics;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public static class CommandHelper
     {

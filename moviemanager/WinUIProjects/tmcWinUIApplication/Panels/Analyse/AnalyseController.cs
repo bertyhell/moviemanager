@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Model;
-using MovieManager.APP.Common;
-using MovieManager.APP.Panels.Analyse;
-using MovieManager.Common;
 using Tmc.DataAccess.Sqlite;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 using Tmc.WinUI.Application.Cache;
+using Tmc.WinUI.Application.Common;
 
 namespace Tmc.WinUI.Application.Panels.Analyse
 {

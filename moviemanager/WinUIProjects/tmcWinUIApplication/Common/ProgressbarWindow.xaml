@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Tmc.WinUI.Application.Common.ProgressbarWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="89" Width="457" xmlns:my="clr-namespace:MovieManager.APP.Common"
+        Height="89" Width="457"
         xmlns:common="clr-namespace:Tmc.WinUI.Application.Common" WindowStartupLocation="CenterOwner" WindowStyle="None" ShowInTaskbar="False" AllowsTransparency="True" Background="{x:Null}">
     <Grid>
         <common:ProgressBarControl HorizontalAlignment="Stretch" x:Name="progressBarControl1" VerticalAlignment="Stretch" />

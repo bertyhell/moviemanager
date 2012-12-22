@@ -3,10 +3,10 @@ using System.Linq;
 using System.Web;
 using System.Xml.Linq;
 using Model;
-using MovieManager.Common;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 
-namespace MovieManager.WEB.Search
+namespace Tmc.BusinessRules.Web.Search
 {
     public class SearchImdb
     {
@@ -31,10 +31,10 @@ namespace MovieManager.WEB.Search
                 {
                     Console.WriteLine(Response);
 
-                    XDocument XMLDoc = XDocument.Parse(Response);
+                    XDocument XmlDoc = XDocument.Parse(Response);
 
                     //get elements from xml
-                    var LocalMovies = from Mov in XMLDoc.Descendants("movie")
+                    var LocalMovies = from Mov in XmlDoc.Descendants("movie")
                                       let XAttribute = Mov.Attribute("rating")
                                       where XAttribute != null
                                       let Attribute = Mov.Attribute("released")

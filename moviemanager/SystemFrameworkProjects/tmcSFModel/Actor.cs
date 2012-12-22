@@ -22,10 +22,7 @@ namespace Model
                 {
                     return Images[0];
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
             set
             {
@@ -48,10 +45,7 @@ namespace Model
                 {
                     return Images[0];
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
             set
             {

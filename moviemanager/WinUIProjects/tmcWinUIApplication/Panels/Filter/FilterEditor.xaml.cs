@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using Model;
-using Tmc.WinUI.Application;
 
-namespace MovieManager.APP.Panels.Filter
+namespace Tmc.WinUI.Application.Panels.Filter
 {
     /// <summary>
     /// Interaction logic for FilterEditor.xaml
