@@ -1,12 +1,14 @@
-﻿<settings:SettingsPanelBase x:Class="MovieManager.APP.Panels.Settings.VideoSearchPanel"
+﻿<settings2:SettingsPanelBase x:Class="Tmc.WinUI.Application.Panels.Settings.VideoSearchPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MovieManager.APP.Localization"
-             xmlns:settings="clr-namespace:MovieManager.APP.Panels.Settings"
+             xmlns:local="clr-namespace:Tmc.WinUI.Application.Localization"
+             xmlns:settings="clr-namespace:Tmc.WinUI.Application.Panels.Settings"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" xmlns:my="clr-namespace:MovieManager.APP.Common" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             d:DesignHeight="300" d:DesignWidth="300"
+                             xmlns:settings2="clr-namespace:Tmc.WinUI.Application.Panels.Settings"
+                            DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="136*" />
@@ -25,4 +27,4 @@
             <ComboBoxItem>GB</ComboBoxItem>
         </ComboBox>
     </Grid>
-</settings:SettingsPanelBase>
+</settings2:SettingsPanelBase>

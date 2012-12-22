@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using ExportImport;
 using Model;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 
-namespace ExcelInterop
+namespace Tmc.BusinessRules.ExportImport
 {
     public class Excel
     {

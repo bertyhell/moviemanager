@@ -4,11 +4,6 @@ namespace Tmc.SystemFrameworks.Log.Model
 {
     public class LoggingEntry
     {
-        public LoggingEntry()
-        {
-            
-        }
-
         private long _id;
         public long Id
         {

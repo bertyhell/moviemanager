@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public class ImageFactory
     {
@@ -33,7 +33,7 @@ namespace MovieManager.Common
             return ImageSource;
         }
 
-        public static void SaveImageToHDD(string url, string pathOnHdd)
+        public static void SaveImageToHdd(string url, string pathOnHdd)
         {
             WebClient Client = new WebClient();
             Client.DownloadFile(url,pathOnHdd);

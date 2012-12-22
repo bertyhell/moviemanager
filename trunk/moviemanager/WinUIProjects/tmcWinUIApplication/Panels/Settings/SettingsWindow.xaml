@@ -1,15 +1,15 @@
-﻿<Window x:Class="MovieManager.APP.Panels.Settings.SettingsWindow"
+﻿<Window x:Class="Tmc.WinUI.Application.Panels.Settings.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:MovieManager.APP.Localization"
-        xmlns:Settings="clr-namespace:MovieManager.APP.Panels.Settings"
+        xmlns:Settings="clr-namespace:Tmc.WinUI.Application.Panels.Settings"
         Title="SettingsWindow" Height="600" Width="573"
         xmlns:extToolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+        xmlns:localization="clr-namespace:Tmc.WinUI.Application.Localization"
         WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
     <Grid Margin="10">
 
         <Grid.Resources>
-            <local:Resource x:Key="LocStrings"/>
+            <localization:Resource x:Key="LocStrings"/>
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows;
-using Tmc.WinUI.Application.Panels.Search;
 
-namespace MovieManager.APP.Panels.Search
+namespace Tmc.WinUI.Application.Panels.Search
 {
 
     public class SearchEventArgs : EventArgs

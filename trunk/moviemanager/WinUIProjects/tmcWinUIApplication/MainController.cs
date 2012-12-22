@@ -5,15 +5,13 @@ using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using Model;
-using MovieManager.APP;
-using MovieManager.APP.Commands;
-using MovieManager.APP.Panels.Settings;
-using MovieManager.APP.Properties;
-using MovieManager.Common;
 using System.ComponentModel;
-using MovieManager.APP.Panels.Filter;
 using Tmc.DataAccess.Sqlite;
+using Tmc.SystemFrameworks.Common;
 using Tmc.WinUI.Application.Commands;
+using Tmc.WinUI.Application.Panels.Filter;
+using Tmc.WinUI.Application.Panels.Settings;
+using Tmc.WinUI.Application.Properties;
 
 namespace Tmc.WinUI.Application
 {

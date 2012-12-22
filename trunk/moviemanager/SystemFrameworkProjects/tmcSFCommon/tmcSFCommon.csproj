@@ -8,8 +8,8 @@
     <ProjectGuid>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovieManager.Common</RootNamespace>
-    <AssemblyName>MovieManager.Common</AssemblyName>
+    <RootNamespace>Tmc.SystemFrameworks.Common</RootNamespace>
+    <AssemblyName>Tmc.SystemFrameworks.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

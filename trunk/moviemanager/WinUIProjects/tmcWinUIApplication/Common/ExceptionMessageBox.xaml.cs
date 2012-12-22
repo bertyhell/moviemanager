@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Reflection;
 
-namespace APP
+namespace Tmc.WinUI.Application.Common
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml

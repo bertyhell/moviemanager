@@ -1,19 +1,18 @@
 ﻿using System.IO;
 using System.Windows;
-using MovieManager.APP.Commands;
 using Model;
 using System.ComponentModel;
 using Tmc.DataAccess.Sqlite;
 using Tmc.WinUI.Application.Commands;
 
-namespace MovieManager.APP.Panels.Settings
+namespace Tmc.WinUI.Application.Panels.Settings
 {
     /// <summary>
     /// Interaction logic for DatabaseSettingsPanel.xaml
     /// </summary>
     public partial class DatabaseSettingsPanel : INotifyPropertyChanged
     {
-        private SelectDatabaseFileCommand _fileCommand = new SelectDatabaseFileCommand();
+        private readonly SelectDatabaseFileCommand _fileCommand = new SelectDatabaseFileCommand();
         private DatabaseDetails _databaseDetails;
         private string _pathToDatabase;
 
@@ -26,7 +25,7 @@ namespace MovieManager.APP.Panels.Settings
             _iconPath = "/MovieManager;component/Images/database_32.png";
 
             this.DataContext = this;
-            _pathToDatabase = APP.Properties.Settings.Default.DatabasePath;
+            _pathToDatabase = Tmc.WinUI.Application.Properties.Settings.Default.DatabasePath;
 
             InitDatabaseVersionControl();
 
@@ -70,7 +69,7 @@ namespace MovieManager.APP.Panels.Settings
         {
             if (File.Exists(_pathToDatabase))
             {
-                TmcDatabaseCreation.Init(APP.Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
+                TmcDatabaseCreation.Init(Tmc.WinUI.Application.Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
                 DatabaseDetails = TmcDatabaseCreation.GetDatabaseDetails();
             }
             else
@@ -81,7 +80,7 @@ namespace MovieManager.APP.Panels.Settings
 
         public override bool SaveSettings()
         {
-            APP.Properties.Settings.Default.DatabasePath = _pathToDatabase;
+            Tmc.WinUI.Application.Properties.Settings.Default.DatabasePath = _pathToDatabase;
             return base.SaveSettings();
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public class DefaultValues
     {

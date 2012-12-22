@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using Model;
-using MovieManager.APP.Common;
-using MovieManager.Common;
-using Tmc.WinUI.Application;
+using Tmc.SystemFrameworks.Common;
 
-namespace MovieManager.APP.Panels.Filter
+namespace Tmc.WinUI.Application.Panels.Filter
 {
     /// <summary>
     /// Interaction logic for FilterText.xaml

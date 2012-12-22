@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using MovieManager.Common;
 using MovieManager.PLAYER.Logic;
 
-namespace MovieManager.APP.Panels.Settings
+namespace Tmc.WinUI.Application.Panels.Settings.MediaPlayer
 {
     public class MediaPlayerSettingsViewModel : INotifyPropertyChanged
     {

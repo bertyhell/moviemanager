@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Model.Interfaces;
 
-namespace MovieManager.APP.Panels.Common
+namespace Tmc.WinUI.Application.Panels.Common
 {
     /// <summary>
     /// Interaction logic for PreviewItem.xaml

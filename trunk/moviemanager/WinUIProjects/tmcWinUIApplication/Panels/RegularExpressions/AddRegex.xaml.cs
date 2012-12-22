@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MovieManager.APP.Panels.RegularExpressions
+namespace Tmc.WinUI.Application.Panels.RegularExpressions
 {
     /// <summary>
     /// Interaction logic for AddRegex.xaml

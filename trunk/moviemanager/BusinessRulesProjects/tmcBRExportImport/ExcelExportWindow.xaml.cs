@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ExportImport
+namespace Tmc.BusinessRules.ExportImport
 {
     public partial class ExcelExportWindow
     {

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 using Model;
 using Tmc.DataAccess.Sqlite;
 
-namespace MovieManager.APP.Commands
+namespace Tmc.WinUI.Application.Commands
 {
     class UpdateVideosCommand : ICommand
     {
-        private List<Video> _video;
+        private readonly List<Video> _video;
 
         public UpdateVideosCommand(List<Video> video)
         {

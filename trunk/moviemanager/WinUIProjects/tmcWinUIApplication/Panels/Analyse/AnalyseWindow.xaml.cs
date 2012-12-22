@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MovieManager.APP.Panels.Analyse;
 
 namespace Tmc.WinUI.Application.Panels.Analyse
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 
-namespace MovieManager.Common.SettingsStorage
+namespace Tmc.SystemFrameworks.Common.SettingsStorage
 {
     public class SettingsSaver
     {

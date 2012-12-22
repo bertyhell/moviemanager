@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using MovieManager.APP;
 using Tmc.WinUI.Application.Panels.Analyse;
 
 namespace Tmc.WinUI.Application.Commands

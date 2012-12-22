@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 
-namespace MovieManager.APP.Panels.Settings
+namespace Tmc.WinUI.Application.Panels.Settings
 {
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
@@ -48,7 +48,7 @@ namespace MovieManager.APP.Panels.Settings
             {
                 SettingsPanel.SaveSettings();
             }
-            APP.Properties.Settings.Default.Save();
+            Tmc.WinUI.Application.Properties.Settings.Default.Save();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

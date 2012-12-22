@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace MovieManager.Common.SettingsStorage
+namespace Tmc.SystemFrameworks.Common.SettingsStorage
 {
     public sealed class CustomSettingsProvider : SettingsProvider
     {
@@ -28,9 +24,6 @@ namespace MovieManager.Common.SettingsStorage
         private ClientSettingsSection _appSettingsSection;
         private string _fullSettingsName; // for example: MovieManager.APP.Properties.Settings
 
-        public CustomSettingsProvider()
-        { }
-
         public override string ApplicationName
         {
             get
@@ -46,17 +39,17 @@ namespace MovieManager.Common.SettingsStorage
         /// <summary>
         /// Initializes the class
         /// </summary>
-        public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
+        public override void Initialize(string name, NameValueCollection config)
         {
             //call base method
             NameValueCollection SettingValues = new NameValueCollection();
-            base.Initialize(this.ApplicationName, SettingValues);
+            base.Initialize(ApplicationName, SettingValues);
 
             //Set new setting file paths in appdata and programdata
             _userSettingsPath = Path.Combine(DefaultValues.PATH_USER_APPDATA, DefaultValues.PATH_APPLICATION_SUBDIR, DefaultValues.PATH_SETTINGS_SUBDIR,
-                                 this.ApplicationName + ".Settings.config");
+                                 ApplicationName + ".Settings.config");
             _appSettingsPath = Path.Combine(DefaultValues.PATH_PROGRAM_DATA, DefaultValues.PATH_APPLICATION_SUBDIR, DefaultValues.PATH_SETTINGS_SUBDIR,
-                                 this.ApplicationName + ".exe.config");
+                                 ApplicationName + ".exe.config");
 
         }
 
@@ -69,9 +62,11 @@ namespace MovieManager.Common.SettingsStorage
             // Get Application specific settings --> load application settings section
             //
 
-            ExeConfigurationFileMap ExeConfigurationFileMap = new ExeConfigurationFileMap();
-            ExeConfigurationFileMap.MachineConfigFilename = _machineSettingsPath;
-            ExeConfigurationFileMap.ExeConfigFilename = _appSettingsPath;
+            ExeConfigurationFileMap ExeConfigurationFileMap = new ExeConfigurationFileMap
+                {
+                    MachineConfigFilename = _machineSettingsPath,
+                    ExeConfigFilename = _appSettingsPath
+                };
             _exeConfig = ConfigurationManager.OpenMappedExeConfiguration(ExeConfigurationFileMap, ConfigurationUserLevel.None);
 
             ApplicationSettingsGroup AppSettingsGroup = (ApplicationSettingsGroup)_exeConfig.SectionGroups["applicationSettings"];
@@ -96,11 +91,13 @@ namespace MovieManager.Common.SettingsStorage
             //  Get user specific user settings --> load user settings section
             //
 
-            ExeConfigurationFileMap UserSettingsFileMap = new ExeConfigurationFileMap();
-            UserSettingsFileMap.MachineConfigFilename = _machineSettingsPath;
-            UserSettingsFileMap.ExeConfigFilename = _appSettingsPath;
-            UserSettingsFileMap.RoamingUserConfigFilename = _userSettingsPath;
-            UserSettingsFileMap.LocalUserConfigFilename = _userSettingsPath;
+            ExeConfigurationFileMap UserSettingsFileMap = new ExeConfigurationFileMap
+                {
+                    MachineConfigFilename = _machineSettingsPath,
+                    ExeConfigFilename = _appSettingsPath,
+                    RoamingUserConfigFilename = _userSettingsPath,
+                    LocalUserConfigFilename = _userSettingsPath
+                };
             _userConfig = ConfigurationManager.OpenMappedExeConfiguration(UserSettingsFileMap, ConfigurationUserLevel.PerUserRoamingAndLocal);
 
             UserSettingsGroup UsrSettingsGroup = (UserSettingsGroup)_userConfig.SectionGroups["userSettings"];
@@ -130,7 +127,7 @@ namespace MovieManager.Common.SettingsStorage
         public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection collection)
         {
             //Get machine config file location and full settings name --> e.g. MovieManager.APP.Properties.Settings
-            System.Type SettingsType = (Type)context["SettingsClassType"];
+            Type SettingsType = (Type)context["SettingsClassType"];
             if (string.IsNullOrWhiteSpace(_machineSettingsPath))
                 _machineSettingsPath = SettingsType.Assembly.Location + ".config";
             if (string.IsNullOrWhiteSpace(_fullSettingsName))
@@ -206,10 +203,7 @@ namespace MovieManager.Common.SettingsStorage
             else
             {
                 ConnectionStringSettings ConnStr = _exeConfig.ConnectionStrings.ConnectionStrings[_fullSettingsName + "." + setting.Name];
-                if (ConnStr != null)
-                    settingsPropertyValue.SerializedValue = ConnStr.ConnectionString;
-                else
-                    settingsPropertyValue.SerializedValue = null;
+                settingsPropertyValue.SerializedValue = ( ConnStr != null ? ConnStr.ConnectionString : null );
             }
         }
 
@@ -223,9 +217,7 @@ namespace MovieManager.Common.SettingsStorage
             {
                 //Deserialize value
                 string Value = settingElement.Value.ValueXml.InnerXml.Trim();
-                if (!string.IsNullOrEmpty(Value))
-                    propertyValue.PropertyValue = Serializer.Deserialize(new StringReader(Value));
-                else propertyValue.PropertyValue = null;
+                propertyValue.PropertyValue = !string.IsNullOrEmpty(Value) ? Serializer.Deserialize(new StringReader(Value)) : null;
             }
             else
             {
@@ -281,7 +273,7 @@ namespace MovieManager.Common.SettingsStorage
                 SetValue(UserSetting, value);
                 _usrSettingsSection.SectionInformation.ForceSave = true;
             }
-                //connectionstring
+            //connectionstring
             else
             {
                 ConnectionStringSettings ConnStr = _exeConfig.ConnectionStrings.ConnectionStrings[_fullSettingsName + "." + value.Name];
@@ -301,7 +293,6 @@ namespace MovieManager.Common.SettingsStorage
                     }
 
                 }
-                return;
             }
         }
 
@@ -319,7 +310,7 @@ namespace MovieManager.Common.SettingsStorage
             if (PropValue != null)
             {
                 XmlSerializer Serializer = new XmlSerializer(PropValue.GetType());
-                String SerializedValue = null;
+                String SerializedValue;
                 using (StringWriter StringWriter = new StringWriter())
                 {
                     XmlWriterSettings Settings = new XmlWriterSettings

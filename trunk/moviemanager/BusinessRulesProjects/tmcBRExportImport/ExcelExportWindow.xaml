@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
-	x:Class="ExportImport.ExcelExportWindow"
+	x:Class="Tmc.BusinessRules.ExportImport.ExcelExportWindow"
 	Title="Exporteer naar excel"
 	Width="460" Height="480" Icon="/ExportImport;component/images/excel_export_32.png">
 

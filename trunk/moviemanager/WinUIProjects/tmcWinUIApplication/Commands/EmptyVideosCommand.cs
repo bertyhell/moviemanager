@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using Tmc.DataAccess.Sqlite;
 
-namespace MovieManager.APP.Commands
+namespace Tmc.WinUI.Application.Commands
 {
     class EmptyVideosCommand : ICommand
     {

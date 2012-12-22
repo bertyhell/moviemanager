@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Model;
 
-namespace MovieManager.APP.Panels.Filter
+namespace Tmc.WinUI.Application.Panels.Filter
 {
     public class FilterControl : UserControl
     {

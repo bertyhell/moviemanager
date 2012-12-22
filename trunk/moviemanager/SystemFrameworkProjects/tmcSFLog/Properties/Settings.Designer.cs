@@ -32,5 +32,15 @@ namespace Tmc.SystemFrameworks.Log.Properties {
                 return ((string)(this["moviemanager_logConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=C:\\ProgramData\\TheMovieCollector\\Log\\Tmc_log.sdf")]
+        public string Tmc_logConnectionString {
+            get {
+                return ((string)(this["Tmc_logConnectionString"]));
+            }
+        }
     }
 }

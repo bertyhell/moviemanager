@@ -1,14 +1,11 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
-using APP;
-using MovieManager.APP.Properties;
 using Tmc.SystemFrameworks.Log;
-using log4net.Core;
+using Tmc.WinUI.Application.Properties;
 
-namespace MovieManager.APP
+namespace Tmc.WinUI.Application
 {
     /// <summary>
     /// Interaction logic for App.xaml

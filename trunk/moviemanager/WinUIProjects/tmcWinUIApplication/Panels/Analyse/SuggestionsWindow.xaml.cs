@@ -2,7 +2,7 @@
 using System.Windows;
 using Model;
 
-namespace MovieManager.APP.Panels.Analyse
+namespace Tmc.WinUI.Application.Panels.Analyse
 {
     //TODO 005 make controller and move logic code
 

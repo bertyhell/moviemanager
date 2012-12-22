@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using MovieManager.APP.Panels.RegularExpressions;
+using Tmc.WinUI.Application.Panels.RegularExpressions;
 
 namespace Tmc.WinUI.Application.Commands
 {

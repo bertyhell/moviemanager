@@ -3,12 +3,11 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.IO;
 using System.Configuration;
-using MovieManager.APP;
-using MovieManager.APP.Common;
-using MovieManager.Common;
 using Ookii.Dialogs.Wpf;
 using Tmc.DataAccess.Sqlite;
+using Tmc.SystemFrameworks.Common;
 using Tmc.WinUI.Application.Common;
+using Tmc.WinUI.Application.Localization;
 
 namespace Tmc.WinUI.Application.Commands
 {

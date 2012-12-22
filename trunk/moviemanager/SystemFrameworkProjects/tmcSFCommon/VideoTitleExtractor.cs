@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MovieManager.Common
+namespace Tmc.SystemFrameworks.Common
 {
     public enum SearchOptions
     {

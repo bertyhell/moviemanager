@@ -5,9 +5,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using Model;
+using Tmc.WinUI.Application.Localization;
 using MessageBox = System.Windows.MessageBox;
 
-namespace MovieManager.APP.Panels
+namespace Tmc.WinUI.Application.Panels
 {
     /// <summary>
     /// Interaction logic for SubtitleEditor.xaml
@@ -52,7 +53,7 @@ namespace MovieManager.APP.Panels
                         Video.Subs.Add(new Subtitle { Path = File });
                     else
                     {
-                        MessageBox.Show(Localization.Resource.SubtitleAlreadyInMovie, Localization.Resource.Error,
+                        MessageBox.Show(Resource.SubtitleAlreadyInMovie, Resource.Error,
                                         MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }

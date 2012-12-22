@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Timers;
 using System.Windows.Forms;
 using MovieManager.PLAYER.Common;
 using Timer = System.Windows.Forms.Timer;
@@ -10,7 +9,7 @@ namespace MovieManager.PLAYER
     {
         private readonly MMPlayer _parent;
         private MediaPlayerControl _controlBar;
-        private Timer aTimer;
+        private readonly Timer aTimer;
 
         public Overlay(MMPlayer parent)
         {

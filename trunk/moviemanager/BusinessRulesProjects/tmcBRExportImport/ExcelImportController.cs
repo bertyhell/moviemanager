@@ -1,16 +1,15 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using ExcelInterop;
 using Model;
-using MovieManager.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Tmc.DataAccess.Sqlite;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 
-namespace ExportImport
+namespace Tmc.BusinessRules.ExportImport
 {
     public class ExcelImportController : INotifyPropertyChanged
     {

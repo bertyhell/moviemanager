@@ -8,9 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Point = System.Windows.Point;
 
-namespace MovieManager.APP.Common
+namespace Tmc.WinUI.Application.Common
 {
     /// <summary>
     /// Interaction logic for ParameteredStringBuilder.xaml

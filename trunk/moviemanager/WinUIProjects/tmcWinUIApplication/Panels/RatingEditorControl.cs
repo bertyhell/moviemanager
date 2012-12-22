@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MovieManager.APP.Panels
+namespace Tmc.WinUI.Application.Panels
 {
     /// <summary>
     /// Interaction logic for RatingEditorControl.xaml

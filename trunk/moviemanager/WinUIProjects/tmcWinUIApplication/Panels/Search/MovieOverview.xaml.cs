@@ -1,6 +1,6 @@
 ﻿using Model;
 
-namespace MovieManager.APP.Panels.Search
+namespace Tmc.WinUI.Application.Panels.Search
 {
     /// <summary>
     /// Interaction logic for ActorOverview.xaml

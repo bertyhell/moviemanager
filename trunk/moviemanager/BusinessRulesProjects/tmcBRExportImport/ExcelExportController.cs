@@ -5,11 +5,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using ExcelInterop;
 using Model;
 using Tmc.DataAccess.Sqlite;
 
-namespace ExportImport
+namespace Tmc.BusinessRules.ExportImport
 {
     public class ExcelExportController : INotifyPropertyChanged
     {

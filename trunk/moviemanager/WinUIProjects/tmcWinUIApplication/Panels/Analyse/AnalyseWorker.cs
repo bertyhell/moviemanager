@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using Bing;
 using Model;
-using MovieManager.Common;
-using MovieManager.WEB.Search;
+using Tmc.BusinessRules.Web.Search;
+using Tmc.SystemFrameworks.Common;
 
-namespace MovieManager.APP.Panels.Analyse
+namespace Tmc.WinUI.Application.Panels.Analyse
 {
     class AnalyseWorker : BackgroundWorker
     {
@@ -172,7 +172,7 @@ namespace MovieManager.APP.Panels.Analyse
             var Candidates = new SortedSet<Video>(new SimilarityComparer()); //sort candidates by their match score with the original filename and foldername
             foreach (string TitleGuess in analyseVideo.TitleGuesses) //all title guesses
             {
-                foreach (var VideoInfo in SearchTMDB.GetVideoInfo(TitleGuess)) //get multiple results for each guess
+                foreach (var VideoInfo in SearchTmdb.GetVideoInfo(TitleGuess)) //get multiple results for each guess
                 {
                     //add pairs of similarity and videoInfo to the list
                     //similarity == max of similarity between to the original guesses for filename and foldername and the videoinfo name from the webservice

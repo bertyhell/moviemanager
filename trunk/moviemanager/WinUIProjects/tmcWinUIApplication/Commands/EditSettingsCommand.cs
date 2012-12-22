@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using MovieManager.APP;
 using MovieManager.APP.Panels.Settings;
+using Tmc.WinUI.Application.Panels.Settings;
 
 namespace Tmc.WinUI.Application.Commands
 {
     class EditSettingsCommand : ICommand
     {
         private SettingsWindow _settingsWindow;
-        private List<SettingsPanelBase> _panels;
+        private readonly List<SettingsPanelBase> _panels;
         public EditSettingsCommand()
         {
             _panels = new List<SettingsPanelBase>{

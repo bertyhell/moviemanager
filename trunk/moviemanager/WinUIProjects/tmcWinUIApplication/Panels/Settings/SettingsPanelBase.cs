@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using Tmc.SystemFrameworks.Log;
 
-namespace MovieManager.APP.Panels.Settings
+namespace Tmc.WinUI.Application.Panels.Settings
 {
     public class SettingsPanelBase : UserControl
     {

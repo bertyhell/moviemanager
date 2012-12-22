@@ -8,8 +8,8 @@
     <ProjectGuid>{5E7E4873-8C9D-4BA8-A936-784387E2379F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovieManager.WEB</RootNamespace>
-    <AssemblyName>MovieManager.WEB</AssemblyName>
+    <RootNamespace>Tmc.BusinessRules.Web</RootNamespace>
+    <AssemblyName>Tmc.BusinessRules.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

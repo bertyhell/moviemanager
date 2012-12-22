@@ -197,7 +197,7 @@ namespace Model
                 _path = value;
                 if (string.IsNullOrEmpty(_name))
                 {
-                    _name = _path.Substring(_path.LastIndexOf("/") + 1, _path.LastIndexOf("."));
+                    _name = _path.Substring(_path.LastIndexOf("/", StringComparison.Ordinal) + 1, _path.LastIndexOf(".", StringComparison.Ordinal));
                     OnPropertyChanged("Path");
                 }
             }

@@ -1,10 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using Model;
-using MovieManager.APP.Commands;
-using Tmc.WinUI.Application;
+using Tmc.WinUI.Application.Commands;
 
-namespace MovieManager.APP.Panels
+namespace Tmc.WinUI.Application.Panels
 {
     /// <summary>
     /// Interaction logic for VideoEditor.xaml

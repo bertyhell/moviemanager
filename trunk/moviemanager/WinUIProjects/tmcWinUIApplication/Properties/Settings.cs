@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
-using MovieManager.Common.SettingsStorage;
+using Tmc.SystemFrameworks.Common.SettingsStorage;
 
-namespace MovieManager.APP.Properties
+namespace Tmc.WinUI.Application.Properties
 {
     
     

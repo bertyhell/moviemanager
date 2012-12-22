@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Model
@@ -89,10 +88,7 @@ namespace Model
                 {
                     return null;
                 }
-                else
-                {
-                    return Candidates[SelectedCandidateIndex];
-                }
+                return Candidates[SelectedCandidateIndex];
             }
         }
 

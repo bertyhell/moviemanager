@@ -1,9 +1,9 @@
-﻿<local:FilterControl x:Class="MovieManager.APP.Panels.Filter.FilterDate"
+﻿<filter:FilterControl x:Class="Tmc.WinUI.Application.Panels.Filter.FilterDate"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:MovieManager.APP.Panels.Filter" mc:Ignorable="d" 
+                      xmlns:filter="clr-namespace:Tmc.WinUI.Application.Panels.Filter" mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="300" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,4 +24,4 @@
         <DatePicker Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" DisplayDate="{Binding FilterInputStart, UpdateSourceTrigger=PropertyChanged}"/>
         <DatePicker Grid.Row="1" Grid.Column="3" DisplayDate="{Binding FilterInputEnd}" Visibility="{Binding DisplaySecondDate, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
-</local:FilterControl>
+</filter:FilterControl>

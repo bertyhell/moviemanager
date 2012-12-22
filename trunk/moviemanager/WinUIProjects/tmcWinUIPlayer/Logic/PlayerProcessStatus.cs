@@ -3,17 +3,15 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using MovieManager.Common;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 
 namespace MovieManager.PLAYER.Logic
 {
     public static class PlayerProcesses
     {
-        private static object _statusLock = new object();
-        private static Dictionary<Process, Video> _playersStatuses;
+        private static readonly object _statusLock = new object();
+        private static readonly Dictionary<Process, Video> _playersStatuses;
 
         static PlayerProcesses()
         {
@@ -32,11 +30,9 @@ namespace MovieManager.PLAYER.Logic
                 }
                 else if (mediaPlayer == "VLC")
                 {
-
-                    Process Process;
                     try
                     {
-                        Process = CommandHelper.ExecuteCommandSync(Path.Combine(RegistryHelper.GetInstallationPath("VLC"), "vlc"), "\"" + video.Path + "\"");
+                        Process Process = CommandHelper.ExecuteCommandSync(Path.Combine(RegistryHelper.GetInstallationPath("VLC"), "vlc"), "\"" + video.Path + "\"");
                         _playersStatuses.Add(Process, video);
                         Process.Exited += Process_Exited;
                         Process.Disposed += Process_Exited;

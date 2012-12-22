@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Model
 {
     public class DatabaseDetails
     {
-
-        public DatabaseDetails()
-        {
-
-        }
-
         private int _databaseVersion;
         public int DatabaseVersion
         {
@@ -37,11 +29,6 @@ namespace Model
 
     public class DatabaseVersionRecord
     {
-        public DatabaseVersionRecord()
-        {
-
-        }
-
         private int _id;
         public int Id
         {

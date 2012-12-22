@@ -1,4 +1,4 @@
-﻿<Window x:Class="MovieManager.APP.Panels.RegularExpressions.EpisodeRegexEditor"
+﻿<Window x:Class="Tmc.WinUI.Application.Panels.RegularExpressions.EpisodeRegexEditor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="EpisodeRegexEditor" Height="auto" SizeToContent="WidthAndHeight" ResizeMode="NoResize">

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace MovieManager.WEB.Search
+namespace Tmc.BusinessRules.Web.Search
 {
-    public static class TMDBConfiguration
+    public static class TmdbConfiguration
     {
-        static TMDBConfiguration()
+        static TmdbConfiguration()
         {
             BackdropSizes = new List<string>();
             PosterSizes = new List<string>();
