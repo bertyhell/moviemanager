@@ -21,56 +21,53 @@ namespace Tmc.DataAccess.Sqlite
         public static IList<Video> SelectAllVideos()
         {
             var Videos = new List<Video>();
-            try
+
+            var DsVideos = new DsVideos();
+            FillDatasetWithAllVideos(DsVideos);
+
+            DsVideos.Videos_genresDataTable VideosGenresDataTable = DsVideos.Videos_genres;
+            DsVideos.GenresDataTable GenresDataTable = DsVideos.Genres;
+
+            //Convert to ObservableCollection<Video>
+            foreach (DsVideos.VideosRow Row in DsVideos.Videos.Rows)
             {
-                var DsVideos = new DsVideos();
-                FillDatasetWithAllVideos(DsVideos);
-
-                DsVideos.Videos_genresDataTable VideosGenresDataTable = DsVideos.Videos_genres;
-                DsVideos.GenresDataTable GenresDataTable = DsVideos.Genres;
-
-                //Convert to ObservableCollection<Video>
-                foreach (DsVideos.VideosRow Row in DsVideos.Videos.Rows)
+                var Video = new Video
                 {
-                    var Video = new Video
-                    {
-                        Id = (uint)Row.id,
-                        IdImdb = Row.id_imdb,
-                        Name = Row.name,
-                        Release = Row.release,
-                        Rating = Row.rating,
-                        RatingImdb = Row.rating_imdb,
-                        Path = Row.path,
-                        LastPlayLocation = (ulong)Row.last_play_location
-                    };
-                    if (!String.IsNullOrEmpty(Row.poster))
-                        Video.Poster = new ImageInfo { Uri = new Uri(Row.poster) };
+                    Id = (uint)Row.id,
+                    IdImdb = Row.id_imdb,
+                    Name = Row.name,
+                    Release = Row.release,
+                    Rating = Row.rating,
+                    RatingImdb = Row.rating_imdb,
+                    Path = Row.path,
+                    LastPlayLocation = (ulong)Row.last_play_location
+                };
+                if (!String.IsNullOrEmpty(Row.poster))
+                    Video.Poster = new ImageInfo { Uri = new Uri(Row.poster) };
 
-                    //get genre from dataset
-                    foreach (DataRow DataRow in VideosGenresDataTable.Select(VideosGenresDataTable.video_idColumn.ColumnName + " = " + Video.Id))
-                    {
-                        var GenreId = (int)(long)DataRow[VideosGenresDataTable.genre_idColumn.ColumnName];
-                        DataRow GenreRow = GenresDataTable.FindBygen_id(GenreId);
-                        Video.Genres.Add((string)GenreRow[GenresDataTable.gen_labelColumn]);
-                    }
-
-                    var MoviesRow = DsVideos.Movies.Rows.Find(Video.Id) as DsVideos.MoviesRow;
-                    if (MoviesRow != null)
-                    {
-                        Video = Video.ConvertVideo(VideoTypeEnum.Movie, Video);
-                    }
-                    else
-                    {
-                        var EpisodeRow = DsVideos.Episodes.Rows.Find(Video.Id) as DsVideos.EpisodesRow;
-                        if (EpisodeRow != null)
-                        {
-                            Video = Video.ConvertVideo(VideoTypeEnum.Episode, Video);
-                        }
-                    }
-                    Videos.Add(Video);
+                //get genre from dataset
+                foreach (DataRow DataRow in VideosGenresDataTable.Select(VideosGenresDataTable.video_idColumn.ColumnName + " = " + Video.Id))
+                {
+                    var GenreId = (int)(long)DataRow[VideosGenresDataTable.genre_idColumn.ColumnName];
+                    DataRow GenreRow = GenresDataTable.FindBygen_id(GenreId);
+                    Video.Genres.Add((string)GenreRow[GenresDataTable.gen_labelColumn]);
                 }
+
+                var MoviesRow = DsVideos.Movies.Rows.Find(Video.Id) as DsVideos.MoviesRow;
+                if (MoviesRow != null)
+                {
+                    Video = Video.ConvertVideo(VideoTypeEnum.Movie, Video);
+                }
+                else
+                {
+                    var EpisodeRow = DsVideos.Episodes.Rows.Find(Video.Id) as DsVideos.EpisodesRow;
+                    if (EpisodeRow != null)
+                    {
+                        Video = Video.ConvertVideo(VideoTypeEnum.Episode, Video);
+                    }
+                }
+                Videos.Add(Video);
             }
-            catch (Exception E) { Console.WriteLine("Exception in GetVideos in TmcDatabase: " + E.Message); }
             return Videos;
         }
 
@@ -306,7 +303,7 @@ namespace Tmc.DataAccess.Sqlite
                 }
 
                 //set values
-                VideosRow.id = (int)video.Id;
+                //VideosRow.id = (int)video.Id;
                 VideosRow.id_imdb = video.IdImdb;
                 VideosRow.name = video.Name;
                 VideosRow.release = video.Release;

@@ -12,6 +12,7 @@ using Tmc.WinUI.Application.Commands;
 using Tmc.WinUI.Application.Panels.Filter;
 using Tmc.WinUI.Application.Panels.Settings;
 using Tmc.WinUI.Application.Properties;
+using Tmc.SystemFrameworks.Log;
 
 namespace Tmc.WinUI.Application
 {
@@ -27,7 +28,7 @@ namespace Tmc.WinUI.Application
         private MainController()
         {
             //init database
-            string DatabasePath = Settings.Default.DatabasePath;
+            string DatabasePath = Settings.Default.DatabasePath.Replace("%APPDATA%", DefaultValues.PATH_USER_APPDATA);
             bool DatabaseUpdated = false;
             if (!File.Exists(DatabasePath))
             {
@@ -45,7 +46,6 @@ namespace Tmc.WinUI.Application
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
             TmcDatabase.VideosChanged += MMDatabaseVideosChanged;
-            //ApplicationCache.AddVideoImages(66, new List<Uri>() { new Uri("http://www.cathedral-design.be/upload/google-logo-voor-nieuws-5178_google_logo.jpg") }, CacheImageType.Images, ImageQuality.High);
 
             IsIconsViewVisible = Visibility.Visible;//TODO 020 check if any of the videos has been analysed --> none == hide iconsview
             IsDetailViewVisible = Visibility.Collapsed;
@@ -80,7 +80,10 @@ namespace Tmc.WinUI.Application
         public List<Video> VideosList
         {
             get { return _videosList; }
-            set { _videosList = value; }
+            set
+            {
+                _videosList = value;
+            }
         }
 
         private FilterEditor _filterEditor;
@@ -90,8 +93,11 @@ namespace Tmc.WinUI.Application
             get { return _filterEditor; }
             set
             {
-                _filterEditor = value;
-                _videosView.Filter += FilterEditor.FilterVideo;
+                if (_filterEditor != value)
+                {
+                    _filterEditor = value;
+                    _videosView.Filter += FilterEditor.FilterVideo;
+                }
             }
         }
 
@@ -104,12 +110,19 @@ namespace Tmc.WinUI.Application
 
         public void ReloadVideos()
         {
-            //Videos = new AsyncVirtualizingCollection<T>(new ItemsProvider(), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
-            _videosList = (List<Video>)TmcDatabase.SelectAllVideos();
-            _videos.Clear();
-            foreach (Video Video in _videosList)
+            try
             {
-                _videos.Add(Video);
+                //Videos = new AsyncVirtualizingCollection<T>(new ItemsProvider(), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
+                _videosList = (List<Video>) TmcDatabase.SelectAllVideos();
+                _videos.Clear();
+                foreach (Video Video in _videosList)
+                {
+                    _videos.Add(Video);
+                }
+            }
+            catch (Exception Ex)
+            {
+                GlobalLogger.Instance.MovieManagerLogger.Fatal(GlobalLogger.FormatExceptionForLog("MainWindow", "ReloadVideos", Ex));
             }
         }
 
@@ -131,8 +144,11 @@ namespace Tmc.WinUI.Application
             get { return _isDetailViewVisible; }
             set
             {
-                _isDetailViewVisible = value;
-                PropChanged("IsDetailViewVisible");
+                if (_isDetailViewVisible != value)
+                {
+                    _isDetailViewVisible = value;
+                    PropChanged("IsDetailViewVisible");
+                }
             }
         }
 
@@ -143,8 +159,11 @@ namespace Tmc.WinUI.Application
             get { return _isIconsViewVisible; }
             set
             {
-                _isIconsViewVisible = value;
-                PropChanged("IsIconsViewVisible");
+                if (_isIconsViewVisible != value)
+                {
+                    _isIconsViewVisible = value;
+                    PropChanged("IsIconsViewVisible");
+                }
             }
         }
 
@@ -159,19 +178,27 @@ namespace Tmc.WinUI.Application
             {
                 IsDetailViewVisible = Visibility.Collapsed;
                 IsIconsViewVisible = Visibility.Visible;
+                int NewPreviewWidth = _previewWidth;
                 switch (requestedViewState)
                 {
                     case ViewStates.BigIcons:
-                        PreviewWidth = DefaultValues.PREVIEW_MAX_WIDTH;
+                        NewPreviewWidth = DefaultValues.PREVIEW_MAX_WIDTH;
                         break;
                     case ViewStates.MediumIcons:
-                        PreviewWidth = (DefaultValues.PREVIEW_MIN_WIDTH + DefaultValues.PREVIEW_MAX_WIDTH ) / 2;
+                        NewPreviewWidth = (DefaultValues.PREVIEW_MIN_WIDTH + DefaultValues.PREVIEW_MAX_WIDTH) / 2;
                         break;
                     case ViewStates.SmallIcons:
-                        PreviewWidth = DefaultValues.PREVIEW_MIN_WIDTH;
+                        NewPreviewWidth = DefaultValues.PREVIEW_MIN_WIDTH;
                         break;
                     default:
                         break;
+                }
+
+                if (_previewWidth != NewPreviewWidth)
+                {
+                    _previewWidth = NewPreviewWidth;
+                    PropChanged("PreviewWidth");
+                    PropChanged("PreviewHeight");
                 }
             }
         }
@@ -182,8 +209,11 @@ namespace Tmc.WinUI.Application
             get { return _previewItemMargin; }
             set
             {
-                _previewItemMargin = value;
-                PropChanged("PreviewItemMargin");
+                if (_previewItemMargin != value)
+                {
+                    _previewItemMargin = value;
+                    PropChanged("PreviewItemMargin");
+                }
             }
         }
 
@@ -198,27 +228,37 @@ namespace Tmc.WinUI.Application
             set
             {
                 //TODO 020 zoomout on details and then zoom in --> slow or error?
+                int NewPreviewWidth = _previewWidth;
+                //if change needed to detail view
                 if (value < DefaultValues.PREVIEW_MIN_WIDTH && _previewWidth >= DefaultValues.PREVIEW_MIN_WIDTH)
                 {
-                    //change view when icons are to little
                     ChangeView(ViewStates.Details);
-                    _previewWidth = DefaultValues.PREVIEW_MIN_WIDTH - DefaultValues.PREVIEW_ZOOM_STEP;
+                    NewPreviewWidth = DefaultValues.PREVIEW_MIN_WIDTH - DefaultValues.PREVIEW_ZOOM_STEP;
                 }
+                //if change needed to poster view
                 else if (value >= DefaultValues.PREVIEW_MIN_WIDTH && _previewWidth < DefaultValues.PREVIEW_MIN_WIDTH)
                 {
                     ChangeView(ViewStates.SmallIcons);
-                    _previewWidth = DefaultValues.PREVIEW_MIN_WIDTH;
+                    NewPreviewWidth = DefaultValues.PREVIEW_MIN_WIDTH;
                 }
+                //if posters become to big
                 else if (value > DefaultValues.PREVIEW_MAX_WIDTH)
                 {
-                    _previewWidth = DefaultValues.PREVIEW_MAX_WIDTH;
+                    NewPreviewWidth = DefaultValues.PREVIEW_MAX_WIDTH;
                 }
+                //if normal poster resize
                 else if (value >= DefaultValues.PREVIEW_MIN_WIDTH && value <= DefaultValues.PREVIEW_MAX_WIDTH)
                 {
-                    _previewWidth = value;
+                    NewPreviewWidth = value;
                 }
-                PropChanged("PreviewWidth");
-                PropChanged("PreviewHeight");
+
+                //check if value has changed and if so commit value
+                if (_previewWidth != NewPreviewWidth)
+                {
+                    _previewWidth = NewPreviewWidth;
+                    PropChanged("PreviewWidth");
+                    PropChanged("PreviewHeight");
+                }
             }
         }
 
@@ -233,8 +273,11 @@ namespace Tmc.WinUI.Application
             get { return _previewTitleVisibility; }
             set
             {
-                _previewTitleVisibility = value;
-                PropChanged("PreviewTitleVisibility");
+                if (_previewTitleVisibility != value)
+                {
+                    _previewTitleVisibility = value;
+                    PropChanged("PreviewTitleVisibility");
+                }
             }
         }
 

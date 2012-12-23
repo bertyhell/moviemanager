@@ -5,7 +5,7 @@ using System.Collections;
 using System.ComponentModel;
 using Tmc.SystemFrameworks.Common;
 
-namespace MovieManager.PLAYER.Logic
+namespace Tmc.WinUI.Player.Logic
 {
     public class MediaPlayerSettings
     {

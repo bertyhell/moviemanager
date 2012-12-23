@@ -61,6 +61,10 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
       <HintPath>..\..\Lib\log4net.dll</HintPath>
@@ -85,9 +89,6 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\lib\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
@@ -466,38 +467,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BusinessRulesProjects\tmcBRExportImport\tmcBRExportImport.csproj">
-      <Project>{948401DF-F23E-47C2-B524-8B7AA5B95A56}</Project>
-      <Name>ExportImport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFModel\tmcSFModel.csproj">
-      <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
-      <Name>Model</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFLog\tmcSFLog.csproj">
-      <Project>{8C2B5F04-EF8F-46B8-B775-FD602B8AFAED}</Project>
-      <Name>MovieManager.LOG</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tmcWinUIPlayer\tmcWinUIPlayer.csproj">
-      <Project>{C8B06303-3B2F-417B-8EE2-CD812F257277}</Project>
-      <Name>MovieManager.PLAYER</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BusinessRulesProjects\tmcBRWeb\tmcBRWeb.csproj">
-      <Project>{5E7E4873-8C9D-4BA8-A936-784387E2379F}</Project>
-      <Name>MovieManager.WEB</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DataAccess\tmcDaSqlite\tmcDaSqlite.csproj">
-      <Project>{ef7c715e-4c61-43d6-b83d-90f0ff38424f}</Project>
-      <Name>SQLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFCommon\tmcSFCommon.csproj">
-      <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
-      <Name>tmcCommon</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\add.png" />
     <Resource Include="Images\close.png" />
     <Resource Include="Images\picto.png" />
@@ -608,6 +577,36 @@
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BusinessRulesProjects\tmcBRExportImport\tmcBRExportImport.csproj">
+      <Project>{948401df-f23e-47c2-b524-8b7aa5b95a56}</Project>
+      <Name>tmcBRExportImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BusinessRulesProjects\tmcBRWeb\tmcBRWeb.csproj">
+      <Project>{5e7e4873-8c9d-4ba8-a936-784387e2379f}</Project>
+      <Name>tmcBRWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\tmcDaSqlite\tmcDaSqlite.csproj">
+      <Project>{ef7c715e-4c61-43d6-b83d-90f0ff38424f}</Project>
+      <Name>tmcDaSqlite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFCommon\tmcSFCommon.csproj">
+      <Project>{d6017df9-ae81-49b8-857a-495ce8275db0}</Project>
+      <Name>tmcSFCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFLog\tmcSFLog.csproj">
+      <Project>{8c2b5f04-ef8f-46b8-b775-fd602b8afaed}</Project>
+      <Name>tmcSFLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFModel\tmcSFModel.csproj">
+      <Project>{3b9b5fe6-81cc-4714-86e1-16a10c44dea2}</Project>
+      <Name>tmcSFModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\tmcWinUIPlayer\tmcWinUIPlayer.csproj">
+      <Project>{c8b06303-3b2f-417b-8ee2-cd812f257277}</Project>
+      <Name>tmcWinUIPlayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

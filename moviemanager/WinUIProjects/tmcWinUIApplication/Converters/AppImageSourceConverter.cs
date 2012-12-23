@@ -6,11 +6,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Model.Interfaces;
 using Tmc.WinUI.Application.Cache;
+using System.Reflection;
 
 namespace Tmc.WinUI.Application.Converters
 {
     public class AppImageSourceConverter : IValueConverter
     {
+        public static readonly Uri NO_IMAGE_URI = new Uri( @"pack://application:,,,/Tmc.WinUI.Application;component/Images/no_image.png");
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value != null)
@@ -25,7 +28,7 @@ namespace Tmc.WinUI.Application.Converters
                         if (LocalImageUri == null || !File.Exists(LocalImageUri.AbsolutePath))
                         {
                             //show empty picture
-                            CreateBitmapImage(new Uri("C:/MMproject/MovieManager.APP/Images/no_image.png"));
+                            CreateBitmapImage(NO_IMAGE_URI);
                         }
                         return CreateBitmapImage(LocalImageUri);
                     }
@@ -35,7 +38,7 @@ namespace Tmc.WinUI.Application.Converters
                     return value;
                 }
             }
-            return CreateBitmapImage(new Uri("C:/MMproject/MovieManager.APP/Images/no_image.png"));
+            return CreateBitmapImage(NO_IMAGE_URI);
         }
 
         private static BitmapImage CreateBitmapImage(Uri localImageUrl)
@@ -63,7 +66,7 @@ namespace Tmc.WinUI.Application.Converters
             catch (FileNotFoundException Ex)
             {
                 //TODO 050 check why this sometimes happens (maybe 400 or 404 errors?)
-                return CreateBitmapImage(new Uri("C:/MMproject/MovieManager.APP/Images/no_image.png"));
+                return CreateBitmapImage(NO_IMAGE_URI);
             }
             return ImagePosterSource;
         }
