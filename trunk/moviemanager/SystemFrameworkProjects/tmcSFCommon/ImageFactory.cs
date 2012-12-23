@@ -39,11 +39,4 @@ namespace Tmc.SystemFrameworks.Common
             Client.DownloadFile(url,pathOnHdd);
         }
     }
-
-    public enum ImageQuality
-    {
-        Low = 0,
-        Medium = 1,
-        High = 2
-    }
 }

@@ -50,6 +50,7 @@
     <Compile Include="CommandHelper.cs" />
     <Compile Include="DateTimeUtilities.cs" />
     <Compile Include="DefaultValues.cs" />
+    <Compile Include="ImageQuality.cs" />
     <Compile Include="ProgressEventArgs.cs" />
     <Compile Include="RegistryHelper.cs" />
     <Compile Include="SerializableKeyValuePair.cs" />

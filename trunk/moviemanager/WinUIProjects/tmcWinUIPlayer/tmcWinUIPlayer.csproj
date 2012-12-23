@@ -8,8 +8,8 @@
     <ProjectGuid>{C8B06303-3B2F-417B-8EE2-CD812F257277}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovieManager.PLAYER</RootNamespace>
-    <AssemblyName>MovieManager.PLAYER</AssemblyName>
+    <RootNamespace>Tmc.WinUI.Player</RootNamespace>
+    <AssemblyName>Tmc.WinUI.Player</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

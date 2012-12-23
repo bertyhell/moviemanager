@@ -52,7 +52,7 @@
             // _btnMute
             // 
             this._btnMute.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this._btnMute.Image = global::MovieManager.PLAYER.Properties.Resources.volume_muted_32;
+            this._btnMute.Image = global::Tmc.WinUI.Player.Properties.Resources.volume_muted_32;
             this._btnMute.Location = new System.Drawing.Point(374, 29);
             this._btnMute.Name = "_btnMute";
             this._btnMute.Size = new System.Drawing.Size(41, 38);
@@ -63,7 +63,7 @@
             // 
             // _btnPlay
             // 
-            this._btnPlay.Image = global::MovieManager.PLAYER.Properties.Resources.play_32;
+            this._btnPlay.Image = global::Tmc.WinUI.Player.Properties.Resources.play_32;
             this._btnPlay.Location = new System.Drawing.Point(89, 31);
             this._btnPlay.Name = "_btnPlay";
             this._btnPlay.Size = new System.Drawing.Size(38, 36);
@@ -74,7 +74,7 @@
             // 
             // _btnPause
             // 
-            this._btnPause.Image = global::MovieManager.PLAYER.Properties.Resources.pause_32;
+            this._btnPause.Image = global::Tmc.WinUI.Player.Properties.Resources.pause_32;
             this._btnPause.Location = new System.Drawing.Point(48, 31);
             this._btnPause.Name = "_btnPause";
             this._btnPause.Size = new System.Drawing.Size(37, 36);
@@ -85,7 +85,7 @@
             // 
             // _btnStop
             // 
-            this._btnStop.Image = global::MovieManager.PLAYER.Properties.Resources.stop_32;
+            this._btnStop.Image = global::Tmc.WinUI.Player.Properties.Resources.stop_32;
             this._btnStop.Location = new System.Drawing.Point(4, 31);
             this._btnStop.Name = "_btnStop";
             this._btnStop.Size = new System.Drawing.Size(39, 36);
@@ -128,7 +128,7 @@
             // 
             this._btnFullScreen.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this._btnFullScreen.AutoSize = true;
-            this._btnFullScreen.Image = global::MovieManager.PLAYER.Properties.Resources.fullscreen_32;
+            this._btnFullScreen.Image = global::Tmc.WinUI.Player.Properties.Resources.fullscreen_32;
             this._btnFullScreen.Location = new System.Drawing.Point(321, 29);
             this._btnFullScreen.Name = "_btnFullScreen";
             this._btnFullScreen.Size = new System.Drawing.Size(40, 38);

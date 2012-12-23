@@ -2572,10 +2572,14 @@ namespace Tmc.DataAccess.Sqlite {
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 255;
                 this.columnplay_count.AllowDBNull = false;
+                this.columnplay_count.DefaultValue = ((int)(0));
                 this.columnrating.AllowDBNull = false;
+                this.columnrating.DefaultValue = ((float)(-1F));
                 this.columnrating_imdb.AllowDBNull = false;
+                this.columnrating_imdb.DefaultValue = ((float)(-1F));
                 this.columnpath.MaxLength = 255;
                 this.columnlast_play_location.AllowDBNull = false;
+                this.columnlast_play_location.DefaultValue = ((int)(0));
                 this.columnposter.MaxLength = 255;
             }
             
@@ -3384,6 +3388,8 @@ namespace Tmc.DataAccess.Sqlite {
             
             private VideosDataTable tableVideos;
             
+            private static System.DateTime release_nullValue = global::System.DateTime.Parse("1900-01-01T00:00:00");
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal VideosRow(global::System.Data.DataRowBuilder rb) : 
@@ -3406,11 +3412,11 @@ namespace Tmc.DataAccess.Sqlite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string id_imdb {
                 get {
-                    try {
-                        return ((string)(this[this.tableVideos.id_imdbColumn]));
+                    if (this.Isid_imdbNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'id_imdb\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableVideos.id_imdbColumn]));
                     }
                 }
                 set {
@@ -3433,11 +3439,11 @@ namespace Tmc.DataAccess.Sqlite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime release {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableVideos.releaseColumn]));
+                    if (this.IsreleaseNull()) {
+                        return VideosRow.release_nullValue;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'release\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((global::System.DateTime)(this[this.tableVideos.releaseColumn]));
                     }
                 }
                 set {
@@ -3525,11 +3531,11 @@ namespace Tmc.DataAccess.Sqlite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string poster {
                 get {
-                    try {
-                        return ((string)(this[this.tableVideos.posterColumn]));
+                    if (this.IsposterNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'poster\' in table \'Videos\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableVideos.posterColumn]));
                     }
                 }
                 set {

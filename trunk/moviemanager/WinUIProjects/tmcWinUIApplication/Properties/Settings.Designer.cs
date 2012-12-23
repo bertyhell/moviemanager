@@ -61,18 +61,6 @@ namespace Tmc.WinUI.Application.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\ProgramData\\MovieManager\\Database\\moviemanager.sqlite")]
-        public string DatabasePath {
-            get {
-                return ((string)(this["DatabasePath"]));
-            }
-            set {
-                this["DatabasePath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("data source={path}")]
         public string ConnectionString {
             get {
@@ -190,6 +178,18 @@ namespace Tmc.WinUI.Application.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%APPDATA%\\TheMovieCollector\\Database\\TheMovieCollector.sdf")]
+        public string DatabasePath {
+            get {
+                return ((string)(this["DatabasePath"]));
+            }
+            set {
+                this["DatabasePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <MediaPlayerSettings xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <SelectedMediaPlayer>VLC Media Player</SelectedMediaPlayer>
@@ -204,9 +204,9 @@ namespace Tmc.WinUI.Application.Properties {
     </MediaPlayer>
   </MediaPlayers>
 </MediaPlayerSettings>")]
-        public global::MovieManager.PLAYER.Logic.MediaPlayerSettings MediaPlayerSettings {
+        public global::Tmc.WinUI.Player.Logic.MediaPlayerSettings MediaPlayerSettings {
             get {
-                return ((global::MovieManager.PLAYER.Logic.MediaPlayerSettings)(this["MediaPlayerSettings"]));
+                return ((global::Tmc.WinUI.Player.Logic.MediaPlayerSettings)(this["MediaPlayerSettings"]));
             }
             set {
                 this["MediaPlayerSettings"] = value;

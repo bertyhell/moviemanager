@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MovieManager;component/Styles/Application.xaml"/>
+                <ResourceDictionary Source="/Tmc.WinUi.Application;component/Styles/Application.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

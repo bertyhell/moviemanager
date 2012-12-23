@@ -1,6 +1,7 @@
 ﻿using MovieManager.PLAYER.Logic;
 using Tmc.WinUI.Application.Panels.Settings;
 using Tmc.WinUI.Application.Panels.Settings.MediaPlayer;
+using Tmc.WinUI.Player.Logic;
 
 namespace MovieManager.APP.Panels.Settings
 {

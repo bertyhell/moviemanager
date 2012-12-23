@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MovieManager.APP.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Tmc.WinUI.Application.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="RenamingMovieFileSequence" Type="System.String" Scope="User">
@@ -11,9 +11,6 @@
     <Setting Name="MinimumVideoFileSize" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">200000000</Value>
     </Setting>
-    <Setting Name="DatabasePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\ProgramData\MovieManager\Database\moviemanager.sqlite</Value>
-    </Setting>
     <Setting Name="ConnectionString" Type="System.String" Scope="User">
       <Value Profile="(Default)">data source={path}</Value>
     </Setting>
@@ -23,7 +20,7 @@
     <Setting Name="MediaPlayerPlayOnDoubleClick" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="Log_Level" Type="MovieManager.LOG.LogLevelEnum" Scope="User">
+    <Setting Name="Log_Level" Type="Tmc.SystemFrameworks.Log.LogLevelEnum" Scope="User">
       <Value Profile="(Default)">Error</Value>
     </Setting>
     <Setting Name="Log_enabled" Type="System.Boolean" Scope="User">
@@ -32,7 +29,7 @@
     <Setting Name="Cache_folder" Type="System.String" Scope="User">
       <Value Profile="(Default)">TheVideoCollector\Cache</Value>
     </Setting>
-    <Setting Name="ImageQuality" Type="MovieManager.Common.ImageQuality" Scope="User">
+    <Setting Name="ImageQuality" Type="Tmc.SystemFrameworks.Common.ImageQuality" Scope="User">
       <Value Profile="(Default)">High</Value>
     </Setting>
     <Setting Name="Cache_enabled" Type="System.Boolean" Scope="User">
@@ -44,7 +41,10 @@
     <Setting Name="SelectedMediaPlayer" Type="System.String" Scope="User">
       <Value Profile="(Default)">VLC</Value>
     </Setting>
-    <Setting Name="MediaPlayerSettings" Type="MovieManager.PLAYER.Logic.MediaPlayerSettings" Scope="User">
+    <Setting Name="DatabasePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%APPDATA%\TheMovieCollector\Database\TheMovieCollector.sdf</Value>
+    </Setting>
+    <Setting Name="MediaPlayerSettings" Type="Tmc.WinUI.Player.Logic.MediaPlayerSettings" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;MediaPlayerSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;SelectedMediaPlayer&gt;VLC Media Player&lt;/SelectedMediaPlayer&gt;
