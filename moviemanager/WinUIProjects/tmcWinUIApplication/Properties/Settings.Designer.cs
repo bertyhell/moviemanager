@@ -212,5 +212,16 @@ namespace Tmc.WinUI.Application.Properties {
                 this["MediaPlayerSettings"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::Tmc.SystemFrameworks.Data.VideoInsertionSettings VideoInsertionSettings {
+            get {
+                return ((global::Tmc.SystemFrameworks.Data.VideoInsertionSettings)(this["VideoInsertionSettings"]));
+            }
+            set {
+                this["VideoInsertionSettings"] = value;
+            }
+        }
     }
 }

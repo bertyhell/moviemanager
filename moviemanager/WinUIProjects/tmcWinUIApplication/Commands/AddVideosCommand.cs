@@ -46,7 +46,7 @@ namespace Tmc.WinUI.Application.Commands
                 IsIndeterminate = false;
                 _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, DataContext = this };
 
-                MovieFileReader FileReader = new MovieFileReader(Ofd.FileNames.Select(file => new FileInfo(file)).ToList());
+                MovieFileReader FileReader = new MovieFileReader(Ofd.FileNames.Select(file => new FileInfo(file)).ToList(), Properties.Settings.Default.VideoInsertionSettings);
                 FileReader.FoundVideo += FileReader_OnVideoFilesProcessingProgress;
                 FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
                 FileReader.RunWorkerAsync();

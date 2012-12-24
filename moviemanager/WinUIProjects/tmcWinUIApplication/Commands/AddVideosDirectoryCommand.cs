@@ -51,7 +51,7 @@ namespace Tmc.WinUI.Application.Commands
                 Message = "Searching videos: 0 found";
                 IsIndeterminate = true;
                 _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, DataContext = this };
-                var FileReader = new MovieFileReader(new DirectoryInfo(Dialog.SelectedPath));
+                var FileReader = new MovieFileReader(new DirectoryInfo(Dialog.SelectedPath), Properties.Settings.Default.VideoInsertionSettings);
                 FileReader.FoundVideo += FileReader_OnVideoFoundProgress;
                 FileReader.OnGetVideoCompleted += FileReader_OnGetVideoCompleted;
                 FileReader.RunWorkerAsync();
