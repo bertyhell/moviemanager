@@ -60,5 +60,8 @@
   &lt;/MediaPlayers&gt;
 &lt;/MediaPlayerSettings&gt;</Value>
     </Setting>
+    <Setting Name="VideoInsertionSettings" Type="Tmc.SystemFrameworks.Data.VideoInsertionSettings" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

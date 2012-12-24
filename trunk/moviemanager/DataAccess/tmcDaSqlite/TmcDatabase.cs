@@ -71,6 +71,27 @@ namespace Tmc.DataAccess.Sqlite
             return Videos;
         }
 
+        public List<Serie> GetAllSeries()
+        {
+            List<Serie> RetVal = new List<Serie>();
+            DsVideos VideosDs = new DsVideos();
+            FillDatasetWithAllSeries(VideosDs);
+
+            DsVideos.SeriesDataTable SeriesTable = VideosDs.Series;
+
+            foreach (DsVideos.SeriesRow SeriesRow in SeriesTable)
+            {
+                Serie Serie = new Serie
+                    {
+                        Id = SeriesRow.id,
+                        Name = SeriesRow.name
+                    };
+                RetVal.Add(Serie);
+            }
+
+            return RetVal;
+        }
+
         public static IList<Video> InsertVideosHdd(IList<Video> videos)
         {
             return InsertVideosHdd(videos, false);
@@ -186,6 +207,12 @@ namespace Tmc.DataAccess.Sqlite
             MoviesTableAdapter.Fill(datasetVideos.Movies);
             GenresTableAdapter.Fill(datasetVideos.Genres);
             VideosGenresTableAdapter.Fill(datasetVideos.Videos_genres);
+            SeriesTableAdapter.Fill(datasetVideos.Series);
+        }
+
+        private static void FillDatasetWithAllSeries(DsVideos datasetVideos)
+        {
+            SeriesTableAdapter SeriesTableAdapter = new SeriesTableAdapter { Connection = Database.GetConnection() };
             SeriesTableAdapter.Fill(datasetVideos.Series);
         }
 

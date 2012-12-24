@@ -1,0 +1,18 @@
+﻿<Window x:Class="Tmc.WinUI.Application.Wizards.AddEpisodesWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=WPFToolkit.Extended"
+        xmlns:panels="clr-namespace:Tmc.WinUI.Application.Panels"
+        Title="Add episodes wizard" Height="400" Width="600">
+    <Grid>
+        <xctk:Wizard>
+            <xctk:WizardPage x:Name="_introPage" Title="Add episodes wizard" Description="This wizard will help you to add episodes to The Movie Collector"/>
+            <xctk:WizardPage x:Name="_selectFolderPage" Title="Select folder">
+                
+            </xctk:WizardPage>
+            <xctk:WizardPage x:Name="_selectSeriePage" Title="Select serie">
+                <panels:SerieSelectionControl></panels:SerieSelectionControl>
+            </xctk:WizardPage>
+        </xctk:Wizard>
+    </Grid>
+</Window>

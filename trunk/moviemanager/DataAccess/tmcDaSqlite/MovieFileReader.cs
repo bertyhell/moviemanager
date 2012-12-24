@@ -6,30 +6,30 @@ using System.Linq;
 using Model;
 using System.IO;
 using System.Text.RegularExpressions;
-using Tmc.DataAccess.Sqlite.RegexSettings;
 using Tmc.SystemFrameworks.Common;
+using Tmc.SystemFrameworks.Data;
 
 namespace Tmc.DataAccess.Sqlite
 {
     public class MovieFileReader : BackgroundWorker
     { // TODO 060: extends SwingWorker
 
-        private const int MINIMAL_VIDEO_SIZE = 30000000; //Bytes
-        static readonly String[] VIDEO_FILE_EXTENSIONS = { "ASX", "DTS", "GXF", "M2V", "M3U", "M4V", "MPEG1", "MPEG2", "MTS", "MXF", "OGM", "BUP", "A52", "AAC", "B4S", "CUE", "DIVX", "DV", "FLV", "M1V", "M2TS", "MKV", "MOV", "MPEG4", "OMA", "SPX", "TS", "VLC", "VOB", "XSPF", "DAT", "BIN", "IFO", "PART", "3G2", "AVI", "MPEG", "MPG", "FLAC", "M4A", "MP1", "OGG", "WAV", "XM", "3GP", "WMV", "AC3", "ASF", "MOD", "MP2", "MP4", "WMA", "MKA", "M4P" };
-
         private readonly DirectoryInfo _dir;
         private readonly IList<FileInfo> _files;
+        private readonly VideoInsertionSettings _videoInsertionSettings;
 
-        public MovieFileReader(DirectoryInfo dir)
+        public MovieFileReader(DirectoryInfo dir, VideoInsertionSettings videoInsertionSettings)
         {
             _dir = dir;
             _videos = new ObservableCollection<Video>();
+            _videoInsertionSettings = videoInsertionSettings;
 
         }
-        public MovieFileReader(IList<FileInfo> files)
+        public MovieFileReader(IList<FileInfo> files, VideoInsertionSettings videoInsertionSettings)
         {
             _files = files;
             _videos = new ObservableCollection<Video>();
+            _videoInsertionSettings = videoInsertionSettings;
         }
 
         private ObservableCollection<Video> _videos;
@@ -76,7 +76,7 @@ namespace Tmc.DataAccess.Sqlite
 
         private void GetVideos(FileInfo file, ICollection<Video> videos, bool reportNonVideos = false)
         {
-            if (!string.IsNullOrEmpty(file.Extension) && VIDEO_FILE_EXTENSIONS.Contains(file.Extension.ToUpper().Substring(1)) && file.Length > MINIMAL_VIDEO_SIZE)//TODO 030 use settings property
+            if (!string.IsNullOrEmpty(file.Extension) && _videoInsertionSettings.VideoFileExtensions.Contains(file.Extension.ToUpper().Substring(1)) && file.Length > (long)_videoInsertionSettings.MinimalVideoSize)//TODO 030 use settings property
             {
 
                 string FilenameWidthoutExt = file.Name.Substring(0, file.Name.LastIndexOf(".", StringComparison.Ordinal));
@@ -132,7 +132,7 @@ namespace Tmc.DataAccess.Sqlite
                 //find episodenumber in Filename
                 bool RegexMatched = false;
                 int Index = 0;
-                ObservableCollection<String> RegularExpressions = RegexSettingsStorage.EpisodeRegularExpressions;
+                ObservableCollection<String> RegularExpressions =  CollectionConverter<String>.ConvertList(_videoInsertionSettings.EpisodeFilterRegexs);
 
                 while (!RegexMatched && Index < RegularExpressions.Count)
                 {

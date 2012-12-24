@@ -1,5 +1,6 @@
-﻿using System.Windows;
-using Tmc.DataAccess.Sqlite.RegexSettings;
+﻿using System;
+using System.Windows;
+using Tmc.SystemFrameworks.Common;
 
 namespace Tmc.WinUI.Application.Panels.RegularExpressions
 {
@@ -8,19 +9,19 @@ namespace Tmc.WinUI.Application.Panels.RegularExpressions
     /// </summary>
     public partial class EpisodeRegexEditor
     {
-        private readonly EpisodeRegexEditorViewModel  _viewModel = new EpisodeRegexEditorViewModel();
+        private readonly EpisodeRegexEditorViewModel _viewModel = new EpisodeRegexEditorViewModel();
         private AddRegex _regex;
 
         public EpisodeRegexEditor()
         {
             InitializeComponent();
             DataContext = _viewModel;
-            _viewModel.RegularExpressions = RegexSettingsStorage.EpisodeRegularExpressions;
+            _viewModel.RegularExpressions = CollectionConverter<String>.ConvertList(Properties.Settings.Default.VideoInsertionSettings.EpisodeFilterRegexs);
         }
 
         private void BtnSaveSettingsClick(object sender, RoutedEventArgs e)
         {
-            RegexSettingsStorage.SaveSettings();
+            Properties.Settings.Default.VideoInsertionSettings.EpisodeFilterRegexs = CollectionConverter<String>.ConvertObservableCollection(_viewModel.RegularExpressions);
         }
 
         private void BtnUpClick(object sender, RoutedEventArgs e)
@@ -42,7 +43,7 @@ namespace Tmc.WinUI.Application.Panels.RegularExpressions
 
         void RegexClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(_regex.DialogResult != null && (bool)_regex.DialogResult)
+            if (_regex.DialogResult != null && (bool)_regex.DialogResult)
             {
                 _viewModel.RegularExpressions.Add(_regex.RegularExpression);
             }

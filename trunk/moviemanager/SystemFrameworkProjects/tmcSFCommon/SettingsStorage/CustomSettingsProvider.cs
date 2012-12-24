@@ -212,18 +212,28 @@ namespace Tmc.SystemFrameworks.Common.SettingsStorage
         /// </summary>
         private void GetValue(SettingElement settingElement, SettingsProperty setting, SettingsPropertyValue propertyValue)
         {
-            XmlSerializer Serializer = new XmlSerializer(setting.PropertyType);
-            if (setting.PropertyType != typeof(string) && !setting.PropertyType.IsValueType && !setting.PropertyType.IsEnum)
+            try
             {
-                //Deserialize value
-                string Value = settingElement.Value.ValueXml.InnerXml.Trim();
-                propertyValue.PropertyValue = !string.IsNullOrEmpty(Value) ? Serializer.Deserialize(new StringReader(Value)) : null;
+                XmlSerializer Serializer = new XmlSerializer(setting.PropertyType);
+                if (setting.PropertyType != typeof (string) && !setting.PropertyType.IsValueType &&
+                    !setting.PropertyType.IsEnum)
+                {
+                    //Deserialize value
+                    string Value = settingElement.Value.ValueXml.InnerXml.Trim();
+                    propertyValue.PropertyValue = !string.IsNullOrEmpty(Value)
+                                                      ? Serializer.Deserialize(new StringReader(Value))
+                                                      : null;
+                }
+                else
+                {
+                    //Simply set text
+                    string Value = settingElement.Value.ValueXml.InnerText.Trim();
+                    propertyValue.SerializedValue = Value.Trim();
+                }
             }
-            else
+            catch
             {
-                //Simply set text
-                string Value = settingElement.Value.ValueXml.InnerText.Trim();
-                propertyValue.SerializedValue = Value.Trim();
+                GetDefaultValue(setting, propertyValue);
             }
         }
 

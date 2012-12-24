@@ -140,6 +140,9 @@
     <Compile Include="Panels\Common\PreviewItem.xaml.cs">
       <DependentUpon>PreviewItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Panels\SerieSelectionControl.xaml.cs">
+      <DependentUpon>SerieSelectionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\Settings\LoggingSettingsPanel.xaml.cs">
       <DependentUpon>LoggingSettingsPanel.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.cs" />
+    <Compile Include="ViewModels\Panels\SerieSelectionViewModel.cs" />
+    <Compile Include="Wizards\AddEpisodesWizard.xaml.cs">
+      <DependentUpon>AddEpisodesWizard.xaml</DependentUpon>
+    </Compile>
     <Page Include="Common\CheckCombobox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Panels\RatingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\SerieSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -435,6 +446,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Wizards\AddEpisodesWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -595,6 +610,10 @@
       <Project>{d6017df9-ae81-49b8-857a-495ce8275db0}</Project>
       <Name>tmcSFCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFData\tmcSFData.csproj">
+      <Project>{8c879bc1-7e2d-4ae2-be01-f7c646827424}</Project>
+      <Name>tmcSFData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFLog\tmcSFLog.csproj">
       <Project>{8c2b5f04-ef8f-46b8-b775-fd602b8afaed}</Project>
       <Name>tmcSFLog</Name>
@@ -608,6 +627,7 @@
       <Name>tmcWinUIPlayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>move /y $(SolutionDir)bin\$(ConfigurationName)\*.dll $(SolutionDir)bin\$(ConfigurationName)\lib
