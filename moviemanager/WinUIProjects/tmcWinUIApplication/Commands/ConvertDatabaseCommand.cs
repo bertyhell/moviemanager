@@ -19,7 +19,7 @@ namespace Tmc.WinUI.Application.Commands
             string DatabasePath = Settings.Default.DatabasePath;
             string ConnectionString = Settings.Default.ConnectionString.Replace("{path}", DatabasePath);
 
-            TmcDatabaseCreation.ConvertDatabase(ConnectionString);
+            TmcDatabase.ConvertDatabase();
         }
     }
 }

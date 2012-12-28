@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlServerCe;
+using System.IO;
 using Model;
 using System.Data.Common;
 using Tmc.DataAccess.Sqlite.DsVideosTableAdapters;
@@ -12,10 +13,27 @@ namespace Tmc.DataAccess.Sqlite
 {
     public class TmcDatabase
     {
-        public static void Init(String connectionString)
+        public static readonly int CURRENT_DATABASE_VERSION = 1;
+
+        public static void Init(String pathToDatabase)
         {
-            Database.Init(connectionString);
-            TmcDatabaseCreation.Init(connectionString);
+            if (!File.Exists(pathToDatabase))
+            {
+                TmcDatabaseCreation.CreateDatabase(pathToDatabase);
+            }
+            SqlCeConnection Connection = Database.Init(pathToDatabase);
+            TmcDatabaseCreation.Init(Connection);
+            ConvertDatabase();
+        }
+
+        public static bool ConvertDatabase()
+        {
+            return TmcDatabaseCreation.ConvertDatabase();
+        }
+
+        public static DatabaseDetails GetDatabaseDetails()
+        {
+            return TmcDatabaseCreation.GetDatabaseDetails();
         }
 
         public static IList<Video> SelectAllVideos()
@@ -33,7 +51,7 @@ namespace Tmc.DataAccess.Sqlite
             {
                 var Video = new Video
                 {
-                    Id = (uint)Row.id,
+                    Id = Row.id,
                     IdImdb = Row.id_imdb,
                     Name = Row.name,
                     Release = Row.release,
@@ -124,7 +142,7 @@ namespace Tmc.DataAccess.Sqlite
                     Row.path = videos[I].Path;
                     Row.name = videos[I].Name;
                     DatasetVideos.Videos.AddVideosRow(Row);
-                    videos[I].Id = (uint)Row.id;
+                    videos[I].Id = Row.id;
 
                     Episode Episode = videos[I] as Episode;
                     if (Episode != null)
@@ -250,7 +268,7 @@ namespace Tmc.DataAccess.Sqlite
             return RetVal;
         }
 
-        public static void InsertVideoGenre(uint videoId, string genreLabel)
+        public static void InsertVideoGenre(int videoId, string genreLabel)
         {
             SqlCeDataReader Reader = null;
             try
@@ -456,15 +474,26 @@ namespace Tmc.DataAccess.Sqlite
             return RetVal;
         }
 
-        public static List<String> GetMovieGenres()
+        public static List<string> GetMovieGenres()
         {
-            List<String> Genres = new List<string>();
+            List<string> Genres = new List<string>();
             DbDataReader Reader = Database.GetReader("SELECT gen_label FROM genres");
             while (Reader.Read())
             {
                 Genres.Add(Reader.GetString(0));
             }
             return Genres;
+        }
+
+        public static int GetLastInsertedId()
+        {
+            int RetVal = -1;
+            DbDataReader Reader = Database.GetReader("SELECT @@IDENTITY AS ID");
+            while (Reader.Read())
+            {
+                RetVal = (int)(decimal)Reader["ID"];
+            }
+            return RetVal;
         }
 
         #region add series
@@ -478,9 +507,9 @@ namespace Tmc.DataAccess.Sqlite
             DsVideos.SeriesRow SerieRow = DsVideos.Series.NewSeriesRow();
             SerieRow.name = serie.Name;
             DsVideos.Series.AddSeriesRow(SerieRow);
-            serie.Id = SerieRow.id;
 
             SeriesTableAdapter.Update(DsVideos.Series);
+            serie.Id = GetLastInsertedId();
         }
 
         #endregion

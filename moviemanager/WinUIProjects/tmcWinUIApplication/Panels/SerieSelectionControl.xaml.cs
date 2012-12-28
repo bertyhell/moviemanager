@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
 using Tmc.WinUI.Application.ViewModels.Panels;
 
 namespace Tmc.WinUI.Application.Panels
@@ -26,6 +27,18 @@ namespace Tmc.WinUI.Application.Panels
         {
             InitializeComponent();
             DataContext = _viewModel;
+        }
+
+        public Serie Serie
+        {
+            get
+            {
+                if (_viewModel.IsCreateNewSerieSelected)
+                    return new Serie {Name = _viewModel.NewSerieName};
+                if (_viewModel.SelectedSerie != null)
+                    return _viewModel.SelectedSerie;
+                return null;
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.ComponentModel;
@@ -14,7 +16,7 @@ namespace Model
 
     public class Video : INotifyPropertyChanged, IEditableObject, IPreviewInfoRetriever
     {
-        private uint _id;
+        private int _id;
         private String _idImdb;
         private String _name;
         private DateTime _release;
@@ -143,8 +145,8 @@ namespace Model
             get { return _analyseCompleted; }
             set { _analyseCompleted = value; OnPropertyChanged("AnalyseCompleted"); }
         }
-
-        public uint Id
+        [Key]
+        public int Id
         {
             get { return _id; }
             set
@@ -385,7 +387,7 @@ namespace Model
 
         #region ieditableobject
 
-        private uint _oldid;
+        private int _oldid;
         private String _oldidImdb;
         private String _oldname;
         private DateTime _oldrelease;
@@ -405,6 +407,7 @@ namespace Model
 
         private bool _editInProgress;
 
+        //TODO 040: Replace backup props with backup Video object
         public void BeginEdit()
         {
             if (!_editInProgress)

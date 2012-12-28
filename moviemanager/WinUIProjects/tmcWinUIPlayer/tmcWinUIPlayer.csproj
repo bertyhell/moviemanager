@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tmc.WinUI.Player</RootNamespace>
     <AssemblyName>Tmc.WinUI.Player</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
@@ -101,15 +104,15 @@
   <ItemGroup>
     <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFModel\tmcSFModel.csproj">
       <Project>{3B9B5FE6-81CC-4714-86E1-16A10C44DEA2}</Project>
-      <Name>Model</Name>
+      <Name>tmcSFModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFLog\tmcSFLog.csproj">
       <Project>{8c2b5f04-ef8f-46b8-b775-fd602b8afaed}</Project>
-      <Name>MovieManager.LOG</Name>
+      <Name>tmcSFLog</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFCommon\tmcSFCommon.csproj">
       <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
-      <Name>tmcCommon</Name>
+      <Name>tmcSFCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

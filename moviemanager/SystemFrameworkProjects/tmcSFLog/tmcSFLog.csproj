@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tmc.SystemFrameworks.Log</RootNamespace>
     <AssemblyName>Tmc.SystemFrameworks.Log</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
@@ -41,12 +43,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\Lib\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq">
-      <HintPath>..\..\Lib\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
@@ -78,11 +74,6 @@
       <DependentUpon>LoggingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LogLevelEnum.cs" />
-    <Compile Include="Model\DsLogging.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DsLogging.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Model\LogDatabase.cs" />
     <Compile Include="Model\LoggingEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -109,7 +100,6 @@
     <None Include="Model\DsLogging.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DsLogging.Designer.cs</LastGenOutput>
     </None>
     <None Include="Model\DsLogging.xss">
       <DependentUpon>DsLogging.xsd</DependentUpon>
@@ -123,7 +113,7 @@
   <ItemGroup>
     <ProjectReference Include="..\tmcSFCommon\tmcSFCommon.csproj">
       <Project>{D6017DF9-AE81-49B8-857A-495CE8275DB0}</Project>
-      <Name>tmcCommon</Name>
+      <Name>tmcSFCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

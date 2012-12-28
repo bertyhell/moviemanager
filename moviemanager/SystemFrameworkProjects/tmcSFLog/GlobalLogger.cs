@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Data.SQLite;
 using System.IO;
 using Tmc.SystemFrameworks.Common;
 using log4net;
@@ -134,25 +133,25 @@ namespace Tmc.SystemFrameworks.Log
 
         private void CreateLogDb(FileInfo file)
         {
-            using (var Conn = new SQLiteConnection())
-            {
-                Conn.ConnectionString = string.Format("Data Source={0};New=True;Compress=True;Synchronous=Off", file.FullName);
-                Conn.Open();
-                var Cmd = Conn.CreateCommand();
+//            using (var Conn = new SQLiteConnection())
+//            {
+//                Conn.ConnectionString = string.Format("Data Source={0};New=True;Compress=True;Synchronous=Off", file.FullName);
+//                Conn.Open();
+//                var Cmd = Conn.CreateCommand();
 
-                Cmd.CommandText =
-                                 @"CREATE TABLE Log(
-                            LogId     INTEGER PRIMARY KEY,
-                            Date      DATETIME NOT NULL,
-                            Level     VARCHAR(50) NOT NULL,
-                            Logger    VARCHAR(255) NOT NULL,
-                            Message   TEXT DEFAULT NULL
-                        );";
+//                Cmd.CommandText =
+//                                 @"CREATE TABLE Log(
+//                            LogId     INTEGER PRIMARY KEY,
+//                            Date      DATETIME NOT NULL,
+//                            Level     VARCHAR(50) NOT NULL,
+//                            Logger    VARCHAR(255) NOT NULL,
+//                            Message   TEXT DEFAULT NULL
+//                        );";
 
-                Cmd.ExecuteNonQuery();
-                Cmd.Dispose();
-                Conn.Close();
-            }
+//                Cmd.ExecuteNonQuery();
+//                Cmd.Dispose();
+//                Conn.Close();
+//            }
         }
     }
 

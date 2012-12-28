@@ -10,9 +10,10 @@ namespace Tmc.DataAccess.Sqlite
         //private const String ConnString = @"data source='C:\ProgramData\MovieManager\Database\moviemanager.sqlite'";
         private static SqlCeConnection _conn;
 
-        public static void Init(string connectionString)
+        public static SqlCeConnection Init(string pathToDatabase)
         {
-            _conn = GetConnection(connectionString);
+            _conn = GetConnection(string.Format("Data Source = {0};", pathToDatabase));
+            return _conn;
         }
 
         public static void ExecuteSql(SqlCeConnection conn, SqlCeTransaction transaction, string sql, params SqlCeParameter[] @params)
@@ -86,7 +87,7 @@ namespace Tmc.DataAccess.Sqlite
             SqlCeCommand Cmd = GetCommand(conn, transaction, sql, @params);
             return Cmd.ExecuteReader();
         }
-
+        
         public static SqlCeDataAdapter GetAdapter(string sql, params SqlCeParameter[] @params)
         {
             return GetAdapter(null, sql, @params);
