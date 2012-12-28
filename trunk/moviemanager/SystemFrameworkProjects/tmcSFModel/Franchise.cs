@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    class Franchise
+    public class Franchise
     {
         public int Id { get; set; }
 

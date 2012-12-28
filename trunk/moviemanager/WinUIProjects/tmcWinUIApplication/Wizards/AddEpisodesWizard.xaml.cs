@@ -21,21 +21,27 @@ namespace Tmc.WinUI.Application.Wizards
 
         private void AddSeries()
         {
+            ObservableCollection<Uri> Folders = _folderSelectionControl.Folders;
+            if (Folders == null || Folders.Count == 0)
+                throw new NullReferenceException("No folders specified");
+            string SelectedPath = Folders[0].AbsolutePath;
 
 
-            String Path = ConfigurationManager.AppSettings["defaultVideoLocation"];
-            if (!new DirectoryInfo(Path).Exists)
-            {
-                Path = ConfigurationManager.AppSettings["defaultVideoLocation1"];
-            }
-            FolderBrowserDialog Odd = new FolderBrowserDialog { SelectedPath = Path };
-            if (Odd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
-                MovieFileReader MovieFileReader = new MovieFileReader(new DirectoryInfo(Odd.SelectedPath), Properties.Settings.Default.VideoInsertionSettings);
-                MovieFileReader.GetSerie(new DirectoryInfo(Odd.SelectedPath), "", "", LocalVideos);
-                TmcDatabase.InsertVideosHdd(LocalVideos);
-            }
+            //add serie if necessary
+            Serie Serie = _serieSelectionControl.Serie;
+            if (Serie.Id == 0)
+                TmcDatabase.AddSerie(Serie);
+
+            //add videos
+            ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
+            MovieFileReader MovieFileReader = new MovieFileReader(new DirectoryInfo(SelectedPath), Properties.Settings.Default.VideoInsertionSettings);
+            MovieFileReader.GetEpisodesForSerie(new DirectoryInfo(SelectedPath), Serie, LocalVideos, "", "");
+            TmcDatabase.InsertVideosHdd(LocalVideos);
+        }
+
+        private void Wizard_OnFinish(object sender, RoutedEventArgs e)
+        {
+            AddSeries();
         }
     }
 }

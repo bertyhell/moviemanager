@@ -27,19 +27,6 @@ namespace Tmc.WinUI.Application
 
         private MainController()
         {
-            //init database
-            string DatabasePath = Settings.Default.DatabasePath.Replace("%APPDATA%", DefaultValues.PATH_USER_APPDATA);
-            bool DatabaseUpdated = false;
-            if (!File.Exists(DatabasePath))
-            {
-                EditSettingsCommand EditSettingsCommand = new EditSettingsCommand(typeof(DatabaseSettingsPanel));
-                EditSettingsCommand.Execute(null);
-                DatabaseUpdated = true;
-            }
-            string ConnectionString = Settings.Default.ConnectionString.Replace("{path}", DatabasePath);
-            TmcDatabase.Init(ConnectionString);
-            if (!DatabaseUpdated)
-                TmcDatabaseCreation.ConvertDatabase(ConnectionString);
 
             _videos = new ObservableCollection<Video>();
             ReloadVideos();

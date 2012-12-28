@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tmc.DataAccess.Sqlite</RootNamespace>
     <AssemblyName>Tmc.DataAccess.Sqlite</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -27,6 +27,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,16 +68,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Database.cs" />
-    <Compile Include="DsDatabaseVersion.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DsDatabaseVersion.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DsVideos.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DsVideos.xsd</DependentUpon>
-    </Compile>
     <Compile Include="TmcDatabase.cs" />
     <Compile Include="TmcDatabaseCreation.cs" />
     <Compile Include="MovieFileReader.cs">
@@ -95,7 +88,6 @@
     <None Include="DsDatabaseVersion.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DsDatabaseVersion.Designer.cs</LastGenOutput>
     </None>
     <None Include="DsDatabaseVersion.xss">
       <DependentUpon>DsDatabaseVersion.xsd</DependentUpon>
@@ -106,7 +98,6 @@
     <None Include="DsVideos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DsVideos.Designer.cs</LastGenOutput>
     </None>
     <None Include="DsVideos.xss">
       <DependentUpon>DsVideos.xsd</DependentUpon>

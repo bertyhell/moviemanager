@@ -27,7 +27,7 @@ namespace Tmc.WinUI.Application.Cache
 
         }
 
-        public static void AddVideoImages(uint videoId, List<Uri> images, CacheImageType imageType, ImageQuality imageQuality)
+        public static void AddVideoImages(int videoId, List<Uri> images, CacheImageType imageType, ImageQuality imageQuality)
         {
             if ((int)imageType >= (int)CacheImageType.PostersAndImages)
                 throw new NotSupportedException("Combined cache image type not supported for setters!");
@@ -41,7 +41,7 @@ namespace Tmc.WinUI.Application.Cache
             }
         }
 
-        public static Uri AddVideoImage(uint videoId, Uri image, CacheImageType imageType, ImageQuality imageQuality)
+        public static Uri AddVideoImage(int videoId, Uri image, CacheImageType imageType, ImageQuality imageQuality)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace Tmc.WinUI.Application.Cache
             return RetVal;
         }
 
-        public static Uri GetImage(uint videoId, Uri imageUri, CacheImageType imageType)
+        public static Uri GetImage(int videoId, Uri imageUri, CacheImageType imageType)
         {
             string FilePath = Path.Combine(
                 _cacheFolder,

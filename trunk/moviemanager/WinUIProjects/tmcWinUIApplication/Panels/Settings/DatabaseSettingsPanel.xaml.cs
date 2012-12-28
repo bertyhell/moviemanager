@@ -69,12 +69,11 @@ namespace Tmc.WinUI.Application.Panels.Settings
         {
             if (File.Exists(_pathToDatabase))
             {
-                TmcDatabaseCreation.Init(Tmc.WinUI.Application.Properties.Settings.Default.ConnectionString.Replace("{path}", _pathToDatabase));
-                DatabaseDetails = TmcDatabaseCreation.GetDatabaseDetails();
+                DatabaseDetails = TmcDatabase.GetDatabaseDetails();
             }
             else
             {
-                DatabaseDetails = new DatabaseDetails { DatabaseVersion = 0, RequiredVersion = TmcDatabaseCreation.CURRENT_DATABASE_VERSION };
+                DatabaseDetails = new DatabaseDetails { DatabaseVersion = 0, RequiredVersion = TmcDatabase.CURRENT_DATABASE_VERSION };
             }
         }
 

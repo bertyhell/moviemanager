@@ -1,8 +1,13 @@
 ﻿using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
+using Tmc.DataAccess.Sqlite;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
+using Tmc.WinUI.Application.Commands;
+using Tmc.WinUI.Application.Panels.Settings;
 using Tmc.WinUI.Application.Properties;
 
 namespace Tmc.WinUI.Application
@@ -32,6 +37,10 @@ namespace Tmc.WinUI.Application
             GlobalLogger.Instance.LogLevel = Settings.Default.Log_Level;
             GlobalLogger.Instance.MovieManagerLogger.Info("Program started");
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
+            //Check if database exists
+            string DatabasePath = Settings.Default.DatabasePath.Replace("%APPDATA%", DefaultValues.PATH_USER_APPDATA);
+            TmcDatabase.Init(DatabasePath);
             base.OnStartup(e);
         }
 

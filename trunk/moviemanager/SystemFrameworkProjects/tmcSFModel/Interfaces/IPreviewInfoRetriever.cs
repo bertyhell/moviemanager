@@ -5,7 +5,7 @@ namespace Model.Interfaces
 {
     public interface IPreviewInfoRetriever
     {
-        uint Id { get; set; }
+        int Id { get; set; }
         List<ImageInfo> Images { get; set; }
         ImageInfo Thumbnail { get; set; }
         ImageInfo Poster { get; set; }

@@ -12,7 +12,7 @@ namespace Model
             MovieImageUrls = new List<ImageInfo>();
         }
 
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         public ImageInfo Thumbnail
         {

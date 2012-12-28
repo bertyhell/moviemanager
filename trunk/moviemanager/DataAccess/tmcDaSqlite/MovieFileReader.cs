@@ -110,18 +110,12 @@ namespace Tmc.DataAccess.Sqlite
         
         #region series
 
-        public void GetSerie(DirectoryInfo dir, string seasonDir, string episodeString, ObservableCollection<Video> videos)
+        public void GetEpisodesForSerie(DirectoryInfo dir, Serie serie, ObservableCollection<Video> videos, string seasonDir, string episodeString)
         {
-
-
             //get all files
             ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
             GetVideos(dir, LocalVideos);
-
-            //create Serie in database
-            Serie Serie = new Serie { Name = dir.FullName.Substring(dir.FullName.LastIndexOf("\\", StringComparison.Ordinal) + 1) };
-            TmcDatabase.AddSerie(Serie);
-
+            
             //convert video to episode
             foreach (Video Video in LocalVideos)
             {
@@ -146,7 +140,7 @@ namespace Tmc.DataAccess.Sqlite
                         Episode Episode = (Episode)Video.ConvertVideo(VideoTypeEnum.Episode, Video);
                         Episode.EpisodeNumber = EpisodeNumber;
                         Episode.Season = SeasonNumber;
-                        Episode.SerieId = Serie.Id;
+                        Episode.SerieId = serie.Id;
                         videos.Add(Episode);
 
                         RegexMatched = true;

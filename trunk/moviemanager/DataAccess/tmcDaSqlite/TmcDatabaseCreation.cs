@@ -1,37 +1,35 @@
 ﻿using System;
+using System.IO;
 using Model;
 using Tmc.DataAccess.Sqlite.DsDatabaseVersionTableAdapters;
 using System.Data.SqlServerCe;
 
 namespace Tmc.DataAccess.Sqlite
 {
-    public class TmcDatabaseCreation
+    internal class TmcDatabaseCreation
     {
-        public static readonly int CURRENT_DATABASE_VERSION = 1;
         private static SqlCeConnection _conn;
 
-        public static void Init(string connectionString)
+        public static void Init(SqlCeConnection connection)
         {
-            _conn = Database.GetConnection(connectionString);
+            _conn = connection;
         }
 
-        //public static event VideosChanged OnVideosChanged;
-        //don't use videos changed -> all database operations could be run in different thread -> different trhead has no access to observable collection
-        //update lists in maincontroller in commandobjects
-
-        public static bool ConvertDatabase(string connectionString)
+        /// <summary>
+        /// This will convert the database to the new version
+        /// </summary>
+        public static bool ConvertDatabase()
         {
-            Init(connectionString);
             bool Retval = true;
             DatabaseDetails Details;
             try { Details = GetDatabaseDetails(); }
             catch
             {
-                Details = new DatabaseDetails { DatabaseVersion = 1, RequiredVersion = CURRENT_DATABASE_VERSION };
-                Retval &= CreateDatabase();
+                Details = new DatabaseDetails { DatabaseVersion = 1, RequiredVersion = TmcDatabase.CURRENT_DATABASE_VERSION };
+                Retval &= CreateTables100();
             }
 
-            if (Details.DatabaseVersion == CURRENT_DATABASE_VERSION)
+            if (Details.DatabaseVersion == TmcDatabase.CURRENT_DATABASE_VERSION)
                 return Retval;
 
             if (Retval && Details.DatabaseVersion < 2)
@@ -50,63 +48,66 @@ namespace Tmc.DataAccess.Sqlite
 
         }
 
-
-        public static bool CreateDatabase()
+        /// <summary>
+        /// Creates a database file
+        /// </summary>
+        public static SqlCeConnection CreateDatabase(string pathToDatabase)
         {
-            bool Retval;
+            if (File.Exists(pathToDatabase))
+                File.Delete(pathToDatabase);
 
-            try
-            {
-                string SqlQuery =
-                    "CREATE TABLE Genres ( gen_id INTEGER PRIMARY KEY AUTOINCREMENT, gen_label TEXT NOT NULL UNIQUE )";
-                Database.ExecuteSql(SqlQuery);
+            string ConnStr = string.Format("Data Source = {0};", pathToDatabase);
 
-                SqlQuery = "CREATE TABLE Franchises (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR NOT NULL)";
-                Database.ExecuteSql(SqlQuery);
+            SqlCeEngine Engine = new SqlCeEngine(ConnStr);
+            Engine.CreateDatabase();
+            Engine.Dispose();
 
-                SqlQuery = "CREATE TABLE Series (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL)";
-                Database.ExecuteSql(SqlQuery);
+            return new SqlCeConnection(ConnStr);
+        }
 
-                SqlQuery =
-                    "CREATE TABLE Videos ( id INTEGER PRIMARY KEY AUTOINCREMENT, id_imdb VARCHAR(10) DEFAULT NULL, name VARCHAR(255) NOT NULL, release DATE, play_count INTEGER DEFAULT 0 NOT NULL, "
-                    + "rating DOUBLE DEFAULT -1 NOT NULL, rating_imdb DOUBLE DEFAULT -1 NOT NULL, path VARCHAR(255), last_play_location INTEGER NOT NULL default 0, runtime TIME,"
-                    + "play_count INTEGER DEFAULT 0 NOT NULL, poster VARCHAR(255) )";
-                Database.ExecuteSql(SqlQuery);
+        /// <summary>
+        /// Creates the tables for version 100
+        /// </summary>
+        private static bool CreateTables100()
+        {
+            string SqlQuery = "CREATE TABLE Genres ( gen_id INTEGER IDENTITY PRIMARY KEY, gen_label NVARCHAR NOT NULL UNIQUE )";
+            Database.ExecuteSql(SqlQuery);
 
-                SqlQuery = "CREATE TABLE Movies ( id INTEGER PRIMARY KEY, franchise_id INTEGER, id_tmdb INTEGER," +
-                           " FOREIGN KEY(id) REFERENCES Videos(id)" +
-                           " FOREIGN KEY(franchise_id) REFERENCES Franchises(id))";
-                Database.ExecuteSql(SqlQuery);
+            SqlQuery = "CREATE TABLE Franchises (id INTEGER IDENTITY PRIMARY KEY, name NVARCHAR NOT NULL)";
+            Database.ExecuteSql(SqlQuery);
 
-                SqlQuery =
-                    "CREATE TABLE Episodes ( id INTEGER PRIMARY KEY, serie_id INTEGER NOT NULL, season INTEGER NOT NULL, episode_number," +
-                    " FOREIGN KEY(id) REFERENCES Videos(id)" +
-                    " FOREIGN KEY(serie_id) REFERENCES Series(id))";
-                Database.ExecuteSql(SqlQuery);
+            SqlQuery = "CREATE TABLE Series (id INTEGER IDENTITY PRIMARY KEY, name NVARCHAR(255) NOT NULL)";
+            Database.ExecuteSql(SqlQuery);
 
-                SqlQuery = "CREATE TABLE Videos_genres ( video_id INTEGER NOT NULL, genre_id INTEGER NOT NULL," +
-                           "UNIQUE (video_id, genre_id) ON CONFLICT ABORT, " +
-                           "FOREIGN KEY(video_id) REFERENCES Videos(id)," +
-                           "FOREIGN KEY(genre_id) REFERENCES Genres(gen_id))";
-                Database.ExecuteSql(SqlQuery);
+            SqlQuery = "CREATE TABLE Videos ( id INTEGER IDENTITY PRIMARY KEY, id_imdb NVARCHAR(10) DEFAULT NULL, name NVARCHAR(255) NOT NULL, release DATETIME, play_count INTEGER DEFAULT 0 NOT NULL, " +
+                "rating REAL DEFAULT -1 NOT NULL, rating_imdb REAL DEFAULT -1 NOT NULL, path NVARCHAR(255), last_play_location INTEGER NOT NULL default 0, runtime DATETIME, poster NVARCHAR(255) )";
+            Database.ExecuteSql(SqlQuery);
 
-                SqlQuery =
-                    "CREATE TABLE Database_version ( id INTEGER PRIMARY KEY AUTOINCREMENT, version INTEGER NOT NULL, timestamp DATETIME default current_timestamp , description VARCHAR(255) )";
-                Database.ExecuteSql(SqlQuery);
+            SqlQuery = "CREATE TABLE Movies ( id INTEGER PRIMARY KEY, franchise_id INTEGER, id_tmdb INTEGER," +
+                         "FOREIGN KEY(id) REFERENCES Videos(id), " +
+                         "FOREIGN KEY(franchise_id) REFERENCES Franchises(id))";
+            Database.ExecuteSql(SqlQuery);
 
+            SqlQuery = "CREATE TABLE Episodes ( id INTEGER PRIMARY KEY, serie_id INTEGER NOT NULL, season INTEGER NOT NULL, episode_number INTEGER DEFAULT -1 NOT NULL, " +
+                 "FOREIGN KEY(id) REFERENCES Videos(id)," +
+                 "FOREIGN KEY(serie_id) REFERENCES Series(id))";
+            Database.ExecuteSql(SqlQuery);
 
-                SqlQuery = "CREATE TABLE Video_folders ( id INTEGER PRIMARY KEY AUTOINCREMENT, path VARCHAR(255) NOT NULL UNIQUE, auto_update INTEGER DEFAULT 0 )";
-                Database.ExecuteSql(SqlQuery);
+            SqlQuery = "CREATE TABLE Videos_genres ( video_id INTEGER NOT NULL, genre_id INTEGER NOT NULL," +
+                "CONSTRAINT UniqueConstraint UNIQUE (video_id, genre_id), " +
+                "FOREIGN KEY(video_id) REFERENCES Videos(id), " +
+                "FOREIGN KEY(genre_id) REFERENCES Genres(gen_id))";
+            Database.ExecuteSql(SqlQuery);
 
-                AddDefaultValuesVersion001();
+            SqlQuery = "CREATE TABLE Database_version ( id INTEGER IDENTITY PRIMARY KEY, version INTEGER NOT NULL, timestamp DATETIME default GETDATE(), description NVARCHAR(255) )";
+            Database.ExecuteSql(SqlQuery);
 
-                Retval = true;
-            }
-            catch
-            {
-                Retval = false;
-            }
-            return Retval;
+            SqlQuery = "CREATE TABLE Video_folders ( id INTEGER IDENTITY PRIMARY KEY, path NVARCHAR(255) NOT NULL UNIQUE, auto_update INTEGER DEFAULT 0 )";
+            Database.ExecuteSql(SqlQuery);
+
+            AddDefaultValuesVersion001();
+
+            return true;
         }
 
         private static void AddDefaultValuesVersion001()
@@ -136,23 +137,8 @@ namespace Tmc.DataAccess.Sqlite
             DatabaseDetails RetVal = new DatabaseDetails();
             DsDatabaseVersion DataSet = new DsDatabaseVersion();
 
-            Database_versionTableAdapter DatabaseVersionTableAdapter = new Database_versionTableAdapter{Connection = _conn};
-
-            try
-            {
-                DatabaseVersionTableAdapter.Fill(DataSet.Database_version);
-            }
-            catch
-            {
-                //database version table doesn't exist
-                //create database
-                //TODO 040 make backup of old database if not empty
-                //TODO 030 make a database backup manager
-
-                CreateDatabase();
-                
-            }
-            
+            Database_versionTableAdapter DatabaseVersionTableAdapter = new Database_versionTableAdapter { Connection = _conn };
+            DatabaseVersionTableAdapter.Fill(DataSet.Database_version);
 
             int DatabaseVersion = 0;
             foreach (DsDatabaseVersion.Database_versionRow DatabaseVersionRow in DataSet.Database_version.Rows)
@@ -170,7 +156,7 @@ namespace Tmc.DataAccess.Sqlite
                 });
             }
             RetVal.DatabaseVersion = DatabaseVersion;
-            RetVal.RequiredVersion = CURRENT_DATABASE_VERSION;
+            RetVal.RequiredVersion = TmcDatabase.CURRENT_DATABASE_VERSION;
 
 
             return RetVal;
