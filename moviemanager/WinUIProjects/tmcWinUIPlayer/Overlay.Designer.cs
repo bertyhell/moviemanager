@@ -1,4 +1,4 @@
-﻿namespace MovieManager.PLAYER
+﻿namespace Tmc.WinUI.Player
 {
     partial class Overlay
     {

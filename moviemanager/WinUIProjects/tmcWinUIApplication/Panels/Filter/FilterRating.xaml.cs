@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using Model;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Filter
 {

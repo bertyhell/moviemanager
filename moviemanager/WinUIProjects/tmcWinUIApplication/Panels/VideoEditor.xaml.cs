@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
-using Model;
+using Tmc.SystemFrameworks.Model;
 using Tmc.WinUI.Application.Commands;
 
 namespace Tmc.WinUI.Application.Panels
@@ -58,9 +58,9 @@ namespace Tmc.WinUI.Application.Panels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonClick(object sender, RoutedEventArgs e)
         {
-            UpdateVideosCommand UpdateVideosCommand = new UpdateVideosCommand(this.Video);
+            UpdateVideosCommand UpdateVideosCommand = new UpdateVideosCommand(Video);
             UpdateVideosCommand.Execute(new object());
         }
     }

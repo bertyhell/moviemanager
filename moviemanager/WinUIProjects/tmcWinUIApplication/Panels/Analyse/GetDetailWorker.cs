@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Model;
 using Tmc.BusinessRules.Web.Search;
 using Tmc.SystemFrameworks.Common;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Analyse
 {
@@ -42,7 +42,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                     SearchTmdb.GetMovieImages(Movie);
                     Movie.AnalyseCompleted = true;
                 }
-                OnVideoInfoProgress(new ProgressEventArgs() { MaxNumber = _videos.Count, ProgressNumber = I });
+                OnVideoInfoProgress(new ProgressEventArgs { MaxNumber = _videos.Count, ProgressNumber = I });
             }
 
         }

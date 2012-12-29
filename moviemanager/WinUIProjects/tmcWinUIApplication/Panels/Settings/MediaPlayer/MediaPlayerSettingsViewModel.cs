@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using MovieManager.PLAYER.Logic;
 using Tmc.WinUI.Player.Logic;
 
 namespace Tmc.WinUI.Application.Panels.Settings.MediaPlayer

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using Model.Interfaces;
+using Tmc.SystemFrameworks.Model.Interfaces;
 
 namespace Tmc.WinUI.Application.Panels.Common
 {
@@ -37,12 +37,7 @@ namespace Tmc.WinUI.Application.Panels.Common
 
     public class ThumbnailDescriptionControlController : INotifyPropertyChanged
     {
-        public ThumbnailDescriptionControlController()
-        {
-
-        }
-
-        private IPreviewInfoRetriever _item;
+	    private IPreviewInfoRetriever _item;
 
         public IPreviewInfoRetriever Item
         {

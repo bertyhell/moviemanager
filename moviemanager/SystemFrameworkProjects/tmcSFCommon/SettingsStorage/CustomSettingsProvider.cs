@@ -329,7 +329,7 @@ namespace Tmc.SystemFrameworks.Common.SettingsStorage
                                                          Indent = false,
                                                          NewLineHandling = NewLineHandling.None
                                                      };
-                    using (XmlWriter XmlWriter = XmlTextWriter.Create(StringWriter, Settings))
+                    using (XmlWriter XmlWriter = XmlWriter.Create(StringWriter, Settings))
                     {
                         Serializer.Serialize(XmlWriter, PropValue);
                         SerializedValue = StringWriter.ToString();

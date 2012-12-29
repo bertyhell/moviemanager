@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Model.Interfaces
+namespace Tmc.SystemFrameworks.Model.Interfaces
 {
     public interface IPreviewInfoRetriever
     {

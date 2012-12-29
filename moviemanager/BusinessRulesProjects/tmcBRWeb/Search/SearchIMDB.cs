@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
-using Model;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.BusinessRules.Web.Search
 {

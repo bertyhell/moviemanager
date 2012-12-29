@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
-using Model;
 using Tmc.DataAccess.SqlCe;
+using Tmc.SystemFrameworks.Model;
 
 namespace DataAccess
 {

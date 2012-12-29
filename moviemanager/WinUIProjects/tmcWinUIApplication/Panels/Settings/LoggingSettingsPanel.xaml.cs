@@ -15,11 +15,11 @@ namespace Tmc.WinUI.Application.Panels.Settings
         {
             InitializeComponent();
 
-            LoggingEnabled = Tmc.WinUI.Application.Properties.Settings.Default.Log_enabled;
-            SelectedLogLevel = Tmc.WinUI.Application.Properties.Settings.Default.Log_Level;
+            LoggingEnabled = Properties.Settings.Default.Log_enabled;
+            SelectedLogLevel = Properties.Settings.Default.Log_Level;
             _panelName = "Logging";
             _iconPath = "/MovieManager;component/Images/log_32.png";
-            this.DataContext = this;
+            DataContext = this;
         }
 
         public bool LoggingEnabled
@@ -50,8 +50,8 @@ namespace Tmc.WinUI.Application.Panels.Settings
 
         public override bool SaveSettings()
         {
-            Tmc.WinUI.Application.Properties.Settings.Default.Log_enabled = LoggingEnabled;
-            Tmc.WinUI.Application.Properties.Settings.Default.Log_Level = SelectedLogLevel;
+            Properties.Settings.Default.Log_enabled = LoggingEnabled;
+            Properties.Settings.Default.Log_Level = SelectedLogLevel;
             return base.SaveSettings();
         }
     }

@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Bing;
-using Model;
 using Tmc.BusinessRules.Web.Search;
 using Tmc.SystemFrameworks.Common;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Analyse
 {
@@ -50,8 +50,8 @@ namespace Tmc.WinUI.Application.Panels.Analyse
 
             int TotalProgressCounter = 0;
             int PassProgressCounter = 0;
-            int passes = 1;
-            if (_fullAnalyse) passes = 3;
+            int Passes = 1;
+            if (_fullAnalyse) Passes = 3;
             
             //pass1 (filename / foldername)
             foreach (AnalyseVideo AnalyseVideo in _analyseVideos)
@@ -66,7 +66,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
 
                 TotalProgressCounter++;
                 PassProgressCounter++;
-                OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * passes, ProgressNumber = TotalProgressCounter, Message = "Pass 1/" + passes });
+                OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * Passes, ProgressNumber = TotalProgressCounter, Message = "Pass 1/" + Passes });
                 OnPassProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter });
             }
 
@@ -101,7 +101,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                     }
                     TotalProgressCounter++;
                     PassProgressCounter++;
-                    OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * passes, ProgressNumber = TotalProgressCounter, Message = "Pass 2/" + passes });
+                    OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * Passes, ProgressNumber = TotalProgressCounter, Message = "Pass 2/" + Passes });
                     OnPassProgress(new ProgressEventArgs {MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter});
                 }
 
@@ -136,7 +136,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                     }
                     TotalProgressCounter++;
                     PassProgressCounter++;
-                    OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * passes, ProgressNumber = TotalProgressCounter, Message = "Pass 3/" + passes });
+                    OnTotalProgress(new ProgressEventArgs { MaxNumber = _analyseVideos.Count * Passes, ProgressNumber = TotalProgressCounter, Message = "Pass 3/" + Passes });
                     OnPassProgress(new ProgressEventArgs {MaxNumber = _analyseVideos.Count, ProgressNumber = PassProgressCounter});
                 }
             }

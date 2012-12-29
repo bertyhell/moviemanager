@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using MovieManager.PLAYER.interop;
+using Tmc.WinUI.Player.interop;
 
-namespace MovieManager.PLAYER
+namespace Tmc.WinUI.Player
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct LibvlcException
@@ -22,20 +22,20 @@ namespace MovieManager.PLAYER
 
     public class VlcException : Exception
     {
-        protected string Err;
+        protected string _err;
 
         public VlcException()
         {
             IntPtr ErrorPointer = VlcLib.libvlc_errmsg();
-            Err = ErrorPointer == IntPtr.Zero ? "VLC Exception"
+            _err = ErrorPointer == IntPtr.Zero ? "VLC Exception"
                 : Marshal.PtrToStringAuto(ErrorPointer);
         }
 
         public VlcException(string exception)
         {
-            Err = exception;
+            _err = exception;
         }
 
-        public override string Message { get { return Err; } }
+        public override string Message { get { return _err; } }
     }
 }

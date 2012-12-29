@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:loc="clr-namespace:Tmc.WinUI.Application.Localization" xmlns:Panels="clr-namespace:MovieManager.APP.Panels"
+             xmlns:loc="clr-namespace:Tmc.WinUI.Application.Localization"
              xmlns:panels="clr-namespace:Tmc.WinUI.Application.Panels"
              mc:Ignorable="d" d:DesignWidth="500">
     

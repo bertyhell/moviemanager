@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using MovieManager.APP.Panels.Settings;
 using Tmc.WinUI.Application.Panels.Settings;
+using Tmc.WinUI.Application.Panels.Settings.MediaPlayer;
 
 namespace Tmc.WinUI.Application.Commands
 {
@@ -27,7 +27,7 @@ namespace Tmc.WinUI.Application.Commands
         {
             Object Object =Activator.CreateInstance(visiblePanel);
             if(!(Object is SettingsPanelBase))
-                throw new TypeInitializationException(this.GetType().FullName, new Exception("The given type " + visiblePanel.FullName + " does not implement interface 'SettingsPanelBase'"));
+                throw new TypeInitializationException(GetType().FullName, new Exception("The given type " + visiblePanel.FullName + " does not implement interface 'SettingsPanelBase'"));
 
             SettingsPanelBase Panel = (SettingsPanelBase) Object;
             Panel.IsExpanded = true;

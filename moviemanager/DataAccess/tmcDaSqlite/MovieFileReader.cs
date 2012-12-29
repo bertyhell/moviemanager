@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using Model;
 using System.IO;
 using System.Text.RegularExpressions;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Data;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.Sqlite
 {

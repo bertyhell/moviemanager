@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using Model;
 using Tmc.SystemFrameworks.Common;
+using Tmc.SystemFrameworks.Model;
 using Tmc.WinUI.Application.Panels.Search;
 using SearchOptions = Tmc.WinUI.Application.Panels.Search.SearchOptions;
 
@@ -19,7 +19,7 @@ namespace Tmc.WinUI.Application.Panels
 
 
         private List<Image> _imagesElements;
-        public readonly static DependencyProperty ImagesProperty = DependencyProperty.Register("Images", typeof(List<ImageInfo>),
+        public readonly static DependencyProperty IMAGES_PROPERTY = DependencyProperty.Register("Images", typeof(List<ImageInfo>),
                                                                           typeof(MovieScrollPanel), new PropertyMetadata(new List<ImageInfo>(), OnImagesChanged));
 
         private const double REPOSITION_SPEED = 100;
@@ -35,10 +35,10 @@ namespace Tmc.WinUI.Application.Panels
 
         public List<ImageInfo> Images
         {
-            get { return (List<ImageInfo>)GetValue(ImagesProperty); }
+            get { return (List<ImageInfo>)GetValue(IMAGES_PROPERTY); }
             set
             {
-                SetValue(ImagesProperty, value);
+                SetValue(IMAGES_PROPERTY, value);
             }
         }
 

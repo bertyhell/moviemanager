@@ -72,10 +72,10 @@ namespace Tmc.WinUI.Application.Commands
             Maximum = e.Videos.Count;
             IsIndeterminate = false;
             _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance,DataContext = this };
-            var BGWInsertVideos = new BgwInsertVideos(e.Videos);
+            var BgwInsertVideos = new BgwInsertVideos(e.Videos);
             DataRetriever.InsertVideosProgress += FileReader_OnInsertVideosProgress;
-            BGWInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
-            BGWInsertVideos.RunWorkerAsync();
+            BgwInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
+            BgwInsertVideos.RunWorkerAsync();
             _progressWindow.ShowDialog();
         }
 

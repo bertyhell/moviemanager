@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Configuration;
 using System.IO;
 using System.Windows;
-using System.Windows.Forms;
-using Model;
 using Tmc.DataAccess.SqlCe;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Wizards
 {

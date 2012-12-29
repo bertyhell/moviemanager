@@ -23,7 +23,7 @@ namespace Tmc.WinUI.Application.Commands
 
         public void Execute(object parameter)
         {
-            OpenFileDialog Ofd = new OpenFileDialog() { CheckFileExists = false, Filter = Resource.SqlServerCeFileFilter };
+            OpenFileDialog Ofd = new OpenFileDialog { CheckFileExists = false, Filter = Resource.SqlServerCeFileFilter };
             if (Ofd.ShowDialog() == DialogResult.OK)
             {
                 _pathToFile = Ofd.FileName;

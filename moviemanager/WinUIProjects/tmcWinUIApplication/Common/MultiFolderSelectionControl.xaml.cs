@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Forms;
 using Ookii.Dialogs.Wpf;
 using Tmc.WinUI.Application.Localization;
 using UserControl = System.Windows.Controls.UserControl;

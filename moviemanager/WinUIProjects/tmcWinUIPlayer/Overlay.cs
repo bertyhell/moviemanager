@@ -1,24 +1,23 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using MovieManager.PLAYER.Common;
-using Timer = System.Windows.Forms.Timer;
+using Tmc.WinUI.Player.Common;
 
-namespace MovieManager.PLAYER
+namespace Tmc.WinUI.Player
 {
     public partial class Overlay : Form
     {
         private readonly MMPlayer _parent;
         private MediaPlayerControl _controlBar;
-        private readonly Timer aTimer;
+        private readonly Timer _aTimer;
 
         public Overlay(MMPlayer parent)
         {
             InitializeComponent();
             _parent = parent; 
-            aTimer = new Timer();
-            aTimer.Tick += new System.EventHandler(aTimer_Tick);
+            _aTimer = new Timer();
+            _aTimer.Tick += ATimerTick;
             // Set the Interval to 5 seconds.
-            aTimer.Interval = 3000;
+            _aTimer.Interval = 3000;
 
         }
 
@@ -37,9 +36,9 @@ namespace MovieManager.PLAYER
         {
         }
 
-        private void Overlay_SizeChanged(object sender, System.EventArgs e)
+        private void OverlaySizeChanged(object sender, System.EventArgs e)
         {
-            _controlBar.Width = this.Width;
+            _controlBar.Width = Width;
         }
 
 
@@ -69,14 +68,14 @@ namespace MovieManager.PLAYER
             _controlBar = controlBar;
             _pnlControlBarHolder.Controls.Add(_controlBar);
             _pnlControlBarHolder.Visible = false;
-            this.SizeChanged += new System.EventHandler(Overlay_SizeChanged);
+            SizeChanged += OverlaySizeChanged;
         }
 
         public void RemoveControlBar()
         {
             if (_controlBar != null)
             {
-                this.SizeChanged -= new System.EventHandler(Overlay_SizeChanged);
+                SizeChanged -= OverlaySizeChanged;
                 _pnlControlBarHolder.Controls.Remove(_controlBar);
                 _controlBar = null;
                 _pnlControlBarHolder.Visible = false;
@@ -86,17 +85,17 @@ namespace MovieManager.PLAYER
         public void Redraw()
         {
 
-            Redraw(this.Size);
+            Redraw(Size);
         }
 
         public void Redraw(Size newSize)
         {
             if (!IsDisposed)
             {
-                this.Visible = false;
-                this.Visible = true;
-                this.Size = new Size(0, 0);
-                this.Size = newSize;
+                Visible = false;
+                Visible = true;
+                Size = new Size(0, 0);
+                Size = newSize;
             }
         }
 
@@ -105,7 +104,7 @@ namespace MovieManager.PLAYER
             ClearMessage();
             _txtMessage.Text = message;
             Redraw();
-            aTimer.Enabled = true;
+            _aTimer.Enabled = true;
         }
 
         private void ClearMessage()
@@ -115,7 +114,7 @@ namespace MovieManager.PLAYER
         }
 
 
-        void aTimer_Tick(object sender, System.EventArgs e)
+        void ATimerTick(object sender, System.EventArgs e)
         {
             ClearMessage();
         }

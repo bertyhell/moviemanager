@@ -26,7 +26,7 @@ namespace Tmc.WinUI.Application.Properties
             
         }
         
-        private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
+        private void SettingChangingEventHandler(object sender, SettingChangingEventArgs e) {
             // Add code to handle the SettingChangingEvent event here.
         }
         
@@ -43,10 +43,5 @@ namespace Tmc.WinUI.Application.Properties
         //    }
         //    _provider.Save();
         //}
-
-        protected override void OnSettingChanging(object sender, SettingChangingEventArgs e)
-        {
-            base.OnSettingChanging(sender, e);
-        }
     }
 }

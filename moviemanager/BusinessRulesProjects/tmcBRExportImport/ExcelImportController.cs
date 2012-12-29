@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +7,7 @@ using System.Collections.ObjectModel;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.BusinessRules.ExportImport
 {

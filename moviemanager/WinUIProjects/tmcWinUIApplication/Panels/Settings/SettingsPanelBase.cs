@@ -44,7 +44,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
 
             try
             {
-                bool Succeeded = this.SaveSettings();
+                bool Succeeded = SaveSettings();
                 foreach (SettingsPanelBase SettingsPanel in _settingsPanels)
                 {
                     Succeeded &= SettingsPanel.SaveAllSettings();

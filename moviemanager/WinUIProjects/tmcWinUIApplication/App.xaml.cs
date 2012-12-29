@@ -1,13 +1,10 @@
 ﻿using System.Globalization;
-using System.IO;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
-using Tmc.WinUI.Application.Commands;
-using Tmc.WinUI.Application.Panels.Settings;
 using Tmc.WinUI.Application.Properties;
 
 namespace Tmc.WinUI.Application
@@ -31,7 +28,7 @@ namespace Tmc.WinUI.Application
 #endif
         }
 
-        protected override void OnStartup(System.Windows.StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             //TODO 050: implement option to disable logging (already stored in settings) 
             GlobalLogger.Instance.LogLevel = Settings.Default.Log_Level;

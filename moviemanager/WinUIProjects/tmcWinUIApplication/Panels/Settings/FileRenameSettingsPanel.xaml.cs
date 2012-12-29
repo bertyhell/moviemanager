@@ -30,14 +30,14 @@ namespace Tmc.WinUI.Application.Panels.Settings
 
         private void LoadSettings()
         {
-            parameteredStringBuilderEpisode.ParameteredString = Tmc.WinUI.Application.Properties.Settings.Default.RenamingEpisodeFileSequence;
-            parameteredStringBuilderMovie.ParameteredString = Tmc.WinUI.Application.Properties.Settings.Default.RenamingMovieFileSequence;
+            parameteredStringBuilderEpisode.ParameteredString = Properties.Settings.Default.RenamingEpisodeFileSequence;
+            parameteredStringBuilderMovie.ParameteredString = Properties.Settings.Default.RenamingMovieFileSequence;
         }
 
         public override bool SaveSettings()
         {
-            Tmc.WinUI.Application.Properties.Settings.Default.RenamingMovieFileSequence = parameteredStringBuilderMovie.ParameteredString;
-            Tmc.WinUI.Application.Properties.Settings.Default.RenamingEpisodeFileSequence = parameteredStringBuilderEpisode.ParameteredString;
+            Properties.Settings.Default.RenamingMovieFileSequence = parameteredStringBuilderMovie.ParameteredString;
+            Properties.Settings.Default.RenamingEpisodeFileSequence = parameteredStringBuilderEpisode.ParameteredString;
             return true;
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace MovieManager.PLAYER
+﻿using Tmc.WinUI.Player.Common;
+
+namespace Tmc.WinUI.Player
 {
     partial class MMPlayer
     {
@@ -23,7 +25,7 @@
             this.fullScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._pnlControlBarHolder = new System.Windows.Forms.Panel();
-            this._mediaPlayerControl = new MovieManager.PLAYER.Common.MediaPlayerControl();
+            this._mediaPlayerControl = new MediaPlayerControl();
             this._menubar.SuspendLayout();
             this._pnlControlBarHolder.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +87,7 @@
             this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
             this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.alwaysOnTopToolStripMenuItem.Text = "Always on top";
-            this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_Click);
+            this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.AlwaysOnTopToolStripMenuItemClick);
             // 
             // _pnlControlBarHolder
             // 
@@ -121,7 +123,7 @@
             this.MainMenuStrip = this._menubar;
             this.Name = "MMPlayer";
             this.Text = "MMPlayer";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MMPlayer_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MMPlayerFormClosing);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormKeyUp);
             this.Move += new System.EventHandler(this.FormMove);
             this._menubar.ResumeLayout(false);
@@ -142,6 +144,6 @@
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fullScreenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alwaysOnTopToolStripMenuItem;
-        private Common.MediaPlayerControl _mediaPlayerControl;
+        private MediaPlayerControl _mediaPlayerControl;
     }
 }

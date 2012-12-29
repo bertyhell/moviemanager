@@ -1,11 +1,11 @@
 ﻿using System;
-using MovieManager.PLAYER.interop;
+using Tmc.WinUI.Player.interop;
 
-namespace MovieManager.PLAYER
+namespace Tmc.WinUI.Player
 {
     public class VlcInstance : IDisposable
     {
-        internal IntPtr Handle;
+        internal IntPtr _handle;
 
         public VlcInstance(string[] args)
         {

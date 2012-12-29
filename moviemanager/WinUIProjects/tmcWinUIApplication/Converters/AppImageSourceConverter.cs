@@ -4,9 +4,8 @@ using System.IO;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Model.Interfaces;
+using Tmc.SystemFrameworks.Model.Interfaces;
 using Tmc.WinUI.Application.Cache;
-using System.Reflection;
 
 namespace Tmc.WinUI.Application.Converters
 {
@@ -63,7 +62,7 @@ namespace Tmc.WinUI.Application.Converters
                 ImagePosterSource.EndInit();
                 //set image source
             }
-            catch (FileNotFoundException Ex)
+            catch (FileNotFoundException)
             {
                 //TODO 050 check why this sometimes happens (maybe 400 or 404 errors?)
                 return CreateBitmapImage(NO_IMAGE_URI);

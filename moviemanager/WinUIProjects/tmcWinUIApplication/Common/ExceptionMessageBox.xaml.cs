@@ -32,7 +32,7 @@ namespace Tmc.WinUI.Application.Common
         {
             String ExceptionInformation = "\n\r\n\r" + e.GetType() + "\n\r\n\r";
             parent.DisplayMemberPath = "Header";
-            parent.Items.Add(new TreeViewStringSet() { Header = "Type", Content = e.GetType().ToString() });
+            parent.Items.Add(new TreeViewStringSet { Header = "Type", Content = e.GetType().ToString() });
             PropertyInfo[] MemberList = e.GetType().GetProperties();
             foreach (PropertyInfo Info in MemberList)
             {
@@ -59,11 +59,10 @@ namespace Tmc.WinUI.Application.Common
 
         private void TreeView1SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewValue.GetType() == typeof(TreeViewItem) ) textBox1.Text = "Exception";
-            else textBox1.Text = e.NewValue.ToString();
+	        textBox1.Text = e.NewValue.GetType() == typeof(TreeViewItem) ? "Exception" : e.NewValue.ToString();
         }
 
-        private class TreeViewStringSet
+	    private class TreeViewStringSet
         {
             public string Header { get; set; }
             public string Content { get; set; }

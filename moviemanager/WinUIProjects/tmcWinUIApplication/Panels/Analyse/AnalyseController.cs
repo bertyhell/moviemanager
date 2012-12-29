@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Model;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
+using Tmc.SystemFrameworks.Model;
 using Tmc.WinUI.Application.Cache;
 using Tmc.WinUI.Application.Common;
 

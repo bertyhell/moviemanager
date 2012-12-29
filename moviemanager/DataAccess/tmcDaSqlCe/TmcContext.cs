@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using Model;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.SqlCe
 {

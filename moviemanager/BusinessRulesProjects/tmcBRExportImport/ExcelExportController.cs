@@ -5,8 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Model;
 using Tmc.DataAccess.SqlCe;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.BusinessRules.ExportImport
 {
