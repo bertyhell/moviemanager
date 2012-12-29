@@ -53,7 +53,7 @@
         <GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
-        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}" MouseDoubleClick="VideoGridMouseDoubleClick"
+        <!--<ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}" MouseDoubleClick="VideoGridMouseDoubleClick"
                   Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel" Style="{DynamicResource ResourceKey=lvStyle}" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -73,7 +73,35 @@
                         />
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
+
+        <ItemsControl x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.Template>
+                <ControlTemplate TargetType="ItemsControl">
+                    <Border>
+                        <ScrollViewer>
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Common:PreviewItem 
+                        Item="{Binding}" 
+                        Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
+                        Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" 
+                        Margin="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.previewItemMargin}"
+                        LabelVisibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewTitleVisibility}"
+                        />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}" ItemsSource="{Binding VideosView}"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick" PreviewMouseWheel="MouseWheel">
