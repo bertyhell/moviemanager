@@ -1,20 +1,20 @@
 ﻿<Window x:Class="Tmc.WinUI.Application.Wizards.AddEpisodesWizard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=WPFToolkit.Extended"
-        xmlns:panels="clr-namespace:Tmc.WinUI.Application.Panels"
+		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+		xmlns:panels="clr-namespace:Tmc.WinUI.Application.Panels"
         xmlns:common="clr-namespace:Tmc.WinUI.Application.Common"
         Title="Add episodes wizard" Height="400" Width="600">
-    <Grid>
-        <xctk:Wizard Finish="Wizard_OnFinish">
-            <xctk:WizardPage x:Name="_introPage" Title="Add episodes wizard" Description="This wizard will help you to add episodes to The Movie Collector"/>
-            <xctk:WizardPage x:Name="_selectFolderPage" Title="Select folder">
-                <common:MultiFolderSelectionControl x:Name="_folderSelectionControl"/>
-            </xctk:WizardPage>
-            <xctk:WizardPage x:Name="_selectSeriePage" Title="Select serie">
-                <panels:SerieSelectionControl x:Name="_serieSelectionControl"/>
-            </xctk:WizardPage>
-            <xctk:WizardPage x:Name="_CreateSeriePage" Title="Create Serie" Description="Press Finish to create the serie" CanFinish="True"/>
-        </xctk:Wizard>
-    </Grid>
+	<Grid>
+		<xctk:Wizard Finish="Wizard_OnFinish">
+			<xctk:WizardPage x:Name="_introPage" Title="Add episodes wizard" Description="This wizard will help you to add episodes to The Movie Collector"/>
+			<xctk:WizardPage x:Name="_selectFolderPage" Title="Select folder">
+				<common:MultiFolderSelectionControl x:Name="_folderSelectionControl"/>
+			</xctk:WizardPage>
+			<xctk:WizardPage x:Name="_selectSeriePage" Title="Select serie">
+					<panels:SerieSelectionControl x:Name="_serieSelectionControl"/>
+			</xctk:WizardPage>
+			<xctk:WizardPage x:Name="_CreateSeriePage" Title="Create Serie" Description="Press Finish to create the serie" CanFinish="True"/>
+		</xctk:Wizard>
+	</Grid>
 </Window>

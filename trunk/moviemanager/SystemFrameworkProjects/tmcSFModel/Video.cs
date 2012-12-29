@@ -18,7 +18,7 @@ namespace Tmc.SystemFrameworks.Model
         private int _id;
         private String _idImdb;
         private String _name;
-        private DateTime _release;
+		private DateTime _release = new DateTime(1800,1,1);
         private String _releaseYearGuess = "";
         private double _rating;
         private double _ratingImdb;
@@ -33,12 +33,14 @@ namespace Tmc.SystemFrameworks.Model
         private String _plot;
         private bool _analyseCompleted;
 
+	    private Video _backup;
+
         public Video()
         {
             _images = new List<ImageInfo>();
             _subs = new ObservableCollection<Subtitle>();
             _genres = new List<string>();
-            _analyseCompleted = false;
+			_analyseCompleted = false;
         }
 
         public Video(Video brother)
@@ -389,7 +391,7 @@ namespace Tmc.SystemFrameworks.Model
         private int _oldid;
         private String _oldidImdb;
         private String _oldname;
-        private DateTime _oldrelease;
+		private DateTime _oldrelease = new DateTime(1800, 1, 1);
         private string _oldreleaseyearguess;
         private double _oldrating;
         private double _oldratingImdb;
@@ -405,6 +407,31 @@ namespace Tmc.SystemFrameworks.Model
         private long _oldRuntime;
 
         private bool _editInProgress;
+
+		public void MakeBackup()
+		{
+			_backup = new Video(this);
+		}
+
+		public void RestoreBackup()
+		{
+			_id = _backup.Id;
+			_idImdb = _backup.IdImdb;
+			_name = _backup.Name;
+			_release = _backup.Release;
+			_releaseYearGuess = _backup.ReleaseYearGuess;
+			_rating = _backup.Rating;
+			_ratingImdb = _backup.RatingImdb;
+			_genres = _backup.Genres;
+			_path = _backup.Path;
+			_lastPlayLocation = _backup.LastPlayLocation;
+			_playCount = _backup.PlayCount;
+			_subs = _backup.Subs;
+			_poster = _backup.Poster;
+			_images = _backup.Images;
+			_plot = _backup.Plot;
+			_runtime = _backup.Runtime;
+		}
 
         //TODO 040: Replace backup props with backup Video object
         public void BeginEdit()

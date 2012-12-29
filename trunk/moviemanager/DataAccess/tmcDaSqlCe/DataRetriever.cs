@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Tmc.SystemFrameworks.Common;
@@ -49,16 +50,24 @@ namespace Tmc.DataAccess.SqlCe
             InsertVideosHdd(videos, true);
         }
 
-        private static IList<Video> InsertVideosHdd(IList<Video> videos, bool insertDuplicates)
+        private static IList<Video> InsertVideosHdd(IEnumerable<Video> videos, bool insertDuplicates)
         {
-            return null;
+			//TODO 030 avoid entering doubles when insertDuplicates == false
+	        foreach (Video Video in videos)
+	        {
+		        DB.Videos.Add(Video);
+	        }
+	        DB.SaveChanges();
+	        OnVideosChanged();
+			return new List<Video>(DB.Videos);
         }
 
         public static void EmptyVideoTables()
         {
+			DB.Database.ExecuteSqlCommand("delete from Videos");
+	        OnVideosChanged();
         }
-
-
+		
         public static bool UpdateVideos(List<Video> videos)
         {
             return false;

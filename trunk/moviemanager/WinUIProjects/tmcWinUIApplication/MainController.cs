@@ -77,7 +77,7 @@ namespace Tmc.WinUI.Application
             get { return _filterEditor; }
             set
             {
-                if (_filterEditor.Equals(value))
+                if (_filterEditor != null && _filterEditor.Equals(value))
                 {
                     _filterEditor = value;
                     _videosView.Filter += FilterEditor.FilterVideo;

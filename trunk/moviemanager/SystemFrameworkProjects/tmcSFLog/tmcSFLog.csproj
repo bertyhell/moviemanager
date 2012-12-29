@@ -93,7 +93,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Model\DsLogging.xsc">
       <DependentUpon>DsLogging.xsd</DependentUpon>
     </None>
