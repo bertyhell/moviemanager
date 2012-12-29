@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 using Tmc.WinUI.Application.Properties;
 
 namespace Tmc.WinUI.Application.Commands
@@ -19,7 +19,7 @@ namespace Tmc.WinUI.Application.Commands
             string DatabasePath = Settings.Default.DatabasePath;
             string ConnectionString = Settings.Default.ConnectionString.Replace("{path}", DatabasePath);
 
-            TmcDatabase.ConvertDatabase();
+            DataRetriever.ConvertDatabase();
         }
     }
 }

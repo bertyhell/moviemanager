@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 
@@ -147,7 +147,7 @@ namespace Tmc.BusinessRules.ExportImport
                         }
                     }
                     List<Video> Data = Excel.Excel2Videos(FilePath, SelectedWorksheetIndex, ImportMappingItems);
-                    TmcDatabase.InsertVideosHdd(Data);
+                    DataRetriever.InsertVideosHdd(Data);
                 }
             }catch(Exception Ex)
             {

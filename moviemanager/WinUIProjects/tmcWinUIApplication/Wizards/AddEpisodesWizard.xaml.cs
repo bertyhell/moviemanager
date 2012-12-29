@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using Model;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 
 namespace Tmc.WinUI.Application.Wizards
 {
@@ -30,13 +30,13 @@ namespace Tmc.WinUI.Application.Wizards
             //add serie if necessary
             Serie Serie = _serieSelectionControl.Serie;
             if (Serie.Id == 0)
-                TmcDatabase.AddSerie(Serie);
+                DataRetriever.AddSerie(Serie);
 
             //add videos
             ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
             MovieFileReader MovieFileReader = new MovieFileReader(new DirectoryInfo(SelectedPath), Properties.Settings.Default.VideoInsertionSettings);
             MovieFileReader.GetEpisodesForSerie(new DirectoryInfo(SelectedPath), Serie, LocalVideos, "", "");
-            TmcDatabase.InsertVideosHdd(LocalVideos);
+            DataRetriever.InsertVideosHdd(LocalVideos);
         }
 
         private void Wizard_OnFinish(object sender, RoutedEventArgs e)

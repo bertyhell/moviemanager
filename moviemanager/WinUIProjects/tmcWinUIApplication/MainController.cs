@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using Model;
 using System.ComponentModel;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.WinUI.Application.Commands;
 using Tmc.WinUI.Application.Panels.Filter;
-using Tmc.WinUI.Application.Panels.Settings;
-using Tmc.WinUI.Application.Properties;
 using Tmc.SystemFrameworks.Log;
 
 namespace Tmc.WinUI.Application
@@ -32,7 +29,7 @@ namespace Tmc.WinUI.Application
             ReloadVideos();
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
-            TmcDatabase.VideosChanged += MMDatabaseVideosChanged;
+            DataRetriever.VideosChanged += MMDatabaseVideosChanged;
 
             IsIconsViewVisible = Visibility.Visible;//TODO 020 check if any of the videos has been analysed --> none == hide iconsview
             IsDetailViewVisible = Visibility.Collapsed;
@@ -100,7 +97,7 @@ namespace Tmc.WinUI.Application
             try
             {
                 //Videos = new AsyncVirtualizingCollection<T>(new ItemsProvider(), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
-                _videosList = (List<Video>) TmcDatabase.SelectAllVideos();
+                _videosList = (List<Video>) DataRetriever.Videos;
                 _videos.Clear();
                 foreach (Video Video in _videosList)
                 {

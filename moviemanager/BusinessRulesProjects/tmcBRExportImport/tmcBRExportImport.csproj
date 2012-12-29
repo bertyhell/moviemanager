@@ -92,9 +92,9 @@
     <Resource Include="images\ok_32.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DataAccess\tmcDaSqlite\tmcDaSqlite.csproj">
-      <Project>{ef7c715e-4c61-43d6-b83d-90f0ff38424f}</Project>
-      <Name>tmcDaSqlite</Name>
+    <ProjectReference Include="..\..\DataAccess\tmcDaSqlCe\tmcDaSqlCe.csproj">
+      <Project>{65be2418-dc15-430d-b470-04487281ec04}</Project>
+      <Name>tmcDaSqlCe</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SystemFrameworkProjects\tmcSFCommon\tmcSFCommon.csproj">
       <Project>{d6017df9-ae81-49b8-857a-495ce8275db0}</Project>

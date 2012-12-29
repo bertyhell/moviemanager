@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 using Tmc.WinUI.Application.Commands;
@@ -40,7 +40,7 @@ namespace Tmc.WinUI.Application
 
             //Check if database exists
             string DatabasePath = Settings.Default.DatabasePath.Replace("%APPDATA%", DefaultValues.PATH_USER_APPDATA);
-            TmcDatabase.Init(DatabasePath);
+            DataRetriever.Init(DatabasePath);
             base.OnStartup(e);
         }
 

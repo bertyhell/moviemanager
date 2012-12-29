@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Windows.Forms;
-using System.IO;
-using System.Configuration;
-using Model;
-using Tmc.DataAccess.Sqlite;
 using Tmc.WinUI.Application.Wizards;
 
 namespace Tmc.WinUI.Application.Commands

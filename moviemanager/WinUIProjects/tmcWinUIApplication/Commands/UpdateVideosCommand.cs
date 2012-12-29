@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using Model;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 
 namespace Tmc.WinUI.Application.Commands
 {
@@ -22,7 +22,7 @@ namespace Tmc.WinUI.Application.Commands
 
         public void Execute(object parameter)
         {
-            TmcDatabase.UpdateVideos(_video);
+            DataRetriever.UpdateVideos(_video);
         }
 
         public bool CanExecute(object parameter)

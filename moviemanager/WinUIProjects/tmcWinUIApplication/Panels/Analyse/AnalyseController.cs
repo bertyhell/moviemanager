@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Model;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 using Tmc.WinUI.Application.Cache;
@@ -125,7 +125,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                     Videos.Add(AnalyseVideo.Video);
                 }
             }
-            TmcDatabase.UpdateVideos(Videos);
+            DataRetriever.Videos = Videos;
         }
     }
 }
