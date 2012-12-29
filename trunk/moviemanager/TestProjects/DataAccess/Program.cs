@@ -9,7 +9,7 @@ namespace DataAccess
     {
         static void Main()
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<TmcContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<TmcContext>());
 
             foreach (Video Video in DataRetriever.Videos)
             {

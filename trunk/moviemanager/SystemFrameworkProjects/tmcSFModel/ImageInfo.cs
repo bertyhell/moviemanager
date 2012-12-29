@@ -8,6 +8,12 @@ namespace Model
     {
         [Key]
         public int Id { get; set; }
+
+        public String UriString
+        {
+            get { return Uri.AbsoluteUri; }
+            set {Uri = new Uri(value) ; }
+        }
         [NotMapped]
         public Uri Uri { get; set; }
         [NotMapped]

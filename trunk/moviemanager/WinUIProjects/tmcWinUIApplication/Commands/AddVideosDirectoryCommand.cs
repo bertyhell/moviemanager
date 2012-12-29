@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.IO;
 using System.Configuration;
 using Ookii.Dialogs.Wpf;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.WinUI.Application.Common;
 using Tmc.WinUI.Application.Localization;
@@ -73,7 +73,7 @@ namespace Tmc.WinUI.Application.Commands
             IsIndeterminate = false;
             _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance,DataContext = this };
             var BGWInsertVideos = new BgwInsertVideos(e.Videos);
-            TmcDatabase.InsertVideosProgress += FileReader_OnInsertVideosProgress;
+            DataRetriever.InsertVideosProgress += FileReader_OnInsertVideosProgress;
             BGWInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
             BGWInsertVideos.RunWorkerAsync();
             _progressWindow.ShowDialog();

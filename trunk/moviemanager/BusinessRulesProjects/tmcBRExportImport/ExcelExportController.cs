@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Model;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 
 namespace Tmc.BusinessRules.ExportImport
 {
@@ -71,7 +71,7 @@ namespace Tmc.BusinessRules.ExportImport
             if (ExportProperties.Any(mappingItem => mappingItem.Selected))
             {
                 //export
-                IList<Video> Videos = TmcDatabase.SelectAllVideos();
+                IList<Video> Videos = DataRetriever.Videos;
                 List<string> Props = new List<string>();
                 foreach(ObjectMappingItem MappingItem in ExportProperties)
                 {

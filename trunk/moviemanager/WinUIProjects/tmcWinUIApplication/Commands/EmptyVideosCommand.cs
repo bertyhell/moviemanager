@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 
 namespace Tmc.WinUI.Application.Commands
 {
@@ -21,7 +21,7 @@ namespace Tmc.WinUI.Application.Commands
 
         public void Execute(object parameter)
         {
-            TmcDatabase.EmptyVideoTables();
+            DataRetriever.EmptyVideoTables();
         }
     }
 }

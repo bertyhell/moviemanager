@@ -2,7 +2,7 @@
 using System.Windows;
 using Model;
 using System.ComponentModel;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 using Tmc.WinUI.Application.Commands;
 
 namespace Tmc.WinUI.Application.Panels.Settings
@@ -69,11 +69,11 @@ namespace Tmc.WinUI.Application.Panels.Settings
         {
             if (File.Exists(_pathToDatabase))
             {
-                DatabaseDetails = TmcDatabase.GetDatabaseDetails();
+                DatabaseDetails = DataRetriever.GetDatabaseDetails();
             }
             else
             {
-                DatabaseDetails = new DatabaseDetails { DatabaseVersion = 0, RequiredVersion = TmcDatabase.CURRENT_DATABASE_VERSION };
+                DatabaseDetails = new DatabaseDetails { DatabaseVersion = 0, RequiredVersion = DataRetriever.CURRENT_DATABASE_VERSION };
             }
         }
 

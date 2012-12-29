@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Tmc.DataAccess.Sqlite;
+using Tmc.DataAccess.SqlCe;
 
 namespace Tmc.WinUI.Application.Panels.Filter
 {
@@ -25,7 +25,7 @@ namespace Tmc.WinUI.Application.Panels.Filter
                         AppliedFilters.Add(new FilterText("Path", "Path"));
                         break;
                     case Filters.Genre:
-                        AppliedFilters.Add(new FilterMultiOption("Genres",TmcDatabase.GetMovieGenres(), "Genres"));
+                        AppliedFilters.Add(new FilterMultiOption("Genres", DataRetriever.Genres, "Genres"));
                         break;
                     case Filters.ReleaseDate:
                         AppliedFilters.Add(new FilterDate("Release", "Release Date"));
