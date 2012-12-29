@@ -67,10 +67,10 @@ namespace Tmc.WinUI.Application.Commands
         void FileReader_OnGetVideoCompleted(object sender, GetVideoCompletedEventArgs e)
         {
             _progressWindow.Close();
-            Message = "Adding videos to database: 0.0 %";
+            Message = "Adding videos to database";
             Value = 0;
             Maximum = e.Videos.Count;
-            IsIndeterminate = false;
+            IsIndeterminate = true;
             _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance,DataContext = this };
             var BgwInsertVideos = new BgwInsertVideos(e.Videos);
             DataRetriever.InsertVideosProgress += FileReader_OnInsertVideosProgress;

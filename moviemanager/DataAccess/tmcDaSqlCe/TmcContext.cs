@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.SqlCe
@@ -14,6 +15,6 @@ namespace Tmc.DataAccess.SqlCe
         public DbSet<Franchise> Franchises { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Serie> Series { get; set; }
-        public DbSet<Video> Videos { get; set; }
+		public DbSet<Video> Videos { get; set; }
     }
 }
