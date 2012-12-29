@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls.Primitives;
-using Model;
 using System.Windows.Data;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
+using Tmc.SystemFrameworks.Model;
 using Tmc.WinUI.Application.Commands;
 using System.Windows.Controls;
 using System.Xml.Serialization;
@@ -111,7 +112,7 @@ namespace Tmc.WinUI.Application
             Style HeaderStyle = new Style(typeof(DataGridColumnHeader));
             HeaderStyle.Setters.Add(new Setter
             {
-                Property = DataGridColumnHeader.ContextMenuProperty,
+                Property = ContextMenuProperty,
                 Value = _columnsContextMenu,
             });
             _videoDetails.ColumnHeaderStyle = HeaderStyle;
@@ -122,13 +123,13 @@ namespace Tmc.WinUI.Application
             //add to context menu
             MenuItem MenuItem = new MenuItem { Header = columnDetails.Key, IsChecked = columnDetails.Value };
             _columnsContextMenu.Items.Add(MenuItem);
-            MenuItem.Click += new RoutedEventHandler(MenuItem_Click);
-            MenuItem.Checked += new RoutedEventHandler(MenuItem_Checked);
-            MenuItem.Unchecked += new RoutedEventHandler(MenuItem_Unchecked);
+            MenuItem.Click += MenuItemClick;
+            MenuItem.Checked += MenuItemChecked;
+            MenuItem.Unchecked += MenuItemUnchecked;
         }
 
 
-        void MenuItem_Click(object sender, RoutedEventArgs e)
+        void MenuItemClick(object sender, RoutedEventArgs e)
         {
             MenuItem Item = (MenuItem)sender;
             if (Item.IsChecked && _videoDetails.Columns.Count > 1 || !Item.IsChecked)
@@ -137,7 +138,7 @@ namespace Tmc.WinUI.Application
             }
         }
 
-        void MenuItem_Unchecked(object sender, RoutedEventArgs e)
+        void MenuItemUnchecked(object sender, RoutedEventArgs e)
         {
             MenuItem Item = (MenuItem)sender;
             foreach (DataGridColumn Column in _videoDetails.Columns)
@@ -150,7 +151,7 @@ namespace Tmc.WinUI.Application
             }
         }
 
-        void MenuItem_Checked(object sender, RoutedEventArgs e)
+        void MenuItemChecked(object sender, RoutedEventArgs e)
         {
             _videoDetails.Columns.Add(_dataGridColumns[((MenuItem)sender).Header.ToString()]);
         }
@@ -176,18 +177,11 @@ namespace Tmc.WinUI.Application
 
         private void MenuItemPlayClick(object sender, RoutedEventArgs e)
         {
-            PlayVideoCommand PlayCommand = new PlayVideoCommand();
-            if (_videoIcons.IsVisible)
-            {
-                PlayCommand.Execute(_videoIcons.SelectedItem);
-            }
-            else
-            {
-                PlayCommand.Execute(_videoDetails.SelectedItem);
-            }
+	        PlayVideoCommand PlayCommand = new PlayVideoCommand();
+	        PlayCommand.Execute(_videoIcons.IsVisible ? _videoIcons.SelectedItem : _videoDetails.SelectedItem);
         }
 
-        private void MenuItemRenameFileClick(object sender, RoutedEventArgs e)
+	    private void MenuItemRenameFileClick(object sender, RoutedEventArgs e)
         {
             if (_videoDetails.SelectedItems != null)
             {
@@ -201,7 +195,7 @@ namespace Tmc.WinUI.Application
                         {
                             string ParString = Settings.Default.RenamingMovieFileSequence;
                             NewVideoName = ParString.Replace("{{MovieName}}", Video.Name);
-                            NewVideoName = NewVideoName.Replace("{{Year}}", Video.Release.Year.ToString());
+                            NewVideoName = NewVideoName.Replace("{{Year}}", Video.Release.Year.ToString(CultureInfo.InvariantCulture));
                         }
 
                         else if (Video is Episode)
@@ -219,9 +213,9 @@ namespace Tmc.WinUI.Application
 
                         _videoDetails.Items.Refresh();
                     }
-                    catch (Exception ex)
+                    catch (Exception Ex)
                     {
-                        GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("MainWindow", "MenuItemRenameFileClick", ex.Message));
+                        GlobalLogger.Instance.MovieManagerLogger.Error(GlobalLogger.FormatExceptionForLog("MainWindow", "MenuItemRenameFileClick", Ex.Message));
                     }
                 }
             }
@@ -229,7 +223,7 @@ namespace Tmc.WinUI.Application
 
         #endregion
 
-        private void VideoGridMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void VideoGridMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (Settings.Default.MediaPlayerPlayOnDoubleClick)
                 MenuItemPlayClick(sender, e);
@@ -258,7 +252,7 @@ namespace Tmc.WinUI.Application
             base.OnClosing(e);
         }
 
-        private void Window_PreviewMouseWheel_1(object sender, MouseWheelEventArgs e)
+        private void WindowPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
                 _controller.Zoom(e.Delta > 0);

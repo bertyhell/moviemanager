@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Model
+namespace Tmc.SystemFrameworks.Model
 {
     public class Subtitle
     {

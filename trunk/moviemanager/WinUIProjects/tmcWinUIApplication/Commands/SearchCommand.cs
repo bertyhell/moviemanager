@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using MovieManager.APP.Panels.Search;
+using Tmc.WinUI.Application.Panels.Search;
 
 namespace Tmc.WinUI.Application.Commands
 {

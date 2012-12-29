@@ -142,7 +142,7 @@ namespace Tmc.WinUI.Application.Common
                 while (!string.IsNullOrEmpty(ParStr))
                 {
                     //search string outside brackets
-                    int Index = ParStr.IndexOf("{{");
+                    int Index = ParStr.IndexOf("{{", System.StringComparison.Ordinal);
                     if (Index == -1)
                     {
                         InsertParameter(typeof(TextBox), ParStr);
@@ -153,7 +153,7 @@ namespace Tmc.WinUI.Application.Common
                     ParStr = ParStr.Substring(Index + 2);
 
                     //search string between brackets
-                    Index = ParStr.IndexOf("}}");
+                    Index = ParStr.IndexOf("}}", System.StringComparison.Ordinal);
                     if (Index == -1)
                         throw new ArgumentException("Invalid ParameterString: " + ParStr);
                     if (Index != 0)
@@ -185,10 +185,11 @@ namespace Tmc.WinUI.Application.Common
         private void ParameterMouseDown(object sender, MouseButtonEventArgs e)
         {
             _startPoint = e.GetPosition(null);
-            if (sender is Rectangle)
-            {
-                _draggedElement = (FrameworkElement)((Rectangle)sender).Parent;
-            }
+	        Rectangle Rectangle = sender as Rectangle;
+	        if (Rectangle != null)
+	        {
+		        _draggedElement = (FrameworkElement)Rectangle.Parent;
+	        }
         }
 
         private void ParameterMouseMove(object sender, MouseEventArgs e)
@@ -465,7 +466,7 @@ namespace Tmc.WinUI.Application.Common
                 _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
                 _parameterGrid.Children.Add(NewParameter);
             }
-            else if (sender != _parameterGrid)
+            else if (sender.Equals(_parameterGrid))
             {
                 _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
                 Grid.SetColumn(NewParameter, _parameterGrid.Children.Count);

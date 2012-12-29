@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Data;
-using Model;
 using System.ComponentModel;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
+using Tmc.SystemFrameworks.Model;
 using Tmc.WinUI.Application.Commands;
 using Tmc.WinUI.Application.Panels.Filter;
 using Tmc.SystemFrameworks.Log;
@@ -77,7 +77,7 @@ namespace Tmc.WinUI.Application
             get { return _filterEditor; }
             set
             {
-                if (_filterEditor != value)
+                if (_filterEditor.Equals(value))
                 {
                     _filterEditor = value;
                     _videosView.Filter += FilterEditor.FilterVideo;
@@ -97,7 +97,7 @@ namespace Tmc.WinUI.Application
             try
             {
                 //Videos = new AsyncVirtualizingCollection<T>(new ItemsProvider(), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
-                _videosList = (List<Video>) DataRetriever.Videos;
+                _videosList = DataRetriever.Videos;
                 _videos.Clear();
                 foreach (Video Video in _videosList)
                 {
@@ -173,8 +173,6 @@ namespace Tmc.WinUI.Application
                         break;
                     case ViewStates.SmallIcons:
                         NewPreviewWidth = DefaultValues.PREVIEW_MIN_WIDTH;
-                        break;
-                    default:
                         break;
                 }
 

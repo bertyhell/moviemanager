@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
-using MovieManager.PLAYER.enums;
+using Tmc.WinUI.Player.enums;
 
-namespace MovieManager.PLAYER.interop
+namespace Tmc.WinUI.Player.interop
 {
     // http://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc.html
 

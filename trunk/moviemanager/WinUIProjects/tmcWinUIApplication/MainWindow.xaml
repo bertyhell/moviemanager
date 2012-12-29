@@ -1,12 +1,11 @@
 ﻿<Window x:Class="Tmc.WinUI.Application.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Panels="clr-namespace:MovieManager.APP.Panels"
         xmlns:converters="clr-namespace:Tmc.WinUI.Application.Converters"
         xmlns:menu="clr-namespace:Tmc.WinUI.Application.Menubar"
         xmlns:panels="clr-namespace:Tmc.WinUI.Application.Panels"
         xmlns:filter="clr-namespace:Tmc.WinUI.Application.Panels.Filter"
-        xmlns:Common="clr-namespace:Tmc.WinUI.Application.Panels.Common" Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="Window_PreviewMouseWheel_1">
+        xmlns:Common="clr-namespace:Tmc.WinUI.Application.Panels.Common" Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="WindowPreviewMouseWheel">
     <Grid>
         <Grid.Resources>
             <converters:StringListConverter x:Key="stringListConverter"/>

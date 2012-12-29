@@ -1,8 +1,7 @@
 ﻿<Window x:Class="Tmc.WinUI.Application.Panels.Analyse.AnalyseWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Analyse Videos" Height="700" Width="930"
-        xmlns:Model="clr-namespace:Model;assembly=Model" xmlns:common2="clr-namespace:Tmc.WinUI.Application.Common"
+        Title="Analyse Videos" Height="700" Width="930" xmlns:common2="clr-namespace:Tmc.WinUI.Application.Common"
         xmlns:analyse2="clr-namespace:Tmc.WinUI.Application.Panels.Analyse"
         Icon="/MovieManager;component/Images/analyse.png" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
     <Window.Resources>

@@ -48,7 +48,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
             {
                 SettingsPanel.SaveSettings();
             }
-            Tmc.WinUI.Application.Properties.Settings.Default.Save();
+            Properties.Settings.Default.Save();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

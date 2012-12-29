@@ -9,8 +9,8 @@ namespace Tmc.WinUI.Application.Panels
     public class RatingEditorControl : RatingControl, IDisposable
     {
 
-        public static Uri MouseOverHalfSelectedStar = new Uri("/MovieManager;component/Images/MouseOverHalfStar.png", UriKind.Relative);
-        public static Uri MouseOverSelectedStar = new Uri("/MovieManager;component/Images/MouseOverStar.png", UriKind.Relative);
+        public static Uri _mouseOverHalfSelectedStar = new Uri("/MovieManager;component/Images/MouseOverHalfStar.png", UriKind.Relative);
+        public static Uri _mouseOverSelectedStar = new Uri("/MovieManager;component/Images/MouseOverStar.png", UriKind.Relative);
         private double _oldMouseOverRating = -1.0;
         private double _mouseOverRating = -1.0;
         private readonly int _width;
@@ -32,7 +32,7 @@ namespace Tmc.WinUI.Application.Panels
         {
             _oldMouseOverRating = -1;
             _mouseOverRating = -1;
-            RefreshStars(Rating, SelectedStar, HalfSelectedStar, EmptyStar);
+            RefreshStars(Rating, _selectedStar, _halfSelectedStar, _emptyStar);
         }
 
         private void RatingEditorControlMouseUp(object sender, MouseButtonEventArgs e)
@@ -40,7 +40,7 @@ namespace Tmc.WinUI.Application.Panels
             if (e.GetPosition(this).X <= _width + 5)
             {
                 Rating = _mouseOverRating;
-                RefreshStars(Rating, SelectedStar, HalfSelectedStar, EmptyStar);
+                RefreshStars(Rating, _selectedStar, _halfSelectedStar, _emptyStar);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Tmc.WinUI.Application.Panels
 
             if (Math.Abs(_oldMouseOverRating - _mouseOverRating) > 0.005)
             {
-                RefreshStars(_mouseOverRating, MouseOverSelectedStar, MouseOverHalfSelectedStar, EmptyStar);
+                RefreshStars(_mouseOverRating, _mouseOverSelectedStar, _mouseOverHalfSelectedStar, _emptyStar);
             }
         }
 

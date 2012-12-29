@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Model
+namespace Tmc.SystemFrameworks.Model
 {
     public class AnalyseVideo : INotifyPropertyChanged
     {

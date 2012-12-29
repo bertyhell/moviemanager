@@ -1,21 +1,21 @@
 ﻿using System.IO;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
+using Tmc.SystemFrameworks.Model;
 
-namespace MovieManager.PLAYER.Logic
+namespace Tmc.WinUI.Player.Logic
 {
     public static class PlayerProcesses
     {
-        private static readonly object _statusLock = new object();
-        private static readonly Dictionary<Process, Video> _playersStatuses;
+        private static readonly object STATUS_LOCK = new object();
+        private static readonly Dictionary<Process, Video> PLAYERS_STATUSES;
 
         static PlayerProcesses()
         {
-            _playersStatuses = new Dictionary<Process, Video>();
+            PLAYERS_STATUSES = new Dictionary<Process, Video>();
         }
 
         public static void StartVideo(Video video, string mediaPlayer)
@@ -33,9 +33,9 @@ namespace MovieManager.PLAYER.Logic
                     try
                     {
                         Process Process = CommandHelper.ExecuteCommandSync(Path.Combine(RegistryHelper.GetInstallationPath("VLC"), "vlc"), "\"" + video.Path + "\"");
-                        _playersStatuses.Add(Process, video);
-                        Process.Exited += Process_Exited;
-                        Process.Disposed += Process_Exited;
+                        PLAYERS_STATUSES.Add(Process, video);
+                        Process.Exited += ProcessExited;
+                        Process.Disposed += ProcessExited;
                     }
                     catch (Exception Ex)
                     {
@@ -45,14 +45,14 @@ namespace MovieManager.PLAYER.Logic
             }
         }
 
-        static void Process_Exited(object sender, EventArgs e)
+        static void ProcessExited(object sender, EventArgs e)
         {
-            lock (_statusLock)
+            lock (STATUS_LOCK)
             {
                 Process Process = (Process) sender;
-                if(_playersStatuses.ContainsKey(Process))
+                if(PLAYERS_STATUSES.ContainsKey(Process))
                 {
-                    Video Video = _playersStatuses[Process];
+                    Video Video = PLAYERS_STATUSES[Process];
                     if(Video != null)
                         Video.CheckVideoSeen(100,100,false);// TODO 010: check timestamp with vlc
                 }

@@ -16,10 +16,7 @@ namespace Tmc.WinUI.Application.Commands
 
         public void Execute(object parameter)
         {
-            string DatabasePath = Settings.Default.DatabasePath;
-            string ConnectionString = Settings.Default.ConnectionString.Replace("{path}", DatabasePath);
-
-            DataRetriever.ConvertDatabase();
+	        DataRetriever.ConvertDatabase();
         }
     }
 }

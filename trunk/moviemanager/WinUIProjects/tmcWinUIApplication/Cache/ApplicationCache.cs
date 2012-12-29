@@ -60,22 +60,16 @@ namespace Tmc.WinUI.Application.Cache
                     Bmp.Save(FilePath);
                     return new Uri(FilePath);
                 }
-                else
-                {
-                    return null;
-                }
+	            return null;
             }
             catch (WebException Ex)
             {
-                if (Ex.Message.Contains("404") || Ex.Message.Contains("400"))//TODO 020 replace by regex   \(4[0-9]{2}\)
+	            if (Ex.Message.Contains("404") || Ex.Message.Contains("400"))//TODO 020 replace by regex   \(4[0-9]{2}\)
                 {
                     //ignore exception
                     return null;
                 }
-                else
-                {
-                    throw;
-                }
+	            throw;
             }
         }
 

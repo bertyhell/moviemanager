@@ -1,13 +1,13 @@
 ﻿using System;
-using MovieManager.PLAYER.enums;
-using MovieManager.PLAYER.interop;
+using Tmc.WinUI.Player.enums;
+using Tmc.WinUI.Player.interop;
 
-namespace MovieManager.PLAYER
+namespace Tmc.WinUI.Player
 {
     public class VlcMedia : IDisposable
     {
         #region interop
-        internal IntPtr Handle;
+        internal IntPtr _handle;
         #endregion
 
         public VlcMedia(VlcInstance instance, string url)
@@ -17,7 +17,7 @@ namespace MovieManager.PLAYER
 
         internal VlcMedia(IntPtr handle)
         {
-            Handle = handle;
+            _handle = handle;
         }
 
         public MediaPlayerState State

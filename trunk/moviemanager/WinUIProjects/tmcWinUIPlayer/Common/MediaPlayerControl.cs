@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Tmc.SystemFrameworks.Common;
 
-namespace MovieManager.PLAYER.Common
+namespace Tmc.WinUI.Player.Common
 {
     public partial class MediaPlayerControl : UserControl
     {
@@ -26,7 +26,7 @@ namespace MovieManager.PLAYER.Common
 
         public void Initialize(MMPlayer form)
         {
-            this._form = form;
+            _form = form;
         }
 
         #region properties
@@ -80,7 +80,9 @@ namespace MovieManager.PLAYER.Common
 
         public void SetVideoTimestamp()
         {
-            _lblTimestamp.Text = TimestampUtilities.LongToTimestampString(_form.Player.CurrentTimestamp) + @"/" +
+// ReSharper disable LocalizableElement
+            _lblTimestamp.Text = TimestampUtilities.LongToTimestampString(_form.Player.CurrentTimestamp) + "/" +
+// ReSharper restore LocalizableElement
                                  TimestampUtilities.LongToTimestampString(_form.Player.VideoLength);
         }
 

@@ -1,9 +1,6 @@
-﻿using MovieManager.PLAYER.Logic;
-using Tmc.WinUI.Application.Panels.Settings;
-using Tmc.WinUI.Application.Panels.Settings.MediaPlayer;
-using Tmc.WinUI.Player.Logic;
+﻿using Tmc.WinUI.Player.Logic;
 
-namespace MovieManager.APP.Panels.Settings
+namespace Tmc.WinUI.Application.Panels.Settings.MediaPlayer
 {
     /// <summary>
     /// Interaction logic for MediaPlayerSettingsPanel.xaml
@@ -18,14 +15,13 @@ namespace MovieManager.APP.Panels.Settings
             //initialize base class variables;
             _panelName = "Media player";
             _iconPath = "/MovieManager;component/Images/MediaPlayer_32.png";
-            MediaPlayerSettings MediaPlayerSettings = Tmc.WinUI.Application.Properties.Settings.Default.MediaPlayerSettings;
-            if(MediaPlayerSettings == null) MediaPlayerSettings = new MediaPlayerSettings();
-            _model = new MediaPlayerSettingsViewModel
+            MediaPlayerSettings MediaPlayerSettings = Properties.Settings.Default.MediaPlayerSettings ?? new MediaPlayerSettings();
+	        _model = new MediaPlayerSettingsViewModel
                                                      {
-                                                         PlayOnDoubleCLick = Tmc.WinUI.Application.Properties.Settings.Default.MediaPlayerPlayOnDoubleClick,
+                                                         PlayOnDoubleCLick = Properties.Settings.Default.MediaPlayerPlayOnDoubleClick,
                                                          MediaPlayerSettings = MediaPlayerSettings
                                                      };
-            this.DataContext = _model;
+            DataContext = _model;
             
 
             _settingsPanels.Add(new InternalMediaPlayerSettingsPanel());
@@ -34,8 +30,8 @@ namespace MovieManager.APP.Panels.Settings
 
         public override bool SaveSettings()
         {
-            Tmc.WinUI.Application.Properties.Settings.Default.MediaPlayerPlayOnDoubleClick = _model.PlayOnDoubleCLick;
-            Tmc.WinUI.Application.Properties.Settings.Default.MediaPlayerSettings = _model.MediaPlayerSettings;
+            Properties.Settings.Default.MediaPlayerPlayOnDoubleClick = _model.PlayOnDoubleCLick;
+            Properties.Settings.Default.MediaPlayerSettings = _model.MediaPlayerSettings;
             return true;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using Model.Interfaces;
+using Tmc.SystemFrameworks.Model.Interfaces;
 
 namespace Tmc.WinUI.Application.Panels.Common
 {
@@ -15,7 +15,7 @@ namespace Tmc.WinUI.Application.Panels.Common
         public ThumbnailDescriptionListWindow()
         {
             InitializeComponent();
-            this.DataContext = _controller;
+            DataContext = _controller;
         }
 
         public List<IPreviewInfoRetriever> ThumbnailDescriptionItems
@@ -38,18 +38,13 @@ namespace Tmc.WinUI.Application.Panels.Common
 
         private void BtnOkOnClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = true;
         }
     }
 
     class ThumbnailDescriptionListWindowController : INotifyPropertyChanged
     {
-        public ThumbnailDescriptionListWindowController()
-        {
-                
-        }
-
-        private List<IPreviewInfoRetriever> _itemsSource;
+	    private List<IPreviewInfoRetriever> _itemsSource;
         public List<IPreviewInfoRetriever> ThumbnailDescriptionItems
         {
             get

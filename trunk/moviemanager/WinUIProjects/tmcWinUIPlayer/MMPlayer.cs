@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Model;
-using MovieManager.PLAYER.Common;
+using Tmc.SystemFrameworks.Model;
+using Tmc.WinUI.Player.Common;
 
-namespace MovieManager.PLAYER
+namespace Tmc.WinUI.Player
 {
     public partial class MMPlayer : Form
     {
@@ -24,7 +24,7 @@ namespace MovieManager.PLAYER
         {
             InitializeComponent();
             string[] Args = new[] {
-                "--ignore-config",
+                "--ignore-config"
                 //@"--plugin-path=" + Path.Combine(PluginPath , "plugins")                
                 //@"--plugin-path=C:\Program Files (x86)\VideoLAN\VLC\plugins"
                 //,"--vout-filter=deinterlace", "--deinterlace-mode=blend"
@@ -51,9 +51,9 @@ namespace MovieManager.PLAYER
 
         public void PlayVideo(Video video)
         {
-            this.Text = video.Name;
+            Text = video.Name;
             _video = video;
-            if (video != null && video.Path != null)
+            if (video.Path != null)
             {
                 PlayVideo(video.Path);
                 _player.CurrentTimestamp = (long)video.LastPlayLocation;
@@ -91,13 +91,13 @@ namespace MovieManager.PLAYER
             if (!_isFullScreen)
             {
                 //save data
-                _previousIsMaximized = this.WindowState;
+                _previousIsMaximized = WindowState;
                 _previousFormLocation = Location;
                 _previousFormSize = Size;
                 _previousVideoPanelLocation = _pnlVideo.Location;
                 _previousVideoPanelSize = _pnlVideo.Size;
 
-                this.WindowState = FormWindowState.Normal;
+                WindowState = FormWindowState.Normal;
                 FormBorderStyle = FormBorderStyle.None;
 
                 //change visual
@@ -131,7 +131,7 @@ namespace MovieManager.PLAYER
                 //_pnlVideo.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
 
 
-                this.WindowState = _previousIsMaximized;
+                WindowState = _previousIsMaximized;
                 _isFullScreen = false;
             }
         }
@@ -191,7 +191,7 @@ namespace MovieManager.PLAYER
                 _player.Mute();
 
             //with control mask
-            else if (Control.ModifierKeys == Keys.Control)
+            else if (ModifierKeys == Keys.Control)
             {
                 //Audio
                 if (keys == Keys.Up)
@@ -208,7 +208,7 @@ namespace MovieManager.PLAYER
             }
         }
 
-        private void MMPlayer_FormClosing(object sender, FormClosingEventArgs e)
+        private void MMPlayerFormClosing(object sender, FormClosingEventArgs e)
         {
             _player.Release();
         }
@@ -232,16 +232,12 @@ namespace MovieManager.PLAYER
 
         #region menu items
 
-        private void alwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AlwaysOnTopToolStripMenuItemClick(object sender, EventArgs e)
         {
-            TopMost = !TopMost;
-            if (this.TopMost)
-                ((ToolStripMenuItem)sender).CheckState = CheckState.Unchecked;
-            else
-                ((ToolStripMenuItem)sender).CheckState = CheckState.Checked;
-
+	        TopMost = !TopMost;
+	        ((ToolStripMenuItem)sender).CheckState = TopMost ? CheckState.Unchecked : CheckState.Checked;
         }
 
-        #endregion
+	    #endregion
     }
 }

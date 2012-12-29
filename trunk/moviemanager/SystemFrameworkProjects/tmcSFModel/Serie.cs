@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace Tmc.SystemFrameworks.Model
 {
     public class Serie
     {

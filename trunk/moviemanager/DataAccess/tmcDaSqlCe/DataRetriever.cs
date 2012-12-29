@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Model;
 using Tmc.SystemFrameworks.Common;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.SqlCe
 {

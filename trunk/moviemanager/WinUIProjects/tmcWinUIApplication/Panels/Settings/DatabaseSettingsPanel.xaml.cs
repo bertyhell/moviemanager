@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Windows;
-using Model;
 using System.ComponentModel;
 using Tmc.DataAccess.SqlCe;
+using Tmc.SystemFrameworks.Model;
 using Tmc.WinUI.Application.Commands;
 
 namespace Tmc.WinUI.Application.Panels.Settings
@@ -24,8 +24,8 @@ namespace Tmc.WinUI.Application.Panels.Settings
             _panelName = "Database";
             _iconPath = "/MovieManager;component/Images/database_32.png";
 
-            this.DataContext = this;
-            _pathToDatabase = Tmc.WinUI.Application.Properties.Settings.Default.DatabasePath;
+            DataContext = this;
+            _pathToDatabase = Properties.Settings.Default.DatabasePath;
 
             InitDatabaseVersionControl();
 
@@ -51,14 +51,14 @@ namespace Tmc.WinUI.Application.Panels.Settings
             }
         }
 
-        private void _btnCreateDatabase_Click(object sender, RoutedEventArgs e)
+        private void BtnCreateDatabaseClick(object sender, RoutedEventArgs e)
         {
             ConvertDatabaseCommand ConvertCommand = new ConvertDatabaseCommand();
             ConvertCommand.Execute(null);
             InitDatabaseVersionControl();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonClick(object sender, RoutedEventArgs e)
         {
             _fileCommand.Execute(null);
             PathToDatabase = _fileCommand.PathToFile;
@@ -79,7 +79,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
 
         public override bool SaveSettings()
         {
-            Tmc.WinUI.Application.Properties.Settings.Default.DatabasePath = _pathToDatabase;
+            Properties.Settings.Default.DatabasePath = _pathToDatabase;
             return base.SaveSettings();
         }
 

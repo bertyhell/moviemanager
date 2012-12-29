@@ -1,7 +1,7 @@
-﻿using Model;
-using System;
+﻿using System;
 using System.Windows.Input;
-using MovieManager.PLAYER.Logic;
+using Tmc.SystemFrameworks.Model;
+using Tmc.WinUI.Player.Logic;
 
 namespace Tmc.WinUI.Application.Commands
 {

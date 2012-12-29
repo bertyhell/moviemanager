@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Tmc.SystemFrameworks.Log.Properties;
+﻿using System.Collections.ObjectModel;
 
 namespace Tmc.SystemFrameworks.Log.Model
 {

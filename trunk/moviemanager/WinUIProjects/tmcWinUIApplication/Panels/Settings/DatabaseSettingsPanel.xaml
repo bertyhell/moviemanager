@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                            xmlns:Settings="clr-namespace:MovieManager.APP.Panels.Settings"
                             xmlns:converters="clr-namespace:Tmc.WinUI.Application.Converters"
                             xmlns:settings="clr-namespace:Tmc.WinUI.Application.Panels.Settings" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -29,7 +28,7 @@
         </Grid.ColumnDefinitions>
 
         <TextBox x:Name="_txtFilePath" Text="{Binding PathToDatabase}" IsReadOnly="True" />
-        <Button Grid.Row="0" Grid.Column="2" Content="Browse ..." Click="Button_Click" />
+        <Button Grid.Row="0" Grid.Column="2" Content="Browse ..." Click="ButtonClick" />
 
         <Grid Grid.Row="2" DataContext="{Binding DatabaseDetails}">
             <Grid.RowDefinitions>
@@ -52,7 +51,7 @@
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Required version: "/>
             <TextBox x:Name="_txtDatabaseRequiredVersion" Grid.Row="2" Grid.Column="2" Text="{Binding RequiredVersion, Mode=OneWay, Converter={StaticResource IntToVersionConverters}}" IsReadOnly="True" />
 
-            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="Update/Create database" Click="_btnCreateDatabase_Click"/>
+            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Content="Update/Create database" Click="BtnCreateDatabaseClick"/>
         </Grid>
 
         <DataGrid x:Name="_grdVersionDetails" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" DataContext="{Binding DatabaseDetails}" ItemsSource="{Binding VersionRecords, Mode=OneWay}" AutoGenerateColumns="False" GridLinesVisibility="None">

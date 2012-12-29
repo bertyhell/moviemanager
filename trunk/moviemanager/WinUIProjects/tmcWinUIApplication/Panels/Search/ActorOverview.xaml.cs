@@ -1,4 +1,4 @@
-﻿using Model;
+﻿using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Search
 {

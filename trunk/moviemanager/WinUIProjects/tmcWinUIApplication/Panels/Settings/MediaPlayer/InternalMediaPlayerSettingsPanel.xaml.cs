@@ -1,6 +1,4 @@
-﻿using Tmc.WinUI.Application.Panels.Settings;
-
-namespace MovieManager.APP.Panels.Settings
+﻿namespace Tmc.WinUI.Application.Panels.Settings.MediaPlayer
 {
     /// <summary>
     /// Interaction logic for InternalMediaPlayerSettingsPanel.xaml

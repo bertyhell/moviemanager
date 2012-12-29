@@ -3,14 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using Model;
-using Model.Interfaces;
 using Tmc.BusinessRules.Web.Search;
+using Tmc.SystemFrameworks.Model;
+using Tmc.SystemFrameworks.Model.Interfaces;
 using Tmc.WinUI.Application.Localization;
 using Tmc.WinUI.Application.Panels.Common;
-using Tmc.WinUI.Application.Panels.Search;
 
-namespace MovieManager.APP.Panels.Search
+namespace Tmc.WinUI.Application.Panels.Search
 {
     /// <summary>
     /// Interaction logic for SearchWindow.xaml
@@ -58,8 +57,7 @@ namespace MovieManager.APP.Panels.Search
                 try
                 {
 
-                    Movie = new Movie();
-                    Movie.IdTmdb = Convert.ToInt32(options.SearchTerm);
+                    Movie = new Movie {IdTmdb = Convert.ToInt32(options.SearchTerm)};
                 }
                 catch
                 {

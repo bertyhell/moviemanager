@@ -18,7 +18,7 @@
             <RowDefinition Height="0.086*"/>
             <RowDefinition Height="0.914*"/>
         </Grid.RowDefinitions>
-        <ComboBox VerticalAlignment="Center" Margin="73,0,12,0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Path=SelectedFilter, Mode=OneWayToSource}" Validation.ErrorTemplate="{x:Null}" SelectionChanged="ComboBox_SelectionChanged" Name="cbbFilters" />
+        <ComboBox VerticalAlignment="Center" Margin="73,0,12,0" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Path=SelectedFilter, Mode=OneWayToSource}" Validation.ErrorTemplate="{x:Null}" SelectionChanged="ComboBoxSelectionChanged" Name="cbbFilters" />
         <!--SelectedIndex="{Binding SelectedFilterIndex,Mode=OneWay}" -->
         <ListBox Grid.Row="1" ItemsSource="{Binding AppliedFilters}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="0" Background="#FFEEEEEE" x:Name="lstFilters"> <!--ItemContainerStyle="{StaticResource BackgroundColorListBoxItem}">-->
             <ListBox.ItemTemplate>

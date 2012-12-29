@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using Model;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.BusinessRules.ExportImport
 {

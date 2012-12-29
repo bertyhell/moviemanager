@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Model;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.SqlCe
 {

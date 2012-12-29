@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Model;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Filter
 {
@@ -28,7 +28,7 @@ namespace Tmc.WinUI.Application.Panels.Filter
             MainController.Instance.Refresh();
         }
 
-        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ComboBoxSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             cbbFilters.SelectedIndex = -1;
         }

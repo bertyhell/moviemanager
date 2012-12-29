@@ -1,4 +1,4 @@
-namespace MovieManager.PLAYER.enums
+namespace Tmc.WinUI.Player.enums
 {
     /// <summary>
     /// Possible state of the media objects

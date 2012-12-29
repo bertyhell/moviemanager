@@ -1,15 +1,15 @@
 ﻿using System;
-using MovieManager.PLAYER.enums;
-using MovieManager.PLAYER.interop;
 using System.Windows.Forms;
+using Tmc.WinUI.Player.enums;
+using Tmc.WinUI.Player.interop;
 
-namespace MovieManager.PLAYER
+namespace Tmc.WinUI.Player
 {
     public class VlcMediaPlayer
     {
         #region interop
 
-        internal IntPtr Handle;
+        internal IntPtr _handle;
 
         #endregion
         

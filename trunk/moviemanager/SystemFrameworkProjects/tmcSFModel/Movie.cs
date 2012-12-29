@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Model
+namespace Tmc.SystemFrameworks.Model
 {
     public class Movie : Video, IEquatable<Video>, IEqualityComparer<Video>
     {

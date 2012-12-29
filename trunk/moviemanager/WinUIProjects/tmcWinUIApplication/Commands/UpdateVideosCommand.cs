@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using Model;
 using Tmc.DataAccess.SqlCe;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Commands
 {
@@ -17,7 +17,7 @@ namespace Tmc.WinUI.Application.Commands
 
         public UpdateVideosCommand(Video video)
         {
-            _video = new List<Video>() { video };
+            _video = new List<Video> { video };
         }
 
         public void Execute(object parameter)

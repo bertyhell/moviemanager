@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using Model;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Filter
 {

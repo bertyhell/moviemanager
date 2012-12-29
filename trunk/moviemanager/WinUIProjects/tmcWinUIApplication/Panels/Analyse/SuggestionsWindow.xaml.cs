@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using Model;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Analyse
 {
@@ -58,12 +58,12 @@ namespace Tmc.WinUI.Application.Panels.Analyse
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
             AnalyseVideo.SelectedCandidateIndex = -1;
-            this.Close();
+            Close();
         }
 
         private void BtnOkClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

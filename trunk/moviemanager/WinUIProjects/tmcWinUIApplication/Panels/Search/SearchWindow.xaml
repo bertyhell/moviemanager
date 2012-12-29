@@ -1,6 +1,6 @@
-﻿<Window x:Class="MovieManager.APP.Panels.Search.SearchWindow"
+﻿<Window x:Class="Tmc.WinUI.Application.Panels.Search.SearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Search="clr-namespace:MovieManager.APP.Panels.Search"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:search="clr-namespace:Tmc.WinUI.Application.Panels.Search"
         Title="SearchWindow" Background="#FFF1EDED" Height="778" Width="804">
     <Grid x:Name="_layoutRoot">

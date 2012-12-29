@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using Model.Interfaces;
+using Tmc.SystemFrameworks.Model.Interfaces;
 
 namespace Tmc.WinUI.Application.Panels.Common
 {
@@ -16,7 +16,7 @@ namespace Tmc.WinUI.Application.Panels.Common
             _contentGrid.DataContext = this;
         }
 
-        public static readonly DependencyProperty ItemProperty =
+        public static readonly DependencyProperty ITEM_PROPERTY =
             DependencyProperty.Register("Item", typeof(IPreviewInfoRetriever), typeof(PreviewItem), new PropertyMetadata(ItemPropertyChanged));
 
         public static void ItemPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
@@ -24,7 +24,7 @@ namespace Tmc.WinUI.Application.Panels.Common
             ((PreviewItem)sender).Item = (IPreviewInfoRetriever)e.NewValue;
         }
 
-        public static readonly DependencyProperty LabelVisibilityProperty =
+        public static readonly DependencyProperty LABEL_VISIBILITY_PROPERTY =
     DependencyProperty.Register("LabelVisibility", typeof(Visibility), typeof(PreviewItem), new PropertyMetadata(LabelVisibilityPropertyChanged));
 
         public static void LabelVisibilityPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)

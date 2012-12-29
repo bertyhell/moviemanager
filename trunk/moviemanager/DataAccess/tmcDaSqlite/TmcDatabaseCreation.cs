@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Model;
 using System.Data.SqlServerCe;
 
 namespace Tmc.DataAccess.Sqlite

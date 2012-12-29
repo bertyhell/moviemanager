@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.ComponentModel;
-using Model.Interfaces;
+using Tmc.SystemFrameworks.Model.Interfaces;
 
-namespace Model
+namespace Tmc.SystemFrameworks.Model
 {
     //TODO 060 add 'toevoegdatum' voor videos
 

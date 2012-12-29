@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace MovieManager.PLAYER.Common
+namespace Tmc.WinUI.Player.Common
 {
     class CustomTrackbar : TrackBar
     {

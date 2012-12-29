@@ -13,7 +13,7 @@ namespace Tmc.WinUI.Application.Converters
         {
             if( targetType == typeof(string))
             {
-                return ((DateTime) value).ToLocalTime().ToString();
+                return ((DateTime) value).ToLocalTime().ToString(CultureInfo.InvariantCulture);
             }
             return null;
         }

@@ -1,4 +1,4 @@
-﻿namespace MovieManager.PLAYER.Common
+﻿namespace Tmc.WinUI.Player.Common
 {
     partial class MediaPlayerControl
     {
@@ -33,8 +33,8 @@
             this._btnPlay = new System.Windows.Forms.Button();
             this._btnPause = new System.Windows.Forms.Button();
             this._btnStop = new System.Windows.Forms.Button();
-            this._trbVolume = new MovieManager.PLAYER.Common.CustomTrackbar();
-            this._trbTimestamp = new MovieManager.PLAYER.Common.CustomTrackbar();
+            this._trbVolume = new CustomTrackbar();
+            this._trbTimestamp = new CustomTrackbar();
             this._btnFullScreen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._trbVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._trbTimestamp)).BeginInit();

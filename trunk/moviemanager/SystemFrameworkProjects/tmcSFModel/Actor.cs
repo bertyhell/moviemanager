@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model.Interfaces;
+using Tmc.SystemFrameworks.Model.Interfaces;
 
-namespace Model
+namespace Tmc.SystemFrameworks.Model
 {
     public class Actor : IPreviewInfoRetriever
     {
