@@ -79,20 +79,18 @@ namespace Tmc.DataAccess.SqlCe
             {
 
                 string FilenameWidthoutExt = file.Name.Substring(0, file.Name.LastIndexOf(".", StringComparison.Ordinal));
-                var Video = new Video
+                var Video = new Video(file.FullName.Replace("\'", "''"))
                 {
-                    //TODO 010 fix this workaround
-                    Path = file.FullName.Replace("\'", "''"),
-                    //handle signle quotes in path name
                     Name = VideoTitleExtractor.CleanTitle(FilenameWidthoutExt)
                 };
+                    //TODO 010 fix this workaround
                 videos.Add(Video);
                 _videosFound++;
                 if (!reportNonVideos)
                 {
                     if (FoundVideo != null)
                     {
-                        FoundVideo(this, new ProgressEventArgs {ProgressNumber = _videosFound});
+                        FoundVideo(this, new ProgressEventArgs { ProgressNumber = _videosFound });
                     }
                 }
                 Console.WriteLine(file.FullName);//TODO 010 remove found video output to console
@@ -102,11 +100,11 @@ namespace Tmc.DataAccess.SqlCe
                 _filesProcessed++;
                 if (FoundVideo != null)
                 {
-                    FoundVideo(this, new ProgressEventArgs {ProgressNumber = _filesProcessed});
+                    FoundVideo(this, new ProgressEventArgs { ProgressNumber = _filesProcessed });
                 }
             }
         }
-        
+
         #region series
 
         public void GetEpisodesForSerie(DirectoryInfo dir, Serie serie, ObservableCollection<Video> videos, string seasonDir, string episodeString)
@@ -114,18 +112,18 @@ namespace Tmc.DataAccess.SqlCe
             //get all files
             ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
             GetVideos(dir, LocalVideos);
-            
+
             //convert video to episode
             foreach (Video Video in LocalVideos)
             {
-                FileInfo FileInfo = new FileInfo(Video.Path);
+                FileInfo FileInfo = new FileInfo(Video.Files[0].Path); //TODO 020 implement for multiple files
                 //int LastIndexOf = Video.Path.LastIndexOf(dir.FullName);
                 //string Path = Video.Path.Remove(0, LastIndexOf);
 
                 //find episodenumber in Filename
                 bool RegexMatched = false;
                 int Index = 0;
-                ObservableCollection<String> RegularExpressions =  CollectionConverter<String>.ConvertList(_videoInsertionSettings.EpisodeFilterRegexs);
+                ObservableCollection<String> RegularExpressions = CollectionConverter<String>.ConvertList(_videoInsertionSettings.EpisodeFilterRegexs); //TODO 030 observableList
 
                 while (!RegexMatched && Index < RegularExpressions.Count)
                 {
@@ -136,11 +134,15 @@ namespace Tmc.DataAccess.SqlCe
                         int SeasonNumber = int.Parse(Match.Groups[1].Value);
                         int EpisodeNumber = int.Parse(Match.Groups[2].Value);
 
-                        Episode Episode = (Episode)Video.ConvertVideo(VideoTypeEnum.Episode, Video);
-                        Episode.EpisodeNumber = EpisodeNumber;
-                        Episode.Season = SeasonNumber;
-                        Episode.SerieId = serie.Id;
-                        videos.Add(Episode);
+                        Video.EpisodeInfo = new EpisodeInfo
+                            {
+                                EpisodeNumber = EpisodeNumber,
+                                Season = SeasonNumber,
+                                SerieId = serie.Id
+                            };
+                        Video.VideoType = VideoTypeEnum.Episode;
+
+                        videos.Add(Video);
 
                         RegexMatched = true;
                     }
@@ -150,7 +152,7 @@ namespace Tmc.DataAccess.SqlCe
         }
 
         #endregion
-        
+
         protected override void OnDoWork(DoWorkEventArgs e)
         {
             if (_dir == null)

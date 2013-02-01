@@ -20,7 +20,7 @@ namespace Tmc.WinUI.Player.Logic
 
         public static void StartVideo(Video video, string mediaPlayer)
         {
-            if (video.Path != null)
+            if (video.Files[0].Path != null)
             {
                 if (mediaPlayer == "INTERNAL")
                 {
@@ -32,7 +32,7 @@ namespace Tmc.WinUI.Player.Logic
                 {
                     try
                     {
-                        Process Process = CommandHelper.ExecuteCommandSync(Path.Combine(RegistryHelper.GetInstallationPath("VLC"), "vlc"), "\"" + video.Path + "\"");
+                        Process Process = CommandHelper.ExecuteCommandSync(Path.Combine(RegistryHelper.GetInstallationPath("VLC"), "vlc"), "\"" + video.Files[0].Path + "\""); //TODO 040 add files to playlist
                         PLAYERS_STATUSES.Add(Process, video);
                         Process.Exited += ProcessExited;
                         Process.Disposed += ProcessExited;

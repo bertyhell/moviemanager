@@ -136,11 +136,11 @@ namespace Tmc.DataAccess.Sqlite
                         int SeasonNumber = int.Parse(Match.Groups[1].Value);
                         int EpisodeNumber = int.Parse(Match.Groups[2].Value);
 
-                        Episode Episode = (Episode)Video.ConvertVideo(VideoTypeEnum.Episode, Video);
-                        Episode.EpisodeNumber = EpisodeNumber;
-                        Episode.Season = SeasonNumber;
-                        Episode.SerieId = serie.Id;
-                        videos.Add(Episode);
+                        EpisodeInfo EpisodeInfo = (EpisodeInfo)Video.ConvertVideo(VideoTypeEnum.Episode, Video);
+                        EpisodeInfo.EpisodeNumber = EpisodeNumber;
+                        EpisodeInfo.Season = SeasonNumber;
+                        EpisodeInfo.SerieId = serie.Id;
+                        videos.Add(EpisodeInfo);
 
                         RegexMatched = true;
                     }

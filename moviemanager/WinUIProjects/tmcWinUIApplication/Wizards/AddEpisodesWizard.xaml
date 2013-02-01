@@ -7,7 +7,7 @@
         Title="Add episodes wizard" Height="400" Width="600">
 	<Grid>
 		<xctk:Wizard Finish="Wizard_OnFinish">
-			<xctk:WizardPage x:Name="_introPage" Title="Add episodes wizard" Description="This wizard will help you to add episodes to The Movie Collector"/>
+			<xctk:WizardPage x:Name="_introPage" Title="Add episodes wizard" Description="This wizard will help you to add episodes to The MovieInfo Collector"/>
 			<xctk:WizardPage x:Name="_selectFolderPage" Title="Select folder">
 				<common:MultiFolderSelectionControl x:Name="_folderSelectionControl"/>
 			</xctk:WizardPage>

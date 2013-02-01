@@ -54,6 +54,7 @@
     <Compile Include="DateTimeUtilities.cs" />
     <Compile Include="DefaultValues.cs" />
     <Compile Include="ImageQuality.cs" />
+    <Compile Include="ObservableList.cs" />
     <Compile Include="ProgressEventArgs.cs" />
     <Compile Include="RegistryHelper.cs" />
     <Compile Include="SerializableKeyValuePair.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="TimestampUtilities.cs" />
     <Compile Include="UniqueCollection.cs" />
     <Compile Include="VideoTitleExtractor.cs" />
+    <Compile Include="VirtualizingWrapPanel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

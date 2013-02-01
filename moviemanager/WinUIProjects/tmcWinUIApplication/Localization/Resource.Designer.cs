@@ -169,7 +169,7 @@ namespace Tmc.WinUI.Application.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Movie.
+        ///   Looks up a localized string similar to MovieInfo.
         /// </summary>
         public static string Movie {
             get {
@@ -286,7 +286,7 @@ namespace Tmc.WinUI.Application.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subtitle already in movie.
+        ///   Looks up a localized string similar to Subtitle already in MovieInfo.
         /// </summary>
         public static string SubtitleAlreadyInMovie {
             get {

@@ -50,7 +50,7 @@ namespace Tmc.WinUI.Application.Panels
                 foreach (String File in Ofd.FileNames)
                 {
                     if (!AlreadyInSubs(File))
-                        Video.Subs.Add(new Subtitle { Path = File });
+                        Video.Files[0].Subs.Add(new Subtitle { Path = File });
                     else
                     {
                         MessageBox.Show(Resource.SubtitleAlreadyInMovie, Resource.Error,
@@ -63,14 +63,14 @@ namespace Tmc.WinUI.Application.Panels
         //check for duplicate
         private bool AlreadyInSubs(String path)
         {
-            return Video.Subs.Any(sub => sub.Path == path);
+            return Video.Files[0].Subs.Any(sub => sub.Path == path);
         }
 
         private void BtnDelSubtitleClick(object sender, RoutedEventArgs e)
         {
             foreach(Subtitle Sub in _grdSubs.SelectedItems)
             {
-                Video.Subs.Remove(Sub);
+                Video.Files[0].Subs.Remove(Sub);
             }
         }
     }

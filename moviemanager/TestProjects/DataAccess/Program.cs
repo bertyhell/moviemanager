@@ -11,8 +11,6 @@ namespace DataAccess
         {
             Database.SetInitializer(new DropCreateDatabaseAlways<TmcContext>());
 
-
-
             foreach (Video Video in DataRetriever.Videos)
             {
                 Console.WriteLine(Video.Name);

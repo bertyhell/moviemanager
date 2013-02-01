@@ -83,7 +83,7 @@ namespace Tmc.WinUI.Application.Panels
                                     {
                                         SearchOptions = new SearchOptions
                                                             {
-                                                                SearchForMovies = (Info.Type == typeof(Movie)),
+                                                                SearchForMovies = (Info.Type == typeof(MovieInfo)),
                                                                 SearchForActors = (Info.Type == typeof(Actor)),
                                                                 SearchOnTmdb = true,
                                                                 SearchTerm = Info.Tag,

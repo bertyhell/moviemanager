@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.ComponentModel;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Model.Interfaces;
 
 namespace Tmc.SystemFrameworks.Model
@@ -13,34 +13,53 @@ namespace Tmc.SystemFrameworks.Model
 
     public enum VideoTypeEnum { Video, Movie, Episode };
 
-    public class Video : INotifyPropertyChanged, IEditableObject, IPreviewInfoRetriever
+    public class Video : INotifyPropertyChanged, IPreviewInfoRetriever
     {
         private int _id;
         private String _idImdb;
         private String _name;
-		private DateTime _release = new DateTime(1800,1,1);
-        private String _releaseYearGuess = "";
+        private DateTime _release = new DateTime(1800, 1, 1);
         private double _rating;
         private double _ratingImdb;
         private List<String> _genres;
-        private String _path; //path to movie
         private ulong _lastPlayLocation;
         private uint _playCount;
-        private ObservableCollection<Subtitle> _subs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
         //properties for searchresults
         private ImageInfo _poster;
         private List<ImageInfo> _images;
         private String _plot;
         private bool _analyseCompleted;
+        private VideoTypeEnum _videoType;
+        private List<VideoFile> _files;
 
-	    private Video _backup;
+        private MovieInfo _movieInfo;
+        private EpisodeInfo _episodeInfo;
+
+        public Video(VideoTypeEnum videoType = VideoTypeEnum.Video) : this()
+        {
+            VideoType = videoType;
+            if (VideoType == VideoTypeEnum.Movie)
+            {
+                MovieInfo = new MovieInfo();
+            }
+            else if(VideoType == VideoTypeEnum.Episode)
+            {
+                EpisodeInfo = new EpisodeInfo();
+            }
+        }
 
         public Video()
         {
             _images = new List<ImageInfo>();
-            _subs = new ObservableCollection<Subtitle>();
             _genres = new List<string>();
-			_analyseCompleted = false;
+            _analyseCompleted = false;
+            _files = new List<VideoFile>();
+        }
+
+        public Video(string path, params Subtitle[] subs)
+            : this()
+        {
+            Files.Add(new VideoFile { Path = path, Subs = new ObservableList<Subtitle>(subs) });
         }
 
         public Video(Video brother)
@@ -52,10 +71,9 @@ namespace Tmc.SystemFrameworks.Model
             _rating = brother.Rating;
             _ratingImdb = brother.RatingImdb;
             _genres = brother.Genres;
-            _path = brother.Path;
+            _files = brother.Files;
             _lastPlayLocation = brother.LastPlayLocation;
             _playCount = brother.PlayCount;
-            _subs = brother.Subs;
             _poster = brother.Poster;
             _images = brother.Images;
             _plot = brother.Plot;
@@ -73,7 +91,7 @@ namespace Tmc.SystemFrameworks.Model
             Release = Release.Year == 1900 || overwrite ? brother.Release : Release;
             RatingImdb = RatingImdb < 0 || overwrite ? brother.RatingImdb : RatingImdb;
             Genres = Genres == null || Genres.Count == 0 || overwrite ? brother.Genres : Genres;
-            Subs = Genres == null || Subs.Count == 0 || overwrite ? brother.Subs : Subs;
+            Files = Files == null || overwrite ? brother.Files : Files;
             Poster = Poster == null || overwrite ? brother.Poster : Poster;
             Images = Images == null || Images.Count == 0 || overwrite ? brother.Images : Images;
             Plot = string.IsNullOrEmpty(Plot) || overwrite ? brother.Plot : Plot;
@@ -81,56 +99,24 @@ namespace Tmc.SystemFrameworks.Model
             AnalyseCompleted = brother.AnalyseCompleted;
         }
 
-        public virtual VideoTypeEnum VideoType
+        public MovieInfo MovieInfo
         {
-            get { return VideoTypeEnum.Video; }
+            get { return _movieInfo; }
+            set { _movieInfo = value; }
         }
 
-        public static Video ConvertVideo(VideoTypeEnum resultingVideoType, Video video)
+        public EpisodeInfo EpisodeInfo
         {
-            if (resultingVideoType == VideoTypeEnum.Movie)
-            {
-                return new Movie
-                {
-                    Id = video.Id,
-                    IdImdb = video.IdImdb,
-                    Name = video.Name,
-                    Release = video.Release,
-                    Rating = video.Rating,
-                    RatingImdb = video.RatingImdb,
-                    Path = video.Path,
-                    LastPlayLocation = video.LastPlayLocation
-                };
-
-            }
-            if (resultingVideoType == VideoTypeEnum.Episode)
-            {
-                return new Episode
-                {
-                    Id = video.Id,
-                    IdImdb = video.IdImdb,
-                    Name = video.Name,
-                    Release = video.Release,
-                    Rating = video.Rating,
-                    RatingImdb = video.RatingImdb,
-                    Path = video.Path,
-                    LastPlayLocation = video.LastPlayLocation
-                };
-            }
-            return new Video
-            {
-                Id = video.Id,
-                IdImdb = video.IdImdb,
-                Name = video.Name,
-                Release = video.Release,
-                Rating = video.Rating,
-                RatingImdb = video.RatingImdb,
-                Path = video.Path,
-                LastPlayLocation = video.LastPlayLocation
-            };
+            get { return _episodeInfo; }
+            set { _episodeInfo = value;}
         }
 
-        //return 
+        public List<VideoFile> Files
+        {
+            get { return _files; }
+            set { _files = value; }
+        }
+
         public List<String> Genres
         {
             get { return _genres; }
@@ -146,6 +132,7 @@ namespace Tmc.SystemFrameworks.Model
             get { return _analyseCompleted; }
             set { _analyseCompleted = value; OnPropertyChanged("AnalyseCompleted"); }
         }
+
         [Key]
         public int Id
         {
@@ -189,20 +176,6 @@ namespace Tmc.SystemFrameworks.Model
             {
                 _name = value;
                 OnPropertyChanged("Name");
-            }
-        }
-
-        public String Path
-        {
-            get { return _path; }
-            set
-            {
-                _path = value;
-                if (string.IsNullOrEmpty(_name))
-                {
-                    _name = _path.Substring(_path.LastIndexOf("/", StringComparison.Ordinal) + 1, _path.LastIndexOf(".", StringComparison.Ordinal));
-                    OnPropertyChanged("Path");
-                }
             }
         }
 
@@ -262,16 +235,6 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
-        public ObservableCollection<Subtitle> Subs
-        {
-            get { return _subs; }
-            set
-            {
-                _subs = value;
-                OnPropertyChanged("Subs");
-            }
-        }
-
         public ulong LastPlayLocation
         {
             get { return _lastPlayLocation; }
@@ -289,6 +252,21 @@ namespace Tmc.SystemFrameworks.Model
             {
                 _playCount = value;
                 OnPropertyChanged("PlayCount");
+            }
+        }
+
+        public VideoTypeEnum VideoType
+        {
+            get {
+                return _videoType;
+            }
+            set
+            {
+                if (_videoType != value)
+                {
+                    _videoType = value;
+                    OnPropertyChanged("VideoType");
+                }
             }
         }
 
@@ -361,7 +339,7 @@ namespace Tmc.SystemFrameworks.Model
             {
                 _images = value;
                 OnPropertyChanged("Images");
-                if(_poster == null)
+                if (_poster == null)
                     OnPropertyChanged("Poster");
             }
         }
@@ -382,134 +360,11 @@ namespace Tmc.SystemFrameworks.Model
 
         protected void OnPropertyChanged(string prop)
         {
-            if (PropertyChanged != null && !_editInProgress)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        #region ieditableobject
-
-        private int _oldid;
-        private String _oldidImdb;
-        private String _oldname;
-		private DateTime _oldrelease = new DateTime(1800, 1, 1);
-        private string _oldreleaseyearguess;
-        private double _oldrating;
-        private double _oldratingImdb;
-        private List<String> _oldgenres;
-        private String _oldpath; //path to movie
-        private ulong _oldlastPlayLocation;
-        private uint _oldPlayCount;
-        private ObservableCollection<Subtitle> _oldsubs; //Subtitles of the formats .cdg, .idx, .srt, .sub, .utf, .ass, .ssa, .aqt, .jss, .psb, .rt and smi are supported. 
-        //properties for searchresults
-        private ImageInfo _oldposter;
-        private List<ImageInfo> _oldimages;
-        private String _oldplot;
-        private long _oldRuntime;
-
-        private bool _editInProgress;
-
-		public void MakeBackup()
-		{
-			_backup = new Video(this);
-		}
-
-		public void RestoreBackup()
-		{
-			_id = _backup.Id;
-			_idImdb = _backup.IdImdb;
-			_name = _backup.Name;
-			_release = _backup.Release;
-			_releaseYearGuess = _backup.ReleaseYearGuess;
-			_rating = _backup.Rating;
-			_ratingImdb = _backup.RatingImdb;
-			_genres = _backup.Genres;
-			_path = _backup.Path;
-			_lastPlayLocation = _backup.LastPlayLocation;
-			_playCount = _backup.PlayCount;
-			_subs = _backup.Subs;
-			_poster = _backup.Poster;
-			_images = _backup.Images;
-			_plot = _backup.Plot;
-			_runtime = _backup.Runtime;
-		}
 
         //TODO 040: Replace backup props with backup Video object
-        public void BeginEdit()
-        {
-            if (!_editInProgress)
-            {
-                _editInProgress = false;
-                _oldid = _id;
-                _oldidImdb = _idImdb;
-                _oldname = _name;
-                _oldrelease = _release;
-                _oldreleaseyearguess = _releaseYearGuess;
-                _oldrating = _rating;
-                _oldratingImdb = _ratingImdb;
-                _oldgenres = _genres;
-                _oldlastPlayLocation = _lastPlayLocation;
-                _oldPlayCount = _playCount;
-                _oldsubs = _subs;
-                _oldposter = _poster;
-                _oldimages = _images;
-                _oldplot = _plot;
-                _oldRuntime = _runtime;
-            }
-        }
 
-        public void EndEdit()
-        {
-            if (_editInProgress)
-            {
-                _editInProgress = false;
-                _oldidImdb = null;
-                _oldname = null;
-                _oldpath = null;
-                _oldgenres = null;
-                _oldposter = null;
-                _oldimages = null;
-                _oldplot = null;
-                OnPropertyChanged("Id");
-                OnPropertyChanged("IdImdb");
-                OnPropertyChanged("Name");
-                OnPropertyChanged("Release");
-                OnPropertyChanged("ReleaseYearGuess");
-                OnPropertyChanged("Rating");
-                OnPropertyChanged("RatingImdb");
-                OnPropertyChanged("Genres");
-                OnPropertyChanged("Path");
-                OnPropertyChanged("LastPlayLocation");
-                OnPropertyChanged("PlayCount");
-                OnPropertyChanged("Poster");
-                OnPropertyChanged("Images");
-                OnPropertyChanged("Plot");
-                OnPropertyChanged("Runtime");
-            }
-        }
-
-        public void CancelEdit()
-        {
-            if (_editInProgress)
-            {
-                _editInProgress = false;
-                _id = _oldid;
-                _idImdb = _oldidImdb;
-                _name = _oldname;
-                _release = _oldrelease;
-                _releaseYearGuess = _oldreleaseyearguess;
-                _rating = _oldrating;
-                _ratingImdb = _oldratingImdb;
-                _genres = _oldgenres;
-                _path = _oldpath;
-                _lastPlayLocation = _oldlastPlayLocation;
-                _playCount = _oldPlayCount;
-                _subs = _oldsubs;
-                _poster = _oldposter;
-                _images = _oldimages;
-                _plot = _oldplot;
-                _runtime = _oldRuntime;
-            }
-        }
-        #endregion
     }
 }

@@ -10,16 +10,16 @@ namespace Tmc.WinUI.Application.Panels.Search
         public MovieOverview()
         {
             InitializeComponent();
-            DataContext = Movie;
+            DataContext = Video;
         }
 
-        private Movie _movie;
-        public Movie Movie
+        private Video _video;
+        public Video Video
         {
-            get { return _movie; }
+            get { return _video; }
             set
             {
-                _movie = value;
+                _video = value;
                 DataContext = value;
             }
         }

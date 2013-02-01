@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using Tmc.DataAccess.SqlCe;
+using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Wizards
@@ -34,7 +35,7 @@ namespace Tmc.WinUI.Application.Wizards
             ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();
             MovieFileReader MovieFileReader = new MovieFileReader(new DirectoryInfo(SelectedPath), Properties.Settings.Default.VideoInsertionSettings);
             MovieFileReader.GetEpisodesForSerie(new DirectoryInfo(SelectedPath), Serie, LocalVideos, "", "");
-            DataRetriever.InsertVideosHdd(LocalVideos);
+            DataRetriever.Videos = CollectionConverter<Video>.ConvertObservableCollection(LocalVideos);
         }
 
         private void Wizard_OnFinish(object sender, RoutedEventArgs e)

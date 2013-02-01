@@ -154,7 +154,7 @@
     <value>Imdb rating:</value>
   </data>
   <data name="Movie" xml:space="preserve">
-    <value>Movie</value>
+    <value>MovieInfo</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name:</value>
@@ -187,7 +187,7 @@
     <value>Start playing on double click (in main view)</value>
   </data>
   <data name="SubtitleAlreadyInMovie" xml:space="preserve">
-    <value>Subtitle already in movie</value>
+    <value>Subtitle already in MovieInfo</value>
   </data>
   <data name="Subtitles" xml:space="preserve">
     <value>Subtitles:</value>

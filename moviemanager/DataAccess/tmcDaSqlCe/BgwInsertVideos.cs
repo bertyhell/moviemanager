@@ -15,7 +15,7 @@ namespace Tmc.DataAccess.SqlCe
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
-            DataRetriever.InsertVideosHdd(_videos);
+            DataRetriever.Videos = _videos;
         }
     }
 }

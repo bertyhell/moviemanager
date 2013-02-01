@@ -189,26 +189,24 @@ namespace Tmc.WinUI.Application
                 {
                     try
                     {
-                        string NewVideoName = Path.GetFileName(Video.Path);
-                        string VideoDir = Path.GetDirectoryName(Video.Path);
-                        if (Video is Movie)
+                        string NewVideoName = Path.GetFileName(Video.Files[0].Path); //TODO 060 rename all files for video
+                        string VideoDir = Path.GetDirectoryName(Video.Files[0].Path);
+                        if (Video.VideoType == VideoTypeEnum.Movie)
                         {
                             string ParString = Settings.Default.RenamingMovieFileSequence;
                             NewVideoName = ParString.Replace("{{MovieName}}", Video.Name);
                             NewVideoName = NewVideoName.Replace("{{Year}}", Video.Release.Year.ToString(CultureInfo.InvariantCulture));
-                        }
-
-                        else if (Video is Episode)
+                        }else if (Video.VideoType == VideoTypeEnum.Episode)
                         {
                             string ParString = Settings.Default.RenamingEpisodeFileSequence;
                             //TODO 030: implement renaming for episodes
                         }
 
-                        if (!string.IsNullOrEmpty(VideoDir) && File.Exists(Video.Path) && Directory.Exists(VideoDir))
+                        if (!string.IsNullOrEmpty(VideoDir) && File.Exists(Video.Files[0].Path) && Directory.Exists(VideoDir))
                         {
-                            string NewPath = Path.Combine(VideoDir, NewVideoName + Path.GetExtension(Video.Path));
-                            File.Move(Video.Path, NewPath);
-                            Video.Path = NewPath;
+                            string NewPath = Path.Combine(VideoDir, NewVideoName + Path.GetExtension(Video.Files[0].Path));
+                            File.Move(Video.Files[0].Path, NewPath);
+                            Video.Files[0].Path = NewPath;
                         }
 
                         _videoDetails.Items.Refresh();
@@ -268,4 +266,4 @@ namespace Tmc.WinUI.Application
 
 //TODO 090: gezochte folders bijhouden + (automatische refresh in background)
 //TODO 070: apparte settingsfile
-//TODO 070: verschillende video types: episode, movie, ...
+//TODO 070: verschillende video types: episode, MovieInfo, ...

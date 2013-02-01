@@ -73,9 +73,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="File" Binding="{Binding Video.Path, Converter={StaticResource FileNameFromPathExtractor}}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Folder" Binding="{Binding Video.Path, Converter={StaticResource FolderFromPathExtractor}}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Path" Binding="{Binding Video.Path}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="File" Binding="{Binding Video.Files[0].Path, Converter={StaticResource FileNameFromPathExtractor}}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Folder" Binding="{Binding Video.Files[0].Path, Converter={StaticResource FolderFromPathExtractor}}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Path" Binding="{Binding Video.Files[0].Path}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

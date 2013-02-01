@@ -47,7 +47,7 @@ namespace Tmc.WinUI.Application.Panels
             {
                 ObservableCollection<Video> LocalVideos = MainController.Instance.Videos;
                 int Index = LocalVideos.IndexOf(Video);
-                Video = Video.ConvertVideo(VideoType, Video);
+                Video.VideoType = VideoType;
                 LocalVideos.RemoveAt(Index);
                 LocalVideos.Insert(Index,Video);
             }
@@ -62,6 +62,7 @@ namespace Tmc.WinUI.Application.Panels
         {
             UpdateVideosCommand UpdateVideosCommand = new UpdateVideosCommand(Video);
             UpdateVideosCommand.Execute(new object());
+            Close();
         }
     }
 }

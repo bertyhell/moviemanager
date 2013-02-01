@@ -147,7 +147,7 @@ namespace Tmc.BusinessRules.ExportImport
                         }
                     }
                     List<Video> Data = Excel.Excel2Videos(FilePath, SelectedWorksheetIndex, ImportMappingItems);
-                    DataRetriever.InsertVideosHdd(Data);
+                    DataRetriever.Videos = (IList<Video>)Data;
                 }
             }catch(Exception Ex)
             {

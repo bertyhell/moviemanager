@@ -97,7 +97,7 @@ namespace Tmc.WinUI.Application
             try
             {
                 //Videos = new AsyncVirtualizingCollection<T>(new ItemsProvider(), 100, 1000);//TODO 020 adjust pagesize to zoom level video preview items
-                _videosList = DataRetriever.Videos;
+                _videosList = (List<Video>)DataRetriever.Videos;
                 _videos.Clear();
                 foreach (Video Video in _videosList)
                 {
@@ -181,12 +181,14 @@ namespace Tmc.WinUI.Application
                     _previewWidth = NewPreviewWidth;
                     PropChanged("PreviewWidth");
                     PropChanged("PreviewHeight");
+                    PropChanged("ItemWidth");
+                    PropChanged("ItemHeight");
                 }
             }
         }
 
-        private int _previewItemMargin = 5;
-        public int PreviewItemMargin
+        private Thickness _previewItemMargin = new Thickness(5);
+        public Thickness PreviewItemMargin
         {
             get { return _previewItemMargin; }
             set
@@ -195,8 +197,20 @@ namespace Tmc.WinUI.Application
                 {
                     _previewItemMargin = value;
                     PropChanged("PreviewItemMargin");
+                    PropChanged("ItemWidth");
+                    PropChanged("ItemHeight");
                 }
             }
+        }
+        
+        public double ItemWidth 
+        {
+            get { return PreviewWidth + PreviewItemMargin.Left + PreviewItemMargin.Right; }
+        }
+
+        public double ItemHeight
+        {
+            get { return PreviewHeight + PreviewItemMargin.Top + PreviewItemMargin.Bottom; }
         }
 
         #region zooming + events
@@ -240,6 +254,8 @@ namespace Tmc.WinUI.Application
                     _previewWidth = NewPreviewWidth;
                     PropChanged("PreviewWidth");
                     PropChanged("PreviewHeight");
+                    PropChanged("ItemWidth");
+                    PropChanged("ItemHeight");
                 }
             }
         }
