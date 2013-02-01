@@ -22,7 +22,7 @@ namespace Tmc.WinUI.Application.Commands
 
         public void Execute(object parameter)
         {
-            DataRetriever.UpdateVideos(_video);
+            DataRetriever.Videos = _video;
         }
 
         public bool CanExecute(object parameter)

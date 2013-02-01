@@ -19,7 +19,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
             _panelName = "File rename";
             _iconPath = "/MovieManager;component/Images/disk.png";
 
-            //movie string builder
+            //MovieInfo string builder
             parameteredStringBuilderMovie.Parameters = new List<FrameworkElement> { new TextBox { Text = "Custom" }, new Button { Content = "MovieName" }, new Button { Content = "Year" } };
 
             //Serie string builder

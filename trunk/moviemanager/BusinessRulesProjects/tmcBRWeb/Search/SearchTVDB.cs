@@ -36,13 +36,13 @@ namespace Tmc.BusinessRules.Web.Search
 
         #region videos
 
-        public static List<Movie> GetVideoInfo(String query)
+        public static List<Video> GetVideoInfo(String query)
         {
-            var Videos = new List<Movie>();
+            var Videos = new List<Video>();
             try
             {
                 //do request
-                var Request = new Uri("http://api.themoviedb.org/3/search/movie?api_key=" + APIKEY + "&query="
+                var Request = new Uri("http://api.themoviedb.org/3/search/MovieInfo?api_key=" + APIKEY + "&query="
                                     + HttpUtility.UrlEncode(query));
                 var Response = SimpleWebRequest.DoJsonRequest(Request);
 
@@ -53,10 +53,13 @@ namespace Tmc.BusinessRules.Web.Search
 
                     foreach (JToken JToken in Results)
                     {
-                        Videos.Add(new Movie
+                        Videos.Add(new Video
                         {
                             Name = (string)JToken["title"],
-                            IdTmdb = (int)JToken["id"],
+                            MovieInfo = new MovieInfo
+                                {
+                                    IdTmdb = (int)JToken["id"]
+                                },
                             Images = new List<ImageInfo> { new ImageInfo { Uri = new Uri(TmdbConfiguration.BaseUrl + TmdbConfiguration.SeletedPosterSize + (string)JToken["poster_path"]) } },
                             Release = ParseTmdbDate((string)JToken["release_date"])
                         });
@@ -72,9 +75,9 @@ namespace Tmc.BusinessRules.Web.Search
             return Videos;
         }
 
-        public static void GetMovieImages(Movie movie)
+        public static void GetMovieImages(Video movie)
         {
-            Uri Request = new Uri("http://api.themoviedb.org/3/movie/" + movie.IdTmdb + "/images?api_key=" + APIKEY);
+            Uri Request = new Uri("http://api.themoviedb.org/3/MovieInfo/" + movie.MovieInfo.IdTmdb + "/images?api_key=" + APIKEY);
             String Response = SimpleWebRequest.DoJsonRequest(Request);
 
             if (!string.IsNullOrEmpty(Response))
@@ -89,9 +92,9 @@ namespace Tmc.BusinessRules.Web.Search
             }
         }
 
-        public static void GetExtraMovieInfo(Movie movie)
+        public static void GetExtraMovieInfo(Video movie)
         {
-            Uri Request = new Uri("http://api.themoviedb.org/3/movie/" + movie.IdTmdb + "?api_key=" + APIKEY);
+            Uri Request = new Uri("http://api.themoviedb.org/3/MovieInfo/" + movie.MovieInfo.IdTmdb + "?api_key=" + APIKEY);
             String Response = SimpleWebRequest.DoJsonRequest(Request);
 
             if (!string.IsNullOrEmpty(Response))
@@ -204,7 +207,7 @@ namespace Tmc.BusinessRules.Web.Search
                                                      Uri = new Uri(TmdbConfiguration.BaseUrl + TmdbConfiguration.PosterSizes[TmdbConfiguration.PosterSizes.Count - 1] + (string)JMovie["poster_path"]),
                                                      Name = (string)JMovie["original_title"],
                                                      Tag = JMovie["id"].ToString(),
-                                                     Type = typeof(Movie)
+                                                     Type = typeof(MovieInfo)
                                                  });
                     }
 

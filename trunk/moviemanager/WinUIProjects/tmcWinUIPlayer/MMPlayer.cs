@@ -53,9 +53,9 @@ namespace Tmc.WinUI.Player
         {
             Text = video.Name;
             _video = video;
-            if (video.Path != null)
+            if (video.Files[0].Path != null)
             {
-                PlayVideo(video.Path);
+                PlayVideo(video.Files[0].Path);
                 _player.CurrentTimestamp = (long)video.LastPlayLocation;
             }
         }

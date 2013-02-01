@@ -28,13 +28,13 @@ namespace Tmc.WinUI.Application.Commands
 
             //foreach (Video Video in MainController.Instance.Videos)
             //{
-            //    if (Video is Movie)
+            //    if (Video is MovieInfo)
             //    {
-            //        List<Movie> Movies = SearchTMDB.GetVideoInfo(Video.Name);
+            //        List<MovieInfo> Movies = SearchTMDB.GetVideoInfo(Video.Name);
             //        if (Movies.Count > 0)
             //        {
-            //            (Video as Movie).IdImdb = Movies[0].IdImdb;
-            //            SearchTMDB.GetExtraMovieInfo(Movies[0].IdTmdb, (Movie)Video);
+            //            (Video as MovieInfo).IdImdb = Movies[0].IdImdb;
+            //            SearchTMDB.GetExtraMovieInfo(Movies[0].IdTmdb, (MovieInfo)Video);
             //        }
             //        //if(!string.IsNullOrEmpty(Video.IdImdb))
             //        //SearchIMDB.GetVideoInfo(Video);

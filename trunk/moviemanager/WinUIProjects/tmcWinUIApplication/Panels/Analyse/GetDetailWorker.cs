@@ -35,16 +35,14 @@ namespace Tmc.WinUI.Application.Panels.Analyse
             for (int I = 0; I < _videos.Count; I++)
             {
                 Video Video = _videos[I];
-                Movie Movie = Video as Movie;
-                if (Movie != null)
+                if (Video.VideoType ==VideoTypeEnum.Movie)
                 {
-                    SearchTmdb.GetExtraMovieInfo(Movie);
-                    SearchTmdb.GetMovieImages(Movie);
-                    Movie.AnalyseCompleted = true;
+                    SearchTmdb.GetExtraMovieInfo(Video);
+                    SearchTmdb.GetMovieImages(Video);
+                    Video.AnalyseCompleted = true;
                 }
                 OnVideoInfoProgress(new ProgressEventArgs { MaxNumber = _videos.Count, ProgressNumber = I });
             }
-
         }
     }
 

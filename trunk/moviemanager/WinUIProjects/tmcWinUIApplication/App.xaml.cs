@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System.Configuration;
+using System.Data.EntityClient;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
@@ -37,7 +39,13 @@ namespace Tmc.WinUI.Application
 
             //Check if database exists
             string DatabasePath = Settings.Default.DatabasePath.Replace("%APPDATA%", DefaultValues.PATH_USER_APPDATA);
-            DataRetriever.Init(DatabasePath);
+            
+            string ConnectionString = string.Format("Data Source = {0}", DatabasePath);
+            EntityConnectionStringBuilder ConnectionStringBuilder = new EntityConnectionStringBuilder();
+            ConnectionStringBuilder.Provider = "System.Data.SqlServerCe.4.0";
+            ConnectionStringBuilder.ProviderConnectionString = ConnectionString;
+            //ConnectionStringBuilder.Metadata = "res://*/VideoModel.csdl|res://*/VideoModel.ssdl|res://*/VideoModel.msl";
+            DataRetriever.Init(ConnectionString);
             base.OnStartup(e);
         }
 

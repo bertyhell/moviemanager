@@ -25,7 +25,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
             AnalyseVideos.Clear();
             foreach (Video Video in Videos)
             {
-                AnalyseVideos.Add(new AnalyseVideo { Video = Video, TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(Video.Path) });
+                AnalyseVideos.Add(new AnalyseVideo { Video = Video, TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(Video.Files[0].Path) });
             }
         }
 
@@ -101,7 +101,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
             }
         }
 
-        //TODO 050 make analyse function multithreaded -> 1 thread for every movie lookup
+        //TODO 050 make analyse function multithreaded -> 1 thread for every MovieInfo lookup
         public void SaveVideos()//TODO 070 do this in a backgroundworker with progressbar
         {
             var Videos = new List<Video>();

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\Constants.cs" />
     <Compile Include="Search\SearchBing.cs" />
     <Compile Include="Search\SearchTVDB.cs" />
     <Compile Include="Search\SearchIMDB.cs" />

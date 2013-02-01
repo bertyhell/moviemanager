@@ -5,7 +5,9 @@
         xmlns:menu="clr-namespace:Tmc.WinUI.Application.Menubar"
         xmlns:panels="clr-namespace:Tmc.WinUI.Application.Panels"
         xmlns:filter="clr-namespace:Tmc.WinUI.Application.Panels.Filter"
-        xmlns:Common="clr-namespace:Tmc.WinUI.Application.Panels.Common" Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="WindowPreviewMouseWheel">
+        xmlns:Common="clr-namespace:Tmc.WinUI.Application.Panels.Common"
+        xmlns:common="clr-namespace:Tmc.SystemFrameworks.Common;assembly=Tmc.SystemFrameworks.Common"
+        Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="WindowPreviewMouseWheel">
     <Grid>
         <Grid.Resources>
             <converters:StringListConverter x:Key="stringListConverter"/>
@@ -53,13 +55,13 @@
         <GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <!-- center panel-->
-        <!--<ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}" MouseDoubleClick="VideoGridMouseDoubleClick"
+        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}" MouseDoubleClick="VideoGridMouseDoubleClick"
                   Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel" Style="{DynamicResource ResourceKey=lvStyle}" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
-                                   ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                   ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    <common:VirtualizingWrapPanel CanVerticallyScroll="True" 
+                        ItemWidth="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemWidth}" 
+                        ItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemHeight}" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -68,17 +70,17 @@
                         Item="{Binding}" 
                         Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
                         Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" 
-                        Margin="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.previewItemMargin}"
+                        Margin="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewItemMargin}"
                         LabelVisibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewTitleVisibility}"
                         />
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>-->
+        </ListView>
 
-        <ItemsControl x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}">
+        <!--<ItemsControl x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel />
+                    <common:VirtualizingWrapPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.Template>
@@ -101,7 +103,7 @@
                         />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ItemsControl>-->
 
         <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}" ItemsSource="{Binding VideosView}"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick" PreviewMouseWheel="MouseWheel">
@@ -122,7 +124,7 @@
                 <DataGridTextColumn Header="Type" Binding="{Binding VideoType}" />
                 <DataGridTextColumn Header="Genres" Binding="{Binding Genres, Converter={StaticResource stringListConverter}}" />
                 <DataGridTextColumn Header="IMDB id" Binding="{Binding IdImdb}" />
-                <DataGridTextColumn Header="Path" Binding="{Binding Path}" />
+                <DataGridTextColumn Header="Path" Binding="{Binding Files[0].Path}" />
                 <DataGridTemplateColumn Header="Rating" SortMemberPath="Rating">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -59,14 +59,20 @@
     <Compile Include="Franchise.cs" />
     <Compile Include="ImageInfo.cs" />
     <Compile Include="Interfaces\IPreviewInfoRetriever.cs" />
-    <Compile Include="Movie.cs" />
+    <Compile Include="MovieInfo.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Serie.cs" />
     <Compile Include="Subtitle.cs" />
     <Compile Include="Video.cs" />
-    <Compile Include="Episode.cs" />
+    <Compile Include="EpisodeInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VideoFile.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\tmcSFCommon\tmcSFCommon.csproj">
+      <Project>{d6017df9-ae81-49b8-857a-495ce8275db0}</Project>
+      <Name>tmcSFCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\tmcSFLog\tmcSFLog.csproj">
       <Project>{8c2b5f04-ef8f-46b8-b775-fd602b8afaed}</Project>
       <Name>tmcSFLog</Name>

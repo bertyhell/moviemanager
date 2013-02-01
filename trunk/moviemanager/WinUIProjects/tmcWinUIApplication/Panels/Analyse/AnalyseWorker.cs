@@ -83,13 +83,13 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                         string FileNameGuess = AnalyseVideo.TitleGuesses[0];
                         string FolderNameGuess = AnalyseVideo.TitleGuesses.Count > 1 ? AnalyseVideo.TitleGuesses[1] : null;
 
-                        string FileName = Path.GetFileNameWithoutExtension(AnalyseVideo.Video.Path);
+                        string FileName = Path.GetFileNameWithoutExtension(AnalyseVideo.Video.Files[0].Path);
                         if (FileName != null)
                         {
                             List<string> FileNameGuesses = VideoTitleExtractor.GetTitleGuessesFromString(FileName.ToLower(), true);
                             AnalyseVideo.TitleGuesses.AddRange(FileNameGuesses);
                         }
-                        var DirectoryName = Path.GetDirectoryName(AnalyseVideo.Video.Path);
+                        var DirectoryName = Path.GetDirectoryName(AnalyseVideo.Video.Files[0].Path);
                         if (DirectoryName != null)
                         {
                             string FolderName = DirectoryName.Split(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).Last().ToLower();
@@ -114,7 +114,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                     if (AnalyseVideo.Candidates.Count == 0 || AnalyseVideo.MatchPercentage < 0.5)
                     {
 
-                        AnalyseVideo.TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(AnalyseVideo.Video.Path); //TODO 004 optimize this --> also gets done in pass1 --> remember somehow
+                        AnalyseVideo.TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(AnalyseVideo.Video.Files[0].Path); //TODO 004 optimize this --> also gets done in pass1 --> remember somehow
                         string FileNameGuess = AnalyseVideo.TitleGuesses[0];
                         string FolderNameGuess = AnalyseVideo.TitleGuesses.Count > 1 ? AnalyseVideo.TitleGuesses[1] : null;
 

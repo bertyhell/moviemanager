@@ -74,7 +74,7 @@
 //                var MoviesRow = DsVideos.Movies.Rows.Find(Video.Id) as DsVideos.MoviesRow;
 //                if (MoviesRow != null)
 //                {
-//                    Video = Video.ConvertVideo(VideoTypeEnum.Movie, Video);
+//                    Video = Video.ConvertVideo(VideoTypeEnum.MovieInfo, Video);
 //                }
 //                else
 //                {
@@ -295,7 +295,7 @@
 //        }
 
 //        /// <summary>
-//        /// Updates one Video, Episode, Movie
+//        /// Updates one Video, Episode, MovieInfo
 //        /// </summary>
 //        /// <param name="video"></param>
 //        /// <returns></returns>
@@ -318,7 +318,7 @@
 //        }
 
 //        /// <summary>
-//        /// Updates one Video, Episode, Movie
+//        /// Updates one Video, Episode, MovieInfo
 //        /// </summary>
 //        /// <param name="video"></param>
 //        /// <param name="datasetVideos"></param>
@@ -365,8 +365,8 @@
 //                RetVal &= (VideosTableAdapter.Update(datasetVideos) > 0);
 
 //                //update movie or episode
-//                if (video.VideoType == VideoTypeEnum.Movie)
-//                    RetVal &= UpdateMovie((Movie)video, datasetVideos);
+//                if (video.VideoType == VideoTypeEnum.MovieInfo)
+//                    RetVal &= UpdateMovie((MovieInfo)video, datasetVideos);
 //                else if (video.VideoType == VideoTypeEnum.Episode)
 //                    RetVal &= UpdateEpisode((Episode)video, datasetVideos);
 
@@ -427,7 +427,7 @@
 //            return RetVal;
 //        }
 
-//        private static bool UpdateMovie(Movie movie, DsVideos datasetVideos)
+//        private static bool UpdateMovie(MovieInfo movie, DsVideos datasetVideos)
 //        {
 //            bool RetVal = true;
 

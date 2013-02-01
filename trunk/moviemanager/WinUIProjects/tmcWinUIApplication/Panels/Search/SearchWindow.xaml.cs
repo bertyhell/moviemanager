@@ -53,30 +53,30 @@ namespace Tmc.WinUI.Application.Panels.Search
 
             if (options.SearchForMovies)
             {
-                Movie Movie = null;
+                Video Video = null;
                 try
                 {
 
-                    Movie = new Movie {IdTmdb = Convert.ToInt32(options.SearchTerm)};
+                    Video =new Video { MovieInfo = new MovieInfo { IdTmdb = Convert.ToInt32(options.SearchTerm) } };
                 }
                 catch
                 {
-                    List<Movie> Movies = SearchTmdb.GetVideoInfo(options.SearchTerm);
+                    List<Video> Movies = SearchTmdb.GetVideoInfo(options.SearchTerm);
                     if(Movies.Count > 1)
                     {
                         ThumbnailDescriptionListWindow Window = new ThumbnailDescriptionListWindow { ThumbnailDescriptionItems = Movies.ToList<IPreviewInfoRetriever>() };
                         Window.ShowDialog();
 
-                        Movie = (Movie)Window.SelectedPreviewDescription;
+                        Video = (Video)Window.SelectedPreviewDescription;
                     }
                     else if (Movies.Count == 1)
                     {
-                        Movie = Movies.Count > 0 ? Movies[0] : null;
+                        Video = Movies.Count > 0 ? Movies[0] : null;
                     }
                 }
-                if (Movie == null) return;
-                SearchTmdb.GetExtraMovieInfo(Movie);
-                UpdateGuiForMovie(Movie);
+                if (Video == null) return;
+                SearchTmdb.GetExtraMovieInfo(Video);
+                UpdateGuiForMovie(Video);
             }
         }
 
@@ -95,10 +95,10 @@ namespace Tmc.WinUI.Application.Panels.Search
             _layoutRoot.Children.Add(_overview);
         }
 
-        private void UpdateGuiForMovie(Movie movie)
+        private void UpdateGuiForMovie(Video video)
         {
             ResetGrid();
-            MovieOverview Overview = new MovieOverview {Movie = movie};
+            MovieOverview Overview = new MovieOverview { Video = video };
             Grid.SetRow(Overview, 1);
             _layoutRoot.Children.Add(Overview);
         }

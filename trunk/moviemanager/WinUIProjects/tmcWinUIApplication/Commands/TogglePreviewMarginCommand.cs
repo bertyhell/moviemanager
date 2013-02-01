@@ -21,7 +21,8 @@ namespace Tmc.WinUI.Application.Commands
 
         public void Execute(object parameter)
         {
-            MainController.Instance.PreviewItemMargin = MainController.Instance.PreviewItemMargin > 0 ? 0 : 5;//TODO 003 make this work
+            //TODO 003 make this work
+            MainController.Instance.PreviewItemMargin = MainController.Instance.PreviewItemMargin;
         }
     }
 }

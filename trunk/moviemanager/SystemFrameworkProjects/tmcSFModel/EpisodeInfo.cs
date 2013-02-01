@@ -1,13 +1,17 @@
-﻿namespace Tmc.SystemFrameworks.Model
-{
-    public class Episode : Video
-    {
-        public override VideoTypeEnum VideoType
-        {
-            get { return VideoTypeEnum.Episode; }
-        }
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-        private int _episodeNumber;
+namespace Tmc.SystemFrameworks.Model
+{
+    public class EpisodeInfo : INotifyPropertyChanged
+    {
+        private int _season = 1;
+        private int _episodeNumber = 1;
+        private int _serieId;
+
+        [Key]
+        public int Id { get; set; }
+
         public int EpisodeNumber
         {
             get { return _episodeNumber; }
@@ -18,7 +22,6 @@
             }
         }
 
-        private int _season;
         public int Season
         {
             get { return _season; }
@@ -29,7 +32,6 @@
             }
         }
 
-        private int _serieId;
         public int SerieId
         {
             get { return _serieId; }
@@ -39,5 +41,13 @@
                 OnPropertyChanged("SerieId");
             }
         }
+
+        protected void OnPropertyChanged(string prop)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
