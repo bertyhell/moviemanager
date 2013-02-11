@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Tmc.SystemFrameworks.Model
@@ -12,7 +10,7 @@ namespace Tmc.SystemFrameworks.Model
         private int _idTmdb;
 
 
-        [Key]
+	    [Key]
         public int Id { get; set; }
 
         public int FranchiseId
@@ -35,7 +33,9 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
-        //public virtual Video Video { get; set; }
+	    public virtual Video Video { get; set; }
+
+	    //public virtual Video Video { get; set; }
         
         //equal videos if imdb IDs match or if names and release dates match
         //public bool Equals(Video other)

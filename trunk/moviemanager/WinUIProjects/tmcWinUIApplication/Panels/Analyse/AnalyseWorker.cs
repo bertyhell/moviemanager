@@ -183,7 +183,12 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                                     //TODO 005 give bonus to videoinfo where eg: "men in black" --> original file name contains: mib (first letters of every word)
                                 };
                     VideoInfo.TitleMatchRatio = Similarities.Max();
-                    if (!Candidates.Contains(VideoInfo)) Candidates.Add(VideoInfo);
+					if (!Candidates.Contains(VideoInfo))
+					{
+						VideoInfo.Files = analyseVideo.Video.Files;
+						Candidates.Add(VideoInfo);
+						
+					}
                 }
             }
             return Candidates.ToList();

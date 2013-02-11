@@ -23,9 +23,9 @@ namespace Tmc.DataAccess.SqlCe
             modelBuilder.Entity<MovieInfo>().ToTable("Movies");
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Video>().HasOptional(v => v.MovieInfo).WithOptionalPrincipal().WillCascadeOnDelete(true);
-            modelBuilder.Entity<Video>().HasOptional(v => v.EpisodeInfo).WithOptionalPrincipal().WillCascadeOnDelete(true);
-            //modelBuilder.Entity<Video>().HasMany(v => v.Files).WithOptional().WillCascadeOnDelete(true);
+            modelBuilder.Entity<Video>().HasOptional(v => v.MovieInfo).WithRequired(m => m.Video).WillCascadeOnDelete(true);
+            modelBuilder.Entity<Video>().HasOptional(v => v.EpisodeInfo).WithRequired(e => e.Video).WillCascadeOnDelete(true);
+            modelBuilder.Entity<Video>().HasMany(v => v.Files).WithRequired(f => f.Video).WillCascadeOnDelete(true);
             ////...
             //modelBuilder.Entity<Parent>().HasMany(e => e.ParentDetails).WithOptional(s => s.Parent).WillCascadeOnDelete(true);
         }
