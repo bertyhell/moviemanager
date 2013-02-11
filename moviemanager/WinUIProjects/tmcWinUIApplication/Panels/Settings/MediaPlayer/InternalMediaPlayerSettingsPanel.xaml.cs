@@ -12,7 +12,7 @@
 
             //initialize base class variables;
             _panelName = "MMPlayer";
-            _iconPath = "/MovieManager;component/Images/picto.png";
+            _iconPath = "/Tmc.WinUI.Application;component/Images/picto.png";
         }
 
         public override bool SaveSettings()

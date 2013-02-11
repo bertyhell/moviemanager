@@ -37,8 +37,8 @@
     <!-- RibbonMenuButton -->
     <Style TargetType="{x:Type ribbon:RibbonMenuButton}" BasedOn="{StaticResource RibbonControlStyle}">
         <Setter Property="QuickAccessToolBarId" Value="{Binding Command}" />
-        <Setter Property="CanUserResizeVertically" Value="{Binding IsVerticallyResizable}" />
-        <Setter Property="CanUserResizeHorizontally" Value="{Binding IsHorizontallyResizable}" />
+        <!--<Setter Property="CanUserResizeVertically" Value="{Binding IsVerticallyResizable}" />-->
+        <!--<Setter Property="CanUserResizeHorizontally" Value="{Binding IsHorizontallyResizable}" />-->
     </Style>
 
     <!-- RibbonMenuItem -->
@@ -53,10 +53,10 @@
         <Setter Property="ribbon:RibbonControlService.ToolTipFooterImageSource" Value="{Binding ToolTipFooterImage}" />
         <Setter Property="KeyTipService.KeyTip" Value="{Binding KeyTip}" />
         <Setter Property="Command" Value="{Binding Command}" />
-        <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
+        <!--<Setter Property="IsCheckable" Value="{Binding IsCheckable}" />-->
         <Setter Property="IsChecked" Value="{Binding IsChecked}" />
-        <Setter Property="CanUserResizeVertically" Value="{Binding IsVerticallyResizable}" />
-        <Setter Property="CanUserResizeHorizontally" Value="{Binding IsHorizontallyResizable}" />
+        <!--<Setter Property="CanUserResizeVertically" Value="{Binding IsVerticallyResizable}" />-->
+        <!--<Setter Property="CanUserResizeHorizontally" Value="{Binding IsHorizontallyResizable}" />-->
         <Style.Triggers>
             <DataTrigger Binding="{Binding SmallImage}" Value="{x:Null}">
                 <Setter Property="ImageSource" Value="{x:Null}" />

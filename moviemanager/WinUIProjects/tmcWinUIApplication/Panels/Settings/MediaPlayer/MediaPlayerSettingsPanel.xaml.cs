@@ -14,7 +14,7 @@ namespace Tmc.WinUI.Application.Panels.Settings.MediaPlayer
 
             //initialize base class variables;
             _panelName = "Media player";
-            _iconPath = "/MovieManager;component/Images/MediaPlayer_32.png";
+            _iconPath = "/Tmc.WinUI.Application;component/Images/MediaPlayer_32.png";
             MediaPlayerSettings MediaPlayerSettings = Properties.Settings.Default.MediaPlayerSettings ?? new MediaPlayerSettings();
 	        _model = new MediaPlayerSettingsViewModel
                                                      {

@@ -22,7 +22,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
 
             //initialize base class variables;
             _panelName = "Database";
-            _iconPath = "/MovieManager;component/Images/database_32.png";
+            _iconPath = "/Tmc.WinUI.Application;component/Images/database_32.png";
 
             DataContext = this;
             _pathToDatabase = Properties.Settings.Default.DatabasePath;

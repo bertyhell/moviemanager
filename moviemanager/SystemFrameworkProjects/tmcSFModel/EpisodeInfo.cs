@@ -42,6 +42,8 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
+        //public virtual Video Video { get; set; }
+
         protected void OnPropertyChanged(string prop)
         {
             if (PropertyChanged != null)

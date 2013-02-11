@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Analyse Videos" Height="700" Width="930" xmlns:common2="clr-namespace:Tmc.WinUI.Application.Common"
         xmlns:analyse2="clr-namespace:Tmc.WinUI.Application.Panels.Analyse"
-        Icon="/MovieManager;component/Images/analyse.png" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
+        Icon="/Tmc.WinUI.Application;component/Images/analyse.png" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow" ShowInTaskbar="False">
     <Window.Resources>
         <analyse2:FileNameFromPathExtractor x:Key="FileNameFromPathExtractor" />
         <analyse2:FolderFromPathConverter x:Key="FolderFromPathExtractor" />
@@ -36,7 +36,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Click="BtnDetailsClick">
-                                <Image Source="/MovieManager;component/Images/zoom_16.png"></Image>
+                                <Image Source="/Tmc.WinUI.Application;component/Images/zoom_16.png"></Image>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -83,7 +83,7 @@
         <common2:ProgressBarControl Margin="0,0,160,0" Grid.Row="2" x:Name="progressbarPass" />
         <Button HorizontalAlignment="Right" Width="120" Name="btnAnalyse" Click="BtnAnalyseClick" Grid.RowSpan="3" Margin="0,0,30,0">
             <StackPanel Orientation="Horizontal">
-                <Image Source="/MovieManager;component/Images/analyse.png" Stretch="Uniform" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Image Source="/Tmc.WinUI.Application;component/Images/analyse.png" Stretch="Uniform" Width="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <TextBlock Text="Start Analysis" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5"></TextBlock>
             </StackPanel>
         </Button>

@@ -13,7 +13,7 @@
         <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/MovieManager;component/Styles/Ribbon.xaml"/>
+                        <ResourceDictionary Source="/Tmc.WinUI.Application;component/Styles/Ribbon.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
         </Grid.Resources>
@@ -21,8 +21,8 @@
         <ribbon:Ribbon Grid.Row="0" Grid.ColumnSpan="3" x:Name="_ribbonMenubar">
             <!-- Applicatiemenu-->
             <ribbon:Ribbon.ApplicationMenu>
-                <ribbon:RibbonApplicationMenu  SmallImageSource="/MovieManager;component/Images/tmc_icon_1_256.png">
-                    <ribbon:RibbonApplicationMenuItem Header="_Close" ImageSource="/MovieManager;component/Images/close.png" />
+                <ribbon:RibbonApplicationMenu  SmallImageSource="/Tmc.WinUI.Application;component/Images/tmc_icon_1_256.png">
+                    <ribbon:RibbonApplicationMenuItem Header="_Close" ImageSource="/Tmc.WinUI.Application;component/Images/close.png" />
 
                     <ribbon:RibbonApplicationMenu.FooterPaneContent>
                         <Grid>

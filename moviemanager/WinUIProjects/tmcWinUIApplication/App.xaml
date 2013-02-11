@@ -7,8 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Tmc.WinUi.Application;component/Styles/Application.xaml"/>
+                <ResourceDictionary Source="/PresentationFramework.Aero;component/themes/aero.normalcolor.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
-    
 </Application>

@@ -34,6 +34,8 @@ namespace Tmc.SystemFrameworks.Model
                 OnPropertyChanged("IdTmdb");
             }
         }
+
+        //public virtual Video Video { get; set; }
         
         //equal videos if imdb IDs match or if names and release dates match
         //public bool Equals(Video other)

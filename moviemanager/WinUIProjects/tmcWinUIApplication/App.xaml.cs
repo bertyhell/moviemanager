@@ -41,9 +41,11 @@ namespace Tmc.WinUI.Application
             string DatabasePath = Settings.Default.DatabasePath.Replace("%APPDATA%", DefaultValues.PATH_USER_APPDATA);
             
             string ConnectionString = string.Format("Data Source = {0}", DatabasePath);
-            EntityConnectionStringBuilder ConnectionStringBuilder = new EntityConnectionStringBuilder();
-            ConnectionStringBuilder.Provider = "System.Data.SqlServerCe.4.0";
-            ConnectionStringBuilder.ProviderConnectionString = ConnectionString;
+            EntityConnectionStringBuilder ConnectionStringBuilder = new EntityConnectionStringBuilder
+                {
+                    Provider = "System.Data.SqlServerCe.4.0",
+                    ProviderConnectionString = ConnectionString
+                };
             //ConnectionStringBuilder.Metadata = "res://*/VideoModel.csdl|res://*/VideoModel.ssdl|res://*/VideoModel.msl";
             DataRetriever.Init(ConnectionString);
             base.OnStartup(e);

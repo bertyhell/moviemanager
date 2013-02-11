@@ -23,7 +23,7 @@ namespace Tmc.WinUI.Application.Wizards
             ObservableCollection<Uri> Folders = _folderSelectionControl.Folders;
             if (Folders == null || Folders.Count == 0)
                 throw new NullReferenceException("No folders specified");
-            string SelectedPath = Folders[0].AbsolutePath;
+            string SelectedPath = Folders[0].LocalPath;
 
 
             //add serie if necessary

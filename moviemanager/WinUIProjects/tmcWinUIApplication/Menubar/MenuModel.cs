@@ -31,7 +31,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/add.png", UriKind.Relative),
                                                          ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                                                          ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                                                          Command = new AddVideosCommand(),
@@ -63,7 +63,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/add.png", UriKind.Relative),
                                                          ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                                                          ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                                                          Command = new AddVideosDirectoryCommand(),
@@ -92,7 +92,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/add.png", UriKind.Relative),
                             ToolTipTitle = ADD_SERIE_TOOL_TIP_TITLE,
                             ToolTipDescription = ADD_SERIE_TOOL_TIP_DESCRIPTION,
                             Command = new AddSerieCommand(),
@@ -121,7 +121,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager;component/Images/clear.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/clear.png", UriKind.Relative),
                                                          ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                                                          ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                                                          Command = new EmptyVideosCommand(),
@@ -150,7 +150,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/excel_export_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/excel_export_32.png", UriKind.Relative),
                             ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                             ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                             Command = new ExportVideosCommand(),
@@ -179,7 +179,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/excel_import_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/excel_import_32.png", UriKind.Relative),
                             ToolTipTitle = ADD_VIDEOS_TOOL_TIP_TITLE,
                             ToolTipDescription = ADD_VIDEOS_TOOL_TIP_DESCRIPTION,
                             Command = new ImportVideosCommand(),
@@ -208,7 +208,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager;component/Images/search.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/search.png", UriKind.Relative),
                                                          ToolTipTitle = "Search TMDB",
                                                          ToolTipDescription = "Search TMDB for info",
                                                          Command = new SearchCommand(),
@@ -235,7 +235,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/analyse.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/analyse.png", UriKind.Relative),
                             ToolTipTitle = "Analyse videos",
                             ToolTipDescription = "Analyse videos and search info on the web",
                             Command = new AnalyseCommand(),
@@ -263,7 +263,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                                                      {
                                                          Label = STR,
-                                                         SmallImage = new Uri("/MovieManager;component/Images/add.png", UriKind.Relative),
+                                                         SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/add.png", UriKind.Relative),
                                                          Command = ApplicationCommands.Close,
                                                          KeyTip = "X",
                                                      };
@@ -290,7 +290,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/RegExp.gif", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/RegExp.gif", UriKind.Relative),
                             ToolTipTitle = TOOL_TIP_TITLE,
                             ToolTipDescription = TOOL_TIP_DESCRIPTION,
                             Command = new EditEpisodeRegExCommand(),
@@ -319,7 +319,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/settings_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/settings_32.png", UriKind.Relative),
                             ToolTipTitle = TOOL_TIP_TITLE,
                             ToolTipDescription = TOOL_TIP_DESCRIPTION,
                             Command = new EditSettingsCommand(),
@@ -348,7 +348,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/log_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/log_32.png", UriKind.Relative),
                             ToolTipTitle = LOGGING_TOOL_TIP_TITLE,
                             ToolTipDescription = LOGGING_TOOL_TIP_DESCRIPTION,
                             Command = new LoggingToolCommand(),
@@ -375,7 +375,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/header_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/header_32.png", UriKind.Relative),
                             ToolTipTitle = "Toggle Title",
                             ToolTipDescription = "Toggle Title",
                             Command = new TogglePreviewTitleCommand(),
@@ -405,7 +405,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ButtonData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/margin_32.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/margin_32.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
                             Command = new TogglePreviewMarginCommand(),
@@ -435,7 +435,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData MenuButtonData = new ControlData
                         {
                             Label = STR,
-                            LargeImage = new Uri("/MovieManager;component/Images/view_32.png", UriKind.Relative),
+                            LargeImage = new Uri("/Tmc.WinUI.Application;component/Images/view_32.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
                             KeyTip = "",
@@ -463,7 +463,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ItemData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/view_big_icons_16.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/view_big_icons_16.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
                             Command = new ChangeViewCommand(ViewStates.BigIcons),
@@ -492,7 +492,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ItemData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/view_medium_icons_16.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/view_medium_icons_16.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
                             Command = new ChangeViewCommand(ViewStates.MediumIcons),
@@ -521,7 +521,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ItemData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/view_small_icons_16.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/view_small_icons_16.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
                             Command = new ChangeViewCommand(ViewStates.SmallIcons),
@@ -550,7 +550,7 @@ namespace Tmc.WinUI.Application.Menubar
                         ControlData ItemData = new ControlData
                         {
                             Label = STR,
-                            SmallImage = new Uri("/MovieManager;component/Images/view_details_16.png", UriKind.Relative),
+                            SmallImage = new Uri("/Tmc.WinUI.Application;component/Images/view_details_16.png", UriKind.Relative),
                             ToolTipTitle = VIEW_TOOL_TIP_TITLE,
                             ToolTipDescription = VIEW_TOOL_TIP_DESCRIPTION,
                             Command = new ChangeViewCommand(ViewStates.Details),
