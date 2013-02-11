@@ -51,10 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\DataAccess\tmcDaSqlCe\tmcDaSqlCe.csproj">
       <Project>{65be2418-dc15-430d-b470-04487281ec04}</Project>
       <Name>tmcDaSqlCe</Name>

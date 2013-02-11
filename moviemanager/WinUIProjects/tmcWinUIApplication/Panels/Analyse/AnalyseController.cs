@@ -25,7 +25,14 @@ namespace Tmc.WinUI.Application.Panels.Analyse
             AnalyseVideos.Clear();
             foreach (Video Video in Videos)
             {
-                AnalyseVideos.Add(new AnalyseVideo { Video = Video, TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(Video.Files[0].Path) });
+				if (Video.Files.Count > 0)
+				{
+					AnalyseVideos.Add(new AnalyseVideo { Video = Video, TitleGuesses = VideoTitleExtractor.GetTitleGuessesFromPath(Video.Files[0].Path) });
+				}
+				else
+				{
+					AnalyseVideos.Add(new AnalyseVideo { Video = Video, TitleGuesses = new List<string> {Video.Name} });
+				}
             }
         }
 
