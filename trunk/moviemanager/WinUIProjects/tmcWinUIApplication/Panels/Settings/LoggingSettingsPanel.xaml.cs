@@ -18,7 +18,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
             LoggingEnabled = Properties.Settings.Default.Log_enabled;
             SelectedLogLevel = Properties.Settings.Default.Log_Level;
             _panelName = "Logging";
-            _iconPath = "/MovieManager;component/Images/log_32.png";
+            _iconPath = "/Tmc.WinUI.Application;component/Images/log_32.png";
             DataContext = this;
         }
 

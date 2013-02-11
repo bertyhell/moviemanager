@@ -61,7 +61,7 @@ namespace Tmc.WinUI.Application.Panels
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
             UpdateVideosCommand UpdateVideosCommand = new UpdateVideosCommand(Video);
-            UpdateVideosCommand.Execute(new object());
+            UpdateVideosCommand.Execute(null);
             Close();
         }
     }

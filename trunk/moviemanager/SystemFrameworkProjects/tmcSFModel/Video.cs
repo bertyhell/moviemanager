@@ -6,6 +6,7 @@ using System.Windows;
 using System.ComponentModel;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Model.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tmc.SystemFrameworks.Model
 {

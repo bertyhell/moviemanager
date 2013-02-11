@@ -16,7 +16,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
 
             //initialize base class variables;
             _panelName = "Video file search";
-            _iconPath = "/MovieManager;component/Images/search.png";
+            _iconPath = "/Tmc.WinUI.Application;component/Images/search.png";
 
             LoadSettings();
         }

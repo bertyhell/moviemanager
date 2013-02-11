@@ -17,7 +17,7 @@ namespace Tmc.WinUI.Application.Panels.Settings
 
             //initialize base class variables;
             _panelName = "File rename";
-            _iconPath = "/MovieManager;component/Images/disk.png";
+            _iconPath = "/Tmc.WinUI.Application;component/Images/disk.png";
 
             //MovieInfo string builder
             parameteredStringBuilderMovie.Parameters = new List<FrameworkElement> { new TextBox { Text = "Custom" }, new Button { Content = "MovieName" }, new Button { Content = "Year" } };

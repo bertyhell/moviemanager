@@ -12,7 +12,9 @@ namespace Tmc.DataAccess.SqlCe
             : base(connectionString)
         {
             Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
+            
             Database.SetInitializer(new CreateDatabaseIfNotExists<TmcContext>());
+            Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -23,7 +25,7 @@ namespace Tmc.DataAccess.SqlCe
 
             modelBuilder.Entity<Video>().HasOptional(v => v.MovieInfo).WithOptionalPrincipal().WillCascadeOnDelete(true);
             modelBuilder.Entity<Video>().HasOptional(v => v.EpisodeInfo).WithOptionalPrincipal().WillCascadeOnDelete(true);
-            modelBuilder.Entity<Video>().HasMany(v => v.Files).WithOptional().WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Video>().HasMany(v => v.Files).WithOptional().WillCascadeOnDelete(true);
             ////...
             //modelBuilder.Entity<Parent>().HasMany(e => e.ParentDetails).WithOptional(s => s.Parent).WillCascadeOnDelete(true);
         }
