@@ -24,5 +24,7 @@ namespace Tmc.SystemFrameworks.Model
         public string Description { get; set; }
         [NotMapped]
         public Type Type { get; set; }
+
+        //public virtual Video Video { get; set; }
     }
 }

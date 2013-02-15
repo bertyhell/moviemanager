@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Actor.cs" />
     <Compile Include="AnalyseVideo.cs" />
+    <Compile Include="VideoFile2.cs" />
     <Compile Include="DatabaseDetails.cs" />
     <Compile Include="Franchise.cs" />
     <Compile Include="ImageInfo.cs" />
