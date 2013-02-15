@@ -22,7 +22,7 @@ namespace Tmc.DataAccess.SqlCe
 
         public static IList<Video> Videos
         {
-            get { return DB.Videos.Include(x => x.Files).ToList(); }
+            get { return DB.Videos.Include(x => x.Files).Include(x => x.Images).ToList(); } //.Include(x => x.Images)
             set
             {
                 UpdateVideos(value);

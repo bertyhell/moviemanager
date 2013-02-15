@@ -50,7 +50,7 @@ namespace Tmc.BusinessRules.Web.Search
             try
             {
                 //do request
-                var Request = new Uri(Constants.TMDB_API_URL_SEARCH_MOVIE + "?api_key=" + APIKEY + "&query=" + HttpUtility.UrlEncode(query));
+                var Request = new Uri(string.Format(Constants.TMDB_API_URL_MOVIE_SEARCH, HttpUtility.UrlEncode(query),APIKEY));
                 var Response = SimpleWebRequest.DoJsonRequest(Request);
 
                 if (!string.IsNullOrEmpty(Response))
@@ -84,7 +84,7 @@ namespace Tmc.BusinessRules.Web.Search
 
         public static void GetMovieImages(Video video)
         {
-            Uri Request = new Uri("http://api.themoviedb.org/3/MovieInfo/" + video.MovieInfo.IdTmdb + "/images?api_key=" + APIKEY);
+            Uri Request = new Uri(string.Format(Constants.TMDB_API_URL_MOVIE_IMAGES, video.MovieInfo.IdTmdb, APIKEY));
             String Response = SimpleWebRequest.DoJsonRequest(Request);
 
             if (!string.IsNullOrEmpty(Response))
@@ -101,7 +101,7 @@ namespace Tmc.BusinessRules.Web.Search
 
         public static void GetExtraMovieInfo(Video video)
         {
-            Uri Request = new Uri("http://api.themoviedb.org/3/MovieInfo/" + video.MovieInfo.IdTmdb + "?api_key=" + APIKEY);
+            Uri Request = new Uri(string.Format(Constants.TMDB_API_URL_MOVIE, video.MovieInfo.IdTmdb, APIKEY));
             String Response = SimpleWebRequest.DoJsonRequest(Request);
 
             if (!string.IsNullOrEmpty(Response))

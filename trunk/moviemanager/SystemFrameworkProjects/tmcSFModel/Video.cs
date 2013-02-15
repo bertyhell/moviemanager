@@ -27,7 +27,7 @@ namespace Tmc.SystemFrameworks.Model
         private uint _playCount;
         //properties for searchresults
         private ImageInfo _poster;
-        private List<ImageInfo> _images;
+        //private List<ImageInfo> _images;
         private String _plot;
         private bool _analyseCompleted;
         private VideoTypeEnum _videoType;
@@ -36,14 +36,15 @@ namespace Tmc.SystemFrameworks.Model
         private MovieInfo _movieInfo;
         private EpisodeInfo _episodeInfo;
 
-        public Video(VideoTypeEnum videoType = VideoTypeEnum.Video) : this()
+        public Video(VideoTypeEnum videoType = VideoTypeEnum.Video)
+            : this()
         {
             VideoType = videoType;
             if (VideoType == VideoTypeEnum.Movie)
             {
                 MovieInfo = new MovieInfo();
             }
-            else if(VideoType == VideoTypeEnum.Episode)
+            else if (VideoType == VideoTypeEnum.Episode)
             {
                 EpisodeInfo = new EpisodeInfo();
             }
@@ -94,7 +95,15 @@ namespace Tmc.SystemFrameworks.Model
             Genres = Genres == null || Genres.Count == 0 || overwrite ? brother.Genres : Genres;
             Files = Files == null || overwrite ? brother.Files : Files;
             Poster = Poster == null || overwrite ? brother.Poster : Poster;
-            Images = Images == null || Images.Count == 0 || overwrite ? brother.Images : Images;
+
+            if (Images == null || Images.Count == 0 || overwrite)
+            {
+                if (Images == null)
+                    Images = new List<ImageInfo>();
+                else
+                    Images.Clear();
+                Images.AddRange(brother.Images);
+            }
             Plot = string.IsNullOrEmpty(Plot) || overwrite ? brother.Plot : Plot;
             Runtime = Runtime == 0 || overwrite ? brother.Runtime : Runtime;
             AnalyseCompleted = brother.AnalyseCompleted;
@@ -109,7 +118,7 @@ namespace Tmc.SystemFrameworks.Model
         public EpisodeInfo EpisodeInfo
         {
             get { return _episodeInfo; }
-            set { _episodeInfo = value;}
+            set { _episodeInfo = value; }
         }
 
         public List<VideoFile> Files
@@ -117,6 +126,27 @@ namespace Tmc.SystemFrameworks.Model
             get { return _files; }
             set { _files = value; }
         }
+
+        //error occured because image objects get added during analyse
+        private List<ImageInfo> _images;// = new List<ImageInfo>{ new ImageInfo{UriString = "http://www.google.be"}};
+        public virtual List<ImageInfo> Images
+        {
+            get { return _images; }
+            set
+            {
+                _images = value;
+                OnPropertyChanged("Images");
+                if (_poster == null)
+                    OnPropertyChanged("Poster");
+            }
+        }
+
+        //private List<VideoFile2> _images = new List<VideoFile2> { new VideoFile2 { Path = "http://google.com"} };
+        //public List<VideoFile2> Images
+        //{
+        //    get { return _images; }
+        //    set { _images = value; }
+        //}
 
         public List<String> Genres
         {
@@ -258,7 +288,8 @@ namespace Tmc.SystemFrameworks.Model
 
         public VideoTypeEnum VideoType
         {
-            get {
+            get
+            {
                 return _videoType;
             }
             set
@@ -333,17 +364,18 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
-        public List<ImageInfo> Images
-        {
-            get { return _images; }
-            set
-            {
-                _images = value;
-                OnPropertyChanged("Images");
-                if (_poster == null)
-                    OnPropertyChanged("Poster");
-            }
-        }
+        //[NotMapped]
+        //public List<ImageInfo> Images
+        //{
+        //    get { return _images; }
+        //    set
+        //    {
+        //        _images = value;
+        //        OnPropertyChanged("Images");
+        //        if (_poster == null)
+        //            OnPropertyChanged("Poster");
+        //    }
+        //}
 
         public String Plot
         {
