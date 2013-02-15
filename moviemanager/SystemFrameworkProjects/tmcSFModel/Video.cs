@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
@@ -52,7 +53,7 @@ namespace Tmc.SystemFrameworks.Model
 
         public Video()
         {
-            _images = new List<ImageInfo>();
+            //_images = new List<ImageInfo>();
             _genres = new List<string>();
             _analyseCompleted = false;
             _files = new List<VideoFile>();
@@ -102,6 +103,7 @@ namespace Tmc.SystemFrameworks.Model
                     Images = new List<ImageInfo>();
                 else
                     Images.Clear();
+                //brother.Images.ForEach(i => i.VideoId = this.Id);
                 Images.AddRange(brother.Images);
             }
             Plot = string.IsNullOrEmpty(Plot) || overwrite ? brother.Plot : Plot;
@@ -128,7 +130,7 @@ namespace Tmc.SystemFrameworks.Model
         }
 
         //error occured because image objects get added during analyse
-        private List<ImageInfo> _images;// = new List<ImageInfo>{ new ImageInfo{UriString = "http://www.google.be"}};
+        private List<ImageInfo> _images = new List<ImageInfo>{ new ImageInfo{UriString = "http://www.google.be"}};
         public virtual List<ImageInfo> Images
         {
             get { return _images; }
