@@ -43,7 +43,7 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
-        public virtual Video Video { get; set; }
+		//public virtual Video Video { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -11,11 +11,13 @@ namespace Tmc.DataAccess.SqlCe
         {
             Database.DefaultConnectionFactory = new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0");
 #if DEBUG
-            if (Database.Exists() && !Database.CompatibleWithModel(true))
-                Database.Delete();
-#endif
+			//if (Database.Exists() && !Database.CompatibleWithModel(true))
+			//	Database.Delete();
+			Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TmcContext>());
+#elif !DEBUG
             Database.SetInitializer(new CreateDatabaseIfNotExists<TmcContext>());
-            Configuration.LazyLoadingEnabled = false;
+#endif
+			Configuration.LazyLoadingEnabled = false;
 
         }
 
@@ -25,11 +27,11 @@ namespace Tmc.DataAccess.SqlCe
             modelBuilder.Entity<MovieInfo>().ToTable("Movies");
             modelBuilder.Entity<ImageInfo>().ToTable("Images");
 
-            modelBuilder.Entity<Video>().HasOptional(v => v.MovieInfo).WithRequired(m => m.Video).WillCascadeOnDelete(true);
-            modelBuilder.Entity<Video>().HasOptional(v => v.EpisodeInfo).WithRequired(e => e.Video).WillCascadeOnDelete(true);
-            modelBuilder.Entity<Video>().HasMany(v => v.Files).WithRequired(f => f.Video).WillCascadeOnDelete(true);
-            //modelBuilder.Entity<Video>().HasMany<ImageInfo>(v => v.Images).WithOptional(i => i.Video).HasForeignKey(i => i.VideoId).WillCascadeOnDelete(true);
-            modelBuilder.Entity<Video>().HasMany(v => v.Images).WithOptional().WillCascadeOnDelete(true);
+            modelBuilder.Entity<Video>().HasOptional(v => v.MovieInfo).WithRequired().WillCascadeOnDelete(true);
+            modelBuilder.Entity<Video>().HasOptional(v => v.EpisodeInfo).WithRequired().WillCascadeOnDelete(true);
+            modelBuilder.Entity<Video>().HasMany(v => v.Files).WithRequired().WillCascadeOnDelete(true);
+			modelBuilder.Entity<Video>().HasMany(v => v.Images).WithRequired().WillCascadeOnDelete(true);
+
             base.OnModelCreating(modelBuilder);
         }
 
