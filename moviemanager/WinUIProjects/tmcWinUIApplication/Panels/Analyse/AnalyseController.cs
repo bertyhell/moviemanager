@@ -129,7 +129,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                     ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.Medium);//TODO 070 move this to a seperate backgroundworker
 
 
-                    Videos.Add(AnalyseVideo.Video);
+                    Videos.Add(Video); //changed this
                 }
             }
             DataRetriever.Videos = Videos;

@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Windows.Input;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Model;
 using Tmc.WinUI.Application.Commands;
+using Tmc.WinUI.Application.Menubar;
 using Tmc.WinUI.Application.Panels.Filter;
 using Tmc.SystemFrameworks.Log;
 
@@ -26,6 +28,9 @@ namespace Tmc.WinUI.Application
         {
 
             _videos = new ObservableCollection<Video>();
+			_videos.CollectionChanged += ((AnalyseCommand)MenuModel.Analyse.Command).OnExecuteChanged;
+			_videos.CollectionChanged += ((ExportVideosCommand)MenuModel.ExportVideos.Command).OnExecuteChanged;
+
             ReloadVideos();
             _videosView = CollectionViewSource.GetDefaultView(Videos);
 
@@ -91,6 +96,8 @@ namespace Tmc.WinUI.Application
         {
             set { _windowInstance = value; }
         }
+
+	    public Dictionary<string, ICommand> Commands { get; set; }
 
         public void ReloadVideos()
         {

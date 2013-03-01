@@ -7,122 +7,137 @@ using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.SqlCe
 {
-    public class DataRetriever
-    {
-        public static readonly int CURRENT_DATABASE_VERSION = 1;
+	public class DataRetriever
+	{
+		public static readonly int CURRENT_DATABASE_VERSION = 1;
 
-        private static TmcContext _db;
+		private static TmcContext _db;
 
-        public static void Init(string connectionString)
-        {
-            _db = new TmcContext(connectionString);
-        }
-
-
-        public static IList<Video> Videos
-        {
-            get { return _db.Videos.Include(x => x.Files).Include(x => x.Images).ToList(); } //.Include(x => x.Images)
-            set
-            {
-                UpdateVideos(value);
-                OnVideosChanged();
-            }
-        }
-
-        public static List<string> Genres
-        {
-            get
-            {
-
-                return null;
-            }
-        }
-
-        public static List<Serie> Series
-        {
-            get { return null; }
-            set { throw new NotImplementedException(); }
-        }
+		public static void Init(string connectionString)
+		{
+			_db = new TmcContext(connectionString);
+		}
 
 
-        public static void AddSerie(Serie serie)
-        {
-        }
+		public static IList<Video> Videos
+		{
+			get
+			{
+				List<Video> Vids = _db.Videos.Include(x => x.Files).Include(x => x.Images).ToList();
+				return Vids;
+			}
+			set
+			{
+				UpdateVideos(value);
+				OnVideosChanged();
+			}
+		}
 
-        private static void UpdateVideos(IEnumerable<Video> videos)
-        {
-            foreach (Video Video in videos)
-            {
-                   //check if video exists
-                Video DbVideo = _db.Videos.FirstOrDefault(v => v.Id == Video.Id);
-                if (DbVideo != null)
-                {
-                    DbVideo.CopyAnalyseVideoInfo(Video, true);
-                }
-                else
-                {
-                    List<Video> DbVideos = new List<Video>();
-                    foreach (Video DBVideo in _db.Videos)
-                    {
-                        if (DBVideo.Files[0].Path == Video.Files[0].Path)
-                        {
-                            DbVideos.Add(DBVideo);
-                        }
-                    }
-                    if (string.IsNullOrWhiteSpace(Video.Files[0].Path) || !DbVideos.Any())
-                    {
-                        _db.Videos.Add(Video);
-                    }
-                    else
-                    {
-                        //TODO 090: Implement this
-                    }
-                }
-            }
-            _db.SaveChanges();
-            OnVideosChanged();
-        }
+		public static List<string> Genres
+		{
+			get
+			{
 
-        public static void EmptyVideoTables()
-        {
-            foreach (Video Video in _db.Videos)
-            {
-                _db.Videos.Remove(Video);
-            }
-            _db.SaveChanges();
-            OnVideosChanged();
-        }
+				return null;
+			}
+		}
 
-        //public static bool UpdateVideo(Video video, DsVideos datasetVideos)
-        //{
-        //    return false;
-        //}
+		public static List<Serie> Series
+		{
+			get { return null; }
+			set { throw new NotImplementedException(); }
+		}
 
 
-        public static bool ConvertDatabase()
-        {
-            return false;
-        }
+		public static void AddSerie(Serie serie)
+		{
+		}
 
-        public static DatabaseDetails GetDatabaseDetails()
-        {
-            return null;
-        }
+		private static void UpdateVideos(IList<Video> videos)
+		{
+			int Progress = 0;
+			foreach (Video NewVideo in videos)
+			{
+				//check if video exists
+				Video ExistingVideo = null;
+				if (_db.Videos.Any(v => v.Id == NewVideo.Id))
+				{
+					//database contains this video (match by id)
+
+					ExistingVideo = _db.Videos.First(v => v.Id == NewVideo.Id);
+				}
+				else{
+					foreach (Video DbVideo in _db.Videos)
+					{
+						if(DbVideo.Files.Any(p => p.Path==NewVideo.Files[0].Path))
+						{
+							//database already contains this video (match by video file path)
+							ExistingVideo = DbVideo;
+						}
+					}
+				}
+				if (ExistingVideo != null)
+				{
+					//video already in database
+					ExistingVideo.CopyAnalyseVideoInfo(NewVideo);
+				}
+				else
+				{
+					//new video --> add to database
+					_db.Videos.Add(NewVideo);
+				}
+				//raise event update/insert video progress
+				Progress++;
+				OnUpdateVideosProgress(new ProgressEventArgs { MaxNumber = videos.Count, ProgressNumber = Progress, Message = "Video " + Progress + " / " + videos.Count });
+			}
+			_db.SaveChanges();
+			OnVideosChanged();
+		}
+
+		public static void EmptyVideoTables()
+		{
+			foreach (Video Video in _db.Videos)
+			{
+				_db.Videos.Remove(Video);
+			}
+			_db.SaveChanges();
+			OnVideosChanged();
+		}
+
+		public static void UpdateVideo(Video video)
+		{
+			UpdateVideos(new List<Video>{video});
+		}
+		
+		public static bool ConvertDatabase()
+		{
+			return false;
+		}
+
+		public static DatabaseDetails GetDatabaseDetails()
+		{
+			return null;
+		}
 
 
-        public static event OnInsertVideosProgress InsertVideosProgress;
+		public static event OnInsertVideosProgress UpdateVideosProgress;
 
-        public delegate void OnInsertVideosProgress(object sender, ProgressEventArgs eventArgs);
+		public static void OnUpdateVideosProgress(ProgressEventArgs eventargs)
+		{
+			if (UpdateVideosProgress != null) UpdateVideosProgress(null, eventargs);
+		}
 
-        public delegate void VideosChangedDel();
+		public delegate void OnInsertVideosProgress(object sender, ProgressEventArgs eventArgs);
 
-        public static event VideosChangedDel VideosChanged;
+		public delegate void VideosChangedDel();
 
-        private static void OnVideosChanged()
-        {
-            if (VideosChanged != null)
-                VideosChanged();
-        }
+		public static event VideosChangedDel VideosChanged;
 
-    }
+		private static void OnVideosChanged()
+		{
+			if (VideosChanged != null)
+				VideosChanged();
+		}
+
+	}
 }

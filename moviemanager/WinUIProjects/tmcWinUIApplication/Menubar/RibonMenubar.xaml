@@ -49,7 +49,7 @@
 
                 <ribbon:RibbonGroup>
                     <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.SearchWeb}"/>
-                    <ribbon:RibbonButton DataContext="{x:Static data:MenuModel.Analyse}" />
+					<ribbon:RibbonButton DataContext="{x:Static data:MenuModel.Analyse}" />
                 </ribbon:RibbonGroup>
 
                 <ribbon:RibbonGroup>

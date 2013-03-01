@@ -239,13 +239,14 @@ namespace Tmc.WinUI.Application.Menubar
                             ToolTipTitle = "Analyse videos",
                             ToolTipDescription = "Analyse videos and search info on the web",
                             Command = new AnalyseCommand(),
-                            KeyTip = "",
+                            KeyTip = ""
                         };
                         DATA_COLLECTION[STR] = ButtonData;
                     }
 
                     return DATA_COLLECTION[STR];
                 }
+
             }
         }
         #endregion
