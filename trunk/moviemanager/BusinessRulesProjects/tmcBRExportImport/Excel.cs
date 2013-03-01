@@ -87,10 +87,9 @@ namespace Tmc.BusinessRules.ExportImport
                     {
                         ICell Cell = Row.CreateCell(ColIndex);
                         Cell.SetCellType(CellType.STRING);
-                        object Value = objects[RowIndex - 1].GetType().GetProperty(props[ColIndex]).GetValue(objects[RowIndex - 1], null);
-                        if (Value != null)
+						if (objects[RowIndex - 1].GetType().GetProperty(props[ColIndex]) != null && objects[RowIndex - 1].GetType().GetProperty(props[ColIndex]).GetValue(objects[RowIndex - 1], null) != null)
                         {
-                            Cell.SetCellValue(Value.ToString());
+							Cell.SetCellValue(objects[RowIndex - 1].GetType().GetProperty(props[ColIndex]).GetValue(objects[RowIndex - 1], null).ToString());
                         }
                     }
                 }

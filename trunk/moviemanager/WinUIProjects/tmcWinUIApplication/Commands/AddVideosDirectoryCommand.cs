@@ -73,13 +73,13 @@ namespace Tmc.WinUI.Application.Commands
             IsIndeterminate = true;
             _progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance,DataContext = this };
             var BgwInsertVideos = new BgwInsertVideos(e.Videos);
-            DataRetriever.InsertVideosProgress += FileReader_OnInsertVideosProgress;
+            DataRetriever.UpdateVideosProgress += FileReaderOnUpdateVideosProgress;
             BgwInsertVideos.RunWorkerCompleted += BGWInsertVideos_OnInsertVideosCompleted;
             BgwInsertVideos.RunWorkerAsync();
             _progressWindow.ShowDialog();
         }
 
-        private void FileReader_OnInsertVideosProgress(object sender, ProgressEventArgs e)
+        private void FileReaderOnUpdateVideosProgress(object sender, ProgressEventArgs e)
         {
             Value = e.ProgressNumber;
             Message = "Adding videos to database: " + Math.Round(e.ProgressNumber * 100.0 / e.MaxNumber, 1).ToString("N1") + " %";
