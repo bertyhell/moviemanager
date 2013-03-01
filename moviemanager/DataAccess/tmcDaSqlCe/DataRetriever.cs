@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Model;
 
@@ -12,17 +11,17 @@ namespace Tmc.DataAccess.SqlCe
     {
         public static readonly int CURRENT_DATABASE_VERSION = 1;
 
-        private static TmcContext DB;
+        private static TmcContext _db;
 
         public static void Init(string connectionString)
         {
-            DB = new TmcContext(connectionString);
+            _db = new TmcContext(connectionString);
         }
 
 
         public static IList<Video> Videos
         {
-            get { return DB.Videos.Include(x => x.Files).Include(x => x.Images).ToList(); } //.Include(x => x.Images)
+            get { return _db.Videos.Include(x => x.Files).Include(x => x.Images).ToList(); } //.Include(x => x.Images)
             set
             {
                 UpdateVideos(value);
@@ -55,7 +54,7 @@ namespace Tmc.DataAccess.SqlCe
             foreach (Video Video in videos)
             {
                    //check if video exists
-                Video DbVideo = DB.Videos.FirstOrDefault(v => v.Id == Video.Id);
+                Video DbVideo = _db.Videos.FirstOrDefault(v => v.Id == Video.Id);
                 if (DbVideo != null)
                 {
                     DbVideo.CopyAnalyseVideoInfo(Video, true);
@@ -63,7 +62,7 @@ namespace Tmc.DataAccess.SqlCe
                 else
                 {
                     List<Video> DbVideos = new List<Video>();
-                    foreach (Video DBVideo in DB.Videos)
+                    foreach (Video DBVideo in _db.Videos)
                     {
                         if (DBVideo.Files[0].Path == Video.Files[0].Path)
                         {
@@ -72,7 +71,7 @@ namespace Tmc.DataAccess.SqlCe
                     }
                     if (string.IsNullOrWhiteSpace(Video.Files[0].Path) || !DbVideos.Any())
                     {
-                        DB.Videos.Add(Video);
+                        _db.Videos.Add(Video);
                     }
                     else
                     {
@@ -80,17 +79,17 @@ namespace Tmc.DataAccess.SqlCe
                     }
                 }
             }
-            DB.SaveChanges();
+            _db.SaveChanges();
             OnVideosChanged();
         }
 
         public static void EmptyVideoTables()
         {
-            foreach (Video Video in DB.Videos)
+            foreach (Video Video in _db.Videos)
             {
-                DB.Videos.Remove(Video);
+                _db.Videos.Remove(Video);
             }
-            DB.SaveChanges();
+            _db.SaveChanges();
             OnVideosChanged();
         }
 

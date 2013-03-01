@@ -53,7 +53,7 @@ namespace Tmc.SystemFrameworks.Model
 
         public Video()
         {
-            //_images = new List<ImageInfo>();
+			_images = new List<ImageInfo>();
             _genres = new List<string>();
             _analyseCompleted = false;
             _files = new List<VideoFile>();
@@ -101,8 +101,14 @@ namespace Tmc.SystemFrameworks.Model
             {
                 if (Images == null)
                     Images = new List<ImageInfo>();
-                else
-                    Images.Clear();
+				else
+                {
+					//Images.Clear(); --> might cause problems with EF
+					for (int I = Images.Count-1; I >= 0; I--)
+	                {
+		                Images.RemoveAt(I);
+	                }
+                }
                 //brother.Images.ForEach(i => i.VideoId = this.Id);
                 Images.AddRange(brother.Images);
             }
@@ -111,12 +117,14 @@ namespace Tmc.SystemFrameworks.Model
             AnalyseCompleted = brother.AnalyseCompleted;
         }
 
+		[ForeignKey("Id")]
         public MovieInfo MovieInfo
         {
             get { return _movieInfo; }
             set { _movieInfo = value; }
         }
 
+		[ForeignKey("Id")]
         public EpisodeInfo EpisodeInfo
         {
             get { return _episodeInfo; }
@@ -130,8 +138,9 @@ namespace Tmc.SystemFrameworks.Model
         }
 
         //error occured because image objects get added during analyse
-        private List<ImageInfo> _images = new List<ImageInfo>{ new ImageInfo{UriString = "http://www.google.be"}};
-        public virtual List<ImageInfo> Images
+
+	    private List<ImageInfo> _images;// = new List<ImageInfo> { new ImageInfo { UriString = "http://upload.wikimedia.org/wikipedia/commons/e/e7/Mozilla_Firefox_3.5_logo_256.png" } };
+		public virtual List<ImageInfo> Images
         {
             get { return _images; }
             set
@@ -142,13 +151,6 @@ namespace Tmc.SystemFrameworks.Model
                     OnPropertyChanged("Poster");
             }
         }
-
-        //private List<VideoFile2> _images = new List<VideoFile2> { new VideoFile2 { Path = "http://google.com"} };
-        //public List<VideoFile2> Images
-        //{
-        //    get { return _images; }
-        //    set { _images = value; }
-        //}
 
         public List<String> Genres
         {
@@ -186,7 +188,7 @@ namespace Tmc.SystemFrameworks.Model
                 OnPropertyChanged("IdImdb");
             }
         }
-
+		[NotMapped]
         public ImageInfo Thumbnail
         {
             get
@@ -196,6 +198,7 @@ namespace Tmc.SystemFrameworks.Model
             }
             set { _images.Insert(0, value); }
         }
+
         public DateTime Year
         {
             get { return _release; }
@@ -351,6 +354,7 @@ namespace Tmc.SystemFrameworks.Model
 
         #region properties for search results
 
+		[NotMapped]
         public ImageInfo Poster
         {
             get
