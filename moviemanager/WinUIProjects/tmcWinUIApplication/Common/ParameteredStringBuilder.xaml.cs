@@ -294,7 +294,7 @@ namespace Tmc.WinUI.Application.Common
                         ColNew--;
 
                     //reposition
-                    MoveParameter(_draggedElement, ColNew); //TODO 090 when release between controls -> move draggeditem to replace insertion hint
+                    MoveParameter(_draggedElement, ColNew); //TODO 070 when release between controls -> move draggeditem to replace insertion hint
                 }
             }
 

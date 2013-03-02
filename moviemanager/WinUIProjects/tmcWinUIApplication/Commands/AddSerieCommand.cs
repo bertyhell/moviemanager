@@ -6,7 +6,6 @@ namespace Tmc.WinUI.Application.Commands
 {
     class AddSerieCommand : ICommand
     {
-        //TODO 090 fix the damn event checks from null
         //TODO 050 change folder browser dialog
 
         public bool CanExecute(object parameter)

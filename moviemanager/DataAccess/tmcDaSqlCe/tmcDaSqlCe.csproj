@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BgwInsertVideos.cs">
+    <Compile Include="BgwInsertOrUpdateVideos.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataRetriever.cs" />

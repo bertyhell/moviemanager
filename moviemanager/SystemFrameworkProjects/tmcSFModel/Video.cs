@@ -57,6 +57,9 @@ namespace Tmc.SystemFrameworks.Model
             _genres = new List<string>();
             _analyseCompleted = false;
             _files = new List<VideoFile>();
+
+
+			_release = new DateTime(1800, 1, 1); //earlier dates ar not supported by sql ce
         }
 
         public Video(string path, params Subtitle[] subs)
@@ -70,7 +73,7 @@ namespace Tmc.SystemFrameworks.Model
             _id = brother.Id;
             _idImdb = brother.IdImdb;
             _name = brother.Name;
-            _release = brother.Release;
+            _release = brother.Release == new DateTime() ? new DateTime(1800,0,0) : brother.Release;
             _rating = brother.Rating;
             _ratingImdb = brother.RatingImdb;
             _genres = brother.Genres;
