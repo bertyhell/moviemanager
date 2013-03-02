@@ -141,6 +141,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menubar\MenuModel.cs" />
+    <Compile Include="Panels\Analyse\AddAnalyseVideosToDatabase.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Panels\Analyse\GetDetailWorker.cs">
       <SubType>Component</SubType>
     </Compile>

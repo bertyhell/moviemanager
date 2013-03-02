@@ -265,5 +265,4 @@ namespace Tmc.WinUI.Application
 }
 
 //TODO 090: gezochte folders bijhouden + (automatische refresh in background)
-//TODO 070: apparte settingsfile
-//TODO 070: verschillende video types: episode, MovieInfo, ...
+//TODO 070: aparte settingsfile

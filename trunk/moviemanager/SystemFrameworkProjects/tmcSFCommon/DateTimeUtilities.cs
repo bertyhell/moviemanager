@@ -23,8 +23,8 @@ namespace Tmc.SystemFrameworks.Common
                     Datetime = DateTime.Parse(date, Format);
                 }
                 catch
-                {
-                    return DateTime.MinValue;
+				{
+					return new DateTime(1800, 1, 1);
                 }
             }
             return Datetime;
@@ -32,19 +32,25 @@ namespace Tmc.SystemFrameworks.Common
 
         public static DateTime ParseDate(String date, String stringFormat)
         {
-            DateTimeFormatInfo Format = new DateTimeFormatInfo();
-            DateTime Datetime;
-            try
-            {
-                Format.FullDateTimePattern = stringFormat;
-
-                Datetime = DateTime.Parse(date, Format);
-            }
-            catch
-            {
-                return DateTime.MinValue;
-            }
-            return Datetime;
+	        if (date == null)
+	        {
+		        return new DateTime(1800, 1, 1);
+	        }
+	        else
+	        {
+		        DateTimeFormatInfo Format = new DateTimeFormatInfo();
+		        DateTime Datetime;
+		        try
+		        {
+			        Format.FullDateTimePattern = stringFormat;
+			        Datetime = DateTime.Parse(date, Format);
+		        }
+		        catch
+		        {
+			        return new DateTime(1800, 1, 1);
+		        }
+		        return Datetime;
+	        }
         }
     }
 }

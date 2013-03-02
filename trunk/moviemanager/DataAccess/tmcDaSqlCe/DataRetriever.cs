@@ -9,7 +9,7 @@ namespace Tmc.DataAccess.SqlCe
 {
 	public class DataRetriever
 	{
-		public static readonly int CURRENT_DATABASE_VERSION = 1;
+		public const int CURRENT_DATABASE_VERSION = 1;
 
 		private static TmcContext _db;
 
@@ -55,7 +55,6 @@ namespace Tmc.DataAccess.SqlCe
 
 		private static void UpdateVideos(IList<Video> videos)
 		{
-			int Progress = 0;
 			foreach (Video NewVideo in videos)
 			{
 				//check if video exists
@@ -73,6 +72,7 @@ namespace Tmc.DataAccess.SqlCe
 						{
 							//database already contains this video (match by video file path)
 							ExistingVideo = DbVideo;
+							break; //stop searching when you find the correct video
 						}
 					}
 				}
@@ -86,9 +86,7 @@ namespace Tmc.DataAccess.SqlCe
 					//new video --> add to database
 					_db.Videos.Add(NewVideo);
 				}
-				//raise event update/insert video progress
-				Progress++;
-				OnUpdateVideosProgress(new ProgressEventArgs { MaxNumber = videos.Count, ProgressNumber = Progress, Message = "Video " + Progress + " / " + videos.Count });
+				OnUpdateVideosProgressInvokator(new ProgressEventArgs{ProgressNumber = -1});
 			}
 			_db.SaveChanges();
 			OnVideosChanged();
@@ -120,14 +118,14 @@ namespace Tmc.DataAccess.SqlCe
 		}
 
 
-		public static event OnInsertVideosProgress UpdateVideosProgress;
+		public static event OnUpdateVideosProgress UpdateVideosProgress;
 
-		public static void OnUpdateVideosProgress(ProgressEventArgs eventargs)
+		public static void OnUpdateVideosProgressInvokator(ProgressEventArgs eventargs)
 		{
 			if (UpdateVideosProgress != null) UpdateVideosProgress(null, eventargs);
 		}
 
-		public delegate void OnInsertVideosProgress(object sender, ProgressEventArgs eventArgs);
+		public delegate void OnUpdateVideosProgress(object sender, ProgressEventArgs eventArgs);
 
 		public delegate void VideosChangedDel();
 

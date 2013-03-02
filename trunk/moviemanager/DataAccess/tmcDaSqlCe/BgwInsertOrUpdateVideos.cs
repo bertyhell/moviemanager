@@ -4,11 +4,11 @@ using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.SqlCe
 {
-    public class BgwInsertVideos : BackgroundWorker
+    public class BgwInsertOrUpdateVideos : BackgroundWorker
     {
         private readonly IList<Video> _videos;
 
-        public BgwInsertVideos(IList<Video> videos)
+        public BgwInsertOrUpdateVideos(IList<Video> videos)
         {
             _videos = videos;
         }

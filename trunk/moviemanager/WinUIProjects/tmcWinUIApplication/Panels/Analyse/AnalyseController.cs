@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Forms;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
 using Tmc.SystemFrameworks.Model;
-using Tmc.WinUI.Application.Cache;
 using Tmc.WinUI.Application.Common;
 
 namespace Tmc.WinUI.Application.Panels.Analyse
@@ -18,7 +18,6 @@ namespace Tmc.WinUI.Application.Panels.Analyse
 
         public AnalyseController()
         {
-
             ProgressBarInfoTotal = new ProgressBarInfo();
             ProgressBarInfoPass = new ProgressBarInfo();
             List<Video> Videos = MainController.Instance.VideosList;
@@ -36,8 +35,8 @@ namespace Tmc.WinUI.Application.Panels.Analyse
             }
         }
 
-        private ObservableCollection<AnalyseVideo> _analyseVideos = new ObservableCollection<AnalyseVideo>();
-        public ObservableCollection<AnalyseVideo> AnalyseVideos
+		private ObservableList<AnalyseVideo> _analyseVideos = new ObservableList<AnalyseVideo>();
+		public ObservableList<AnalyseVideo> AnalyseVideos
         {
             get
             {
@@ -50,7 +49,8 @@ namespace Tmc.WinUI.Application.Panels.Analyse
         }
 
         private AnalyseVideo _selectedVideoFile;
-        public AnalyseVideo SelectedVideoFile
+
+	    public AnalyseVideo SelectedVideoFile
         {
             get { return _selectedVideoFile; }
             set
@@ -100,6 +100,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
         public ProgressBarInfo ProgressBarInfoPass { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void PropChanged(string title)
         {
             if (PropertyChanged != null)
@@ -111,28 +112,40 @@ namespace Tmc.WinUI.Application.Panels.Analyse
         //TODO 050 make analyse function multithreaded -> 1 thread for every MovieInfo lookup
         public void SaveVideos()//TODO 070 do this in a backgroundworker with progressbar
         {
-            var Videos = new List<Video>();
-            foreach (var AnalyseVideo in AnalyseVideos)
-            {
-                Video Video = AnalyseVideo.SelectedCandidate;
-                if (Video != null)
-                {
-                    AnalyseVideo.Video.CopyAnalyseVideoInfo(Video);
-                    var Images = new List<Uri>();
-                    foreach (ImageInfo ImageInfo in Video.Images)
-                    {
-                        if (ImageInfo.Uri != null)
-                        {
-                            Images.Add(new Uri(ImageInfo.Uri.AbsoluteUri));
-                        }
-                    }
-                    ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.Medium);//TODO 070 move this to a seperate backgroundworker
-
-
-                    Videos.Add(Video); //changed this
-                }
-            }
-            DataRetriever.Videos = Videos;
+			Message = "Downloading movie posters";
+			Value = 0;
+			Maximum = AnalyseVideos.Count*2;
+			IsIndeterminate = false;
+			_progressWindow = new ProgressbarWindow(this) { Owner = MainWindow.Instance, DataContext = this };
+			AddAnalyseVideosToDatabase AddAnalyseVideosToDatabase = new AddAnalyseVideosToDatabase(AnalyseVideos);
+			AddAnalyseVideosToDatabase.UpdateVideosProgress += AddAnalyseVideosToDatabaseProgressChanged;
+			AddAnalyseVideosToDatabase.RunWorkerCompleted += BgwInsertVideosRunWorkerCompleted;
+			AddAnalyseVideosToDatabase.RunWorkerAsync();
+			_progressWindow.ShowDialog();
         }
-    }
+
+		void AddAnalyseVideosToDatabaseProgressChanged(object sender, ProgressEventArgs e)
+		{
+			if (Value < Maximum/2)
+			{
+				Value = e.ProgressNumber;
+				Message = "Downloading video posters: " +
+				          Math.Round(e.ProgressNumber*100.0/Maximum*2, 1).ToString(CultureInfo.InvariantCulture) + " %";
+			}else{
+				Message = "Saving videos to database...";
+				IsIndeterminate = true; //when all posters are downloaded --> saving to database starts --> undeterminate how much time this will take
+			}
+		}
+
+		void BgwInsertVideosRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			_progressWindow.Close();
+		}
+
+		private ProgressbarWindow _progressWindow;
+	    public bool IsIndeterminate { get; set; }
+		public int Value { get; set; }
+		public int Maximum { get; set; }
+		public string Message { get; set; }
+	}
 }
