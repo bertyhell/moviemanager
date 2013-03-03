@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using Tmc.DataAccess.SqlCe;
+using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.WinUI.Application.Panels.Filter
 {
@@ -25,7 +28,7 @@ namespace Tmc.WinUI.Application.Panels.Filter
                         AppliedFilters.Add(new FilterText("Path", "Path"));
                         break;
                     case Filters.Genre:
-                        AppliedFilters.Add(new FilterMultiOption("Genres", DataRetriever.Genres, "Genres"));
+                        AppliedFilters.Add(new FilterMultiOption("Genres",  DataRetriever.Genres.Select(genre => genre.Name).ToList(), "Genres"));
                         break;
                     case Filters.ReleaseDate:
                         AppliedFilters.Add(new FilterDate("Release", "Release Date"));

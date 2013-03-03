@@ -57,6 +57,7 @@
     <Compile Include="AnalyseVideo.cs" />
     <Compile Include="DatabaseDetails.cs" />
     <Compile Include="Franchise.cs" />
+    <Compile Include="Genre.cs" />
     <Compile Include="ImageInfo.cs" />
     <Compile Include="Interfaces\IPreviewInfoRetriever.cs" />
     <Compile Include="MovieInfo.cs" />

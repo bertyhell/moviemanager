@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Data;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Windows.Input;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Model;
+using Tmc.SystemFrameworks.Model.Annotations;
 using Tmc.WinUI.Application.Commands;
 using Tmc.WinUI.Application.Menubar;
 using Tmc.WinUI.Application.Panels.Filter;
@@ -82,7 +84,7 @@ namespace Tmc.WinUI.Application
             get { return _filterEditor; }
             set
             {
-                if (_filterEditor != null && _filterEditor.Equals(value))
+                if (_filterEditor == null || !_filterEditor.Equals(value))
                 {
                     _filterEditor = value;
                     _videosView.Filter += FilterEditor.FilterVideo;
@@ -203,7 +205,7 @@ namespace Tmc.WinUI.Application
                 if (_previewItemMargin != value)
                 {
                     _previewItemMargin = value;
-                    PropChanged("PreviewItemMargin");
+                    PropChanged();
                     PropChanged("ItemWidth");
                     PropChanged("ItemHeight");
                 }
@@ -300,15 +302,13 @@ namespace Tmc.WinUI.Application
 
         #endregion
 
-
-        public void PropChanged(String field)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(field));
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void PropChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler Handler = PropertyChanged;
+            if (Handler != null) Handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

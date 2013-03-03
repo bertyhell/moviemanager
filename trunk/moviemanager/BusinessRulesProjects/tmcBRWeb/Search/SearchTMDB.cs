@@ -99,6 +99,21 @@ namespace Tmc.BusinessRules.Web.Search
             }
         }
 
+        public static List<Genre> GetGenres()
+        {
+            List<Genre> Genres = new List<Genre>();
+            Uri Request = new Uri(string.Format(Constants.TMDB_API_URL_GENRES, APIKEY));
+            String Response = SimpleWebRequest.DoJsonRequest(Request);
+
+            if (!string.IsNullOrEmpty(Response))
+            {
+                JObject JSonGenres = JObject.Parse(Response);
+                JSonGenres["genres"].ToList().ForEach(g => Genres.Add(new Genre{TmdbId = (int) g["id"], Name = (string) g["name"]}));
+            }
+
+            return Genres;
+        }
+
         public static void GetExtraMovieInfo(Video video)
         {
             Uri Request = new Uri(string.Format(Constants.TMDB_API_URL_MOVIE, video.MovieInfo.IdTmdb, APIKEY));
@@ -108,7 +123,7 @@ namespace Tmc.BusinessRules.Web.Search
             {
                 JObject JsonMovie = JObject.Parse(Response);
                 List<string> Genres = new List<string>();
-                JsonMovie["genres"].ToList().ForEach(g => Genres.Add((string)g["name"])); // get genres
+                JsonMovie["genres"].ToList().ForEach(g => Genres.Add((string)g["name"])); // get genres //TODO 060 link to genres table in database
                 video.Genres = Genres;
                 video.IdImdb = (string)JsonMovie["imdb_id"];
                 video.Plot = (string)JsonMovie["overview"];

@@ -39,5 +39,6 @@ namespace Tmc.DataAccess.SqlCe
         public DbSet<Franchise> Franchises { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Serie> Series { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }
