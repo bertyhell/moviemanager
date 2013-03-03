@@ -49,11 +49,11 @@ namespace Tmc.WinUI.Application.Panels.Analyse
 				_progress++;
 				OnUpdateVideosProgressInvokator(new ProgressEventArgs { ProgressNumber = _progress });
 			}
-			DataRetriever.UpdateVideosProgress += DataRetriever_UpdateVideosProgress;
+			DataRetriever.UpdateVideosProgress += DataRetrieverUpdateVideosProgress;
 			DataRetriever.Videos = Videos;
 		}
 
-		void DataRetriever_UpdateVideosProgress(object sender, ProgressEventArgs eventArgs)
+		void DataRetrieverUpdateVideosProgress(object sender, ProgressEventArgs eventArgs)
 		{
 			_progress++;
 			OnUpdateVideosProgressInvokator(new ProgressEventArgs { ProgressNumber = _progress });
