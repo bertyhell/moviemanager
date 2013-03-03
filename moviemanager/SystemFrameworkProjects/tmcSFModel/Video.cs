@@ -97,7 +97,40 @@ namespace Tmc.SystemFrameworks.Model
             Release = Release.Year == 1900 || overwrite ? brother.Release : Release;
             RatingImdb = RatingImdb < 0 || overwrite ? brother.RatingImdb : RatingImdb;
             Genres = Genres == null || Genres.Count == 0 || overwrite ? brother.Genres : Genres;
-            Files = Files == null || overwrite ? brother.Files : Files;
+
+			if (Genres == null || Genres.Count == 0 || overwrite)
+			{
+				if (Genres == null)
+					Genres = new List<Genre>();
+				else
+				{
+					//Images.Clear(); --> might cause problems with EF
+					for (int I = Genres.Count - 1; I >= 0; I--)
+					{
+						Genres.RemoveAt(I);
+					}
+				}
+				//brother.Images.ForEach(i => i.VideoId = this.Id);
+				Genres.AddRange(brother.Genres);
+			}
+
+
+			if (Files == null || Files.Count == 0 || overwrite)
+			{
+				if (Files == null)
+					Files = new List<VideoFile>();
+				else
+				{
+					//Images.Clear(); --> might cause problems with EF
+					for (int I = Files.Count - 1; I >= 0; I--)
+					{
+						Files.RemoveAt(I);
+					}
+				}
+				//brother.Images.ForEach(i => i.VideoId = this.Id);
+				Files.AddRange(brother.Files);
+			}
+
             Poster = Poster == null || overwrite ? brother.Poster : Poster;
 
             if (Images == null || Images.Count == 0 || overwrite)
@@ -155,7 +188,7 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
-        public List<String> Genres //TODO 90 add Genres instead of string (also when adding movie get genres from database and not genres from tmdb analyse)
+        public List<Genre> Genres
         {
             get { return _genres; }
             set
