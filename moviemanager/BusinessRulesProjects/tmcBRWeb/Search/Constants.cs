@@ -19,6 +19,8 @@ namespace Tmc.BusinessRules.Web.Search
 
         public static readonly string TMDB_API_URL_SEARCH = TMDB_API_URL + TMDB_API_VERSION + "/" + SEARCH + "/";
 
+        public static readonly string TMDB_API_URL_GENRES =TMDB_API_URL + "/" + TMDB_API_VERSION + "/genre/list?" + API_KEY_PARAM + "={0}";
+
         /// <summary>
         /// TMDB Movie url --> params: Movie id, Api key
         /// </summary>

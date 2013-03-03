@@ -155,7 +155,7 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
-        public List<String> Genres
+        public List<String> Genres //TODO 90 add Genres instead of string (also when adding movie get genres from database and not genres from tmdb analyse)
         {
             get { return _genres; }
             set

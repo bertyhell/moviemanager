@@ -8,7 +8,15 @@ namespace Tmc.WinUI.Application.Commands
 	{
 		public bool CanExecute(object parameter)
 		{
-			return MainController.Instance != null && MainController.Instance.Videos != null && MainController.Instance.Videos.Count > 0;
+		    try
+		    {
+		        return MainController.Instance != null && MainController.Instance.Videos != null &&
+		               MainController.Instance.Videos.Count > 0;
+		    }
+		    catch
+		    {
+		        return false; //ignore exception
+		    }
 		}
 
 		public event EventHandler CanExecuteChanged;
