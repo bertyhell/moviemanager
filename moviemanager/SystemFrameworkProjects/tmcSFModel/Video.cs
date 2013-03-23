@@ -23,7 +23,7 @@ namespace Tmc.SystemFrameworks.Model
         private DateTime _release = new DateTime(1800, 1, 1);
         private double _rating;
         private double _ratingImdb;
-        private List<String> _genres;
+        private List<Genre> _genres;
         private ulong _lastPlayLocation;
         private uint _playCount;
         //properties for searchresults
@@ -54,10 +54,9 @@ namespace Tmc.SystemFrameworks.Model
         public Video()
         {
 			_images = new List<ImageInfo>();
-            _genres = new List<string>();
+            _genres = new List<Genre>();
             _analyseCompleted = false;
             _files = new List<VideoFile>();
-
 
 			_release = new DateTime(1800, 1, 1); //earlier dates ar not supported by sql ce
         }
@@ -115,21 +114,21 @@ namespace Tmc.SystemFrameworks.Model
 			}
 
 
-			if (Files == null || Files.Count == 0 || overwrite)
-			{
-				if (Files == null)
-					Files = new List<VideoFile>();
-				else
-				{
-					//Images.Clear(); --> might cause problems with EF
-					for (int I = Files.Count - 1; I >= 0; I--)
-					{
-						Files.RemoveAt(I);
-					}
-				}
-				//brother.Images.ForEach(i => i.VideoId = this.Id);
-				Files.AddRange(brother.Files);
-			}
+            //if (Files == null || Files.Count == 0 || overwrite)
+            //{
+            //    if (Files == null)
+            //        Files = new List<VideoFile>();
+            //    else
+            //    {
+            //        //Images.Clear(); --> might cause problems with EF
+            //        for (int I = Files.Count - 1; I >= 0; I--)
+            //        {
+            //            Files.RemoveAt(I);
+            //        }
+            //    }
+            //    //brother.Images.ForEach(i => i.VideoId = this.Id);
+            //    Files.AddRange(brother.Files);
+            //}
 
             Poster = Poster == null || overwrite ? brother.Poster : Poster;
 

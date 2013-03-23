@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Model;
@@ -44,7 +41,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
 					}
 					ApplicationCache.AddVideoImages(AnalyseVideo.Video.Id, Images, CacheImageType.Images, ImageQuality.Medium);
 
-					Videos.Add(Video);
+                    Videos.Add(AnalyseVideo.Video);
 				}
 				_progress++;
 				OnUpdateVideosProgressInvokator(new ProgressEventArgs { ProgressNumber = _progress });

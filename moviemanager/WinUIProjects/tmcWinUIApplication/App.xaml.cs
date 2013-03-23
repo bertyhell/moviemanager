@@ -9,6 +9,7 @@ using Tmc.BusinessRules.Web.Search;
 using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Common;
 using Tmc.SystemFrameworks.Log;
+using Tmc.WinUI.Application.Common;
 using Tmc.WinUI.Application.Properties;
 
 namespace Tmc.WinUI.Application
@@ -18,18 +19,18 @@ namespace Tmc.WinUI.Application
     /// </summary>
     public partial class App
     {
-        void DispatcherUnhandledExceptionEventHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void DispatcherUnhandledExceptionEventHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-#if RELEASE
-            // Process unhandled exception
-            new ExceptionMessageBox(e.Exception, "Unhandled exeption has occured, please send this info to info.taxrebel@gmail.com").Show();
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                // Process unhandled exception
+                new ExceptionMessageBox(e.Exception, "Unhandled exeption has occured, please send this info to info.taxrebel@gmail.com").Show();
 
+                GlobalLogger.Instance.MovieManagerLogger.Error(e.Exception.Message);
 
-            GlobalLogger.Instance.MovieManagerLogger.Error(e.Exception.Message);
-
-            // Prevent default unhandled exception processing
-            e.Handled = true;
-#endif
+                // Prevent default unhandled exception processing
+                e.Handled = true;
+            }
         }
 
         protected override void OnStartup(StartupEventArgs e)

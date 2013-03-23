@@ -122,7 +122,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Type" Binding="{Binding VideoType}" />
-                <DataGridTextColumn Header="Genres" Binding="{Binding Genres, Converter={StaticResource StringListConverter}}" />
+                <DataGridTextColumn Header="Genres" Binding="{Binding Genres}" /> <!--, Converter={StaticResource StringListConverter}}-->
                 <DataGridTextColumn Header="IMDB id" Binding="{Binding IdImdb}" />
                 <DataGridTextColumn Header="Path" Binding="{Binding Files[0].Path}" />
                 <DataGridTemplateColumn Header="Rating" SortMemberPath="Rating">
