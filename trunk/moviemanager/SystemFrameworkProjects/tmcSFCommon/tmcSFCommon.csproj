@@ -54,6 +54,7 @@
     <Compile Include="DateTimeUtilities.cs" />
     <Compile Include="DefaultValues.cs" />
     <Compile Include="ImageQuality.cs" />
+    <Compile Include="ObjectCloner.cs" />
     <Compile Include="ObservableList.cs" />
     <Compile Include="ProgressEventArgs.cs" />
     <Compile Include="RegistryHelper.cs" />

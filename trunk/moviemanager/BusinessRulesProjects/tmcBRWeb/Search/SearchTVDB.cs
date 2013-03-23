@@ -102,7 +102,8 @@ namespace Tmc.BusinessRules.Web.Search
                 JObject JsonMovie = JObject.Parse(Response);
                 List<string> Genres = new List<string>();
                 JsonMovie["genres"].ToList().ForEach(g => Genres.Add((string)g["name"])); // get genres
-                movie.Genres = Genres;
+                //TODO 090: add genres to movie
+                //movie.Genres = Genres;
                 movie.IdImdb = (string)JsonMovie["imdb_id"];
                 movie.Plot = (string)JsonMovie["overview"];
                 movie.Runtime = (int)JsonMovie["runtime"];

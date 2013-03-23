@@ -29,7 +29,7 @@ namespace Tmc.WinUI.Application.Wizards
             //add serie if necessary
             Serie Serie = _serieSelectionControl.Serie;
             if (Serie.Id == 0)
-                DataRetriever.AddSerie(Serie);
+                DataRetriever.UpdateSerie(Serie);
 
             //add videos
             ObservableCollection<Video> LocalVideos = new ObservableCollection<Video>();

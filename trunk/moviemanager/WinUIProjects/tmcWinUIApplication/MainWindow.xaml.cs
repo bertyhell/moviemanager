@@ -178,7 +178,7 @@ namespace Tmc.WinUI.Application
         private void MenuItemPlayClick(object sender, RoutedEventArgs e)
         {
 	        PlayVideoCommand PlayCommand = new PlayVideoCommand();
-	        //PlayCommand.Execute(_videoIcons.IsVisible ? _videoIcons.SelectedItem : _videoDetails.SelectedItem);
+	        PlayCommand.Execute(_videoIcons.IsVisible ? _videoIcons.SelectedItem : _videoDetails.SelectedItem);
         }
 
 	    private void MenuItemRenameFileClick(object sender, RoutedEventArgs e)
@@ -266,3 +266,4 @@ namespace Tmc.WinUI.Application
 
 //TODO 090: gezochte folders bijhouden + (automatische refresh in background)
 //TODO 070: aparte settingsfile
+//TODO 010: scrubby preview (screenshots video)

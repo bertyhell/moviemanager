@@ -185,7 +185,7 @@ namespace Tmc.WinUI.Application.Panels.Analyse
                     VideoInfo.TitleMatchRatio = Similarities.Max();
 					if (!Candidates.Contains(VideoInfo))
 					{
-						VideoInfo.Files = analyseVideo.Video.Files;
+						//VideoInfo.Files = analyseVideo.Video.Files;
 						Candidates.Add(VideoInfo);
 						
 					}
