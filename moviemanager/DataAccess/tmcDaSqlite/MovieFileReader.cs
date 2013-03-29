@@ -82,10 +82,10 @@ namespace Tmc.DataAccess.Sqlite
                 var Video = new Video
                 {
                     //TODO 010 fix this workaround
-                    Path = file.FullName.Replace("\'", "''"),
                     //handle signle quotes in path name
                     Name = VideoTitleExtractor.CleanTitle(FilenameWidthoutExt)
                 };
+                Video.Files.Add(new VideoFile() { Path = file.FullName.Replace("\'", "''"), Subs = new ObservableList<Subtitle>()});
                 videos.Add(Video);
                 _videosFound++;
                 if (!reportNonVideos)
@@ -118,9 +118,7 @@ namespace Tmc.DataAccess.Sqlite
             //convert video to episode
             foreach (Video Video in LocalVideos)
             {
-                FileInfo FileInfo = new FileInfo(Video.Path);
-                //int LastIndexOf = Video.Path.LastIndexOf(dir.FullName);
-                //string Path = Video.Path.Remove(0, LastIndexOf);
+                FileInfo FileInfo = new FileInfo(Video.Files[0].Path); //TODO 020 fix this multiple paths
 
                 //find episodenumber in Filename
                 bool RegexMatched = false;
@@ -136,11 +134,14 @@ namespace Tmc.DataAccess.Sqlite
                         int SeasonNumber = int.Parse(Match.Groups[1].Value);
                         int EpisodeNumber = int.Parse(Match.Groups[2].Value);
 
-                        EpisodeInfo EpisodeInfo = (EpisodeInfo)Video.ConvertVideo(VideoTypeEnum.Episode, Video);
-                        EpisodeInfo.EpisodeNumber = EpisodeNumber;
-                        EpisodeInfo.Season = SeasonNumber;
-                        EpisodeInfo.SerieId = serie.Id;
-                        videos.Add(EpisodeInfo);
+                        Video.VideoType = VideoTypeEnum.Episode;
+                        Video.EpisodeInfo = new EpisodeInfo
+                            {
+                                EpisodeNumber = EpisodeNumber,
+                                Season = SeasonNumber,
+                                SerieId = serie.Id
+                            };
+                        videos.Add(Video);
 
                         RegexMatched = true;
                     }

@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.EntityClient;
 using System.Globalization;
 using System.IO;
@@ -21,20 +22,30 @@ namespace Tmc.WinUI.Application
     {
         private void DispatcherUnhandledExceptionEventHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+            UnUnhandleExceptionHandler(e.Exception);
+            // Prevent default unhandled exception processing
+            e.Handled = true;
+        }
+
+        private void DispatcherUnhandledExceptionEventHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            UnUnhandleExceptionHandler((Exception) e.ExceptionObject);
+        }
+
+        private void UnUnhandleExceptionHandler(Exception ex)
+        {
             if (!System.Diagnostics.Debugger.IsAttached)
             {
                 // Process unhandled exception
-                new ExceptionMessageBox(e.Exception, "Unhandled exeption has occured, please send this info to info.taxrebel@gmail.com").Show();
+                new ExceptionMessageBox(ex, "Unhandled exeption has occured, please send this info to info.taxrebel@gmail.com").Show();
 
-                GlobalLogger.Instance.MovieManagerLogger.Error(e.Exception.Message);
-
-                // Prevent default unhandled exception processing
-                e.Handled = true;
+                GlobalLogger.Instance.MovieManagerLogger.Error(ex.Message);
             }
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(DispatcherUnhandledExceptionEventHandler);
             //TODO 050: implement option to disable logging (already stored in settings) 
             GlobalLogger.Instance.LogLevel = Settings.Default.Log_Level;
             GlobalLogger.Instance.MovieManagerLogger.Info("Program started");
