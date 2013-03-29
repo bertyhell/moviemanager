@@ -16,17 +16,48 @@ namespace TmcWinUITest
     /// Summary description for CodedUITest1
     /// </summary>
     [CodedUITest]
-    public class CodedUITest1
+    public class MainFuntionalitiesTest
     {
-        public CodedUITest1()
+        public MainFuntionalitiesTest()
         {
         }
 
         [TestMethod]
-        public void CodedUITestMethod1()
+        public void StartAndAnalse()
         {
             // To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
+            this.UIMap.StartTMC();
+            this.UIMap.DoAnalyse();
+            this.UIMap.SaveAnalyseResults();
+            //this.UIMap.ChangeToDetailView();
+            //this.UIMap.ChangeToBigIconsView();
+            this.UIMap.GotoViewTab();
+            this.UIMap.ToggleTitleVisibility();
+
+
             // For more information on generated code, see http://go.microsoft.com/fwlink/?LinkId=179463
+        }
+        [TestMethod]
+        public void ChangeView()
+        {
+            this.UIMap.StartTMC();
+            System.Threading.Thread.Sleep(10000);
+            this.UIMap.GotoViewTab();
+            System.Threading.Thread.Sleep(10000);
+            this.UIMap.ToggleTitleVisibility();
+            System.Threading.Thread.Sleep(10000);
+
+            this.UIMap.CloseTMC();
+
+        }
+
+        [TestMethod]
+        public void TestNameFilter()
+        {
+            this.UIMap.StartTMC();
+            this.UIMap.AddNameFilter();
+            this.UIMap.AssertNameFilterWork();
+            this.UIMap.CloseTMC();
         }
 
         #region Additional test attributes
@@ -67,5 +98,20 @@ namespace TmcWinUITest
             }
         }
         private TestContext testContextInstance;
+
+        public UIMap UIMap
+        {
+            get
+            {
+                if ((this.map == null))
+                {
+                    this.map = new UIMap();
+                }
+
+                return this.map;
+            }
+        }
+
+        private UIMap map;
     }
 }

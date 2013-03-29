@@ -125,6 +125,10 @@
       <Project>{3b9b5fe6-81cc-4714-86e1-16a10c44dea2}</Project>
       <Name>tmcSFModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\tmcDaSqlCe\tmcDaSqlCe.csproj">
+      <Project>{65BE2418-DC15-430D-B470-04487281EC04}</Project>
+      <Name>tmcDaSqlCe</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\Other\Database\TheMovieCollector.sdf">

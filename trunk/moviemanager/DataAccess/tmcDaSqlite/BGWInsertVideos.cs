@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Tmc.DataAccess.SqlCe;
 using Tmc.SystemFrameworks.Model;
 
 namespace Tmc.DataAccess.Sqlite
@@ -15,7 +16,7 @@ namespace Tmc.DataAccess.Sqlite
 
         protected override void OnDoWork(DoWorkEventArgs e)
         {
-            TmcDatabase.InsertVideosHdd(_videos);
+            DataRetriever.Videos = _videos;
         }
     }
 }

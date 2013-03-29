@@ -7,7 +7,7 @@
         xmlns:filter="clr-namespace:Tmc.WinUI.Application.Panels.Filter"
         xmlns:uiCommon="clr-namespace:Tmc.WinUI.Application.Panels.Common"
         xmlns:common="clr-namespace:Tmc.SystemFrameworks.Common;assembly=Tmc.SystemFrameworks.Common"
-        Title="MainWindow" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="WindowPreviewMouseWheel">
+        Title="The Movie Collector" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="WindowPreviewMouseWheel">
     <Grid>
         <Grid.Resources>
             <converters:StringListConverter x:Key="StringListConverter"/>
