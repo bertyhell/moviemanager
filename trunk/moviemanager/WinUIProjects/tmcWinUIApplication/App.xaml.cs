@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.EntityClient;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
@@ -77,7 +78,17 @@ namespace Tmc.WinUI.Application
             //ConnectionStringBuilder.Metadata = "res://*/VideoModel.csdl|res://*/VideoModel.ssdl|res://*/VideoModel.msl";
             DataRetriever.Init(ConnectionString);
 
-            DataRetriever.Genres = SearchTmdb.GetGenres();
+			try
+			{
+				if (DataRetriever.Genres.Count == 0) DataRetriever.Genres = SearchTmdb.GetGenres();
+			}catch(TypeInitializationException Ex)
+			{
+				if(Ex.InnerException.GetType() == typeof(WebException))
+				{
+					MessageBox.Show("A problem occured while attempting to retrieve the movie genres.", "Error", MessageBoxButton.OK,
+					                MessageBoxImage.Exclamation);
+				}
+			}
         }
 
         protected override void OnExit(ExitEventArgs e)
