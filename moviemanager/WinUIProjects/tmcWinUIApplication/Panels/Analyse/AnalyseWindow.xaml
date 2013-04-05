@@ -89,7 +89,7 @@
                 <TextBlock Text="Start Analysis" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5"></TextBlock>
             </StackPanel>
         </Button>
-        <Button Content="Save" Grid.Row="5" HorizontalAlignment="Right"  Name="button1" VerticalAlignment="Stretch" Width="75" Click="BtnSaveClick" />
+        <Button Content="Save" Grid.Row="5" HorizontalAlignment="Right"  Name="button1" VerticalAlignment="Stretch" Width="75" Click="BtnSaveClick" IsEnabled="{Binding IsSaveEnabled}" />
         <Button Content="Fast" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="30" Height="45" Grid.RowSpan="3" Click="BtnQuickAnalyseClick" />
     </Grid>
 </Window>
