@@ -70,11 +70,6 @@ namespace Tmc.WinUI.Application
             }
 
             string ConnectionString = string.Format("Data Source = {0}", DatabasePath);
-            EntityConnectionStringBuilder ConnectionStringBuilder = new EntityConnectionStringBuilder
-            {
-                Provider = "System.Data.SqlServerCe.4.0",
-                ProviderConnectionString = ConnectionString
-            }; //TODO 040 unused variable? --> remove or fix me
             //ConnectionStringBuilder.Metadata = "res://*/VideoModel.csdl|res://*/VideoModel.ssdl|res://*/VideoModel.msl";
             DataRetriever.Init(ConnectionString);
 

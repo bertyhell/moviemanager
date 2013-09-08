@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VideosModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="VideosEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Images" EntityType="VideosModel.Image" />
+    <EntitySet Name="Videos" EntityType="VideosModel.Video" />
+    <AssociationSet Name="FK_VIDEOS_IMAGES_POSTER" Association="VideosModel.FK_VIDEOS_IMAGES_POSTER">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="Videos" EntitySet="Videos" />
+    </AssociationSet>
+    <AssociationSet Name="Video_Images" Association="VideosModel.Video_Images">
+      <End Role="Images" EntitySet="Images" />
+      <End Role="Videos" EntitySet="Videos" />
+    </AssociationSet>
+    <EntitySet Name="Episodes" EntityType="VideosModel.Episode" />
+    <AssociationSet Name="FK_EPISODES_VIDEOS" Association="VideosModel.FK_EPISODES_VIDEOS">
+      <End Role="Video" EntitySet="Videos" />
+      <End Role="Episode" EntitySet="Episodes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="path" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="PosterVideos" Relationship="VideosModel.FK_VIDEOS_IMAGES_POSTER" FromRole="Images" ToRole="Videos" />
+    <NavigationProperty Name="ImageVideos" Relationship="VideosModel.Video_Images" FromRole="Images" ToRole="Videos" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="posterId" Type="Int64" Nullable="false" />
+    <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Poster" Relationship="VideosModel.FK_VIDEOS_IMAGES_POSTER" FromRole="Videos" ToRole="Images" />
+    <NavigationProperty Name="Images" Relationship="VideosModel.Video_Images" FromRole="Videos" ToRole="Images" />
+    <NavigationProperty Name="Episode" Relationship="VideosModel.FK_EPISODES_VIDEOS" FromRole="Video" ToRole="Episode" />
+  </EntityType>
+  <Association Name="FK_VIDEOS_IMAGES_POSTER">
+    <End Role="Images" Type="VideosModel.Image" Multiplicity="1" />
+    <End Role="Videos" Type="VideosModel.Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Images">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Videos">
+        <PropertyRef Name="posterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Video_Images">
+    <End Role="Images" Type="VideosModel.Image" Multiplicity="*" />
+    <End Role="Videos" Type="VideosModel.Video" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Episode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="episodeNumber" Nullable="false" />
+    <Property Type="Int32" Name="seasonNumber" Nullable="false" />
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <NavigationProperty Name="Video" Relationship="VideosModel.FK_EPISODES_VIDEOS" FromRole="Episode" ToRole="Video" />
+    <Property Type="Int64" Name="videoId" />
+  </EntityType>
+  <Association Name="FK_EPISODES_VIDEOS">
+    <End Type="VideosModel.Video" Role="Video" Multiplicity="1" />
+    <End Type="VideosModel.Episode" Role="Episode" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Video">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Episode">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

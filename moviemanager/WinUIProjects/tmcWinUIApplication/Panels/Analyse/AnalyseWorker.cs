@@ -187,7 +187,6 @@ namespace Tmc.WinUI.Application.Panels.Analyse
 					{
 						//VideoInfo.Files = analyseVideo.Video.Files;
 						Candidates.Add(VideoInfo);
-						
 					}
                 }
             }

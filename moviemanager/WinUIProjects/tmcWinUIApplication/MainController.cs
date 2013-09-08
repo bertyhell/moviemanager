@@ -14,7 +14,6 @@ using Tmc.WinUI.Application.Commands;
 using Tmc.WinUI.Application.Menubar;
 using Tmc.WinUI.Application.Panels.Filter;
 using Tmc.SystemFrameworks.Log;
-
 namespace Tmc.WinUI.Application
 {
     public class MainController : INotifyPropertyChanged

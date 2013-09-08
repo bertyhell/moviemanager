@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VideosModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="VideosModelStoreContainer">
+          <EntitySet Name="Episodes" EntityType="VideosModel.Store.Episodes" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="VideosModel.Store.Images" store:Type="Tables" />
+          <EntitySet Name="Video_Images" EntityType="VideosModel.Store.Video_Images" store:Type="Tables" />
+          <EntitySet Name="Videos" EntityType="VideosModel.Store.Videos" store:Type="Tables" />
+          <AssociationSet Name="FK_VIDEO_IMAGES_X_IMAGES" Association="VideosModel.Store.FK_VIDEO_IMAGES_X_IMAGES">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Video_Images" EntitySet="Video_Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEO_IMAGES_X_VIDEOS" Association="VideosModel.Store.FK_VIDEO_IMAGES_X_VIDEOS">
+            <End Role="Videos" EntitySet="Videos" />
+            <End Role="Video_Images" EntitySet="Video_Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIDEOS_IMAGES_POSTER" Association="VideosModel.Store.FK_VIDEOS_IMAGES_POSTER">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Episodes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="episodeNumber" Type="int" Nullable="false" />
+          <Property Name="seasonNumber" Type="int" Nullable="false" />
+          <Property Name="videoId" Type="bigint" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="path" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Video_Images">
+          <Key>
+            <PropertyRef Name="VideoId" />
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="VideoId" Type="bigint" Nullable="false" />
+          <Property Name="ImageId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="poster" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_VIDEO_IMAGES_X_IMAGES">
+          <End Role="Images" Type="VideosModel.Store.Images" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Video_Images" Type="VideosModel.Store.Video_Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Video_Images">
+              <PropertyRef Name="ImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEO_IMAGES_X_VIDEOS">
+          <End Role="Videos" Type="VideosModel.Store.Videos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Video_Images" Type="VideosModel.Store.Video_Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Videos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Video_Images">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIDEOS_IMAGES_POSTER">
+          <End Role="Images" Type="VideosModel.Store.Images" Multiplicity="1" />
+          <End Role="Videos" Type="VideosModel.Store.Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="poster" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VideosModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="VideosEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Images" EntityType="VideosModel.Image" />
+          <EntitySet Name="Videos" EntityType="VideosModel.Video" />
+          <AssociationSet Name="FK_VIDEOS_IMAGES_POSTER" Association="VideosModel.FK_VIDEOS_IMAGES_POSTER">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+          <AssociationSet Name="Video_Images" Association="VideosModel.Video_Images">
+            <End Role="Images" EntitySet="Images" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+          <EntitySet Name="Episodes" EntityType="VideosModel.Episode" />
+          <AssociationSet Name="FK_EPISODES_VIDEOS" Association="VideosModel.FK_EPISODES_VIDEOS">
+            <End Role="Video" EntitySet="Videos" />
+            <End Role="Episode" EntitySet="Episodes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="path" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PosterVideos" Relationship="VideosModel.FK_VIDEOS_IMAGES_POSTER" FromRole="Images" ToRole="Videos" />
+          <NavigationProperty Name="ImageVideos" Relationship="VideosModel.Video_Images" FromRole="Images" ToRole="Videos" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="posterId" Type="Int64" Nullable="false" />
+          <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Poster" Relationship="VideosModel.FK_VIDEOS_IMAGES_POSTER" FromRole="Videos" ToRole="Images" />
+          <NavigationProperty Name="Images" Relationship="VideosModel.Video_Images" FromRole="Videos" ToRole="Images" />
+          <NavigationProperty Name="Episode" Relationship="VideosModel.FK_EPISODES_VIDEOS" FromRole="Video" ToRole="Episode" />
+        </EntityType>
+        <Association Name="FK_VIDEOS_IMAGES_POSTER">
+          <End Role="Images" Type="VideosModel.Image" Multiplicity="1" />
+          <End Role="Videos" Type="VideosModel.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Images">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="posterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Video_Images">
+          <End Role="Images" Type="VideosModel.Image" Multiplicity="*" />
+          <End Role="Videos" Type="VideosModel.Video" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Episode">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="episodeNumber" Nullable="false" />
+          <Property Type="Int32" Name="seasonNumber" Nullable="false" />
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <NavigationProperty Name="Video" Relationship="VideosModel.FK_EPISODES_VIDEOS" FromRole="Episode" ToRole="Video" />
+          <Property Type="Int64" Name="videoId" />
+        </EntityType>
+        <Association Name="FK_EPISODES_VIDEOS">
+          <End Type="VideosModel.Video" Role="Video" Multiplicity="1" />
+          <End Type="VideosModel.Episode" Role="Episode" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Video">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Episode">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VideosModelStoreContainer" CdmEntityContainer="VideosEntities">
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="VideosModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="path" ColumnName="path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="VideosModel.Video">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="posterId" ColumnName="poster" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Video_Images" TypeName="VideosModel.Video_Images" StoreEntitySet="Video_Images">
+            <EndProperty Name="Images">
+              <ScalarProperty Name="id" ColumnName="ImageId" />
+            </EndProperty>
+            <EndProperty Name="Videos">
+              <ScalarProperty Name="id" ColumnName="VideoId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Episodes">
+            <EntityTypeMapping TypeName="VideosModel.Episode">
+              <MappingFragment StoreEntitySet="Episodes">
+                <ScalarProperty Name="videoId" ColumnName="videoId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="seasonNumber" ColumnName="seasonNumber" />
+                <ScalarProperty Name="episodeNumber" ColumnName="episodeNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

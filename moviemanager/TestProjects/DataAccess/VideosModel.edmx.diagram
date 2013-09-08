@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e73e7de98e040e1aad626903ed946c5" Name="Diagram1">
+        <EntityTypeShape EntityType="VideosModel.Image" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VideosModel.Video" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="VideosModel.FK_VIDEOS_IMAGES_POSTER" ManuallyRouted="false" />
+        <AssociationConnector Association="VideosModel.Video_Images" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VideosModel.Episode" Width="1.5" PointX="6.5" PointY="1.375" />
+        <AssociationConnector Association="VideosModel.FK_EPISODES_VIDEOS" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
