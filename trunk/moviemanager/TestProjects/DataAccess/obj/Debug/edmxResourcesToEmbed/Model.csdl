@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TheMovieCollectorModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TheMovieCollectorEntities2" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="TheMovieCollectorModel.C__MigrationHistory" />
+    <EntitySet Name="Episodes" EntityType="TheMovieCollectorModel.Episode" />
+    <EntitySet Name="Franchises" EntityType="TheMovieCollectorModel.Franchise" />
+    <EntitySet Name="Images" EntityType="TheMovieCollectorModel.Image" />
+    <EntitySet Name="Movies" EntityType="TheMovieCollectorModel.Movie" />
+    <EntitySet Name="Series" EntityType="TheMovieCollectorModel.Series" />
+    <EntitySet Name="Subtitles" EntityType="TheMovieCollectorModel.Subtitle" />
+    <EntitySet Name="VideoFiles" EntityType="TheMovieCollectorModel.VideoFile" />
+    <EntitySet Name="Videos" EntityType="TheMovieCollectorModel.Video" />
+    <AssociationSet Name="FK_dbo_Episodes_dbo_Videos_Id" Association="TheMovieCollectorModel.FK_dbo_Episodes_dbo_Videos_Id">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="Episodes" EntitySet="Episodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Images_dbo_Videos_Id" Association="TheMovieCollectorModel.FK_dbo_Images_dbo_Videos_Id">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Movies_dbo_Videos_Id" Association="TheMovieCollectorModel.FK_dbo_Movies_dbo_Videos_Id">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="Movies" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Subtitles_dbo_VideoFiles_VideoFile_Id" Association="TheMovieCollectorModel.FK_dbo_Subtitles_dbo_VideoFiles_VideoFile_Id">
+      <End Role="VideoFiles" EntitySet="VideoFiles" />
+      <End Role="Subtitles" EntitySet="Subtitles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_VideoFiles_dbo_Videos_Id" Association="TheMovieCollectorModel.FK_dbo_VideoFiles_dbo_Videos_Id">
+      <End Role="Videos" EntitySet="Videos" />
+      <End Role="VideoFiles" EntitySet="VideoFiles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Episode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="EpisodeNumber" Type="Int32" Nullable="false" />
+    <Property Name="Season" Type="Int32" Nullable="false" />
+    <Property Name="SerieId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Video" Relationship="TheMovieCollectorModel.FK_dbo_Episodes_dbo_Videos_Id" FromRole="Episodes" ToRole="Videos" />
+  </EntityType>
+  <EntityType Name="Franchise">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UriString" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Video" Relationship="TheMovieCollectorModel.FK_dbo_Images_dbo_Videos_Id" FromRole="Images" ToRole="Videos" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="FranchiseId" Type="Int32" Nullable="false" />
+    <Property Name="IdTmdb" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Video" Relationship="TheMovieCollectorModel.FK_dbo_Movies_dbo_Videos_Id" FromRole="Movies" ToRole="Videos" />
+  </EntityType>
+  <EntityType Name="Series">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Subtitle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Path" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <Property Name="VideoFile_Id" Type="Int32" />
+    <NavigationProperty Name="VideoFile" Relationship="TheMovieCollectorModel.FK_dbo_Subtitles_dbo_VideoFiles_VideoFile_Id" FromRole="Subtitles" ToRole="VideoFiles" />
+  </EntityType>
+  <EntityType Name="VideoFile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Path" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Subtitles" Relationship="TheMovieCollectorModel.FK_dbo_Subtitles_dbo_VideoFiles_VideoFile_Id" FromRole="VideoFiles" ToRole="Subtitles" />
+    <NavigationProperty Name="Video" Relationship="TheMovieCollectorModel.FK_dbo_VideoFiles_dbo_Videos_Id" FromRole="VideoFiles" ToRole="Videos" />
+  </EntityType>
+  <EntityType Name="Video">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AnalyseCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="IdImdb" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <Property Name="Year" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <Property Name="Rating" Type="Double" Nullable="false" />
+    <Property Name="RatingImdb" Type="Double" Nullable="false" />
+    <Property Name="Release" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Runtime" Type="Int64" Nullable="false" />
+    <Property Name="VideoType" Type="Int32" Nullable="false" />
+    <Property Name="TitleMatchRatio" Type="Double" Nullable="false" />
+    <Property Name="Plot" Type="String" MaxLength="4000" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Episode" Relationship="TheMovieCollectorModel.FK_dbo_Episodes_dbo_Videos_Id" FromRole="Videos" ToRole="Episodes" />
+    <NavigationProperty Name="Image" Relationship="TheMovieCollectorModel.FK_dbo_Images_dbo_Videos_Id" FromRole="Videos" ToRole="Images" />
+    <NavigationProperty Name="Movie" Relationship="TheMovieCollectorModel.FK_dbo_Movies_dbo_Videos_Id" FromRole="Videos" ToRole="Movies" />
+    <NavigationProperty Name="VideoFile" Relationship="TheMovieCollectorModel.FK_dbo_VideoFiles_dbo_Videos_Id" FromRole="Videos" ToRole="VideoFiles" />
+  </EntityType>
+  <Association Name="FK_dbo_Episodes_dbo_Videos_Id">
+    <End Role="Videos" Type="TheMovieCollectorModel.Video" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Episodes" Type="TheMovieCollectorModel.Episode" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Episodes">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Images_dbo_Videos_Id">
+    <End Role="Videos" Type="TheMovieCollectorModel.Video" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Images" Type="TheMovieCollectorModel.Image" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Movies_dbo_Videos_Id">
+    <End Role="Videos" Type="TheMovieCollectorModel.Video" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Movies" Type="TheMovieCollectorModel.Movie" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Movies">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Subtitles_dbo_VideoFiles_VideoFile_Id">
+    <End Role="VideoFiles" Type="TheMovieCollectorModel.VideoFile" Multiplicity="0..1" />
+    <End Role="Subtitles" Type="TheMovieCollectorModel.Subtitle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VideoFiles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subtitles">
+        <PropertyRef Name="VideoFile_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_VideoFiles_dbo_Videos_Id">
+    <End Role="Videos" Type="TheMovieCollectorModel.Video" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VideoFiles" Type="TheMovieCollectorModel.VideoFile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Videos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VideoFiles">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
