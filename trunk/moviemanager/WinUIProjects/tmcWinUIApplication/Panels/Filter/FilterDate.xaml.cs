@@ -22,7 +22,6 @@ namespace Tmc.WinUI.Application.Panels.Filter
         public FilterDate(string property, string label)
         {
             InitializeComponent();
-
             txtLabel.Text = label + ":";
             _property = property;
         }
@@ -60,17 +59,17 @@ namespace Tmc.WinUI.Application.Panels.Filter
 
         public override bool FilterSucceeded(Video video)
         {
-            DateTime Release = ((DateTime) typeof (Video).GetProperty(_property).GetValue(video, null));
+            DateTime release = ((DateTime) typeof (Video).GetProperty(_property).GetValue(video, null));
             switch ((TextOperations)cbbOperation.SelectedIndex)
             {
                 case TextOperations.Before:
-                    return Release < FilterInputStart;
+                    return release < FilterInputStart;
                 case TextOperations.After:
-                    return Release > FilterInputStart;
+                    return release > FilterInputStart;
                 case TextOperations.InBetween:
-                    return (Release > FilterInputStart) && (Release > FilterInputEnd);
+                    return (release > FilterInputStart) && (release < FilterInputEnd);
                 case TextOperations.NotBetween:
-                    return !(Release > FilterInputStart) && (Release > FilterInputEnd);
+                    return (release < FilterInputStart) && (release > FilterInputEnd);
             }
             return false;
         }

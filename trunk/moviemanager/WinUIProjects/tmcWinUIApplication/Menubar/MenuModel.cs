@@ -420,7 +420,7 @@ namespace Tmc.WinUI.Application.Menubar
             }
         }
 
-        public static ControlData ChangeView //TODO 070 check why the **** this doesn't work :@ (wasted 3 hours)
+        public static ControlData ChangeView
         {
             get
             {
