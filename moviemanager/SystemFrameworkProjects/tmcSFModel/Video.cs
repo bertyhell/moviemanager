@@ -37,8 +37,7 @@ namespace Tmc.SystemFrameworks.Model
         private MovieInfo _movieInfo;
         private EpisodeInfo _episodeInfo;
 
-        public Video(VideoTypeEnum videoType = VideoTypeEnum.Video)
-            : this()
+        public Video(VideoTypeEnum videoType = VideoTypeEnum.Video): this()
         {
             VideoType = videoType;
             if (VideoType == VideoTypeEnum.Movie)
@@ -297,7 +296,7 @@ namespace Tmc.SystemFrameworks.Model
                 {
                     var ReleaseYearGuessString = Match.Groups[1].Value;
                     var ReleaseYearGuessInt = Int32.Parse(ReleaseYearGuessString);
-                    if (ReleaseYearGuessInt > 1800 && ReleaseYearGuessInt < DateTime.Today.Year + 20)//TODO 001 make this an option?
+                    if (ReleaseYearGuessInt > 1800 && ReleaseYearGuessInt < DateTime.Today.Year + 20)
                     {
                         return ReleaseYearGuessString;
                     }

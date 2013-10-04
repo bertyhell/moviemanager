@@ -25,7 +25,7 @@ namespace Tmc.WinUI.Application.Panels.Filter
                         AppliedFilters.Add(new FilterText("Name", "Name"));
                         break;
                     case Filters.Path:
-                        AppliedFilters.Add(new FilterText("Path", "Path"));
+                        AppliedFilters.Add(new FilterText("Files", "Path"));
                         break;
                     case Filters.Genre:
                         AppliedFilters.Add(new FilterMultiOption("Genres",  DataRetriever.Genres.Select(genre => genre.Name).ToList(), "Genres"));

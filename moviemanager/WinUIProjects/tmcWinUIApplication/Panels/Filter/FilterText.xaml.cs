@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Tmc.SystemFrameworks.Model;
 
@@ -38,27 +40,28 @@ namespace Tmc.WinUI.Application.Panels.Filter
             MainController.Instance.VideosView.Refresh();}
         }
 
-        public override bool FilterSucceeded(Video video)
+	    public override bool FilterSucceeded(Video video)
         {
-            try
-            {
-                String Text = (String) typeof (Video).GetProperty(_property).GetValue(video, null);
-                switch ((TextOperations) cbbOperation.SelectedIndex)
-                {
-                    case TextOperations.Contains:
-                        return Text.Contains(FilterInput);
-                    case TextOperations.DoesntContain:
-                        return !Text.Contains(FilterInput);
-                    case TextOperations.StartsWith:
-                        return !Text.StartsWith(FilterInput);
-                    case TextOperations.EndsWith:
-                        return !Text.EndsWith(FilterInput);
-                    case TextOperations.Regex:
-                        return Regex.IsMatch(Text, FilterInput);
-                }
-            }catch(ArgumentException)
-            {
-            }
+			try
+			{
+	            Object property = typeof (Video).GetProperty(_property).GetValue(video, null);
+				if(property is IEnumerable<object>)
+				{
+					foreach (object propertyItem in ((IEnumerable<object>) property))
+					{
+						if (TextFilterSucceeded(propertyItem.ToString(), (TextOperations) cbbOperation.SelectedIndex)) return true;
+					}
+				}
+				else
+				{
+					return TextFilterSucceeded(property.ToString(), (TextOperations)cbbOperation.SelectedIndex);
+				}
+
+			}catch(ArgumentException)
+			{
+				//ignore temporary invalid regualr expressions
+				//TODO 001 color regex input field orange with tooltip of invalid regex
+			}
             return false;
         }
 
@@ -66,5 +69,24 @@ namespace Tmc.WinUI.Application.Panels.Filter
         {
             MainController.Instance.VideosView.Refresh();
         }
+
+		private bool TextFilterSucceeded(string text, TextOperations filterOperation)
+		{
+			switch (filterOperation)
+			{
+				case TextOperations.Contains:
+					return text.ToLower().Contains(FilterInput.ToLower());
+				case TextOperations.DoesntContain:
+					return !text.ToLower().Contains(FilterInput.ToLower());
+				case TextOperations.StartsWith:
+					return text.ToLower().StartsWith(FilterInput.ToLower());
+				case TextOperations.EndsWith:
+					return text.ToLower().EndsWith(FilterInput.ToLower());
+				case TextOperations.Regex:
+					return Regex.IsMatch(text, FilterInput, RegexOptions.IgnoreCase);
+				default:
+					return false;
+			}
+		}
     }
 }

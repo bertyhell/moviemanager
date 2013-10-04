@@ -395,7 +395,7 @@ namespace Tmc.WinUI.Application.Common
             {
                 return;
             }
-            NewParameter.AllowDrop = true; // TODO 005: can this be deleted?
+            //NewParameter.AllowDrop = true; // TODO 005: can this be deleted?
 
             _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
             Grid.SetColumn(NewParameter, _parameterGrid.Children.Count);
@@ -466,7 +466,7 @@ namespace Tmc.WinUI.Application.Common
                 _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
                 _parameterGrid.Children.Add(NewParameter);
             }
-            else if (sender.Equals(_parameterGrid))
+            else //if (sender.Equals(_parameterGrid))
             {
                 _parameterGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
                 Grid.SetColumn(NewParameter, _parameterGrid.Children.Count);

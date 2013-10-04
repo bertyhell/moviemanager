@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Tmc.WinUI.Application.Commands
 {
     class TogglePreviewMarginCommand : ICommand
     {
+	    private const ushort NO_MARGIN = 0;
+	    private const ushort MARGIN = 5;
 
-        public bool CanExecute(object parameter)
+	    public bool CanExecute(object parameter)
         {
             return true;
         }
@@ -21,8 +24,7 @@ namespace Tmc.WinUI.Application.Commands
 
         public void Execute(object parameter)
         {
-            //TODO 003 make this work
-            MainController.Instance.PreviewItemMargin = MainController.Instance.PreviewItemMargin;
+			MainController.Instance.PreviewItemMargin = new Thickness(MainController.Instance.PreviewItemMargin.Bottom > 1 ? MARGIN : NO_MARGIN);
         }
     }
 }

@@ -43,7 +43,12 @@ namespace Tmc.SystemFrameworks.Model
             }
         }
 
-		//public virtual Video Video { get; set; }
+	    public override string ToString()
+	    {
+		    return Path;
+	    }
+
+	    //public virtual Video Video { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

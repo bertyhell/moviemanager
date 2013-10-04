@@ -8,76 +8,76 @@
         xmlns:uiCommon="clr-namespace:Tmc.WinUI.Application.Panels.Common"
         xmlns:common="clr-namespace:Tmc.SystemFrameworks.Common;assembly=Tmc.SystemFrameworks.Common"
         Title="The Movie Collector" Height="789" Width="1024" Background="#FFF1EDED" Icon="tmc_ico_1.ico" WindowState="Maximized" PreviewMouseWheel="WindowPreviewMouseWheel">
-    <Grid>
-        <Grid.Resources>
-            <converters:StringListConverter x:Key="StringListConverter"/>
-                <Style x:Key="LvStyle" TargetType="{x:Type ListView}">
-                    <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
-                    <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
-                    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="True"/>
-                    <Setter Property="ListView.ItemsSource" Value="{Binding}"/>
-                    <!--<Style.Triggers>
+	<Grid>
+		<Grid.Resources>
+			<converters:StringListConverter x:Key="StringListConverter"/>
+			<Style x:Key="LvStyle" TargetType="{x:Type ListView}">
+				<Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+				<Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
+				<Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="True"/>
+				<Setter Property="ListView.ItemsSource" Value="{Binding}"/>
+				<!--<Style.Triggers>
                         <DataTrigger Binding="{Binding IsLoading}" Value="True">
                             <Setter Property="ListView.Cursor" Value="Wait"/>
                             <Setter Property="ListView.Background" Value="LightGray"/>
                         </DataTrigger>
                     </Style.Triggers>-->
-                </Style>
-        </Grid.Resources>
+			</Style>
+		</Grid.Resources>
 
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" MinWidth="100"/>
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto" MinWidth="100"/>
+			<ColumnDefinition Width="10" />
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="auto"/>
+		</Grid.ColumnDefinitions>
 
-        <menu:RibonMenubar Grid.ColumnSpan="3" />
+		<menu:RibonMenubar Grid.ColumnSpan="3" />
 
-        <!--left  panel-->
-        <TabControl x:Name="_tabLeft" Grid.Row="1" Margin="5,0,0,0" Padding="0">
-            <TabItem  ToolTip="Filters">
-                <TabItem.Header>
-                    <Image Source="/Tmc.WinUI.Application;component/Images/view-filter.png" Width="24"/>
-                </TabItem.Header>
-                <filter:FilterEditor x:Name="_FilterEditor" />
-            </TabItem>
+		<!--left  panel-->
+		<TabControl x:Name="_tabLeft" Grid.Row="1" Margin="5,0,0,0" Padding="0">
+			<TabItem  ToolTip="Filters">
+				<TabItem.Header>
+					<Image Source="/Tmc.WinUI.Application;component/Images/view-filter.png" Width="24"/>
+				</TabItem.Header>
+				<filter:FilterEditor x:Name="_FilterEditor" />
+			</TabItem>
 
-        </TabControl>
+		</TabControl>
 
-        <GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
+		<GridSplitter Grid.Column ="1" Grid.Row="1" Width="20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <!-- center panel-->
-        <ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}" MouseDoubleClick="VideoGridMouseDoubleClick"
+		<!-- center panel-->
+		<ListView x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}" MouseDoubleClick="VideoGridMouseDoubleClick"
                   Visibility="{Binding IsIconsViewVisible}" PreviewMouseWheel="MouseWheel" Style="{DynamicResource ResourceKey=LvStyle}" >
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <common:VirtualizingWrapPanel CanVerticallyScroll="True" 
+			<ListView.ItemsPanel>
+				<ItemsPanelTemplate>
+					<common:VirtualizingWrapPanel CanVerticallyScroll="True" 
                         ItemWidth="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemWidth}" 
                         ItemHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ItemHeight}" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <uiCommon:PreviewItem
+				</ItemsPanelTemplate>
+			</ListView.ItemsPanel>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<uiCommon:PreviewItem
                         Item="{Binding}" 
                         Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewWidth}" 
                         Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewHeight}" 
                         Margin="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewItemMargin}"
                         LabelVisibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.PreviewTitleVisibility}"
                         />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
 
-        <!--<ItemsControl x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}">
+		<!--<ItemsControl x:Name="_videoIcons" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" ItemsSource="{Binding VideosView}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <common:VirtualizingWrapPanel Orientation="Horizontal" />
@@ -105,48 +105,49 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>-->
 
-        <DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}" ItemsSource="{Binding VideosView}"
+		<DataGrid x:Name="_videoDetails" Grid.Row="1" Grid.Column="2" Margin="0,0,5,0" AlternatingRowBackground="#EEE" Visibility="{Binding IsDetailViewVisible}" ItemsSource="{Binding VideosView}"
                           CanUserSortColumns="true" GridLinesVisibility="None" SelectionMode="Extended" IsReadOnly="True" CanUserResizeRows="False" AutoGenerateColumns="False" MouseDoubleClick="VideoGridMouseDoubleClick" PreviewMouseWheel="MouseWheel">
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </DataGrid.CellStyle>
-            <DataGrid.ContextMenu>
-                <ContextMenu >
-                    <MenuItem Header="Play" Click="MenuItemPlayClick"/>
-                    <MenuItem Header="Properties" Click="MenuItemPropertiesClick"  />
-                    <MenuItem Header="Rename File" Click="MenuItemRenameFileClick"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding VideoType}" />
-                <DataGridTextColumn Header="Genres" Binding="{Binding Genres}" /> <!--, Converter={StaticResource StringListConverter}}-->
-                <DataGridTextColumn Header="IMDB id" Binding="{Binding IdImdb}" />
-                <DataGridTextColumn Header="Path" Binding="{Binding Files[0].Path}" />
-                <DataGridTemplateColumn Header="Rating" SortMemberPath="Rating">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <panels:RatingEditorControl Rating="{Binding  Rating}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="IMDB rating" SortMemberPath="RatingImdb">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <panels:RatingControl Rating="{Binding  RatingImdb}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Release date" Binding="{Binding Release, StringFormat=\{0:d\}}" />
-                <DataGridTextColumn Header="Play count" Binding="{Binding PlayCount}" />
-            </DataGrid.Columns>
-        </DataGrid>
+			<DataGrid.CellStyle>
+				<Style TargetType="DataGridCell">
+					<Setter Property="BorderThickness" Value="0"/>
+				</Style>
+			</DataGrid.CellStyle>
+			<DataGrid.ContextMenu>
+				<ContextMenu >
+					<MenuItem Header="Play" Click="MenuItemPlayClick"/>
+					<MenuItem Header="Properties" Click="MenuItemPropertiesClick"  />
+					<MenuItem Header="Rename File" Click="MenuItemRenameFileClick"/>
+				</ContextMenu>
+			</DataGrid.ContextMenu>
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+				<DataGridTextColumn Header="Type" Binding="{Binding VideoType}" />
+				<DataGridTextColumn Header="Genres" Binding="{Binding Genres}" />
+				<!--, Converter={StaticResource StringListConverter}}-->
+				<DataGridTextColumn Header="IMDB id" Binding="{Binding IdImdb}" />
+				<DataGridTextColumn Header="Path" Binding="{Binding Files[0].Path}" />
+				<DataGridTemplateColumn Header="Rating" SortMemberPath="Rating" MinWidth="102">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<panels:RatingEditorControl Rating="{Binding  Rating}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn Header="IMDB rating" SortMemberPath="RatingImdb" MinWidth="102">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<panels:RatingControl Rating="{Binding  RatingImdb}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn Header="Release date" Binding="{Binding Release, StringFormat=\{0:d\}}" />
+				<DataGridTextColumn Header="Play count" Binding="{Binding PlayCount}" />
+			</DataGrid.Columns>
+		</DataGrid>
 
 
-        <StatusBar Grid.Row="2" Grid.ColumnSpan="3" Height="20">
+		<StatusBar Grid.Row="2" Grid.ColumnSpan="3" Height="20">
 
-        </StatusBar>
-    </Grid>
+		</StatusBar>
+	</Grid>
 </Window>

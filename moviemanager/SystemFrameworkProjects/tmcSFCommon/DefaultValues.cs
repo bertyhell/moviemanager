@@ -7,7 +7,7 @@ namespace Tmc.SystemFrameworks.Common
     {
         public static readonly DateTime NULL_DATE = new DateTime(1900, 1, 1);
         public static readonly DateTime FILTER_START_DATE = DateTime.Now.AddYears(-2);
-        public static readonly DateTime FILTER_END_DATE = DateTime.Now.AddYears(-10);
+        public static readonly DateTime FILTER_END_DATE = DateTime.Now;
 
         public static readonly string PATH_USER_APPDATA = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static readonly string PATH_PROGRAM_DATA = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
